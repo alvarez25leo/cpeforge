@@ -38,19 +38,33 @@ prueba:
 
 ## Credenciales
 
-Ningún secreto está en el código. El ejemplo lee de la raíz del repositorio:
+Los ejemplos usan credenciales **públicas de prueba**, versionadas en
+[`credenciales/`](credenciales/):
 
-- `cert/certificate.pem`: clave privada y certificado en PEM;
-- `cert/user.txt`: líneas `RUC: …`, `Usuario: …` y `Contraseña: …` (Clave SOL
-  de SUNAT BETA), y `GRE_API_URL=`, `GRE_CLIENT_ID=`, `GRE_CLIENT_SECRET=`,
-  `GRE_RUC=`, `GRE_USUARIO=` y `GRE_CLAVE=` (API GRE de prueba). Sin las
-  `GRE_*`, las guías solo generan XML.
+- `credenciales/credenciales-prueba.json`: Clave SOL por defecto de SUNAT BETA
+  (`sunat_beta`: RUC `20000000001`, usuario `MODDATOS`) y las credenciales de
+  la API GRE de prueba (`gre`: `api_url`, `client_id`, `client_secret`, `ruc`,
+  `usuario`, `clave`). Sin la sección `gre`, las guías solo generan XML.
+- `credenciales/certificado-prueba.pem`: certificado autofirmado de muestra
+  con su clave privada (vencido en 2018). El JSON lo indica en `certificado`.
 
-`EJEMPLO_CERT` y `EJEMPLO_CREDENCIALES` cambian esas rutas. `cert/` está en
-`.gitignore`.
+No sirven para producción. Para usar las propias, apuntar
+`EJEMPLO_CREDENCIALES` a otro JSON con la misma forma (y, si hace falta,
+`EJEMPLO_CERT` a otro PEM), fuera del repositorio:
+
+```json
+{
+  "certificado": "mi-certificado.pem",
+  "sunat_beta": { "ruc": "…", "usuario": "…", "clave": "…" },
+  "gre": {
+    "api_url": "…", "client_id": "…", "client_secret": "…",
+    "ruc": "…", "usuario": "…", "clave": "…"
+  }
+}
+```
 
 Los servicios están fijos en entornos de prueba: SUNAT BETA (`FE_BETA` y
-`RETENCION_BETA`) y la API GRE de `GRE_API_URL`; se rechaza una URL de
+`RETENCION_BETA`) y la API GRE de `gre.api_url`; se rechaza una URL de
 producción de SUNAT. `factura-beatose` nunca se envía.
 
 Cada tipo va por su vía:

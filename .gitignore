@@ -21,6 +21,9 @@ __pycache__/
 .claude/settings.local.json
 # Credenciales y certificados locales de los ejemplos: nunca se versionan.
 /cert/
+# Excepción: certificado de muestra PÚBLICO (autofirmado y vencido) de las
+# credenciales de prueba de los ejemplos.
+!/example/credenciales/certificado-prueba.pem
 # Ejemplos: dependencias y salidas locales.
 /example/php/vendor/
 /example/php/out/

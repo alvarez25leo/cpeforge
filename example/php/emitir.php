@@ -22,7 +22,7 @@ declare(strict_types=1);
  * - percepción, retención: sendBill al servicio BETA de retenciones;
  * - resumen, baja: sendSummary a SUNAT BETA, ticket y getStatus;
  * - reversión: igual, en el servicio BETA de retenciones;
- * - guía: API GRE de prueba (GRE_API_URL), ticket y estado.
+ * - guía: API GRE de prueba (gre.api_url del JSON de credenciales), ticket y estado.
  * SUNAT BETA responde 401 a los envíos muy seguidos: entre uno y otro se
  * esperan EJEMPLO_PAUSA segundos (5 por defecto).
  *
@@ -209,7 +209,7 @@ function enviar(Config $config, DocumentInterface $doc, string $xml, string $out
     if ($doc instanceof Despatch) {
         $api = $config->api();
         if ($api === null) {
-            echo '  sin envío: faltan GRE_* en el archivo de credenciales'.PHP_EOL;
+            echo '  sin envío: falta la sección gre en el JSON de credenciales'.PHP_EOL;
             $medida['resultado'] = 'sin envío';
 
             return true;

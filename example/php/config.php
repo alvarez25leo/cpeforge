@@ -5,11 +5,12 @@ declare(strict_types=1);
 /*
  * Configuración de See y Api, como en https://greenter.dev/starter/ y en
  * thegreenter/demo (src/Util.php), pero sin credenciales en el código: se
- * leen de cert/ en la raíz del repositorio (o de las rutas en EJEMPLO_CERT y
- * EJEMPLO_CREDENCIALES).
+ * leen de example/credenciales/credenciales-prueba.json (o del JSON en
+ * EJEMPLO_CREDENCIALES). El certificado es el del campo `certificado`,
+ * relativo al JSON, o el de EJEMPLO_CERT.
  *
  * Los servicios quedan fijos en los entornos de prueba (SUNAT BETA y la API
- * GRE de GRE_API_URL): este ejemplo nunca usa producción.
+ * GRE de gre.api_url): este ejemplo nunca usa producción.
  */
 
 use Greenter\Api;
@@ -17,9 +18,9 @@ use Greenter\See;
 use Greenter\Ws\Services\SunatEndpoints;
 
 /**
- * Lee un texto con líneas `Clave: valor` o `CLAVE= valor`.
+ * Lee el JSON de credenciales y comprueba los campos obligatorios.
  *
- * @return array<string, string>
+ * @return array{certificado: string, sunat_beta: array<string, string>, gre?: array<string, string>}
  */
 function leer_credenciales(string $path): array
 {
@@ -27,31 +28,35 @@ function leer_credenciales(string $path): array
     if ($texto === false) {
         throw new RuntimeException("No se pudo leer el archivo de credenciales: $path");
     }
-    $out = [];
-    foreach (preg_split('/\R/u', $texto) as $linea) {
-        if (preg_match('/^\s*([\p{L}_]+)\s*[:=]\s*(\S.*?)\s*$/u', $linea, $m)) {
-            $out[$m[1]] ??= $m[2];
+    $json = json_decode($texto, true, 16, JSON_THROW_ON_ERROR);
+    $campos = ['sunat_beta' => ['ruc', 'usuario', 'clave']];
+    if (isset($json['gre'])) {
+        $campos['gre'] = ['api_url', 'client_id', 'client_secret', 'ruc', 'usuario', 'clave'];
+    }
+    foreach ($campos as $objeto => $claves) {
+        foreach ($claves as $clave) {
+            if (!is_string($json[$objeto][$clave] ?? null) || $json[$objeto][$clave] === '') {
+                throw new RuntimeException("Falta «$objeto.$clave» en $path");
+            }
         }
     }
-    foreach (['RUC', 'Usuario', 'Contraseña'] as $clave) {
-        if (!isset($out[$clave])) {
-            throw new RuntimeException("Falta «$clave:» en $path");
-        }
+    if (!is_string($json['certificado'] ?? null)) {
+        throw new RuntimeException("Falta «certificado» en $path");
     }
 
-    return $out;
+    return $json;
 }
 
 final class Config
 {
-    /** @param array<string, string> $cred */
+    /** @param array{sunat_beta: array<string, string>, gre?: array<string, string>} $cred */
     public function __construct(private string $pem, private array $cred)
     {
     }
 
     public function ruc(): string
     {
-        return $this->cred['RUC'];
+        return $this->cred['sunat_beta']['ruc'];
     }
 
     /** See para facturas, boletas, notas, resúmenes y bajas (FE_BETA). */
@@ -71,7 +76,8 @@ final class Config
         $see = new See();
         $see->setCertificate($this->pem);
         $see->setService($endpoint);
-        $see->setClaveSOL($this->cred['RUC'], $this->cred['Usuario'], $this->cred['Contraseña']);
+        $sol = $this->cred['sunat_beta'];
+        $see->setClaveSOL($sol['ruc'], $sol['usuario'], $sol['clave']);
 
         return $see;
     }
@@ -79,36 +85,36 @@ final class Config
     /** RUC del emisor de guías en la API GRE de prueba. */
     public function greRuc(): string
     {
-        return $this->cred['GRE_RUC'] ?? '20161515648';
+        return $this->cred['gre']['ruc'] ?? '20161515648';
     }
 
-    /** Api GRE de prueba; null si faltan sus credenciales. */
+    /** Api GRE de prueba; null si el JSON no tiene la sección gre. */
     public function api(): ?Api
     {
-        foreach (['GRE_API_URL', 'GRE_CLIENT_ID', 'GRE_CLIENT_SECRET', 'GRE_RUC', 'GRE_USUARIO', 'GRE_CLAVE'] as $clave) {
-            if (!isset($this->cred[$clave])) {
-                return null;
-            }
+        $gre = $this->cred['gre'] ?? null;
+        if ($gre === null) {
+            return null;
         }
-        $url = $this->cred['GRE_API_URL'];
+        $url = $gre['api_url'];
         if (str_contains($url, 'sunat.gob.pe') && !str_contains($url, 'test') && !str_contains($url, 'beta')) {
-            throw new RuntimeException('GRE_API_URL apunta a producción; este ejemplo solo usa entornos de prueba');
+            throw new RuntimeException('gre.api_url apunta a producción; este ejemplo solo usa entornos de prueba');
         }
         $api = new Api(['auth' => $url, 'cpe' => $url]);
 
-        return $api->setApiCredentials($this->cred['GRE_CLIENT_ID'], $this->cred['GRE_CLIENT_SECRET'])
-            ->setClaveSOL($this->cred['GRE_RUC'], $this->cred['GRE_USUARIO'], $this->cred['GRE_CLAVE'])
+        return $api->setApiCredentials($gre['client_id'], $gre['client_secret'])
+            ->setClaveSOL($gre['ruc'], $gre['usuario'], $gre['clave'])
             ->setCertificate($this->pem);
     }
 }
 
 $raiz = dirname(__DIR__, 2);
-$certPath = getenv('EJEMPLO_CERT') ?: $raiz.'/cert/certificate.pem';
-$credPath = getenv('EJEMPLO_CREDENCIALES') ?: $raiz.'/cert/user.txt';
+$credPath = getenv('EJEMPLO_CREDENCIALES') ?: $raiz.'/example/credenciales/credenciales-prueba.json';
+$cred = leer_credenciales($credPath);
+$certPath = getenv('EJEMPLO_CERT') ?: dirname($credPath).'/'.$cred['certificado'];
 
 $pem = @file_get_contents($certPath);
 if ($pem === false) {
     throw new RuntimeException("No se pudo leer el certificado: $certPath");
 }
 
-return new Config($pem, leer_credenciales($credPath));
+return new Config($pem, $cred);

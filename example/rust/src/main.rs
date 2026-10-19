@@ -16,7 +16,7 @@
 //! - percepción, retención: `sendBill` al servicio BETA de retenciones;
 //! - resumen, baja: `sendSummary` a SUNAT BETA, ticket y `getStatus`;
 //! - reversión: igual, en el servicio BETA de retenciones;
-//! - guía: API GRE de prueba (`GRE_API_URL`), ticket y estado.
+//! - guía: API GRE de prueba (`gre.api_url` del JSON de credenciales), ticket y estado.
 //!
 //! SUNAT BETA responde `401` a los envíos muy seguidos: entre uno y otro se
 //! esperan `EJEMPLO_PAUSA` segundos (5 por defecto).
@@ -318,7 +318,7 @@ async fn enviar_documento(
 
     if let Documento::Despatch(_) = doc {
         let Some(mut api) = config.api()? else {
-            println!("  sin envío: faltan GRE_* en el archivo de credenciales");
+            println!("  sin envío: falta la sección gre en el JSON de credenciales");
             medida.resultado = Some("sin envío".to_owned());
             return Ok(true);
         };

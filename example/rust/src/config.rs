@@ -1,11 +1,11 @@
-//! Configuración de `See` y `Api`, sin credenciales en el código:
-//! se leen de `cert/` en la raíz del repositorio (o de las rutas en
-//! `EJEMPLO_CERT` y `EJEMPLO_CREDENCIALES`).
+//! Configuración de `See` y `Api`, sin credenciales en el código: se leen de
+//! `example/credenciales/credenciales-prueba.json` (o del JSON en
+//! `EJEMPLO_CREDENCIALES`). El certificado es el que indica el campo
+//! `certificado` del JSON, relativo a ese archivo, o el de `EJEMPLO_CERT`.
 //!
 //! Los servicios quedan fijos en los entornos de prueba (SUNAT BETA y la API
-//! GRE de `GRE_API_URL`): este ejemplo nunca usa producción.
+//! GRE de `gre.api_url`): este ejemplo nunca usa producción.
 
-use std::collections::HashMap;
 use std::error::Error;
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -14,95 +14,120 @@ use cpeforge::{Api, See};
 use cpeforge_gre_api::{Configuration, ReqwestTransport};
 use cpeforge_ws::api::{ApiFactory, InMemoryStore, SystemClock};
 use cpeforge_ws::soap::SunatEndpoints;
+use serde_json::Value;
 
 /// `Api` GRE con transporte real, almacén de token en memoria y reloj del sistema.
 pub type ApiGre = Api<ReqwestTransport, InMemoryStore, SystemClock>;
 
-/// Certificado y credenciales leídos de `cert/`.
+/// Clave SOL de SUNAT BETA (`sunat_beta` del JSON).
+struct ClaveSol {
+    ruc: String,
+    usuario: String,
+    clave: String,
+}
+
+/// Credenciales de la API GRE de prueba (`gre` del JSON).
+struct CredencialesGre {
+    api_url: String,
+    client_id: String,
+    client_secret: String,
+    ruc: String,
+    usuario: String,
+    clave: String,
+}
+
+/// Certificado y credenciales leídos del JSON de credenciales.
 pub struct Config {
     pem: String,
-    cred: HashMap<String, String>,
+    sol: ClaveSol,
+    gre: Option<CredencialesGre>,
     transport: ReqwestTransport,
 }
 
-/// Lee un texto con líneas `Clave: valor` o `CLAVE= valor`; gana la primera.
-fn leer_credenciales(path: &Path) -> Result<HashMap<String, String>, Box<dyn Error>> {
-    let texto = fs::read_to_string(path).map_err(|e| {
-        format!(
-            "No se pudo leer el archivo de credenciales {}: {e}",
-            path.display()
-        )
-    })?;
-    let mut out = HashMap::new();
-    for linea in texto.lines() {
-        let Some(corte) = linea.find([':', '=']) else {
-            continue;
-        };
-        let (clave, valor) = (linea[..corte].trim(), linea[corte + 1..].trim());
-        if !clave.is_empty()
-            && !valor.is_empty()
-            && clave.chars().all(|c| c.is_alphabetic() || c == '_')
-        {
-            out.entry(clave.to_owned())
-                .or_insert_with(|| valor.to_owned());
-        }
-    }
-    for clave in ["RUC", "Usuario", "Contraseña"] {
-        if !out.contains_key(clave) {
-            return Err(format!("Falta «{clave}:» en {}", path.display()).into());
-        }
-    }
-    Ok(out)
+/// Texto obligatorio `objeto.campo` del JSON.
+fn texto(json: &Value, objeto: &str, campo: &str, path: &Path) -> Result<String, Box<dyn Error>> {
+    json[objeto][campo]
+        .as_str()
+        .filter(|v| !v.is_empty())
+        .map(str::to_owned)
+        .ok_or_else(|| format!("Falta «{objeto}.{campo}» en {}", path.display()).into())
 }
 
-fn ruta(variable: &str, por_defecto: &str) -> PathBuf {
-    std::env::var_os(variable).map_or_else(
-        || {
-            Path::new(env!("CARGO_MANIFEST_DIR"))
-                .join("../..")
-                .join(por_defecto)
-        },
-        PathBuf::from,
-    )
+fn leer_gre(json: &Value, path: &Path) -> Result<Option<CredencialesGre>, Box<dyn Error>> {
+    if json["gre"].is_null() {
+        return Ok(None);
+    }
+    Ok(Some(CredencialesGre {
+        api_url: texto(json, "gre", "api_url", path)?,
+        client_id: texto(json, "gre", "client_id", path)?,
+        client_secret: texto(json, "gre", "client_secret", path)?,
+        ruc: texto(json, "gre", "ruc", path)?,
+        usuario: texto(json, "gre", "usuario", path)?,
+        clave: texto(json, "gre", "clave", path)?,
+    }))
+}
+
+fn raiz() -> PathBuf {
+    Path::new(env!("CARGO_MANIFEST_DIR")).join("../..")
 }
 
 impl Config {
-    /// Lee el certificado y las credenciales.
+    /// Lee el JSON de credenciales y el certificado que indica.
     ///
     /// # Errors
     ///
-    /// Archivos ilegibles, credenciales incompletas o fallo del transporte TLS.
+    /// Archivos ilegibles, JSON inválido o incompleto, o fallo del transporte TLS.
     pub fn cargar() -> Result<Self, Box<dyn Error>> {
-        let cert_path = ruta("EJEMPLO_CERT", "cert/certificate.pem");
+        let cred_path = std::env::var_os("EJEMPLO_CREDENCIALES").map_or_else(
+            || raiz().join("example/credenciales/credenciales-prueba.json"),
+            PathBuf::from,
+        );
+        let texto_json = fs::read_to_string(&cred_path).map_err(|e| {
+            format!(
+                "No se pudo leer el archivo de credenciales {}: {e}",
+                cred_path.display()
+            )
+        })?;
+        let json: Value = serde_json::from_str(&texto_json)
+            .map_err(|e| format!("JSON inválido en {}: {e}", cred_path.display()))?;
+
+        let cert_path = match std::env::var_os("EJEMPLO_CERT") {
+            Some(path) => PathBuf::from(path),
+            None => {
+                let nombre = json["certificado"]
+                    .as_str()
+                    .ok_or_else(|| format!("Falta «certificado» en {}", cred_path.display()))?;
+                cred_path.parent().unwrap_or(Path::new(".")).join(nombre)
+            }
+        };
         let pem = fs::read_to_string(&cert_path).map_err(|e| {
             format!(
                 "No se pudo leer el certificado {}: {e}",
                 cert_path.display()
             )
         })?;
-        let cred = leer_credenciales(&ruta("EJEMPLO_CREDENCIALES", "cert/user.txt"))?;
         Ok(Self {
             pem,
-            cred,
+            sol: ClaveSol {
+                ruc: texto(&json, "sunat_beta", "ruc", &cred_path)?,
+                usuario: texto(&json, "sunat_beta", "usuario", &cred_path)?,
+                clave: texto(&json, "sunat_beta", "clave", &cred_path)?,
+            },
+            gre: leer_gre(&json, &cred_path)?,
             transport: ReqwestTransport::new()?,
         })
     }
 
-    fn get(&self, clave: &str) -> &str {
-        self.cred.get(clave).map_or("", String::as_str)
-    }
-
     /// RUC de la Clave SOL.
     pub fn ruc(&self) -> String {
-        self.get("RUC").to_owned()
+        self.sol.ruc.clone()
     }
 
     /// RUC del emisor de guías en la API GRE de prueba.
     pub fn gre_ruc(&self) -> String {
-        self.cred
-            .get("GRE_RUC")
-            .cloned()
-            .unwrap_or_else(|| "20161515648".to_owned())
+        self.gre
+            .as_ref()
+            .map_or_else(|| "20161515648".to_owned(), |gre| gre.ruc.clone())
     }
 
     /// `See` para facturas, boletas, notas, resúmenes y bajas (FE_BETA).
@@ -127,31 +152,23 @@ impl Config {
         let mut see = See::new(self.transport.clone());
         see.set_certificate(&self.pem)?;
         see.set_service(endpoint);
-        see.set_clave_sol(self.get("RUC"), self.get("Usuario"), self.get("Contraseña"));
+        see.set_clave_sol(&self.sol.ruc, &self.sol.usuario, &self.sol.clave);
         Ok(see)
     }
 
-    /// `Api` GRE de prueba; `None` si faltan sus credenciales.
+    /// `Api` GRE de prueba; `None` si el JSON no tiene la sección `gre`.
     ///
     /// # Errors
     ///
-    /// `GRE_API_URL` de producción.
+    /// `gre.api_url` de producción.
     pub fn api(&self) -> Result<Option<ApiGre>, Box<dyn Error>> {
-        let claves = [
-            "GRE_API_URL",
-            "GRE_CLIENT_ID",
-            "GRE_CLIENT_SECRET",
-            "GRE_RUC",
-            "GRE_USUARIO",
-            "GRE_CLAVE",
-        ];
-        if claves.iter().any(|clave| !self.cred.contains_key(*clave)) {
+        let Some(gre) = &self.gre else {
             return Ok(None);
-        }
-        let url = self.get("GRE_API_URL");
+        };
+        let url = gre.api_url.as_str();
         if url.contains("sunat.gob.pe") && !url.contains("test") && !url.contains("beta") {
             return Err(
-                "GRE_API_URL apunta a producción; este ejemplo solo usa entornos de prueba".into(),
+                "gre.api_url apunta a producción; este ejemplo solo usa entornos de prueba".into(),
             );
         }
         let mut api = Api::new(ApiFactory::new(
@@ -161,12 +178,8 @@ impl Config {
             InMemoryStore::default(),
             SystemClock,
         ));
-        api.set_api_credentials(self.get("GRE_CLIENT_ID"), self.get("GRE_CLIENT_SECRET"))
-            .set_clave_sol(
-                self.get("GRE_RUC"),
-                self.get("GRE_USUARIO"),
-                self.get("GRE_CLAVE"),
-            )
+        api.set_api_credentials(&gre.client_id, &gre.client_secret)
+            .set_clave_sol(&gre.ruc, &gre.usuario, &gre.clave)
             .set_certificate(&self.pem);
         Ok(Some(api))
     }

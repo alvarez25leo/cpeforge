@@ -36,8 +36,10 @@ cpeforge-ubl-validator = "0.1.0"
 cpeforge-report = "0.1.0"
 ```
 
-Los paquetes `cpeforge-*` aún no están publicados en crates.io; mientras
-tanto se pueden usar como dependencias `path` o `git`.
+Los 13 paquetes `cpeforge` y `cpeforge-*` están publicados en
+[crates.io](https://crates.io/crates/cpeforge/0.1.0) como versión 0.1.0.
+Esta versión sigue en desarrollo; los pendientes para una versión estable se
+detallan en [docs/pendientes.md](docs/pendientes.md).
 
 ## Paquetes
 

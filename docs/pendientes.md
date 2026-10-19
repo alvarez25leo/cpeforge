@@ -1,23 +1,18 @@
 # Pendientes por módulo
 
-Estado al 18 de octubre de 2026. Los 13 crates compilan y sus pruebas pasan
+Estado al 19 de octubre de 2026. Los 13 crates compilan y sus pruebas pasan
 (`cargo test --workspace --all-features`), pero ninguno se considera estable
 todavía. Cada módulo indica qué hace y qué le falta.
 
+Los 13 crates `cpeforge` y `cpeforge-*` 0.1.0 están publicados en crates.io.
+El CI del commit `9720dae` terminó correctamente en
+[GitHub Actions](https://github.com/alvarez25leo/cpeforge/actions/runs/39195271285).
+
 ## Pendientes del proyecto
 
-- **Publicación.** Retirar de crates.io los `greenter-rs-*` 0.1.0 (crates.io
-  solo permite borrar un crate en las 72 h siguientes a su publicación, o si
-  tiene pocas descargas y ningún dependiente; si no, `cargo yank`) y publicar
-  los `cpeforge-*` 0.1.0 respetando el orden de dependencias.
-- **Repositorio.** Renombrar `alvarez25leo/lib-greenter-rust` a
-  `alvarez25leo/cpeforge` (los manifiestos ya apuntan ahí) y añadir la
-  descripción y los topics: `rust`, `sunat`, `electronic-invoicing`, `peru`,
+- **Repositorio.** Añadir los topics de GitHub: `rust`, `sunat`,
+  `electronic-invoicing`, `peru`,
   `ubl`, `xml`, `xml-signature`, `cpe`, `sdk`.
-- **CI.** Ejecutar el workflow en GitHub tras el cambio de nombre. Los gates
-  de contraste con la referencia PHP ya traducen la identidad
-  (`oracle/identidad.py` y `oracle/php/identidad.php`) y pasan en local
-  (macOS); falta confirmarlos en `ubuntu-24.04`.
 - **Revisión independiente** de seguridad y de API de todos los crates antes
   de declarar una versión estable.
 - **PDF.** No existe generador de PDF (la representación impresa termina en

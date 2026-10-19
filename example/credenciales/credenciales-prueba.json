@@ -1,0 +1,17 @@
+{
+  "descripcion": "Credenciales PÚBLICAS de prueba para los ejemplos: Clave SOL por defecto de SUNAT BETA, API GRE de prueba del demo público y un certificado autofirmado de muestra (vencido). No sirven para producción y se pueden versionar.",
+  "certificado": "certificado-prueba.pem",
+  "sunat_beta": {
+    "ruc": "20000000001",
+    "usuario": "MODDATOS",
+    "clave": "moddatos"
+  },
+  "gre": {
+    "api_url": "https://gre-test.nubefact.com/v1",
+    "client_id": "test-85e5b0ae-255c-4891-a595-0b98c65c9854",
+    "client_secret": "test-Hty/M6QshYvPgItX2P0+Kw==",
+    "ruc": "20161515648",
+    "usuario": "MODDATOS",
+    "clave": "MODDATOS"
+  }
+}

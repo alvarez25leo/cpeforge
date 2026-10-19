@@ -39,13 +39,13 @@ comandos llama a SUNAT.
 EJEMPLO_REPETICIONES=1 bash oracle/ejemplos/errores/enviar.sh
 ```
 
-El script usa `FE_BETA` para la nota y el resumen, y `GRE_API_URL` de prueba
+El script usa `FE_BETA` para la nota y el resumen, y `gre.api_url` de prueba
 para la guía; no usa producción. Genera los tres casos con la misma fecha y,
 en cada lenguaje, los envía a su servicio de prueba. Exige el código esperado,
 el mismo tipo de rechazo, mensaje y observaciones. Se espera `EJEMPLO_PAUSA`
 segundos entre envíos (5 por defecto) por el límite de BETA. Se puede pasar un
-nombre para enviar solo ese caso. Para GRE deben estar configuradas las seis
-credenciales `GRE_*` que exige `example/README.md`.
+nombre para enviar solo ese caso. Para GRE se usa la sección `gre` de
+`example/credenciales/credenciales-prueba.json`.
 
 La respuesta SOAP de BETA incrusta un **ticket distinto por solicitud** dentro
 del mensaje. `verificar.py` conserva los mensajes originales en

@@ -1,0 +1,420 @@
+# Gates del workspace (ver AGENTS.md). Los jobs *-parity contrastan con la referencia PHP de oracle/.
+# cpeforge-xmldsig enlaza OpenSSL 3 del sistema (libssl-dev en Ubuntu); PHP
+# (setup-php) usa también las bibliotecas del sistema: OpenSSL 3.0 y libxml2
+# 2.9 en ubuntu-24.04, distintas de las que generaron los fixtures en macOS.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Una sola ejecución por rama o PR; la nueva cancela la anterior.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  rust:
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - toolchain: "1.85.0"
+            scope: "--workspace --exclude cpeforge-ws --exclude cpeforge"
+          - toolchain: "1.88.0"
+            scope: "--workspace"
+          - toolchain: stable
+            scope: "--workspace"
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: rustup toolchain install ${{ matrix.toolchain }} --profile minimal --component rustfmt,clippy
+      - run: rustup default ${{ matrix.toolchain }}
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: ${{ matrix.toolchain }}
+      # crates/xml/tests/schema.rs valida con xmllint contra los XSD UBL que
+      # instala composer (greenter/ubl-validator, fijado en oracle/php).
+      # libxslt1-dev: cpeforge-cpe-validator enlaza libxml2/libxslt/libexslt.
+      - run: sudo apt-get update && sudo apt-get install -y libssl-dev pkg-config libxml2-utils libxslt1-dev
+      - run: composer install --working-dir=oracle/php --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
+      - run: bash scripts/prepare_ubl_validator_reference.sh
+      - run: cargo fmt --all -- --check
+        if: matrix.toolchain == 'stable'
+      - run: cargo clippy ${{ matrix.scope }} --all-targets --all-features --locked -- -D warnings
+      - run: cargo clippy ${{ matrix.scope }} --all-targets --locked -- -D warnings
+      - run: cargo test ${{ matrix.scope }} --locked
+      - run: cargo test ${{ matrix.scope }} --all-features --locked
+      - run: cargo doc ${{ matrix.scope }} --no-deps --all-features --locked
+        env:
+          RUSTDOCFLAGS: -D warnings
+      - run: cargo run -p cpeforge-core --example invoice_model --locked
+      - run: cargo run -p cpeforge-xml --example invoice_xml --locked
+      - run: cargo run -p cpeforge-xml --example despatch_2022_xml --locked
+      - run: cargo run -p cpeforge-xmldsig --example sign_verify_invoice --locked
+      - run: cargo run -p cpeforge-gre-api --example flujo_gre --locked
+      - run: cargo run -p cpeforge-validator --example invoice_validation --locked
+      - run: cargo run -p cpeforge-xcodes --example lookup --locked
+      - run: cargo run -p cpeforge-xcodes --example with_validator --locked
+      - run: cargo run -p cpeforge-xml-parser --example parse_invoice --locked
+      - run: cargo run -p cpeforge-xml-parser --example reader --locked
+      - run: cargo run -p cpeforge-cpe-validator --example validate_rules --locked
+      - run: cargo run -p cpeforge-ubl-validator --example validate_ubl --locked -- target/reference/ubl-validator-v2.3.0/src/xsd tests/reference/ubl-validator/xml/2.1-Invoice.xml
+      - run: cargo run -p cpeforge-report --example invoice_html --locked
+      - run: cargo run -p cpeforge-ws --example local_cdr --locked
+        if: matrix.toolchain != '1.85.0'
+      - run: cargo run -p cpeforge --example fachadas_sin_red --locked
+        if: matrix.toolchain != '1.85.0'
+      - run: cargo run -p cpeforge --example see_with_xcodes --features xcodes --locked
+        if: matrix.toolchain != '1.85.0'
+      # xml depende de core sin publicar: se empaquetan y verifican juntos.
+      - run: cargo publish -p cpeforge-core -p cpeforge-xml -p cpeforge-xmldsig -p cpeforge-gre-api -p cpeforge-ws -p cpeforge -p cpeforge-validator -p cpeforge-xcodes -p cpeforge-xml-limits -p cpeforge-xml-parser -p cpeforge-cpe-validator -p cpeforge-ubl-validator -p cpeforge-report --dry-run --locked
+        if: matrix.toolchain == 'stable'
+      # rust-cache guarda y poda `target/`: los clones de referencia y el
+      # entorno Python no deben entrar en la caché (se restaurarían a medias).
+      - if: always()
+        run: rm -rf target/reference target/ubl-independent-venv312
+
+  security:
+    timeout-minutes: 30
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y libssl-dev pkg-config
+      - run: cargo install --locked cargo-deny@0.20.2 cargo-audit@0.22.2
+      - run: cargo deny check
+      - run: cargo audit
+      # Registros de diferencias válidos, oracle/compatibilidad.md al día y
+      # metadatos de publicación completos. Los pendientes CORREGIR de un
+      # paquete en desarrollo se informan sin fallar (--ci).
+      - run: python3 scripts/release_readiness.py --ci
+
+  php-parity:
+    timeout-minutes: 60
+    runs-on: ubuntu-24.04
+    # bash con pipefail: `| tee` no oculta el estado de salida del gate.
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: mbstring, dom, openssl
+          tools: composer:v2
+          coverage: none
+      - run: sudo apt-get update && sudo apt-get install -y libxml2-utils libssl-dev pkg-config openssl
+      - uses: Swatinem/rust-cache@v2
+      # La referencia se clona desde el remoto oficial y se fija al commit de
+      # oracle/upstream/referencia.json; el script falla si no coincide.
+      - run: mkdir -p target/evidence && scripts/core_parity.sh 2>&1 | tee target/evidence/core-parity.log
+      - run: scripts/xml_parity.sh 2>&1 | tee target/evidence/xml-parity.log
+      # Claves efímeras en un directorio temporal. La CLI openssl 3.0 de Ubuntu
+      # no admite -not_before: scripts/xmldsig_keys.sh usa entonces el
+      # generador Rust equivalente. La verificación independiente usa xmllint
+      # y la CLI openssl del sistema (en macOS, LibreSSL).
+      - run: scripts/xmldsig_parity.sh 2>&1 | tee target/evidence/xmldsig-parity.log
+        env:
+          OPENSSL_BIN: /usr/bin/openssl
+      - run: scripts/gre_api_parity.sh 2>&1 | tee target/evidence/gre-api-parity.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: php-parity-evidence
+          path: |
+            target/evidence/core-*
+            target/evidence/xml-parity.log
+            target/evidence/xml-regenerated
+            target/evidence/xmldsig-*
+            target/evidence/gre-api-*
+          if-no-files-found: warn
+      # rust-cache guarda y poda `target/`: los clones de referencia, el
+      # entorno Python y la evidencia no deben entrar en la caché.
+      - if: always()
+        run: rm -rf target/reference target/ubl-independent-venv312 target/evidence
+
+  ws-parity:
+    timeout-minutes: 60
+    runs-on: ubuntu-24.04
+    # bash con pipefail: `| tee` no oculta el estado de salida del gate.
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: dom, soap, zlib, mbstring
+          tools: composer:v2
+          coverage: none
+      - run: sudo apt-get update && sudo apt-get install -y libxml2-utils libssl-dev pkg-config iptables
+      - run: |
+          bash scripts/prepare_php_reference.sh
+          PHP_REFERENCE_DIR="$PWD/target/reference/v5.3.0-suite" bash scripts/prepare_php_reference.sh
+          cp oracle/php/ws/composer.lock target/reference/v5.3.0-suite/composer.lock
+          composer install --working-dir=target/reference/v5.3.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
+          cargo fetch --locked
+      # Dependencias y fuente fijada están descargadas. Durante la ejecución
+      # solo se permite loopback, que usa el servidor SOAP independiente.
+      - run: |
+          sudo iptables -I OUTPUT ! -o lo -j REJECT
+          trap 'sudo iptables -D OUTPUT ! -o lo -j REJECT || true; sudo ip6tables -D OUTPUT ! -o lo -j REJECT || true' EXIT
+          sudo ip6tables -I OUTPUT ! -o lo -j REJECT
+          mkdir -p target/evidence
+          WS_RUN_RUST=1 bash scripts/ws_reference_oracle.sh 2>&1 | tee target/evidence/ws-oracle.log
+          bash scripts/ws_tls_probe.sh 2>&1 | tee target/evidence/ws-tls-probe.log
+          bash scripts/ws_http_probe.sh 2>&1 | tee target/evidence/ws-http-probe.log
+          cargo test -p cpeforge-ws --test parity offline_parity --locked -- --nocapture 2>&1 | tee target/evidence/ws-offline-parity.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ws-parity-evidence
+          path: |
+            target/evidence/ws-*
+          if-no-files-found: warn
+
+  cpeforge-parity:
+    timeout-minutes: 60
+    runs-on: ubuntu-24.04
+    # bash con pipefail: `| tee` no oculta el estado de salida del gate.
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: dom, soap, zlib, mbstring, openssl
+          tools: composer:v2
+          coverage: none
+      - run: sudo apt-get update && sudo apt-get install -y libxml2-utils libssl-dev pkg-config iptables openssl
+      - run: |
+          bash scripts/prepare_php_reference.sh
+          PHP_REFERENCE_DIR="$PWD/target/reference/v5.3.0-suite" bash scripts/prepare_php_reference.sh
+          cp oracle/php/ws/composer.lock target/reference/v5.3.0-suite/composer.lock
+          composer install --working-dir=target/reference/v5.3.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
+          composer install --working-dir=oracle/php --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
+          cargo fetch --locked
+      - run: |
+          sudo iptables -I OUTPUT ! -o lo -j REJECT
+          trap 'sudo iptables -D OUTPUT ! -o lo -j REJECT || true; sudo ip6tables -D OUTPUT ! -o lo -j REJECT || true' EXIT
+          sudo ip6tables -I OUTPUT ! -o lo -j REJECT
+          mkdir -p target/evidence
+          CPEFORGE_NETWORK_BLOCKED=1 OPENSSL_BIN=/usr/bin/openssl bash scripts/cpeforge_parity.sh 2>&1 | tee target/evidence/cpeforge-parity.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cpeforge-parity-evidence
+          path: |
+            target/evidence/cpeforge-*
+          if-no-files-found: warn
+
+  validator-parity:
+    timeout-minutes: 60
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: mbstring, dom, intl
+          tools: composer:v2
+          coverage: none
+      - run: sudo apt-get update && sudo apt-get install -y libssl-dev pkg-config iptables
+      - run: |
+          bash scripts/prepare_php_reference.sh
+          PHP_REFERENCE_DIR="$PWD/target/reference/v5.3.0-suite" bash scripts/prepare_php_reference.sh
+          cp oracle/php/ws/composer.lock target/reference/v5.3.0-suite/composer.lock
+          composer install --working-dir=target/reference/v5.3.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
+          cargo fetch --locked
+      - run: |
+          sudo iptables -I OUTPUT ! -o lo -j REJECT
+          trap 'sudo iptables -D OUTPUT ! -o lo -j REJECT || true; sudo ip6tables -D OUTPUT ! -o lo -j REJECT || true' EXIT
+          sudo ip6tables -I OUTPUT ! -o lo -j REJECT
+          (cd target/reference/v5.3.0-suite && php vendor/bin/phpunit packages/validator/tests --no-coverage)
+          VALIDATOR_NETWORK_BLOCKED=1 bash scripts/validator_parity.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validator-parity-evidence
+          path: target/evidence/validator-*
+          if-no-files-found: warn
+
+  xcodes-parity:
+    timeout-minutes: 30
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: dom
+          tools: composer:v2
+          coverage: none
+      - run: sudo apt-get update && sudo apt-get install -y libssl-dev pkg-config iptables
+      - run: |
+          bash scripts/prepare_php_reference.sh
+          PHP_REFERENCE_DIR="$PWD/target/reference/v5.3.0-suite" bash scripts/prepare_php_reference.sh
+          cp oracle/php/ws/composer.lock target/reference/v5.3.0-suite/composer.lock
+          composer install --working-dir=target/reference/v5.3.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
+          cargo fetch --locked
+      - run: |
+          sudo iptables -I OUTPUT ! -o lo -j REJECT
+          trap 'sudo iptables -D OUTPUT ! -o lo -j REJECT || true; sudo ip6tables -D OUTPUT ! -o lo -j REJECT || true' EXIT
+          sudo ip6tables -I OUTPUT ! -o lo -j REJECT
+          XCODES_NETWORK_BLOCKED=1 bash scripts/xcodes_parity.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: xcodes-parity-evidence
+          path: target/evidence/xcodes-*
+          if-no-files-found: warn
+
+  xml-parser-parity:
+    timeout-minutes: 30
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: dom
+          tools: composer:v2
+          coverage: none
+      - run: sudo apt-get update && sudo apt-get install -y libssl-dev pkg-config iptables
+      - run: |
+          bash scripts/prepare_php_reference.sh
+          PHP_REFERENCE_DIR="$PWD/target/reference/v5.3.0-suite" bash scripts/prepare_php_reference.sh
+          cp oracle/php/ws/composer.lock target/reference/v5.3.0-suite/composer.lock
+          composer install --working-dir=target/reference/v5.3.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
+          cargo fetch --locked
+      # Sin red: la suite upstream, el oráculo PHP y las pruebas Rust.
+      - run: |
+          sudo iptables -I OUTPUT ! -o lo -j REJECT
+          trap 'sudo iptables -D OUTPUT ! -o lo -j REJECT || true; sudo ip6tables -D OUTPUT ! -o lo -j REJECT || true' EXIT
+          sudo ip6tables -I OUTPUT ! -o lo -j REJECT
+          XML_PARSER_NETWORK_BLOCKED=1 bash scripts/xml_parser_parity.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: xml-parser-parity-evidence
+          path: target/evidence/xml-parser-*
+          if-no-files-found: warn
+
+  cpe-validator-parity:
+    timeout-minutes: 30
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: dom, xsl
+          tools: composer:v2
+          coverage: none
+      - run: sudo apt-get update && sudo apt-get install -y libssl-dev pkg-config libxslt1-dev xsltproc iptables
+      - run: |
+          bash scripts/prepare_php_reference.sh
+          PHP_REFERENCE_DIR="$PWD/target/reference/v5.3.0-suite" bash scripts/prepare_php_reference.sh
+          cp oracle/php/ws/composer.lock target/reference/v5.3.0-suite/composer.lock
+          composer install --working-dir=target/reference/v5.3.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
+          cargo fetch --locked
+      # Sin red: la suite upstream, el oráculo PHP, las pruebas Rust y el
+      # verificador independiente (xsltproc).
+      - run: |
+          sudo iptables -I OUTPUT ! -o lo -j REJECT
+          trap 'sudo iptables -D OUTPUT ! -o lo -j REJECT || true; sudo ip6tables -D OUTPUT ! -o lo -j REJECT || true' EXIT
+          sudo ip6tables -I OUTPUT ! -o lo -j REJECT
+          CPE_VALIDATOR_NETWORK_BLOCKED=1 bash scripts/cpe_validator_parity.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cpe-validator-parity-evidence
+          path: target/evidence/cpe-validator-*
+          if-no-files-found: warn
+
+  ubl-validator-parity:
+    timeout-minutes: 30
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: dom, libxml
+          tools: phpunit:9.6
+          coverage: none
+      - run: sudo apt-get update && sudo apt-get install -y libxml2-dev pkg-config python3-venv iptables
+      - uses: Swatinem/rust-cache@v2
+      - run: |
+          bash scripts/prepare_ubl_validator_reference.sh
+          python3 -m venv target/ubl-independent-venv312
+          target/ubl-independent-venv312/bin/python -m pip install 'xmlschema==4.3.2' 'elementpath==5.1.4'
+          cargo fetch --locked
+      - run: |
+          sudo iptables -I OUTPUT ! -o lo -j REJECT
+          trap 'sudo iptables -D OUTPUT ! -o lo -j REJECT || true; sudo ip6tables -D OUTPUT ! -o lo -j REJECT || true' EXIT
+          sudo ip6tables -I OUTPUT ! -o lo -j REJECT
+          UBL_VALIDATOR_NETWORK_BLOCKED=1 bash scripts/ubl_validator_parity.sh
+          UBL_VALIDATOR_NETWORK_BLOCKED=1 PHPUNIT_BIN=phpunit bash scripts/ubl_validator_php_suite.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ubl-validator-parity-evidence
+          path: target/evidence/ubl-validator-*
+          if-no-files-found: warn
+      # rust-cache guarda y poda `target/`: los clones de referencia y el
+      # entorno Python no deben entrar en la caché (se restaurarían a medias).
+      - if: always()
+        run: rm -rf target/reference target/ubl-independent-venv312
+
+  report-parity:
+    timeout-minutes: 30
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: mbstring, dom, iconv, xmlwriter
+          tools: composer:v2
+          coverage: none
+      - run: sudo apt-get update && sudo apt-get install -y libssl-dev pkg-config iptables
+      - uses: Swatinem/rust-cache@v2
+      # Referencia, suite upstream (greenter/data y PHPUnit), dependencias del
+      # oráculo y del decodificador QR se descargan antes de cortar la red.
+      - run: |
+          bash scripts/prepare_php_reference.sh
+          PHP_REFERENCE_DIR="$PWD/target/reference/v5.3.0-suite" bash scripts/prepare_php_reference.sh
+          cp oracle/php/ws/composer.lock target/reference/v5.3.0-suite/composer.lock
+          composer install --working-dir=target/reference/v5.3.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
+          composer install --working-dir=oracle/php/report --no-interaction --prefer-dist --no-progress
+          cargo fetch --locked
+          cargo fetch --locked --manifest-path scripts/report_qr_verify/Cargo.toml
+      - run: |
+          sudo iptables -I OUTPUT ! -o lo -j REJECT
+          trap 'sudo iptables -D OUTPUT ! -o lo -j REJECT || true; sudo ip6tables -D OUTPUT ! -o lo -j REJECT || true' EXIT
+          sudo ip6tables -I OUTPUT ! -o lo -j REJECT
+          REPORT_REQUIRE_UPSTREAM_SUITE=1 bash scripts/report_parity.sh 2>&1 | tee target/evidence-report-parity.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: report-parity-evidence
+          path: target/evidence-report-parity.log
+          if-no-files-found: warn
+      # rust-cache guarda y poda `target/`: los clones de referencia y el
+      # entorno Python no deben entrar en la caché (se restaurarían a medias).
+      - if: always()
+        run: rm -rf target/reference target/ubl-independent-venv312

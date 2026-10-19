@@ -1,0 +1,86 @@
+{
+    "generator": "oracle/php/core/run_cases.php",
+    "reference": {
+        "tag": "v5.3.0",
+        "commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+    },
+    "reference_version": "8.4.17",
+    "timezone_db": "2025.2",
+    "cases_file": "services.json",
+    "results": {
+        "basic-token-null": {
+            "calls": {},
+            "snapshot": {
+                "$class": "BasicToken",
+                "expire": null,
+                "value": null
+            }
+        },
+        "basic-token-full": {
+            "calls": {},
+            "snapshot": {
+                "$class": "BasicToken",
+                "expire": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-01-01T12:00:00.000000",
+                        "offset": 0,
+                        "unix": 1704110400,
+                        "micro": 0,
+                        "tz": "UTC"
+                    }
+                },
+                "value": "token-sintetico"
+            }
+        },
+        "basic-token-setters": {
+            "calls": {},
+            "snapshot": {
+                "$class": "BasicToken",
+                "expire": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-01-01T07:00:00.000000",
+                        "offset": -18000,
+                        "unix": 1704110400,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "value": "otro"
+            }
+        },
+        "exception-default": {
+            "calls": {},
+            "snapshot": {
+                "$throwable": "CPEForge\\Services\\InvalidServiceResponseException",
+                "message": "",
+                "code": 0,
+                "previous": null
+            }
+        },
+        "exception-message-code": {
+            "calls": {},
+            "snapshot": {
+                "$throwable": "CPEForge\\Services\\InvalidServiceResponseException",
+                "message": "Respuesta inválida",
+                "code": 500,
+                "previous": null
+            }
+        },
+        "exception-previous": {
+            "calls": {},
+            "snapshot": {
+                "$throwable": "CPEForge\\Services\\InvalidServiceResponseException",
+                "message": "Respuesta inválida",
+                "code": 0,
+                "previous": {
+                    "$throwable": "LogicException",
+                    "message": "causa",
+                    "code": 7,
+                    "previous": null
+                }
+            }
+        }
+    }
+}

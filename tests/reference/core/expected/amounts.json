@@ -1,0 +1,374 @@
+{
+    "generator": "oracle/php/core/run_cases.php",
+    "reference": {
+        "tag": "v5.3.0",
+        "commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+    },
+    "reference_version": "8.4.17",
+    "timezone_db": "2025.2",
+    "cases_file": "amounts.json",
+    "results": {
+        "amount-zero": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "0.0"
+                },
+                "monto": {
+                    "$float": "0.0"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-zero-scale-2": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "0.0"
+                },
+                "monto": {
+                    "$float": "0.0"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-negative-zero": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "-0.0"
+                },
+                "monto": {
+                    "$float": "-0.0"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-cent": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "0.01"
+                },
+                "monto": {
+                    "$float": "0.01"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-negative": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "-15.3"
+                },
+                "monto": {
+                    "$float": "-15.3"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-three-decimals": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "1234567.891"
+                },
+                "monto": {
+                    "$float": "1234567.891"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-binary-inexact": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "0.1"
+                },
+                "monto": {
+                    "$float": "0.1"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-half-cent": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "1.005"
+                },
+                "monto": {
+                    "$float": "1.005"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-thirteen-digits": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "99999999999.99"
+                },
+                "monto": {
+                    "$float": "99999999999.99"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-fifteen-significant": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "1234567890123.45"
+                },
+                "monto": {
+                    "$float": "1234567890123.45"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-sixteen-significant": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "12345678901234.56"
+                },
+                "monto": {
+                    "$float": "12345678901234.56"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-seventeen-significant": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "123456789012345.67"
+                },
+                "monto": {
+                    "$float": "123456789012345.67"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-nineteen-significant": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "12345678901234568.0"
+                },
+                "monto": {
+                    "$float": "12345678901234568.0"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-many-decimals": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "0.12345678901234568"
+                },
+                "monto": {
+                    "$float": "0.12345678901234568"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-tiny": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "1.0e-6"
+                },
+                "monto": {
+                    "$float": "1.0e-6"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-exponent-input": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "1000.0"
+                },
+                "monto": {
+                    "$float": "1000.0"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-integer-trailing-zeros": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "1000.0"
+                },
+                "monto": {
+                    "$float": "1000.0"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-max-safe-integer": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "9007199254740992.0"
+                },
+                "monto": {
+                    "$float": "9007199254740992.0"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-decimal-max": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "7.922816251426434e+28"
+                },
+                "monto": {
+                    "$float": "7.922816251426434e+28"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-beyond-decimal-max": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "7.922816251426434e+28"
+                },
+                "monto": {
+                    "$float": "7.922816251426434e+28"
+                },
+                "montoBase": null
+            }
+        },
+        "amount-large-exponent": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": {
+                    "$float": "1.0e+30"
+                },
+                "monto": {
+                    "$float": "1.0e+30"
+                },
+                "montoBase": null
+            }
+        },
+        "int-negative-bultos": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Shipment",
+                "aeropuerto": null,
+                "choferes": null,
+                "codPuerto": null,
+                "codTraslado": null,
+                "contenedores": null,
+                "desTraslado": null,
+                "fecEntregaBienes": null,
+                "fecTraslado": null,
+                "indicadores": null,
+                "llegada": null,
+                "modTraslado": null,
+                "numBultos": -1,
+                "numContenedor": null,
+                "partida": null,
+                "pesoItems": null,
+                "pesoTotal": null,
+                "puerto": null,
+                "sustentoPeso": null,
+                "transportista": null,
+                "undPesoTotal": null,
+                "vehiculo": null,
+                "indTransbordo": null
+            }
+        },
+        "int-max-bultos": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Shipment",
+                "aeropuerto": null,
+                "choferes": null,
+                "codPuerto": null,
+                "codTraslado": null,
+                "contenedores": null,
+                "desTraslado": null,
+                "fecEntregaBienes": null,
+                "fecTraslado": null,
+                "indicadores": null,
+                "llegada": null,
+                "modTraslado": null,
+                "numBultos": 9223372036854775807,
+                "numContenedor": null,
+                "partida": null,
+                "pesoItems": null,
+                "pesoTotal": null,
+                "puerto": null,
+                "sustentoPeso": null,
+                "transportista": null,
+                "undPesoTotal": null,
+                "vehiculo": null,
+                "indTransbordo": null
+            }
+        },
+        "int-duracion-zero": {
+            "calls": {},
+            "snapshot": {
+                "$class": "DetailAttribute",
+                "code": null,
+                "duracion": 0,
+                "fecFin": null,
+                "fecInicio": null,
+                "name": null,
+                "value": null
+            }
+        }
+    }
+}

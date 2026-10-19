@@ -1,0 +1,201 @@
+{
+    "generator": "oracle/php/xml/run_cases.php",
+    "reference": {
+        "tag": "v5.3.0",
+        "commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+    },
+    "reference_version": "8.4.17",
+    "twig_version": "v3.30.0",
+    "timezone_db": "2025.2",
+    "cases_file": "retention-perception.json",
+    "results": {
+        "retention-full-default": {
+            "now": 1792253931,
+            "sha256": "0b5a9944759105007d2123037465692f651f09a496d47422f43e2c6635b85a2f",
+            "bytes": 3467,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/retention.xml.twig at line 1."
+            ]
+        },
+        "retention-full-cpeforge": {
+            "now": 1792253931,
+            "sha256": "8164186f4d1c54c4411f32a2c1ddcda4618a3ba29bdf53b0b035a39ec219d454",
+            "bytes": 3437,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/retention.xml.twig at line 1."
+            ]
+        },
+        "retention-full-tests": {
+            "now": 1792253931,
+            "sha256": "8164186f4d1c54c4411f32a2c1ddcda4618a3ba29bdf53b0b035a39ec219d454",
+            "bytes": 3437,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/retention.xml.twig at line 1."
+            ]
+        },
+        "retention-partial-default": {
+            "now": 1792253931,
+            "sha256": "820a446f91b5913185d23a1d93e995cb7c6007ad79a2ce333e539f3f35f1f021",
+            "bytes": 3521,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/retention.xml.twig at line 1."
+            ]
+        },
+        "retention-partial-tests": {
+            "now": 1792253931,
+            "sha256": "820a446f91b5913185d23a1d93e995cb7c6007ad79a2ce333e539f3f35f1f021",
+            "bytes": 3521,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/retention.xml.twig at line 1."
+            ]
+        },
+        "retention-empty-default": {
+            "now": 1792253931,
+            "sha256": "78f07b92105c5578ca5e23b974e5487ebb52817f5bae8e3d8caec649da94e25a",
+            "bytes": 2203,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/retention.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "retention-empty-cpeforge": {
+            "now": 1792253931,
+            "sha256": "78f07b92105c5578ca5e23b974e5487ebb52817f5bae8e3d8caec649da94e25a",
+            "bytes": 2203,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/retention.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "retention-empty-tests": {
+            "now": 1792253931,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "Impossible to access an attribute (\"ruc\") on a null variable in \"retention.xml.twig\" at line 13."
+            },
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/retention.xml.twig at line 1."
+            ]
+        },
+        "retention-no-provider-default": {
+            "now": 1792253931,
+            "sha256": "85772d90867b6f807112a96fa6fadf95cff0a0fb97865001147f526aa8e70f15",
+            "bytes": 3390,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/retention.xml.twig at line 1."
+            ]
+        },
+        "retention-no-provider-cpeforge": {
+            "now": 1792253931,
+            "sha256": "85772d90867b6f807112a96fa6fadf95cff0a0fb97865001147f526aa8e70f15",
+            "bytes": 3390,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/retention.xml.twig at line 1."
+            ]
+        },
+        "retention-no-provider-tests": {
+            "now": 1792253931,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "Impossible to access an attribute (\"tipoDoc\") on a null variable in \"retention.xml.twig\" at line 55."
+            },
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/retention.xml.twig at line 1."
+            ]
+        },
+        "perception-full-default": {
+            "now": 1792253931,
+            "sha256": "01612b1e01c295936109fe3e5f93745afa12edde5357c8b8e0195113b548f61d",
+            "bytes": 3324,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/perception.xml.twig at line 1."
+            ]
+        },
+        "perception-full-cpeforge": {
+            "now": 1792253931,
+            "sha256": "01612b1e01c295936109fe3e5f93745afa12edde5357c8b8e0195113b548f61d",
+            "bytes": 3324,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/perception.xml.twig at line 1."
+            ]
+        },
+        "perception-full-tests": {
+            "now": 1792253931,
+            "sha256": "01612b1e01c295936109fe3e5f93745afa12edde5357c8b8e0195113b548f61d",
+            "bytes": 3324,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/perception.xml.twig at line 1."
+            ]
+        },
+        "perception-partial-default": {
+            "now": 1792253931,
+            "sha256": "694099c4cbbd9275b102e2f20561d1a9640911cb186ea6fef8991b80413d8920",
+            "bytes": 3549,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/perception.xml.twig at line 1."
+            ]
+        },
+        "perception-partial-tests": {
+            "now": 1792253931,
+            "sha256": "694099c4cbbd9275b102e2f20561d1a9640911cb186ea6fef8991b80413d8920",
+            "bytes": 3549,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/perception.xml.twig at line 1."
+            ]
+        },
+        "perception-empty-default": {
+            "now": 1792253931,
+            "sha256": "e1da7445583c3599777d12e608d780808245ea27d3321067cf8390323a27a21b",
+            "bytes": 2214,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/perception.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "perception-empty-cpeforge": {
+            "now": 1792253931,
+            "sha256": "e1da7445583c3599777d12e608d780808245ea27d3321067cf8390323a27a21b",
+            "bytes": 2214,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/perception.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "perception-empty-tests": {
+            "now": 1792253931,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "Impossible to access an attribute (\"ruc\") on a null variable in \"perception.xml.twig\" at line 13."
+            },
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/perception.xml.twig at line 1."
+            ]
+        },
+        "perception-no-provider-default": {
+            "now": 1792253931,
+            "sha256": "dc7f2c8634f9056c3e65b7bfe12341b2dae1067e516127e0512a517c76496270",
+            "bytes": 3277,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/perception.xml.twig at line 1."
+            ]
+        },
+        "perception-no-provider-cpeforge": {
+            "now": 1792253931,
+            "sha256": "dc7f2c8634f9056c3e65b7bfe12341b2dae1067e516127e0512a517c76496270",
+            "bytes": 3277,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/perception.xml.twig at line 1."
+            ]
+        },
+        "perception-no-provider-tests": {
+            "now": 1792253932,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "Impossible to access an attribute (\"tipoDoc\") on a null variable in \"perception.xml.twig\" at line 55."
+            },
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/perception.xml.twig at line 1."
+            ]
+        }
+    }
+}

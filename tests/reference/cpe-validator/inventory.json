@@ -1,0 +1,481 @@
+{
+ "source": "la referencia packages/cpe-validator",
+ "files": [
+  {
+   "file": "Validator/Entity/CpeError.php",
+   "sha256": "a62c9969a1672e65a9bb7d2e000cb8e9a940a18445ed221c2079014c0614180e",
+   "lines": 120,
+   "kind": "class",
+   "name": "CpeError",
+   "methods": [
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "getCode",
+     "params": "",
+     "returns": "?string"
+    },
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "setCode",
+     "params": "?string $code",
+     "returns": "CpeError"
+    },
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "getMessage",
+     "params": "",
+     "returns": "?string"
+    },
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "setMessage",
+     "params": "?string $message",
+     "returns": "CpeError"
+    },
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "getLevel",
+     "params": "",
+     "returns": "?string"
+    },
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "setLevel",
+     "params": "?string $level",
+     "returns": "CpeError"
+    },
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "getNodePath",
+     "params": "",
+     "returns": "?string"
+    },
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "setNodePath",
+     "params": "?string $nodePath",
+     "returns": "CpeError"
+    },
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "getNodeValue",
+     "params": "",
+     "returns": "?string"
+    },
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "setNodeValue",
+     "params": "?string $nodeValue",
+     "returns": "CpeError"
+    }
+   ],
+   "constants": {},
+   "literals": []
+  },
+  {
+   "file": "Validator/Entity/DocumentType.php",
+   "sha256": "d551481a58a17f2ddb79cf027b7ae1fd64b41e661f16a2e44de0627e7658b756",
+   "lines": 25,
+   "kind": "class",
+   "name": "DocumentType",
+   "methods": [],
+   "constants": {
+    "FACTURA": "01",
+    "BOLETA": "03",
+    "NOTA_CREDITO": "07",
+    "NOTA_DEBITO": "08",
+    "RESUMEN_DIARIO": "RC",
+    "COMUNICACION_BAJA": "RA",
+    "GUIA_REMISION": "09",
+    "RETENCION": "20",
+    "PERCEPCION": "40",
+    "RESUMEN_REVERSION": "RR"
+   },
+   "literals": []
+  },
+  {
+   "file": "Validator/Entity/ErrorLevel.php",
+   "sha256": "e7faf49c3fb26a3da7275c8ca7f38fb4b0f46f76fd83363f38b52d3d7383e1fb",
+   "lines": 12,
+   "kind": "class",
+   "name": "ErrorLevel",
+   "methods": [],
+   "constants": {
+    "EXCEPTION": "1",
+    "OBSERVATION": "2"
+   },
+   "literals": []
+  },
+  {
+   "file": "Validator/Parser/ErrorResultParser.php",
+   "sha256": "fb0386f219be60d019de3dc035144ccc99f13496c183fdc05f0cc734a9c74d68",
+   "lines": 34,
+   "kind": "class",
+   "name": "ErrorResultParser",
+   "methods": [
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "parse",
+     "params": "?string $raw",
+     "returns": "?CpeError"
+    }
+   ],
+   "constants": {},
+   "literals": [
+    "1",
+    "|"
+   ]
+  },
+  {
+   "file": "Validator/Parser/ResultParserInterface.php",
+   "sha256": "0140afcea2e048a2949c6099c19821d2e675263fef31eb707dc73221479726aa",
+   "lines": 13,
+   "kind": "interface",
+   "name": "ResultParserInterface",
+   "methods": [
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "parse",
+     "params": "?string $raw",
+     "returns": "?CpeError"
+    }
+   ],
+   "constants": {},
+   "literals": []
+  },
+  {
+   "file": "Validator/Resolver/RuleResolverInterface.php",
+   "sha256": "57ebcb72b2c8da404f1b2615b68dea27d2d2f2176ad7adfb0534e006aa757f13",
+   "lines": 11,
+   "kind": "interface",
+   "name": "RuleResolverInterface",
+   "methods": [
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "getPath",
+     "params": "?string $typeDoc",
+     "returns": "?string"
+    }
+   ],
+   "constants": {},
+   "literals": []
+  },
+  {
+   "file": "Validator/Resolver/TypeResolverInterface.php",
+   "sha256": "6b39a3c54b604a38ea264a8101a10b6b198d158b73bf884dc6226c3329d30437",
+   "lines": 15,
+   "kind": "interface",
+   "name": "TypeResolverInterface",
+   "methods": [
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "getType",
+     "params": "DOMDocument $doc",
+     "returns": "?string"
+    },
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "getTypeFromXml",
+     "params": "?string $xml",
+     "returns": "?string"
+    }
+   ],
+   "constants": {},
+   "literals": []
+  },
+  {
+   "file": "Validator/Resolver/XmlTypeResolver.php",
+   "sha256": "0e4215d6c969eff6e64e6b42d52529d258c51370533b89467dd8443d279f6a72",
+   "lines": 60,
+   "kind": "class",
+   "name": "XmlTypeResolver",
+   "methods": [
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "getType",
+     "params": "DOMDocument $doc",
+     "returns": "?string"
+    },
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "getTypeFromXml",
+     "params": "?string $xml",
+     "returns": "?string"
+    },
+    {
+     "visibility": "private",
+     "static": false,
+     "name": "fromInvoice",
+     "params": "DOMDocument $doc",
+     "returns": null
+    },
+    {
+     "visibility": "private",
+     "static": false,
+     "name": "fromVoided",
+     "params": "DOMDocument $doc",
+     "returns": null
+    },
+    {
+     "visibility": "private",
+     "static": false,
+     "name": "getTextValue",
+     "params": "DOMDocument $doc, string $query",
+     "returns": "?string"
+    }
+   ],
+   "constants": {},
+   "literals": [
+    "CreditNote",
+    "DebitNote",
+    "DespatchAdvice",
+    "Invoice",
+    "Perception",
+    "Retention",
+    "SummaryDocuments",
+    "VoidedDocuments",
+    "cbc:ID",
+    "cbc:InvoiceTypeCode"
+   ]
+  },
+  {
+   "file": "Validator/Resolver/XslPathResolver.php",
+   "sha256": "8a49442b00f7596263c6fbdc7f74b27cc529bda2875ba99928d3cefc2f5acded",
+   "lines": 47,
+   "kind": "class",
+   "name": "XslPathResolver",
+   "methods": [
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "__construct",
+     "params": "string $basePath",
+     "returns": null
+    },
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "getPath",
+     "params": "?string $typeDoc",
+     "returns": "?string"
+    }
+   ],
+   "constants": {},
+   "literals": []
+  },
+  {
+   "file": "Validator/Xml/CpeValidator.php",
+   "sha256": "62c80c6130537579f9313b247b147d31fbcdb4aa9fb0634df9b04caa64abfb07",
+   "lines": 90,
+   "kind": "class",
+   "name": "CpeValidator",
+   "methods": [
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "__construct",
+     "params": "TypeResolverInterface $typeResolver, RuleResolverInterface $ruleResolver, XslValidatorInterface $xslValidator",
+     "returns": null
+    },
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "validateFromXml",
+     "params": "string $filename, string $xml",
+     "returns": "array"
+    },
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "validate",
+     "params": "string $filename, DOMDocument $document",
+     "returns": "array"
+    }
+   ],
+   "constants": {},
+   "literals": [
+    "0305"
+   ]
+  },
+  {
+   "file": "Validator/Xml/ValidatorInterface.php",
+   "sha256": "524cf7e000cf1870075498abddcb24e490cca4cfc814834e9c64ba08ec3dd05e",
+   "lines": 20,
+   "kind": "interface",
+   "name": "ValidatorInterface",
+   "methods": [
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "validate",
+     "params": "string $filename, DOMDocument $document",
+     "returns": "array"
+    }
+   ],
+   "constants": {},
+   "literals": []
+  },
+  {
+   "file": "Validator/Xml/XslValidator.php",
+   "sha256": "ab73b4786fb7b30a36c3dfaa2f757624078276515383caa7794ae74225a8588f",
+   "lines": 89,
+   "kind": "class",
+   "name": "XslValidator",
+   "methods": [
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "__construct",
+     "params": "ResultParserInterface $errorParser",
+     "returns": null
+    },
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "setXsl",
+     "params": "DOMDocument $xslDocument",
+     "returns": null
+    },
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "validate",
+     "params": "string $filename, DOMDocument $document",
+     "returns": "array"
+    },
+    {
+     "visibility": "private",
+     "static": false,
+     "name": "getErrors",
+     "params": "?array $xmlErrors",
+     "returns": "array"
+    }
+   ],
+   "constants": {},
+   "literals": [
+    "",
+    "::matches",
+    "XslDocument no set",
+    "nombreArchivoEnviado"
+   ]
+  },
+  {
+   "file": "Validator/Xml/XslValidatorInterface.php",
+   "sha256": "b0750941af5d20ad16382f2e85d7574a20f1ab9616f1102f8464d639a62a6994",
+   "lines": 12,
+   "kind": "interface",
+   "name": "XslValidatorInterface",
+   "methods": [
+    {
+     "visibility": "public",
+     "static": false,
+     "name": "setXsl",
+     "params": "DOMDocument $xslDocument",
+     "returns": null
+    }
+   ],
+   "constants": {},
+   "literals": []
+  },
+  {
+   "file": "Validator/Xml/XsltFunctions.php",
+   "sha256": "04dd28be3c38b7b1ef8d19d7ff37c65f79aea136b6b5d8777fa458d51efcc84f",
+   "lines": 17,
+   "kind": "class",
+   "name": "XsltFunctions",
+   "methods": [
+    {
+     "visibility": "public",
+     "static": true,
+     "name": "matches",
+     "params": "?string $pattern, ?string $input",
+     "returns": null
+    }
+   ],
+   "constants": {},
+   "literals": [
+    "/",
+    "\\/"
+   ]
+  }
+ ],
+ "path_mapping": {
+  "01": "2.X/ValidaExprRegFactura-2.0.1.xsl",
+  "03": "2.X/ValidaExprRegBoleta-2.0.1.xsl",
+  "07": "2.X/ValidaExprRegNC-2.0.1.xsl",
+  "08": "2.X/ValidaExprRegND-2.0.1.xsl",
+  "RC": "1.X/ValidaExprRegSummary-1.1.0.xsl",
+  "RA": "1.X/ValidaExprRegSummaryVoided-1.0.1.xsl",
+  "09": "2.X/ValidaExprRegGreRemitente-2.0.1.xsl",
+  "20": "1.X/ValidaExprRegRetencion-1.0.3.xsl",
+  "40": "1.X/ValidaExprRegPercepcion-1.0.1.xsl",
+  "RR": "1.X/ValidaExprRegOtrosVoided-1.0.1.xsl"
+ },
+ "upstream_tests": [
+  {
+   "file": "tests/Resources/2.X/ValidaExprRegFactura-2.0.1.xsl",
+   "sha256": "03191f930537968c751f67de652fe4b1183b8c6640a5525b9c468f8d0eb8aab2",
+   "bytes": 931
+  },
+  {
+   "file": "tests/Validator/Factory/CpeValidatorFactory.php",
+   "sha256": "c0de09b26ffdc23e74c16f68e7a559a81fb5cf4b237b1cb2d75b56299fc33461",
+   "bytes": 671
+  },
+  {
+   "file": "tests/Validator/Parser/ErrorResultParserTest.php",
+   "sha256": "32dd6a2a5b13e2fdb9b73d901c975b659fa0915e4e852918d79239c0fa0da77b",
+   "bytes": 1506
+  },
+  {
+   "file": "tests/Validator/Resolver/XmlTypeResolverTest.php",
+   "sha256": "237eb4f9efeae5f53e9e8df0a736b0d9194bcf183ebf8b71062283a55d421175",
+   "bytes": 1894
+  },
+  {
+   "file": "tests/Validator/Resolver/XslPathResolverTest.php",
+   "sha256": "f037343182fa60c631efe25f64293be753e5f03106dea7864322cd4e5d9ba486",
+   "bytes": 386
+  },
+  {
+   "file": "tests/Validator/Xml/CpeValidatorTest.php",
+   "sha256": "a302867b477b2c50f4e697301f5d3d5b4667f81402db11e38a58e9911a79d22b",
+   "bytes": 2953
+  },
+  {
+   "file": "tests/Validator/Xml/XslValidatorTest.php",
+   "sha256": "5607b75102ecd6155b829eeb41b67a8b107bc8dc858d981b0959b60e67d4ffca",
+   "bytes": 887
+  }
+ ],
+ "license": {
+  "file": "LICENSE",
+  "sha256": "0ea19c2a113c2dc0035e12a68aa379ba400f3468447be1755b52a3c5b68d2724",
+  "first_line": "MIT License"
+ },
+ "composer": {
+  "license": "MIT",
+  "require": {
+   "php": ">=7.4",
+   "ext-libxml": "*",
+   "ext-xsl": "*"
+  }
+ }
+}

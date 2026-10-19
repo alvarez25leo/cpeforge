@@ -1,0 +1,83 @@
+{
+  "description": "Divergencias referencia↔Rust de la referencia observadas por crates/report/tests/parity.rs. Cada entrada se valida con tests/support/perfil_seguro.rs: DIFERENCIA_DELIBERADA con motivo admitido por el perfil seguro (docs/verificacion-paridad.md#perfil-seguro) o CORREGIR pendiente, que bloquea LISTO.",
+  "differences": [
+    {
+      "case": "invoice-logo-over-limit",
+      "kind": "html",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "La referencia incrusta en el HTML un logo de cualquier tamaño (base64 en memoria). Rust rechaza por defecto un params.system.logo de más de 10 MiB (ReportOptions::max_logo_bytes) con ReportError::Render { cause: Limit } para acotar memoria y tamaño de salida con datos recibidos de consumidores.",
+      "compatibility_note": "Con logos de hasta 10 MiB el HTML es idéntico. El límite se cambia o desactiva con ReportOptions::max_logo_bytes (None = sin límite, como la referencia)."
+    },
+    {
+      "case": "user-symlink-escape",
+      "kind": "html",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "Twig FilesystemLoader sigue un enlace simbólico de la carpeta de plantillas aunque apunte fuera de ella. Rust resuelve la ruta real y rechaza el archivo con ReportError::InvalidTemplateName si sale de la carpeta del usuario (lectura de archivos arbitrarios).",
+      "compatibility_note": "Las plantillas reales dentro de la carpeta, incluidos enlaces simbólicos internos, se cargan igual que en la referencia. Solo cambia un enlace que apunta fuera de template_dir."
+    },
+    {
+      "case": "user-twig-only-syntax",
+      "kind": "html",
+      "classification": "CORREGIR",
+      "reason": "Las plantillas del usuario se ejecutan con MiniJinja, no con Twig 3. El ternario (? :), ?: y ?? y las etiquetas exclusivas de Twig (apply, with, embed…) producen ReportError::Syntax en Rust y un render válido en la referencia. El rango 1..3 no falla: se evalúa como indefinido y se imprime vacío, también con strict_variables (prueba twig_range_operator_is_silently_undefined). El filtro format sí existe en MiniJinja, con el formato % de Python. Las siete plantillas integradas no usan esa sintaxis y son idénticas.",
+      "next_step": "Decidir el alcance de las plantillas personalizadas: (a) documentar que solo se admite el dialecto MiniJinja con los filtros listados en crates/report/README.md y retirar esta fila del alcance de paridad con aprobación explícita, o (b) implementar los operadores y filtros de Twig que falten con casos de paridad. En ambos casos, documentar o rechazar el rango .. silencioso."
+    },
+    {
+      "case": "user-unknown-function-dead-branch",
+      "kind": "html",
+      "classification": "CORREGIR",
+      "reason": "Twig compila toda la plantilla y lanza SyntaxError por una función inexistente aunque esté en una rama que no se ejecuta. MiniJinja resuelve funciones al ejecutar: la misma plantilla renderiza 'ok' en Rust. Solo afecta a plantillas del usuario con llamadas inexistentes.",
+      "next_step": "Validar al cargar las plantillas del usuario las funciones, filtros y tests referenciados (por ejemplo con el AST de MiniJinja tras fijar la API) o incluirlo en la decisión de alcance de user-twig-only-syntax."
+    },
+    {
+      "case": "xml-dtd-entity",
+      "kind": "xml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "La referencia (libxml2 sin LIBXML_NOENT) acepta la DTD interna y devuelve el texto de la entidad dentro de DigestValue. Rust rechaza cualquier DTD con XmlUtilsError::Dtd para no expandir entidades (XXE, billion laughs).",
+      "compatibility_note": "Un CPE firmado de SUNAT no declara DTD; con XML sin DTD el resultado es idéntico."
+    },
+    {
+      "case": "xml-dtd-external",
+      "kind": "xml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "La referencia acepta un DOCTYPE con identificador SYSTEM (sin cargarlo) y lee el DigestValue. Rust rechaza cualquier DTD con XmlUtilsError::Dtd.",
+      "compatibility_note": "Igual que xml-dtd-entity: solo cambia con XML que declara DOCTYPE."
+    },
+    {
+      "case": "xml-deep",
+      "kind": "xml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "reason": "libxml2 rechaza más de 256 niveles de anidamiento y la referencia, que suprime el aviso, devuelve ''. Rust devuelve XmlUtilsError::Limit antes de analizar (cpeforge-xml-limits).",
+      "compatibility_note": "El límite es el mismo (256 niveles); en vez de '' se informa el motivo."
+    },
+    {
+      "case": "xml-malformed",
+      "kind": "xml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "reason": "@DOMDocument::loadXML falla y getHashSign devuelve ''. Rust devuelve XmlUtilsError::Malformed: un XML roto no es un comprobante sin firma.",
+      "compatibility_note": "Para conservar el comportamiento de la referencia basta tratar el error como cadena vacía (unwrap_or_default)."
+    },
+    {
+      "case": "xml-empty",
+      "kind": "xml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "reason": "Con contenido vacío la referencia lanza ValueError en getHashSign/getHashSignFromDoc, pero getHashSignFromFile de un archivo vacío devuelve '' (load() falla en silencio). Rust devuelve XmlUtilsError::Empty en los tres casos.",
+      "compatibility_note": "Solo cambia getHashSignFromFile con un archivo vacío."
+    },
+    {
+      "case": "xml-missing-file",
+      "kind": "xml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "reason": "@DOMDocument::load de un archivo inexistente falla en silencio y la referencia devuelve ''. Rust devuelve XmlUtilsError::Io con el error del sistema.",
+      "compatibility_note": "Un archivo inexistente o ilegible deja de confundirse con un XML sin firma."
+    }
+  ]
+}

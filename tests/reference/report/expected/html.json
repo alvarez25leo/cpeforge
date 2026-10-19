@@ -1,0 +1,756 @@
+{
+    "reference_version": "8.4.17",
+    "timezone_db": "2025.2",
+    "libxml": "2.15.1",
+    "results": {
+        "invoice-full": {
+            "now": 1792336701,
+            "sha256": "8c467749b8a2e70fc8c5b40ee0267bbcd14c71ee1cd8bf004d9a31eec14f3fb6",
+            "bytes": 31597,
+            "notices": []
+        },
+        "invoice-full-strict": {
+            "now": 1792336701,
+            "sha256": "8c467749b8a2e70fc8c5b40ee0267bbcd14c71ee1cd8bf004d9a31eec14f3fb6",
+            "bytes": 31597,
+            "notices": []
+        },
+        "invoice-default-template": {
+            "now": 1792336701,
+            "sha256": "8c467749b8a2e70fc8c5b40ee0267bbcd14c71ee1cd8bf004d9a31eec14f3fb6",
+            "bytes": 31597,
+            "notices": []
+        },
+        "boleta": {
+            "now": 1792336701,
+            "sha256": "2d99631893fd1d26ba0d69b79e32909082642c862496d7077078303facdd72b2",
+            "bytes": 24242,
+            "notices": []
+        },
+        "boleta-strict": {
+            "now": 1792336701,
+            "sha256": "2d99631893fd1d26ba0d69b79e32909082642c862496d7077078303facdd72b2",
+            "bytes": 24242,
+            "notices": []
+        },
+        "invoice-minimal": {
+            "now": 1792336701,
+            "sha256": "f50db0f984629fcabba328a84b25eaaef06ed395bb31979a6298db5d63898ee3",
+            "bytes": 20957,
+            "notices": [
+                "foreach() argument must be of type array|object, null given"
+            ]
+        },
+        "invoice-minimal-strict": {
+            "now": 1792336701,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "Impossible to access an attribute (\"direccion\") on a null variable in \"invoice.html.twig\" at line 58."
+            },
+            "notices": []
+        },
+        "invoice-one-detail": {
+            "now": 1792336701,
+            "sha256": "89bc366815b831be34a5e3dba1433cdd03c21e9cfdb5f539116be604156b583a",
+            "bytes": 30740,
+            "notices": []
+        },
+        "invoice-many-details": {
+            "now": 1792336701,
+            "sha256": "424a99361a661569e3ea8c4bf6bfe51c01de9bae081a4bf722307508231e37a2",
+            "bytes": 36798,
+            "notices": []
+        },
+        "invoice-max-items-equal": {
+            "now": 1792336701,
+            "sha256": "129a06f355d52b0e952e182203f3e09add52fdc17043d2b185983876b25708a2",
+            "bytes": 35870,
+            "notices": []
+        },
+        "invoice-empty-details": {
+            "now": 1792336701,
+            "sha256": "f58444cf139dcaec64531c980c62d8effb28a427b4aa8623cfdd2dd5b46aa8ba",
+            "bytes": 29885,
+            "notices": []
+        },
+        "invoice2-full": {
+            "now": 1792336702,
+            "sha256": "96d07e70ec83d83bcf6f9c6388d6301fd4c9292773bab294ebba8ad190b05b5f",
+            "bytes": 17091,
+            "notices": []
+        },
+        "invoice2-strict": {
+            "now": 1792336702,
+            "sha256": "96d07e70ec83d83bcf6f9c6388d6301fd4c9292773bab294ebba8ad190b05b5f",
+            "bytes": 17091,
+            "notices": []
+        },
+        "invoice2-null-serie": {
+            "now": 1792336702,
+            "sha256": "3c2c3c8ebe75e2972983ab2959bfaaddec1fa496346b8bc905a300f640942389",
+            "bytes": 15384,
+            "notices": []
+        },
+        "invoice2-raw-amounts": {
+            "now": 1792336702,
+            "sha256": "90cac9e1bdbda0e5db2eefbfb8e0fe77a19012e0422abca813ca88a62624b6dc",
+            "bytes": 17444,
+            "notices": []
+        },
+        "note-credit": {
+            "now": 1792336702,
+            "sha256": "5da02e7fb468faff4d70a47aff3f160ff010d246b0871691d66786bc1817d0ea",
+            "bytes": 28534,
+            "notices": []
+        },
+        "note-debit-strict": {
+            "now": 1792336702,
+            "sha256": "98a1096c6f74494829bac2b4363e20e9dff4425b36282e854717d8c57c675c5e",
+            "bytes": 28960,
+            "notices": []
+        },
+        "despatch-full": {
+            "now": 1792336702,
+            "sha256": "e1692ed583807b93388c932f3736e38295c8656acd49ead4fea15095a5cf8b9c",
+            "bytes": 13102,
+            "notices": []
+        },
+        "despatch-strict-no-footer": {
+            "now": 1792336702,
+            "sha256": "d6f6ac03a5b311a26f7c8a35a02122835b98796691938b9f19f3080271eaf21c",
+            "bytes": 12914,
+            "notices": []
+        },
+        "despatch-qr-url": {
+            "now": 1792336702,
+            "sha256": "bdf24b674487203358f0e4ea3082a861414609b4a0bc3972cd79de07c9a110bc",
+            "bytes": 26064,
+            "notices": []
+        },
+        "despatch-no-transport": {
+            "now": 1792336702,
+            "sha256": "f0a4f60dbb0a987d671cd846c37593116cbe7fe098ccfb08fa4d48d71586a43b",
+            "bytes": 11558,
+            "notices": []
+        },
+        "despatch-one-driver": {
+            "now": 1792336702,
+            "sha256": "d6e825da91c2b6dcc6f082f9421d3825afd8843821d13ad39052807613fdf904",
+            "bytes": 12756,
+            "notices": []
+        },
+        "despatch-null-envio": {
+            "now": 1792336702,
+            "sha256": "75f7f9ecd09bd469c5217e2029e699a2a7cc10ac387de263019e7258bb6b2d28",
+            "bytes": 11842,
+            "notices": []
+        },
+        "perception-full": {
+            "now": 1792336702,
+            "sha256": "5c0a8fdb62058c22e05630258316a6037ede0f667929eb7bb0cc3cc235a06ac6",
+            "bytes": 11338,
+            "notices": []
+        },
+        "perception-strict": {
+            "now": 1792336702,
+            "sha256": "5c0a8fdb62058c22e05630258316a6037ede0f667929eb7bb0cc3cc235a06ac6",
+            "bytes": 11338,
+            "notices": []
+        },
+        "retention-full": {
+            "now": 1792336702,
+            "sha256": "d71d28cd0af217a6ec7a34cafecd49661993945d9b8112bd2c380b7b600b1e85",
+            "bytes": 11328,
+            "notices": []
+        },
+        "retention-minimal": {
+            "now": 1792336702,
+            "sha256": "1169129b299c96b2f36de4dc8ad07ad14981529f7a07420590b088446a6ee552",
+            "bytes": 10465,
+            "notices": []
+        },
+        "summary-full": {
+            "now": 1792336702,
+            "sha256": "621b853309c002ca82eb3de5945fd49c4a960e46425e1e1cd62b220319bff3ae",
+            "bytes": 12235,
+            "notices": []
+        },
+        "summary-strict": {
+            "now": 1792336702,
+            "sha256": "621b853309c002ca82eb3de5945fd49c4a960e46425e1e1cd62b220319bff3ae",
+            "bytes": 12235,
+            "notices": []
+        },
+        "voided-full": {
+            "now": 1792336702,
+            "sha256": "357c445a75e32098869c17c8f39ed3d0158d68c22ac32c5b72287964f9ef4d90",
+            "bytes": 8245,
+            "notices": []
+        },
+        "reversion-full": {
+            "now": 1792336702,
+            "sha256": "00fafa89c4d87d798c322cad23c7b91c59aad6873341fca0a0f90c21d5a61a79",
+            "bytes": 8230,
+            "notices": []
+        },
+        "voided-strict": {
+            "now": 1792336702,
+            "sha256": "357c445a75e32098869c17c8f39ed3d0158d68c22ac32c5b72287964f9ef4d90",
+            "bytes": 8245,
+            "notices": []
+        },
+        "voided-no-company": {
+            "now": 1792336702,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "An exception has been thrown during the rendering of a template (\"Call to a member function getRuc() on null\") in \"voided.html.twig\" at line 24.",
+                "previous": {
+                    "class": "Error",
+                    "message": "Call to a member function getRuc() on null"
+                }
+            },
+            "notices": []
+        },
+        "invoice-loose-tipo": {
+            "now": 1792336702,
+            "sha256": "b4b0be48c6b40e14152059f0fe7d34f29881efcd1e52ee2199424508824de603",
+            "bytes": 31371,
+            "notices": []
+        },
+        "invoice-loose-legend": {
+            "now": 1792336703,
+            "sha256": "e00152caf761c12390ab3b5f9f36f1f59f8e89433cdd3d4101d97515cc864956",
+            "bytes": 31837,
+            "notices": []
+        },
+        "invoice-no-legends": {
+            "now": 1792336703,
+            "sha256": "4ba3601810fb0c52cae8d8caf3e24624afb7eaf9a6ca42eba2d68dd9fb0a3d90",
+            "bytes": 31470,
+            "notices": [
+                "foreach() argument must be of type array|object, null given"
+            ]
+        },
+        "invoice-string-zero": {
+            "now": 1792336703,
+            "sha256": "9c7e4dcd338e9b1796efd0240503621cfd11e2556c5d0684f3cb138992b610fa",
+            "bytes": 31447,
+            "notices": []
+        },
+        "invoice-hash-empty": {
+            "now": 1792336703,
+            "sha256": "ebf53f283b55e3a79f7703866e6ffa1263e7e17280050138c3a9c67d095b553d",
+            "bytes": 31478,
+            "notices": []
+        },
+        "invoice-no-hash": {
+            "now": 1792336703,
+            "sha256": "8166340b2c32eb90d245b813434390bb3afa1ed00d20666c5f7cde1dd68a1cec",
+            "bytes": 30165,
+            "notices": []
+        },
+        "invoice-escaping": {
+            "now": 1792336703,
+            "sha256": "5a3c1005585f942bd5153bfebbe47dd97294982b73dfeb6467911e7600a6f49c",
+            "bytes": 30751,
+            "notices": []
+        },
+        "invoice-amounts-edge": {
+            "now": 1792336703,
+            "sha256": "63a7167f66cd33fca94f36243217aa4e47df5857106bacf7e71c0d5b9e2d526c",
+            "bytes": 31891,
+            "notices": []
+        },
+        "invoice-dates-utc": {
+            "now": 1792336703,
+            "sha256": "d948a3de4bd8051f41f6d1e4808bd4c34b324309df5479dc9fd01a205ac8b1e4",
+            "bytes": 31445,
+            "notices": []
+        },
+        "invoice-midnight": {
+            "now": 1792336703,
+            "sha256": "c008e205c2cd477102680d18ff2500fd453f66380bbafbfda23f169e2c38c960",
+            "bytes": 31322,
+            "notices": []
+        },
+        "invoice-usd-catalogs": {
+            "now": 1792336703,
+            "sha256": "9075fb38249692f2d2b285918ecbf339a2cd9ead92db29e6452e5fc4c8490161",
+            "bytes": 31816,
+            "notices": []
+        },
+        "invoice-unknown-codes": {
+            "now": 1792336703,
+            "sha256": "c23f4c11c0c2c2ea4716a1407b53b078ae324d20f4972660f40bb94afada02e6",
+            "bytes": 31497,
+            "notices": []
+        },
+        "invoice-gif-logo": {
+            "now": 1792336703,
+            "sha256": "9e787c0e28e9421a742143c1ff19219d7b78667916925003e66e93c185901a26",
+            "bytes": 31565,
+            "notices": []
+        },
+        "invoice-jpeg-logo": {
+            "now": 1792336703,
+            "sha256": "4cf80bfbbf8d701b66acb687554213cd795696f1eb09cc1b3a4d41ec1a09a042",
+            "bytes": 31538,
+            "notices": []
+        },
+        "invoice-no-autoescape": {
+            "now": 1792336703,
+            "sha256": "dfb0a594879410b2e0ac2b0280ee655ece69db93b03bdce0775cae8618f489d7",
+            "bytes": 31564,
+            "notices": []
+        },
+        "invoice-no-logo": {
+            "now": 1792336703,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "An exception has been thrown during the rendering of a template (\"substr(): Argument #1 ($string) must be of type string, null given\") in \"invoice.html.twig\" at line 20.",
+                "previous": {
+                    "class": "TypeError",
+                    "message": "substr(): Argument #1 ($string) must be of type string, null given"
+                }
+            },
+            "notices": []
+        },
+        "invoice-no-company": {
+            "now": 1792336703,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "An exception has been thrown during the rendering of a template (\"Call to a member function getRuc() on null\") in \"invoice.html.twig\" at line 423.",
+                "previous": {
+                    "class": "Error",
+                    "message": "Call to a member function getRuc() on null"
+                }
+            },
+            "notices": []
+        },
+        "invoice-no-date": {
+            "now": 1792336703,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "An exception has been thrown during the rendering of a template (\"Call to a member function format() on null\") in \"invoice.html.twig\" at line 423.",
+                "previous": {
+                    "class": "Error",
+                    "message": "Call to a member function format() on null"
+                }
+            },
+            "notices": []
+        },
+        "invoice-no-client": {
+            "now": 1792336703,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "An exception has been thrown during the rendering of a template (\"Call to a member function getTipoDoc() on null\") in \"invoice.html.twig\" at line 423.",
+                "previous": {
+                    "class": "Error",
+                    "message": "Call to a member function getTipoDoc() on null"
+                }
+            },
+            "notices": []
+        },
+        "invoice-null-igv": {
+            "now": 1792336703,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "An exception has been thrown during the rendering of a template (\"number_format(): Argument #1 ($num) must be of type int|float, null given\") in \"invoice.html.twig\" at line 336.",
+                "previous": {
+                    "class": "TypeError",
+                    "message": "number_format(): Argument #1 ($num) must be of type int|float, null given"
+                }
+            },
+            "notices": []
+        },
+        "invoice-strict-no-user": {
+            "now": 1792336703,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "Key \"user\" for sequence/mapping with keys \"system\" does not exist in \"invoice.html.twig\" at line 63."
+            },
+            "notices": []
+        },
+        "despatch-as-invoice": {
+            "now": 1792336704,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "An exception has been thrown during the rendering of a template (\"number_format(): Argument #1 ($num) must be of type int|float, null given\") in \"invoice.html.twig\" at line 134.",
+                "previous": {
+                    "class": "TypeError",
+                    "message": "number_format(): Argument #1 ($num) must be of type int|float, null given"
+                }
+            },
+            "notices": []
+        },
+        "summary-as-invoice-strict": {
+            "now": 1792336704,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "Neither the property \"tipoDoc\" nor one of the methods \"tipoDoc()\", \"gettipoDoc()\", \"istipoDoc()\", \"hastipoDoc()\" or \"__call()\" exist and have public access in class \"CPEForge\\Model\\Summary\\Summary\" in \"invoice.html.twig\" at line 10."
+            },
+            "notices": []
+        },
+        "missing-template": {
+            "now": 1792336704,
+            "error": {
+                "class": "Twig\\Error\\LoaderError",
+                "message": "Unable to find template \"nothing.html.twig\" (looked into: <report-src>/Report/Templates)."
+            },
+            "notices": []
+        },
+        "traversal-template": {
+            "now": 1792336704,
+            "error": {
+                "class": "Twig\\Error\\LoaderError",
+                "message": "Looks like you try to load a template outside configured directories (../secret.html.twig)."
+            },
+            "notices": []
+        },
+        "traversal-nested": {
+            "now": 1792336704,
+            "error": {
+                "class": "Twig\\Error\\LoaderError",
+                "message": "Looks like you try to load a template outside configured directories (assets/../../invoice.html.twig)."
+            },
+            "notices": []
+        },
+        "dot-segments": {
+            "now": 1792336704,
+            "sha256": "8c467749b8a2e70fc8c5b40ee0267bbcd14c71ee1cd8bf004d9a31eec14f3fb6",
+            "bytes": 31597,
+            "notices": []
+        },
+        "user-override-invoice": {
+            "now": 1792336704,
+            "sha256": "5287573578a93bb4f79066ce9250686cb2224a4be6943402679cc3eef84a7490",
+            "bytes": 68,
+            "notices": []
+        },
+        "user-override-css": {
+            "now": 1792336704,
+            "sha256": "e651beeb47e94949337e0f0d1643f78a1372ec6f34ca9f5cb649130f297888ab",
+            "bytes": 5770,
+            "notices": []
+        },
+        "user-builtin-fallback": {
+            "now": 1792336704,
+            "sha256": "621b853309c002ca82eb3de5945fd49c4a960e46425e1e1cd62b220319bff3ae",
+            "bytes": 12235,
+            "notices": []
+        },
+        "user-syntax-error": {
+            "now": 1792336704,
+            "error": {
+                "class": "Twig\\Error\\SyntaxError",
+                "message": "Unexpected token \"end of statement block\" of value \"\" in \"invoice.html.twig\" at line 1."
+            },
+            "notices": []
+        },
+        "user-undefined-function": {
+            "now": 1792336704,
+            "error": {
+                "class": "Twig\\Error\\SyntaxError",
+                "message": "Unknown \"inexistente\" function in \"unknown.html.twig\" at line 1."
+            },
+            "notices": []
+        },
+        "filter-n-format": {
+            "now": 1792336704,
+            "sha256": "0563bfb9d57ff3a72dfc7a8cf4f17174b83d9b02f14fddc943a2629c97212105",
+            "bytes": 856,
+            "notices": []
+        },
+        "filter-n-format-null": {
+            "now": 1792336704,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "An exception has been thrown during the rendering of a template (\"number_format(): Argument #1 ($num) must be of type int|float, null given\") in \"n_format_one.html.twig\" at line 1.",
+                "previous": {
+                    "class": "TypeError",
+                    "message": "number_format(): Argument #1 ($num) must be of type int|float, null given"
+                }
+            },
+            "notices": []
+        },
+        "filter-n-format-string": {
+            "now": 1792336704,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "An exception has been thrown during the rendering of a template (\"number_format(): Argument #1 ($num) must be of type int|float, string given\") in \"n_format_one.html.twig\" at line 1.",
+                "previous": {
+                    "class": "TypeError",
+                    "message": "number_format(): Argument #1 ($num) must be of type int|float, string given"
+                }
+            },
+            "notices": []
+        },
+        "filter-image": {
+            "now": 1792336704,
+            "sha256": "cd234bdd03f33b1d09b2333bcaf94d8166728bdbfcc5d2f854f5469c6ae752de",
+            "bytes": 652,
+            "notices": []
+        },
+        "filter-catalog-types": {
+            "now": 1792336704,
+            "sha256": "1b20bbf0dc8341c45aca03e7ef4274dd4ca985206f19bb32cb328c7665554b8e",
+            "bytes": 75,
+            "notices": [
+                "Implicit conversion from float 6.9 to int loses precision"
+            ]
+        },
+        "filter-upper-length": {
+            "now": 1792336704,
+            "sha256": "53f3b799b31e12ddcb721e21f53c5d7ab4280723243f3a27b87c38c19bce27a9",
+            "bytes": 42,
+            "notices": []
+        },
+        "function-legend": {
+            "now": 1792336704,
+            "sha256": "d608844df5dd7e42337170547e9eeb5ec2df6e35c84171c464abd665b12c9735",
+            "bytes": 17,
+            "notices": [
+                "foreach() argument must be of type array|object, null given"
+            ]
+        },
+        "function-qr-sale": {
+            "now": 1792336704,
+            "sha256": "bd3e3e281c4fc0aa5467340a862ad97e554fd32eaf5f2192934f4ba0ba69963a",
+            "bytes": 6049,
+            "notices": [
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "function-qr-note": {
+            "now": 1792336704,
+            "sha256": "9fc0492a680f4e6392b3968974e75b5ad2b551a3228ddc8259bdf547100bcf7f",
+            "bytes": 6971,
+            "notices": []
+        },
+        "function-qr-despatch": {
+            "now": 1792336704,
+            "sha256": "97ee120533d23fb764f5135fa6d61825a567a53265f1cffe95da66d797278a7a",
+            "bytes": 5704,
+            "notices": []
+        },
+        "function-qr-despatch-utc": {
+            "now": 1792336704,
+            "sha256": "ab4fb70b95a6274196259e8011d5e8af3120084cdc60c7cb1ea80277b157b92d",
+            "bytes": 5696,
+            "notices": []
+        },
+        "function-qr-despatch-no-dest": {
+            "now": 1792336704,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "An exception has been thrown during the rendering of a template (\"Call to a member function getTipoDoc() on null\") in \"qr_despatch.html.twig\" at line 1.",
+                "previous": {
+                    "class": "Error",
+                    "message": "Call to a member function getTipoDoc() on null"
+                }
+            },
+            "notices": []
+        },
+        "despatch-qr-null": {
+            "now": 1792336704,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "An exception has been thrown during the rendering of a template (\"CPEForge\\Report\\Render\\QrRender::getQrUrl(): Argument #1 ($url) must be of type string, null given\") in \"despatch.html.twig\" at line 211.",
+                "previous": {
+                    "class": "TypeError",
+                    "message": "CPEForge\\Report\\Render\\QrRender::getQrUrl(): Argument #1 ($url) must be of type string, null given"
+                }
+            },
+            "notices": []
+        },
+        "invoice-logo-over-limit": {
+            "now": 1792336705,
+            "stored": false,
+            "sha256": "cef23e6e88f79e95d26e68d29b9c037f98bbf0a28026f43eaa78eeaa96c1e856",
+            "bytes": 14012521,
+            "notices": []
+        },
+        "user-symlink-escape": {
+            "now": 1792336705,
+            "sha256": "e186b25bf5897a9dac91fd8eee58e3c640b4c26811d2ecf1ac5c69731f9483e3",
+            "bytes": 25,
+            "notices": []
+        },
+        "user-twig-only-syntax": {
+            "now": 1792336705,
+            "sha256": "847a288c652389b098dfa672aed5e7c0c3f2bc9463e2020dd08a092a34406ca1",
+            "bytes": 17,
+            "notices": []
+        },
+        "user-unknown-function-dead-branch": {
+            "now": 1792336705,
+            "error": {
+                "class": "Twig\\Error\\SyntaxError",
+                "message": "Unknown \"inexistente\" function in \"dead_branch.html.twig\" at line 1."
+            },
+            "notices": []
+        },
+        "filter-builtins": {
+            "now": 1792336705,
+            "sha256": "1e7ec7bebc8bbd6e37bfe30e28131d7eec2ec5da9cc205509a172c8ccaa01c8c",
+            "bytes": 111,
+            "notices": []
+        },
+        "function-qr-sale-on-despatch": {
+            "now": 1792336705,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "An exception has been thrown during the rendering of a template (\"Call to undefined method CPEForge\\Model\\Despatch\\Despatch::getClient()\") in \"qr_sale.html.twig\" at line 1.",
+                "previous": {
+                    "class": "Error",
+                    "message": "Call to undefined method CPEForge\\Model\\Despatch\\Despatch::getClient()"
+                }
+            },
+            "notices": []
+        },
+        "function-qr-url-ascii": {
+            "now": 1792336705,
+            "sha256": "abe0a01c8c6e1816b17be38b4c7ed82dba0bbd69c52f86f2e7385a832b8a472d",
+            "bytes": 5993,
+            "notices": []
+        },
+        "function-qr-url-unicode": {
+            "now": 1792336705,
+            "sha256": "534f29ded58a7800b7a7546f0acc58123cf1e2bc0a8215e7f2f9216e88e35aac",
+            "bytes": 4364,
+            "notices": []
+        },
+        "function-qr-url-alnum": {
+            "now": 1792336705,
+            "sha256": "73188291883bbd6f4ad231e9baafcd6bec0e5f396089e181349c0cd96f99e3a6",
+            "bytes": 2368,
+            "notices": []
+        },
+        "function-qr-url-numeric": {
+            "now": 1792336705,
+            "sha256": "c5e12bad8860b0b05b090cff34faa9b02eee899c30f75abf5cfa48beb83a20d6",
+            "bytes": 1757,
+            "notices": []
+        },
+        "function-qr-url-one-char": {
+            "now": 1792336705,
+            "sha256": "f7a4e70e7af938792780be62267478aa6852707b703a9a857a48a03c994bb87a",
+            "bytes": 1670,
+            "notices": []
+        },
+        "function-qr-url-v9-v10-byte": {
+            "now": 1792336705,
+            "sha256": "217c75beb9f7a3aa3158dd4be283417c3af3c8b1c5d8ff7c192559e79d07bef6",
+            "bytes": 17527,
+            "notices": []
+        },
+        "function-qr-url-v10-byte": {
+            "now": 1792336705,
+            "sha256": "0d5d2d9f47f426e0974019588041317393cdea47f86f85bbe4aac3e12986249d",
+            "bytes": 17312,
+            "notices": []
+        },
+        "function-qr-url-long": {
+            "now": 1792336705,
+            "sha256": "d331516a0cec4e83909e7af541bf035b2d4696b2f330b49c5d5a2fb35ed32922",
+            "bytes": 56925,
+            "notices": []
+        },
+        "function-qr-url-max-byte": {
+            "now": 1792336709,
+            "sha256": "447c01c4aa8c345e353e95d228854b1ca54b6458420eff62cc8bc660a673a60c",
+            "bytes": 180087,
+            "notices": []
+        },
+        "function-qr-url-too-big": {
+            "now": 1792336709,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "An exception has been thrown during the rendering of a template (\"Data too big\") in \"qr_url.html.twig\" at line 1.",
+                "previous": {
+                    "class": "BaconQrCode\\Exception\\WriterException",
+                    "message": "Data too big"
+                }
+            },
+            "notices": []
+        },
+        "function-qr-url-empty": {
+            "now": 1792336709,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "An exception has been thrown during the rendering of a template (\"Found empty contents\") in \"qr_url.html.twig\" at line 1.",
+                "previous": {
+                    "class": "BaconQrCode\\Exception\\InvalidArgumentException",
+                    "message": "Found empty contents"
+                }
+            },
+            "notices": []
+        },
+        "function-qr-url-int": {
+            "now": 1792336710,
+            "sha256": "a3c539df770111445dccf7bf870ea9b54c73e512ce38e728b67613a5dea70f41",
+            "bytes": 1711,
+            "notices": []
+        },
+        "filter-date-all-lima": {
+            "now": 1792336710,
+            "sha256": "cce08c47a678c4043c41c13bc4d802ebfea037f13a9809f97c642c202c172f87",
+            "bytes": 173,
+            "notices": []
+        },
+        "filter-date-all-utc": {
+            "now": 1792336710,
+            "sha256": "c8a250faaabe72c824aa3f4df8a78aa518c18afe1be386a26f59b35be89e253e",
+            "bytes": 174,
+            "notices": []
+        },
+        "filter-date-iso-rfc": {
+            "now": 1792336710,
+            "sha256": "cdf36f02fecdfd7d5f99a6b46a7f5894833ce484db4f1190870e811b71f35151",
+            "bytes": 57,
+            "notices": []
+        },
+        "filter-date-escaped": {
+            "now": 1792336710,
+            "sha256": "9c358135306f6ca36927cce4fcc51f975f2b9c5589ecb5c7e11e5984031a34b8",
+            "bytes": 20,
+            "notices": []
+        },
+        "filter-date-dst-1994": {
+            "now": 1792336710,
+            "sha256": "a4df56d211a2e9487228c8b9f069f674b246610ad14f7777184c223bb189ae08",
+            "bytes": 31,
+            "notices": []
+        },
+        "filter-date-lmt-1900": {
+            "now": 1792336710,
+            "sha256": "123c3c29ef4afe9497e9a4206f5d7435abbb770bbafbbe8e4c32919b7b1466c4",
+            "bytes": 36,
+            "notices": []
+        },
+        "filter-date-year-0999": {
+            "now": 1792336710,
+            "sha256": "14210369bc83887eb9e1d7471c5e6d20171bf9e3a0aefd1e87c924183f6a04b4",
+            "bytes": 22,
+            "notices": []
+        },
+        "filter-date-ordinals": {
+            "now": 1792336710,
+            "sha256": "ba3c549bb8cedc4afee93d23cb81f3cfbeb53e97e93f9e6eecc21c4d323f9fb3",
+            "bytes": 4,
+            "notices": []
+        },
+        "filter-date-noon-midnight": {
+            "now": 1792336710,
+            "sha256": "723cbb4626bfe6af4d47510dedc2e859ff039295c1a571e676cfbc7d937338c0",
+            "bytes": 16,
+            "notices": []
+        },
+        "filter-date-default-format": {
+            "now": 1792336710,
+            "sha256": "aa4c0badaea16d075fea17b06524ba5f96944aa6920b3093627ab5451ca71e66",
+            "bytes": 20,
+            "notices": []
+        }
+    }
+}

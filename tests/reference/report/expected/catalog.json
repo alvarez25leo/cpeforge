@@ -1,0 +1,491 @@
+{
+    "reference_version": "8.4.17",
+    "timezone_db": "2025.2",
+    "libxml": "2.15.1",
+    "results": {
+        "entries": [
+            {
+                "catalog": "01",
+                "key": "01",
+                "value": "FACTURA"
+            },
+            {
+                "catalog": "01",
+                "key": "03",
+                "value": "BOLETA DE VENTA"
+            },
+            {
+                "catalog": "01",
+                "key": "07",
+                "value": "NOTA DE CRÉDITO"
+            },
+            {
+                "catalog": "01",
+                "key": "08",
+                "value": "NOTA DE DÉBITO"
+            },
+            {
+                "catalog": "01",
+                "key": "09",
+                "value": "GUÍA DE REMISIÓN REMITENTE"
+            },
+            {
+                "catalog": "01",
+                "key": "20",
+                "value": "RETENCIÓN"
+            },
+            {
+                "catalog": "01",
+                "key": "31",
+                "value": "GUÍA DE REMISIÓN TRANSPORTISTA"
+            },
+            {
+                "catalog": "01",
+                "key": "40",
+                "value": "PERCEPCIÓN"
+            },
+            {
+                "catalog": "02",
+                "key": "PEN",
+                "value": "S/"
+            },
+            {
+                "catalog": "02",
+                "key": "USD",
+                "value": "$"
+            },
+            {
+                "catalog": "02",
+                "key": "EUR",
+                "value": "€"
+            },
+            {
+                "catalog": "021",
+                "key": "PEN",
+                "value": "SOLES"
+            },
+            {
+                "catalog": "021",
+                "key": "USD",
+                "value": "DÓLARES AMERICANOS"
+            },
+            {
+                "catalog": "021",
+                "key": "EUR",
+                "value": "EUROS"
+            },
+            {
+                "catalog": "06",
+                "key": "0",
+                "value": "N/D"
+            },
+            {
+                "catalog": "06",
+                "key": "1",
+                "value": "DNI"
+            },
+            {
+                "catalog": "06",
+                "key": "6",
+                "value": "RUC"
+            },
+            {
+                "catalog": "18",
+                "key": "01",
+                "value": "PÚBLICO"
+            },
+            {
+                "catalog": "18",
+                "key": "02",
+                "value": "PRIVADO"
+            },
+            {
+                "catalog": "19",
+                "key": "1",
+                "value": "ADICIONAR"
+            },
+            {
+                "catalog": "19",
+                "key": "2",
+                "value": "MODIFICAR"
+            },
+            {
+                "catalog": "19",
+                "key": "3",
+                "value": "ANULADO"
+            },
+            {
+                "catalog": "20",
+                "key": "01",
+                "value": "Venta"
+            },
+            {
+                "catalog": "20",
+                "key": "02",
+                "value": "Compra"
+            },
+            {
+                "catalog": "20",
+                "key": "04",
+                "value": "Traslado entre establecimientos de la misma empresa"
+            },
+            {
+                "catalog": "20",
+                "key": "08",
+                "value": "Importación"
+            },
+            {
+                "catalog": "20",
+                "key": "09",
+                "value": "Exportación"
+            },
+            {
+                "catalog": "20",
+                "key": "13",
+                "value": "Otros"
+            },
+            {
+                "catalog": "20",
+                "key": "14",
+                "value": "Venta sujeta a confirmación del comprador"
+            },
+            {
+                "catalog": "20",
+                "key": "18",
+                "value": "Traslado emisor itinerante CP"
+            },
+            {
+                "catalog": "20",
+                "key": "19",
+                "value": "Traslado a zona primaria"
+            },
+            {
+                "catalog": "54",
+                "key": "001",
+                "value": "Azúcar y melaza de caña"
+            },
+            {
+                "catalog": "54",
+                "key": "002",
+                "value": "Arroz"
+            },
+            {
+                "catalog": "54",
+                "key": "003",
+                "value": "Alcohol etílico"
+            },
+            {
+                "catalog": "54",
+                "key": "004",
+                "value": "Recursos hidrobiológicos"
+            },
+            {
+                "catalog": "54",
+                "key": "005",
+                "value": "Maíz amarillo duro"
+            },
+            {
+                "catalog": "54",
+                "key": "007",
+                "value": "Caña de azúcar"
+            },
+            {
+                "catalog": "54",
+                "key": "008",
+                "value": "Madera"
+            },
+            {
+                "catalog": "54",
+                "key": "009",
+                "value": "Arena y piedra."
+            },
+            {
+                "catalog": "54",
+                "key": "010",
+                "value": "Residuos, subproductos, desechos, recortes, desperdicios y formas primarias derivadas de los mismos"
+            },
+            {
+                "catalog": "54",
+                "key": "011",
+                "value": "Bienes gravados con el IGV por renuncia a la exoneración"
+            },
+            {
+                "catalog": "54",
+                "key": "012",
+                "value": "Intermediación laboral y tercerización"
+            },
+            {
+                "catalog": "54",
+                "key": "013",
+                "value": "Animales vivos"
+            },
+            {
+                "catalog": "54",
+                "key": "014",
+                "value": "Carnes y despojos comestibles"
+            },
+            {
+                "catalog": "54",
+                "key": "015",
+                "value": "Abonos, cueros y pieles de origen animal"
+            },
+            {
+                "catalog": "54",
+                "key": "016",
+                "value": "Aceite de pescado"
+            },
+            {
+                "catalog": "54",
+                "key": "017",
+                "value": "Harina, polvo y “pellets” de pescado, crustáceos, moluscos y demás invertebrados acuáticos"
+            },
+            {
+                "catalog": "54",
+                "key": "019",
+                "value": "Arrendamiento de bienes"
+            },
+            {
+                "catalog": "54",
+                "key": "020",
+                "value": "Mantenimiento y reparación de bienes muebles"
+            },
+            {
+                "catalog": "54",
+                "key": "021",
+                "value": "Movimiento de carga"
+            },
+            {
+                "catalog": "54",
+                "key": "022",
+                "value": "Otros servicios empresariales"
+            },
+            {
+                "catalog": "54",
+                "key": "023",
+                "value": "Leche"
+            },
+            {
+                "catalog": "54",
+                "key": "024",
+                "value": "Comisión mercantil"
+            },
+            {
+                "catalog": "54",
+                "key": "025",
+                "value": "Fabricación de bienes por encargo"
+            },
+            {
+                "catalog": "54",
+                "key": "026",
+                "value": "Servicio de transporte de personas"
+            },
+            {
+                "catalog": "54",
+                "key": "027",
+                "value": "Servicio de transporte de carga"
+            },
+            {
+                "catalog": "54",
+                "key": "028",
+                "value": "Transporte de pasajeros"
+            },
+            {
+                "catalog": "54",
+                "key": "030",
+                "value": "Contratos de construcción"
+            },
+            {
+                "catalog": "54",
+                "key": "031",
+                "value": "Oro gravado con el IGV"
+            },
+            {
+                "catalog": "54",
+                "key": "032",
+                "value": "Páprika y otros frutos de los generos capsicum o pimienta"
+            },
+            {
+                "catalog": "54",
+                "key": "034",
+                "value": "Minerales metálicos no auríferos"
+            },
+            {
+                "catalog": "54",
+                "key": "035",
+                "value": "Bienes exonerados del IGV"
+            },
+            {
+                "catalog": "54",
+                "key": "036",
+                "value": "Oro y demás minerales metálicos exonerados del IGV"
+            },
+            {
+                "catalog": "54",
+                "key": "037",
+                "value": "Demás servicios gravados con el IGV"
+            },
+            {
+                "catalog": "54",
+                "key": "039",
+                "value": "Minerales no metálicos"
+            },
+            {
+                "catalog": "54",
+                "key": "040",
+                "value": "Bien inmueble gravado con IGV"
+            },
+            {
+                "catalog": "54",
+                "key": "041",
+                "value": "Plomo"
+            },
+            {
+                "catalog": "54",
+                "key": "099",
+                "value": "Ley 30737"
+            },
+            {
+                "catalog": "59",
+                "key": "001",
+                "value": "Depósito en cuenta"
+            },
+            {
+                "catalog": "59",
+                "key": "002",
+                "value": "Giro"
+            },
+            {
+                "catalog": "59",
+                "key": "003",
+                "value": "Transferencia de fondos"
+            },
+            {
+                "catalog": "59",
+                "key": "004",
+                "value": "Orden de pago"
+            },
+            {
+                "catalog": "59",
+                "key": "005",
+                "value": "Tarjeta de débito"
+            },
+            {
+                "catalog": "59",
+                "key": "006",
+                "value": "Tarjeta de crédito emitida en el país por una empresa del sistema financiero"
+            },
+            {
+                "catalog": "59",
+                "key": "007",
+                "value": "Cheques con la cláusula de \"NO NEGOCIABLE\", \"INTRANSFERIBLES\", \"NO A LA ORDEN\" u otra equivalente, a que se refiere el inciso g) del artículo 5° de la ley"
+            },
+            {
+                "catalog": "59",
+                "key": "008",
+                "value": "Efectivo, por operaciones en las que no existe obligación de utilizar medio de pago"
+            },
+            {
+                "catalog": "59",
+                "key": "009",
+                "value": "Efectivo, en los demás casos"
+            },
+            {
+                "catalog": "59",
+                "key": "010",
+                "value": "Medios de pago usados en comercio exterior"
+            },
+            {
+                "catalog": "59",
+                "key": "011",
+                "value": "Documentos emitidos por las EDPYMES y las cooperativas de ahorro y crédito no autorizadas a captar depósitos del público"
+            },
+            {
+                "catalog": "59",
+                "key": "012",
+                "value": "Tarjeta de crédito emitida en el país o en el exterior por una empresa no perteneciente al sistema financiero, cuyo objeto principal sea la emisión y administración de tarjetas de crédito"
+            },
+            {
+                "catalog": "59",
+                "key": "013",
+                "value": "Tarjetas de crédito emitidas en el exterior por empresas bancarias o financieras no domiciliadas"
+            },
+            {
+                "catalog": "59",
+                "key": "101",
+                "value": "Transferencias - Comercio exterior"
+            },
+            {
+                "catalog": "59",
+                "key": "102",
+                "value": "Cheques bancarios - Comercio exterior"
+            },
+            {
+                "catalog": "59",
+                "key": "103",
+                "value": "Orden de pago simple - Comercio exterior"
+            },
+            {
+                "catalog": "59",
+                "key": "104",
+                "value": "Orden de pago documentario - Comercio exterior"
+            },
+            {
+                "catalog": "59",
+                "key": "105",
+                "value": "Remesa simple - Comercio exterior"
+            },
+            {
+                "catalog": "59",
+                "key": "106",
+                "value": "Remesa documentaria - Comercio exterior"
+            },
+            {
+                "catalog": "59",
+                "key": "107",
+                "value": "Carta de crédito simple - Comercio exterior"
+            },
+            {
+                "catalog": "59",
+                "key": "108",
+                "value": "Carta de crédito documentario - Comercio exterior"
+            },
+            {
+                "catalog": "59",
+                "key": "999",
+                "value": "Otros medios de pago"
+            }
+        ],
+        "misses": [
+            {
+                "catalog": "01",
+                "key": "50",
+                "value": ""
+            },
+            {
+                "catalog": "011",
+                "key": "01",
+                "value": ""
+            },
+            {
+                "catalog": "021",
+                "key": "GB",
+                "value": ""
+            },
+            {
+                "catalog": "022",
+                "key": "USD",
+                "value": ""
+            },
+            {
+                "catalog": "",
+                "key": "",
+                "value": ""
+            },
+            {
+                "catalog": "06",
+                "key": "",
+                "value": ""
+            }
+        ]
+    }
+}

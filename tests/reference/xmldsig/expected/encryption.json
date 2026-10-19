@@ -1,0 +1,1323 @@
+{
+  "generator": "oracle/php/xmldsig/run_cases.php",
+  "iconv_profile": "libiconv",
+  "libxml": "2.15.1",
+  "libxml_cdata": "separados",
+  "libxml_cr": "decimal",
+  "openssl": "OpenSSL 3.6.0 1 Oct 2025",
+  "reference_version": "8.4.17",
+  "reference": {
+    "commit": "3b70c1b1cd1b2be3693666b91be3e5adff620b76",
+    "tag": "v5.1.0"
+  },
+  "results": {
+    "dec-3des-content-oaep": {
+      "result": {
+        "key_algorithm": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "key_info_encrypted": true,
+        "located": true,
+        "result": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>\n",
+        "session_key_length": 24,
+        "type": "http://www.w3.org/2001/04/xmlenc#Content"
+      },
+      "warnings": []
+    },
+    "dec-3des-content-rsa15": {
+      "result": {
+        "key_algorithm": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "key_info_encrypted": true,
+        "located": true,
+        "result": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>\n",
+        "session_key_length": 24,
+        "type": "http://www.w3.org/2001/04/xmlenc#Content"
+      },
+      "warnings": []
+    },
+    "dec-3des-element-oaep": {
+      "result": {
+        "key_algorithm": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "key_info_encrypted": true,
+        "located": true,
+        "result": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>\n",
+        "session_key_length": 24,
+        "type": "http://www.w3.org/2001/04/xmlenc#Element"
+      },
+      "warnings": []
+    },
+    "dec-3des-element-rsa15": {
+      "result": {
+        "key_algorithm": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "key_info_encrypted": true,
+        "located": true,
+        "result": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>\n",
+        "session_key_length": 24,
+        "type": "http://www.w3.org/2001/04/xmlenc#Element"
+      },
+      "warnings": []
+    },
+    "dec-aes128-content-oaep": {
+      "result": {
+        "key_algorithm": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "key_info_encrypted": true,
+        "located": true,
+        "result": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>\n",
+        "session_key_length": 16,
+        "type": "http://www.w3.org/2001/04/xmlenc#Content"
+      },
+      "warnings": []
+    },
+    "dec-aes128-content-rsa15": {
+      "result": {
+        "key_algorithm": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "key_info_encrypted": true,
+        "located": true,
+        "result": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>\n",
+        "session_key_length": 16,
+        "type": "http://www.w3.org/2001/04/xmlenc#Content"
+      },
+      "warnings": []
+    },
+    "dec-aes128-element-oaep": {
+      "result": {
+        "key_algorithm": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "key_info_encrypted": true,
+        "located": true,
+        "result": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>\n",
+        "session_key_length": 16,
+        "type": "http://www.w3.org/2001/04/xmlenc#Element"
+      },
+      "warnings": []
+    },
+    "dec-aes128-element-rsa15": {
+      "result": {
+        "key_algorithm": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "key_info_encrypted": true,
+        "located": true,
+        "result": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>\n",
+        "session_key_length": 16,
+        "type": "http://www.w3.org/2001/04/xmlenc#Element"
+      },
+      "warnings": []
+    },
+    "dec-aes192-content-oaep": {
+      "result": {
+        "key_algorithm": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "key_info_encrypted": true,
+        "located": true,
+        "result": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>\n",
+        "session_key_length": 24,
+        "type": "http://www.w3.org/2001/04/xmlenc#Content"
+      },
+      "warnings": []
+    },
+    "dec-aes192-content-rsa15": {
+      "result": {
+        "key_algorithm": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "key_info_encrypted": true,
+        "located": true,
+        "result": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>\n",
+        "session_key_length": 24,
+        "type": "http://www.w3.org/2001/04/xmlenc#Content"
+      },
+      "warnings": []
+    },
+    "dec-aes192-element-oaep": {
+      "result": {
+        "key_algorithm": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "key_info_encrypted": true,
+        "located": true,
+        "result": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>\n",
+        "session_key_length": 24,
+        "type": "http://www.w3.org/2001/04/xmlenc#Element"
+      },
+      "warnings": []
+    },
+    "dec-aes192-element-rsa15": {
+      "result": {
+        "key_algorithm": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "key_info_encrypted": true,
+        "located": true,
+        "result": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>\n",
+        "session_key_length": 24,
+        "type": "http://www.w3.org/2001/04/xmlenc#Element"
+      },
+      "warnings": []
+    },
+    "dec-aes256-content-oaep": {
+      "result": {
+        "key_algorithm": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "key_info_encrypted": true,
+        "located": true,
+        "result": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>\n",
+        "session_key_length": 32,
+        "type": "http://www.w3.org/2001/04/xmlenc#Content"
+      },
+      "warnings": []
+    },
+    "dec-aes256-content-rsa15": {
+      "result": {
+        "key_algorithm": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "key_info_encrypted": true,
+        "located": true,
+        "result": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>\n",
+        "session_key_length": 32,
+        "type": "http://www.w3.org/2001/04/xmlenc#Content"
+      },
+      "warnings": []
+    },
+    "dec-aes256-element-oaep": {
+      "result": {
+        "key_algorithm": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "key_info_encrypted": true,
+        "located": true,
+        "result": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>\n",
+        "session_key_length": 32,
+        "type": "http://www.w3.org/2001/04/xmlenc#Element"
+      },
+      "warnings": []
+    },
+    "dec-aes256-element-rsa15": {
+      "result": {
+        "key_algorithm": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "key_info_encrypted": true,
+        "located": true,
+        "result": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>\n",
+        "session_key_length": 32,
+        "type": "http://www.w3.org/2001/04/xmlenc#Element"
+      },
+      "warnings": []
+    },
+    "dec-no-encrypted-data": {
+      "result": {
+        "located": false
+      },
+      "warnings": []
+    },
+    "dec-no-key-transport-session": {
+      "result": {
+        "key_algorithm": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "key_info_encrypted": false,
+        "located": true,
+        "result": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>\n",
+        "type": "http://www.w3.org/2001/04/xmlenc#Element"
+      },
+      "warnings": []
+    },
+    "dec-no-replace": {
+      "result": {
+        "key_algorithm": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "key_info_encrypted": false,
+        "located": true,
+        "result": "<secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret>",
+        "type": "http://www.w3.org/2001/04/xmlenc#Element"
+      },
+      "warnings": []
+    },
+    "dec-wrong-private-key": {
+      "result": {
+        "original_recovered": false
+      },
+      "warnings": []
+    },
+    "enc-3des-content-oaep": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\"><xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Content\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#tripledes-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData></secret><public>visible</public></root>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Content\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#tripledes-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-3des-content-rsa15": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\"><xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Content\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#tripledes-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData></secret><public>visible</public></root>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Content\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#tripledes-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-3des-element-oaep": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#tripledes-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData><public>visible</public></root>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#tripledes-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-3des-element-rsa15": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#tripledes-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData><public>visible</public></root>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#tripledes-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-aes128-content-oaep": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\"><xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Content\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes128-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData></secret><public>visible</public></root>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Content\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes128-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-aes128-content-rsa15": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\"><xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Content\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes128-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData></secret><public>visible</public></root>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Content\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes128-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-aes128-element-oaep": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes128-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData><public>visible</public></root>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes128-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-aes128-element-rsa15": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes128-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData><public>visible</public></root>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes128-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-aes192-content-oaep": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\"><xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Content\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes192-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData></secret><public>visible</public></root>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Content\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes192-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-aes192-content-rsa15": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\"><xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Content\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes192-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData></secret><public>visible</public></root>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Content\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes192-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-aes192-element-oaep": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes192-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData><public>visible</public></root>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes192-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-aes192-element-rsa15": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes192-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData><public>visible</public></root>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes192-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-aes256-content-oaep": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\"><xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Content\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes256-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData></secret><public>visible</public></root>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Content\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes256-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-aes256-content-rsa15": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\"><xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Content\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes256-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData></secret><public>visible</public></root>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Content\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes256-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-aes256-element-oaep": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes256-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData><public>visible</public></root>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes256-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-aes256-element-rsa15": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes256-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData><public>visible</public></root>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes256-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"/><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-document-element": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes128-cbc\"/>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes128-cbc\"/>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-invalid-type": {
+      "error": {
+        "class": "Exception",
+        "message": "Type is currently not supported"
+      },
+      "warnings": []
+    },
+    "enc-key-named": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes128-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"/><dsig:KeyInfo><dsig:KeyName>clave-sitio</dsig:KeyName></dsig:KeyInfo><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData><public>visible</public></root>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes128-cbc\"/><dsig:KeyInfo xmlns:dsig=\"http://www.w3.org/2000/09/xmldsig#\"><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"/><dsig:KeyInfo><dsig:KeyName>clave-sitio</dsig:KeyName></dsig:KeyInfo><xenc:CipherData><xenc:CipherValue><depende-de-clave></xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></dsig:KeyInfo>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-key-not-appended": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes128-cbc\"/>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData><public>visible</public></root>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes128-cbc\"/>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-no-replace": {
+      "result": {
+        "document": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>\n",
+        "encrypted": "<xenc:EncryptedData xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\" Type=\"http://www.w3.org/2001/04/xmlenc#Element\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#aes128-cbc\"/>\n   <xenc:CipherData>\n      <xenc:CipherValue><depende-de-clave></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>",
+        "session_key": "<aleatorio>"
+      },
+      "warnings": []
+    },
+    "enc-unknown-session": {
+      "error": {
+        "class": "Exception",
+        "message": "Unknown key size for type \"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"."
+      },
+      "warnings": []
+    },
+    "keyinfo-dsakeyvalue": {
+      "error": {
+        "class": "Exception",
+        "message": "DSAKeyValue currently not supported"
+      },
+      "warnings": []
+    },
+    "keyinfo-encryptedkey": {
+      "result": {
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "certificate": null,
+        "encrypted": true,
+        "name": "interna",
+        "thumbprint": null
+      },
+      "warnings": []
+    },
+    "keyinfo-keyname": {
+      "result": {
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "certificate": null,
+        "encrypted": false,
+        "name": "clave-1",
+        "thumbprint": null
+      },
+      "warnings": []
+    },
+    "keyinfo-no-base": {
+      "result": null,
+      "warnings": []
+    },
+    "keyinfo-no-keyinfo": {
+      "result": {
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "certificate": null,
+        "encrypted": false,
+        "name": null,
+        "thumbprint": null
+      },
+      "warnings": []
+    },
+    "keyinfo-retrieval": {
+      "result": {
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "certificate": null,
+        "encrypted": true,
+        "name": null,
+        "thumbprint": null
+      },
+      "warnings": []
+    },
+    "keyinfo-retrieval-missing": {
+      "error": {
+        "class": "Exception",
+        "message": "Unable to locate EncryptedKey with @Id='nada'."
+      },
+      "warnings": []
+    },
+    "keyinfo-retrieval-not-local": {
+      "result": {
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "certificate": null,
+        "encrypted": false,
+        "name": null,
+        "thumbprint": null
+      },
+      "warnings": []
+    },
+    "keyinfo-retrieval-other-type": {
+      "result": {
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "certificate": null,
+        "encrypted": false,
+        "name": "n",
+        "thumbprint": null
+      },
+      "warnings": []
+    },
+    "keyinfo-rsakeyvalue": {
+      "result": {
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "certificate": null,
+        "encrypted": false,
+        "name": null,
+        "thumbprint": null
+      },
+      "warnings": []
+    },
+    "keyinfo-rsakeyvalue-missing": {
+      "error": {
+        "class": "Exception",
+        "message": "Missing Modulus or Exponent"
+      },
+      "warnings": []
+    },
+    "keyinfo-x509": {
+      "result": {
+        "algorithm": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "certificate": "<pem:CERTIFICATE>\n",
+        "encrypted": false,
+        "name": null,
+        "thumbprint": "<depende-de-clave>"
+      },
+      "warnings": []
+    },
+    "x509-ext-ca": {
+      "result": {
+        "expiration": "2034-01-01T00:00:00+00:00",
+        "export_cer": "<pem:CERTIFICATE>\n",
+        "export_other": "",
+        "export_pem": "<pem:CERTIFICATE>\n<pem:PRIVATE KEY>\n",
+        "extension_order": [
+          "basicConstraints",
+          "keyUsage",
+          "subjectKeyIdentifier",
+          "authorityKeyIdentifier"
+        ],
+        "extensions": {
+          "authorityKeyIdentifier": "<depende-de-clave>",
+          "basicConstraints": "CA:TRUE, pathlen:1",
+          "keyUsage": "Certificate Sign, CRL Sign",
+          "subjectKeyIdentifier": "<depende-de-clave>"
+        },
+        "issuer": {
+          "C": "PE",
+          "CN": "20000000001",
+          "O": "EMPRESA SINTETICA S.A.C."
+        },
+        "name": "/C=PE/O=EMPRESA SINTETICA S.A.C./CN=20000000001",
+        "private_key": "<pem:PRIVATE KEY>\n",
+        "public_key": "<pem:CERTIFICATE>\n",
+        "purposes": {
+          "1": [
+            false,
+            true,
+            "sslclient"
+          ],
+          "10": [
+            false,
+            true,
+            "codesign"
+          ],
+          "2": [
+            false,
+            true,
+            "sslserver"
+          ],
+          "3": [
+            false,
+            true,
+            "nssslserver"
+          ],
+          "4": [
+            false,
+            true,
+            "smimesign"
+          ],
+          "5": [
+            false,
+            true,
+            "smimeencrypt"
+          ],
+          "6": [
+            true,
+            true,
+            "crlsign"
+          ],
+          "7": [
+            true,
+            true,
+            "any"
+          ],
+          "8": [
+            true,
+            true,
+            "ocsphelper"
+          ],
+          "9": [
+            false,
+            true,
+            "timestampsign"
+          ]
+        },
+        "raw_equals_input": true,
+        "subject": {
+          "C": "PE",
+          "CN": "20000000001",
+          "O": "EMPRESA SINTETICA S.A.C."
+        },
+        "valid_from": "2024-01-01T00:00:00+00:00"
+      },
+      "warnings": []
+    },
+    "x509-ext-codesign": {
+      "result": {
+        "expiration": "2034-01-01T00:00:00+00:00",
+        "export_cer": "<pem:CERTIFICATE>\n",
+        "export_other": "",
+        "export_pem": "<pem:CERTIFICATE>\n<pem:PRIVATE KEY>\n",
+        "extension_order": [
+          "keyUsage",
+          "extendedKeyUsage",
+          "subjectKeyIdentifier"
+        ],
+        "extensions": {
+          "extendedKeyUsage": "Code Signing",
+          "keyUsage": "Digital Signature",
+          "subjectKeyIdentifier": "<depende-de-clave>"
+        },
+        "issuer": {
+          "C": "PE",
+          "CN": "20000000001",
+          "O": "EMPRESA SINTETICA S.A.C."
+        },
+        "name": "/C=PE/O=EMPRESA SINTETICA S.A.C./CN=20000000001",
+        "private_key": "<pem:PRIVATE KEY>\n",
+        "public_key": "<pem:CERTIFICATE>\n",
+        "purposes": {
+          "1": [
+            false,
+            false,
+            "sslclient"
+          ],
+          "10": [
+            true,
+            false,
+            "codesign"
+          ],
+          "2": [
+            false,
+            false,
+            "sslserver"
+          ],
+          "3": [
+            false,
+            false,
+            "nssslserver"
+          ],
+          "4": [
+            false,
+            false,
+            "smimesign"
+          ],
+          "5": [
+            false,
+            false,
+            "smimeencrypt"
+          ],
+          "6": [
+            false,
+            false,
+            "crlsign"
+          ],
+          "7": [
+            true,
+            true,
+            "any"
+          ],
+          "8": [
+            true,
+            false,
+            "ocsphelper"
+          ],
+          "9": [
+            false,
+            false,
+            "timestampsign"
+          ]
+        },
+        "raw_equals_input": true,
+        "subject": {
+          "C": "PE",
+          "CN": "20000000001",
+          "O": "EMPRESA SINTETICA S.A.C."
+        },
+        "valid_from": "2024-01-01T00:00:00+00:00"
+      },
+      "warnings": []
+    },
+    "x509-ext-invalid": {
+      "result": {
+        "expiration": "2034-01-01T00:00:00+00:00",
+        "export_cer": "<pem:CERTIFICATE>\n",
+        "export_other": "",
+        "export_pem": "<pem:CERTIFICATE>\n<pem:PRIVATE KEY>\n",
+        "extension_order": [
+          "keyUsage",
+          "subjectKeyIdentifier"
+        ],
+        "extensions": {
+          "keyUsage": "\u0005\u0000",
+          "subjectKeyIdentifier": "<depende-de-clave>"
+        },
+        "issuer": {
+          "C": "PE",
+          "CN": "20000000001",
+          "O": "EMPRESA SINTETICA S.A.C."
+        },
+        "name": "/C=PE/O=EMPRESA SINTETICA S.A.C./CN=20000000001",
+        "private_key": "<pem:PRIVATE KEY>\n",
+        "public_key": "<pem:CERTIFICATE>\n",
+        "purposes": {
+          "1": [
+            true,
+            true,
+            "sslclient"
+          ],
+          "10": [
+            true,
+            true,
+            "codesign"
+          ],
+          "2": [
+            true,
+            true,
+            "sslserver"
+          ],
+          "3": [
+            true,
+            true,
+            "nssslserver"
+          ],
+          "4": [
+            true,
+            true,
+            "smimesign"
+          ],
+          "5": [
+            true,
+            true,
+            "smimeencrypt"
+          ],
+          "6": [
+            true,
+            true,
+            "crlsign"
+          ],
+          "7": [
+            true,
+            true,
+            "any"
+          ],
+          "8": [
+            true,
+            true,
+            "ocsphelper"
+          ],
+          "9": [
+            true,
+            true,
+            "timestampsign"
+          ]
+        },
+        "raw_equals_input": true,
+        "subject": {
+          "C": "PE",
+          "CN": "20000000001",
+          "O": "EMPRESA SINTETICA S.A.C."
+        },
+        "valid_from": "2024-01-01T00:00:00+00:00"
+      },
+      "warnings": []
+    },
+    "x509-ext-kuonly": {
+      "result": {
+        "expiration": "2034-01-01T00:00:00+00:00",
+        "export_cer": "<pem:CERTIFICATE>\n",
+        "export_other": "",
+        "export_pem": "<pem:CERTIFICATE>\n<pem:PRIVATE KEY>\n",
+        "extension_order": [
+          "keyUsage",
+          "subjectKeyIdentifier"
+        ],
+        "extensions": {
+          "keyUsage": "Certificate Sign",
+          "subjectKeyIdentifier": "<depende-de-clave>"
+        },
+        "issuer": {
+          "C": "PE",
+          "CN": "20000000001",
+          "O": "EMPRESA SINTETICA S.A.C."
+        },
+        "name": "/C=PE/O=EMPRESA SINTETICA S.A.C./CN=20000000001",
+        "private_key": "<pem:PRIVATE KEY>\n",
+        "public_key": "<pem:CERTIFICATE>\n",
+        "purposes": {
+          "1": [
+            false,
+            true,
+            "sslclient"
+          ],
+          "10": [
+            false,
+            true,
+            "codesign"
+          ],
+          "2": [
+            false,
+            true,
+            "sslserver"
+          ],
+          "3": [
+            false,
+            true,
+            "nssslserver"
+          ],
+          "4": [
+            false,
+            true,
+            "smimesign"
+          ],
+          "5": [
+            false,
+            true,
+            "smimeencrypt"
+          ],
+          "6": [
+            false,
+            true,
+            "crlsign"
+          ],
+          "7": [
+            true,
+            true,
+            "any"
+          ],
+          "8": [
+            true,
+            true,
+            "ocsphelper"
+          ],
+          "9": [
+            false,
+            true,
+            "timestampsign"
+          ]
+        },
+        "raw_equals_input": true,
+        "subject": {
+          "C": "PE",
+          "CN": "20000000001",
+          "O": "EMPRESA SINTETICA S.A.C."
+        },
+        "valid_from": "2024-01-01T00:00:00+00:00"
+      },
+      "warnings": []
+    },
+    "x509-ext-nsca": {
+      "result": {
+        "expiration": "2034-01-01T00:00:00+00:00",
+        "export_cer": "<pem:CERTIFICATE>\n",
+        "export_other": "",
+        "export_pem": "<pem:CERTIFICATE>\n<pem:PRIVATE KEY>\n",
+        "extension_order": [
+          "nsCertType",
+          "subjectKeyIdentifier"
+        ],
+        "extensions": {
+          "nsCertType": "SSL CA, S/MIME CA, Object Signing CA",
+          "subjectKeyIdentifier": "<depende-de-clave>"
+        },
+        "issuer": {
+          "C": "PE",
+          "CN": "20000000001",
+          "O": "EMPRESA SINTETICA S.A.C."
+        },
+        "name": "/C=PE/O=EMPRESA SINTETICA S.A.C./CN=20000000001",
+        "private_key": "<pem:PRIVATE KEY>\n",
+        "public_key": "<pem:CERTIFICATE>\n",
+        "purposes": {
+          "1": [
+            false,
+            true,
+            "sslclient"
+          ],
+          "10": [
+            false,
+            true,
+            "codesign"
+          ],
+          "2": [
+            false,
+            true,
+            "sslserver"
+          ],
+          "3": [
+            false,
+            true,
+            "nssslserver"
+          ],
+          "4": [
+            false,
+            true,
+            "smimesign"
+          ],
+          "5": [
+            false,
+            true,
+            "smimeencrypt"
+          ],
+          "6": [
+            true,
+            true,
+            "crlsign"
+          ],
+          "7": [
+            true,
+            true,
+            "any"
+          ],
+          "8": [
+            true,
+            true,
+            "ocsphelper"
+          ],
+          "9": [
+            false,
+            true,
+            "timestampsign"
+          ]
+        },
+        "raw_equals_input": true,
+        "subject": {
+          "C": "PE",
+          "CN": "20000000001",
+          "O": "EMPRESA SINTETICA S.A.C."
+        },
+        "valid_from": "2024-01-01T00:00:00+00:00"
+      },
+      "warnings": []
+    },
+    "x509-ext-saninvalid": {
+      "result": {
+        "expiration": null,
+        "export_cer": "<pem:CERTIFICATE>\n",
+        "export_other": "",
+        "export_pem": "<pem:CERTIFICATE>\n<pem:PRIVATE KEY>\n",
+        "extension_order": null,
+        "extensions": null,
+        "issuer": null,
+        "name": null,
+        "private_key": "<pem:PRIVATE KEY>\n",
+        "public_key": "<pem:CERTIFICATE>\n",
+        "purposes": null,
+        "raw_equals_input": true,
+        "subject": null,
+        "valid_from": null
+      },
+      "warnings": []
+    },
+    "x509-ext-server": {
+      "result": {
+        "expiration": "2034-01-01T00:00:00+00:00",
+        "export_cer": "<pem:CERTIFICATE>\n",
+        "export_other": "",
+        "export_pem": "<pem:CERTIFICATE>\n<pem:PRIVATE KEY>\n",
+        "extension_order": [
+          "keyUsage",
+          "extendedKeyUsage",
+          "subjectAltName",
+          "issuerAltName",
+          "subjectKeyIdentifier",
+          "authorityKeyIdentifier",
+          "crlDistributionPoints",
+          "authorityInfoAccess",
+          "certificatePolicies",
+          "nsCertType",
+          "nsComment",
+          "1.3.6.1.4.1.55555.1",
+          "1.3.6.1.4.1.55555.2"
+        ],
+        "extensions": {
+          "1.3.6.1.4.1.55555.1": "\f\u0004hola",
+          "1.3.6.1.4.1.55555.2": {
+            "b64": "/wD+"
+          },
+          "authorityInfoAccess": "OCSP - URI:http://ocsp.ejemplo.test\nCA Issuers - URI:http://ca.ejemplo.test/ca.cer",
+          "authorityKeyIdentifier": "<depende-de-clave>",
+          "certificatePolicies": "Policy: 2.23.140.1.2.1\nPolicy: 1.3.6.1.4.1.55555.10\n  CPS: https://ejemplo.test/cps\n  User Notice:\n    Organization: Organizacion\n    Numbers: 1, 2\n    Explicit Text: Aviso sintetico",
+          "crlDistributionPoints": "Full Name:\n  URI:http://crl.ejemplo.test/ca.crl\n",
+          "extendedKeyUsage": "TLS Web Server Authentication, TLS Web Client Authentication, Microsoft Server Gated Crypto, 1.3.6.1.4.1.55555.9",
+          "issuerAltName": "email:emisor@ejemplo.test",
+          "keyUsage": "Digital Signature, Key Encipherment",
+          "nsCertType": "SSL Client, SSL Server",
+          "nsComment": "comentario sintetico",
+          "subjectAltName": "DNS:www.ejemplo.test, DNS:*.ejemplo.test, email:usuario@ejemplo.test, URI:https://ejemplo.test/ruta, IP Address:192.0.2.1, IP Address:2001:DB8:0:0:0:0:0:1, Registered ID:1.2.3.4, othername:UPN:upn@ejemplo.test, othername:<unsupported>, DirName:C = PE, O = \"EMPRESA, S.A.C.; <x>\", OU = \" espacio\", L = \"a+b=c\\\\d\\\"e\", CN = \\C3\\83\\C2\\91and\\C3\\83\\C2\\BA",
+          "subjectKeyIdentifier": "<depende-de-clave>"
+        },
+        "issuer": {
+          "C": "PE",
+          "CN": "20000000001",
+          "O": "EMPRESA SINTETICA S.A.C."
+        },
+        "name": "/C=PE/O=EMPRESA SINTETICA S.A.C./CN=20000000001",
+        "private_key": "<pem:PRIVATE KEY>\n",
+        "public_key": "<pem:CERTIFICATE>\n",
+        "purposes": {
+          "1": [
+            true,
+            false,
+            "sslclient"
+          ],
+          "10": [
+            false,
+            false,
+            "codesign"
+          ],
+          "2": [
+            true,
+            false,
+            "sslserver"
+          ],
+          "3": [
+            true,
+            false,
+            "nssslserver"
+          ],
+          "4": [
+            false,
+            false,
+            "smimesign"
+          ],
+          "5": [
+            false,
+            false,
+            "smimeencrypt"
+          ],
+          "6": [
+            false,
+            false,
+            "crlsign"
+          ],
+          "7": [
+            true,
+            true,
+            "any"
+          ],
+          "8": [
+            true,
+            false,
+            "ocsphelper"
+          ],
+          "9": [
+            false,
+            false,
+            "timestampsign"
+          ]
+        },
+        "raw_equals_input": true,
+        "subject": {
+          "C": "PE",
+          "CN": "20000000001",
+          "O": "EMPRESA SINTETICA S.A.C."
+        },
+        "valid_from": "2024-01-01T00:00:00+00:00"
+      },
+      "warnings": []
+    },
+    "x509-ext-tsa": {
+      "result": {
+        "expiration": "2034-01-01T00:00:00+00:00",
+        "export_cer": "<pem:CERTIFICATE>\n",
+        "export_other": "",
+        "export_pem": "<pem:CERTIFICATE>\n<pem:PRIVATE KEY>\n",
+        "extension_order": [
+          "basicConstraints",
+          "keyUsage",
+          "extendedKeyUsage",
+          "subjectKeyIdentifier"
+        ],
+        "extensions": {
+          "basicConstraints": "CA:FALSE",
+          "extendedKeyUsage": "Time Stamping",
+          "keyUsage": "Digital Signature",
+          "subjectKeyIdentifier": "<depende-de-clave>"
+        },
+        "issuer": {
+          "C": "PE",
+          "CN": "20000000001",
+          "O": "EMPRESA SINTETICA S.A.C."
+        },
+        "name": "/C=PE/O=EMPRESA SINTETICA S.A.C./CN=20000000001",
+        "private_key": "<pem:PRIVATE KEY>\n",
+        "public_key": "<pem:CERTIFICATE>\n",
+        "purposes": {
+          "1": [
+            false,
+            false,
+            "sslclient"
+          ],
+          "10": [
+            false,
+            false,
+            "codesign"
+          ],
+          "2": [
+            false,
+            false,
+            "sslserver"
+          ],
+          "3": [
+            false,
+            false,
+            "nssslserver"
+          ],
+          "4": [
+            false,
+            false,
+            "smimesign"
+          ],
+          "5": [
+            false,
+            false,
+            "smimeencrypt"
+          ],
+          "6": [
+            false,
+            false,
+            "crlsign"
+          ],
+          "7": [
+            true,
+            true,
+            "any"
+          ],
+          "8": [
+            true,
+            false,
+            "ocsphelper"
+          ],
+          "9": [
+            true,
+            false,
+            "timestampsign"
+          ]
+        },
+        "raw_equals_input": true,
+        "subject": {
+          "C": "PE",
+          "CN": "20000000001",
+          "O": "EMPRESA SINTETICA S.A.C."
+        },
+        "valid_from": "2024-01-01T00:00:00+00:00"
+      },
+      "warnings": []
+    },
+    "x509-ext-v1": {
+      "result": {
+        "expiration": "2034-01-01T00:00:00+00:00",
+        "export_cer": "<pem:CERTIFICATE>\n",
+        "export_other": "",
+        "export_pem": "<pem:CERTIFICATE>\n<pem:PRIVATE KEY>\n",
+        "extension_order": [],
+        "extensions": [],
+        "issuer": {
+          "C": "PE",
+          "CN": "20000000001",
+          "O": "EMPRESA SINTETICA S.A.C."
+        },
+        "name": "/C=PE/O=EMPRESA SINTETICA S.A.C./CN=20000000001",
+        "private_key": "<pem:PRIVATE KEY>\n",
+        "public_key": "<pem:CERTIFICATE>\n",
+        "purposes": {
+          "1": [
+            true,
+            true,
+            "sslclient"
+          ],
+          "10": [
+            false,
+            true,
+            "codesign"
+          ],
+          "2": [
+            true,
+            true,
+            "sslserver"
+          ],
+          "3": [
+            true,
+            true,
+            "nssslserver"
+          ],
+          "4": [
+            true,
+            true,
+            "smimesign"
+          ],
+          "5": [
+            true,
+            true,
+            "smimeencrypt"
+          ],
+          "6": [
+            true,
+            true,
+            "crlsign"
+          ],
+          "7": [
+            true,
+            true,
+            "any"
+          ],
+          "8": [
+            true,
+            true,
+            "ocsphelper"
+          ],
+          "9": [
+            false,
+            true,
+            "timestampsign"
+          ]
+        },
+        "raw_equals_input": true,
+        "subject": {
+          "C": "PE",
+          "CN": "20000000001",
+          "O": "EMPRESA SINTETICA S.A.C."
+        },
+        "valid_from": "2024-01-01T00:00:00+00:00"
+      },
+      "warnings": []
+    },
+    "x509-not-pfx": {
+      "error": {
+        "class": "Exception",
+        "message": "error:0680008E:asn1 encoding routines::not enough data"
+      },
+      "warnings": []
+    },
+    "x509-pfx": {
+      "result": {
+        "expiration": "2034-01-01T00:00:00+00:00",
+        "export_cer": "<pem:CERTIFICATE>\n",
+        "export_other": "",
+        "export_pem": "<pem:CERTIFICATE>\n<pem:PRIVATE KEY>\n",
+        "extension_order": [
+          "basicConstraints",
+          "keyUsage",
+          "extendedKeyUsage",
+          "subjectKeyIdentifier"
+        ],
+        "extensions": {
+          "basicConstraints": "CA:FALSE",
+          "extendedKeyUsage": "TLS Web Client Authentication, E-mail Protection",
+          "keyUsage": "Digital Signature, Non Repudiation, Key Encipherment, Data Encipherment",
+          "subjectKeyIdentifier": "<depende-de-clave>"
+        },
+        "issuer": {
+          "C": "PE",
+          "CN": "20000000001",
+          "O": "EMPRESA SINTETICA S.A.C."
+        },
+        "name": "/C=PE/O=EMPRESA SINTETICA S.A.C./CN=20000000001",
+        "private_key": "<pem:PRIVATE KEY>\n",
+        "public_key": "<pem:CERTIFICATE>\n",
+        "purposes": {
+          "1": [
+            true,
+            false,
+            "sslclient"
+          ],
+          "10": [
+            false,
+            false,
+            "codesign"
+          ],
+          "2": [
+            false,
+            false,
+            "sslserver"
+          ],
+          "3": [
+            false,
+            false,
+            "nssslserver"
+          ],
+          "4": [
+            true,
+            false,
+            "smimesign"
+          ],
+          "5": [
+            true,
+            false,
+            "smimeencrypt"
+          ],
+          "6": [
+            false,
+            false,
+            "crlsign"
+          ],
+          "7": [
+            true,
+            true,
+            "any"
+          ],
+          "8": [
+            true,
+            false,
+            "ocsphelper"
+          ],
+          "9": [
+            false,
+            false,
+            "timestampsign"
+          ]
+        },
+        "raw_equals_input": true,
+        "subject": {
+          "C": "PE",
+          "CN": "20000000001",
+          "O": "EMPRESA SINTETICA S.A.C."
+        },
+        "valid_from": "2024-01-01T00:00:00+00:00"
+      },
+      "warnings": []
+    },
+    "x509-pfx-wrong-password": {
+      "error": {
+        "class": "Exception",
+        "message": "error:11800071:PKCS12 routines::mac verify failure"
+      },
+      "warnings": []
+    }
+  }
+}

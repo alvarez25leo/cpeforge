@@ -1,0 +1,105 @@
+{
+  "description": "Diferencias deliberadas referencia↔Rust de cpeforge-gre-api admitidas por el perfil seguro (docs/verificacion-paridad.md#perfil-seguro). crates/gre-api/tests/parity.rs falla ante cualquier diferencia o caso no aplicable sin registrar y ante cualquier registro obsoleto.",
+  "differences": [
+    {
+      "id": "consulta-redirect-cross-host",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "Guzzle sigue la redirección de 127.0.0.1 a localhost (quitando Authorization); Rust corta toda redirección entre orígenes y devuelve ApiException con el 302.",
+      "compatibility_note": "Las APIs de SUNAT no redirigen a otro origen; evita reenviar cuerpo o credenciales a un host distinto."
+    },
+    {
+      "id": "envio-fecha-date-only",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "reason": "La referencia completa la hora con la zona predeterminada del proceso (UTC en el oráculo); Rust conserva el texto y DateTimeValue::parse informa MissingOffset.",
+      "compatibility_note": "Una fecha sin zona no se interpreta con la zona del servidor; el texto original sigue disponible con raw()."
+    },
+    {
+      "id": "envio-fecha-no-offset",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "reason": "La referencia aplica la zona predeterminada del proceso; Rust conserva el texto y DateTimeValue::parse informa MissingOffset.",
+      "compatibility_note": "Igual que envio-fecha-date-only."
+    },
+    {
+      "id": "envio-fecha-overflow",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "reason": "DateTime normaliza 2024-02-30 al 1 de marzo; Rust conserva el texto y DateTimeValue::parse informa Range.",
+      "compatibility_note": "Una fecha imposible no se convierte silenciosamente en otra."
+    },
+    {
+      "id": "envio-fecha-relative",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "reason": "DateTime interpreta la expresión relativa «first day of January 2024»; Rust no interpreta lenguaje natural y lanza DateMalformedStringException al deserializar.",
+      "compatibility_note": "SUNAT devuelve fechas ISO 8601; un texto relativo en la respuesta se rechaza."
+    },
+    {
+      "id": "envio-fecha-invalid",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "diagnostico-runtime",
+      "reason": "Ambos lanzan DateMalformedStringException al deserializar; la referencia añade la posición y el motivo de su analizador de fechas («at position 0 (a): …»), que Rust no reproduce.",
+      "compatibility_note": "Clase, código y prefijo del mensaje coinciden; el detalle posterior lo genera el runtime de la referencia."
+    },
+    {
+      "id": "envio-fecha-number",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "diagnostico-runtime",
+      "reason": "Ambos lanzan DateMalformedStringException al deserializar; la referencia añade la posición y el motivo de su analizador de fechas.",
+      "compatibility_note": "Igual que envio-fecha-invalid."
+    },
+    {
+      "id": "token-connection-closed",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "diagnostico-runtime",
+      "reason": "Ambos devuelven ApiException con código 0 y la misma categoría de transporte; el texto lo genera cURL 52 en la referencia y hyper en Rust.",
+      "compatibility_note": "El tipo de fallo está en ApiError::Transport { kind }; no conviene analizar el texto."
+    },
+    {
+      "id": "token-connection-refused",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "diagnostico-runtime",
+      "reason": "Ambos devuelven ApiException con código 0 y la misma categoría de transporte; el texto lo genera cURL 7 (con la latencia medida) en la referencia y hyper en Rust.",
+      "compatibility_note": "Igual que token-connection-closed."
+    },
+    {
+      "id": "token-timeout",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "diagnostico-runtime",
+      "reason": "Ambos detectan el tiempo límite; la referencia incluye los milisegundos medidos por cURL 28 y Rust el texto de reqwest.",
+      "compatibility_note": "Igual que token-connection-closed."
+    },
+    {
+      "id": "token-values-token-array",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "diagnostico-runtime",
+      "reason": "El valor resultante es el mismo («Array»); la referencia además emite el aviso del intérprete «Array to string conversion».",
+      "compatibility_note": "Rust no emite avisos del runtime."
+    }
+  ],
+  "not_applicable": [
+    {
+      "id": "token-null-client_id",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "tipado-estatico",
+      "reason": "La referencia acepta null en client_id; TokenRequest exige &str.",
+      "compatibility_note": "El caso no es representable con la API tipada; un valor ausente se detecta al compilar."
+    },
+    {
+      "id": "token-null-grant_type",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "tipado-estatico",
+      "reason": "La referencia acepta null en grant_type; TokenRequest exige &str.",
+      "compatibility_note": "Igual que token-null-client_id."
+    },
+    {
+      "id": "token-null-password",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "tipado-estatico",
+      "reason": "La referencia acepta null en password; TokenRequest exige &str.",
+      "compatibility_note": "Igual que token-null-client_id."
+    }
+  ]
+}

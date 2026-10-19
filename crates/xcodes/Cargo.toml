@@ -1,0 +1,25 @@
+[package]
+name = "cpeforge-xcodes"
+version = "0.1.0"
+description = "Catálogo fijo de códigos de error de SUNAT."
+readme = "README.md"
+keywords = ["sunat", "codes", "errors", "cpe", "peru"]
+categories = ["data-structures"]
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+exclude = ["tests/"]
+
+[dependencies]
+cpeforge-core.workspace = true
+roxmltree.workspace = true
+sha2.workspace = true
+
+[dev-dependencies]
+cpeforge-validator = { path = "../validator", version = "0.1.0" }
+serde_json.workspace = true
+
+[lints]
+workspace = true

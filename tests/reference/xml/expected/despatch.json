@@ -1,0 +1,241 @@
+{
+    "generator": "oracle/php/xml/run_cases.php",
+    "reference": {
+        "tag": "v5.3.0",
+        "commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+    },
+    "reference_version": "8.4.17",
+    "twig_version": "v3.30.0",
+    "timezone_db": "2025.2",
+    "cases_file": "despatch.json",
+    "results": {
+        "desp2022-full-default": {
+            "now": 1792253925,
+            "sha256": "4f4b152ba6ced462254054f11d1a28a9ec548d9d62f0f9fdcbf4f55b044e3c83",
+            "bytes": 8676,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch2022.xml.twig at line 1."
+            ]
+        },
+        "desp2022-full-cpeforge": {
+            "now": 1792253925,
+            "sha256": "4f4b152ba6ced462254054f11d1a28a9ec548d9d62f0f9fdcbf4f55b044e3c83",
+            "bytes": 8676,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch2022.xml.twig at line 1."
+            ]
+        },
+        "desp2022-full-tests": {
+            "now": 1792253925,
+            "sha256": "4f4b152ba6ced462254054f11d1a28a9ec548d9d62f0f9fdcbf4f55b044e3c83",
+            "bytes": 8676,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch2022.xml.twig at line 1."
+            ]
+        },
+        "desp-full-default": {
+            "now": 1792253925,
+            "sha256": "b4a2c24b2cf5d52a9a1527ce02db856a92bda0261632c8ca3de1f33765b2b723",
+            "bytes": 4853,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch.xml.twig at line 1."
+            ]
+        },
+        "desp-full-cpeforge": {
+            "now": 1792253925,
+            "sha256": "b4a2c24b2cf5d52a9a1527ce02db856a92bda0261632c8ca3de1f33765b2b723",
+            "bytes": 4853,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch.xml.twig at line 1."
+            ]
+        },
+        "desp-full-tests": {
+            "now": 1792253925,
+            "sha256": "b4a2c24b2cf5d52a9a1527ce02db856a92bda0261632c8ca3de1f33765b2b723",
+            "bytes": 4853,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch.xml.twig at line 1."
+            ]
+        },
+        "desp-version-null-default": {
+            "now": 1792253925,
+            "sha256": "b4a2c24b2cf5d52a9a1527ce02db856a92bda0261632c8ca3de1f33765b2b723",
+            "bytes": 4853,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch.xml.twig at line 1."
+            ]
+        },
+        "desp-version-space-default": {
+            "now": 1792253925,
+            "sha256": "b4a2c24b2cf5d52a9a1527ce02db856a92bda0261632c8ca3de1f33765b2b723",
+            "bytes": 4853,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch.xml.twig at line 1."
+            ]
+        },
+        "desp-version-2023-default": {
+            "now": 1792253925,
+            "sha256": "b4a2c24b2cf5d52a9a1527ce02db856a92bda0261632c8ca3de1f33765b2b723",
+            "bytes": 4853,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch.xml.twig at line 1."
+            ]
+        },
+        "desp2022-minimal-default": {
+            "now": 1792253925,
+            "sha256": "7db62a5e144a5474f41cf273a850b1d47d54902161b9126cc7a71fe95c5ecc51",
+            "bytes": 3405,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch2022.xml.twig at line 1."
+            ]
+        },
+        "desp2022-minimal-tests": {
+            "now": 1792253925,
+            "sha256": "7db62a5e144a5474f41cf273a850b1d47d54902161b9126cc7a71fe95c5ecc51",
+            "bytes": 3405,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch2022.xml.twig at line 1."
+            ]
+        },
+        "desp-minimal-default": {
+            "now": 1792253925,
+            "sha256": "b11e1ea45b495d3a3e577dff8acfef5b0cf91f185ee1662c7cf7bc5a841ce400",
+            "bytes": 2742,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch.xml.twig at line 1."
+            ]
+        },
+        "desp-minimal-tests": {
+            "now": 1792253925,
+            "sha256": "b11e1ea45b495d3a3e577dff8acfef5b0cf91f185ee1662c7cf7bc5a841ce400",
+            "bytes": 2742,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch.xml.twig at line 1."
+            ]
+        },
+        "desp2022-airport-default": {
+            "now": 1792253925,
+            "sha256": "f8e7717a6f1f28f830953cf92e6fccf79e32fc28abb0049d1e698c415e7179f3",
+            "bytes": 8637,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch2022.xml.twig at line 1."
+            ]
+        },
+        "desp-airport-default": {
+            "now": 1792253925,
+            "sha256": "123365686e651ca90d03a0948cc10b5f64e4c566c8b05da3517d098716061706",
+            "bytes": 4840,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch.xml.twig at line 1."
+            ]
+        },
+        "desp2022-null-nro-default": {
+            "now": 1792253925,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "An exception has been thrown during the rendering of a template (\"CPEForge\\Model\\Despatch\\AdditionalDoc::getNro(): Return value must be of type string, null returned\") in \"despatch2022.xml.twig\" at line 20.",
+                "previous": {
+                    "class": "TypeError",
+                    "message": "CPEForge\\Model\\Despatch\\AdditionalDoc::getNro(): Return value must be of type string, null returned"
+                }
+            },
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch2022.xml.twig at line 1."
+            ]
+        },
+        "desp2022-null-nro-tests": {
+            "now": 1792253925,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "An exception has been thrown during the rendering of a template (\"CPEForge\\Model\\Despatch\\AdditionalDoc::getNro(): Return value must be of type string, null returned\") in \"despatch2022.xml.twig\" at line 20.",
+                "previous": {
+                    "class": "TypeError",
+                    "message": "CPEForge\\Model\\Despatch\\AdditionalDoc::getNro(): Return value must be of type string, null returned"
+                }
+            },
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch2022.xml.twig at line 1."
+            ]
+        },
+        "desp2022-quantities-default": {
+            "now": 1792253925,
+            "sha256": "62d07801986f6d784e0d9a9b2d52af8c520d42be57c6e6eac61c4f0577ab417e",
+            "bytes": 9030,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch2022.xml.twig at line 1."
+            ]
+        },
+        "desp2022-special-default": {
+            "now": 1792253925,
+            "sha256": "e5162f837b38e866a1a8764847d86b3b8d0c30c6d202d4f5c1c8a3b593b23fc3",
+            "bytes": 8708,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch2022.xml.twig at line 1."
+            ]
+        },
+        "desp2022-special-cpeforge": {
+            "now": 1792253925,
+            "sha256": "e5162f837b38e866a1a8764847d86b3b8d0c30c6d202d4f5c1c8a3b593b23fc3",
+            "bytes": 8708,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch2022.xml.twig at line 1."
+            ]
+        },
+        "desp-empty-default": {
+            "now": 1792253925,
+            "sha256": "72e74f3f6b75f6fb0941c0e234b18459cc124f165e0510ea7b95728dcedc3d11",
+            "bytes": 2254,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "desp-empty-cpeforge": {
+            "now": 1792253925,
+            "sha256": "72e74f3f6b75f6fb0941c0e234b18459cc124f165e0510ea7b95728dcedc3d11",
+            "bytes": 2254,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "desp-empty-tests": {
+            "now": 1792253925,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "Impossible to access an attribute (\"ruc\") on a null variable in \"despatch.xml.twig\" at line 32."
+            },
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch.xml.twig at line 1."
+            ]
+        },
+        "desp2022-empty-default": {
+            "now": 1792253925,
+            "sha256": "5e560a1b751297c230d5c44b7e3ca33ccfe389badefada3e51f1146f7df34e0a",
+            "bytes": 2903,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch2022.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "desp2022-empty-cpeforge": {
+            "now": 1792253926,
+            "sha256": "e4ffa93fae191942df66196dab1959ba457a43e1f678db5279caa49053b70377",
+            "bytes": 2903,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch2022.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "desp2022-empty-tests": {
+            "now": 1792253926,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "Impossible to access an attribute (\"ruc\") on a null variable in \"despatch2022.xml.twig\" at line 34."
+            },
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/despatch2022.xml.twig at line 1."
+            ]
+        }
+    }
+}

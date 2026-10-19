@@ -1,0 +1,2360 @@
+{
+ "source": "la referencia packages/xml-parser/src",
+ "files": [
+  {
+   "file": "Xml/Parser/DespatchParser.php",
+   "sha256": "2d2cd28497e76913c031605c6bd4d6a65ea62d43c0b628163be24e7e427662f7",
+   "lines": 200,
+   "methods": [
+    "parse",
+    "getClient",
+    "getCompany",
+    "loadRelDocs",
+    "getShipment",
+    "getTransportista",
+    "getDetails"
+   ],
+   "queries": [
+    {
+     "call": "getValue",
+     "xpath": "cbc:ID",
+     "context": "$root",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:DespatchAdviceTypeCode",
+     "context": "$root",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:Note",
+     "context": "$root",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:IssueDate",
+     "context": "$root",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cbc:CustomerAssignedAccountID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Party/cac:PartyLegalEntity/cbc:RegistrationName",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:DespatchSupplierParty",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:CustomerAssignedAccountID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Party/cac:PartyLegalEntity/cbc:RegistrationName",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:OrderReference",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:OrderTypeCode",
+     "context": "$bajaNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:ID",
+     "context": "$bajaNode",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:AdditionalDocumentReference",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:OrderTypeCode",
+     "context": "$relDoc",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:ID",
+     "context": "$relDoc",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:Shipment",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:HandlingCode",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:Information",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:TotalTransportHandlingUnitQuantity",
+     "context": "$node",
+     "default": "0"
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:SplitConsignmentIndicator",
+     "context": "$node",
+     "default": "false"
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:TransportHandlingUnit/cbc:ID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:FirstArrivalPortLocation/cbc:ID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cbc:GrossWeightMeasure",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:Delivery/cac:DeliveryAddress",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:ID",
+     "context": "$otNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:StreetName",
+     "context": "$otNode",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:OriginAddress",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:ID",
+     "context": "$otNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:StreetName",
+     "context": "$otNode",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:ShipmentStage",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:TransportModeCode",
+     "context": "$otNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:TransitPeriod/cbc:StartDate",
+     "context": "$otNode",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:CarrierParty",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:PartyIdentification/cbc:ID",
+     "context": "$othNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:PartyName/cbc:Name",
+     "context": "$othNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:TransportMeans/cac:RoadTransport/cbc:LicensePlateID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:DriverPerson/cbc:ID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNodes",
+     "xpath": "cac:DespatchLine",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cbc:DeliveredQuantity",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Item/cbc:Name",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Item/cac:SellersItemIdentification/cbc:ID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode",
+     "context": "$node",
+     "default": null
+    }
+   ],
+   "setters": [
+    "cantidad",
+    "choferDoc",
+    "choferTipoDoc",
+    "codProdSunat",
+    "codPuerto",
+    "codTraslado",
+    "codigo",
+    "company",
+    "correlativo",
+    "desTraslado",
+    "descripcion",
+    "destinatario",
+    "details",
+    "docBaja",
+    "envio",
+    "fecTraslado",
+    "fechaEmision",
+    "indTransbordo",
+    "llegada",
+    "modTraslado",
+    "nroDoc",
+    "numBultos",
+    "numContenedor",
+    "numDoc",
+    "observacion",
+    "partida",
+    "pesoTotal",
+    "placa",
+    "razonSocial",
+    "relDoc",
+    "ruc",
+    "rznSocial",
+    "serie",
+    "tercero",
+    "tipoDoc",
+    "transportista",
+    "undPesoTotal",
+    "unidad"
+   ],
+   "switch_cases": [],
+   "float_casts": 2,
+   "int_casts": 1,
+   "datetime": 2,
+   "trim": 0,
+   "explode": 1
+  },
+  {
+   "file": "Xml/Parser/InvoiceParser.php",
+   "sha256": "69e0dd0842ce3be47cd5ea0cac269dae74c330d04bbf0b31bcac850f9f01eca5",
+   "lines": 352,
+   "methods": [
+    "parse",
+    "getXpath",
+    "defValue",
+    "defNodeAttribute",
+    "loadTotals",
+    "loadTributos",
+    "getPrepayments",
+    "getLegends",
+    "getClient",
+    "getCompany",
+    "loadExtras",
+    "getGuias",
+    "getAddress",
+    "getDetails",
+    "loadTaxDetail",
+    "loadDescuentosDetail",
+    "loadPricesDetail"
+   ],
+   "queries": [
+    {
+     "call": "query",
+     "xpath": "/xt:Invoice/cbc:ID",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "/xt:Invoice/cbc:InvoiceTypeCode",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "/xt:Invoice/cbc:DocumentCurrencyCode",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "/xt:Invoice/cbc:IssueDate",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "/xt:Invoice/ext:UBLExtensions",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "//sac:AdditionalInformation",
+     "context": "$extensions",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "/xt:Invoice/cac:LegalMonetaryTotal",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "sac:SUNATTransaction/cbc:ID",
+     "context": "$additional",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:AllowanceTotalAmount",
+     "context": "$monetaryTotal",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:PrepaidAmount",
+     "context": "$monetaryTotal",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:ChargeTotalAmount",
+     "context": "$monetaryTotal",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:PayableAmount",
+     "context": "$monetaryTotal",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "sac:AdditionalMonetaryTotal",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:ID",
+     "context": "$total",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:PayableAmount",
+     "context": "$total",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:ID",
+     "context": "$total",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "sac:ReferenceAmount",
+     "context": "$total",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "sac:TotalAmount",
+     "context": "$total",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:Percent",
+     "context": "$total",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "sac:ReferenceAmount",
+     "context": "$total",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "/xt:Invoice/cac:TaxTotal",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:Name",
+     "context": "$tax",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:TaxAmount",
+     "context": "$tax",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "/xt:Invoice/cac:PrepaidPayment",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:PaidAmount",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:ID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:ID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "sac:AdditionalProperty",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:ID",
+     "context": "$legend",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:Value",
+     "context": "$legend",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "/xt:Invoice/cac:AccountingCustomerParty",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:CustomerAssignedAccountID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:AdditionalAccountID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cac:Party/cac:PartyLegalEntity/cbc:RegistrationName",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "/xt:Invoice/cac:AccountingSupplierParty",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:CustomerAssignedAccountID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cac:Party/cac:PartyName/cbc:Name",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cac:Party/cac:PartyLegalEntity/cbc:RegistrationName",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "/xt:Invoice/cac:OrderReference/cbc:ID",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "/xt:Invoice/cac:PaymentMeans/cbc:PaymentDueDate",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "/xt:Invoice/cac:DespatchDocumentReference",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:DocumentTypeCode",
+     "context": "$guia",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:ID",
+     "context": "$guia",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cac:Party/cac:PostalAddress",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:StreetName",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:CityName",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:CountrySubentity",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:District",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:ID",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "/xt:Invoice/cac:InvoiceLine",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:InvoicedQuantity",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:InvoicedQuantity",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:LineExtensionAmount",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cac:Price/cbc:PriceAmount",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cac:Item/cbc:Description",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cac:Item/cac:SellersItemIdentification/cbc:ID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cac:TaxTotal",
+     "context": "$detailNode",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:Name",
+     "context": "$tax",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:TaxAmount",
+     "context": "$tax",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode",
+     "context": "$tax",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cac:TaxSubtotal/cac:TaxCategory/cbc:TierRange",
+     "context": "$tax",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cac:AllowanceCharge",
+     "context": "$detailNode",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:ChargeIndicator",
+     "context": "$desc",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cbc:Amount",
+     "context": "$desc",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cac:PricingReference",
+     "context": "$detailNode",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cac:AlternativeConditionPrice/cbc:PriceTypeCode",
+     "context": "$price",
+     "default": null
+    },
+    {
+     "call": "query",
+     "xpath": "cac:AlternativeConditionPrice/cbc:PriceAmount",
+     "context": "$price",
+     "default": null
+    }
+   ],
+   "setters": [
+    "address",
+    "anticipos",
+    "cantidad",
+    "client",
+    "codProdSunat",
+    "codProducto",
+    "codReg",
+    "code",
+    "company",
+    "compra",
+    "correlativo",
+    "departamento",
+    "descripcion",
+    "descuento",
+    "details",
+    "detraccion",
+    "direccion",
+    "distrito",
+    "fecVencimiento",
+    "fechaEmision",
+    "guias",
+    "igv",
+    "isc",
+    "legends",
+    "mount",
+    "mto",
+    "mtoBase",
+    "mtoDescuentos",
+    "mtoIGV",
+    "mtoISC",
+    "mtoImpVenta",
+    "mtoOperExoneradas",
+    "mtoOperGratuitas",
+    "mtoOperGravadas",
+    "mtoOperInafectas",
+    "mtoOtrosTributos",
+    "mtoPrecioUnitario",
+    "mtoTotal",
+    "mtoValorGratuito",
+    "mtoValorUnitario",
+    "mtoValorVenta",
+    "nombreComercial",
+    "nroDoc",
+    "nroDocRel",
+    "numDoc",
+    "percent",
+    "perception",
+    "provincia",
+    "razonSocial",
+    "ruc",
+    "rznSocial",
+    "serie",
+    "sumDsctoGlobal",
+    "sumOtrosCargos",
+    "tipAfeIgv",
+    "tipSisIsc",
+    "tipoDoc",
+    "tipoDocRel",
+    "tipoMoneda",
+    "tipoOperacion",
+    "total",
+    "totalAnticipos",
+    "ubigueo",
+    "unidad",
+    "value",
+    "valueRef"
+   ],
+   "switch_cases": [
+    "01",
+    "02",
+    "1001",
+    "1002",
+    "1003",
+    "1004",
+    "2001",
+    "2003",
+    "2005",
+    "IGV",
+    "ISC",
+    "OTROS"
+   ],
+   "float_casts": 17,
+   "int_casts": 0,
+   "datetime": 2,
+   "trim": 3,
+   "explode": 1
+  },
+  {
+   "file": "Xml/Parser/NoteParser.php",
+   "sha256": "324f0324990299312a8c9a66cf094e94d8f7727c6ba3d2fac45aa8f02d809e1d",
+   "lines": 312,
+   "methods": [
+    "parse",
+    "loadTotals",
+    "loadTributos",
+    "getLegends",
+    "loadDocAfectado",
+    "getClient",
+    "getCompany",
+    "getGuias",
+    "getAddress",
+    "getDetails",
+    "loadTaxDetail",
+    "loadDescuentosDetail",
+    "loadPricesDetail"
+   ],
+   "queries": [
+    {
+     "call": "getValue",
+     "xpath": "cbc:ID",
+     "context": "$root",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:DocumentCurrencyCode",
+     "context": "$root",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:IssueDate",
+     "context": "$root",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "ext:UBLExtensions",
+     "context": "$root",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "//sac:AdditionalInformation",
+     "context": "$extensions",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:ChargeTotalAmount",
+     "context": "$monetaryTotal",
+     "default": "0"
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:PayableAmount",
+     "context": "$monetaryTotal",
+     "default": "0"
+    },
+    {
+     "call": "getNodes",
+     "xpath": "sac:AdditionalMonetaryTotal",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cbc:ID",
+     "context": "$total",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:PayableAmount",
+     "context": "$total",
+     "default": "0"
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:ReferenceAmount",
+     "context": "$total",
+     "default": "0"
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:TotalAmount",
+     "context": "$total",
+     "default": "0"
+    },
+    {
+     "call": "getNodes",
+     "xpath": "cac:TaxTotal",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:Name",
+     "context": "$tax",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:TaxAmount",
+     "context": "$tax",
+     "default": "0"
+    },
+    {
+     "call": "getNodes",
+     "xpath": "sac:AdditionalProperty",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:ID",
+     "context": "$legend",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:Value",
+     "context": "$legend",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:DiscrepancyResponse",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:ResponseCode",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:Description",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:ReferenceID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:BillingReference/cac:InvoiceDocumentReference/cbc:DocumentTypeCode",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:AccountingCustomerParty",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:CustomerAssignedAccountID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:AdditionalAccountID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Party/cac:PartyLegalEntity/cbc:RegistrationName",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:AccountingSupplierParty",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:CustomerAssignedAccountID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Party/cac:PartyName/cbc:Name",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Party/cac:PartyLegalEntity/cbc:RegistrationName",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNodes",
+     "xpath": "cac:DespatchDocumentReference",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:DocumentTypeCode",
+     "context": "$guia",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:ID",
+     "context": "$guia",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:Party/cac:PostalAddress",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:StreetName",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:CityName",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:CountrySubentity",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:District",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:ID",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "getNodes",
+     "xpath": "cac:",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cbc:",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:LineExtensionAmount",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Price/cbc:PriceAmount",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Item/cbc:Description",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Item/cac:SellersItemIdentification/cbc:ID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNodes",
+     "xpath": "cac:TaxTotal",
+     "context": "$detailNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:Name",
+     "context": "$tax",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:TaxAmount",
+     "context": "$tax",
+     "default": "0"
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode",
+     "context": "$tax",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:TaxSubtotal/cac:TaxCategory/cbc:TierRange",
+     "context": "$tax",
+     "default": null
+    },
+    {
+     "call": "getNodes",
+     "xpath": "cac:AllowanceCharge",
+     "context": "$detailNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:ChargeIndicator",
+     "context": "$desc",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:Amount",
+     "context": "$desc",
+     "default": "0"
+    },
+    {
+     "call": "getNodes",
+     "xpath": "cac:PricingReference",
+     "context": "$detailNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:AlternativeConditionPrice/cbc:PriceTypeCode",
+     "context": "$price",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:AlternativeConditionPrice/cbc:PriceAmount",
+     "context": "$price",
+     "default": "0"
+    }
+   ],
+   "setters": [
+    "address",
+    "cantidad",
+    "client",
+    "codMotivo",
+    "codProdSunat",
+    "codProducto",
+    "codReg",
+    "code",
+    "company",
+    "correlativo",
+    "departamento",
+    "desMotivo",
+    "descripcion",
+    "descuento",
+    "details",
+    "direccion",
+    "distrito",
+    "fechaEmision",
+    "guias",
+    "igv",
+    "isc",
+    "legends",
+    "mto",
+    "mtoBase",
+    "mtoIGV",
+    "mtoISC",
+    "mtoImpVenta",
+    "mtoOperExoneradas",
+    "mtoOperGratuitas",
+    "mtoOperGravadas",
+    "mtoOperInafectas",
+    "mtoOtrosTributos",
+    "mtoPrecioUnitario",
+    "mtoTotal",
+    "mtoValorGratuito",
+    "mtoValorUnitario",
+    "mtoValorVenta",
+    "nombreComercial",
+    "nroDoc",
+    "numDoc",
+    "numDocfectado",
+    "perception",
+    "provincia",
+    "razonSocial",
+    "ruc",
+    "rznSocial",
+    "serie",
+    "sumOtrosCargos",
+    "tipAfeIgv",
+    "tipDocAfectado",
+    "tipSisIsc",
+    "tipoDoc",
+    "tipoMoneda",
+    "ubigueo",
+    "unidad",
+    "value"
+   ],
+   "switch_cases": [
+    "01",
+    "02",
+    "1001",
+    "1002",
+    "1003",
+    "1004",
+    "2001",
+    "IGV",
+    "ISC",
+    "OTROS"
+   ],
+   "float_casts": 12,
+   "int_casts": 0,
+   "datetime": 1,
+   "trim": 5,
+   "explode": 1
+  },
+  {
+   "file": "Xml/Parser/PerceptionParser.php",
+   "sha256": "148c43e9a4e19962d7a7bb4065ba965112e4430435d4396aaeee0b0ca443d32d",
+   "lines": 183,
+   "methods": [
+    "parse",
+    "getCompany",
+    "getClient",
+    "getAddress",
+    "getDetails",
+    "getPayments"
+   ],
+   "queries": [
+    {
+     "call": "getValue",
+     "xpath": "cbc:ID",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:IssueDate",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:SUNATPerceptionSystemCode",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:SUNATPerceptionPercent",
+     "context": "$root",
+     "default": "0"
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:Note",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:TotalInvoiceAmount",
+     "context": "$root",
+     "default": "0"
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:SUNATTotalCashed",
+     "context": "$root",
+     "default": "0"
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:AgentParty",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:PartyIdentification/cbc:ID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:PartyName/cbc:Name",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:PartyLegalEntity/cbc:RegistrationName",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:ReceiverParty",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:PartyIdentification/cbc:ID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:PartyLegalEntity/cbc:RegistrationName",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:PostalAddress",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:StreetName",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:CityName",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:CountrySubentity",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:District",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:ID",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "getNodes",
+     "xpath": "sac:SUNATPerceptionDocumentReference",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cbc:ID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cbc:TotalInvoiceAmount",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:IssueDate",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "sac:SUNATPerceptionInformation",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:SUNATPerceptionAmount",
+     "context": "$temp",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:SUNATPerceptionDate",
+     "context": "$temp",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:SUNATNetTotalCashed",
+     "context": "$temp",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:ExchangeRate",
+     "context": "$temp",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:SourceCurrencyCode",
+     "context": "$cambio",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:TargetCurrencyCode",
+     "context": "$cambio",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:CalculationRate",
+     "context": "$cambio",
+     "default": "0"
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:Date",
+     "context": "$cambio",
+     "default": null
+    },
+    {
+     "call": "getNodes",
+     "xpath": "cac:Payment",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cbc:PaidAmount",
+     "context": "$pay",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:PaidDate",
+     "context": null,
+     "default": null
+    }
+   ],
+   "setters": [
+    "address",
+    "cobros",
+    "company",
+    "correlativo",
+    "departamento",
+    "details",
+    "direccion",
+    "distrito",
+    "factor",
+    "fecha",
+    "fechaEmision",
+    "fechaPercepcion",
+    "impCobrado",
+    "impCobrar",
+    "impPercibido",
+    "impTotal",
+    "importe",
+    "moneda",
+    "monedaObj",
+    "monedaRef",
+    "nombreComercial",
+    "numDoc",
+    "observacion",
+    "proveedor",
+    "provincia",
+    "razonSocial",
+    "regimen",
+    "ruc",
+    "rznSocial",
+    "serie",
+    "tasa",
+    "tipoCambio",
+    "tipoDoc",
+    "ubigueo"
+   ],
+   "switch_cases": [],
+   "float_casts": 8,
+   "int_casts": 0,
+   "datetime": 6,
+   "trim": 0,
+   "explode": 1
+  },
+  {
+   "file": "Xml/Parser/ReceiptParser.php",
+   "sha256": "fa408fb663b30ccd8f7fc01f97237a605e9a60e7b82654b70f0e38b5b874b492",
+   "lines": 121,
+   "methods": [
+    "parse",
+    "getClient",
+    "getPerson",
+    "getAddress",
+    "loadFromDetail"
+   ],
+   "queries": [
+    {
+     "call": "getValue",
+     "xpath": "cbc:ID",
+     "context": "$root",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:IssueDate",
+     "context": "$root",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:Note",
+     "context": "$root",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:LegalMonetaryTotal",
+     "context": "$root",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:TaxTotal/cac:TaxSubtotal/cbc:TaxableAmount",
+     "context": "$root",
+     "default": "0"
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:TaxExclusiveAmount",
+     "context": "$monetaryTotal",
+     "default": "0"
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:PayableAmount",
+     "context": "$monetaryTotal",
+     "default": "0"
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:AccountingCustomerParty",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:CustomerAssignedAccountID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:AdditionalAccountID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Party/cac:PartyName/cbc:Name",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:AccountingSupplierParty",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:CustomerAssignedAccountID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Party/cac:PartyName/cbc:Name",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Party/cac:PostalAddress/cbc:StreetName",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:InvoiceLine",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:TaxTotal/cac:TaxSubtotal/cbc:Percent",
+     "context": "$node",
+     "default": "0"
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Item/cbc:Description",
+     "context": "$node",
+     "default": null
+    }
+   ],
+   "setters": [
+    "address",
+    "concepto",
+    "correlativo",
+    "direccion",
+    "fechaEmision",
+    "montoLetras",
+    "numDoc",
+    "person",
+    "porcentaje",
+    "razonSocial",
+    "receptor",
+    "retencion",
+    "ruc",
+    "rznSocial",
+    "serie",
+    "subTotal",
+    "tipoDoc",
+    "total"
+   ],
+   "switch_cases": [],
+   "float_casts": 4,
+   "int_casts": 0,
+   "datetime": 1,
+   "trim": 0,
+   "explode": 1
+  },
+  {
+   "file": "Xml/Parser/RetentionParser.php",
+   "sha256": "5ca9a8a08a50a0ba1cf162f88c703d15fd4977c69024f1fa9770629703d58693",
+   "lines": 178,
+   "methods": [
+    "parse",
+    "getCompany",
+    "getClient",
+    "getAddress",
+    "getDetails",
+    "getPayments"
+   ],
+   "queries": [
+    {
+     "call": "getValue",
+     "xpath": "cbc:ID",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:IssueDate",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:SUNATRetentionSystemCode",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:SUNATRetentionPercent",
+     "context": "$root",
+     "default": "0"
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:Note",
+     "context": null,
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:TotalInvoiceAmount",
+     "context": "$root",
+     "default": "0"
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:SUNATTotalPaid",
+     "context": "$root",
+     "default": "0"
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:AgentParty",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:PartyIdentification/cbc:ID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:PartyName/cbc:Name",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:PartyLegalEntity/cbc:RegistrationName",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:ReceiverParty",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:PartyIdentification/cbc:ID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:PartyLegalEntity/cbc:RegistrationName",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:PostalAddress",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:StreetName",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:CityName",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:CountrySubentity",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:District",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:ID",
+     "context": "$address",
+     "default": null
+    },
+    {
+     "call": "getNodes",
+     "xpath": "sac:SUNATRetentionDocumentReference",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cbc:ID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cbc:TotalInvoiceAmount",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:IssueDate",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "sac:SUNATRetentionInformation",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:SUNATRetentionAmount",
+     "context": "$temp",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:SUNATRetentionDate",
+     "context": "$temp",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:SUNATNetTotalPaid",
+     "context": "$temp",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:ExchangeRate",
+     "context": "$temp",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:SourceCurrencyCode",
+     "context": "$cambio",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:TargetCurrencyCode",
+     "context": "$cambio",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:CalculationRate",
+     "context": "$cambio",
+     "default": "0"
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:Date",
+     "context": "$cambio",
+     "default": null
+    },
+    {
+     "call": "getNodes",
+     "xpath": "cac:Payment",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cbc:PaidAmount",
+     "context": "$pay",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:PaidDate",
+     "context": null,
+     "default": null
+    }
+   ],
+   "setters": [
+    "address",
+    "company",
+    "correlativo",
+    "departamento",
+    "details",
+    "direccion",
+    "distrito",
+    "factor",
+    "fecha",
+    "fechaEmision",
+    "fechaRetencion",
+    "impPagado",
+    "impPagar",
+    "impRetenido",
+    "impTotal",
+    "importe",
+    "moneda",
+    "monedaObj",
+    "monedaRef",
+    "nombreComercial",
+    "numDoc",
+    "observacion",
+    "pagos",
+    "proveedor",
+    "provincia",
+    "razonSocial",
+    "regimen",
+    "ruc",
+    "rznSocial",
+    "serie",
+    "tasa",
+    "tipoCambio",
+    "tipoDoc",
+    "ubigueo"
+   ],
+   "switch_cases": [],
+   "float_casts": 8,
+   "int_casts": 0,
+   "datetime": 6,
+   "trim": 0,
+   "explode": 1
+  },
+  {
+   "file": "Xml/Parser/SummaryParser.php",
+   "sha256": "0dcf911071173b2e52c7c3242d904c418e4336aa7257930ac072d5f6a0be2848",
+   "lines": 172,
+   "methods": [
+    "parse",
+    "getCompany",
+    "getDetails",
+    "loadPerception",
+    "loadTotals",
+    "loadTaxs"
+   ],
+   "queries": [
+    {
+     "call": "getValue",
+     "xpath": "cbc:ID",
+     "context": "$root",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:ReferenceDate",
+     "context": "$root",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:IssueDate",
+     "context": "$root",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:AccountingSupplierParty",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:CustomerAssignedAccountID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Party/cac:PartyName/cbc:Name",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Party/cac:PartyLegalEntity/cbc:RegistrationName",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNodes",
+     "xpath": "sac:SummaryDocumentsLine",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:DocumentTypeCode",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:ID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Status/cbc:ConditionCode",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:AccountingCustomerParty/cbc:AdditionalAccountID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:AccountingCustomerParty/cbc:CustomerAssignedAccountID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:TotalAmount",
+     "context": "$node",
+     "default": "0"
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:AllowanceCharge/cbc:Amount",
+     "context": "$node",
+     "default": "0"
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:BillingReference",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:InvoiceDocumentReference/cbc:DocumentTypeCode",
+     "context": "$ref",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:InvoiceDocumentReference/cbc:ID",
+     "context": "$ref",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "sac:SUNATPerceptionSummaryDocumentReference",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:SUNATPerceptionSystemCode",
+     "context": "$ref",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:SUNATPerceptionPercent",
+     "context": "$ref",
+     "default": "0"
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:TotalInvoiceAmount",
+     "context": "$ref",
+     "default": "0"
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:SUNATTotalCashed",
+     "context": "$ref",
+     "default": "0"
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:TaxableAmount",
+     "context": "$ref",
+     "default": "0"
+    },
+    {
+     "call": "getNodes",
+     "xpath": "sac:BillingPayment",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:InstructionID",
+     "context": "$total",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:PaidAmount",
+     "context": "$total",
+     "default": "0"
+    },
+    {
+     "call": "getNodes",
+     "xpath": "cac:TaxTotal",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:Name",
+     "context": "$tax",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:TaxAmount",
+     "context": "$tax",
+     "default": "0"
+    }
+   ],
+   "setters": [
+    "clienteNro",
+    "clienteTipo",
+    "codReg",
+    "company",
+    "correlativo",
+    "details",
+    "docReferencia",
+    "estado",
+    "fecGeneracion",
+    "fecResumen",
+    "mto",
+    "mtoBase",
+    "mtoIGV",
+    "mtoISC",
+    "mtoOperExoneradas",
+    "mtoOperGratuitas",
+    "mtoOperGravadas",
+    "mtoOperInafectas",
+    "mtoOtrosCargos",
+    "mtoOtrosTributos",
+    "mtoTotal",
+    "nombreComercial",
+    "nroDoc",
+    "percepcion",
+    "razonSocial",
+    "ruc",
+    "serieNro",
+    "tasa",
+    "tipoDoc",
+    "total"
+   ],
+   "switch_cases": [
+    "01",
+    "02",
+    "03",
+    "05",
+    "IGV",
+    "ISC",
+    "OTROS"
+   ],
+   "float_casts": 8,
+   "int_casts": 0,
+   "datetime": 2,
+   "trim": 8,
+   "explode": 1
+  },
+  {
+   "file": "Xml/Parser/VoidedParser.php",
+   "sha256": "47f7f5c9c5b981211154c50058a87a0a7856bd4e116f55ac4e62b4da17215036",
+   "lines": 90,
+   "methods": [
+    "parse",
+    "getCompany",
+    "getDetails"
+   ],
+   "queries": [
+    {
+     "call": "getValue",
+     "xpath": "cbc:ID",
+     "context": "$root",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:ReferenceDate",
+     "context": "$root",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:IssueDate",
+     "context": "$root",
+     "default": null
+    },
+    {
+     "call": "getNode",
+     "xpath": "cac:AccountingSupplierParty",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:CustomerAssignedAccountID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Party/cac:PartyName/cbc:Name",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cac:Party/cac:PartyLegalEntity/cbc:RegistrationName",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getNodes",
+     "xpath": "sac:VoidedDocumentsLine",
+     "context": "$this->rootNode",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "cbc:DocumentTypeCode",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:DocumentSerialID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:DocumentNumberID",
+     "context": "$node",
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:VoidReasonDescription",
+     "context": "$node",
+     "default": null
+    }
+   ],
+   "setters": [
+    "company",
+    "correlativo",
+    "desMotivoBaja",
+    "details",
+    "fecComunicacion",
+    "fecGeneracion",
+    "nombreComercial",
+    "razonSocial",
+    "ruc",
+    "serie",
+    "tipoDoc"
+   ],
+   "switch_cases": [],
+   "float_casts": 0,
+   "int_casts": 0,
+   "datetime": 2,
+   "trim": 0,
+   "explode": 1
+  },
+  {
+   "file": "Xml/Parser/XmlLoaderTrait.php",
+   "sha256": "83a7259e8b09303ec6312e4583d96588e9ee2d25ab896284eb541f124028fcac",
+   "lines": 28,
+   "methods": [
+    "load"
+   ],
+   "queries": [],
+   "setters": [],
+   "switch_cases": [],
+   "float_casts": 0,
+   "int_casts": 0,
+   "datetime": 0,
+   "trim": 0,
+   "explode": 0
+  },
+  {
+   "file": "Xml/XmlReader.php",
+   "sha256": "0e7dd23d80672c920f89b5a240cd5625fa6e3b55774fc4ef3035d05303f2f289",
+   "lines": 98,
+   "methods": [
+    "loadXml",
+    "loadDom",
+    "getXpath",
+    "getValue",
+    "getNode",
+    "getNodes"
+   ],
+   "queries": [],
+   "setters": [],
+   "switch_cases": [],
+   "float_casts": 0,
+   "int_casts": 0,
+   "datetime": 0,
+   "trim": 0,
+   "explode": 0
+  }
+ ]
+}

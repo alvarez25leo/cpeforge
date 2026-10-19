@@ -1,0 +1,9 @@
+{
+  "package": "greenter/gre-api",
+  "repository": "https://github.com/thegreenter/gre-api.git",
+  "baseline_tag": "v1.0.2",
+  "baseline_commit": "81627a3511b98cba7243ee3a60cc66ff4a688f51",
+  "consumer_baseline": "thegreenter/greenter v5.3.0",
+  "consumer_constraint": "^1.0",
+  "openapi_document_version": "1.0.0"
+}

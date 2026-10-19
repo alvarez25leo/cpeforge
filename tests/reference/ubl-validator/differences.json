@@ -1,0 +1,55 @@
+{
+  "description": "Diferencias deliberadas del perfil seguro frente al la referencia real v2.3.0; fixtures en xml/ y reference-security-expected.json.",
+  "differences": [
+    {
+      "id": "ubl/dtd-internal",
+      "path": "$.results.ubl/dtd-internal",
+      "family": "xml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "dtd",
+      "reason": "La referencia acepta el DOCTYPE y llega a la validación XSD; Rust lo rechaza antes de expandir entidades.",
+      "compatibility_note": "Los XML con DTD o entidades declaradas producen DtdForbidden."
+    },
+    {
+      "id": "ubl/version-traversal",
+      "path": "$.results.ubl/version-traversal",
+      "family": "ruta",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "traversal",
+      "reason": "La referencia compone y consulta una ruta con la versión '..'; Rust rechaza ese segmento antes de acceder al disco.",
+      "compatibility_note": "La versión y el nombre raíz no pueden contener segmentos que salgan del directorio XSD autorizado."
+    },
+    {
+      "id": "ubl/xades-missing-import",
+      "path": "$.results.ubl/xades-missing-import",
+      "family": "esquema",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "category": "import",
+      "reason": "La referencia informa que falta XAdES.xsd, omite ese import y continúa la validación directa; Rust devuelve MissingImport para no presentar una compilación incompleta como validación fiable.",
+      "compatibility_note": "Un include/import ausente detiene la validación con un error tipado; no se descarga ni se suplanta el recurso."
+    },
+    {
+      "id": "ubl/schema-outside-manifest",
+      "path": "$.results.ubl/schema-outside-manifest",
+      "family": "esquema",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "ruta",
+      "reason": "La referencia SchemaValidator acepta un XSD sintético fuera del conjunto fijado; Rust limita las rutas al manifiesto autorizado.",
+      "compatibility_note": "La validación directa solo acepta una ruta relativa del manifiesto de 45 XSD."
+    },
+    {
+      "id": "ubl/deep-nesting",
+      "path": "$.results.ubl/deep-nesting",
+      "family": "xml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "profundidad",
+      "reason": "Factura UBL 2.1 válida con 204 niveles de elementos (200 dentro de ExtensionContent). La referencia con libxml2 2.15.1 la valida (acepta hasta 256 niveles y a partir de 257 devuelve 'Invalid XML Document'); Rust la rechaza en la prevalidación porque supera 128 niveles bajo la raíz.",
+      "compatibility_note": "Un XML con más de 128 niveles bajo la raíz produce InfrastructureError::XmlLimit antes de validar; un comprobante SUNAT real no pasa de unas 15."
+    }
+  ]
+}

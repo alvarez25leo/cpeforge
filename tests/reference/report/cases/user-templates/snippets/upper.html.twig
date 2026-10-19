@@ -1,0 +1,2 @@
+{% for w in params.user.words %}[{{ w|upper }}|{{ w|length }}]{% endfor %}
+{{ params.user.map|length }}|{{ params.user.words|length }}|{{ doc.legends|length }}

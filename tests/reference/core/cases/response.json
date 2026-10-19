@@ -1,0 +1,908 @@
+{
+  "family": "response",
+  "cases": [
+    {
+      "id": "base-result-default",
+      "description": "BaseResult: success=false por defecto",
+      "input": {
+        "$class": "BaseResult"
+      }
+    },
+    {
+      "id": "base-result-null-success",
+      "description": "success admite null",
+      "input": {
+        "$class": "BaseResult",
+        "success": null
+      }
+    },
+    {
+      "id": "base-result-error",
+      "description": "BaseResult con error",
+      "input": {
+        "$class": "BaseResult",
+        "success": false,
+        "error": {
+          "$class": "Error",
+          "$ctor": [
+            "0111",
+            "No tiene el perfil para enviar comprobantes electronicos"
+          ]
+        }
+      }
+    },
+    {
+      "id": "bill-result-full",
+      "description": "BillResult con CDR y ZIP binario",
+      "input": {
+        "$class": "BillResult",
+        "success": true,
+        "cdrZip": {
+          "$bytes": "UEsDBAD/IGJpbmFyaW8="
+        },
+        "cdrResponse": {
+          "$class": "CdrResponse",
+          "id": "F001-123",
+          "code": "0",
+          "description": "La Factura numero F001-123, ha sido aceptada",
+          "notes": [
+            "4252 - Nota sintética",
+            "4287 - Otra nota"
+          ],
+          "reference": "20000000001-01-F001-123"
+        }
+      }
+    },
+    {
+      "id": "bill-result-empty",
+      "description": "BillResult vacío",
+      "input": {
+        "$class": "BillResult"
+      }
+    },
+    {
+      "id": "summary-result-full",
+      "description": "SummaryResult con ticket",
+      "input": {
+        "$class": "SummaryResult",
+        "success": true,
+        "ticket": "1500000000001"
+      }
+    },
+    {
+      "id": "summary-result-empty",
+      "description": "SummaryResult vacío",
+      "input": {
+        "$class": "SummaryResult"
+      }
+    },
+    {
+      "id": "status-result-full",
+      "description": "StatusResult con código 0 y CDR",
+      "input": {
+        "$class": "StatusResult",
+        "success": true,
+        "code": "0",
+        "cdrZip": {
+          "$bytes": "Y2Ry"
+        },
+        "cdrResponse": {
+          "$class": "CdrResponse",
+          "id": "F001-123",
+          "code": "0",
+          "description": "La Factura numero F001-123, ha sido aceptada",
+          "notes": [
+            "4252 - Nota sintética",
+            "4287 - Otra nota"
+          ],
+          "reference": "20000000001-01-F001-123"
+        }
+      }
+    },
+    {
+      "id": "status-result-processing",
+      "description": "StatusResult en proceso (98)",
+      "input": {
+        "$class": "StatusResult",
+        "success": false,
+        "code": "98",
+        "error": {
+          "$class": "Error",
+          "$ctor": [
+            "98",
+            "En proceso"
+          ]
+        }
+      }
+    },
+    {
+      "id": "status-result-empty",
+      "description": "StatusResult vacío",
+      "input": {
+        "$class": "StatusResult"
+      }
+    },
+    {
+      "id": "status-cdr-result-full",
+      "description": "StatusCdrResult con código, mensaje y CDR",
+      "input": {
+        "$class": "StatusCdrResult",
+        "success": true,
+        "code": "0004",
+        "message": "La constancia existe",
+        "cdrZip": {
+          "$bytes": ""
+        },
+        "cdrResponse": {
+          "$class": "CdrResponse",
+          "id": "F001-123",
+          "code": "0",
+          "description": "La Factura numero F001-123, ha sido aceptada",
+          "notes": [
+            "4252 - Nota sintética",
+            "4287 - Otra nota"
+          ],
+          "reference": "20000000001-01-F001-123"
+        }
+      }
+    },
+    {
+      "id": "status-cdr-result-empty",
+      "description": "StatusCdrResult vacío",
+      "input": {
+        "$class": "StatusCdrResult"
+      }
+    },
+    {
+      "id": "error-default",
+      "description": "Error sin argumentos: código y mensaje vacíos",
+      "input": {
+        "$class": "Error"
+      }
+    },
+    {
+      "id": "error-code-only",
+      "description": "Error con un argumento: mensaje vacío",
+      "input": {
+        "$class": "Error",
+        "$ctor": [
+          "0100"
+        ]
+      }
+    },
+    {
+      "id": "error-nulls",
+      "description": "Error con null explícito",
+      "input": {
+        "$class": "Error",
+        "$ctor": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "error-setters",
+      "description": "Error modificado con setters",
+      "input": {
+        "$class": "Error",
+        "code": "2800",
+        "message": "Mensaje"
+      }
+    },
+    {
+      "id": "cdr-empty",
+      "description": "CdrResponse vacío",
+      "input": {
+        "$class": "CdrResponse"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-full",
+      "description": "CdrResponse completo",
+      "input": {
+        "$class": "CdrResponse",
+        "id": "F001-123",
+        "code": "0",
+        "description": "La Factura numero F001-123, ha sido aceptada",
+        "notes": [
+          "4252 - Nota sintética",
+          "4287 - Otra nota"
+        ],
+        "reference": "20000000001-01-F001-123"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-empty-notes",
+      "description": "Notas vacías frente a null",
+      "input": {
+        "$class": "CdrResponse",
+        "id": "F001-123",
+        "code": "0",
+        "description": "La Factura numero F001-123, ha sido aceptada",
+        "notes": [],
+        "reference": "20000000001-01-F001-123"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-null",
+      "description": "isAccepted con código None",
+      "input": {
+        "$class": "CdrResponse",
+        "code": null
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-empty",
+      "description": "isAccepted con código ''",
+      "input": {
+        "$class": "CdrResponse",
+        "code": ""
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-zero",
+      "description": "isAccepted con código '0'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "0"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-zero-padded",
+      "description": "isAccepted con código '0000'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "0000"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-one",
+      "description": "isAccepted con código '1'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "1"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-98",
+      "description": "isAccepted con código '98'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "98"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-99",
+      "description": "isAccepted con código '99'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "99"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-100",
+      "description": "isAccepted con código '100'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "100"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-2000",
+      "description": "isAccepted con código '2000'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "2000"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-3999",
+      "description": "isAccepted con código '3999'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "3999"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-4000",
+      "description": "isAccepted con código '4000'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "4000"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-4252",
+      "description": "isAccepted con código '4252'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "4252"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-99999",
+      "description": "isAccepted con código '99999'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "99999"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-negative",
+      "description": "isAccepted con código '-1'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "-1"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-negative-zero",
+      "description": "isAccepted con código '-0'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "-0"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-plus-sign",
+      "description": "isAccepted con código '+1'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "+1"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-leading-spaces",
+      "description": "isAccepted con código '  1'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "  1"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-trailing-spaces",
+      "description": "isAccepted con código '1  '",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "1  "
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-leading-newline",
+      "description": "isAccepted con código '\\n1'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "\n1"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-leading-carriage-return",
+      "description": "isAccepted con código '\\r1'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "\r1"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-tab-prefix",
+      "description": "isAccepted con código '\\t1'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "\t1"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-vertical-tab-prefix",
+      "description": "isAccepted con código '\\x0b1'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "\u000b1"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-formfeed-prefix",
+      "description": "isAccepted con código '\\x0c1'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "\f1"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-nbsp-prefix",
+      "description": "isAccepted con código '\\xa01'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": " 1"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-nul-prefix",
+      "description": "isAccepted con código '\\x001'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "\u00001"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-trailing-garbage",
+      "description": "isAccepted con código '1abc'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "1abc"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-trailing-garbage-4000",
+      "description": "isAccepted con código '4000abc'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "4000abc"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-decimal-below",
+      "description": "isAccepted con código '3999.9'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "3999.9"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-decimal-rounds-up",
+      "description": "isAccepted con código '3999.99999999999999999'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "3999.99999999999999999"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-decimal-above",
+      "description": "isAccepted con código '4000.5'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "4000.5"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-negative-fraction",
+      "description": "isAccepted con código '-0.9'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "-0.9"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-negative-decimal",
+      "description": "isAccepted con código '  -3999.99'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "  -3999.99"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-exponent",
+      "description": "isAccepted con código '4e3'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "4e3"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-exponent-upper",
+      "description": "isAccepted con código '1E3'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "1E3"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-exponent-fraction",
+      "description": "isAccepted con código '0.4e4'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "0.4e4"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-exponent-negative",
+      "description": "isAccepted con código '4000e-1'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "4000e-1"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-exponent-underflow",
+      "description": "isAccepted con código '1e-400'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "1e-400"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-exponent-incomplete",
+      "description": "isAccepted con código '1e'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "1e"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-exponent-sign-only",
+      "description": "isAccepted con código '1e+'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "1e+"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-leading-dot",
+      "description": "isAccepted con código '.5'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": ".5"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-leading-dot-exponent",
+      "description": "isAccepted con código '-.5e1'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "-.5e1"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-trailing-dot",
+      "description": "isAccepted con código '1.'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "1."
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-only-dot",
+      "description": "isAccepted con código '.'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "."
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-text",
+      "description": "isAccepted con código 'abc'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "abc"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-hex",
+      "description": "isAccepted con código '0x1A'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "0x1A"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-underscore",
+      "description": "isAccepted con código '1_000'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "1_000"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-int-max",
+      "description": "isAccepted con código '9223372036854775807'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "9223372036854775807"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-int-overflow",
+      "description": "isAccepted con código '9223372036854775808'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "9223372036854775808"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-int-min",
+      "description": "isAccepted con código '-9223372036854775808'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "-9223372036854775808"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-int-underflow",
+      "description": "isAccepted con código '-9223372036854775809'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "-9223372036854775809"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-float-overflow-positive",
+      "description": "isAccepted con código '1e19'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "1e19"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-float-overflow-negative",
+      "description": "isAccepted con código '-1e19'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "-1e19"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-float-two-pow-64",
+      "description": "isAccepted con código '18446744073709551616'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "18446744073709551616"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-float-near-max",
+      "description": "isAccepted con código '9.2233720368547748e18'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "9.2233720368547748e18"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-huge",
+      "description": "isAccepted con código '1e400'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "1e400"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-negative-huge",
+      "description": "isAccepted con código '-1e400'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "-1e400"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-only-sign",
+      "description": "isAccepted con código '-'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "-"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-double-sign",
+      "description": "isAccepted con código '+-1'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "+-1"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-unicode-digits",
+      "description": "isAccepted con código '١'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "١"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-fullwidth-digits",
+      "description": "isAccepted con código '１'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "１"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    },
+    {
+      "id": "cdr-accepted-internal-space",
+      "description": "isAccepted con código '40 00'",
+      "input": {
+        "$class": "CdrResponse",
+        "code": "40 00"
+      },
+      "calls": [
+        "isAccepted"
+      ]
+    }
+  ]
+}

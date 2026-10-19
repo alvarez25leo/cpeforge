@@ -1,0 +1,694 @@
+{
+    "reference": "980bad9412eab51516e4879b06d8d2e723c62f0d",
+    "runtime": "8.4.17",
+    "libxml": "2.15.1",
+    "results": [
+        {
+            "id": "2.0-ApplicationResponse",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-ApplicationResponse-2.0.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.0-ApplicationResponse-missing-date",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-ApplicationResponse-2.0.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1871, Line: 1, Column: 0, Message: Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}SenderParty': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}SenderParty': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "2.0-CreditNote",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-CreditNote-2.0.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.0-CreditNote-missing-date",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-CreditNote-2.0.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1871, Line: 1, Column: 0, Message: Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "2.0-DebitNote",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-DebitNote-2.0.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.0-DebitNote-missing-date",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-DebitNote-2.0.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1871, Line: 1, Column: 0, Message: Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "2.0-DespatchAdvice",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-DespatchAdvice-2.0.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.0-DespatchAdvice-missing-date",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-DespatchAdvice-2.0.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1871, Line: 1, Column: 0, Message: Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}DespatchSupplierParty': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}DespatchSupplierParty': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "2.0-Invoice",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-Invoice-2.0.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.0-Invoice-missing-date",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-Invoice-2.0.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1871, Line: 1, Column: 0, Message: Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "2.0-Perception",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-Perception-2.0.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.0-Perception-missing-date",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-Perception-2.0.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1871, Line: 1, Column: 0, Message: Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "2.0-Retention",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-Retention-2.0.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.0-Retention-missing-date",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-Retention-2.0.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1871, Line: 1, Column: 0, Message: Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "2.0-SummaryDocuments",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-SummaryDocuments-2.0.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.0-SummaryDocuments-missing-date",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-SummaryDocuments-2.0.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1871, Line: 1, Column: 0, Message: Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}Signature': This element is not expected. Expected is ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}Signature': This element is not expected. Expected is ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "2.0-VoidedDocuments",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-VoidedDocuments-2.0.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.0-VoidedDocuments-missing-date",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-VoidedDocuments-2.0.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1871, Line: 1, Column: 0, Message: Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}Signature': This element is not expected. Expected is ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}Signature': This element is not expected. Expected is ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "2.1-ApplicationResponse",
+            "mode": "string",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-ApplicationResponse-2.1.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.1-ApplicationResponse-missing-date",
+            "mode": "string",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-ApplicationResponse-2.1.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1871, Line: 1, Column: 0, Message: Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}SenderParty': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}SenderParty': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "2.1-CreditNote",
+            "mode": "string",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-CreditNote-2.1.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.1-CreditNote-missing-date",
+            "mode": "string",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-CreditNote-2.1.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1871, Line: 1, Column: 0, Message: Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "2.1-DebitNote",
+            "mode": "string",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-DebitNote-2.1.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.1-DebitNote-missing-date",
+            "mode": "string",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-DebitNote-2.1.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1871, Line: 1, Column: 0, Message: Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "2.1-DespatchAdvice",
+            "mode": "string",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-DespatchAdvice-2.1.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.1-DespatchAdvice-missing-date",
+            "mode": "string",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-DespatchAdvice-2.1.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1871, Line: 1, Column: 0, Message: Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "2.1-Invoice",
+            "mode": "string",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-Invoice-2.1.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.1-Invoice-missing-date",
+            "mode": "string",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-Invoice-2.1.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1871, Line: 1, Column: 0, Message: Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "2.1-SelfBilledCreditNote",
+            "mode": "string",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-SelfBilledCreditNote-2.1.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.1-SelfBilledCreditNote-missing-date",
+            "mode": "string",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-SelfBilledCreditNote-2.1.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1871, Line: 1, Column: 0, Message: Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "2.1-SelfBilledInvoice",
+            "mode": "string",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-SelfBilledInvoice-2.1.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.1-SelfBilledInvoice-missing-date",
+            "mode": "string",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-SelfBilledInvoice-2.1.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1871, Line: 1, Column: 0, Message: Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueTime': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CopyIndicator, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UUID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}IssueDate ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "2.0-Perception-exceptional",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-Perception-2.0.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.0-Perception-exceptional-duplicate",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-Perception-2.0.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1871, Line: 1, Column: 0, Message: Element '{urn:sunat:names:specification:ubl:peru:schema:xsd:SunatAggregateComponents-1}ExceptionalIndicator': This element is not expected. Expected is ( {urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}AgentParty ).\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{urn:sunat:names:specification:ubl:peru:schema:xsd:SunatAggregateComponents-1}ExceptionalIndicator': This element is not expected. Expected is ( {urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}AgentParty ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "empty",
+            "mode": "string",
+            "version": "",
+            "schema": null,
+            "exception": "ValueError",
+            "message": "DOMDocument::loadXML(): Argument #1 ($source) must not be empty"
+        },
+        {
+            "id": "malformed",
+            "mode": "string",
+            "version": "",
+            "schema": null,
+            "valid": false,
+            "before": null,
+            "error": "Invalid XML Document",
+            "errors": []
+        },
+        {
+            "id": "2.1-Invoice-missing-version",
+            "mode": "string",
+            "version": "",
+            "schema": "/maindoc/UBL-Invoice-.xsd",
+            "valid": false,
+            "before": null,
+            "error": "XSD Path: :'{workspace}/target/reference/ubl-validator-v2.3.0/src/Ubl/../xsd//maindoc/UBL-Invoice-.xsd' not found",
+            "errors": []
+        },
+        {
+            "id": "2.1-Invoice-unknown-version",
+            "mode": "string",
+            "version": "9.9",
+            "schema": "9.9/maindoc/UBL-Invoice-9.9.xsd",
+            "valid": false,
+            "before": null,
+            "error": "XSD Path: :'{workspace}/target/reference/ubl-validator-v2.3.0/src/Ubl/../xsd/9.9/maindoc/UBL-Invoice-9.9.xsd' not found",
+            "errors": []
+        },
+        {
+            "id": "2.1-Invoice-repeated-version",
+            "mode": "string",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-Invoice-2.1.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1871, Line: 1, Column: 0, Message: Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UBLVersionID': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CustomizationID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ProfileID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ProfileExecutionID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ID ).\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UBLVersionID': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CustomizationID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ProfileID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ProfileExecutionID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ID ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "2.1-Invoice-prefixed-root",
+            "mode": "string",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-Invoice-2.1.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.1-Invoice-wrong-root-namespace",
+            "mode": "string",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-Invoice-2.1.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1845, Line: 1, Column: 0, Message: Element '{urn:wrong}Invoice': No matching global declaration available for the validation root.\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1845,
+                    "column": 0,
+                    "message": "Element '{urn:wrong}Invoice': No matching global declaration available for the validation root.\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "2.1-Invoice-wrong-cbc-namespace",
+            "mode": "string",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-Invoice-2.1.xsd",
+            "valid": false,
+            "before": null,
+            "error": "Code: 1871, Line: 1, Column: 0, Message: Element '{urn:wrong:cbc}UBLVersionID': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UBLVersionID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CustomizationID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ProfileID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ProfileExecutionID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ID ).\n",
+            "errors": [
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{urn:wrong:cbc}UBLVersionID': This element is not expected. Expected is one of ( {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}UBLVersionID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}CustomizationID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ProfileID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ProfileExecutionID, {urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ID ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        {
+            "id": "2.1-Invoice-dom",
+            "mode": "dom",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-Invoice-2.1.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.1-Mystery-root",
+            "mode": "string",
+            "version": "2.1",
+            "schema": "2.1/maindoc/UBL-Mystery-2.1.xsd",
+            "valid": false,
+            "before": null,
+            "error": "XSD Path: :'{workspace}/target/reference/ubl-validator-v2.3.0/src/Ubl/../xsd/2.1/maindoc/UBL-Mystery-2.1.xsd' not found",
+            "errors": []
+        },
+        {
+            "id": "2.0-ApplicationResponse-latin1",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-ApplicationResponse-2.0.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.0-ApplicationResponse-ascii",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-ApplicationResponse-2.0.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.0-ApplicationResponse-cp1252",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-ApplicationResponse-2.0.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        },
+        {
+            "id": "2.0-ApplicationResponse-latin9",
+            "mode": "string",
+            "version": "2.0",
+            "schema": "2.0/maindoc/UBL-ApplicationResponse-2.0.xsd",
+            "valid": true,
+            "before": null,
+            "error": "",
+            "errors": []
+        }
+    ],
+    "state": {
+        "before": null,
+        "steps": [
+            {
+                "file": "2.0-Invoice.xml",
+                "valid": true,
+                "error": "",
+                "cached_version": "2.0"
+            },
+            {
+                "file": "2.1-Invoice.xml",
+                "valid": true,
+                "error": "",
+                "cached_version": "2.0"
+            },
+            {
+                "file": "2.1-Invoice-missing-version.xml",
+                "valid": true,
+                "error": "",
+                "cached_version": "2.0"
+            },
+            {
+                "file": "2.1-Invoice.xml",
+                "valid": true,
+                "error": "",
+                "cached_version": "2.1"
+            }
+        ]
+    }
+}

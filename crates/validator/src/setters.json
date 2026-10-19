@@ -1,0 +1,2536 @@
+{
+ "generator": "scripts/build_validator_setters.py",
+ "models": {
+  "AdditionalDoc": {
+   "class": "CPEForge\\Model\\Despatch\\AdditionalDoc",
+   "is_a": [
+    "CPEForge\\Model\\Despatch\\AdditionalDoc"
+   ],
+   "setters": {
+    "setEmisor": [
+     "CPEForge\\Model\\Despatch\\AdditionalDoc",
+     "emisor",
+     "?string"
+    ],
+    "setNro": [
+     "CPEForge\\Model\\Despatch\\AdditionalDoc",
+     "nro",
+     "?string"
+    ],
+    "setTipo": [
+     "CPEForge\\Model\\Despatch\\AdditionalDoc",
+     "tipo",
+     "?string"
+    ],
+    "setTipoDesc": [
+     "CPEForge\\Model\\Despatch\\AdditionalDoc",
+     "tipoDesc",
+     "?string"
+    ]
+   }
+  },
+  "Address": {
+   "class": "CPEForge\\Model\\Company\\Address",
+   "is_a": [
+    "CPEForge\\Model\\Company\\Address"
+   ],
+   "setters": {
+    "setCodLocal": [
+     "CPEForge\\Model\\Company\\Address",
+     "codLocal",
+     "?string"
+    ],
+    "setCodigoPais": [
+     "CPEForge\\Model\\Company\\Address",
+     "codigoPais",
+     "?string"
+    ],
+    "setDepartamento": [
+     "CPEForge\\Model\\Company\\Address",
+     "departamento",
+     "?string"
+    ],
+    "setDireccion": [
+     "CPEForge\\Model\\Company\\Address",
+     "direccion",
+     "?string"
+    ],
+    "setDistrito": [
+     "CPEForge\\Model\\Company\\Address",
+     "distrito",
+     "?string"
+    ],
+    "setProvincia": [
+     "CPEForge\\Model\\Company\\Address",
+     "provincia",
+     "?string"
+    ],
+    "setUbigueo": [
+     "CPEForge\\Model\\Company\\Address",
+     "ubigueo",
+     "?string"
+    ],
+    "setUrbanizacion": [
+     "CPEForge\\Model\\Company\\Address",
+     "urbanizacion",
+     "?string"
+    ]
+   }
+  },
+  "BaseResult": {
+   "class": "CPEForge\\Model\\Response\\BaseResult",
+   "is_a": [
+    "CPEForge\\Model\\Response\\BaseResult"
+   ],
+   "setters": {
+    "setError": [
+     "CPEForge\\Model\\Response\\BaseResult",
+     "error",
+     "?CPEForge\\Model\\Response\\Error"
+    ],
+    "setSuccess": [
+     "CPEForge\\Model\\Response\\BaseResult",
+     "success",
+     "?bool"
+    ]
+   }
+  },
+  "BaseSale": {
+   "class": "CPEForge\\Model\\Sale\\BaseSale",
+   "is_a": [
+    "CPEForge\\Model\\Sale\\BaseSale",
+    "CPEForge\\Model\\DocumentInterface"
+   ],
+   "setters": {
+    "setClient": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "client",
+     "?CPEForge\\Model\\Client\\Client"
+    ],
+    "setCompany": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "company",
+     "?CPEForge\\Model\\Company\\Company"
+    ],
+    "setCompra": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "compra",
+     "?string"
+    ],
+    "setCorrelativo": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "correlativo",
+     "?string"
+    ],
+    "setCuotas": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "cuotas",
+     "?array"
+    ],
+    "setDetails": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "details",
+     "?array"
+    ],
+    "setFechaEmision": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "fechaEmision",
+     "?DateTimeInterface"
+    ],
+    "setFormaPago": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "formaPago",
+     "?CPEForge\\Model\\Sale\\PaymentTerms"
+    ],
+    "setGuias": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "guias",
+     "?array"
+    ],
+    "setIcbper": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "icbper",
+     "?float"
+    ],
+    "setLegends": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "legends",
+     "?array"
+    ],
+    "setMtoBaseIsc": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoBaseIsc",
+     "?float"
+    ],
+    "setMtoBaseIvap": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoBaseIvap",
+     "?float"
+    ],
+    "setMtoBaseOth": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoBaseOth",
+     "?float"
+    ],
+    "setMtoIGV": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoIGV",
+     "?float"
+    ],
+    "setMtoIGVGratuitas": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoIGVGratuitas",
+     "?float"
+    ],
+    "setMtoISC": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoISC",
+     "?float"
+    ],
+    "setMtoImpVenta": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoImpVenta",
+     "?float"
+    ],
+    "setMtoIvap": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoIvap",
+     "?float"
+    ],
+    "setMtoOperExoneradas": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoOperExoneradas",
+     "?float"
+    ],
+    "setMtoOperExportacion": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoOperExportacion",
+     "?float"
+    ],
+    "setMtoOperGratuitas": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoOperGratuitas",
+     "?float"
+    ],
+    "setMtoOperGravadas": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoOperGravadas",
+     "?float"
+    ],
+    "setMtoOperInafectas": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoOperInafectas",
+     "?float"
+    ],
+    "setMtoOtrosTributos": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoOtrosTributos",
+     "?float"
+    ],
+    "setRedondeo": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "redondeo",
+     "?float"
+    ],
+    "setRelDocs": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "relDocs",
+     "?array"
+    ],
+    "setSerie": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "serie",
+     "?string"
+    ],
+    "setSumOtrosCargos": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "sumOtrosCargos",
+     "?float"
+    ],
+    "setTipoDoc": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "tipoDoc",
+     "?string"
+    ],
+    "setTipoMoneda": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "tipoMoneda",
+     "?string"
+    ],
+    "setTotalImpuestos": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "totalImpuestos",
+     "?float"
+    ],
+    "setUblVersion": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "ublVersion",
+     "?string"
+    ]
+   }
+  },
+  "BillResult": {
+   "class": "CPEForge\\Model\\Response\\BillResult",
+   "is_a": [
+    "CPEForge\\Model\\Response\\BillResult",
+    "CPEForge\\Model\\Response\\BaseResult"
+   ],
+   "setters": {
+    "setCdrResponse": [
+     "CPEForge\\Model\\Response\\BillResult",
+     "cdrResponse",
+     "?CPEForge\\Model\\Response\\CdrResponse"
+    ],
+    "setCdrZip": [
+     "CPEForge\\Model\\Response\\BillResult",
+     "cdrZip",
+     "?string"
+    ],
+    "setError": [
+     "CPEForge\\Model\\Response\\BaseResult",
+     "error",
+     "?CPEForge\\Model\\Response\\Error"
+    ],
+    "setSuccess": [
+     "CPEForge\\Model\\Response\\BaseResult",
+     "success",
+     "?bool"
+    ]
+   }
+  },
+  "CdrResponse": {
+   "class": "CPEForge\\Model\\Response\\CdrResponse",
+   "is_a": [
+    "CPEForge\\Model\\Response\\CdrResponse"
+   ],
+   "setters": {
+    "setCode": [
+     "CPEForge\\Model\\Response\\CdrResponse",
+     "code",
+     "?string"
+    ],
+    "setDescription": [
+     "CPEForge\\Model\\Response\\CdrResponse",
+     "description",
+     "?string"
+    ],
+    "setId": [
+     "CPEForge\\Model\\Response\\CdrResponse",
+     "id",
+     "?string"
+    ],
+    "setNotes": [
+     "CPEForge\\Model\\Response\\CdrResponse",
+     "notes",
+     "?array"
+    ],
+    "setReference": [
+     "CPEForge\\Model\\Response\\CdrResponse",
+     "reference",
+     "?string"
+    ]
+   }
+  },
+  "Charge": {
+   "class": "CPEForge\\Model\\Sale\\Charge",
+   "is_a": [
+    "CPEForge\\Model\\Sale\\Charge"
+   ],
+   "setters": {
+    "setCodTipo": [
+     "CPEForge\\Model\\Sale\\Charge",
+     "codTipo",
+     "?string"
+    ],
+    "setFactor": [
+     "CPEForge\\Model\\Sale\\Charge",
+     "factor",
+     "?float"
+    ],
+    "setMonto": [
+     "CPEForge\\Model\\Sale\\Charge",
+     "monto",
+     "?float"
+    ],
+    "setMontoBase": [
+     "CPEForge\\Model\\Sale\\Charge",
+     "montoBase",
+     "?float"
+    ]
+   }
+  },
+  "Client": {
+   "class": "CPEForge\\Model\\Client\\Client",
+   "is_a": [
+    "CPEForge\\Model\\Client\\Client"
+   ],
+   "setters": {
+    "setAddress": [
+     "CPEForge\\Model\\Client\\Client",
+     "address",
+     "?CPEForge\\Model\\Company\\Address"
+    ],
+    "setEmail": [
+     "CPEForge\\Model\\Client\\Client",
+     "email",
+     "?string"
+    ],
+    "setNumDoc": [
+     "CPEForge\\Model\\Client\\Client",
+     "numDoc",
+     "?string"
+    ],
+    "setRznSocial": [
+     "CPEForge\\Model\\Client\\Client",
+     "rznSocial",
+     "?string"
+    ],
+    "setTelephone": [
+     "CPEForge\\Model\\Client\\Client",
+     "telephone",
+     "?string"
+    ],
+    "setTipoDoc": [
+     "CPEForge\\Model\\Client\\Client",
+     "tipoDoc",
+     "?string"
+    ]
+   }
+  },
+  "Company": {
+   "class": "CPEForge\\Model\\Company\\Company",
+   "is_a": [
+    "CPEForge\\Model\\Company\\Company"
+   ],
+   "setters": {
+    "setAddress": [
+     "CPEForge\\Model\\Company\\Company",
+     "address",
+     "?CPEForge\\Model\\Company\\Address"
+    ],
+    "setEmail": [
+     "CPEForge\\Model\\Company\\Company",
+     "email",
+     "?string"
+    ],
+    "setNombreComercial": [
+     "CPEForge\\Model\\Company\\Company",
+     "nombreComercial",
+     "?string"
+    ],
+    "setRazonSocial": [
+     "CPEForge\\Model\\Company\\Company",
+     "razonSocial",
+     "?string"
+    ],
+    "setRuc": [
+     "CPEForge\\Model\\Company\\Company",
+     "ruc",
+     "?string"
+    ],
+    "setTelephone": [
+     "CPEForge\\Model\\Company\\Company",
+     "telephone",
+     "?string"
+    ]
+   }
+  },
+  "Cuota": {
+   "class": "CPEForge\\Model\\Sale\\Cuota",
+   "is_a": [
+    "CPEForge\\Model\\Sale\\Cuota"
+   ],
+   "setters": {
+    "setFechaPago": [
+     "CPEForge\\Model\\Sale\\Cuota",
+     "fechaPago",
+     "?DateTimeInterface"
+    ],
+    "setMoneda": [
+     "CPEForge\\Model\\Sale\\Cuota",
+     "moneda",
+     "?string"
+    ],
+    "setMonto": [
+     "CPEForge\\Model\\Sale\\Cuota",
+     "monto",
+     "?float"
+    ]
+   }
+  },
+  "Despatch": {
+   "class": "CPEForge\\Model\\Despatch\\Despatch",
+   "is_a": [
+    "CPEForge\\Model\\Despatch\\Despatch",
+    "CPEForge\\Model\\DocumentInterface"
+   ],
+   "setters": {
+    "setAddDocs": [
+     "CPEForge\\Model\\Despatch\\Despatch",
+     "addDocs",
+     "?array"
+    ],
+    "setCompany": [
+     "CPEForge\\Model\\Despatch\\Despatch",
+     "company",
+     "?CPEForge\\Model\\Company\\Company"
+    ],
+    "setComprador": [
+     "CPEForge\\Model\\Despatch\\Despatch",
+     "comprador",
+     "?CPEForge\\Model\\Client\\Client"
+    ],
+    "setCorrelativo": [
+     "CPEForge\\Model\\Despatch\\Despatch",
+     "correlativo",
+     "?string"
+    ],
+    "setDestinatario": [
+     "CPEForge\\Model\\Despatch\\Despatch",
+     "destinatario",
+     "?CPEForge\\Model\\Client\\Client"
+    ],
+    "setDetails": [
+     "CPEForge\\Model\\Despatch\\Despatch",
+     "details",
+     "?array"
+    ],
+    "setDocBaja": [
+     "CPEForge\\Model\\Despatch\\Despatch",
+     "docBaja",
+     "?CPEForge\\Model\\Sale\\Document"
+    ],
+    "setEnvio": [
+     "CPEForge\\Model\\Despatch\\Despatch",
+     "envio",
+     "?CPEForge\\Model\\Despatch\\Shipment"
+    ],
+    "setFechaEmision": [
+     "CPEForge\\Model\\Despatch\\Despatch",
+     "fechaEmision",
+     "?DateTimeInterface"
+    ],
+    "setObservacion": [
+     "CPEForge\\Model\\Despatch\\Despatch",
+     "observacion",
+     "?string"
+    ],
+    "setRelDoc": [
+     "CPEForge\\Model\\Despatch\\Despatch",
+     "relDoc",
+     "?CPEForge\\Model\\Sale\\Document"
+    ],
+    "setSerie": [
+     "CPEForge\\Model\\Despatch\\Despatch",
+     "serie",
+     "?string"
+    ],
+    "setTercero": [
+     "CPEForge\\Model\\Despatch\\Despatch",
+     "tercero",
+     "?CPEForge\\Model\\Client\\Client"
+    ],
+    "setTipoDoc": [
+     "CPEForge\\Model\\Despatch\\Despatch",
+     "tipoDoc",
+     "?string"
+    ],
+    "setVersion": [
+     "CPEForge\\Model\\Despatch\\Despatch",
+     "version",
+     "?string"
+    ]
+   }
+  },
+  "DespatchDetail": {
+   "class": "CPEForge\\Model\\Despatch\\DespatchDetail",
+   "is_a": [
+    "CPEForge\\Model\\Despatch\\DespatchDetail"
+   ],
+   "setters": {
+    "setAtributos": [
+     "CPEForge\\Model\\Despatch\\DespatchDetail",
+     "atributos",
+     "?array"
+    ],
+    "setCantidad": [
+     "CPEForge\\Model\\Despatch\\DespatchDetail",
+     "cantidad",
+     "?float"
+    ],
+    "setCodProdSunat": [
+     "CPEForge\\Model\\Despatch\\DespatchDetail",
+     "codProdSunat",
+     "?string"
+    ],
+    "setCodigo": [
+     "CPEForge\\Model\\Despatch\\DespatchDetail",
+     "codigo",
+     "?string"
+    ],
+    "setDescripcion": [
+     "CPEForge\\Model\\Despatch\\DespatchDetail",
+     "descripcion",
+     "?string"
+    ],
+    "setUnidad": [
+     "CPEForge\\Model\\Despatch\\DespatchDetail",
+     "unidad",
+     "?string"
+    ]
+   }
+  },
+  "DetailAttribute": {
+   "class": "CPEForge\\Model\\Sale\\DetailAttribute",
+   "is_a": [
+    "CPEForge\\Model\\Sale\\DetailAttribute"
+   ],
+   "setters": {
+    "setCode": [
+     "CPEForge\\Model\\Sale\\DetailAttribute",
+     "code",
+     "?string"
+    ],
+    "setDuracion": [
+     "CPEForge\\Model\\Sale\\DetailAttribute",
+     "duracion",
+     "?int"
+    ],
+    "setFecFin": [
+     "CPEForge\\Model\\Sale\\DetailAttribute",
+     "fecFin",
+     "?DateTime"
+    ],
+    "setFecInicio": [
+     "CPEForge\\Model\\Sale\\DetailAttribute",
+     "fecInicio",
+     "?DateTime"
+    ],
+    "setName": [
+     "CPEForge\\Model\\Sale\\DetailAttribute",
+     "name",
+     "?string"
+    ],
+    "setValue": [
+     "CPEForge\\Model\\Sale\\DetailAttribute",
+     "value",
+     "?string"
+    ]
+   }
+  },
+  "Detraction": {
+   "class": "CPEForge\\Model\\Sale\\Detraction",
+   "is_a": [
+    "CPEForge\\Model\\Sale\\Detraction"
+   ],
+   "setters": {
+    "setCodBienDetraccion": [
+     "CPEForge\\Model\\Sale\\Detraction",
+     "codBienDetraccion",
+     "?string"
+    ],
+    "setCodMedioPago": [
+     "CPEForge\\Model\\Sale\\Detraction",
+     "codMedioPago",
+     "?string"
+    ],
+    "setCtaBanco": [
+     "CPEForge\\Model\\Sale\\Detraction",
+     "ctaBanco",
+     "?string"
+    ],
+    "setMount": [
+     "CPEForge\\Model\\Sale\\Detraction",
+     "mount",
+     "?float"
+    ],
+    "setPercent": [
+     "CPEForge\\Model\\Sale\\Detraction",
+     "percent",
+     "?float"
+    ],
+    "setValueRef": [
+     "CPEForge\\Model\\Sale\\Detraction",
+     "valueRef",
+     "?float"
+    ]
+   }
+  },
+  "Direction": {
+   "class": "CPEForge\\Model\\Despatch\\Direction",
+   "is_a": [
+    "CPEForge\\Model\\Despatch\\Direction"
+   ],
+   "setters": {
+    "setCodLocal": [
+     "CPEForge\\Model\\Despatch\\Direction",
+     "codLocal",
+     "?string"
+    ],
+    "setDireccion": [
+     "CPEForge\\Model\\Despatch\\Direction",
+     "direccion",
+     "?string"
+    ],
+    "setRuc": [
+     "CPEForge\\Model\\Despatch\\Direction",
+     "ruc",
+     "?string"
+    ],
+    "setUbigueo": [
+     "CPEForge\\Model\\Despatch\\Direction",
+     "ubigueo",
+     "?string"
+    ]
+   }
+  },
+  "Document": {
+   "class": "CPEForge\\Model\\Sale\\Document",
+   "is_a": [
+    "CPEForge\\Model\\Sale\\Document"
+   ],
+   "setters": {
+    "setNroDoc": [
+     "CPEForge\\Model\\Sale\\Document",
+     "nroDoc",
+     "?string"
+    ],
+    "setTipoDoc": [
+     "CPEForge\\Model\\Sale\\Document",
+     "tipoDoc",
+     "?string"
+    ]
+   }
+  },
+  "Driver": {
+   "class": "CPEForge\\Model\\Despatch\\Driver",
+   "is_a": [
+    "CPEForge\\Model\\Despatch\\Driver"
+   ],
+   "setters": {
+    "setApellidos": [
+     "CPEForge\\Model\\Despatch\\Driver",
+     "apellidos",
+     "?string"
+    ],
+    "setLicencia": [
+     "CPEForge\\Model\\Despatch\\Driver",
+     "licencia",
+     "?string"
+    ],
+    "setNombres": [
+     "CPEForge\\Model\\Despatch\\Driver",
+     "nombres",
+     "?string"
+    ],
+    "setNroDoc": [
+     "CPEForge\\Model\\Despatch\\Driver",
+     "nroDoc",
+     "?string"
+    ],
+    "setTipo": [
+     "CPEForge\\Model\\Despatch\\Driver",
+     "tipo",
+     "?string"
+    ],
+    "setTipoDoc": [
+     "CPEForge\\Model\\Despatch\\Driver",
+     "tipoDoc",
+     "?string"
+    ]
+   }
+  },
+  "EmbededDespatch": {
+   "class": "CPEForge\\Model\\Sale\\EmbededDespatch",
+   "is_a": [
+    "CPEForge\\Model\\Sale\\EmbededDespatch"
+   ],
+   "setters": {
+    "setLlegada": [
+     "CPEForge\\Model\\Sale\\EmbededDespatch",
+     "llegada",
+     "?CPEForge\\Model\\Despatch\\Direction"
+    ],
+    "setModTraslado": [
+     "CPEForge\\Model\\Sale\\EmbededDespatch",
+     "modTraslado",
+     "?string"
+    ],
+    "setNroLicencia": [
+     "CPEForge\\Model\\Sale\\EmbededDespatch",
+     "nroLicencia",
+     "?string"
+    ],
+    "setPartida": [
+     "CPEForge\\Model\\Sale\\EmbededDespatch",
+     "partida",
+     "?CPEForge\\Model\\Despatch\\Direction"
+    ],
+    "setPesoBruto": [
+     "CPEForge\\Model\\Sale\\EmbededDespatch",
+     "pesoBruto",
+     "?float"
+    ],
+    "setTranspCodeAuth": [
+     "CPEForge\\Model\\Sale\\EmbededDespatch",
+     "transpCodeAuth",
+     "?string"
+    ],
+    "setTranspMarca": [
+     "CPEForge\\Model\\Sale\\EmbededDespatch",
+     "transpMarca",
+     "?string"
+    ],
+    "setTranspPlaca": [
+     "CPEForge\\Model\\Sale\\EmbededDespatch",
+     "transpPlaca",
+     "?string"
+    ],
+    "setTransportista": [
+     "CPEForge\\Model\\Sale\\EmbededDespatch",
+     "transportista",
+     "?CPEForge\\Model\\Client\\Client"
+    ],
+    "setUndPesoBruto": [
+     "CPEForge\\Model\\Sale\\EmbededDespatch",
+     "undPesoBruto",
+     "?string"
+    ]
+   }
+  },
+  "Error": {
+   "class": "CPEForge\\Model\\Response\\Error",
+   "is_a": [
+    "CPEForge\\Model\\Response\\Error"
+   ],
+   "setters": {
+    "setCode": [
+     "CPEForge\\Model\\Response\\Error",
+     "code",
+     "?string"
+    ],
+    "setMessage": [
+     "CPEForge\\Model\\Response\\Error",
+     "message",
+     "?string"
+    ]
+   }
+  },
+  "Exchange": {
+   "class": "CPEForge\\Model\\Retention\\Exchange",
+   "is_a": [
+    "CPEForge\\Model\\Retention\\Exchange"
+   ],
+   "setters": {
+    "setFactor": [
+     "CPEForge\\Model\\Retention\\Exchange",
+     "factor",
+     "?float"
+    ],
+    "setFecha": [
+     "CPEForge\\Model\\Retention\\Exchange",
+     "fecha",
+     "?DateTimeInterface"
+    ],
+    "setMonedaObj": [
+     "CPEForge\\Model\\Retention\\Exchange",
+     "monedaObj",
+     "?string"
+    ],
+    "setMonedaRef": [
+     "CPEForge\\Model\\Retention\\Exchange",
+     "monedaRef",
+     "?string"
+    ]
+   }
+  },
+  "FormaPagoContado": {
+   "class": "CPEForge\\Model\\Sale\\FormaPagos\\FormaPagoContado",
+   "is_a": [
+    "CPEForge\\Model\\Sale\\FormaPagos\\FormaPagoContado",
+    "CPEForge\\Model\\Sale\\PaymentTerms"
+   ],
+   "setters": {
+    "setMoneda": [
+     "CPEForge\\Model\\Sale\\PaymentTerms",
+     "moneda",
+     "?string"
+    ],
+    "setMonto": [
+     "CPEForge\\Model\\Sale\\PaymentTerms",
+     "monto",
+     "?float"
+    ],
+    "setTipo": [
+     "CPEForge\\Model\\Sale\\PaymentTerms",
+     "tipo",
+     "?string"
+    ]
+   }
+  },
+  "FormaPagoCredito": {
+   "class": "CPEForge\\Model\\Sale\\FormaPagos\\FormaPagoCredito",
+   "is_a": [
+    "CPEForge\\Model\\Sale\\FormaPagos\\FormaPagoCredito",
+    "CPEForge\\Model\\Sale\\PaymentTerms"
+   ],
+   "setters": {
+    "setMoneda": [
+     "CPEForge\\Model\\Sale\\PaymentTerms",
+     "moneda",
+     "?string"
+    ],
+    "setMonto": [
+     "CPEForge\\Model\\Sale\\PaymentTerms",
+     "monto",
+     "?float"
+    ],
+    "setTipo": [
+     "CPEForge\\Model\\Sale\\PaymentTerms",
+     "tipo",
+     "?string"
+    ]
+   }
+  },
+  "Invoice": {
+   "class": "CPEForge\\Model\\Sale\\Invoice",
+   "is_a": [
+    "CPEForge\\Model\\Sale\\Invoice",
+    "CPEForge\\Model\\Sale\\BaseSale",
+    "CPEForge\\Model\\DocumentInterface"
+   ],
+   "setters": {
+    "setAnticipos": [
+     "CPEForge\\Model\\Sale\\Invoice",
+     "anticipos",
+     "?array"
+    ],
+    "setCargos": [
+     "CPEForge\\Model\\Sale\\Invoice",
+     "cargos",
+     "?array"
+    ],
+    "setClient": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "client",
+     "?CPEForge\\Model\\Client\\Client"
+    ],
+    "setCompany": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "company",
+     "?CPEForge\\Model\\Company\\Company"
+    ],
+    "setCompra": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "compra",
+     "?string"
+    ],
+    "setCorrelativo": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "correlativo",
+     "?string"
+    ],
+    "setCuotas": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "cuotas",
+     "?array"
+    ],
+    "setDescuentos": [
+     "CPEForge\\Model\\Sale\\Invoice",
+     "descuentos",
+     "?array"
+    ],
+    "setDetails": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "details",
+     "?array"
+    ],
+    "setDetraccion": [
+     "CPEForge\\Model\\Sale\\Invoice",
+     "detraccion",
+     "?CPEForge\\Model\\Sale\\Detraction"
+    ],
+    "setDireccionEntrega": [
+     "CPEForge\\Model\\Sale\\Invoice",
+     "direccionEntrega",
+     "?CPEForge\\Model\\Company\\Address"
+    ],
+    "setFecVencimiento": [
+     "CPEForge\\Model\\Sale\\Invoice",
+     "fecVencimiento",
+     "?DateTimeInterface"
+    ],
+    "setFechaEmision": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "fechaEmision",
+     "?DateTimeInterface"
+    ],
+    "setFormaPago": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "formaPago",
+     "?CPEForge\\Model\\Sale\\PaymentTerms"
+    ],
+    "setGuiaEmbebida": [
+     "CPEForge\\Model\\Sale\\Invoice",
+     "guiaEmbebida",
+     "?CPEForge\\Model\\Sale\\EmbededDespatch"
+    ],
+    "setGuias": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "guias",
+     "?array"
+    ],
+    "setIcbper": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "icbper",
+     "?float"
+    ],
+    "setLegends": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "legends",
+     "?array"
+    ],
+    "setMtoBaseIsc": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoBaseIsc",
+     "?float"
+    ],
+    "setMtoBaseIvap": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoBaseIvap",
+     "?float"
+    ],
+    "setMtoBaseOth": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoBaseOth",
+     "?float"
+    ],
+    "setMtoCargos": [
+     "CPEForge\\Model\\Sale\\Invoice",
+     "mtoCargos",
+     "?float"
+    ],
+    "setMtoDescuentos": [
+     "CPEForge\\Model\\Sale\\Invoice",
+     "mtoDescuentos",
+     "?float"
+    ],
+    "setMtoIGV": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoIGV",
+     "?float"
+    ],
+    "setMtoIGVGratuitas": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoIGVGratuitas",
+     "?float"
+    ],
+    "setMtoISC": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoISC",
+     "?float"
+    ],
+    "setMtoImpVenta": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoImpVenta",
+     "?float"
+    ],
+    "setMtoIvap": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoIvap",
+     "?float"
+    ],
+    "setMtoOperExoneradas": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoOperExoneradas",
+     "?float"
+    ],
+    "setMtoOperExportacion": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoOperExportacion",
+     "?float"
+    ],
+    "setMtoOperGratuitas": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoOperGratuitas",
+     "?float"
+    ],
+    "setMtoOperGravadas": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoOperGravadas",
+     "?float"
+    ],
+    "setMtoOperInafectas": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoOperInafectas",
+     "?float"
+    ],
+    "setMtoOtrosTributos": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoOtrosTributos",
+     "?float"
+    ],
+    "setObservacion": [
+     "CPEForge\\Model\\Sale\\Invoice",
+     "observacion",
+     "?string"
+    ],
+    "setPerception": [
+     "CPEForge\\Model\\Sale\\Invoice",
+     "perception",
+     "?CPEForge\\Model\\Sale\\SalePerception"
+    ],
+    "setRedondeo": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "redondeo",
+     "?float"
+    ],
+    "setRelDocs": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "relDocs",
+     "?array"
+    ],
+    "setSeller": [
+     "CPEForge\\Model\\Sale\\Invoice",
+     "seller",
+     "?CPEForge\\Model\\Client\\Client"
+    ],
+    "setSerie": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "serie",
+     "?string"
+    ],
+    "setSubTotal": [
+     "CPEForge\\Model\\Sale\\Invoice",
+     "subTotal",
+     "?float"
+    ],
+    "setSumDsctoGlobal": [
+     "CPEForge\\Model\\Sale\\Invoice",
+     "sumDsctoGlobal",
+     "?float"
+    ],
+    "setSumOtrosCargos": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "sumOtrosCargos",
+     "?float"
+    ],
+    "setSumOtrosDescuentos": [
+     "CPEForge\\Model\\Sale\\Invoice",
+     "sumOtrosDescuentos",
+     "?float"
+    ],
+    "setTipoDoc": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "tipoDoc",
+     "?string"
+    ],
+    "setTipoMoneda": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "tipoMoneda",
+     "?string"
+    ],
+    "setTipoOperacion": [
+     "CPEForge\\Model\\Sale\\Invoice",
+     "tipoOperacion",
+     "?string"
+    ],
+    "setTotalAnticipos": [
+     "CPEForge\\Model\\Sale\\Invoice",
+     "totalAnticipos",
+     "?float"
+    ],
+    "setTotalImpuestos": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "totalImpuestos",
+     "?float"
+    ],
+    "setUblVersion": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "ublVersion",
+     "?string"
+    ],
+    "setValorVenta": [
+     "CPEForge\\Model\\Sale\\Invoice",
+     "valorVenta",
+     "?float"
+    ]
+   }
+  },
+  "Legend": {
+   "class": "CPEForge\\Model\\Sale\\Legend",
+   "is_a": [
+    "CPEForge\\Model\\Sale\\Legend"
+   ],
+   "setters": {
+    "setCode": [
+     "CPEForge\\Model\\Sale\\Legend",
+     "code",
+     "?string"
+    ],
+    "setValue": [
+     "CPEForge\\Model\\Sale\\Legend",
+     "value",
+     "?string"
+    ]
+   }
+  },
+  "Note": {
+   "class": "CPEForge\\Model\\Sale\\Note",
+   "is_a": [
+    "CPEForge\\Model\\Sale\\Note",
+    "CPEForge\\Model\\Sale\\BaseSale",
+    "CPEForge\\Model\\DocumentInterface"
+   ],
+   "setters": {
+    "setClient": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "client",
+     "?CPEForge\\Model\\Client\\Client"
+    ],
+    "setCodMotivo": [
+     "CPEForge\\Model\\Sale\\Note",
+     "codMotivo",
+     "?string"
+    ],
+    "setCompany": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "company",
+     "?CPEForge\\Model\\Company\\Company"
+    ],
+    "setCompra": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "compra",
+     "?string"
+    ],
+    "setCorrelativo": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "correlativo",
+     "?string"
+    ],
+    "setCuotas": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "cuotas",
+     "?array"
+    ],
+    "setDesMotivo": [
+     "CPEForge\\Model\\Sale\\Note",
+     "desMotivo",
+     "?string"
+    ],
+    "setDetails": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "details",
+     "?array"
+    ],
+    "setFechaEmision": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "fechaEmision",
+     "?DateTimeInterface"
+    ],
+    "setFormaPago": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "formaPago",
+     "?CPEForge\\Model\\Sale\\PaymentTerms"
+    ],
+    "setGuias": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "guias",
+     "?array"
+    ],
+    "setIcbper": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "icbper",
+     "?float"
+    ],
+    "setLegends": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "legends",
+     "?array"
+    ],
+    "setMtoBaseIsc": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoBaseIsc",
+     "?float"
+    ],
+    "setMtoBaseIvap": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoBaseIvap",
+     "?float"
+    ],
+    "setMtoBaseOth": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoBaseOth",
+     "?float"
+    ],
+    "setMtoIGV": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoIGV",
+     "?float"
+    ],
+    "setMtoIGVGratuitas": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoIGVGratuitas",
+     "?float"
+    ],
+    "setMtoISC": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoISC",
+     "?float"
+    ],
+    "setMtoImpVenta": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoImpVenta",
+     "?float"
+    ],
+    "setMtoIvap": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoIvap",
+     "?float"
+    ],
+    "setMtoOperExoneradas": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoOperExoneradas",
+     "?float"
+    ],
+    "setMtoOperExportacion": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoOperExportacion",
+     "?float"
+    ],
+    "setMtoOperGratuitas": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoOperGratuitas",
+     "?float"
+    ],
+    "setMtoOperGravadas": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoOperGravadas",
+     "?float"
+    ],
+    "setMtoOperInafectas": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoOperInafectas",
+     "?float"
+    ],
+    "setMtoOtrosTributos": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "mtoOtrosTributos",
+     "?float"
+    ],
+    "setNumDocfectado": [
+     "CPEForge\\Model\\Sale\\Note",
+     "numDocfectado",
+     "?string"
+    ],
+    "setPerception": [
+     "CPEForge\\Model\\Sale\\Note",
+     "perception",
+     "?CPEForge\\Model\\Sale\\SalePerception"
+    ],
+    "setRedondeo": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "redondeo",
+     "?float"
+    ],
+    "setRelDocs": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "relDocs",
+     "?array"
+    ],
+    "setSerie": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "serie",
+     "?string"
+    ],
+    "setSubTotal": [
+     "CPEForge\\Model\\Sale\\Note",
+     "subTotal",
+     "?float"
+    ],
+    "setSumOtrosCargos": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "sumOtrosCargos",
+     "?float"
+    ],
+    "setTipDocAfectado": [
+     "CPEForge\\Model\\Sale\\Note",
+     "tipDocAfectado",
+     "?string"
+    ],
+    "setTipoDoc": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "tipoDoc",
+     "?string"
+    ],
+    "setTipoMoneda": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "tipoMoneda",
+     "?string"
+    ],
+    "setTotalImpuestos": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "totalImpuestos",
+     "?float"
+    ],
+    "setUblVersion": [
+     "CPEForge\\Model\\Sale\\BaseSale",
+     "ublVersion",
+     "?string"
+    ],
+    "setValorVenta": [
+     "CPEForge\\Model\\Sale\\Note",
+     "valorVenta",
+     "?float"
+    ]
+   }
+  },
+  "Payment": {
+   "class": "CPEForge\\Model\\Retention\\Payment",
+   "is_a": [
+    "CPEForge\\Model\\Retention\\Payment"
+   ],
+   "setters": {
+    "setFecha": [
+     "CPEForge\\Model\\Retention\\Payment",
+     "fecha",
+     "?DateTimeInterface"
+    ],
+    "setImporte": [
+     "CPEForge\\Model\\Retention\\Payment",
+     "importe",
+     "?float"
+    ],
+    "setMoneda": [
+     "CPEForge\\Model\\Retention\\Payment",
+     "moneda",
+     "?string"
+    ]
+   }
+  },
+  "PaymentTerms": {
+   "class": "CPEForge\\Model\\Sale\\PaymentTerms",
+   "is_a": [
+    "CPEForge\\Model\\Sale\\PaymentTerms"
+   ],
+   "setters": {
+    "setMoneda": [
+     "CPEForge\\Model\\Sale\\PaymentTerms",
+     "moneda",
+     "?string"
+    ],
+    "setMonto": [
+     "CPEForge\\Model\\Sale\\PaymentTerms",
+     "monto",
+     "?float"
+    ],
+    "setTipo": [
+     "CPEForge\\Model\\Sale\\PaymentTerms",
+     "tipo",
+     "?string"
+    ]
+   }
+  },
+  "Perception": {
+   "class": "CPEForge\\Model\\Perception\\Perception",
+   "is_a": [
+    "CPEForge\\Model\\Perception\\Perception",
+    "CPEForge\\Model\\DocumentInterface"
+   ],
+   "setters": {
+    "setCompany": [
+     "CPEForge\\Model\\Perception\\Perception",
+     "company",
+     "?CPEForge\\Model\\Company\\Company"
+    ],
+    "setCorrelativo": [
+     "CPEForge\\Model\\Perception\\Perception",
+     "correlativo",
+     "?string"
+    ],
+    "setDetails": [
+     "CPEForge\\Model\\Perception\\Perception",
+     "details",
+     "?array"
+    ],
+    "setFechaEmision": [
+     "CPEForge\\Model\\Perception\\Perception",
+     "fechaEmision",
+     "?DateTimeInterface"
+    ],
+    "setImpCobrado": [
+     "CPEForge\\Model\\Perception\\Perception",
+     "impCobrado",
+     "?float"
+    ],
+    "setImpPercibido": [
+     "CPEForge\\Model\\Perception\\Perception",
+     "impPercibido",
+     "?float"
+    ],
+    "setObservacion": [
+     "CPEForge\\Model\\Perception\\Perception",
+     "observacion",
+     "?string"
+    ],
+    "setProveedor": [
+     "CPEForge\\Model\\Perception\\Perception",
+     "proveedor",
+     "?CPEForge\\Model\\Client\\Client"
+    ],
+    "setRegimen": [
+     "CPEForge\\Model\\Perception\\Perception",
+     "regimen",
+     "?string"
+    ],
+    "setSerie": [
+     "CPEForge\\Model\\Perception\\Perception",
+     "serie",
+     "?string"
+    ],
+    "setTasa": [
+     "CPEForge\\Model\\Perception\\Perception",
+     "tasa",
+     "?float"
+    ]
+   }
+  },
+  "PerceptionDetail": {
+   "class": "CPEForge\\Model\\Perception\\PerceptionDetail",
+   "is_a": [
+    "CPEForge\\Model\\Perception\\PerceptionDetail"
+   ],
+   "setters": {
+    "setCobros": [
+     "CPEForge\\Model\\Perception\\PerceptionDetail",
+     "cobros",
+     "?array"
+    ],
+    "setFechaEmision": [
+     "CPEForge\\Model\\Perception\\PerceptionDetail",
+     "fechaEmision",
+     "?DateTimeInterface"
+    ],
+    "setFechaPercepcion": [
+     "CPEForge\\Model\\Perception\\PerceptionDetail",
+     "fechaPercepcion",
+     "?DateTimeInterface"
+    ],
+    "setImpCobrar": [
+     "CPEForge\\Model\\Perception\\PerceptionDetail",
+     "impCobrar",
+     "?float"
+    ],
+    "setImpPercibido": [
+     "CPEForge\\Model\\Perception\\PerceptionDetail",
+     "impPercibido",
+     "?float"
+    ],
+    "setImpTotal": [
+     "CPEForge\\Model\\Perception\\PerceptionDetail",
+     "impTotal",
+     "?float"
+    ],
+    "setMoneda": [
+     "CPEForge\\Model\\Perception\\PerceptionDetail",
+     "moneda",
+     "?string"
+    ],
+    "setNumDoc": [
+     "CPEForge\\Model\\Perception\\PerceptionDetail",
+     "numDoc",
+     "?string"
+    ],
+    "setTipoCambio": [
+     "CPEForge\\Model\\Perception\\PerceptionDetail",
+     "tipoCambio",
+     "?CPEForge\\Model\\Retention\\Exchange"
+    ],
+    "setTipoDoc": [
+     "CPEForge\\Model\\Perception\\PerceptionDetail",
+     "tipoDoc",
+     "?string"
+    ]
+   }
+  },
+  "Prepayment": {
+   "class": "CPEForge\\Model\\Sale\\Prepayment",
+   "is_a": [
+    "CPEForge\\Model\\Sale\\Prepayment"
+   ],
+   "setters": {
+    "setNroDocRel": [
+     "CPEForge\\Model\\Sale\\Prepayment",
+     "nroDocRel",
+     "?string"
+    ],
+    "setTipoDocRel": [
+     "CPEForge\\Model\\Sale\\Prepayment",
+     "tipoDocRel",
+     "?string"
+    ],
+    "setTotal": [
+     "CPEForge\\Model\\Sale\\Prepayment",
+     "total",
+     "?float"
+    ]
+   }
+  },
+  "Puerto": {
+   "class": "CPEForge\\Model\\Despatch\\Puerto",
+   "is_a": [
+    "CPEForge\\Model\\Despatch\\Puerto"
+   ],
+   "setters": {
+    "setCodigo": [
+     "CPEForge\\Model\\Despatch\\Puerto",
+     "codigo",
+     "?string"
+    ],
+    "setNombre": [
+     "CPEForge\\Model\\Despatch\\Puerto",
+     "nombre",
+     "?string"
+    ]
+   }
+  },
+  "Receipt": {
+   "class": "CPEForge\\Model\\Sale\\Receipt",
+   "is_a": [
+    "CPEForge\\Model\\Sale\\Receipt",
+    "CPEForge\\Model\\DocumentInterface"
+   ],
+   "setters": {
+    "setConcepto": [
+     "CPEForge\\Model\\Sale\\Receipt",
+     "concepto",
+     "?string"
+    ],
+    "setCorrelativo": [
+     "CPEForge\\Model\\Sale\\Receipt",
+     "correlativo",
+     "?string"
+    ],
+    "setFechaEmision": [
+     "CPEForge\\Model\\Sale\\Receipt",
+     "fechaEmision",
+     "?DateTimeInterface"
+    ],
+    "setMontoLetras": [
+     "CPEForge\\Model\\Sale\\Receipt",
+     "montoLetras",
+     "?string"
+    ],
+    "setPerson": [
+     "CPEForge\\Model\\Sale\\Receipt",
+     "person",
+     "?CPEForge\\Model\\Company\\Company"
+    ],
+    "setPorcentaje": [
+     "CPEForge\\Model\\Sale\\Receipt",
+     "porcentaje",
+     "?float"
+    ],
+    "setReceptor": [
+     "CPEForge\\Model\\Sale\\Receipt",
+     "receptor",
+     "?CPEForge\\Model\\Client\\Client"
+    ],
+    "setRetencion": [
+     "CPEForge\\Model\\Sale\\Receipt",
+     "retencion",
+     "?float"
+    ],
+    "setSerie": [
+     "CPEForge\\Model\\Sale\\Receipt",
+     "serie",
+     "?string"
+    ],
+    "setSubTotal": [
+     "CPEForge\\Model\\Sale\\Receipt",
+     "subTotal",
+     "?float"
+    ],
+    "setTotal": [
+     "CPEForge\\Model\\Sale\\Receipt",
+     "total",
+     "?float"
+    ]
+   }
+  },
+  "Retention": {
+   "class": "CPEForge\\Model\\Retention\\Retention",
+   "is_a": [
+    "CPEForge\\Model\\Retention\\Retention",
+    "CPEForge\\Model\\DocumentInterface"
+   ],
+   "setters": {
+    "setCompany": [
+     "CPEForge\\Model\\Retention\\Retention",
+     "company",
+     "?CPEForge\\Model\\Company\\Company"
+    ],
+    "setCorrelativo": [
+     "CPEForge\\Model\\Retention\\Retention",
+     "correlativo",
+     "?string"
+    ],
+    "setDetails": [
+     "CPEForge\\Model\\Retention\\Retention",
+     "details",
+     "?array"
+    ],
+    "setFechaEmision": [
+     "CPEForge\\Model\\Retention\\Retention",
+     "fechaEmision",
+     "?DateTimeInterface"
+    ],
+    "setImpPagado": [
+     "CPEForge\\Model\\Retention\\Retention",
+     "impPagado",
+     "?float"
+    ],
+    "setImpRetenido": [
+     "CPEForge\\Model\\Retention\\Retention",
+     "impRetenido",
+     "?float"
+    ],
+    "setObservacion": [
+     "CPEForge\\Model\\Retention\\Retention",
+     "observacion",
+     "?string"
+    ],
+    "setProveedor": [
+     "CPEForge\\Model\\Retention\\Retention",
+     "proveedor",
+     "?CPEForge\\Model\\Client\\Client"
+    ],
+    "setRegimen": [
+     "CPEForge\\Model\\Retention\\Retention",
+     "regimen",
+     "?string"
+    ],
+    "setSerie": [
+     "CPEForge\\Model\\Retention\\Retention",
+     "serie",
+     "?string"
+    ],
+    "setTasa": [
+     "CPEForge\\Model\\Retention\\Retention",
+     "tasa",
+     "?float"
+    ]
+   }
+  },
+  "RetentionDetail": {
+   "class": "CPEForge\\Model\\Retention\\RetentionDetail",
+   "is_a": [
+    "CPEForge\\Model\\Retention\\RetentionDetail"
+   ],
+   "setters": {
+    "setFechaEmision": [
+     "CPEForge\\Model\\Retention\\RetentionDetail",
+     "fechaEmision",
+     "?DateTimeInterface"
+    ],
+    "setFechaRetencion": [
+     "CPEForge\\Model\\Retention\\RetentionDetail",
+     "fechaRetencion",
+     "?DateTimeInterface"
+    ],
+    "setImpPagar": [
+     "CPEForge\\Model\\Retention\\RetentionDetail",
+     "impPagar",
+     "?float"
+    ],
+    "setImpRetenido": [
+     "CPEForge\\Model\\Retention\\RetentionDetail",
+     "impRetenido",
+     "?float"
+    ],
+    "setImpTotal": [
+     "CPEForge\\Model\\Retention\\RetentionDetail",
+     "impTotal",
+     "?float"
+    ],
+    "setMoneda": [
+     "CPEForge\\Model\\Retention\\RetentionDetail",
+     "moneda",
+     "?string"
+    ],
+    "setNumDoc": [
+     "CPEForge\\Model\\Retention\\RetentionDetail",
+     "numDoc",
+     "?string"
+    ],
+    "setPagos": [
+     "CPEForge\\Model\\Retention\\RetentionDetail",
+     "pagos",
+     "?array"
+    ],
+    "setTipoCambio": [
+     "CPEForge\\Model\\Retention\\RetentionDetail",
+     "tipoCambio",
+     "?CPEForge\\Model\\Retention\\Exchange"
+    ],
+    "setTipoDoc": [
+     "CPEForge\\Model\\Retention\\RetentionDetail",
+     "tipoDoc",
+     "?string"
+    ]
+   }
+  },
+  "Reversion": {
+   "class": "CPEForge\\Model\\Voided\\Reversion",
+   "is_a": [
+    "CPEForge\\Model\\Voided\\Reversion",
+    "CPEForge\\Model\\Voided\\Voided",
+    "CPEForge\\Model\\DocumentInterface"
+   ],
+   "setters": {
+    "setCompany": [
+     "CPEForge\\Model\\Voided\\Voided",
+     "company",
+     "?CPEForge\\Model\\Company\\Company"
+    ],
+    "setCorrelativo": [
+     "CPEForge\\Model\\Voided\\Voided",
+     "correlativo",
+     "?string"
+    ],
+    "setDetails": [
+     "CPEForge\\Model\\Voided\\Voided",
+     "details",
+     "?array"
+    ],
+    "setFecComunicacion": [
+     "CPEForge\\Model\\Voided\\Voided",
+     "fecComunicacion",
+     "?DateTimeInterface"
+    ],
+    "setFecGeneracion": [
+     "CPEForge\\Model\\Voided\\Voided",
+     "fecGeneracion",
+     "?DateTimeInterface"
+    ]
+   }
+  },
+  "SaleDetail": {
+   "class": "CPEForge\\Model\\Sale\\SaleDetail",
+   "is_a": [
+    "CPEForge\\Model\\Sale\\SaleDetail"
+   ],
+   "setters": {
+    "setAtributos": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "atributos",
+     "?array"
+    ],
+    "setCantidad": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "cantidad",
+     "?float"
+    ],
+    "setCargos": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "cargos",
+     "?array"
+    ],
+    "setCodProdGS1": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "codProdGS1",
+     "?string"
+    ],
+    "setCodProdSunat": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "codProdSunat",
+     "?string"
+    ],
+    "setCodProducto": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "codProducto",
+     "?string"
+    ],
+    "setDescripcion": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "descripcion",
+     "?string"
+    ],
+    "setDescuento": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "descuento",
+     "?float"
+    ],
+    "setDescuentos": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "descuentos",
+     "?array"
+    ],
+    "setFactorIcbper": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "factorIcbper",
+     "?float"
+    ],
+    "setIcbper": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "icbper",
+     "?float"
+    ],
+    "setIgv": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "igv",
+     "?float"
+    ],
+    "setIsc": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "isc",
+     "?float"
+    ],
+    "setMtoBaseIgv": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "mtoBaseIgv",
+     "?float"
+    ],
+    "setMtoBaseIsc": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "mtoBaseIsc",
+     "?float"
+    ],
+    "setMtoBaseOth": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "mtoBaseOth",
+     "?float"
+    ],
+    "setMtoPrecioUnitario": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "mtoPrecioUnitario",
+     "?float"
+    ],
+    "setMtoValorGratuito": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "mtoValorGratuito",
+     "?float"
+    ],
+    "setMtoValorUnitario": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "mtoValorUnitario",
+     "?float"
+    ],
+    "setMtoValorVenta": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "mtoValorVenta",
+     "?float"
+    ],
+    "setOtroTributo": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "otroTributo",
+     "?float"
+    ],
+    "setPorcentajeIgv": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "porcentajeIgv",
+     "?float"
+    ],
+    "setPorcentajeIsc": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "porcentajeIsc",
+     "?float"
+    ],
+    "setPorcentajeOth": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "porcentajeOth",
+     "?float"
+    ],
+    "setTipAfeIgv": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "tipAfeIgv",
+     "?string"
+    ],
+    "setTipSisIsc": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "tipSisIsc",
+     "?string"
+    ],
+    "setTotalImpuestos": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "totalImpuestos",
+     "?float"
+    ],
+    "setUnidad": [
+     "CPEForge\\Model\\Sale\\SaleDetail",
+     "unidad",
+     "?string"
+    ]
+   }
+  },
+  "SalePerception": {
+   "class": "CPEForge\\Model\\Sale\\SalePerception",
+   "is_a": [
+    "CPEForge\\Model\\Sale\\SalePerception"
+   ],
+   "setters": {
+    "setCodReg": [
+     "CPEForge\\Model\\Sale\\SalePerception",
+     "codReg",
+     "?string"
+    ],
+    "setMto": [
+     "CPEForge\\Model\\Sale\\SalePerception",
+     "mto",
+     "?float"
+    ],
+    "setMtoBase": [
+     "CPEForge\\Model\\Sale\\SalePerception",
+     "mtoBase",
+     "?float"
+    ],
+    "setMtoTotal": [
+     "CPEForge\\Model\\Sale\\SalePerception",
+     "mtoTotal",
+     "?float"
+    ],
+    "setPorcentaje": [
+     "CPEForge\\Model\\Sale\\SalePerception",
+     "porcentaje",
+     "?float"
+    ]
+   }
+  },
+  "Shipment": {
+   "class": "CPEForge\\Model\\Despatch\\Shipment",
+   "is_a": [
+    "CPEForge\\Model\\Despatch\\Shipment"
+   ],
+   "setters": {
+    "setAeropuerto": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "aeropuerto",
+     "?CPEForge\\Model\\Despatch\\Puerto"
+    ],
+    "setChoferes": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "choferes",
+     "?array"
+    ],
+    "setCodPuerto": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "codPuerto",
+     "?string"
+    ],
+    "setCodTraslado": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "codTraslado",
+     "?string"
+    ],
+    "setContenedores": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "contenedores",
+     "?array"
+    ],
+    "setDesTraslado": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "desTraslado",
+     "?string"
+    ],
+    "setFecEntregaBienes": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "fecEntregaBienes",
+     "?DateTime"
+    ],
+    "setFecTraslado": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "fecTraslado",
+     "?DateTime"
+    ],
+    "setIndTransbordo": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "indTransbordo",
+     "?bool"
+    ],
+    "setIndicadores": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "indicadores",
+     "?array"
+    ],
+    "setLlegada": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "llegada",
+     "?CPEForge\\Model\\Despatch\\Direction"
+    ],
+    "setModTraslado": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "modTraslado",
+     "?string"
+    ],
+    "setNumBultos": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "numBultos",
+     "?int"
+    ],
+    "setNumContenedor": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "numContenedor",
+     "?string"
+    ],
+    "setPartida": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "partida",
+     "?CPEForge\\Model\\Despatch\\Direction"
+    ],
+    "setPesoItems": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "pesoItems",
+     "?float"
+    ],
+    "setPesoTotal": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "pesoTotal",
+     "?float"
+    ],
+    "setPuerto": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "puerto",
+     "?CPEForge\\Model\\Despatch\\Puerto"
+    ],
+    "setSustentoPeso": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "sustentoPeso",
+     "?string"
+    ],
+    "setTransportista": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "transportista",
+     "?CPEForge\\Model\\Despatch\\Transportist"
+    ],
+    "setUndPesoTotal": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "undPesoTotal",
+     "?string"
+    ],
+    "setVehiculo": [
+     "CPEForge\\Model\\Despatch\\Shipment",
+     "vehiculo",
+     "?CPEForge\\Model\\Despatch\\Vehicle"
+    ]
+   }
+  },
+  "StatusCdrResult": {
+   "class": "CPEForge\\Model\\Response\\StatusCdrResult",
+   "is_a": [
+    "CPEForge\\Model\\Response\\StatusCdrResult",
+    "CPEForge\\Model\\Response\\BillResult",
+    "CPEForge\\Model\\Response\\BaseResult"
+   ],
+   "setters": {
+    "setCdrResponse": [
+     "CPEForge\\Model\\Response\\BillResult",
+     "cdrResponse",
+     "?CPEForge\\Model\\Response\\CdrResponse"
+    ],
+    "setCdrZip": [
+     "CPEForge\\Model\\Response\\BillResult",
+     "cdrZip",
+     "?string"
+    ],
+    "setCode": [
+     "CPEForge\\Model\\Response\\StatusCdrResult",
+     "code",
+     "?string"
+    ],
+    "setError": [
+     "CPEForge\\Model\\Response\\BaseResult",
+     "error",
+     "?CPEForge\\Model\\Response\\Error"
+    ],
+    "setMessage": [
+     "CPEForge\\Model\\Response\\StatusCdrResult",
+     "message",
+     "?string"
+    ],
+    "setSuccess": [
+     "CPEForge\\Model\\Response\\BaseResult",
+     "success",
+     "?bool"
+    ]
+   }
+  },
+  "StatusResult": {
+   "class": "CPEForge\\Model\\Response\\StatusResult",
+   "is_a": [
+    "CPEForge\\Model\\Response\\StatusResult",
+    "CPEForge\\Model\\Response\\BillResult",
+    "CPEForge\\Model\\Response\\BaseResult"
+   ],
+   "setters": {
+    "setCdrResponse": [
+     "CPEForge\\Model\\Response\\BillResult",
+     "cdrResponse",
+     "?CPEForge\\Model\\Response\\CdrResponse"
+    ],
+    "setCdrZip": [
+     "CPEForge\\Model\\Response\\BillResult",
+     "cdrZip",
+     "?string"
+    ],
+    "setCode": [
+     "CPEForge\\Model\\Response\\StatusResult",
+     "code",
+     "?string"
+    ],
+    "setError": [
+     "CPEForge\\Model\\Response\\BaseResult",
+     "error",
+     "?CPEForge\\Model\\Response\\Error"
+    ],
+    "setSuccess": [
+     "CPEForge\\Model\\Response\\BaseResult",
+     "success",
+     "?bool"
+    ]
+   }
+  },
+  "Summary": {
+   "class": "CPEForge\\Model\\Summary\\Summary",
+   "is_a": [
+    "CPEForge\\Model\\Summary\\Summary",
+    "CPEForge\\Model\\DocumentInterface"
+   ],
+   "setters": {
+    "setCompany": [
+     "CPEForge\\Model\\Summary\\Summary",
+     "company",
+     "?CPEForge\\Model\\Company\\Company"
+    ],
+    "setCorrelativo": [
+     "CPEForge\\Model\\Summary\\Summary",
+     "correlativo",
+     "?string"
+    ],
+    "setDetails": [
+     "CPEForge\\Model\\Summary\\Summary",
+     "details",
+     "?array"
+    ],
+    "setFecGeneracion": [
+     "CPEForge\\Model\\Summary\\Summary",
+     "fecGeneracion",
+     "?DateTimeInterface"
+    ],
+    "setFecResumen": [
+     "CPEForge\\Model\\Summary\\Summary",
+     "fecResumen",
+     "?DateTimeInterface"
+    ],
+    "setMoneda": [
+     "CPEForge\\Model\\Summary\\Summary",
+     "moneda",
+     "?string"
+    ]
+   }
+  },
+  "SummaryDetail": {
+   "class": "CPEForge\\Model\\Summary\\SummaryDetail",
+   "is_a": [
+    "CPEForge\\Model\\Summary\\SummaryDetail"
+   ],
+   "setters": {
+    "setClienteNro": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "clienteNro",
+     "?string"
+    ],
+    "setClienteTipo": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "clienteTipo",
+     "?string"
+    ],
+    "setDocReferencia": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "docReferencia",
+     "?CPEForge\\Model\\Sale\\Document"
+    ],
+    "setEstado": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "estado",
+     "?string"
+    ],
+    "setMtoIGV": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "mtoIGV",
+     "?float"
+    ],
+    "setMtoISC": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "mtoISC",
+     "?float"
+    ],
+    "setMtoIcbper": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "mtoIcbper",
+     "?float"
+    ],
+    "setMtoIvap": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "mtoIvap",
+     "?float"
+    ],
+    "setMtoOperExoneradas": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "mtoOperExoneradas",
+     "?float"
+    ],
+    "setMtoOperExportacion": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "mtoOperExportacion",
+     "?float"
+    ],
+    "setMtoOperGratuitas": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "mtoOperGratuitas",
+     "?float"
+    ],
+    "setMtoOperGravadas": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "mtoOperGravadas",
+     "?float"
+    ],
+    "setMtoOperInafectas": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "mtoOperInafectas",
+     "?float"
+    ],
+    "setMtoOtrosCargos": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "mtoOtrosCargos",
+     "?float"
+    ],
+    "setMtoOtrosTributos": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "mtoOtrosTributos",
+     "?float"
+    ],
+    "setPercepcion": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "percepcion",
+     "?CPEForge\\Model\\Summary\\SummaryPerception"
+    ],
+    "setPorcentajeIgv": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "porcentajeIgv",
+     "?float"
+    ],
+    "setSerieNro": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "serieNro",
+     "?string"
+    ],
+    "setTipoDoc": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "tipoDoc",
+     "?string"
+    ],
+    "setTotal": [
+     "CPEForge\\Model\\Summary\\SummaryDetail",
+     "total",
+     "?float"
+    ]
+   }
+  },
+  "SummaryPerception": {
+   "class": "CPEForge\\Model\\Summary\\SummaryPerception",
+   "is_a": [
+    "CPEForge\\Model\\Summary\\SummaryPerception"
+   ],
+   "setters": {
+    "setCodReg": [
+     "CPEForge\\Model\\Summary\\SummaryPerception",
+     "codReg",
+     "?string"
+    ],
+    "setMto": [
+     "CPEForge\\Model\\Summary\\SummaryPerception",
+     "mto",
+     "?float"
+    ],
+    "setMtoBase": [
+     "CPEForge\\Model\\Summary\\SummaryPerception",
+     "mtoBase",
+     "?float"
+    ],
+    "setMtoTotal": [
+     "CPEForge\\Model\\Summary\\SummaryPerception",
+     "mtoTotal",
+     "?float"
+    ],
+    "setTasa": [
+     "CPEForge\\Model\\Summary\\SummaryPerception",
+     "tasa",
+     "?float"
+    ]
+   }
+  },
+  "SummaryResult": {
+   "class": "CPEForge\\Model\\Response\\SummaryResult",
+   "is_a": [
+    "CPEForge\\Model\\Response\\SummaryResult",
+    "CPEForge\\Model\\Response\\BaseResult"
+   ],
+   "setters": {
+    "setError": [
+     "CPEForge\\Model\\Response\\BaseResult",
+     "error",
+     "?CPEForge\\Model\\Response\\Error"
+    ],
+    "setSuccess": [
+     "CPEForge\\Model\\Response\\BaseResult",
+     "success",
+     "?bool"
+    ],
+    "setTicket": [
+     "CPEForge\\Model\\Response\\SummaryResult",
+     "ticket",
+     "?string"
+    ]
+   }
+  },
+  "Transportist": {
+   "class": "CPEForge\\Model\\Despatch\\Transportist",
+   "is_a": [
+    "CPEForge\\Model\\Despatch\\Transportist"
+   ],
+   "setters": {
+    "setChoferDoc": [
+     "CPEForge\\Model\\Despatch\\Transportist",
+     "choferDoc",
+     "?string"
+    ],
+    "setChoferTipoDoc": [
+     "CPEForge\\Model\\Despatch\\Transportist",
+     "choferTipoDoc",
+     "?string"
+    ],
+    "setNroMtc": [
+     "CPEForge\\Model\\Despatch\\Transportist",
+     "nroMtc",
+     "?string"
+    ],
+    "setNumDoc": [
+     "CPEForge\\Model\\Despatch\\Transportist",
+     "numDoc",
+     "?string"
+    ],
+    "setPlaca": [
+     "CPEForge\\Model\\Despatch\\Transportist",
+     "placa",
+     "?string"
+    ],
+    "setRznSocial": [
+     "CPEForge\\Model\\Despatch\\Transportist",
+     "rznSocial",
+     "?string"
+    ],
+    "setTipoDoc": [
+     "CPEForge\\Model\\Despatch\\Transportist",
+     "tipoDoc",
+     "?string"
+    ]
+   }
+  },
+  "Vehicle": {
+   "class": "CPEForge\\Model\\Despatch\\Vehicle",
+   "is_a": [
+    "CPEForge\\Model\\Despatch\\Vehicle"
+   ],
+   "setters": {
+    "setCodEmisor": [
+     "CPEForge\\Model\\Despatch\\Vehicle",
+     "codEmisor",
+     "?string"
+    ],
+    "setNroAutorizacion": [
+     "CPEForge\\Model\\Despatch\\Vehicle",
+     "nroAutorizacion",
+     "?string"
+    ],
+    "setNroCirculacion": [
+     "CPEForge\\Model\\Despatch\\Vehicle",
+     "nroCirculacion",
+     "?string"
+    ],
+    "setPlaca": [
+     "CPEForge\\Model\\Despatch\\Vehicle",
+     "placa",
+     "?string"
+    ],
+    "setSecundarios": [
+     "CPEForge\\Model\\Despatch\\Vehicle",
+     "secundarios",
+     "?array"
+    ]
+   }
+  },
+  "Voided": {
+   "class": "CPEForge\\Model\\Voided\\Voided",
+   "is_a": [
+    "CPEForge\\Model\\Voided\\Voided",
+    "CPEForge\\Model\\DocumentInterface"
+   ],
+   "setters": {
+    "setCompany": [
+     "CPEForge\\Model\\Voided\\Voided",
+     "company",
+     "?CPEForge\\Model\\Company\\Company"
+    ],
+    "setCorrelativo": [
+     "CPEForge\\Model\\Voided\\Voided",
+     "correlativo",
+     "?string"
+    ],
+    "setDetails": [
+     "CPEForge\\Model\\Voided\\Voided",
+     "details",
+     "?array"
+    ],
+    "setFecComunicacion": [
+     "CPEForge\\Model\\Voided\\Voided",
+     "fecComunicacion",
+     "?DateTimeInterface"
+    ],
+    "setFecGeneracion": [
+     "CPEForge\\Model\\Voided\\Voided",
+     "fecGeneracion",
+     "?DateTimeInterface"
+    ]
+   }
+  },
+  "VoidedDetail": {
+   "class": "CPEForge\\Model\\Voided\\VoidedDetail",
+   "is_a": [
+    "CPEForge\\Model\\Voided\\VoidedDetail"
+   ],
+   "setters": {
+    "setCorrelativo": [
+     "CPEForge\\Model\\Voided\\VoidedDetail",
+     "correlativo",
+     "?string"
+    ],
+    "setDesMotivoBaja": [
+     "CPEForge\\Model\\Voided\\VoidedDetail",
+     "desMotivoBaja",
+     "?string"
+    ],
+    "setSerie": [
+     "CPEForge\\Model\\Voided\\VoidedDetail",
+     "serie",
+     "?string"
+    ],
+    "setTipoDoc": [
+     "CPEForge\\Model\\Voided\\VoidedDetail",
+     "tipoDoc",
+     "?string"
+    ]
+   }
+  }
+ },
+ "source": "tests/reference/core/inventory.json (reflexión de la referencia)"
+}

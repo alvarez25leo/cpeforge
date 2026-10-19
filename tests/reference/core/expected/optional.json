@@ -1,0 +1,167 @@
+{
+    "generator": "oracle/php/core/run_cases.php",
+    "reference": {
+        "tag": "v5.3.0",
+        "commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+    },
+    "reference_version": "8.4.17",
+    "timezone_db": "2025.2",
+    "cases_file": "optional.json",
+    "results": {
+        "optional-unset": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Legend",
+                "code": null,
+                "value": null
+            }
+        },
+        "optional-null": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Legend",
+                "code": null,
+                "value": null
+            }
+        },
+        "optional-empty-string": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Legend",
+                "code": "",
+                "value": ""
+            }
+        },
+        "optional-zero-amount": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Prepayment",
+                "nroDocRel": null,
+                "tipoDocRel": null,
+                "total": {
+                    "$float": "0.0"
+                }
+            }
+        },
+        "optional-zero-scale-amount": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Prepayment",
+                "nroDocRel": null,
+                "tipoDocRel": null,
+                "total": {
+                    "$float": "0.0"
+                }
+            }
+        },
+        "optional-null-list": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Summary",
+                "company": null,
+                "correlativo": null,
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": null,
+                "moneda": "PEN"
+            }
+        },
+        "optional-empty-list": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Summary",
+                "company": null,
+                "correlativo": null,
+                "details": [],
+                "fecGeneracion": null,
+                "fecResumen": null,
+                "moneda": "PEN"
+            }
+        },
+        "optional-false": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Shipment",
+                "aeropuerto": null,
+                "choferes": null,
+                "codPuerto": null,
+                "codTraslado": null,
+                "contenedores": null,
+                "desTraslado": null,
+                "fecEntregaBienes": null,
+                "fecTraslado": null,
+                "indicadores": null,
+                "llegada": null,
+                "modTraslado": null,
+                "numBultos": null,
+                "numContenedor": null,
+                "partida": null,
+                "pesoItems": null,
+                "pesoTotal": null,
+                "puerto": null,
+                "sustentoPeso": null,
+                "transportista": null,
+                "undPesoTotal": null,
+                "vehiculo": null,
+                "indTransbordo": false
+            }
+        },
+        "optional-null-object": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Invoice",
+                "anticipos": null,
+                "cargos": null,
+                "client": null,
+                "company": null,
+                "compra": null,
+                "correlativo": null,
+                "cuotas": null,
+                "descuentos": null,
+                "details": null,
+                "detraccion": null,
+                "direccionEntrega": null,
+                "fecVencimiento": null,
+                "fechaEmision": null,
+                "formaPago": null,
+                "guiaEmbebida": null,
+                "guias": null,
+                "icbper": null,
+                "legends": null,
+                "mtoBaseIsc": null,
+                "mtoBaseIvap": null,
+                "mtoBaseOth": null,
+                "mtoCargos": null,
+                "mtoDescuentos": null,
+                "mtoIGV": null,
+                "mtoIGVGratuitas": null,
+                "mtoISC": null,
+                "mtoImpVenta": null,
+                "mtoIvap": null,
+                "mtoOperExoneradas": null,
+                "mtoOperExportacion": null,
+                "mtoOperGratuitas": null,
+                "mtoOperGravadas": null,
+                "mtoOperInafectas": null,
+                "mtoOtrosTributos": null,
+                "observacion": null,
+                "perception": null,
+                "redondeo": null,
+                "relDocs": null,
+                "seller": null,
+                "serie": null,
+                "subTotal": null,
+                "sumDsctoGlobal": null,
+                "sumOtrosCargos": null,
+                "sumOtrosDescuentos": null,
+                "tipoDoc": null,
+                "tipoMoneda": null,
+                "tipoOperacion": null,
+                "totalAnticipos": null,
+                "totalImpuestos": null,
+                "ublVersion": "2.0",
+                "valorVenta": null
+            }
+        }
+    }
+}

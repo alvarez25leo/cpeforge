@@ -1,0 +1,3170 @@
+{
+    "generator": "oracle/php/xml/filters.php",
+    "reference_version": "8.4.17",
+    "results": [
+        {
+            "input": {
+                "fn": "print",
+                "value": null
+            },
+            "output": "",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": null
+            },
+            "output": "0.00",
+            "deprecations": [
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": null,
+                "decimals": 0
+            },
+            "output": "0",
+            "deprecations": [
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": null,
+                "decimals": 3
+            },
+            "output": "0.000",
+            "deprecations": [
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": null,
+                "decimals": 6
+            },
+            "output": "0.000000",
+            "deprecations": [
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": null,
+                "decimals": 5
+            },
+            "output": null,
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": null,
+                "decimals": 10
+            },
+            "output": null,
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "0"
+                }
+            },
+            "output": "0",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0"
+                }
+            },
+            "output": "0.00",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0"
+                },
+                "decimals": 0
+            },
+            "output": "0",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0"
+                },
+                "decimals": 3
+            },
+            "output": "0.000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0"
+                },
+                "decimals": 6
+            },
+            "output": "0.000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "0"
+                },
+                "decimals": 5
+            },
+            "output": "0",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "0"
+                },
+                "decimals": 10
+            },
+            "output": "0",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "-0.00"
+                }
+            },
+            "output": "-0",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "-0.00"
+                }
+            },
+            "output": "0.00",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "-0.00"
+                },
+                "decimals": 0
+            },
+            "output": "0",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "-0.00"
+                },
+                "decimals": 3
+            },
+            "output": "0.000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "-0.00"
+                },
+                "decimals": 6
+            },
+            "output": "0.000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "-0.00"
+                },
+                "decimals": 5
+            },
+            "output": "-0",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "-0.00"
+                },
+                "decimals": 10
+            },
+            "output": "-0",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "0.004"
+                }
+            },
+            "output": "0.004",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.004"
+                }
+            },
+            "output": "0.00",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.004"
+                },
+                "decimals": 0
+            },
+            "output": "0",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.004"
+                },
+                "decimals": 3
+            },
+            "output": "0.004",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.004"
+                },
+                "decimals": 6
+            },
+            "output": "0.004000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "0.004"
+                },
+                "decimals": 5
+            },
+            "output": "0.004",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "0.004"
+                },
+                "decimals": 10
+            },
+            "output": "0.004",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "-0.004"
+                }
+            },
+            "output": "-0.004",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "-0.004"
+                }
+            },
+            "output": "0.00",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "-0.004"
+                },
+                "decimals": 0
+            },
+            "output": "0",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "-0.004"
+                },
+                "decimals": 3
+            },
+            "output": "-0.004",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "-0.004"
+                },
+                "decimals": 6
+            },
+            "output": "-0.004000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "-0.004"
+                },
+                "decimals": 5
+            },
+            "output": "-0.004",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "-0.004"
+                },
+                "decimals": 10
+            },
+            "output": "-0.004",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "-0.005"
+                }
+            },
+            "output": "-0.005",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "-0.005"
+                }
+            },
+            "output": "-0.01",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "-0.005"
+                },
+                "decimals": 0
+            },
+            "output": "0",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "-0.005"
+                },
+                "decimals": 3
+            },
+            "output": "-0.005",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "-0.005"
+                },
+                "decimals": 6
+            },
+            "output": "-0.005000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "-0.005"
+                },
+                "decimals": 5
+            },
+            "output": "-0.005",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "-0.005"
+                },
+                "decimals": 10
+            },
+            "output": "-0.005",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "0.005"
+                }
+            },
+            "output": "0.005",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.005"
+                }
+            },
+            "output": "0.01",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.005"
+                },
+                "decimals": 0
+            },
+            "output": "0",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.005"
+                },
+                "decimals": 3
+            },
+            "output": "0.005",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.005"
+                },
+                "decimals": 6
+            },
+            "output": "0.005000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "0.005"
+                },
+                "decimals": 5
+            },
+            "output": "0.005",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "0.005"
+                },
+                "decimals": 10
+            },
+            "output": "0.005",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "1.005"
+                }
+            },
+            "output": "1.005",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1.005"
+                }
+            },
+            "output": "1.01",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1.005"
+                },
+                "decimals": 0
+            },
+            "output": "1",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1.005"
+                },
+                "decimals": 3
+            },
+            "output": "1.005",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1.005"
+                },
+                "decimals": 6
+            },
+            "output": "1.005000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "1.005"
+                },
+                "decimals": 5
+            },
+            "output": "1.005",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "1.005"
+                },
+                "decimals": 10
+            },
+            "output": "1.005",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "2.675"
+                }
+            },
+            "output": "2.675",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "2.675"
+                }
+            },
+            "output": "2.68",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "2.675"
+                },
+                "decimals": 0
+            },
+            "output": "3",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "2.675"
+                },
+                "decimals": 3
+            },
+            "output": "2.675",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "2.675"
+                },
+                "decimals": 6
+            },
+            "output": "2.675000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "2.675"
+                },
+                "decimals": 5
+            },
+            "output": "2.675",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "2.675"
+                },
+                "decimals": 10
+            },
+            "output": "2.675",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "0.285"
+                }
+            },
+            "output": "0.285",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.285"
+                }
+            },
+            "output": "0.29",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.285"
+                },
+                "decimals": 0
+            },
+            "output": "0",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.285"
+                },
+                "decimals": 3
+            },
+            "output": "0.285",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.285"
+                },
+                "decimals": 6
+            },
+            "output": "0.285000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "0.285"
+                },
+                "decimals": 5
+            },
+            "output": "0.285",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "0.285"
+                },
+                "decimals": 10
+            },
+            "output": "0.285",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "1.0049999999999999"
+                }
+            },
+            "output": "1.005",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1.0049999999999999"
+                }
+            },
+            "output": "1.01",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1.0049999999999999"
+                },
+                "decimals": 0
+            },
+            "output": "1",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1.0049999999999999"
+                },
+                "decimals": 3
+            },
+            "output": "1.005",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1.0049999999999999"
+                },
+                "decimals": 6
+            },
+            "output": "1.005000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "1.0049999999999999"
+                },
+                "decimals": 5
+            },
+            "output": "1.005",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "1.0049999999999999"
+                },
+                "decimals": 10
+            },
+            "output": "1.005",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "10.4"
+                }
+            },
+            "output": "10.4",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "10.4"
+                }
+            },
+            "output": "10.40",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "10.4"
+                },
+                "decimals": 0
+            },
+            "output": "10",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "10.4"
+                },
+                "decimals": 3
+            },
+            "output": "10.400",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "10.4"
+                },
+                "decimals": 6
+            },
+            "output": "10.400000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "10.4"
+                },
+                "decimals": 5
+            },
+            "output": "10.4",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "10.4"
+                },
+                "decimals": 10
+            },
+            "output": "10.4",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "17.22111"
+                }
+            },
+            "output": "17.22111",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "17.22111"
+                }
+            },
+            "output": "17.22",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "17.22111"
+                },
+                "decimals": 0
+            },
+            "output": "17",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "17.22111"
+                },
+                "decimals": 3
+            },
+            "output": "17.221",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "17.22111"
+                },
+                "decimals": 6
+            },
+            "output": "17.221110",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "17.22111"
+                },
+                "decimals": 5
+            },
+            "output": "17.22111",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "17.22111"
+                },
+                "decimals": 10
+            },
+            "output": "17.22111",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "20.677722"
+                }
+            },
+            "output": "20.677722",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "20.677722"
+                }
+            },
+            "output": "20.68",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "20.677722"
+                },
+                "decimals": 0
+            },
+            "output": "21",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "20.677722"
+                },
+                "decimals": 3
+            },
+            "output": "20.678",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "20.677722"
+                },
+                "decimals": 6
+            },
+            "output": "20.677722",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "20.677722"
+                },
+                "decimals": 5
+            },
+            "output": "20.67772",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "20.677722"
+                },
+                "decimals": 10
+            },
+            "output": "20.677722",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "30.22"
+                }
+            },
+            "output": "30.22",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "30.22"
+                }
+            },
+            "output": "30.22",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "30.22"
+                },
+                "decimals": 0
+            },
+            "output": "30",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "30.22"
+                },
+                "decimals": 3
+            },
+            "output": "30.220",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "30.22"
+                },
+                "decimals": 6
+            },
+            "output": "30.220000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "30.22"
+                },
+                "decimals": 5
+            },
+            "output": "30.22",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "30.22"
+                },
+                "decimals": 10
+            },
+            "output": "30.22",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "1234567.891"
+                }
+            },
+            "output": "1234567.891",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1234567.891"
+                }
+            },
+            "output": "1234567.89",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1234567.891"
+                },
+                "decimals": 0
+            },
+            "output": "1234568",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1234567.891"
+                },
+                "decimals": 3
+            },
+            "output": "1234567.891",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1234567.891"
+                },
+                "decimals": 6
+            },
+            "output": "1234567.891000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "1234567.891"
+                },
+                "decimals": 5
+            },
+            "output": "1234567.891",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "1234567.891"
+                },
+                "decimals": 10
+            },
+            "output": "1234567.891",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "99999999999.995"
+                }
+            },
+            "output": "99999999999.995",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "99999999999.995"
+                }
+            },
+            "output": "100000000000.00",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "99999999999.995"
+                },
+                "decimals": 0
+            },
+            "output": "100000000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "99999999999.995"
+                },
+                "decimals": 3
+            },
+            "output": "99999999999.995",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "99999999999.995"
+                },
+                "decimals": 6
+            },
+            "output": "99999999999.994995",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "99999999999.995"
+                },
+                "decimals": 5
+            },
+            "output": "99999999999.995",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "99999999999.995"
+                },
+                "decimals": 10
+            },
+            "output": "99999999999.995",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "1e15"
+                }
+            },
+            "output": "1.0E+15",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1e15"
+                }
+            },
+            "output": "1000000000000000.00",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1e15"
+                },
+                "decimals": 0
+            },
+            "output": "1000000000000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1e15"
+                },
+                "decimals": 3
+            },
+            "output": "1000000000000000.000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1e15"
+                },
+                "decimals": 6
+            },
+            "output": "1000000000000000.000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "1e15"
+                },
+                "decimals": 5
+            },
+            "output": "1000000000000000.00000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "1e15"
+                },
+                "decimals": 10
+            },
+            "output": "1000000000000000.0000000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "1e14"
+                }
+            },
+            "output": "1.0E+14",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1e14"
+                }
+            },
+            "output": "100000000000000.00",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1e14"
+                },
+                "decimals": 0
+            },
+            "output": "100000000000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1e14"
+                },
+                "decimals": 3
+            },
+            "output": "100000000000000.000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1e14"
+                },
+                "decimals": 6
+            },
+            "output": "100000000000000.000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "1e14"
+                },
+                "decimals": 5
+            },
+            "output": "100000000000000.00000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "1e14"
+                },
+                "decimals": 10
+            },
+            "output": "100000000000000.0000000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "99999999999999"
+                }
+            },
+            "output": "99999999999999",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "99999999999999"
+                }
+            },
+            "output": "99999999999999.00",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "99999999999999"
+                },
+                "decimals": 0
+            },
+            "output": "99999999999999",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "99999999999999"
+                },
+                "decimals": 3
+            },
+            "output": "99999999999999.000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "99999999999999"
+                },
+                "decimals": 6
+            },
+            "output": "99999999999999.000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "99999999999999"
+                },
+                "decimals": 5
+            },
+            "output": "99999999999999",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "99999999999999"
+                },
+                "decimals": 10
+            },
+            "output": "99999999999999",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "123456789012345.67"
+                }
+            },
+            "output": "1.2345678901235E+14",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "123456789012345.67"
+                }
+            },
+            "output": "123456789012345.67",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "123456789012345.67"
+                },
+                "decimals": 0
+            },
+            "output": "123456789012346",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "123456789012345.67"
+                },
+                "decimals": 3
+            },
+            "output": "123456789012345.672",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "123456789012345.67"
+                },
+                "decimals": 6
+            },
+            "output": "123456789012345.671875",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "123456789012345.67"
+                },
+                "decimals": 5
+            },
+            "output": "123456789012345.67188",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "123456789012345.67"
+                },
+                "decimals": 10
+            },
+            "output": "123456789012345.6718750000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "0.1"
+                }
+            },
+            "output": "0.1",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.1"
+                }
+            },
+            "output": "0.10",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.1"
+                },
+                "decimals": 0
+            },
+            "output": "0",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.1"
+                },
+                "decimals": 3
+            },
+            "output": "0.100",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.1"
+                },
+                "decimals": 6
+            },
+            "output": "0.100000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "0.1"
+                },
+                "decimals": 5
+            },
+            "output": "0.1",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "0.1"
+                },
+                "decimals": 10
+            },
+            "output": "0.1",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "0.0001"
+                }
+            },
+            "output": "0.0001",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.0001"
+                }
+            },
+            "output": "0.00",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.0001"
+                },
+                "decimals": 0
+            },
+            "output": "0",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.0001"
+                },
+                "decimals": 3
+            },
+            "output": "0.000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.0001"
+                },
+                "decimals": 6
+            },
+            "output": "0.000100",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "0.0001"
+                },
+                "decimals": 5
+            },
+            "output": "0.0001",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "0.0001"
+                },
+                "decimals": 10
+            },
+            "output": "0.0001",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "0.00001"
+                }
+            },
+            "output": "1.0E-5",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.00001"
+                }
+            },
+            "output": "0.00",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.00001"
+                },
+                "decimals": 0
+            },
+            "output": "0",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.00001"
+                },
+                "decimals": 3
+            },
+            "output": "0.000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.00001"
+                },
+                "decimals": 6
+            },
+            "output": "0.000010",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "0.00001"
+                },
+                "decimals": 5
+            },
+            "output": "0.00001",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "0.00001"
+                },
+                "decimals": 10
+            },
+            "output": "0.0000100000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "1e-6"
+                }
+            },
+            "output": "1.0E-6",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1e-6"
+                }
+            },
+            "output": "0.00",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1e-6"
+                },
+                "decimals": 0
+            },
+            "output": "0",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1e-6"
+                },
+                "decimals": 3
+            },
+            "output": "0.000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1e-6"
+                },
+                "decimals": 6
+            },
+            "output": "0.000001",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "1e-6"
+                },
+                "decimals": 5
+            },
+            "output": "0.00000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "1e-6"
+                },
+                "decimals": 10
+            },
+            "output": "0.0000010000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "10.343434223423423"
+                }
+            },
+            "output": "10.343434223423",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "10.343434223423423"
+                }
+            },
+            "output": "10.34",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "10.343434223423423"
+                },
+                "decimals": 0
+            },
+            "output": "10",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "10.343434223423423"
+                },
+                "decimals": 3
+            },
+            "output": "10.343",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "10.343434223423423"
+                },
+                "decimals": 6
+            },
+            "output": "10.343434",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "10.343434223423423"
+                },
+                "decimals": 5
+            },
+            "output": "10.34343",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "10.343434223423423"
+                },
+                "decimals": 10
+            },
+            "output": "10.3434342234",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "432.23"
+                }
+            },
+            "output": "432.23",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "432.23"
+                }
+            },
+            "output": "432.23",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "432.23"
+                },
+                "decimals": 0
+            },
+            "output": "432",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "432.23"
+                },
+                "decimals": 3
+            },
+            "output": "432.230",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "432.23"
+                },
+                "decimals": 6
+            },
+            "output": "432.230000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "432.23"
+                },
+                "decimals": 5
+            },
+            "output": "432.23",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "432.23"
+                },
+                "decimals": 10
+            },
+            "output": "432.23",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "59.0"
+                }
+            },
+            "output": "59",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "59.0"
+                }
+            },
+            "output": "59.00",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "59.0"
+                },
+                "decimals": 0
+            },
+            "output": "59",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "59.0"
+                },
+                "decimals": 3
+            },
+            "output": "59.000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "59.0"
+                },
+                "decimals": 6
+            },
+            "output": "59.000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "59.0"
+                },
+                "decimals": 5
+            },
+            "output": "59",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "59.0"
+                },
+                "decimals": 10
+            },
+            "output": "59",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "0.123456789012345"
+                }
+            },
+            "output": "0.12345678901234",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.123456789012345"
+                }
+            },
+            "output": "0.12",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.123456789012345"
+                },
+                "decimals": 0
+            },
+            "output": "0",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.123456789012345"
+                },
+                "decimals": 3
+            },
+            "output": "0.123",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.123456789012345"
+                },
+                "decimals": 6
+            },
+            "output": "0.123457",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "0.123456789012345"
+                },
+                "decimals": 5
+            },
+            "output": "0.12346",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "0.123456789012345"
+                },
+                "decimals": 10
+            },
+            "output": "0.1234567890",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "123456789012345"
+                }
+            },
+            "output": "1.2345678901234E+14",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "123456789012345"
+                }
+            },
+            "output": "123456789012345.00",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "123456789012345"
+                },
+                "decimals": 0
+            },
+            "output": "123456789012345",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "123456789012345"
+                },
+                "decimals": 3
+            },
+            "output": "123456789012345.000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "123456789012345"
+                },
+                "decimals": 6
+            },
+            "output": "123456789012345.000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "123456789012345"
+                },
+                "decimals": 5
+            },
+            "output": "123456789012345.00000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "123456789012345"
+                },
+                "decimals": 10
+            },
+            "output": "123456789012345.0000000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "1.5"
+                }
+            },
+            "output": "1.5",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1.5"
+                }
+            },
+            "output": "1.50",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1.5"
+                },
+                "decimals": 0
+            },
+            "output": "2",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1.5"
+                },
+                "decimals": 3
+            },
+            "output": "1.500",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1.5"
+                },
+                "decimals": 6
+            },
+            "output": "1.500000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "1.5"
+                },
+                "decimals": 5
+            },
+            "output": "1.5",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "1.5"
+                },
+                "decimals": 10
+            },
+            "output": "1.5",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "2.5"
+                }
+            },
+            "output": "2.5",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "2.5"
+                }
+            },
+            "output": "2.50",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "2.5"
+                },
+                "decimals": 0
+            },
+            "output": "3",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "2.5"
+                },
+                "decimals": 3
+            },
+            "output": "2.500",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "2.5"
+                },
+                "decimals": 6
+            },
+            "output": "2.500000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "2.5"
+                },
+                "decimals": 5
+            },
+            "output": "2.5",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "2.5"
+                },
+                "decimals": 10
+            },
+            "output": "2.5",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "-1.5"
+                }
+            },
+            "output": "-1.5",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "-1.5"
+                }
+            },
+            "output": "-1.50",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "-1.5"
+                },
+                "decimals": 0
+            },
+            "output": "-2",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "-1.5"
+                },
+                "decimals": 3
+            },
+            "output": "-1.500",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "-1.5"
+                },
+                "decimals": 6
+            },
+            "output": "-1.500000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "-1.5"
+                },
+                "decimals": 5
+            },
+            "output": "-1.5",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "-1.5"
+                },
+                "decimals": 10
+            },
+            "output": "-1.5",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "1e20"
+                }
+            },
+            "output": "1.0E+20",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1e20"
+                }
+            },
+            "output": "100000000000000000000.00",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1e20"
+                },
+                "decimals": 0
+            },
+            "output": "100000000000000000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1e20"
+                },
+                "decimals": 3
+            },
+            "output": "100000000000000000000.000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "1e20"
+                },
+                "decimals": 6
+            },
+            "output": "100000000000000000000.000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "1e20"
+                },
+                "decimals": 5
+            },
+            "output": "100000000000000000000.00000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "1e20"
+                },
+                "decimals": 10
+            },
+            "output": "100000000000000000000.0000000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "0.30000000000000004"
+                }
+            },
+            "output": "0.3",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.30000000000000004"
+                }
+            },
+            "output": "0.30",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.30000000000000004"
+                },
+                "decimals": 0
+            },
+            "output": "0",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.30000000000000004"
+                },
+                "decimals": 3
+            },
+            "output": "0.300",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "0.30000000000000004"
+                },
+                "decimals": 6
+            },
+            "output": "0.300000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "0.30000000000000004"
+                },
+                "decimals": 5
+            },
+            "output": "0.3",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "0.30000000000000004"
+                },
+                "decimals": 10
+            },
+            "output": "0.3",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "999999999999999.5"
+                }
+            },
+            "output": "1.0E+15",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "999999999999999.5"
+                }
+            },
+            "output": "999999999999999.50",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "999999999999999.5"
+                },
+                "decimals": 0
+            },
+            "output": "1000000000000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "999999999999999.5"
+                },
+                "decimals": 3
+            },
+            "output": "999999999999999.500",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "999999999999999.5"
+                },
+                "decimals": 6
+            },
+            "output": "999999999999999.500000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "999999999999999.5"
+                },
+                "decimals": 5
+            },
+            "output": "999999999999999.50000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "999999999999999.5"
+                },
+                "decimals": 10
+            },
+            "output": "999999999999999.5000000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "3.7123456789"
+                }
+            },
+            "output": "3.7123456789",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "3.7123456789"
+                }
+            },
+            "output": "3.71",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "3.7123456789"
+                },
+                "decimals": 0
+            },
+            "output": "4",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "3.7123456789"
+                },
+                "decimals": 3
+            },
+            "output": "3.712",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "3.7123456789"
+                },
+                "decimals": 6
+            },
+            "output": "3.712346",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "3.7123456789"
+                },
+                "decimals": 5
+            },
+            "output": "3.71235",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "3.7123456789"
+                },
+                "decimals": 10
+            },
+            "output": "3.7123456789",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "print",
+                "value": {
+                    "$decimal": "12345678901234567.89"
+                }
+            },
+            "output": "1.2345678901235E+16",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "12345678901234567.89"
+                }
+            },
+            "output": "12345678901234568.00",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "12345678901234567.89"
+                },
+                "decimals": 0
+            },
+            "output": "12345678901234568",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "12345678901234567.89"
+                },
+                "decimals": 3
+            },
+            "output": "12345678901234568.000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format",
+                "value": {
+                    "$decimal": "12345678901234567.89"
+                },
+                "decimals": 6
+            },
+            "output": "12345678901234568.000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "12345678901234567.89"
+                },
+                "decimals": 5
+            },
+            "output": "12345678901234568.00000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "n_format_limit",
+                "value": {
+                    "$decimal": "12345678901234567.89"
+                },
+                "decimals": 10
+            },
+            "output": "12345678901234568.0000000000",
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo_afectacion",
+                "value": "10"
+            },
+            "output": {
+                "id": "1000",
+                "code": "VAT",
+                "name": "IGV"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo_afectacion",
+                "value": "11"
+            },
+            "output": {
+                "id": "9996",
+                "code": "FRE",
+                "name": "GRA"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo_afectacion",
+                "value": "17"
+            },
+            "output": {
+                "id": "1016",
+                "code": "VAT",
+                "name": "IVAP"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo_afectacion",
+                "value": "20"
+            },
+            "output": {
+                "id": "9997",
+                "code": "VAT",
+                "name": "EXO"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo_afectacion",
+                "value": "21"
+            },
+            "output": {
+                "id": "9996",
+                "code": "FRE",
+                "name": "GRA"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo_afectacion",
+                "value": "30"
+            },
+            "output": {
+                "id": "9998",
+                "code": "FRE",
+                "name": "INA"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo_afectacion",
+                "value": "40"
+            },
+            "output": {
+                "id": "9995",
+                "code": "FRE",
+                "name": "EXP"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo_afectacion",
+                "value": "99"
+            },
+            "output": {
+                "id": "9996",
+                "code": "FRE",
+                "name": "GRA"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo_afectacion",
+                "value": null
+            },
+            "output": {
+                "id": "9996",
+                "code": "FRE",
+                "name": "GRA"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo_afectacion",
+                "value": ""
+            },
+            "output": {
+                "id": "9996",
+                "code": "FRE",
+                "name": "GRA"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo_afectacion",
+                "value": "10abc"
+            },
+            "output": {
+                "id": "1000",
+                "code": "VAT",
+                "name": "IGV"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo_afectacion",
+                "value": " 20"
+            },
+            "output": {
+                "id": "9997",
+                "code": "VAT",
+                "name": "EXO"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo_afectacion",
+                "value": "x"
+            },
+            "output": {
+                "id": "9996",
+                "code": "FRE",
+                "name": "GRA"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo_afectacion",
+                "value": "1e1"
+            },
+            "output": {
+                "id": "1000",
+                "code": "VAT",
+                "name": "IGV"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo_afectacion",
+                "value": "40.9"
+            },
+            "output": {
+                "id": "9995",
+                "code": "FRE",
+                "name": "EXP"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo_afectacion",
+                "value": "-10"
+            },
+            "output": {
+                "id": "9996",
+                "code": "FRE",
+                "name": "GRA"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo",
+                "value": "1000"
+            },
+            "output": {
+                "id": "1000",
+                "code": "VAT",
+                "name": "IGV"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo",
+                "value": "1016"
+            },
+            "output": {
+                "id": "1016",
+                "code": "VAT",
+                "name": "IVAP"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo",
+                "value": "2000"
+            },
+            "output": {
+                "id": "2000",
+                "code": "EXC",
+                "name": "ISC"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo",
+                "value": "9995"
+            },
+            "output": {
+                "id": "9995",
+                "code": "FRE",
+                "name": "EXP"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo",
+                "value": "9996"
+            },
+            "output": {
+                "id": "9996",
+                "code": "FRE",
+                "name": "GRA"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo",
+                "value": "9997"
+            },
+            "output": {
+                "id": "9997",
+                "code": "VAT",
+                "name": "EXO"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo",
+                "value": "9998"
+            },
+            "output": {
+                "id": "9998",
+                "code": "FRE",
+                "name": "INA"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo",
+                "value": "9999"
+            },
+            "output": {
+                "id": "9999",
+                "code": "OTH",
+                "name": "OTROS"
+            },
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo",
+                "value": "2"
+            },
+            "output": null,
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo",
+                "value": "7152"
+            },
+            "output": null,
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo",
+                "value": null
+            },
+            "output": null,
+            "deprecations": []
+        },
+        {
+            "input": {
+                "fn": "tributo",
+                "value": ""
+            },
+            "output": null,
+            "deprecations": []
+        }
+    ]
+}

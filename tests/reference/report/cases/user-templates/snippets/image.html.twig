@@ -1,0 +1,7 @@
+{{ params.system.logo|image_b64 }}
+{{ params.user.gif|image_b64 }}
+{{ params.user.jpeg|image_b64 }}
+{{ params.user.svg|image_b64('svg+xml') }}
+{{ params.system.logo|image_b64('webp') }}
+{{ params.user.gif|image_b64('0') }}
+{{ params.user.empty|image_b64 }}

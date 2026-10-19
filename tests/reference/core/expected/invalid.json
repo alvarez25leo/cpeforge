@@ -1,0 +1,102 @@
+{
+    "generator": "oracle/php/core/run_cases.php",
+    "reference": {
+        "tag": "v5.3.0",
+        "commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+    },
+    "reference_version": "8.4.17",
+    "timezone_db": "2025.2",
+    "cases_file": "invalid.json",
+    "results": {
+        "invalid-string-into-float": {
+            "hydrate_error": {
+                "class": "TypeError",
+                "message": "CPEForge\\Model\\Sale\\Charge::setMonto(): Argument #1 ($monto) must be of type ?float, string given"
+            }
+        },
+        "invalid-number-into-string": {
+            "hydrate_error": {
+                "class": "TypeError",
+                "message": "CPEForge\\Model\\Sale\\Legend::setCode(): Argument #1 ($code) must be of type ?string, int given"
+            }
+        },
+        "invalid-bool-into-string": {
+            "hydrate_error": {
+                "class": "TypeError",
+                "message": "CPEForge\\Model\\Sale\\Legend::setValue(): Argument #1 ($value) must be of type ?string, true given"
+            }
+        },
+        "invalid-object-type": {
+            "hydrate_error": {
+                "class": "TypeError",
+                "message": "CPEForge\\Model\\Sale\\BaseSale::setCompany(): Argument #1 ($company) must be of type ?CPEForge\\Model\\Company\\Company, CPEForge\\Model\\Company\\Address given"
+            }
+        },
+        "invalid-object-type-with-fields": {
+            "hydrate_error": {
+                "class": "TypeError",
+                "message": "CPEForge\\Model\\Sale\\BaseSale::setCompany(): Argument #1 ($company) must be of type ?CPEForge\\Model\\Company\\Company, CPEForge\\Model\\Company\\Address given"
+            }
+        },
+        "invalid-string-into-date-nested": {
+            "hydrate_error": {
+                "class": "TypeError",
+                "message": "CPEForge\\Model\\Sale\\Cuota::setFechaPago(): Argument #1 ($fechaPago) must be of type ?DateTimeInterface, string given"
+            }
+        },
+        "invalid-string-into-list-nested": {
+            "hydrate_error": {
+                "class": "TypeError",
+                "message": "CPEForge\\Model\\Summary\\Summary::setDetails(): Argument #1 ($details) must be of type ?array, string given"
+            }
+        },
+        "invalid-array-into-string": {
+            "hydrate_error": {
+                "class": "TypeError",
+                "message": "CPEForge\\Model\\Sale\\Legend::setValue(): Argument #1 ($value) must be of type ?string, array given"
+            }
+        },
+        "invalid-string-into-int": {
+            "hydrate_error": {
+                "class": "TypeError",
+                "message": "CPEForge\\Model\\Despatch\\Shipment::setNumBultos(): Argument #1 ($numBultos) must be of type ?int, string given"
+            }
+        },
+        "invalid-float-into-int": {
+            "hydrate_error": {
+                "class": "TypeError",
+                "message": "CPEForge\\Model\\Despatch\\Shipment::setNumBultos(): Argument #1 ($numBultos) must be of type ?int, float given"
+            }
+        },
+        "invalid-string-into-bool": {
+            "hydrate_error": {
+                "class": "TypeError",
+                "message": "CPEForge\\Model\\Despatch\\Shipment::setIndTransbordo(): Argument #1 ($indTransbordo) must be of type ?bool, string given"
+            }
+        },
+        "invalid-string-into-date": {
+            "hydrate_error": {
+                "class": "TypeError",
+                "message": "CPEForge\\Model\\Sale\\BaseSale::setFechaEmision(): Argument #1 ($fechaEmision) must be of type ?DateTimeInterface, string given"
+            }
+        },
+        "invalid-string-into-list": {
+            "hydrate_error": {
+                "class": "TypeError",
+                "message": "CPEForge\\Model\\Sale\\BaseSale::setDetails(): Argument #1 ($details) must be of type ?array, string given"
+            }
+        },
+        "invalid-direction-missing-args": {
+            "hydrate_error": {
+                "class": "ArgumentCountError",
+                "message": "Too few arguments to function CPEForge\\Model\\Despatch\\Direction::__construct(), 0 passed and exactly 2 expected"
+            }
+        },
+        "invalid-token-missing-args": {
+            "hydrate_error": {
+                "class": "ArgumentCountError",
+                "message": "Too few arguments to function CPEForge\\Services\\Api\\BasicToken::__construct(), 0 passed and exactly 2 expected"
+            }
+        }
+    }
+}

@@ -1,0 +1,4284 @@
+{
+    "generator": "oracle/php/cpe_validator/run_cases.php",
+    "reference": {
+        "tag": "v5.3.0",
+        "commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+    },
+    "cases_sha256": "ab1d59366d5f7dc74897ab15d05040e5d152494cc7d178dda0e9c123bdad461b",
+    "classes": [
+        "CPEForge\\Validator\\Entity\\CpeError",
+        "CPEForge\\Validator\\Entity\\DocumentType",
+        "CPEForge\\Validator\\Entity\\ErrorLevel",
+        "CPEForge\\Validator\\Parser\\ErrorResultParser",
+        "CPEForge\\Validator\\Parser\\ResultParserInterface",
+        "CPEForge\\Validator\\Resolver\\RuleResolverInterface",
+        "CPEForge\\Validator\\Resolver\\TypeResolverInterface",
+        "CPEForge\\Validator\\Resolver\\XmlTypeResolver",
+        "CPEForge\\Validator\\Resolver\\XslPathResolver",
+        "CPEForge\\Validator\\Xml\\CpeValidator",
+        "CPEForge\\Validator\\Xml\\ValidatorInterface",
+        "CPEForge\\Validator\\Xml\\XslValidator",
+        "CPEForge\\Validator\\Xml\\XslValidatorInterface",
+        "CPEForge\\Validator\\Xml\\XsltFunctions"
+    ],
+    "reference_version": "8.4.17",
+    "extensions": {
+        "dom": "20031129",
+        "libxml": "8.4.17",
+        "xsl": "8.4.17",
+        "pcre": "8.4.17"
+    },
+    "libxml": "2.15.1",
+    "libxslt": "1.1.45",
+    "libexslt": "0.8.25",
+    "pcre": "10.44 2024-06-07",
+    "ini": {
+        "pcre.jit": "0",
+        "pcre.backtrack_limit": "1000000",
+        "pcre.recursion_limit": "100000",
+        "precision": "14"
+    },
+    "load_warnings": [],
+    "results": {
+        "parser-null": {
+            "steps": [
+                {
+                    "outcome": "exception",
+                    "class": "TypeError",
+                    "message": "explode(): Argument #2 ($string) must be of type string, null given"
+                }
+            ],
+            "warnings": []
+        },
+        "parser-empty": {
+            "steps": [
+                {
+                    "outcome": "null"
+                }
+            ],
+            "warnings": []
+        },
+        "parser-one-field": {
+            "steps": [
+                {
+                    "outcome": "null"
+                }
+            ],
+            "warnings": []
+        },
+        "parser-two-fields": {
+            "steps": [
+                {
+                    "outcome": "null"
+                }
+            ],
+            "warnings": []
+        },
+        "parser-three-fields": {
+            "steps": [
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "b",
+                            "c",
+                            "2",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "parser-upstream-three": {
+            "steps": [
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "1023",
+                            "INVALID",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "parser-upstream-five": {
+            "steps": [
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "2000",
+                            "INVALID",
+                            "2",
+                            "/Invoice/LegalMonetaryTotal/PayableAmount",
+                            "223.20"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "parser-level-zero": {
+            "steps": [
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "c",
+                            "m",
+                            "2",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "parser-level-space": {
+            "steps": [
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "c",
+                            "m",
+                            "2",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "parser-level-eleven": {
+            "steps": [
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "c",
+                            "m",
+                            "2",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "parser-level-letter": {
+            "steps": [
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "c",
+                            "m",
+                            "2",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "parser-four-fields": {
+            "steps": [
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "c",
+                            "m",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "parser-five-fields": {
+            "steps": [
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "c",
+                            "m",
+                            "1",
+                            "p",
+                            "v"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "parser-six-fields": {
+            "steps": [
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "c",
+                            "m",
+                            "1",
+                            "p",
+                            "v"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "parser-trailing-separator": {
+            "steps": [
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "c",
+                            "m",
+                            "1",
+                            "p",
+                            "v"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "parser-three-trailing": {
+            "steps": [
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "c",
+                            "",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "parser-only-separators": {
+            "steps": [
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "",
+                            "",
+                            "2",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "parser-four-separators": {
+            "steps": [
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "",
+                            "",
+                            "2",
+                            "",
+                            ""
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "parser-many-separators": {
+            "steps": [
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "",
+                            "",
+                            "2",
+                            "",
+                            ""
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "parser-unicode": {
+            "steps": [
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "ÑÁ",
+                            "mensaje ñ € 𝄞",
+                            "1",
+                            "/Invoice/ñ",
+                            "ü"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "parser-inner-newline": {
+            "steps": [
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "c",
+                            "m\nx",
+                            "1",
+                            "p",
+                            "v"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "parser-spaces": {
+            "steps": [
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            " c ",
+                            " m ",
+                            "2",
+                            " p ",
+                            " v "
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "path-01": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "/reglas/2.X/ValidaExprRegFactura-2.0.1.xsl"
+                }
+            ],
+            "warnings": []
+        },
+        "path-03": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "/reglas/2.X/ValidaExprRegBoleta-2.0.1.xsl"
+                }
+            ],
+            "warnings": []
+        },
+        "path-07": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "/reglas/2.X/ValidaExprRegNC-2.0.1.xsl"
+                }
+            ],
+            "warnings": []
+        },
+        "path-08": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "/reglas/2.X/ValidaExprRegND-2.0.1.xsl"
+                }
+            ],
+            "warnings": []
+        },
+        "path-rc": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "/reglas/1.X/ValidaExprRegSummary-1.1.0.xsl"
+                }
+            ],
+            "warnings": []
+        },
+        "path-ra": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "/reglas/1.X/ValidaExprRegSummaryVoided-1.0.1.xsl"
+                }
+            ],
+            "warnings": []
+        },
+        "path-09": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "/reglas/2.X/ValidaExprRegGreRemitente-2.0.1.xsl"
+                }
+            ],
+            "warnings": []
+        },
+        "path-20": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "/reglas/1.X/ValidaExprRegRetencion-1.0.3.xsl"
+                }
+            ],
+            "warnings": []
+        },
+        "path-40": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "/reglas/1.X/ValidaExprRegPercepcion-1.0.1.xsl"
+                }
+            ],
+            "warnings": []
+        },
+        "path-rr": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "/reglas/1.X/ValidaExprRegOtrosVoided-1.0.1.xsl"
+                }
+            ],
+            "warnings": []
+        },
+        "path-unknown-00": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": null
+                }
+            ],
+            "warnings": []
+        },
+        "path-empty-code": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": null
+                }
+            ],
+            "warnings": []
+        },
+        "path-null-code": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": null
+                }
+            ],
+            "warnings": []
+        },
+        "path-lowercase": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": null
+                }
+            ],
+            "warnings": []
+        },
+        "path-padded": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": null
+                }
+            ],
+            "warnings": []
+        },
+        "path-base-trailing-slash": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "/reglas//2.X/ValidaExprRegFactura-2.0.1.xsl"
+                }
+            ],
+            "warnings": []
+        },
+        "path-base-empty": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "/1.X/ValidaExprRegOtrosVoided-1.0.1.xsl"
+                }
+            ],
+            "warnings": []
+        },
+        "path-base-relative": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "reglas/sunat/2.X/ValidaExprRegGreRemitente-2.0.1.xsl"
+                }
+            ],
+            "warnings": []
+        },
+        "path-base-unicode": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "/reglas/ñandú/1.X/ValidaExprRegRetencion-1.0.3.xsl"
+                }
+            ],
+            "warnings": []
+        },
+        "type-invoice-default": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                }
+            ],
+            "warnings": []
+        },
+        "type-invoice-03": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "03"
+                }
+            ],
+            "warnings": []
+        },
+        "type-invoice-01": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                }
+            ],
+            "warnings": []
+        },
+        "type-invoice-3": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                }
+            ],
+            "warnings": []
+        },
+        "type-invoice-whitespace": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                }
+            ],
+            "warnings": []
+        },
+        "type-invoice-nested-text": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "03"
+                }
+            ],
+            "warnings": []
+        },
+        "type-invoice-deep": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                }
+            ],
+            "warnings": []
+        },
+        "type-invoice-first-wins": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                }
+            ],
+            "warnings": []
+        },
+        "type-invoice-char-ref": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "03"
+                }
+            ],
+            "warnings": []
+        },
+        "type-invoice-cdata": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "03"
+                }
+            ],
+            "warnings": []
+        },
+        "type-invoice-cbc-other-uri": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "03"
+                }
+            ],
+            "warnings": []
+        },
+        "type-invoice-cbc-other-prefix": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                }
+            ],
+            "warnings": [
+                "DOMXPath::query(): Undefined namespace prefix: cbc",
+                "Attempt to read property \"length\" on false"
+            ]
+        },
+        "type-invoice-cbc-on-child": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                }
+            ],
+            "warnings": [
+                "DOMXPath::query(): Undefined namespace prefix: cbc",
+                "Attempt to read property \"length\" on false"
+            ]
+        },
+        "type-invoice-prefixed-root": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "03"
+                }
+            ],
+            "warnings": []
+        },
+        "type-invoice-undeclared-root-prefix": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": null
+                }
+            ],
+            "warnings": [
+                "DOMDocument::loadXML(): Namespace prefix i on Invoice is not defined in Entity, line: 1"
+            ]
+        },
+        "type-invoice-no-namespace": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                }
+            ],
+            "warnings": [
+                "DOMXPath::query(): Undefined namespace prefix: cbc",
+                "Attempt to read property \"length\" on false"
+            ]
+        },
+        "type-invoice-other-root-ns": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                }
+            ],
+            "warnings": [
+                "DOMXPath::query(): Undefined namespace prefix: cbc",
+                "Attempt to read property \"length\" on false"
+            ]
+        },
+        "type-invoice-comment-pi": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "03"
+                }
+            ],
+            "warnings": []
+        },
+        "type-invoice-dtd": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "03"
+                }
+            ],
+            "warnings": []
+        },
+        "type-credit-note": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "07"
+                }
+            ],
+            "warnings": []
+        },
+        "type-debit-note": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "08"
+                }
+            ],
+            "warnings": []
+        },
+        "type-summary": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "RC"
+                }
+            ],
+            "warnings": []
+        },
+        "type-despatch": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "09"
+                }
+            ],
+            "warnings": []
+        },
+        "type-retention": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "20"
+                }
+            ],
+            "warnings": []
+        },
+        "type-perception": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "40"
+                }
+            ],
+            "warnings": []
+        },
+        "type-voided-ra": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "RA"
+                }
+            ],
+            "warnings": []
+        },
+        "type-voided-rr": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "RR"
+                }
+            ],
+            "warnings": []
+        },
+        "type-voided-rr-lowercase": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "RA"
+                }
+            ],
+            "warnings": []
+        },
+        "type-voided-rr-not-prefix": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "RA"
+                }
+            ],
+            "warnings": []
+        },
+        "type-voided-rr-leading-space": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "RA"
+                }
+            ],
+            "warnings": []
+        },
+        "type-voided-r-only": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "RA"
+                }
+            ],
+            "warnings": []
+        },
+        "type-voided-empty-id": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "RA"
+                }
+            ],
+            "warnings": []
+        },
+        "type-voided-no-id": {
+            "steps": [
+                {
+                    "outcome": "exception",
+                    "class": "TypeError",
+                    "message": "strpos(): Argument #1 ($haystack) must be of type string, null given"
+                }
+            ],
+            "warnings": []
+        },
+        "type-voided-cbc-undefined": {
+            "steps": [
+                {
+                    "outcome": "exception",
+                    "class": "TypeError",
+                    "message": "strpos(): Argument #1 ($haystack) must be of type string, null given"
+                }
+            ],
+            "warnings": [
+                "DOMXPath::query(): Undefined namespace prefix: cbc",
+                "Attempt to read property \"length\" on false"
+            ]
+        },
+        "type-application-response": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": null
+                }
+            ],
+            "warnings": []
+        },
+        "type-lowercase-root": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": null
+                }
+            ],
+            "warnings": []
+        },
+        "type-malformed": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": null
+                }
+            ],
+            "warnings": [
+                "DOMDocument::loadXML(): Premature end of data in tag Invoice line 1 in Entity, line: 1",
+                "Attempt to read property \"localName\" on null"
+            ]
+        },
+        "type-not-xml": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": null
+                }
+            ],
+            "warnings": [
+                "DOMDocument::loadXML(): Start tag expected, '<' not found in Entity, line: 1",
+                "Attempt to read property \"localName\" on null"
+            ]
+        },
+        "type-empty": {
+            "steps": [
+                {
+                    "outcome": "exception",
+                    "class": "ValueError",
+                    "message": "DOMDocument::loadXML(): Argument #1 ($source) must not be empty"
+                }
+            ],
+            "warnings": []
+        },
+        "type-null": {
+            "steps": [
+                {
+                    "outcome": "exception",
+                    "class": "TypeError",
+                    "message": "DOMDocument::loadXML(): Argument #1 ($source) must be of type string, null given"
+                }
+            ],
+            "warnings": []
+        },
+        "type-default-boleta21": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "03"
+                }
+            ],
+            "warnings": []
+        },
+        "type-default-voided": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "RA"
+                }
+            ],
+            "warnings": []
+        },
+        "type-default-reversion": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "RR"
+                }
+            ],
+            "warnings": []
+        },
+        "type-default-summary": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "RC"
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-not-set": {
+            "steps": [
+                {
+                    "outcome": "exception",
+                    "class": "InvalidArgumentException",
+                    "message": "XslDocument no set"
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-zero-messages": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": []
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-two-messages": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "A",
+                            "m1",
+                            "1",
+                            "p",
+                            "v"
+                        ],
+                        [
+                            "B",
+                            "m2",
+                            "2",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-terminate-yes": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "A",
+                            "m1",
+                            "1",
+                            "p",
+                            "v"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-terminate-no": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "A",
+                            "m1",
+                            "1",
+                            null,
+                            null
+                        ],
+                        [
+                            "B",
+                            "m2",
+                            "2",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-terminate-invalid": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "A",
+                            "x",
+                            "1",
+                            null,
+                            null
+                        ],
+                        [
+                            "B",
+                            "y",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-message-trailing-newlines": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "A",
+                            "m1",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-message-inner-newline": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "A",
+                            "m1\nx",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-message-empty-then-text": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "A",
+                            "z",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-message-non-error-text": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "A",
+                            "despues",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-message-two-fields": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "B",
+                            "ok",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-message-markup": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "A",
+                            "negrita&<",
+                            "1",
+                            "p",
+                            "v"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-message-unicode": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "ÑÁ",
+                            "Descripción € 𝄞",
+                            "2",
+                            "/Invoice/ñ",
+                            "ü"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-message-order-templates": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "E",
+                            "1ID",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "E",
+                            "2Note",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "E",
+                            "3Other",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "T",
+                            "fin",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-many-messages": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "60",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "59",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "58",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "57",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "56",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "55",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "54",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "53",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "52",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "51",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "50",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "49",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "48",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "47",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "46",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "45",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "44",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "43",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "42",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "41",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "40",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "39",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "38",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "37",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "36",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "35",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "34",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "33",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "32",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "31",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "30",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "29",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "28",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "27",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "26",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "25",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "24",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "23",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "22",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "21",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "20",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "19",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "18",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "17",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "16",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "15",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "14",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "13",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "12",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "11",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "10",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "9",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "8",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "7",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "6",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "5",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "4",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "3",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "2",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "1",
+                            "repeticion",
+                            "2",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-param-filename": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "P",
+                            "20000000001-01-F001-1.xml",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-param-quotes": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "P",
+                            "a'b\"c.xml",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-param-unicode": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "P",
+                            "ñandú-€.xml",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-param-empty": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "P",
+                            "",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-param-pipe": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "P",
+                            "a",
+                            "1",
+                            "b",
+                            "c.xml"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-param-nul": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "ValueError",
+                    "message": "XSLTProcessor::setParameter(): Argument #3 ($value) must not contain any null bytes"
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-param-undeclared": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "P",
+                            "sin-param",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-matches-true": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "1",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-matches-false": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "0",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-matches-in-test": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "si",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-matches-false-comparison": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "falla",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": [
+                "preg_match(): Compilation failed: missing closing parenthesis at offset 1"
+            ]
+        },
+        "xsl-matches-invalid-regex": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "false",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": [
+                "preg_match(): Compilation failed: missing closing parenthesis at offset 1"
+            ]
+        },
+        "xsl-matches-nodeset": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "TypeError",
+                    "message": "CPEForge\\Validator\\Xml\\XsltFunctions::matches(): Argument #2 ($input) must be of type ?string, array given"
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-matches-empty-nodeset": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "TypeError",
+                    "message": "CPEForge\\Validator\\Xml\\XsltFunctions::matches(): Argument #2 ($input) must be of type ?string, array given"
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-matches-nodeset-pattern": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "TypeError",
+                    "message": "CPEForge\\Validator\\Xml\\XsltFunctions::matches(): Argument #1 ($pattern) must be of type ?string, array given"
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-matches-rtf": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "1",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-matches-bool-true": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "1",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-matches-bool-false": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "1",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-matches-one-arg": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "ArgumentCountError",
+                    "message": "Too few arguments to function CPEForge\\Validator\\Xml\\XsltFunctions::matches(), 1 passed and exactly 2 expected"
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-matches-no-args": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "ArgumentCountError",
+                    "message": "Too few arguments to function CPEForge\\Validator\\Xml\\XsltFunctions::matches(), 0 passed and exactly 2 expected"
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-matches-extra-arg": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "1",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-function-string-nodeset": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "1",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-function-string-empty": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "1",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-function-other-handler": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "Error",
+                    "message": "No callback handler \"strlen\" registered"
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-function-case-mismatch": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "Error",
+                    "message": "No callback handler \"cpeforge\\validator\\xml\\xsltfunctions::MATCHES\" registered"
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-function-leading-backslash": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "Error",
+                    "message": "No callback handler \"\\CPEForge\\Validator\\Xml\\XsltFunctions::matches\" registered"
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-function-no-name": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "Error",
+                    "message": "Function name must be passed as the first argument"
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-function-number-name": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "TypeError",
+                    "message": "Handler name must be a string"
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-matches-slash": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "1",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-matches-escaped-slash": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "false",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": [
+                "preg_match(): Unknown modifier '/'"
+            ]
+        },
+        "xsl-matches-trailing-backslash": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "false",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": [
+                "preg_match(): No ending delimiter '/' found"
+            ]
+        },
+        "xsl-matches-backtrack-limit": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "false",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-matches-byte-mode": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "0",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-matches-empty-pattern": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "1",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-matches-anchors": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "1",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-matches-pcre-syntax": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "1",
+                            "1",
+                            "1",
+                            "0"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-matches-lookbehind-k": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "1",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-runtime-undefined-variable": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "A",
+                            "antes",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-runtime-unknown-function": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "A",
+                            "antes",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-runtime-recursion-limit": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "A",
+                            "antes",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-runtime-bad-element-name": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "A",
+                            "antes",
+                            "1",
+                            null,
+                            null
+                        ],
+                        [
+                            "2",
+                            "x' is not a valid QName.",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "B",
+                            "despues",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-exslt-strings": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "E",
+                            "xxx",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-compile-unknown-element": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "A",
+                            "x",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": [
+                "XSLTProcessor::importStylesheet(): compilation error: file {ROOT}/main.xsl line 2 element bogus",
+                "XSLTProcessor::importStylesheet(): xsltStylePreCompute: unknown xsl:bogus"
+            ]
+        },
+        "xsl-compile-bad-xpath": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "Error",
+                    "message": "XSLTProcessor::transformToXml() can only be called after a stylesheet has been imported"
+                }
+            ],
+            "warnings": [
+                "XSLTProcessor::importStylesheet(): Invalid expression",
+                "XSLTProcessor::importStylesheet(): compilation error: file {ROOT}/main.xsl line 2 element value-of",
+                "XSLTProcessor::importStylesheet(): xsl:value-of : could not compile select expression '1 +'"
+            ]
+        },
+        "xsl-rules-ubl-valid": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": []
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-rules-ubl-invalid": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "2074",
+                            "UBLVersionID - La versión del UBL no es correcta",
+                            "1",
+                            "Invoice/UBLVersionID",
+                            "2.0"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-rules-several": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "4001",
+                            "version",
+                            "2",
+                            "Invoice/UBLVersionID",
+                            "2.0"
+                        ],
+                        [
+                            "1001",
+                            "serie-correlativo",
+                            "1",
+                            "Invoice/ID",
+                            "F001-123456789"
+                        ],
+                        [
+                            "4003",
+                            "archivo",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "3027",
+                            "nota",
+                            "1",
+                            "Invoice/Note",
+                            "texto demasiado largo"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-rules-matching-nothing": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": []
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-rules-unicode": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "4100",
+                            "nota ñ",
+                            "2",
+                            "Invoice/Note",
+                            "Año ñandú"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-xml-dtd": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "A",
+                            "entidad",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-sheet-dtd": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "A",
+                            "",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-reuse-two-documents": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "2074",
+                            "version",
+                            "1",
+                            "Invoice/UBLVersionID",
+                            "2.0"
+                        ]
+                    ]
+                },
+                {
+                    "outcome": "errors",
+                    "errors": []
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "2074",
+                            "version",
+                            "1",
+                            "Invoice/UBLVersionID",
+                            "1.0"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-reuse-replace-stylesheet": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "A",
+                            "primera",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                },
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "B",
+                            "segunda",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-reuse-after-exception": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "TypeError",
+                    "message": "CPEForge\\Validator\\Xml\\XsltFunctions::matches(): Argument #2 ($input) must be of type ?string, array given"
+                },
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "R",
+                            "",
+                            "1",
+                            null,
+                            null
+                        ],
+                        [
+                            "G",
+                            "limpio",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-document-inside-root": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "D",
+                            "1",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-document-outside-root": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "D",
+                            "1",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-document-network": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "D",
+                            "0",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": [
+                "XSLTProcessor::transformToXml(http://127.0.0.1:9/x.xml): Failed to open stream: Operation not permitted"
+            ]
+        },
+        "xsl-include-inside-root": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "INC",
+                            "dentro",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-import-inside-root": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "BASE",
+                            "importada",
+                            "2",
+                            null,
+                            null
+                        ],
+                        [
+                            "MAIN",
+                            "principal",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-include-outside-root": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "INC",
+                            "fuera",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-include-missing": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "Error",
+                    "message": "XSLTProcessor::transformToXml() can only be called after a stylesheet has been imported"
+                }
+            ],
+            "warnings": [
+                "XSLTProcessor::importStylesheet(): I/O warning : failed to load \"{ROOT}/noexiste.xsl\": No such file or directory",
+                "XSLTProcessor::importStylesheet(): compilation error: file {ROOT}/main.xsl line 2 element include",
+                "XSLTProcessor::importStylesheet(): xsl:include : unable to load {ROOT}/noexiste.xsl"
+            ]
+        },
+        "xsl-include-entity": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "INC",
+                            "entidad",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-exsl-document-write": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "W",
+                            "despues",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                },
+                {
+                    "outcome": "value",
+                    "value": false
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-number-00": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "N",
+                            "1",
+                            "1",
+                            "1",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-number-01": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "N",
+                            "0.1",
+                            "1",
+                            "1",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-number-02": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "N",
+                            "1 div 3",
+                            "1",
+                            "1",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-number-03": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "N",
+                            "2 div 3",
+                            "1",
+                            "1",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-number-04": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "N",
+                            "100000000000000",
+                            "1",
+                            "1",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-number-05": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "N",
+                            "10000000000000",
+                            "1",
+                            "1",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-number-06": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "N",
+                            "1000000000000000",
+                            "1",
+                            "1",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-number-07": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "N",
+                            "123456789012345678",
+                            "1",
+                            "1",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-number-08": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "N",
+                            "0.0001",
+                            "1",
+                            "1",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-number-09": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "N",
+                            "0.00001",
+                            "1",
+                            "1",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-number-10": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "N",
+                            "0.000012345",
+                            "1",
+                            "1",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-number-11": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "N",
+                            "-0",
+                            "1",
+                            "1",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-number-12": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "N",
+                            "-1.5",
+                            "1",
+                            "1",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-number-13": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "N",
+                            "0 div 0",
+                            "1",
+                            "1",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-number-14": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "N",
+                            "1 div 0",
+                            "1",
+                            "1",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-number-15": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "N",
+                            "-1 div 0",
+                            "1",
+                            "1",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-number-16": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "N",
+                            "12345678901234.5",
+                            "1",
+                            "1",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-number-17": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "N",
+                            "99999999999999.5",
+                            "1",
+                            "1",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "xsl-number-18": {
+            "steps": [
+                {
+                    "outcome": "ok"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "N",
+                            "0.1 + 0.2",
+                            "1",
+                            "1",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-type-01": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "01",
+                            "2.X/ValidaExprRegFactura-2.0.1.xsl",
+                            "1",
+                            "20000000001-01-X-1.xml",
+                            "Invoice"
+                        ],
+                        [
+                            "OBS-01",
+                            "segunda",
+                            "2",
+                            "/2.X/ValidaExprRegFactura-2.0.1.xsl",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-type-03": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "03"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegBoleta-2.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "03",
+                            "2.X/ValidaExprRegBoleta-2.0.1.xsl",
+                            "1",
+                            "20000000001-03-X-1.xml",
+                            "Invoice"
+                        ],
+                        [
+                            "OBS-03",
+                            "segunda",
+                            "2",
+                            "/2.X/ValidaExprRegBoleta-2.0.1.xsl",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-type-07": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "07"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegNC-2.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "07",
+                            "2.X/ValidaExprRegNC-2.0.1.xsl",
+                            "1",
+                            "20000000001-07-X-1.xml",
+                            "CreditNote"
+                        ],
+                        [
+                            "OBS-07",
+                            "segunda",
+                            "2",
+                            "/2.X/ValidaExprRegNC-2.0.1.xsl",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-type-08": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "08"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegND-2.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "08",
+                            "2.X/ValidaExprRegND-2.0.1.xsl",
+                            "1",
+                            "20000000001-08-X-1.xml",
+                            "DebitNote"
+                        ],
+                        [
+                            "OBS-08",
+                            "segunda",
+                            "2",
+                            "/2.X/ValidaExprRegND-2.0.1.xsl",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-type-rc": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "RC"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/1.X/ValidaExprRegSummary-1.1.0.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "RC",
+                            "1.X/ValidaExprRegSummary-1.1.0.xsl",
+                            "1",
+                            "20000000001-RC-X-1.xml",
+                            "SummaryDocuments"
+                        ],
+                        [
+                            "OBS-RC",
+                            "segunda",
+                            "2",
+                            "/1.X/ValidaExprRegSummary-1.1.0.xsl",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-type-ra": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "RA"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/1.X/ValidaExprRegSummaryVoided-1.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "RA",
+                            "1.X/ValidaExprRegSummaryVoided-1.0.1.xsl",
+                            "1",
+                            "20000000001-RA-X-1.xml",
+                            "VoidedDocuments"
+                        ],
+                        [
+                            "OBS-RA",
+                            "segunda",
+                            "2",
+                            "/1.X/ValidaExprRegSummaryVoided-1.0.1.xsl",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-type-09": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "09"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegGreRemitente-2.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "09",
+                            "2.X/ValidaExprRegGreRemitente-2.0.1.xsl",
+                            "1",
+                            "20000000001-09-X-1.xml",
+                            "DespatchAdvice"
+                        ],
+                        [
+                            "OBS-09",
+                            "segunda",
+                            "2",
+                            "/2.X/ValidaExprRegGreRemitente-2.0.1.xsl",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-type-20": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "20"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/1.X/ValidaExprRegRetencion-1.0.3.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "20",
+                            "1.X/ValidaExprRegRetencion-1.0.3.xsl",
+                            "1",
+                            "20000000001-20-X-1.xml",
+                            "Retention"
+                        ],
+                        [
+                            "OBS-20",
+                            "segunda",
+                            "2",
+                            "/1.X/ValidaExprRegRetencion-1.0.3.xsl",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-type-40": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "40"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/1.X/ValidaExprRegPercepcion-1.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "40",
+                            "1.X/ValidaExprRegPercepcion-1.0.1.xsl",
+                            "1",
+                            "20000000001-40-X-1.xml",
+                            "Perception"
+                        ],
+                        [
+                            "OBS-40",
+                            "segunda",
+                            "2",
+                            "/1.X/ValidaExprRegPercepcion-1.0.1.xsl",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-type-rr": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "RR"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/1.X/ValidaExprRegOtrosVoided-1.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "RR",
+                            "1.X/ValidaExprRegOtrosVoided-1.0.1.xsl",
+                            "1",
+                            "20000000001-RR-X-1.xml",
+                            "VoidedDocuments"
+                        ],
+                        [
+                            "OBS-RR",
+                            "segunda",
+                            "2",
+                            "/1.X/ValidaExprRegOtrosVoided-1.0.1.xsl",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-upstream-valid": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": []
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-upstream-errors-dom": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "2074",
+                            "UBLVersionID - La versión del UBL no es correcta",
+                            "1",
+                            "Invoice/UBLVersionID",
+                            "2.0"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-unknown-root": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": null
+                },
+                {
+                    "outcome": "value",
+                    "value": null
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "0305",
+                            null,
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-unmapped-type": {
+            "steps": [
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "0305",
+                            null,
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-missing-rule-file": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "Error",
+                    "message": "XSLTProcessor::transformToXml() can only be called after a stylesheet has been imported"
+                }
+            ],
+            "warnings": [
+                "DOMDocument::load(): I/O warning : failed to load \"{ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl\": No such file or directory",
+                "XSLTProcessor::importStylesheet(): compilation error",
+                "XSLTProcessor::importStylesheet(): xsltParseStylesheetProcess : empty stylesheet"
+            ]
+        },
+        "cpe-malformed-rule": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "Error",
+                    "message": "XSLTProcessor::transformToXml() can only be called after a stylesheet has been imported"
+                }
+            ],
+            "warnings": [
+                "DOMDocument::load(): Namespace prefix xsl on stylesheet is not defined in {ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl, line: 1",
+                "DOMDocument::load(): Couldn't find end of Start Tag stylesheet line 1 in {ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl, line: 1",
+                "XSLTProcessor::importStylesheet(): compilation error",
+                "XSLTProcessor::importStylesheet(): xsltParseStylesheetProcess : empty stylesheet"
+            ]
+        },
+        "cpe-empty-rule-file": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "Error",
+                    "message": "XSLTProcessor::transformToXml() can only be called after a stylesheet has been imported"
+                }
+            ],
+            "warnings": [
+                "DOMDocument::load(): Document is empty in {ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl, line: 1",
+                "XSLTProcessor::importStylesheet(): compilation error",
+                "XSLTProcessor::importStylesheet(): xsltParseStylesheetProcess : empty stylesheet"
+            ]
+        },
+        "cpe-not-a-stylesheet": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "Error",
+                    "message": "XSLTProcessor::transformToXml() can only be called after a stylesheet has been imported"
+                }
+            ],
+            "warnings": [
+                "XSLTProcessor::importStylesheet(): compilation error: file {ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl line 1 element foo",
+                "XSLTProcessor::importStylesheet(): xsltParseStylesheetProcess : document is not a stylesheet"
+            ]
+        },
+        "cpe-compile-error-rule": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "Error",
+                    "message": "XSLTProcessor::transformToXml() can only be called after a stylesheet has been imported"
+                }
+            ],
+            "warnings": [
+                "XSLTProcessor::importStylesheet(): Invalid expression",
+                "XSLTProcessor::importStylesheet(): compilation error: file {ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl line 2 element value-of",
+                "XSLTProcessor::importStylesheet(): xsl:value-of : could not compile select expression '1 +'"
+            ]
+        },
+        "cpe-malformed-xml": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": null
+                },
+                {
+                    "outcome": "value",
+                    "value": null
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "0305",
+                            null,
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": [
+                "DOMDocument::loadXML(): Couldn't find end of Start Tag Invoice line 1 in Entity, line: 1",
+                "Attempt to read property \"localName\" on null"
+            ]
+        },
+        "cpe-empty-xml": {
+            "steps": [
+                {
+                    "outcome": "exception",
+                    "class": "ValueError",
+                    "message": "DOMDocument::loadXML(): Argument #1 ($source) must not be empty"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "ValueError",
+                    "message": "DOMDocument::loadXML(): Argument #1 ($source) must not be empty"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "ValueError",
+                    "message": "DOMDocument::loadXML(): Argument #1 ($source) must not be empty"
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-xml-dtd": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "03"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegBoleta-2.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "03",
+                            "2.X/ValidaExprRegBoleta-2.0.1.xsl",
+                            "1",
+                            "20000000001-01-F001-1.xml",
+                            "Invoice"
+                        ],
+                        [
+                            "OBS-03",
+                            "segunda",
+                            "2",
+                            "/2.X/ValidaExprRegBoleta-2.0.1.xsl",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-voided-without-id": {
+            "steps": [
+                {
+                    "outcome": "exception",
+                    "class": "TypeError",
+                    "message": "strpos(): Argument #1 ($haystack) must be of type string, null given"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "TypeError",
+                    "message": "strpos(): Argument #1 ($haystack) must be of type string, null given"
+                },
+                {
+                    "outcome": "exception",
+                    "class": "TypeError",
+                    "message": "strpos(): Argument #1 ($haystack) must be of type string, null given"
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-xml-over-limit": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "01",
+                            "2.X/ValidaExprRegFactura-2.0.1.xsl",
+                            "1",
+                            "20000000001-01-F001-1.xml",
+                            "Invoice"
+                        ],
+                        [
+                            "OBS-01",
+                            "segunda",
+                            "2",
+                            "/2.X/ValidaExprRegFactura-2.0.1.xsl",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-include-outside-root": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "INC",
+                            "fuera",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-include-inside-root": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "INC",
+                            "comun",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-symlink-escape": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "LINK",
+                            "fuera",
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-filename-param": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "01",
+                            "2.X/ValidaExprRegFactura-2.0.1.xsl",
+                            "1",
+                            "nombre con espacios 'y' comillas.xml",
+                            "Invoice"
+                        ],
+                        [
+                            "OBS-01",
+                            "segunda",
+                            "2",
+                            "/2.X/ValidaExprRegFactura-2.0.1.xsl",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-reuse-sequence": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "01"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegFactura-2.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "01",
+                            "2.X/ValidaExprRegFactura-2.0.1.xsl",
+                            "1",
+                            "a.xml",
+                            "Invoice"
+                        ],
+                        [
+                            "OBS-01",
+                            "segunda",
+                            "2",
+                            "/2.X/ValidaExprRegFactura-2.0.1.xsl",
+                            "1"
+                        ]
+                    ]
+                },
+                {
+                    "outcome": "value",
+                    "value": "RR"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/1.X/ValidaExprRegOtrosVoided-1.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "RR",
+                            "1.X/ValidaExprRegOtrosVoided-1.0.1.xsl",
+                            "1",
+                            "b.xml",
+                            "VoidedDocuments"
+                        ],
+                        [
+                            "OBS-RR",
+                            "segunda",
+                            "2",
+                            "/1.X/ValidaExprRegOtrosVoided-1.0.1.xsl",
+                            "1"
+                        ]
+                    ]
+                },
+                {
+                    "outcome": "value",
+                    "value": null
+                },
+                {
+                    "outcome": "value",
+                    "value": null
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "0305",
+                            null,
+                            "1",
+                            null,
+                            null
+                        ]
+                    ]
+                },
+                {
+                    "outcome": "value",
+                    "value": "03"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegBoleta-2.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "03",
+                            "2.X/ValidaExprRegBoleta-2.0.1.xsl",
+                            "1",
+                            "d.xml",
+                            "Invoice"
+                        ],
+                        [
+                            "OBS-03",
+                            "segunda",
+                            "2",
+                            "/2.X/ValidaExprRegBoleta-2.0.1.xsl",
+                            "1"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-default-boleta21": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "03"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/2.X/ValidaExprRegBoleta-2.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "03",
+                            "2.X/ValidaExprRegBoleta-2.0.1.xsl",
+                            "1",
+                            "20000000001-01-F001-1.xml",
+                            "Invoice"
+                        ],
+                        [
+                            "OBS-03",
+                            "segunda",
+                            "2",
+                            "/2.X/ValidaExprRegBoleta-2.0.1.xsl",
+                            "14"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        },
+        "cpe-default-reversion": {
+            "steps": [
+                {
+                    "outcome": "value",
+                    "value": "RR"
+                },
+                {
+                    "outcome": "value",
+                    "value": "{ROOT}/1.X/ValidaExprRegOtrosVoided-1.0.1.xsl"
+                },
+                {
+                    "outcome": "errors",
+                    "errors": [
+                        [
+                            "RR",
+                            "1.X/ValidaExprRegOtrosVoided-1.0.1.xsl",
+                            "1",
+                            "20000000001-01-F001-1.xml",
+                            "VoidedDocuments"
+                        ],
+                        [
+                            "OBS-RR",
+                            "segunda",
+                            "2",
+                            "/1.X/ValidaExprRegOtrosVoided-1.0.1.xsl",
+                            "10"
+                        ]
+                    ]
+                }
+            ],
+            "warnings": []
+        }
+    }
+}

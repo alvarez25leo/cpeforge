@@ -1,0 +1,131 @@
+{
+    "generator": "oracle/php/xml/run_cases.php",
+    "reference": {
+        "tag": "v5.3.0",
+        "commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+    },
+    "reference_version": "8.4.17",
+    "twig_version": "v3.30.0",
+    "timezone_db": "2025.2",
+    "cases_file": "voided.json",
+    "results": {
+        "voided-full-default": {
+            "now": 1792253932,
+            "sha256": "05789bbc7531d3e4f673c750b953b678b5ae85dc974e2bab8d07a7c0d602fc7b",
+            "bytes": 2213,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/voided.xml.twig at line 1."
+            ]
+        },
+        "voided-full-cpeforge": {
+            "now": 1792253932,
+            "sha256": "05789bbc7531d3e4f673c750b953b678b5ae85dc974e2bab8d07a7c0d602fc7b",
+            "bytes": 2213,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/voided.xml.twig at line 1."
+            ]
+        },
+        "voided-full-tests": {
+            "now": 1792253932,
+            "sha256": "05789bbc7531d3e4f673c750b953b678b5ae85dc974e2bab8d07a7c0d602fc7b",
+            "bytes": 2213,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/voided.xml.twig at line 1."
+            ]
+        },
+        "reversion-full-default": {
+            "now": 1792253932,
+            "sha256": "cc6aeb4aa69368d2e87b071b441e94244b893f9541e4c6738decc3853188c569",
+            "bytes": 2213,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/voided.xml.twig at line 1."
+            ]
+        },
+        "reversion-full-cpeforge": {
+            "now": 1792253932,
+            "sha256": "cc6aeb4aa69368d2e87b071b441e94244b893f9541e4c6738decc3853188c569",
+            "bytes": 2213,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/voided.xml.twig at line 1."
+            ]
+        },
+        "reversion-full-tests": {
+            "now": 1792253932,
+            "sha256": "cc6aeb4aa69368d2e87b071b441e94244b893f9541e4c6738decc3853188c569",
+            "bytes": 2213,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/voided.xml.twig at line 1."
+            ]
+        },
+        "voided-empty-details-default": {
+            "now": 1792253932,
+            "sha256": "dfda99e95f9aea0b489186f2306417fb0a9e979c1bbaa938c28a174deca8b2bd",
+            "bytes": 1594,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/voided.xml.twig at line 1."
+            ]
+        },
+        "voided-null-date-default": {
+            "now": 1792253932,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "An exception has been thrown during the rendering of a template (\"CPEForge\\Model\\Voided\\Voided::getDateWithTimezone(): Argument #1 ($date) must be of type DateTimeInterface, null given\") in \"voided.xml.twig\" at line 11.",
+                "previous": {
+                    "class": "TypeError",
+                    "message": "CPEForge\\Model\\Voided\\Voided::getDateWithTimezone(): Argument #1 ($date) must be of type DateTimeInterface, null given"
+                }
+            },
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/voided.xml.twig at line 1."
+            ]
+        },
+        "voided-null-date-tests": {
+            "now": 1792253932,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "An exception has been thrown during the rendering of a template (\"CPEForge\\Model\\Voided\\Voided::getDateWithTimezone(): Argument #1 ($date) must be of type DateTimeInterface, null given\") in \"voided.xml.twig\" at line 11.",
+                "previous": {
+                    "class": "TypeError",
+                    "message": "CPEForge\\Model\\Voided\\Voided::getDateWithTimezone(): Argument #1 ($date) must be of type DateTimeInterface, null given"
+                }
+            },
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/voided.xml.twig at line 1."
+            ]
+        },
+        "voided-null-generation-default": {
+            "now": 1792253932,
+            "sha256": "b59aa178b8709a18373c6be4b9e9cec9fa181a1e068013a0f25fc645a356c8fd",
+            "bytes": 2213,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/voided.xml.twig at line 1."
+            ]
+        },
+        "voided-no-company-default": {
+            "now": 1792253932,
+            "sha256": "abe40c55df6b40f0119f9f961df826e5e2fa0420a8e86ced7120f52b7641bc51",
+            "bytes": 2132,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/voided.xml.twig at line 1."
+            ]
+        },
+        "voided-no-company-cpeforge": {
+            "now": 1792253933,
+            "sha256": "abe40c55df6b40f0119f9f961df826e5e2fa0420a8e86ced7120f52b7641bc51",
+            "bytes": 2132,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/voided.xml.twig at line 1."
+            ]
+        },
+        "voided-no-company-tests": {
+            "now": 1792253933,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "Impossible to access an attribute (\"ruc\") on a null variable in \"voided.xml.twig\" at line 16."
+            },
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/voided.xml.twig at line 1."
+            ]
+        }
+    }
+}

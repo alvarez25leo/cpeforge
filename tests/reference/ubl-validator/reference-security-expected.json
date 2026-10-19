@@ -1,0 +1,55 @@
+{
+    "reference": "980bad9412eab51516e4879b06d8d2e723c62f0d",
+    "runtime": "8.4.17",
+    "libxml": "2.15.1",
+    "results": {
+        "ubl/dtd-internal": {
+            "file": "security-dtd-internal.xml",
+            "valid": false,
+            "error": "Code: 1818, Line: 1, Column: 0, Message: Internal error: xmlSchemaVDocWalk, there is at least one entity reference in the node-tree currently being validated. Processing of entities with this XML Schema processor is not supported (yet). Please substitute entities before validation..\n"
+        },
+        "ubl/version-traversal": {
+            "file": "security-version-traversal.xml",
+            "valid": false,
+            "error": "XSD Path: :'{workspace}/target/reference/ubl-validator-v2.3.0/src/Ubl/../xsd/../maindoc/UBL-Invoice-...xsd' not found"
+        },
+        "ubl/deep-nesting": {
+            "file": "security-deep-nesting.xml",
+            "valid": true,
+            "error": ""
+        },
+        "ubl/xades-missing-import": {
+            "valid": false,
+            "errors": [
+                {
+                    "level": 1,
+                    "code": 1524,
+                    "column": 0,
+                    "message": "failed to load \"{workspace}/target/reference/ubl-validator-v2.3.0/src/xsd/2.0/common/XAdES.xsd\": No such file or directory\n",
+                    "file": null,
+                    "line": 0
+                },
+                {
+                    "level": 1,
+                    "code": 3084,
+                    "column": 0,
+                    "message": "Element '{http://www.w3.org/2001/XMLSchema}import': Failed to locate a schema at location '{workspace}/target/reference/ubl-validator-v2.3.0/src/xsd/2.0/common/XAdES.xsd'. Skipping the import.\n",
+                    "file": null,
+                    "line": 19
+                },
+                {
+                    "level": 2,
+                    "code": 1871,
+                    "column": 0,
+                    "message": "Element '{http://www.w3.org/2000/09/xmldsig#}Signature': Missing child element(s). Expected is ( {http://www.w3.org/2000/09/xmldsig#}SignedInfo ).\n",
+                    "file": null,
+                    "line": 1
+                }
+            ]
+        },
+        "ubl/schema-outside-manifest": {
+            "valid": true,
+            "error_count": 0
+        }
+    }
+}

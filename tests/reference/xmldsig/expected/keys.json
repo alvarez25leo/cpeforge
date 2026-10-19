@@ -1,0 +1,1096 @@
+{
+  "generator": "oracle/php/xmldsig/run_cases.php",
+  "iconv_profile": "libiconv",
+  "libxml": "2.15.1",
+  "libxml_cdata": "separados",
+  "libxml_cr": "decimal",
+  "openssl": "OpenSSL 3.6.0 1 Oct 2025",
+  "reference_version": "8.4.17",
+  "reference": {
+    "commit": "3b70c1b1cd1b2be3693666b91be3e5adff620b76",
+    "tag": "v5.1.0"
+  },
+  "results": {
+    "hmac-sign": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": true
+      },
+      "warnings": []
+    },
+    "hmac-sign-empty": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": true
+      },
+      "warnings": []
+    },
+    "hmac-verify-other-data": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": false
+      },
+      "warnings": []
+    },
+    "hmac-verify-other-key": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": false
+      },
+      "warnings": []
+    },
+    "key-3des-bogus": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "keysize": 24,
+        "type": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc"
+      },
+      "warnings": []
+    },
+    "key-3des-no-type": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "keysize": 24,
+        "type": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc"
+      },
+      "warnings": []
+    },
+    "key-3des-private": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "keysize": 24,
+        "type": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc"
+      },
+      "warnings": []
+    },
+    "key-3des-public": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "keysize": 24,
+        "type": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc"
+      },
+      "warnings": []
+    },
+    "key-aes128-bogus": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "keysize": 16,
+        "type": "http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+      },
+      "warnings": []
+    },
+    "key-aes128-no-type": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "keysize": 16,
+        "type": "http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+      },
+      "warnings": []
+    },
+    "key-aes128-private": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "keysize": 16,
+        "type": "http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+      },
+      "warnings": []
+    },
+    "key-aes128-public": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "keysize": 16,
+        "type": "http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+      },
+      "warnings": []
+    },
+    "key-aes192-bogus": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "keysize": 24,
+        "type": "http://www.w3.org/2001/04/xmlenc#aes192-cbc"
+      },
+      "warnings": []
+    },
+    "key-aes192-no-type": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "keysize": 24,
+        "type": "http://www.w3.org/2001/04/xmlenc#aes192-cbc"
+      },
+      "warnings": []
+    },
+    "key-aes192-private": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "keysize": 24,
+        "type": "http://www.w3.org/2001/04/xmlenc#aes192-cbc"
+      },
+      "warnings": []
+    },
+    "key-aes192-public": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "keysize": 24,
+        "type": "http://www.w3.org/2001/04/xmlenc#aes192-cbc"
+      },
+      "warnings": []
+    },
+    "key-aes256-bogus": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "keysize": 32,
+        "type": "http://www.w3.org/2001/04/xmlenc#aes256-cbc"
+      },
+      "warnings": []
+    },
+    "key-aes256-no-type": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "keysize": 32,
+        "type": "http://www.w3.org/2001/04/xmlenc#aes256-cbc"
+      },
+      "warnings": []
+    },
+    "key-aes256-private": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "keysize": 32,
+        "type": "http://www.w3.org/2001/04/xmlenc#aes256-cbc"
+      },
+      "warnings": []
+    },
+    "key-aes256-public": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "keysize": 32,
+        "type": "http://www.w3.org/2001/04/xmlenc#aes256-cbc"
+      },
+      "warnings": []
+    },
+    "key-dsa-bogus": {
+      "error": {
+        "class": "Exception",
+        "message": "Invalid Key Type"
+      },
+      "warnings": []
+    },
+    "key-dsa-no-type": {
+      "error": {
+        "class": "Exception",
+        "message": "Invalid Key Type"
+      },
+      "warnings": []
+    },
+    "key-dsa-private": {
+      "error": {
+        "class": "Exception",
+        "message": "Invalid Key Type"
+      },
+      "warnings": []
+    },
+    "key-dsa-public": {
+      "error": {
+        "class": "Exception",
+        "message": "Invalid Key Type"
+      },
+      "warnings": []
+    },
+    "key-hmac-bogus": {
+      "result": {
+        "algorith": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "algorithm": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "keysize": null,
+        "type": "http://www.w3.org/2000/09/xmldsig#hmac-sha1"
+      },
+      "warnings": []
+    },
+    "key-hmac-no-type": {
+      "result": {
+        "algorith": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "algorithm": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "keysize": null,
+        "type": "http://www.w3.org/2000/09/xmldsig#hmac-sha1"
+      },
+      "warnings": []
+    },
+    "key-hmac-private": {
+      "result": {
+        "algorith": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "algorithm": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "keysize": null,
+        "type": "http://www.w3.org/2000/09/xmldsig#hmac-sha1"
+      },
+      "warnings": []
+    },
+    "key-hmac-public": {
+      "result": {
+        "algorith": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "algorithm": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "keysize": null,
+        "type": "http://www.w3.org/2000/09/xmldsig#hmac-sha1"
+      },
+      "warnings": []
+    },
+    "key-oaep-bogus": {
+      "error": {
+        "class": "Exception",
+        "message": "Certificate \"type\" (private/public) must be passed via parameters"
+      },
+      "warnings": []
+    },
+    "key-oaep-no-type": {
+      "error": {
+        "class": "Exception",
+        "message": "Certificate \"type\" (private/public) must be passed via parameters"
+      },
+      "warnings": []
+    },
+    "key-oaep-private": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "keysize": null,
+        "type": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p"
+      },
+      "warnings": []
+    },
+    "key-oaep-public": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "keysize": null,
+        "type": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p"
+      },
+      "warnings": []
+    },
+    "key-rsa-sha1-bogus": {
+      "error": {
+        "class": "Exception",
+        "message": "Certificate \"type\" (private/public) must be passed via parameters"
+      },
+      "warnings": []
+    },
+    "key-rsa-sha1-no-type": {
+      "error": {
+        "class": "Exception",
+        "message": "Certificate \"type\" (private/public) must be passed via parameters"
+      },
+      "warnings": []
+    },
+    "key-rsa-sha1-private": {
+      "result": {
+        "algorith": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "algorithm": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "keysize": null,
+        "type": "http://www.w3.org/2000/09/xmldsig#rsa-sha1"
+      },
+      "warnings": []
+    },
+    "key-rsa-sha1-public": {
+      "result": {
+        "algorith": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "algorithm": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "keysize": null,
+        "type": "http://www.w3.org/2000/09/xmldsig#rsa-sha1"
+      },
+      "warnings": []
+    },
+    "key-rsa-sha256-bogus": {
+      "error": {
+        "class": "Exception",
+        "message": "Certificate \"type\" (private/public) must be passed via parameters"
+      },
+      "warnings": []
+    },
+    "key-rsa-sha256-no-type": {
+      "error": {
+        "class": "Exception",
+        "message": "Certificate \"type\" (private/public) must be passed via parameters"
+      },
+      "warnings": []
+    },
+    "key-rsa-sha256-private": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "algorithm": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "keysize": null,
+        "type": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"
+      },
+      "warnings": []
+    },
+    "key-rsa-sha256-public": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "algorithm": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "keysize": null,
+        "type": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"
+      },
+      "warnings": []
+    },
+    "key-rsa-sha384-bogus": {
+      "error": {
+        "class": "Exception",
+        "message": "Certificate \"type\" (private/public) must be passed via parameters"
+      },
+      "warnings": []
+    },
+    "key-rsa-sha384-no-type": {
+      "error": {
+        "class": "Exception",
+        "message": "Certificate \"type\" (private/public) must be passed via parameters"
+      },
+      "warnings": []
+    },
+    "key-rsa-sha384-private": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384",
+        "algorithm": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384",
+        "keysize": null,
+        "type": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384"
+      },
+      "warnings": []
+    },
+    "key-rsa-sha384-public": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384",
+        "algorithm": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384",
+        "keysize": null,
+        "type": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384"
+      },
+      "warnings": []
+    },
+    "key-rsa-sha512-bogus": {
+      "error": {
+        "class": "Exception",
+        "message": "Certificate \"type\" (private/public) must be passed via parameters"
+      },
+      "warnings": []
+    },
+    "key-rsa-sha512-no-type": {
+      "error": {
+        "class": "Exception",
+        "message": "Certificate \"type\" (private/public) must be passed via parameters"
+      },
+      "warnings": []
+    },
+    "key-rsa-sha512-private": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+        "algorithm": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+        "keysize": null,
+        "type": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"
+      },
+      "warnings": []
+    },
+    "key-rsa-sha512-public": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+        "algorithm": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+        "keysize": null,
+        "type": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"
+      },
+      "warnings": []
+    },
+    "key-rsa15-bogus": {
+      "error": {
+        "class": "Exception",
+        "message": "Certificate \"type\" (private/public) must be passed via parameters"
+      },
+      "warnings": []
+    },
+    "key-rsa15-no-type": {
+      "error": {
+        "class": "Exception",
+        "message": "Certificate \"type\" (private/public) must be passed via parameters"
+      },
+      "warnings": []
+    },
+    "key-rsa15-private": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "keysize": null,
+        "type": "http://www.w3.org/2001/04/xmlenc#rsa-1_5"
+      },
+      "warnings": []
+    },
+    "key-rsa15-public": {
+      "result": {
+        "algorith": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "algorithm": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "keysize": null,
+        "type": "http://www.w3.org/2001/04/xmlenc#rsa-1_5"
+      },
+      "warnings": []
+    },
+    "key-unknown-bogus": {
+      "error": {
+        "class": "Exception",
+        "message": "Invalid Key Type"
+      },
+      "warnings": []
+    },
+    "key-unknown-no-type": {
+      "error": {
+        "class": "Exception",
+        "message": "Invalid Key Type"
+      },
+      "warnings": []
+    },
+    "key-unknown-private": {
+      "error": {
+        "class": "Exception",
+        "message": "Invalid Key Type"
+      },
+      "warnings": []
+    },
+    "key-unknown-public": {
+      "error": {
+        "class": "Exception",
+        "message": "Invalid Key Type"
+      },
+      "warnings": []
+    },
+    "key-x509-cert": {
+      "result": {
+        "certificate": "<pem:CERTIFICATE>\n",
+        "thumbprint": "<depende-de-clave>"
+      },
+      "warnings": []
+    },
+    "key-x509-combined-pem": {
+      "result": {
+        "certificate": "<pem:CERTIFICATE>\n",
+        "thumbprint": "<depende-de-clave>"
+      },
+      "warnings": []
+    },
+    "key-x509-not-cert": {
+      "result": {
+        "certificate": null,
+        "thumbprint": null
+      },
+      "warnings": []
+    },
+    "key-x509-private": {
+      "result": {
+        "certificate": null,
+        "thumbprint": null
+      },
+      "warnings": []
+    },
+    "rsa-oaep-priv-pub": {
+      "error": {
+        "class": "Exception",
+        "message": "Failure encrypting Data (openssl private) - error:1C8000A5:Provider routines::illegal or unsupported padding mode"
+      },
+      "warnings": []
+    },
+    "rsa-oaep-pub-priv-empty": {
+      "result": {
+        "ciphertext_length": 256,
+        "plaintext": "",
+        "plaintext_matches": true
+      },
+      "warnings": []
+    },
+    "rsa-oaep-pub-priv-session": {
+      "result": {
+        "ciphertext_length": 256,
+        "plaintext": "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\b\t\n\u000b\f\r\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f",
+        "plaintext_matches": true
+      },
+      "warnings": []
+    },
+    "rsa-oaep-pub-priv-short": {
+      "result": {
+        "ciphertext_length": 256,
+        "plaintext": "secreto",
+        "plaintext_matches": true
+      },
+      "warnings": []
+    },
+    "rsa-oaep-too-long": {
+      "error": {
+        "class": "Exception",
+        "message": "Failure encrypting Data (openssl public) - error:0200006E:rsa routines::data too large for key size"
+      },
+      "warnings": []
+    },
+    "rsa-oaep-wrong-key": {
+      "result": {
+        "original_recovered": false
+      },
+      "warnings": []
+    },
+    "rsa-public-invalid": {
+      "error": {
+        "class": "Exception",
+        "message": "Unable to extract public key"
+      },
+      "warnings": []
+    },
+    "rsa-rsa15-priv-pub": {
+      "result": {
+        "ciphertext_length": 256,
+        "plaintext": "firmado en bruto",
+        "plaintext_matches": true
+      },
+      "warnings": []
+    },
+    "rsa-rsa15-pub-priv-empty": {
+      "result": {
+        "ciphertext_length": 256,
+        "plaintext": "",
+        "plaintext_matches": true
+      },
+      "warnings": []
+    },
+    "rsa-rsa15-pub-priv-session": {
+      "result": {
+        "ciphertext_length": 256,
+        "plaintext": "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\b\t\n\u000b\f\r\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f",
+        "plaintext_matches": true
+      },
+      "warnings": []
+    },
+    "rsa-rsa15-pub-priv-short": {
+      "result": {
+        "ciphertext_length": 256,
+        "plaintext": "secreto",
+        "plaintext_matches": true
+      },
+      "warnings": []
+    },
+    "rsa-rsa15-too-long": {
+      "error": {
+        "class": "Exception",
+        "message": "Failure encrypting Data (openssl public) - error:0200006E:rsa routines::data too large for key size"
+      },
+      "warnings": []
+    },
+    "rsa-rsa15-wrong-key": {
+      "result": {
+        "original_recovered": false
+      },
+      "warnings": []
+    },
+    "rsa-sign-encrypted-key": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": 1
+      },
+      "warnings": []
+    },
+    "rsa-sign-encrypted-key-wrong-pass": {
+      "error": {
+        "class": "Exception",
+        "message": "Failure Signing Data: <detalle-openssl> - 1"
+      },
+      "warnings": [
+        "openssl_sign(): Supplied key param cannot be coerced into a private key"
+      ]
+    },
+    "rsa-sign-invalid-key": {
+      "error": {
+        "class": "Exception",
+        "message": "Failure Signing Data: error:1E08010C:DECODER routines::unsupported - 1"
+      },
+      "warnings": [
+        "openssl_sign(): Supplied key param cannot be coerced into a private key"
+      ]
+    },
+    "rsa-sign-pkcs1-key": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": 1
+      },
+      "warnings": []
+    },
+    "rsa-sign-rsa-sha1": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": 1
+      },
+      "warnings": []
+    },
+    "rsa-sign-rsa-sha1-other-data": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": 0
+      },
+      "warnings": []
+    },
+    "rsa-sign-rsa-sha1-pubkey": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": 1
+      },
+      "warnings": []
+    },
+    "rsa-sign-rsa-sha1-wrong-key": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": 0
+      },
+      "warnings": []
+    },
+    "rsa-sign-rsa-sha256": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": 1
+      },
+      "warnings": []
+    },
+    "rsa-sign-rsa-sha256-other-data": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": 0
+      },
+      "warnings": []
+    },
+    "rsa-sign-rsa-sha256-pubkey": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": 1
+      },
+      "warnings": []
+    },
+    "rsa-sign-rsa-sha256-wrong-key": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": 0
+      },
+      "warnings": []
+    },
+    "rsa-sign-rsa-sha384": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": 1
+      },
+      "warnings": []
+    },
+    "rsa-sign-rsa-sha384-other-data": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": 0
+      },
+      "warnings": []
+    },
+    "rsa-sign-rsa-sha384-pubkey": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": 1
+      },
+      "warnings": []
+    },
+    "rsa-sign-rsa-sha384-wrong-key": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": 0
+      },
+      "warnings": []
+    },
+    "rsa-sign-rsa-sha512": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": 1
+      },
+      "warnings": []
+    },
+    "rsa-sign-rsa-sha512-other-data": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": 0
+      },
+      "warnings": []
+    },
+    "rsa-sign-rsa-sha512-pubkey": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": 1
+      },
+      "warnings": []
+    },
+    "rsa-sign-rsa-sha512-wrong-key": {
+      "result": {
+        "signature": "<depende-de-clave>",
+        "verify": 0
+      },
+      "warnings": []
+    },
+    "rsa-sign-with-public-key": {
+      "error": {
+        "class": "Exception",
+        "message": "Failure Signing Data:  - 1"
+      },
+      "warnings": [
+        "openssl_sign(): Supplied key param is a public key",
+        "openssl_sign(): Supplied key param cannot be coerced into a private key"
+      ]
+    },
+    "session-3des": {
+      "result": {
+        "length": 24,
+        "odd_parity": true,
+        "stored": true
+      },
+      "warnings": []
+    },
+    "session-aes128": {
+      "result": {
+        "length": 16,
+        "odd_parity": false,
+        "stored": true
+      },
+      "warnings": []
+    },
+    "session-aes192": {
+      "result": {
+        "length": 24,
+        "odd_parity": false,
+        "stored": true
+      },
+      "warnings": []
+    },
+    "session-aes256": {
+      "result": {
+        "length": 32,
+        "odd_parity": false,
+        "stored": true
+      },
+      "warnings": []
+    },
+    "session-hmac": {
+      "error": {
+        "class": "Exception",
+        "message": "Unknown key size for type \"http://www.w3.org/2000/09/xmldsig#hmac-sha1\"."
+      },
+      "warnings": []
+    },
+    "session-oaep": {
+      "error": {
+        "class": "Exception",
+        "message": "Unknown key size for type \"http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p\"."
+      },
+      "warnings": []
+    },
+    "session-rsa-sha1": {
+      "error": {
+        "class": "Exception",
+        "message": "Unknown key size for type \"http://www.w3.org/2000/09/xmldsig#rsa-sha1\"."
+      },
+      "warnings": []
+    },
+    "session-rsa-sha256": {
+      "error": {
+        "class": "Exception",
+        "message": "Unknown key size for type \"http://www.w3.org/2001/04/xmldsig-more#rsa-sha256\"."
+      },
+      "warnings": []
+    },
+    "session-rsa-sha384": {
+      "error": {
+        "class": "Exception",
+        "message": "Unknown key size for type \"http://www.w3.org/2001/04/xmldsig-more#rsa-sha384\"."
+      },
+      "warnings": []
+    },
+    "session-rsa-sha512": {
+      "error": {
+        "class": "Exception",
+        "message": "Unknown key size for type \"http://www.w3.org/2001/04/xmldsig-more#rsa-sha512\"."
+      },
+      "warnings": []
+    },
+    "session-rsa15": {
+      "error": {
+        "class": "Exception",
+        "message": "Unknown key size for type \"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"."
+      },
+      "warnings": []
+    },
+    "sym-decrypt-3des-iv-only": {
+      "result": "",
+      "warnings": []
+    },
+    "sym-decrypt-3des-not-block": {
+      "error": {
+        "class": "Exception",
+        "message": "Failure decrypting Data (openssl symmetric) - error:1C80006B:Provider routines::wrong final block length"
+      },
+      "warnings": []
+    },
+    "sym-decrypt-3des-pattern": {
+      "result": "",
+      "warnings": []
+    },
+    "sym-decrypt-3des-zero-blocks": {
+      "result": {
+        "b64": "PmoELZqsAwI+agQtmqw="
+      },
+      "warnings": []
+    },
+    "sym-decrypt-aes128-iv-only": {
+      "result": "",
+      "warnings": []
+    },
+    "sym-decrypt-aes128-not-block": {
+      "error": {
+        "class": "Exception",
+        "message": "Failure decrypting Data (openssl symmetric) - error:1C80006B:Provider routines::wrong final block length"
+      },
+      "warnings": []
+    },
+    "sym-decrypt-aes128-pattern": {
+      "result": "",
+      "warnings": []
+    },
+    "sym-decrypt-aes128-zero-blocks": {
+      "result": "",
+      "warnings": []
+    },
+    "sym-decrypt-aes192-iv-only": {
+      "result": "",
+      "warnings": []
+    },
+    "sym-decrypt-aes192-not-block": {
+      "error": {
+        "class": "Exception",
+        "message": "Failure decrypting Data (openssl symmetric) - error:1C80006B:Provider routines::wrong final block length"
+      },
+      "warnings": []
+    },
+    "sym-decrypt-aes192-pattern": {
+      "result": "",
+      "warnings": []
+    },
+    "sym-decrypt-aes192-zero-blocks": {
+      "result": "",
+      "warnings": []
+    },
+    "sym-decrypt-aes256-iv-only": {
+      "result": "",
+      "warnings": []
+    },
+    "sym-decrypt-aes256-not-block": {
+      "error": {
+        "class": "Exception",
+        "message": "Failure decrypting Data (openssl symmetric) - error:1C80006B:Provider routines::wrong final block length"
+      },
+      "warnings": []
+    },
+    "sym-decrypt-aes256-pattern": {
+      "result": "",
+      "warnings": []
+    },
+    "sym-decrypt-aes256-zero-blocks": {
+      "result": "",
+      "warnings": []
+    },
+    "sym-long-key-3des": {
+      "result": {
+        "ciphertext_length": 16,
+        "iv_prefix": true,
+        "plaintext": "texto"
+      },
+      "warnings": []
+    },
+    "sym-long-key-aes128": {
+      "result": {
+        "ciphertext_length": 32,
+        "iv_prefix": true,
+        "plaintext": "texto"
+      },
+      "warnings": []
+    },
+    "sym-long-key-aes192": {
+      "result": {
+        "ciphertext_length": 32,
+        "iv_prefix": true,
+        "plaintext": "texto"
+      },
+      "warnings": []
+    },
+    "sym-long-key-aes256": {
+      "result": {
+        "ciphertext_length": 32,
+        "iv_prefix": true,
+        "plaintext": "texto"
+      },
+      "warnings": []
+    },
+    "sym-roundtrip-3des-block": {
+      "result": {
+        "ciphertext_length": 24,
+        "iv_prefix": true,
+        "plaintext": "xxxxxxxx"
+      },
+      "warnings": []
+    },
+    "sym-roundtrip-3des-block-minus": {
+      "result": {
+        "ciphertext_length": 16,
+        "iv_prefix": true,
+        "plaintext": "xxxxxxx"
+      },
+      "warnings": []
+    },
+    "sym-roundtrip-3des-empty": {
+      "result": {
+        "ciphertext_length": 16,
+        "iv_prefix": true,
+        "plaintext": ""
+      },
+      "warnings": []
+    },
+    "sym-roundtrip-3des-unicode": {
+      "result": {
+        "ciphertext_length": 32,
+        "iv_prefix": true,
+        "plaintext": "ñandú 😀 <xml/>"
+      },
+      "warnings": []
+    },
+    "sym-roundtrip-aes128-block": {
+      "result": {
+        "ciphertext_length": 48,
+        "iv_prefix": true,
+        "plaintext": "xxxxxxxxxxxxxxxx"
+      },
+      "warnings": []
+    },
+    "sym-roundtrip-aes128-block-minus": {
+      "result": {
+        "ciphertext_length": 32,
+        "iv_prefix": true,
+        "plaintext": "xxxxxxxxxxxxxxx"
+      },
+      "warnings": []
+    },
+    "sym-roundtrip-aes128-empty": {
+      "result": {
+        "ciphertext_length": 32,
+        "iv_prefix": true,
+        "plaintext": ""
+      },
+      "warnings": []
+    },
+    "sym-roundtrip-aes128-unicode": {
+      "result": {
+        "ciphertext_length": 48,
+        "iv_prefix": true,
+        "plaintext": "ñandú 😀 <xml/>"
+      },
+      "warnings": []
+    },
+    "sym-roundtrip-aes192-block": {
+      "result": {
+        "ciphertext_length": 48,
+        "iv_prefix": true,
+        "plaintext": "xxxxxxxxxxxxxxxx"
+      },
+      "warnings": []
+    },
+    "sym-roundtrip-aes192-block-minus": {
+      "result": {
+        "ciphertext_length": 32,
+        "iv_prefix": true,
+        "plaintext": "xxxxxxxxxxxxxxx"
+      },
+      "warnings": []
+    },
+    "sym-roundtrip-aes192-empty": {
+      "result": {
+        "ciphertext_length": 32,
+        "iv_prefix": true,
+        "plaintext": ""
+      },
+      "warnings": []
+    },
+    "sym-roundtrip-aes192-unicode": {
+      "result": {
+        "ciphertext_length": 48,
+        "iv_prefix": true,
+        "plaintext": "ñandú 😀 <xml/>"
+      },
+      "warnings": []
+    },
+    "sym-roundtrip-aes256-block": {
+      "result": {
+        "ciphertext_length": 48,
+        "iv_prefix": true,
+        "plaintext": "xxxxxxxxxxxxxxxx"
+      },
+      "warnings": []
+    },
+    "sym-roundtrip-aes256-block-minus": {
+      "result": {
+        "ciphertext_length": 32,
+        "iv_prefix": true,
+        "plaintext": "xxxxxxxxxxxxxxx"
+      },
+      "warnings": []
+    },
+    "sym-roundtrip-aes256-empty": {
+      "result": {
+        "ciphertext_length": 32,
+        "iv_prefix": true,
+        "plaintext": ""
+      },
+      "warnings": []
+    },
+    "sym-roundtrip-aes256-unicode": {
+      "result": {
+        "ciphertext_length": 48,
+        "iv_prefix": true,
+        "plaintext": "ñandú 😀 <xml/>"
+      },
+      "warnings": []
+    },
+    "sym-short-key-3des": {
+      "error": {
+        "class": "Exception",
+        "message": "Key must contain at least 25 characters for this cipher"
+      },
+      "warnings": []
+    },
+    "sym-short-key-aes128": {
+      "error": {
+        "class": "Exception",
+        "message": "Key must contain at least 25 characters for this cipher"
+      },
+      "warnings": []
+    },
+    "sym-short-key-aes192": {
+      "error": {
+        "class": "Exception",
+        "message": "Key must contain at least 25 characters for this cipher"
+      },
+      "warnings": []
+    },
+    "sym-short-key-aes256": {
+      "error": {
+        "class": "Exception",
+        "message": "Key must contain at least 25 characters for this cipher"
+      },
+      "warnings": []
+    }
+  }
+}

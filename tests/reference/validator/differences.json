@@ -1,0 +1,36 @@
+{
+  "differences": [
+    {
+      "id": "2.1/Invoice/details/limit-violations-10012",
+      "path": "$.keys",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "Rust deja de validar al llegar a 10 000 violaciones (ValidatorError::Limit «violaciones»); la referencia devuelve todas (10 012 en el caso).",
+      "compatibility_note": "Un documento con más de 10 000 errores ya es inválido; se informa el límite en vez de acumular violaciones sin cota."
+    },
+    {
+      "id": "2.1/Vehicle/placa/limit-bytes-1000001",
+      "path": "$.keys",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "Rust rechaza entradas de más de 1 MB (ValidatorError::Limit «tamaño de entrada»); la referencia valida cualquier tamaño.",
+      "compatibility_note": "Ningún comprobante real se acerca a 1 MB de campos; el límite evita agotar memoria con entradas hostiles."
+    },
+    {
+      "id": "2.1/Vehicle/secundarios/limit-depth-33",
+      "path": "$.keys",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "Rust rechaza más de 32 niveles de anidamiento (ValidatorError::Limit «profundidad»); la referencia no limita la profundidad.",
+      "compatibility_note": "Los modelos de la referencia anidan pocos niveles; el límite impide desbordar la pila con entradas hostiles."
+    },
+    {
+      "id": "2.1/Vehicle/secundarios/limit-nodes-100001",
+      "path": "$.keys",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "Rust rechaza más de 100 000 nodos (ValidatorError::Limit «nodos»); la referencia los recorre todos.",
+      "compatibility_note": "Un comprobante real tiene órdenes de magnitud menos nodos; el límite acota el tiempo de validación."
+    }
+  ]
+}

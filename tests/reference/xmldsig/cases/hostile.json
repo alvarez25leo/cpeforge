@@ -1,0 +1,249 @@
+{
+  "family": "hostile",
+  "cases": [
+    {
+      "id": "hostile-serialize-dtd-internal-entity",
+      "scenario": "serialize",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><!DOCTYPE r [<!ENTITY e \"valor\">]><r>&e;</r>"
+    },
+    {
+      "id": "hostile-serialize-dtd-only",
+      "scenario": "serialize",
+      "xml": "<!DOCTYPE r><r>x</r>"
+    },
+    {
+      "id": "hostile-serialize-external-entity",
+      "scenario": "serialize",
+      "xml": "<!DOCTYPE r [<!ENTITY ext SYSTEM \"file:///no/existe/secreto\">]><r>&ext;</r>"
+    },
+    {
+      "id": "hostile-serialize-external-dtd",
+      "scenario": "serialize",
+      "xml": "<!DOCTYPE r SYSTEM \"http://127.0.0.1:9/x.dtd\"><r>x</r>"
+    },
+    {
+      "id": "hostile-serialize-parameter-entity",
+      "scenario": "serialize",
+      "xml": "<!DOCTYPE r [<!ENTITY % p SYSTEM \"file:///no/existe\"> %p;]><r/>"
+    },
+    {
+      "id": "hostile-serialize-billion-laughs",
+      "scenario": "serialize",
+      "xml": "<!DOCTYPE r [<!ENTITY a \"lol\"><!ENTITY b \"&a;&a;&a;&a;&a;&a;&a;&a;&a;&a;\"><!ENTITY c \"&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;\"><!ENTITY d \"&c;&c;&c;&c;&c;&c;&c;&c;&c;&c;\"><!ENTITY e \"&d;&d;&d;&d;&d;&d;&d;&d;&d;&d;\"><!ENTITY f \"&e;&e;&e;&e;&e;&e;&e;&e;&e;&e;\"><!ENTITY g \"&f;&f;&f;&f;&f;&f;&f;&f;&f;&f;\"><!ENTITY h \"&g;&g;&g;&g;&g;&g;&g;&g;&g;&g;\"><!ENTITY i \"&h;&h;&h;&h;&h;&h;&h;&h;&h;&h;\"><!ENTITY j \"&i;&i;&i;&i;&i;&i;&i;&i;&i;&i;\">]><r>&j;</r>"
+    },
+    {
+      "id": "hostile-serialize-undefined-entity",
+      "scenario": "serialize",
+      "xml": "<r>&nada;</r>"
+    },
+    {
+      "id": "hostile-serialize-deep-255",
+      "scenario": "serialize",
+      "xml": "<d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d>x</d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d>"
+    },
+    {
+      "id": "hostile-serialize-deep-256",
+      "scenario": "serialize",
+      "xml": "<d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d>x</d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d>"
+    },
+    {
+      "id": "hostile-serialize-deep-300",
+      "scenario": "serialize",
+      "xml": "<d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d><d>x</d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d></d>"
+    },
+    {
+      "id": "hostile-serialize-non-utf8-declared",
+      "scenario": "serialize",
+      "xml": "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><r>x</r>"
+    },
+    {
+      "id": "hostile-serialize-huge-11mib",
+      "scenario": "serialize",
+      "xml": {
+        "repeat": {
+          "prefix": "<r>",
+          "unit": "<a>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</a>",
+          "count": 11264,
+          "suffix": "</r>"
+        }
+      },
+      "summary": true
+    },
+    {
+      "id": "hostile-serialize-large-9mib",
+      "scenario": "serialize",
+      "xml": {
+        "repeat": {
+          "prefix": "<r>",
+          "unit": "<a>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</a>",
+          "count": 9216,
+          "suffix": "</r>"
+        }
+      },
+      "summary": true
+    },
+    {
+      "id": "hostile-c14n-xpath-quadratic",
+      "scenario": "c14n",
+      "xml": {
+        "repeat": {
+          "prefix": "<r>",
+          "unit": "<a/>",
+          "count": 4000,
+          "suffix": "</r>"
+        }
+      },
+      "target": "document",
+      "transforms": [
+        {
+          "algorithm": "http://www.w3.org/TR/1999/REC-xpath-19991116",
+          "xpath": "count(following::*) >= 0"
+        }
+      ],
+      "summary": true
+    },
+    {
+      "id": "hostile-serialize-many-nodes",
+      "scenario": "serialize",
+      "xml": {
+        "repeat": {
+          "prefix": "<r>",
+          "unit": "<a/>",
+          "count": 1100000,
+          "suffix": "</r>"
+        }
+      },
+      "summary": true
+    },
+    {
+      "id": "hostile-sunat-sign-dtd",
+      "scenario": "sunat_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><!DOCTYPE Invoice [<!ENTITY e \"x\">]><Invoice xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2\" xmlns:ext=\"urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2\"><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent/></ext:UBLExtension></ext:UBLExtensions><ID>&e;</ID></Invoice>",
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "hostile-sunat-verify-dtd-added",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": "<Invoice",
+          "to": "<!DOCTYPE Invoice [<!ENTITY e \"F001-123\">]>\n<Invoice"
+        }
+      ]
+    },
+    {
+      "id": "hostile-sunat-verify-entity-substitution",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": "<Invoice",
+          "to": "<!DOCTYPE Invoice [<!ENTITY e \"F001-123\">]>\n<Invoice"
+        },
+        {
+          "op": "replace",
+          "from": "<cbc:ID>F001-123</cbc:ID>",
+          "to": "<cbc:ID>&e;</cbc:ID>"
+        }
+      ]
+    },
+    {
+      "id": "hostile-sunat-verify-external-entity",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": "<Invoice",
+          "to": "<!DOCTYPE Invoice [<!ENTITY ext SYSTEM \"file:///no/existe\">]>\n<Invoice"
+        },
+        {
+          "op": "replace",
+          "from": "<cbc:ID>F001-123</cbc:ID>",
+          "to": "<cbc:ID>&ext;</cbc:ID>"
+        }
+      ]
+    },
+    {
+      "id": "hostile-sunat-verify-huge",
+      "scenario": "sunat_verify",
+      "input": {
+        "repeat": {
+          "prefix": "<r>",
+          "unit": "<a>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</a>",
+          "count": 11264,
+          "suffix": "</r>"
+        }
+      }
+    },
+    {
+      "id": "hostile-dsig-verify-dtd-id",
+      "scenario": "dsig_verify",
+      "sign": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other></root>",
+        "key": {
+          "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+          "type": "private",
+          "load": {
+            "key": "a",
+            "suffix": "pem"
+          }
+        },
+        "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+        "references": [
+          {
+            "target": "id:d1",
+            "transforms": [
+              "http://www.w3.org/2001/10/xml-exc-c14n#"
+            ],
+            "options": {
+              "overwrite": false
+            }
+          }
+        ],
+        "append_to": "root"
+      },
+      "verify_with": {
+        "key": "a",
+        "suffix": "crt"
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": "<root",
+          "to": "<!DOCTYPE root [<!ATTLIST data Id ID #IMPLIED>]><root"
+        }
+      ]
+    }
+  ]
+}

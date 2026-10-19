@@ -1,0 +1,83 @@
+{
+  "family": "optional",
+  "cases": [
+    {
+      "id": "optional-unset",
+      "description": "Campo no establecido",
+      "input": {
+        "$class": "Legend"
+      }
+    },
+    {
+      "id": "optional-null",
+      "description": "Campo establecido en null",
+      "input": {
+        "$class": "Legend",
+        "code": null,
+        "value": null
+      }
+    },
+    {
+      "id": "optional-empty-string",
+      "description": "Cadena vacía",
+      "input": {
+        "$class": "Legend",
+        "code": "",
+        "value": ""
+      }
+    },
+    {
+      "id": "optional-zero-amount",
+      "description": "Importe cero",
+      "input": {
+        "$class": "Prepayment",
+        "total": {
+          "$decimal": "0"
+        }
+      }
+    },
+    {
+      "id": "optional-zero-scale-amount",
+      "description": "Importe 0.00",
+      "input": {
+        "$class": "Prepayment",
+        "total": {
+          "$decimal": "0.00"
+        }
+      }
+    },
+    {
+      "id": "optional-null-list",
+      "description": "Lista null",
+      "input": {
+        "$class": "Summary",
+        "details": null
+      }
+    },
+    {
+      "id": "optional-empty-list",
+      "description": "Lista vacía",
+      "input": {
+        "$class": "Summary",
+        "details": []
+      }
+    },
+    {
+      "id": "optional-false",
+      "description": "Booleano false frente a null",
+      "input": {
+        "$class": "Shipment",
+        "indTransbordo": false
+      }
+    },
+    {
+      "id": "optional-null-object",
+      "description": "Objeto anidado null",
+      "input": {
+        "$class": "Invoice",
+        "company": null,
+        "client": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+[package]
+name = "cpeforge-ws"
+version = "0.1.0"
+description = "SOAP, ZIP, CDR y adaptador GRE para los servicios electrónicos de SUNAT."
+readme = "README.md"
+keywords = ["sunat", "soap", "cdr", "cpe", "peru"]
+categories = ["api-bindings"]
+exclude = ["tests/"]
+edition.workspace = true
+rust-version = "1.88"
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+cpeforge-core.workspace = true
+cpeforge-gre-api = { path = "../gre-api", version = "0.1.0" }
+cpeforge-xml-limits.workspace = true
+roxmltree.workspace = true
+base64.workspace = true
+zip.workspace = true
+flate2.workspace = true
+# Solo activa la compilación estática del zlib que usa flate2.
+libz-sys.workspace = true
+sha2.workspace = true
+# Solo `sync` (independiente del runtime): candado asíncrono por clave para
+# no repetir solicitudes de token concurrentes. Ya está en el árbol por reqwest.
+tokio = { version = "1.53.3", default-features = false, features = ["sync"] }
+
+[dev-dependencies]
+serde_json.workspace = true
+tokio.workspace = true
+
+[[bench]]
+name = "pipeline"
+harness = false
+
+[lints]
+workspace = true

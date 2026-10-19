@@ -1,0 +1,99 @@
+# cpeforge-report
+
+Representación impresa HTML de comprobantes electrónicos peruanos (siete
+plantillas, CSS y QR SVG). Recibe los modelos de `cpeforge-core`.
+
+## Alcance
+
+- `HtmlReport` (contrato `Report` de `cpeforge-core`): siete plantillas
+  (`invoice`, `invoice2`, `despatch`, `perception`, `retention`, `summary`,
+  `voided`) y su CSS. La plantilla inicial es `invoice.html.twig`; se cambia
+  con `set_template`. Opciones: carpeta de plantillas propias,
+  `strict_variables`, escape automático, globales (`max_items`) y reloj
+  inyectable para `date(null)`.
+- `DefaultTemplateResolver`: plantilla por tipo de documento.
+- `qr`: SVG del QR de ventas, guías y URL (`qrcodegen` codifica; la máscara,
+  la versión y la serialización SVG son propias).
+- `XmlUtils`: `DigestValue` de un XML firmado (no verifica la firma).
+- `format`: `decimal_to_f64`, `number_format`, `float_to_string`,
+  `round_half_up` y `format_date`.
+
+**No incluye** PDF, firma ni envío a SUNAT.
+
+## Seguridad
+
+- `user.header` y `user.footer` se imprimen sin escapar: son `TrustedHtml`.
+  El resto de textos se escapa como `htmlspecialchars(ENT_QUOTES)`.
+- Las plantillas propias no pueden salir de su carpeta (`..`, rutas absolutas
+  o con unidad, enlaces simbólicos), deben ser archivos regulares, tienen
+  tamaño máximo (1 MiB) y el motor no ofrece acceso a archivos, red ni
+  entorno. `ReportOptions::fuel` limita el coste de render: conviene fijarlo
+  si las plantillas no son de confianza.
+- Logo de hasta 10 MiB por defecto (`max_logo_bytes`).
+- `XmlUtils` rechaza DTD, XML mal formado y anidamiento mayor de 256 niveles.
+
+## Importes
+
+En la frontera de la plantilla cada `Decimal` se convierte en el `double` más
+cercano (como `strtod`) y `number_format` y la impresión usan redondeo
+half-up sobre ese valor. No se hace aritmética con esos valores ni se
+recalculan impuestos: se muestran los del documento. `tests/amounts.rs` acota
+la diferencia con el redondeo decimal exacto: son iguales mientras
+`|importe| · 10^decimales < 2^50` (con dos decimales, hasta ≈ 11 billones) y
+el importe tenga como mucho 15 cifras significativas.
+
+## Plantillas propias
+
+`ReportOptions::template_dir` se consulta antes que las plantillas
+integradas, así que un archivo `invoice.html.twig` o `assets/style.css` propio
+las sustituye. Las plantillas se ejecutan con **MiniJinja**: la sintaxis común
+(`{{ }}`, `{% if/for/set/include %}`, `|filtro`, `is defined`, `loop.index`)
+funciona, pero no operadores como `?:`, `??` o `..`, ni etiquetas como
+`apply`, `with`, `embed` o `sandbox`.
+
+- `? :`, `?:`, `??`, `apply`, `with` y `starts with` son errores de sintaxis
+  (`ReportError::Syntax`). Equivalentes: `a if cond else b`,
+  `x|default('…')`, `x is twig_true`.
+- **El rango `1..3` no falla**: se evalúa como indefinido y se imprime vacío,
+  también con `strict_variables`. Usar `range(1, 4)`.
+- `|format` usa el formato `%` de Python (próximo a `sprintf`).
+
+Filtros, funciones y tests disponibles:
+
+| Nombre | Tipo | Comportamiento |
+| --- | --- | --- |
+| `catalog(código)` | filtro | Texto del catálogo SUNAT; `''` si no existe |
+| `image_b64(mime='')` | filtro | `data:image/<mime>;base64,…`; detecta PNG, GIF o JPEG |
+| `n_format(decimales=2)` | filtro | `number_format($x, $d, '.', '')`; `null` o texto → error |
+| `date(formato='F j, Y H:i')` | filtro | Formato de fecha de una letra en hora de Lima; `null` → ahora |
+| `raw`, `escape`/`e`, `upper`, `lower`, `length`, `default` | filtro | Filtros de texto habituales |
+| `twig_string` | filtro | Conversión a texto (`null` → `''`, `18.0` → `18`) |
+| `legend(leyendas, código)` | función | Valor de la primera leyenda con ese código |
+| `qrCode(venta)`, `qrCodeDespatch(guía)`, `qrUrl(url)` | función | SVG del QR |
+| `twig_true`, `twig_in(x)`, `twig_eq(x)` | test | Verdad, pertenencia e igualdad laxas |
+
+Las variables son `doc` (getters del modelo, sin distinguir mayúsculas),
+`params` y los globales añadidos con `HtmlReport::add_global`.
+
+## Rendimiento y concurrencia
+
+`HtmlReport` es `Send + Sync`: se crea una vez y se comparte entre hilos; las
+plantillas compiladas se reutilizan.
+
+```text
+cargo bench -p cpeforge-report --bench render            # latencia y throughput
+cargo bench -p cpeforge-report --bench render -- --dump D  # salidas para diff
+```
+
+Medición local (Apple Silicon, p50): factura completa con QR 124 µs, 10 000
+líneas 11,9 ms (+13,5 MiB por render), QR de venta 92 µs.
+
+## Estado
+
+Versión 0.1.0 en desarrollo. Lo que falta para la primera versión estable está en
+[docs/pendientes.md](https://github.com/alvarez25leo/cpeforge/blob/main/docs/pendientes.md).
+
+## Licencia
+
+MIT. Ver `LICENSE` y, para el material de terceros incluido (plantillas, CSS y
+catálogos), `LICENSE-THIRD-PARTY` y `NOTICE`.

@@ -1,0 +1,58 @@
+[workspace]
+resolver = "3"
+members = ["crates/core", "crates/xml", "crates/xmldsig", "crates/gre-api", "crates/ws", "crates/cpeforge", "crates/validator", "crates/xcodes", "crates/xml-parser", "crates/cpe-validator", "crates/ubl-validator", "crates/xml-limits", "crates/report"]
+
+[workspace.package]
+edition = "2024"
+rust-version = "1.85"
+authors = ["Contribuidores de CPEForge"]
+license = "MIT"
+repository = "https://github.com/alvarez25leo/cpeforge"
+
+[workspace.dependencies]
+cpeforge-core = { path = "crates/core", version = "0.1.0" }
+cpeforge-xml-limits = { path = "crates/xml-limits", version = "0.1.0" }
+roxmltree = "0.21.1"
+openssl = "0.10.81"
+quick-xml = "0.41.0"
+zeroize = { version = "1.8.1", default-features = false, features = ["alloc"] }
+base64 = { version = "0.23.1", default-features = false, features = ["alloc"] }
+jiff = { version = "0.2.38", default-features = false, features = ["std", "tzdb-bundle-always"] }
+rust_decimal = { version = "1.43.0", default-features = false, features = ["std"] }
+serde = { version = "1.0.228", default-features = false, features = ["std", "derive"] }
+serde_json = "1.0.154"
+serde_path_to_error = "0.1.20"
+# gre-api: HTTP/1.1 con TLS nativo (Security.framework / OpenSSL / SChannel).
+reqwest = { version = "0.13.5", default-features = false, features = ["native-tls"] }
+hyper = { version = "1.12.0", default-features = false }
+url = "2.5.8"
+tokio = { version = "1.53.3", default-features = false, features = ["rt", "macros", "net", "io-util", "time", "sync"] }
+# ZIP: zlib de madler compilado estático (libz-sys `static`) para que DEFLATE
+# produzca los mismos bytes en cualquier SO (el `hashZip` de GRE depende de ellos).
+zip = { version = "=9.0.5", default-features = false, features = ["deflate-flate2-zlib"] }
+flate2 = { version = "1.1.10", default-features = false, features = ["zlib"] }
+libz-sys = { version = "1.1.30", default-features = false, features = ["static"] }
+sha2 = { version = "=0.11.0", default-features = false }
+# cpe-validator: PCRE2 (expresiones regulares de las reglas XSL) y compilación del
+# puente C con libxslt/libxml2 del sistema.
+pcre2-sys = "0.2.10"
+cc = "1.2.0"
+pkg-config = "0.3.34"
+tempfile = "3.27.0"
+# report: motor de plantillas (subconjunto Twig, ver crates/report) y matriz QR.
+minijinja = { version = "3.0.1", default-features = false, features = ["builtins", "multi_template", "macros", "fuel"] }
+qrcodegen = "1.8.0"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+unreachable_pub = "warn"
+
+[workspace.lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+float_arithmetic = "warn"
+dbg_macro = "deny"
+todo = "deny"
+unimplemented = "deny"

@@ -1,0 +1,661 @@
+{
+  "family": "voided",
+  "cases": [
+    {
+      "id": "voided-full-default",
+      "description": "Comunicación de baja RA [default]",
+      "builder": "VoidedBuilder",
+      "options": {},
+      "input": {
+        "$class": "Voided",
+        "correlativo": "00001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-30T10:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecComunicacion": {
+          "$datetime": "2024-02-01T04:59:59+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": [
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "01",
+            "serie": "F001",
+            "correlativo": "123",
+            "desMotivoBaja": "ERROR A & B <S.A.> \"comillas\" 'apostrofe'"
+          },
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "03",
+            "serie": "B001",
+            "correlativo": "9",
+            "desMotivoBaja": "x>  <y"
+          }
+        ]
+      }
+    },
+    {
+      "id": "voided-full-cpeforge",
+      "description": "Comunicación de baja RA [cpeforge]",
+      "builder": "VoidedBuilder",
+      "options": {
+        "autoescape": false
+      },
+      "input": {
+        "$class": "Voided",
+        "correlativo": "00001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-30T10:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecComunicacion": {
+          "$datetime": "2024-02-01T04:59:59+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": [
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "01",
+            "serie": "F001",
+            "correlativo": "123",
+            "desMotivoBaja": "ERROR A & B <S.A.> \"comillas\" 'apostrofe'"
+          },
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "03",
+            "serie": "B001",
+            "correlativo": "9",
+            "desMotivoBaja": "x>  <y"
+          }
+        ]
+      }
+    },
+    {
+      "id": "voided-full-tests",
+      "description": "Comunicación de baja RA [tests]",
+      "builder": "VoidedBuilder",
+      "options": {
+        "cache": false,
+        "strict_variables": true,
+        "autoescape": false
+      },
+      "input": {
+        "$class": "Voided",
+        "correlativo": "00001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-30T10:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecComunicacion": {
+          "$datetime": "2024-02-01T04:59:59+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": [
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "01",
+            "serie": "F001",
+            "correlativo": "123",
+            "desMotivoBaja": "ERROR A & B <S.A.> \"comillas\" 'apostrofe'"
+          },
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "03",
+            "serie": "B001",
+            "correlativo": "9",
+            "desMotivoBaja": "x>  <y"
+          }
+        ]
+      }
+    },
+    {
+      "id": "reversion-full-default",
+      "description": "Resumen de reversiones RR [default]",
+      "builder": "VoidedBuilder",
+      "options": {},
+      "input": {
+        "$class": "Reversion",
+        "correlativo": "00001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-30T10:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecComunicacion": {
+          "$datetime": "2024-02-01T04:59:59+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": [
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "01",
+            "serie": "F001",
+            "correlativo": "123",
+            "desMotivoBaja": "ERROR A & B <S.A.> \"comillas\" 'apostrofe'"
+          },
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "03",
+            "serie": "B001",
+            "correlativo": "9",
+            "desMotivoBaja": "x>  <y"
+          }
+        ]
+      }
+    },
+    {
+      "id": "reversion-full-cpeforge",
+      "description": "Resumen de reversiones RR [cpeforge]",
+      "builder": "VoidedBuilder",
+      "options": {
+        "autoescape": false
+      },
+      "input": {
+        "$class": "Reversion",
+        "correlativo": "00001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-30T10:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecComunicacion": {
+          "$datetime": "2024-02-01T04:59:59+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": [
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "01",
+            "serie": "F001",
+            "correlativo": "123",
+            "desMotivoBaja": "ERROR A & B <S.A.> \"comillas\" 'apostrofe'"
+          },
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "03",
+            "serie": "B001",
+            "correlativo": "9",
+            "desMotivoBaja": "x>  <y"
+          }
+        ]
+      }
+    },
+    {
+      "id": "reversion-full-tests",
+      "description": "Resumen de reversiones RR [tests]",
+      "builder": "VoidedBuilder",
+      "options": {
+        "cache": false,
+        "strict_variables": true,
+        "autoescape": false
+      },
+      "input": {
+        "$class": "Reversion",
+        "correlativo": "00001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-30T10:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecComunicacion": {
+          "$datetime": "2024-02-01T04:59:59+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": [
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "01",
+            "serie": "F001",
+            "correlativo": "123",
+            "desMotivoBaja": "ERROR A & B <S.A.> \"comillas\" 'apostrofe'"
+          },
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "03",
+            "serie": "B001",
+            "correlativo": "9",
+            "desMotivoBaja": "x>  <y"
+          }
+        ]
+      }
+    },
+    {
+      "id": "voided-empty-details-default",
+      "description": "Baja sin líneas [default]",
+      "builder": "VoidedBuilder",
+      "options": {},
+      "input": {
+        "$class": "Voided",
+        "correlativo": "00001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-30T10:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecComunicacion": {
+          "$datetime": "2024-02-01T04:59:59+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": []
+      }
+    },
+    {
+      "id": "voided-null-date-default",
+      "description": "fecComunicacion nula: error [default]",
+      "builder": "VoidedBuilder",
+      "options": {},
+      "input": {
+        "$class": "Voided",
+        "correlativo": "00001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-30T10:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecComunicacion": null,
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": [
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "01",
+            "serie": "F001",
+            "correlativo": "123",
+            "desMotivoBaja": "ERROR A & B <S.A.> \"comillas\" 'apostrofe'"
+          },
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "03",
+            "serie": "B001",
+            "correlativo": "9",
+            "desMotivoBaja": "x>  <y"
+          }
+        ]
+      }
+    },
+    {
+      "id": "voided-null-date-tests",
+      "description": "fecComunicacion nula: error [tests]",
+      "builder": "VoidedBuilder",
+      "options": {
+        "cache": false,
+        "strict_variables": true,
+        "autoescape": false
+      },
+      "input": {
+        "$class": "Voided",
+        "correlativo": "00001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-30T10:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecComunicacion": null,
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": [
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "01",
+            "serie": "F001",
+            "correlativo": "123",
+            "desMotivoBaja": "ERROR A & B <S.A.> \"comillas\" 'apostrofe'"
+          },
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "03",
+            "serie": "B001",
+            "correlativo": "9",
+            "desMotivoBaja": "x>  <y"
+          }
+        ]
+      }
+    },
+    {
+      "id": "voided-null-generation-default",
+      "description": "fecGeneracion nula usa la hora actual [default]",
+      "builder": "VoidedBuilder",
+      "options": {},
+      "input": {
+        "$class": "Voided",
+        "correlativo": "00001",
+        "fecGeneracion": null,
+        "fecComunicacion": {
+          "$datetime": "2024-02-01T04:59:59+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": [
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "01",
+            "serie": "F001",
+            "correlativo": "123",
+            "desMotivoBaja": "ERROR A & B <S.A.> \"comillas\" 'apostrofe'"
+          },
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "03",
+            "serie": "B001",
+            "correlativo": "9",
+            "desMotivoBaja": "x>  <y"
+          }
+        ]
+      }
+    },
+    {
+      "id": "voided-no-company-default",
+      "description": "Baja sin emisor [default]",
+      "builder": "VoidedBuilder",
+      "options": {},
+      "input": {
+        "$class": "Voided",
+        "correlativo": "00001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-30T10:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecComunicacion": {
+          "$datetime": "2024-02-01T04:59:59+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "company": null,
+        "details": [
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "01",
+            "serie": "F001",
+            "correlativo": "123",
+            "desMotivoBaja": "ERROR A & B <S.A.> \"comillas\" 'apostrofe'"
+          },
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "03",
+            "serie": "B001",
+            "correlativo": "9",
+            "desMotivoBaja": "x>  <y"
+          }
+        ]
+      }
+    },
+    {
+      "id": "voided-no-company-cpeforge",
+      "description": "Baja sin emisor [cpeforge]",
+      "builder": "VoidedBuilder",
+      "options": {
+        "autoescape": false
+      },
+      "input": {
+        "$class": "Voided",
+        "correlativo": "00001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-30T10:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecComunicacion": {
+          "$datetime": "2024-02-01T04:59:59+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "company": null,
+        "details": [
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "01",
+            "serie": "F001",
+            "correlativo": "123",
+            "desMotivoBaja": "ERROR A & B <S.A.> \"comillas\" 'apostrofe'"
+          },
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "03",
+            "serie": "B001",
+            "correlativo": "9",
+            "desMotivoBaja": "x>  <y"
+          }
+        ]
+      }
+    },
+    {
+      "id": "voided-no-company-tests",
+      "description": "Baja sin emisor [tests]",
+      "builder": "VoidedBuilder",
+      "options": {
+        "cache": false,
+        "strict_variables": true,
+        "autoescape": false
+      },
+      "input": {
+        "$class": "Voided",
+        "correlativo": "00001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-30T10:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecComunicacion": {
+          "$datetime": "2024-02-01T04:59:59+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "company": null,
+        "details": [
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "01",
+            "serie": "F001",
+            "correlativo": "123",
+            "desMotivoBaja": "ERROR A & B <S.A.> \"comillas\" 'apostrofe'"
+          },
+          {
+            "$class": "VoidedDetail",
+            "tipoDoc": "03",
+            "serie": "B001",
+            "correlativo": "9",
+            "desMotivoBaja": "x>  <y"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+[
+  {
+    "id": "soap-send-bill",
+    "method": "POST",
+    "path": "/soap-send-bill",
+    "content_type": "text/xml; charset=utf-8",
+    "soap_action": "\"urn:sendBill\"",
+    "operation": "sendBill",
+    "params": {
+      "fileName": "20000000001-01-F001-1.zip",
+      "contentFile": [
+        {
+          "filename": "20000000001-01-F001-1.xml",
+          "content": "<Invoice xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2\" xmlns:cac=\"urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2\" xmlns:cbc=\"urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2\"><cbc:UBLVersionID>2.1</cbc:UBLVersionID><cbc:ID>F001-1</cbc:ID><cbc:InvoiceTypeCode>01</cbc:InvoiceTypeCode><cac:AccountingSupplierParty><cac:Party><cac:PartyIdentification><cbc:ID>20000000001</cbc:ID></cac:PartyIdentification></cac:Party></cac:AccountingSupplierParty></Invoice>"
+        }
+      ]
+    },
+    "observations": []
+  },
+  {
+    "id": "soap-send-summary",
+    "method": "POST",
+    "path": "/soap-send-summary",
+    "content_type": "text/xml; charset=utf-8",
+    "soap_action": "\"urn:sendSummary\"",
+    "operation": "sendSummary",
+    "params": {
+      "fileName": "20000000001-RC-20240101-1.zip",
+      "contentFile": [
+        {
+          "filename": "20000000001-RC-20240101-1.xml",
+          "content": "<SummaryDocuments xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:SummaryDocuments-2\" xmlns:cac=\"urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2\" xmlns:cbc=\"urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2\"><cbc:UBLVersionID>2.1</cbc:UBLVersionID><cbc:ID>RC-20240101-1</cbc:ID><cbc:InvoiceTypeCode>01</cbc:InvoiceTypeCode><cac:AccountingSupplierParty><cac:Party><cac:PartyIdentification><cbc:ID>20000000001</cbc:ID></cac:PartyIdentification></cac:Party></cac:AccountingSupplierParty></SummaryDocuments>"
+        }
+      ]
+    },
+    "observations": []
+  },
+  {
+    "id": "soap-get-status",
+    "method": "POST",
+    "path": "/soap-get-status",
+    "content_type": "text/xml; charset=utf-8",
+    "soap_action": "\"urn:getStatus\"",
+    "operation": "getStatus",
+    "params": {
+      "ticket": "TICKET-FICTICIO"
+    },
+    "observations": []
+  },
+  {
+    "id": "soap-get-status-cdr",
+    "method": "POST",
+    "path": "/soap-get-status-cdr",
+    "content_type": "text/xml; charset=utf-8",
+    "soap_action": "\"urn:getStatusCdr\"",
+    "operation": "getStatusCdr",
+    "params": {
+      "rucComprobante": "20000000001",
+      "tipoComprobante": "01",
+      "serieComprobante": "F001",
+      "numeroComprobante": "1"
+    },
+    "observations": []
+  },
+  {
+    "id": "soap-fault",
+    "method": "POST",
+    "path": "/soap-fault",
+    "content_type": "text/xml; charset=utf-8",
+    "soap_action": "\"urn:sendBill\"",
+    "operation": "sendBill",
+    "params": {
+      "fileName": "20000000001-01-F001-1.zip",
+      "contentFile": [
+        {
+          "filename": "20000000001-01-F001-1.xml",
+          "content": "<Invoice xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2\" xmlns:cac=\"urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2\" xmlns:cbc=\"urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2\"><cbc:UBLVersionID>2.1</cbc:UBLVersionID><cbc:ID>F001-1</cbc:ID><cbc:InvoiceTypeCode>01</cbc:InvoiceTypeCode><cac:AccountingSupplierParty><cac:Party><cac:PartyIdentification><cbc:ID>20000000001</cbc:ID></cac:PartyIdentification></cac:Party></cac:AccountingSupplierParty></Invoice>"
+        }
+      ]
+    },
+    "observations": []
+  }
+]

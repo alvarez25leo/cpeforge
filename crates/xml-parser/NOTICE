@@ -1,0 +1,7 @@
+cpeforge-xml-parser
+Copyright (c) 2026 Contribuidores de CPEForge
+Licencia: MIT (ver LICENSE).
+
+Partes de la lógica de lectura derivan de software de terceros distribuido
+bajo licencia MIT, Copyright (c) 2017 Giancarlos Salas; ver
+LICENSE-THIRD-PARTY. Las pruebas usan solo XML sintéticos.

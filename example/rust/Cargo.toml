@@ -1,0 +1,21 @@
+[package]
+name = "ejemplo-cpeforge"
+version = "0.0.0"
+description = "Ejemplo: factura y boleta con los crates Rust de cpeforge"
+edition = "2024"
+rust-version = "1.88"
+license = "MIT"
+publish = false
+
+# Proyecto independiente: no forma parte del workspace de los crates.
+[workspace]
+
+[dependencies]
+cpeforge-core = { path = "../../crates/core" }
+cpeforge = { path = "../../crates/cpeforge" }
+cpeforge-ws = { path = "../../crates/ws" }
+cpeforge-gre-api = { path = "../../crates/gre-api" }
+cpeforge-xmldsig = { path = "../../crates/xmldsig" }
+serde_json = "1.0.145"
+jiff = { version = "0.2.38", default-features = false, features = ["std", "tzdb-bundle-always"] }
+tokio = { version = "1.53.3", default-features = false, features = ["rt", "macros", "time"] }

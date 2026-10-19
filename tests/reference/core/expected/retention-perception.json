@@ -1,0 +1,502 @@
+{
+    "generator": "oracle/php/core/run_cases.php",
+    "reference": {
+        "tag": "v5.3.0",
+        "commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+    },
+    "reference_version": "8.4.17",
+    "timezone_db": "2025.2",
+    "cases_file": "retention-perception.json",
+    "results": {
+        "retention-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Retention",
+                "company": null,
+                "correlativo": null,
+                "details": null,
+                "fechaEmision": null,
+                "impPagado": null,
+                "impRetenido": null,
+                "observacion": null,
+                "proveedor": null,
+                "regimen": null,
+                "serie": null,
+                "tasa": null
+            }
+        },
+        "retention-full": {
+            "calls": {
+                "getName": "20000000001-20-R001-10"
+            },
+            "snapshot": {
+                "$class": "Retention",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "10",
+                "details": [
+                    {
+                        "$class": "RetentionDetail",
+                        "fechaEmision": {
+                            "$datetime": {
+                                "class": "DateTimeImmutable",
+                                "local": "2024-04-01T10:00:00.000000",
+                                "offset": -18000,
+                                "unix": 1711983600,
+                                "micro": 0,
+                                "tz": "America/Lima"
+                            }
+                        },
+                        "fechaRetencion": {
+                            "$datetime": {
+                                "class": "DateTimeImmutable",
+                                "local": "2024-04-15T10:00:00.000000",
+                                "offset": -18000,
+                                "unix": 1713193200,
+                                "micro": 0,
+                                "tz": "America/Lima"
+                            }
+                        },
+                        "impPagar": {
+                            "$float": "970.0"
+                        },
+                        "impRetenido": {
+                            "$float": "30.0"
+                        },
+                        "impTotal": {
+                            "$float": "1000.0"
+                        },
+                        "moneda": "USD",
+                        "numDoc": "F001-1",
+                        "pagos": [
+                            {
+                                "$class": "Payment",
+                                "fecha": {
+                                    "$datetime": {
+                                        "class": "DateTimeImmutable",
+                                        "local": "2024-04-10T09:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1712757600,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "importe": {
+                                    "$float": "500.0"
+                                },
+                                "moneda": "USD"
+                            },
+                            {
+                                "$class": "Payment",
+                                "fecha": {
+                                    "$datetime": {
+                                        "class": "DateTimeImmutable",
+                                        "local": "2024-04-10T09:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1712757600,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "importe": {
+                                    "$float": "500.0"
+                                },
+                                "moneda": "USD"
+                            }
+                        ],
+                        "tipoCambio": {
+                            "$class": "Exchange",
+                            "factor": {
+                                "$float": "3.712"
+                            },
+                            "fecha": {
+                                "$datetime": {
+                                    "class": "DateTimeImmutable",
+                                    "local": "2024-04-10T00:00:00.000000",
+                                    "offset": -18000,
+                                    "unix": 1712725200,
+                                    "micro": 0,
+                                    "tz": "America/Lima"
+                                }
+                            },
+                            "monedaObj": "PEN",
+                            "monedaRef": "USD"
+                        },
+                        "tipoDoc": "01"
+                    }
+                ],
+                "fechaEmision": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-04-15T10:00:00.000000",
+                        "offset": -18000,
+                        "unix": 1713193200,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "impPagado": {
+                    "$float": "970.0"
+                },
+                "impRetenido": {
+                    "$float": "30.0"
+                },
+                "observacion": "Retención sintética",
+                "proveedor": {
+                    "$class": "Client",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "CALLE PRUEBA 456",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150122",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "cliente@example.test",
+                    "numDoc": "20000000002",
+                    "rznSocial": "CLIENTE SINTETICO S.A.",
+                    "telephone": "999000000",
+                    "tipoDoc": "6"
+                },
+                "regimen": "01",
+                "serie": "R001",
+                "tasa": {
+                    "$float": "3.0"
+                }
+            }
+        },
+        "retention-name-no-company": {
+            "calls": {
+                "getName": {
+                    "$error": {
+                        "class": "Error",
+                        "message": "Call to a member function getRuc() on null"
+                    }
+                }
+            },
+            "snapshot": {
+                "$class": "Retention",
+                "company": null,
+                "correlativo": null,
+                "details": null,
+                "fechaEmision": null,
+                "impPagado": null,
+                "impRetenido": null,
+                "observacion": null,
+                "proveedor": null,
+                "regimen": null,
+                "serie": "R001",
+                "tasa": null
+            }
+        },
+        "retention-name-null-parts": {
+            "calls": {
+                "getName": "-20--"
+            },
+            "snapshot": {
+                "$class": "Retention",
+                "company": {
+                    "$class": "Company",
+                    "address": null,
+                    "email": null,
+                    "nombreComercial": null,
+                    "razonSocial": null,
+                    "ruc": null,
+                    "telephone": null
+                },
+                "correlativo": null,
+                "details": null,
+                "fechaEmision": null,
+                "impPagado": null,
+                "impRetenido": null,
+                "observacion": null,
+                "proveedor": null,
+                "regimen": null,
+                "serie": null,
+                "tasa": null
+            }
+        },
+        "retention-detail-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "RetentionDetail",
+                "fechaEmision": null,
+                "fechaRetencion": null,
+                "impPagar": null,
+                "impRetenido": null,
+                "impTotal": null,
+                "moneda": null,
+                "numDoc": null,
+                "pagos": null,
+                "tipoCambio": null,
+                "tipoDoc": null
+            }
+        },
+        "payment-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Payment",
+                "fecha": null,
+                "importe": null,
+                "moneda": null
+            }
+        },
+        "exchange-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Exchange",
+                "factor": null,
+                "fecha": null,
+                "monedaObj": null,
+                "monedaRef": null
+            }
+        },
+        "perception-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Perception",
+                "company": null,
+                "correlativo": null,
+                "details": null,
+                "fechaEmision": null,
+                "impCobrado": null,
+                "impPercibido": null,
+                "observacion": null,
+                "proveedor": null,
+                "regimen": null,
+                "serie": null,
+                "tasa": null
+            }
+        },
+        "perception-full": {
+            "calls": {
+                "getName": "20000000001-40-P001-11"
+            },
+            "snapshot": {
+                "$class": "Perception",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "11",
+                "details": [
+                    {
+                        "$class": "PerceptionDetail",
+                        "cobros": [
+                            {
+                                "$class": "Payment",
+                                "fecha": {
+                                    "$datetime": {
+                                        "class": "DateTimeImmutable",
+                                        "local": "2024-04-10T09:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1712757600,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "importe": {
+                                    "$float": "1000.0"
+                                },
+                                "moneda": "PEN"
+                            }
+                        ],
+                        "fechaEmision": {
+                            "$datetime": {
+                                "class": "DateTimeImmutable",
+                                "local": "2024-04-01T10:00:00.000000",
+                                "offset": -18000,
+                                "unix": 1711983600,
+                                "micro": 0,
+                                "tz": "America/Lima"
+                            }
+                        },
+                        "fechaPercepcion": {
+                            "$datetime": {
+                                "class": "DateTimeImmutable",
+                                "local": "2024-04-15T10:00:00.000000",
+                                "offset": -18000,
+                                "unix": 1713193200,
+                                "micro": 0,
+                                "tz": "America/Lima"
+                            }
+                        },
+                        "impCobrar": {
+                            "$float": "1020.0"
+                        },
+                        "impPercibido": {
+                            "$float": "20.0"
+                        },
+                        "impTotal": {
+                            "$float": "1000.0"
+                        },
+                        "moneda": "PEN",
+                        "numDoc": "F001-2",
+                        "tipoCambio": {
+                            "$class": "Exchange",
+                            "factor": {
+                                "$float": "3.712"
+                            },
+                            "fecha": {
+                                "$datetime": {
+                                    "class": "DateTimeImmutable",
+                                    "local": "2024-04-10T00:00:00.000000",
+                                    "offset": -18000,
+                                    "unix": 1712725200,
+                                    "micro": 0,
+                                    "tz": "America/Lima"
+                                }
+                            },
+                            "monedaObj": "PEN",
+                            "monedaRef": "USD"
+                        },
+                        "tipoDoc": "01"
+                    }
+                ],
+                "fechaEmision": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-04-15T10:00:00.000000",
+                        "offset": -18000,
+                        "unix": 1713193200,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "impCobrado": {
+                    "$float": "1020.0"
+                },
+                "impPercibido": {
+                    "$float": "20.0"
+                },
+                "observacion": "Percepción sintética",
+                "proveedor": {
+                    "$class": "Client",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "CALLE PRUEBA 456",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150122",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "cliente@example.test",
+                    "numDoc": "20000000002",
+                    "rznSocial": "CLIENTE SINTETICO S.A.",
+                    "telephone": "999000000",
+                    "tipoDoc": "6"
+                },
+                "regimen": "01",
+                "serie": "P001",
+                "tasa": {
+                    "$float": "2.0"
+                }
+            }
+        },
+        "perception-name-no-company": {
+            "calls": {
+                "getName": {
+                    "$error": {
+                        "class": "Error",
+                        "message": "Call to a member function getRuc() on null"
+                    }
+                }
+            },
+            "snapshot": {
+                "$class": "Perception",
+                "company": null,
+                "correlativo": null,
+                "details": null,
+                "fechaEmision": null,
+                "impCobrado": null,
+                "impPercibido": null,
+                "observacion": null,
+                "proveedor": null,
+                "regimen": null,
+                "serie": "P001",
+                "tasa": null
+            }
+        },
+        "perception-name-null-parts": {
+            "calls": {
+                "getName": "-40--"
+            },
+            "snapshot": {
+                "$class": "Perception",
+                "company": {
+                    "$class": "Company",
+                    "address": null,
+                    "email": null,
+                    "nombreComercial": null,
+                    "razonSocial": null,
+                    "ruc": null,
+                    "telephone": null
+                },
+                "correlativo": null,
+                "details": null,
+                "fechaEmision": null,
+                "impCobrado": null,
+                "impPercibido": null,
+                "observacion": null,
+                "proveedor": null,
+                "regimen": null,
+                "serie": null,
+                "tasa": null
+            }
+        },
+        "perception-detail-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "PerceptionDetail",
+                "cobros": null,
+                "fechaEmision": null,
+                "fechaPercepcion": null,
+                "impCobrar": null,
+                "impPercibido": null,
+                "impTotal": null,
+                "moneda": null,
+                "numDoc": null,
+                "tipoCambio": null,
+                "tipoDoc": null
+            }
+        }
+    }
+}

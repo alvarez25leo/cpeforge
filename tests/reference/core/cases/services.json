@@ -1,0 +1,84 @@
+{
+  "family": "services",
+  "cases": [
+    {
+      "id": "basic-token-null",
+      "description": "BasicToken con null",
+      "input": {
+        "$class": "BasicToken",
+        "$ctor": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "basic-token-full",
+      "description": "BasicToken con valor y expiración",
+      "input": {
+        "$class": "BasicToken",
+        "$ctor": [
+          "token-sintetico",
+          {
+            "$datetime": "2024-01-01T12:00:00+00:00",
+            "tz": "UTC",
+            "class": "DateTimeImmutable"
+          }
+        ]
+      }
+    },
+    {
+      "id": "basic-token-setters",
+      "description": "BasicToken modificado con setters",
+      "input": {
+        "$class": "BasicToken",
+        "$ctor": [
+          null,
+          null
+        ],
+        "value": "otro",
+        "expire": {
+          "$datetime": "2024-01-01T07:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        }
+      }
+    },
+    {
+      "id": "exception-default",
+      "description": "InvalidServiceResponseException sin argumentos",
+      "input": {
+        "$class": "InvalidServiceResponseException"
+      }
+    },
+    {
+      "id": "exception-message-code",
+      "description": "InvalidServiceResponseException con mensaje y código",
+      "input": {
+        "$class": "InvalidServiceResponseException",
+        "$ctor": [
+          "Respuesta inválida",
+          500
+        ]
+      }
+    },
+    {
+      "id": "exception-previous",
+      "description": "InvalidServiceResponseException conserva la causa",
+      "input": {
+        "$class": "InvalidServiceResponseException",
+        "$ctor": [
+          "Respuesta inválida",
+          0,
+          {
+            "$class": "LogicException",
+            "$ctor": [
+              "causa",
+              7
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

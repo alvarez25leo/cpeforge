@@ -1,0 +1,1038 @@
+{
+    "generator": "oracle/php/core/run_cases.php",
+    "reference": {
+        "tag": "v5.3.0",
+        "commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+    },
+    "reference_version": "8.4.17",
+    "timezone_db": "2025.2",
+    "cases_file": "response.json",
+    "results": {
+        "base-result-default": {
+            "calls": {},
+            "snapshot": {
+                "$class": "BaseResult",
+                "error": null,
+                "success": false
+            }
+        },
+        "base-result-null-success": {
+            "calls": {},
+            "snapshot": {
+                "$class": "BaseResult",
+                "error": null,
+                "success": null
+            }
+        },
+        "base-result-error": {
+            "calls": {},
+            "snapshot": {
+                "$class": "BaseResult",
+                "error": {
+                    "$class": "Error",
+                    "code": "0111",
+                    "message": "No tiene el perfil para enviar comprobantes electronicos"
+                },
+                "success": false
+            }
+        },
+        "bill-result-full": {
+            "calls": {},
+            "snapshot": {
+                "$class": "BillResult",
+                "cdrResponse": {
+                    "$class": "CdrResponse",
+                    "code": "0",
+                    "description": "La Factura numero F001-123, ha sido aceptada",
+                    "id": "F001-123",
+                    "notes": [
+                        "4252 - Nota sintética",
+                        "4287 - Otra nota"
+                    ],
+                    "reference": "20000000001-01-F001-123"
+                },
+                "cdrZip": {
+                    "$bytes": "UEsDBAD/IGJpbmFyaW8="
+                },
+                "error": null,
+                "success": true
+            }
+        },
+        "bill-result-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "BillResult",
+                "cdrResponse": null,
+                "cdrZip": null,
+                "error": null,
+                "success": false
+            }
+        },
+        "summary-result-full": {
+            "calls": {},
+            "snapshot": {
+                "$class": "SummaryResult",
+                "error": null,
+                "ticket": "1500000000001",
+                "success": true
+            }
+        },
+        "summary-result-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "SummaryResult",
+                "error": null,
+                "ticket": null,
+                "success": false
+            }
+        },
+        "status-result-full": {
+            "calls": {},
+            "snapshot": {
+                "$class": "StatusResult",
+                "cdrResponse": {
+                    "$class": "CdrResponse",
+                    "code": "0",
+                    "description": "La Factura numero F001-123, ha sido aceptada",
+                    "id": "F001-123",
+                    "notes": [
+                        "4252 - Nota sintética",
+                        "4287 - Otra nota"
+                    ],
+                    "reference": "20000000001-01-F001-123"
+                },
+                "cdrZip": "cdr",
+                "code": "0",
+                "error": null,
+                "success": true
+            }
+        },
+        "status-result-processing": {
+            "calls": {},
+            "snapshot": {
+                "$class": "StatusResult",
+                "cdrResponse": null,
+                "cdrZip": null,
+                "code": "98",
+                "error": {
+                    "$class": "Error",
+                    "code": "98",
+                    "message": "En proceso"
+                },
+                "success": false
+            }
+        },
+        "status-result-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "StatusResult",
+                "cdrResponse": null,
+                "cdrZip": null,
+                "code": null,
+                "error": null,
+                "success": false
+            }
+        },
+        "status-cdr-result-full": {
+            "calls": {},
+            "snapshot": {
+                "$class": "StatusCdrResult",
+                "cdrResponse": {
+                    "$class": "CdrResponse",
+                    "code": "0",
+                    "description": "La Factura numero F001-123, ha sido aceptada",
+                    "id": "F001-123",
+                    "notes": [
+                        "4252 - Nota sintética",
+                        "4287 - Otra nota"
+                    ],
+                    "reference": "20000000001-01-F001-123"
+                },
+                "cdrZip": "",
+                "code": "0004",
+                "error": null,
+                "message": "La constancia existe",
+                "success": true
+            }
+        },
+        "status-cdr-result-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "StatusCdrResult",
+                "cdrResponse": null,
+                "cdrZip": null,
+                "code": null,
+                "error": null,
+                "message": null,
+                "success": false
+            }
+        },
+        "error-default": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Error",
+                "code": "",
+                "message": ""
+            }
+        },
+        "error-code-only": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Error",
+                "code": "0100",
+                "message": ""
+            }
+        },
+        "error-nulls": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Error",
+                "code": null,
+                "message": null
+            }
+        },
+        "error-setters": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Error",
+                "code": "2800",
+                "message": "Mensaje"
+            }
+        },
+        "cdr-empty": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": null,
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-full": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "0",
+                "description": "La Factura numero F001-123, ha sido aceptada",
+                "id": "F001-123",
+                "notes": [
+                    "4252 - Nota sintética",
+                    "4287 - Otra nota"
+                ],
+                "reference": "20000000001-01-F001-123"
+            }
+        },
+        "cdr-empty-notes": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "0",
+                "description": "La Factura numero F001-123, ha sido aceptada",
+                "id": "F001-123",
+                "notes": [],
+                "reference": "20000000001-01-F001-123"
+            }
+        },
+        "cdr-accepted-null": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": null,
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-empty": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-zero": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "0",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-zero-padded": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "0000",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-one": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "1",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-98": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "98",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-99": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "99",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-100": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "100",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-2000": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "2000",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-3999": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "3999",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-4000": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "4000",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-4252": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "4252",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-99999": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "99999",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-negative": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "-1",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-negative-zero": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "-0",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-plus-sign": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "+1",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-leading-spaces": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "  1",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-trailing-spaces": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "1  ",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-leading-newline": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "\n1",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-leading-carriage-return": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "\r1",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-tab-prefix": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "\t1",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-vertical-tab-prefix": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "\u000b1",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-formfeed-prefix": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "\f1",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-nbsp-prefix": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": " 1",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-nul-prefix": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "\u00001",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-trailing-garbage": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "1abc",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-trailing-garbage-4000": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "4000abc",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-decimal-below": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "3999.9",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-decimal-rounds-up": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "3999.99999999999999999",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-decimal-above": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "4000.5",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-negative-fraction": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "-0.9",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-negative-decimal": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "  -3999.99",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-exponent": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "4e3",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-exponent-upper": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "1E3",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-exponent-fraction": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "0.4e4",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-exponent-negative": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "4000e-1",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-exponent-underflow": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "1e-400",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-exponent-incomplete": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "1e",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-exponent-sign-only": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "1e+",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-leading-dot": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": ".5",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-leading-dot-exponent": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "-.5e1",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-trailing-dot": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "1.",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-only-dot": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": ".",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-text": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "abc",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-hex": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "0x1A",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-underscore": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "1_000",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-int-max": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "9223372036854775807",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-int-overflow": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "9223372036854775808",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-int-min": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "-9223372036854775808",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-int-underflow": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "-9223372036854775809",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-float-overflow-positive": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "1e19",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-float-overflow-negative": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "-1e19",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-float-two-pow-64": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "18446744073709551616",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-float-near-max": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "9.2233720368547748e18",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-huge": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "1e400",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-negative-huge": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "-1e400",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-only-sign": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "-",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-double-sign": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "+-1",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-unicode-digits": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "١",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-fullwidth-digits": {
+            "calls": {
+                "isAccepted": true
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "１",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        },
+        "cdr-accepted-internal-space": {
+            "calls": {
+                "isAccepted": false
+            },
+            "snapshot": {
+                "$class": "CdrResponse",
+                "code": "40 00",
+                "description": null,
+                "id": null,
+                "notes": null,
+                "reference": null
+            }
+        }
+    }
+}

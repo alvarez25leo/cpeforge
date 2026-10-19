@@ -1,0 +1,252 @@
+{
+  "generator": "oracle/php/xmldsig/run_cases.php",
+  "iconv_profile": "libiconv",
+  "libxml": "2.15.1",
+  "libxml_cdata": "separados",
+  "libxml_cr": "decimal",
+  "openssl": "OpenSSL 3.6.0 1 Oct 2025",
+  "reference_version": "8.4.17",
+  "reference": {
+    "commit": "3b70c1b1cd1b2be3693666b91be3e5adff620b76",
+    "tag": "v5.1.0"
+  },
+  "results": {
+    "encoding-alias-CP819": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"CP819\"?>\n<r>é &#8364;</r>\n",
+      "warnings": []
+    },
+    "encoding-alias-IBM819": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"IBM819\"?>\n<r>é &#8364;</r>\n",
+      "warnings": []
+    },
+    "encoding-alias-ISO-IR-100": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"ISO-IR-100\"?>\n<r>é &#8364;</r>\n",
+      "warnings": []
+    },
+    "encoding-alias-ISO-LATIN-1": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"ISO-LATIN-1\"?>\n<r>é &#8364;</r>\n",
+      "warnings": []
+    },
+    "encoding-alias-ISO8859-1": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"ISO8859-1\"?>\n<r>é &#8364;</r>\n",
+      "warnings": []
+    },
+    "encoding-alias-ISO_8859-1": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"ISO_8859-1\"?>\n<r>é &#8364;</r>\n",
+      "warnings": []
+    },
+    "encoding-alias-ISO_8859-1_1987": {
+      "error": {
+        "class": "RuntimeException",
+        "message": "loadXML devolvió false"
+      },
+      "warnings": [
+        "DOMDocument::loadXML(): String not closed expecting \" or ' in Entity, line: 1",
+        "DOMDocument::loadXML(): parsing XML declaration: '?>' expected in Entity, line: 1",
+        "DOMDocument::loadXML(): Invalid bytes in character encoding in Entity, line: 1"
+      ]
+    },
+    "encoding-alias-ISO_LATIN_1": {
+      "error": {
+        "class": "RuntimeException",
+        "message": "loadXML devolvió false"
+      },
+      "warnings": [
+        "DOMDocument::loadXML(): String not closed expecting \" or ' in Entity, line: 1",
+        "DOMDocument::loadXML(): parsing XML declaration: '?>' expected in Entity, line: 1",
+        "DOMDocument::loadXML(): Invalid bytes in character encoding in Entity, line: 1"
+      ]
+    },
+    "encoding-alias-L1": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"L1\"?>\n<r>é &#8364;</r>\n",
+      "warnings": []
+    },
+    "encoding-alias-csISOLatin1": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"csISOLatin1\"?>\n<r>é &#8364;</r>\n",
+      "warnings": []
+    },
+    "encoding-alias-iso-8859-1": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n<r>é &#8364;</r>\n",
+      "warnings": []
+    },
+    "encoding-alias-latin1": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"latin1\"?>\n<r>é &#8364;</r>\n",
+      "warnings": []
+    },
+    "encoding-ascii-ANSI_X3.4-1968": {
+      "result": "<?xml version=\"1.0\" encoding=\"ANSI_X3.4-1968\"?>\n<r a=\"&#233;\">x &#8364;</r>\n",
+      "warnings": []
+    },
+    "encoding-ascii-ISO646-US": {
+      "result": "<?xml version=\"1.0\" encoding=\"ISO646-US\"?>\n<r a=\"&#233;\">x &#8364;</r>\n",
+      "warnings": []
+    },
+    "encoding-ascii-US": {
+      "result": "<?xml version=\"1.0\" encoding=\"US\"?>\n<r a=\"&#233;\">x &#8364;</r>\n",
+      "warnings": []
+    },
+    "encoding-ascii-US-ASCII": {
+      "result": "<?xml version=\"1.0\" encoding=\"US-ASCII\"?>\n<r a=\"&#233;\">x &#8364;</r>\n",
+      "warnings": []
+    },
+    "encoding-ascii-ascii": {
+      "result": "<?xml version=\"1.0\" encoding=\"ascii\"?>\n<r a=\"&#233;\">x &#8364;</r>\n",
+      "warnings": []
+    },
+    "encoding-ascii-csASCII": {
+      "result": "<?xml version=\"1.0\" encoding=\"csASCII\"?>\n<r a=\"&#233;\">x &#8364;</r>\n",
+      "warnings": []
+    },
+    "encoding-ascii-invalid-byte": {
+      "error": {
+        "class": "RuntimeException",
+        "message": "loadXML devolvió false"
+      },
+      "warnings": [
+        "DOMDocument::loadXML(): Invalid bytes in character encoding in Entity, line: 1"
+      ]
+    },
+    "encoding-cp1252-CP1252": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"CP1252\"?>\n<r>  é ¤  &#937;</r>\n",
+      "warnings": []
+    },
+    "encoding-cp1252-MS-ANSI": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"MS-ANSI\"?>\n<r>  é ¤  &#937;</r>\n",
+      "warnings": []
+    },
+    "encoding-cp1252-undefined-81": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"windows-1252\"?>\n<r></r>\n",
+      "warnings": []
+    },
+    "encoding-cp1252-undefined-8d": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"windows-1252\"?>\n<r></r>\n",
+      "warnings": []
+    },
+    "encoding-cp1252-undefined-8f": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"windows-1252\"?>\n<r></r>\n",
+      "warnings": []
+    },
+    "encoding-cp1252-undefined-90": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"windows-1252\"?>\n<r></r>\n",
+      "warnings": []
+    },
+    "encoding-cp1252-undefined-9d": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"windows-1252\"?>\n<r></r>\n",
+      "warnings": []
+    },
+    "encoding-cp1252-windows-1252": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"windows-1252\"?>\n<r>  é ¤  &#937;</r>\n",
+      "warnings": []
+    },
+    "encoding-cyrillic-iso-8859-5": {
+      "result": "<?xml version=\"1.0\" encoding=\"ISO-8859-5\"?>\n<r>а</r>\n",
+      "warnings": []
+    },
+    "encoding-latin1-c14n": {
+      "result": "<r a=\"café\" b=\"€ 𐀀\">á &lt;x&gt;<?pi dáta?>niño € é 𐀀<eñe x=\"¿\"></eñe></r>",
+      "warnings": []
+    },
+    "encoding-latin1-declared-as-utf8-text": {
+      "result": "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n<r>é</r>\n",
+      "warnings": []
+    },
+    "encoding-latin1-exc": {
+      "result": "<r a=\"café\" b=\"€ 𐀀\">á &lt;x&gt;<?pi dáta?>niño € é 𐀀<eñe x=\"¿\"></eñe></r>",
+      "warnings": []
+    },
+    "encoding-latin1-serialize": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n<r a=\"café\" b=\"&#8364; &#65536;\"><!-- comentário --><![CDATA[á <x>]]><?pi dáta?>niño &#8364; é &#65536;<eñe x=\"¿\"/></r>\n",
+      "warnings": []
+    },
+    "encoding-latin1-serialize-node": {
+      "result": "<r a=\"café\" b=\"€ 𐀀\"><!-- comentário --><![CDATA[á <x>]]><?pi dáta?>niño € é 𐀀<eñe x=\"¿\"/></r>",
+      "warnings": []
+    },
+    "encoding-latin9-ISO-8859-15": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"ISO-8859-15\"?>\n<r>¤ ¼ é &#164; &#189; ¤</r>\n",
+      "warnings": []
+    },
+    "encoding-latin9-ISO_8859-15": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"ISO_8859-15\"?>\n<r>¤ ¼ é &#164; &#189; ¤</r>\n",
+      "warnings": []
+    },
+    "encoding-latin9-LATIN9": {
+      "error": {
+        "class": "RuntimeException",
+        "message": "loadXML devolvió false"
+      },
+      "warnings": [
+        "DOMDocument::loadXML(): Unsupported encoding: LATIN9 in Entity, line: 1",
+        "DOMDocument::loadXML(): Invalid bytes in character encoding in Entity, line: 1"
+      ]
+    },
+    "encoding-latin9-latin-9": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"latin-9\"?>\n<r>¤ ¼ é &#164; &#189; ¤</r>\n",
+      "warnings": []
+    },
+    "encoding-sunat-sign-cp1252": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"windows-1252\"?>\n<Invoice xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2\" xmlns:ext=\"urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2\" xmlns:cbc=\"urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2\"><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><ds:Signature xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\" Id=\"CPEForgeSign\"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm=\"http://www.w3.org/TR/2001/REC-xml-c14n-20010315\"/><ds:SignatureMethod Algorithm=\"http://www.w3.org/2000/09/xmldsig#rsa-sha1\"/><ds:Reference URI=\"\"><ds:Transforms><ds:Transform Algorithm=\"http://www.w3.org/2000/09/xmldsig#enveloped-signature\"/></ds:Transforms><ds:DigestMethod Algorithm=\"http://www.w3.org/2000/09/xmldsig#sha1\"/><ds:DigestValue>M0Vv65RO+JgpuCyLIF50PvXeybE=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue><depende-de-clave></ds:SignatureValue><ds:KeyInfo><ds:X509Data><ds:X509Certificate><depende-de-clave></ds:X509Certificate></ds:X509Data></ds:KeyInfo></ds:Signature></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions><cbc:ID>F001-1</cbc:ID><cbc:Note>Peña S.A.C.  año</cbc:Note></Invoice>\n",
+      "warnings": []
+    },
+    "encoding-sunat-sign-latin1": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n<Invoice xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2\" xmlns:ext=\"urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2\" xmlns:cbc=\"urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2\"><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><ds:Signature xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\" Id=\"CPEForgeSign\"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm=\"http://www.w3.org/TR/2001/REC-xml-c14n-20010315\"/><ds:SignatureMethod Algorithm=\"http://www.w3.org/2000/09/xmldsig#rsa-sha1\"/><ds:Reference URI=\"\"><ds:Transforms><ds:Transform Algorithm=\"http://www.w3.org/2000/09/xmldsig#enveloped-signature\"/></ds:Transforms><ds:DigestMethod Algorithm=\"http://www.w3.org/2000/09/xmldsig#sha1\"/><ds:DigestValue>M0Vv65RO+JgpuCyLIF50PvXeybE=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue><depende-de-clave></ds:SignatureValue><ds:KeyInfo><ds:X509Data><ds:X509Certificate><depende-de-clave></ds:X509Certificate></ds:X509Data></ds:KeyInfo></ds:Signature></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions><cbc:ID>F001-1</cbc:ID><cbc:Note>Peña S.A.C. &#8364; año</cbc:Note></Invoice>\n",
+      "warnings": [
+        "CPEForge\\XMLSecLibs\\Sunat\\SignedXml::getPublicKey(): Implicitly marking parameter $doc as nullable is deprecated, the explicit nullable type must be used instead"
+      ]
+    },
+    "encoding-sunat-sign-latin1-sha256": {
+      "result": "<latin1><?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n<Invoice xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2\" xmlns:ext=\"urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2\" xmlns:cbc=\"urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2\"><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><ds:Signature xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\" Id=\"CPEForgeSign\"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm=\"http://www.w3.org/TR/2001/REC-xml-c14n-20010315\"/><ds:SignatureMethod Algorithm=\"http://www.w3.org/2001/04/xmldsig-more#rsa-sha256\"/><ds:Reference URI=\"\"><ds:Transforms><ds:Transform Algorithm=\"http://www.w3.org/2000/09/xmldsig#enveloped-signature\"/></ds:Transforms><ds:DigestMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#sha256\"/><ds:DigestValue>F2vQ+2ndscIN7lnzdWIFIpIfwKEDTxe9yrlKbrBITLk=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue><depende-de-clave></ds:SignatureValue><ds:KeyInfo><ds:X509Data><ds:X509Certificate><depende-de-clave></ds:X509Certificate></ds:X509Data></ds:KeyInfo></ds:Signature></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions><cbc:ID>F001-1</cbc:ID><cbc:Note>Peña S.A.C. &#8364; año</cbc:Note></Invoice>\n",
+      "warnings": []
+    },
+    "encoding-sunat-verify-latin1": {
+      "result": {
+        "public_key_is_configured": false,
+        "result": true
+      },
+      "warnings": []
+    },
+    "encoding-sunat-verify-latin1-dom": {
+      "result": {
+        "public_key_is_configured": false,
+        "result": true
+      },
+      "warnings": []
+    },
+    "encoding-undeclared-latin1-bytes": {
+      "error": {
+        "class": "RuntimeException",
+        "message": "loadXML devolvió false"
+      },
+      "warnings": [
+        "DOMDocument::loadXML(): Invalid bytes in character encoding in Entity, line: 1"
+      ]
+    },
+    "encoding-unknown-name": {
+      "error": {
+        "class": "RuntimeException",
+        "message": "loadXML devolvió false"
+      },
+      "warnings": [
+        "DOMDocument::loadXML(): Unsupported encoding: foo in Entity, line: 1"
+      ]
+    },
+    "encoding-utf16-declared": {
+      "error": {
+        "class": "RuntimeException",
+        "message": "loadXML devolvió false"
+      },
+      "warnings": [
+        "DOMDocument::loadXML(): Blank needed here in Entity, line: 1",
+        "DOMDocument::loadXML(): parsing XML declaration: '?>' expected in Entity, line: 1"
+      ]
+    },
+    "encoding-utf8-UTF8": {
+      "result": "<?xml version=\"1.0\" encoding=\"UTF8\"?>\n<r>é €</r>\n",
+      "warnings": []
+    },
+    "encoding-utf8-utf-8": {
+      "result": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<r>é €</r>\n",
+      "warnings": []
+    }
+  }
+}

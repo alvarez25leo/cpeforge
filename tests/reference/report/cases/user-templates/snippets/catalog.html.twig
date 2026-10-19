@@ -1,0 +1,2 @@
+{% for k in params.user.keys %}[{{ k|catalog('06') }}|{{ k|catalog('01') }}|{{ k|catalog('02') }}|{{ 'PEN'|catalog(k) }}]
+{% endfor %}

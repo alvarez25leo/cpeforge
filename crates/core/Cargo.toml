@@ -1,0 +1,43 @@
+[package]
+name = "cpeforge-core"
+version = "0.1.0"
+description = "Modelos y contratos de comprobantes electrónicos peruanos (CPE) para CPEForge, sin XML, firma ni transporte."
+readme = "README.md"
+keywords = ["sunat", "peru", "facturacion", "cpe", "cpeforge"]
+categories = ["data-structures"]
+# Las pruebas dependen de los fixtures del workspace (tests/reference); no se publican.
+exclude = ["tests/"]
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[features]
+default = []
+## Serialización con serde usando los nombres de propiedad en camelCase del modelo.
+serde = ["dep:serde", "dep:base64", "jiff/serde"]
+
+[dependencies]
+base64 = { workspace = true, optional = true }
+jiff.workspace = true
+rust_decimal.workspace = true
+serde = { workspace = true, optional = true }
+
+[dev-dependencies]
+serde_json.workspace = true
+serde_path_to_error.workspace = true
+base64.workspace = true
+
+[[test]]
+name = "parity"
+required-features = ["serde"]
+
+[[example]]
+name = "invoice_model"
+
+[package.metadata.docs.rs]
+all-features = true
+
+[lints]
+workspace = true

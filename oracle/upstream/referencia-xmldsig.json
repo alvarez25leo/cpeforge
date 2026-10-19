@@ -1,0 +1,8 @@
+{
+  "package": "greenter/xmldsig",
+  "repository": "https://github.com/thegreenter/xmldsig.git",
+  "baseline_tag": "v5.1.0",
+  "baseline_commit": "3b70c1b1cd1b2be3693666b91be3e5adff620b76",
+  "consumer_baseline": "thegreenter/greenter v5.3.0",
+  "consumer_constraint": "^5.0"
+}

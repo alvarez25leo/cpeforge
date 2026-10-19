@@ -1,0 +1,997 @@
+{
+    "generator": "oracle/php/core/run_cases.php",
+    "reference": {
+        "tag": "v5.3.0",
+        "commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+    },
+    "reference_version": "8.4.17",
+    "timezone_db": "2025.2",
+    "cases_file": "despatch.json",
+    "results": {
+        "despatch-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Despatch",
+                "addDocs": null,
+                "company": null,
+                "comprador": null,
+                "correlativo": null,
+                "destinatario": null,
+                "details": null,
+                "docBaja": null,
+                "envio": null,
+                "fechaEmision": null,
+                "observacion": null,
+                "relDoc": null,
+                "serie": null,
+                "tercero": null,
+                "tipoDoc": null,
+                "version": null
+            }
+        },
+        "despatch-full": {
+            "calls": {
+                "getName": "20000000001-09-T001-12"
+            },
+            "snapshot": {
+                "$class": "Despatch",
+                "addDocs": [
+                    {
+                        "$class": "AdditionalDoc",
+                        "emisor": "20000000001",
+                        "nro": "F001-1",
+                        "tipo": "01",
+                        "tipoDesc": "Factura"
+                    }
+                ],
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "comprador": {
+                    "$class": "Client",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "CALLE PRUEBA 456",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150122",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "cliente@example.test",
+                    "numDoc": "20000000005",
+                    "rznSocial": "CLIENTE SINTETICO S.A.",
+                    "telephone": "999000000",
+                    "tipoDoc": "6"
+                },
+                "correlativo": "12",
+                "destinatario": {
+                    "$class": "Client",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "CALLE PRUEBA 456",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150122",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "cliente@example.test",
+                    "numDoc": "20000000002",
+                    "rznSocial": "CLIENTE SINTETICO S.A.",
+                    "telephone": "999000000",
+                    "tipoDoc": "6"
+                },
+                "details": [
+                    {
+                        "$class": "DespatchDetail",
+                        "atributos": [
+                            {
+                                "$class": "DetailAttribute",
+                                "code": "7000",
+                                "duracion": null,
+                                "fecFin": null,
+                                "fecInicio": null,
+                                "name": "Partida",
+                                "value": "0000"
+                            }
+                        ],
+                        "cantidad": {
+                            "$float": "2.0"
+                        },
+                        "codProdSunat": "10000000",
+                        "codigo": "P001",
+                        "descripcion": "ITEM 1",
+                        "unidad": "NIU"
+                    },
+                    {
+                        "$class": "DespatchDetail",
+                        "atributos": null,
+                        "cantidad": {
+                            "$float": "0.125"
+                        },
+                        "codProdSunat": null,
+                        "codigo": "P002",
+                        "descripcion": "ITEM 2",
+                        "unidad": "KGM"
+                    }
+                ],
+                "docBaja": {
+                    "$class": "Document",
+                    "nroDoc": "T001-1",
+                    "tipoDoc": "09"
+                },
+                "envio": {
+                    "$class": "Shipment",
+                    "aeropuerto": {
+                        "$class": "Puerto",
+                        "codigo": "LIM",
+                        "nombre": "JORGE CHAVEZ"
+                    },
+                    "choferes": [
+                        {
+                            "$class": "Driver",
+                            "apellidos": "PRUEBA",
+                            "licencia": "Q0000002",
+                            "nombres": "JUAN",
+                            "nroDoc": "00000002",
+                            "tipo": "Principal",
+                            "tipoDoc": "1"
+                        },
+                        {
+                            "$class": "Driver",
+                            "apellidos": "PRUEBA",
+                            "licencia": "Q0000003",
+                            "nombres": "ANA",
+                            "nroDoc": "00000003",
+                            "tipo": "Secundario",
+                            "tipoDoc": "1"
+                        }
+                    ],
+                    "codPuerto": "PECLL",
+                    "codTraslado": "01",
+                    "contenedores": [
+                        "CONT-1",
+                        "CONT-2"
+                    ],
+                    "desTraslado": "VENTA",
+                    "fecEntregaBienes": {
+                        "$datetime": {
+                            "class": "DateTime",
+                            "local": "2025-01-01T08:00:00.000000",
+                            "offset": -18000,
+                            "unix": 1735736400,
+                            "micro": 0,
+                            "tz": "America/Lima"
+                        }
+                    },
+                    "fecTraslado": {
+                        "$datetime": {
+                            "class": "DateTime",
+                            "local": "2024-12-31T23:59:59.000000",
+                            "offset": -18000,
+                            "unix": 1735707599,
+                            "micro": 0,
+                            "tz": "America/Lima"
+                        }
+                    },
+                    "indicadores": [
+                        "SUNAT_Envio_IndicadorTrasladoVehiculoM1L"
+                    ],
+                    "llegada": {
+                        "$class": "Direction",
+                        "codLocal": "0002",
+                        "direccion": "AV. LLEGADA 1",
+                        "ruc": "20000000001",
+                        "ubigueo": "150101"
+                    },
+                    "modTraslado": "02",
+                    "numBultos": 3,
+                    "numContenedor": "CONT-1",
+                    "partida": {
+                        "$class": "Direction",
+                        "codLocal": "0001",
+                        "direccion": "AV. PARTIDA 2",
+                        "ruc": "20000000001",
+                        "ubigueo": "150203"
+                    },
+                    "pesoItems": {
+                        "$float": "10.5"
+                    },
+                    "pesoTotal": {
+                        "$float": "12.5"
+                    },
+                    "puerto": {
+                        "$class": "Puerto",
+                        "codigo": "PECLL",
+                        "nombre": "CALLAO"
+                    },
+                    "sustentoPeso": "Sustento",
+                    "transportista": {
+                        "$class": "Transportist",
+                        "choferDoc": "00000002",
+                        "choferTipoDoc": "1",
+                        "nroMtc": "MTC-1",
+                        "numDoc": "20000000003",
+                        "placa": "ABC-123",
+                        "rznSocial": "TRANSPORTES SINTETICOS",
+                        "tipoDoc": "6"
+                    },
+                    "undPesoTotal": "KGM",
+                    "vehiculo": {
+                        "$class": "Vehicle",
+                        "codEmisor": "MTC",
+                        "nroAutorizacion": "AUT-ABC-123",
+                        "nroCirculacion": "CIRC-ABC-123",
+                        "placa": "ABC-123",
+                        "secundarios": [
+                            {
+                                "$class": "Vehicle",
+                                "codEmisor": "MTC",
+                                "nroAutorizacion": "AUT-DEF-456",
+                                "nroCirculacion": "CIRC-DEF-456",
+                                "placa": "DEF-456",
+                                "secundarios": [
+                                    {
+                                        "$class": "Vehicle",
+                                        "codEmisor": "MTC",
+                                        "nroAutorizacion": "AUT-GHI-789",
+                                        "nroCirculacion": "CIRC-GHI-789",
+                                        "placa": "GHI-789",
+                                        "secundarios": null
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "indTransbordo": false
+                },
+                "fechaEmision": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-06-15T10:00:00.000000",
+                        "offset": -18000,
+                        "unix": 1718463600,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "observacion": "Guía sintética",
+                "relDoc": {
+                    "$class": "Document",
+                    "nroDoc": "F001-1",
+                    "tipoDoc": "01"
+                },
+                "serie": "T001",
+                "tercero": {
+                    "$class": "Client",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "CALLE PRUEBA 456",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150122",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "cliente@example.test",
+                    "numDoc": "20000000004",
+                    "rznSocial": "CLIENTE SINTETICO S.A.",
+                    "telephone": "999000000",
+                    "tipoDoc": "6"
+                },
+                "tipoDoc": "09",
+                "version": "2022"
+            }
+        },
+        "despatch-carrier-name": {
+            "calls": {
+                "getName": "20000000001-31-V001-12"
+            },
+            "snapshot": {
+                "$class": "Despatch",
+                "addDocs": [
+                    {
+                        "$class": "AdditionalDoc",
+                        "emisor": "20000000001",
+                        "nro": "F001-1",
+                        "tipo": "01",
+                        "tipoDesc": "Factura"
+                    }
+                ],
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "comprador": {
+                    "$class": "Client",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "CALLE PRUEBA 456",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150122",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "cliente@example.test",
+                    "numDoc": "20000000005",
+                    "rznSocial": "CLIENTE SINTETICO S.A.",
+                    "telephone": "999000000",
+                    "tipoDoc": "6"
+                },
+                "correlativo": "12",
+                "destinatario": {
+                    "$class": "Client",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "CALLE PRUEBA 456",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150122",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "cliente@example.test",
+                    "numDoc": "20000000002",
+                    "rznSocial": "CLIENTE SINTETICO S.A.",
+                    "telephone": "999000000",
+                    "tipoDoc": "6"
+                },
+                "details": [
+                    {
+                        "$class": "DespatchDetail",
+                        "atributos": [
+                            {
+                                "$class": "DetailAttribute",
+                                "code": "7000",
+                                "duracion": null,
+                                "fecFin": null,
+                                "fecInicio": null,
+                                "name": "Partida",
+                                "value": "0000"
+                            }
+                        ],
+                        "cantidad": {
+                            "$float": "2.0"
+                        },
+                        "codProdSunat": "10000000",
+                        "codigo": "P001",
+                        "descripcion": "ITEM 1",
+                        "unidad": "NIU"
+                    },
+                    {
+                        "$class": "DespatchDetail",
+                        "atributos": null,
+                        "cantidad": {
+                            "$float": "0.125"
+                        },
+                        "codProdSunat": null,
+                        "codigo": "P002",
+                        "descripcion": "ITEM 2",
+                        "unidad": "KGM"
+                    }
+                ],
+                "docBaja": {
+                    "$class": "Document",
+                    "nroDoc": "T001-1",
+                    "tipoDoc": "09"
+                },
+                "envio": {
+                    "$class": "Shipment",
+                    "aeropuerto": {
+                        "$class": "Puerto",
+                        "codigo": "LIM",
+                        "nombre": "JORGE CHAVEZ"
+                    },
+                    "choferes": [
+                        {
+                            "$class": "Driver",
+                            "apellidos": "PRUEBA",
+                            "licencia": "Q0000002",
+                            "nombres": "JUAN",
+                            "nroDoc": "00000002",
+                            "tipo": "Principal",
+                            "tipoDoc": "1"
+                        },
+                        {
+                            "$class": "Driver",
+                            "apellidos": "PRUEBA",
+                            "licencia": "Q0000003",
+                            "nombres": "ANA",
+                            "nroDoc": "00000003",
+                            "tipo": "Secundario",
+                            "tipoDoc": "1"
+                        }
+                    ],
+                    "codPuerto": "PECLL",
+                    "codTraslado": "01",
+                    "contenedores": [
+                        "CONT-1",
+                        "CONT-2"
+                    ],
+                    "desTraslado": "VENTA",
+                    "fecEntregaBienes": {
+                        "$datetime": {
+                            "class": "DateTime",
+                            "local": "2025-01-01T08:00:00.000000",
+                            "offset": -18000,
+                            "unix": 1735736400,
+                            "micro": 0,
+                            "tz": "America/Lima"
+                        }
+                    },
+                    "fecTraslado": {
+                        "$datetime": {
+                            "class": "DateTime",
+                            "local": "2024-12-31T23:59:59.000000",
+                            "offset": -18000,
+                            "unix": 1735707599,
+                            "micro": 0,
+                            "tz": "America/Lima"
+                        }
+                    },
+                    "indicadores": [
+                        "SUNAT_Envio_IndicadorTrasladoVehiculoM1L"
+                    ],
+                    "llegada": {
+                        "$class": "Direction",
+                        "codLocal": "0002",
+                        "direccion": "AV. LLEGADA 1",
+                        "ruc": "20000000001",
+                        "ubigueo": "150101"
+                    },
+                    "modTraslado": "02",
+                    "numBultos": 3,
+                    "numContenedor": "CONT-1",
+                    "partida": {
+                        "$class": "Direction",
+                        "codLocal": "0001",
+                        "direccion": "AV. PARTIDA 2",
+                        "ruc": "20000000001",
+                        "ubigueo": "150203"
+                    },
+                    "pesoItems": {
+                        "$float": "10.5"
+                    },
+                    "pesoTotal": {
+                        "$float": "12.5"
+                    },
+                    "puerto": {
+                        "$class": "Puerto",
+                        "codigo": "PECLL",
+                        "nombre": "CALLAO"
+                    },
+                    "sustentoPeso": "Sustento",
+                    "transportista": {
+                        "$class": "Transportist",
+                        "choferDoc": "00000002",
+                        "choferTipoDoc": "1",
+                        "nroMtc": "MTC-1",
+                        "numDoc": "20000000003",
+                        "placa": "ABC-123",
+                        "rznSocial": "TRANSPORTES SINTETICOS",
+                        "tipoDoc": "6"
+                    },
+                    "undPesoTotal": "KGM",
+                    "vehiculo": {
+                        "$class": "Vehicle",
+                        "codEmisor": "MTC",
+                        "nroAutorizacion": "AUT-ABC-123",
+                        "nroCirculacion": "CIRC-ABC-123",
+                        "placa": "ABC-123",
+                        "secundarios": [
+                            {
+                                "$class": "Vehicle",
+                                "codEmisor": "MTC",
+                                "nroAutorizacion": "AUT-DEF-456",
+                                "nroCirculacion": "CIRC-DEF-456",
+                                "placa": "DEF-456",
+                                "secundarios": [
+                                    {
+                                        "$class": "Vehicle",
+                                        "codEmisor": "MTC",
+                                        "nroAutorizacion": "AUT-GHI-789",
+                                        "nroCirculacion": "CIRC-GHI-789",
+                                        "placa": "GHI-789",
+                                        "secundarios": null
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "indTransbordo": false
+                },
+                "fechaEmision": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-06-15T10:00:00.000000",
+                        "offset": -18000,
+                        "unix": 1718463600,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "observacion": "Guía sintética",
+                "relDoc": {
+                    "$class": "Document",
+                    "nroDoc": "F001-1",
+                    "tipoDoc": "01"
+                },
+                "serie": "V001",
+                "tercero": {
+                    "$class": "Client",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "CALLE PRUEBA 456",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150122",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "cliente@example.test",
+                    "numDoc": "20000000004",
+                    "rznSocial": "CLIENTE SINTETICO S.A.",
+                    "telephone": "999000000",
+                    "tipoDoc": "6"
+                },
+                "tipoDoc": "31",
+                "version": "2022"
+            }
+        },
+        "despatch-name-no-company": {
+            "calls": {
+                "getName": {
+                    "$error": {
+                        "class": "Error",
+                        "message": "Call to a member function getRuc() on null"
+                    }
+                }
+            },
+            "snapshot": {
+                "$class": "Despatch",
+                "addDocs": null,
+                "company": null,
+                "comprador": null,
+                "correlativo": null,
+                "destinatario": null,
+                "details": null,
+                "docBaja": null,
+                "envio": null,
+                "fechaEmision": null,
+                "observacion": null,
+                "relDoc": null,
+                "serie": null,
+                "tercero": null,
+                "tipoDoc": "09",
+                "version": null
+            }
+        },
+        "despatch-name-null-parts": {
+            "calls": {
+                "getName": "---"
+            },
+            "snapshot": {
+                "$class": "Despatch",
+                "addDocs": null,
+                "company": {
+                    "$class": "Company",
+                    "address": null,
+                    "email": null,
+                    "nombreComercial": null,
+                    "razonSocial": null,
+                    "ruc": null,
+                    "telephone": null
+                },
+                "comprador": null,
+                "correlativo": null,
+                "destinatario": null,
+                "details": null,
+                "docBaja": null,
+                "envio": null,
+                "fechaEmision": null,
+                "observacion": null,
+                "relDoc": null,
+                "serie": null,
+                "tercero": null,
+                "tipoDoc": null,
+                "version": null
+            }
+        },
+        "shipment-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Shipment",
+                "aeropuerto": null,
+                "choferes": null,
+                "codPuerto": null,
+                "codTraslado": null,
+                "contenedores": null,
+                "desTraslado": null,
+                "fecEntregaBienes": null,
+                "fecTraslado": null,
+                "indicadores": null,
+                "llegada": null,
+                "modTraslado": null,
+                "numBultos": null,
+                "numContenedor": null,
+                "partida": null,
+                "pesoItems": null,
+                "pesoTotal": null,
+                "puerto": null,
+                "sustentoPeso": null,
+                "transportista": null,
+                "undPesoTotal": null,
+                "vehiculo": null,
+                "indTransbordo": null
+            }
+        },
+        "shipment-full": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Shipment",
+                "aeropuerto": {
+                    "$class": "Puerto",
+                    "codigo": "LIM",
+                    "nombre": "JORGE CHAVEZ"
+                },
+                "choferes": [
+                    {
+                        "$class": "Driver",
+                        "apellidos": "PRUEBA",
+                        "licencia": "Q0000002",
+                        "nombres": "JUAN",
+                        "nroDoc": "00000002",
+                        "tipo": "Principal",
+                        "tipoDoc": "1"
+                    },
+                    {
+                        "$class": "Driver",
+                        "apellidos": "PRUEBA",
+                        "licencia": "Q0000003",
+                        "nombres": "ANA",
+                        "nroDoc": "00000003",
+                        "tipo": "Secundario",
+                        "tipoDoc": "1"
+                    }
+                ],
+                "codPuerto": "PECLL",
+                "codTraslado": "01",
+                "contenedores": [
+                    "CONT-1",
+                    "CONT-2"
+                ],
+                "desTraslado": "VENTA",
+                "fecEntregaBienes": {
+                    "$datetime": {
+                        "class": "DateTime",
+                        "local": "2025-01-01T08:00:00.000000",
+                        "offset": -18000,
+                        "unix": 1735736400,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "fecTraslado": {
+                    "$datetime": {
+                        "class": "DateTime",
+                        "local": "2024-12-31T23:59:59.000000",
+                        "offset": -18000,
+                        "unix": 1735707599,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "indicadores": [
+                    "SUNAT_Envio_IndicadorTrasladoVehiculoM1L"
+                ],
+                "llegada": {
+                    "$class": "Direction",
+                    "codLocal": "0002",
+                    "direccion": "AV. LLEGADA 1",
+                    "ruc": "20000000001",
+                    "ubigueo": "150101"
+                },
+                "modTraslado": "02",
+                "numBultos": 3,
+                "numContenedor": "CONT-1",
+                "partida": {
+                    "$class": "Direction",
+                    "codLocal": "0001",
+                    "direccion": "AV. PARTIDA 2",
+                    "ruc": "20000000001",
+                    "ubigueo": "150203"
+                },
+                "pesoItems": {
+                    "$float": "10.5"
+                },
+                "pesoTotal": {
+                    "$float": "12.5"
+                },
+                "puerto": {
+                    "$class": "Puerto",
+                    "codigo": "PECLL",
+                    "nombre": "CALLAO"
+                },
+                "sustentoPeso": "Sustento",
+                "transportista": {
+                    "$class": "Transportist",
+                    "choferDoc": "00000002",
+                    "choferTipoDoc": "1",
+                    "nroMtc": "MTC-1",
+                    "numDoc": "20000000003",
+                    "placa": "ABC-123",
+                    "rznSocial": "TRANSPORTES SINTETICOS",
+                    "tipoDoc": "6"
+                },
+                "undPesoTotal": "KGM",
+                "vehiculo": {
+                    "$class": "Vehicle",
+                    "codEmisor": "MTC",
+                    "nroAutorizacion": "AUT-ABC-123",
+                    "nroCirculacion": "CIRC-ABC-123",
+                    "placa": "ABC-123",
+                    "secundarios": [
+                        {
+                            "$class": "Vehicle",
+                            "codEmisor": "MTC",
+                            "nroAutorizacion": "AUT-DEF-456",
+                            "nroCirculacion": "CIRC-DEF-456",
+                            "placa": "DEF-456",
+                            "secundarios": [
+                                {
+                                    "$class": "Vehicle",
+                                    "codEmisor": "MTC",
+                                    "nroAutorizacion": "AUT-GHI-789",
+                                    "nroCirculacion": "CIRC-GHI-789",
+                                    "placa": "GHI-789",
+                                    "secundarios": null
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "indTransbordo": false
+            }
+        },
+        "shipment-transbordo-true": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Shipment",
+                "aeropuerto": null,
+                "choferes": null,
+                "codPuerto": null,
+                "codTraslado": null,
+                "contenedores": null,
+                "desTraslado": null,
+                "fecEntregaBienes": null,
+                "fecTraslado": null,
+                "indicadores": null,
+                "llegada": null,
+                "modTraslado": null,
+                "numBultos": 0,
+                "numContenedor": null,
+                "partida": null,
+                "pesoItems": null,
+                "pesoTotal": null,
+                "puerto": null,
+                "sustentoPeso": null,
+                "transportista": null,
+                "undPesoTotal": null,
+                "vehiculo": null,
+                "indTransbordo": true
+            }
+        },
+        "direction-ctor-null": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Direction",
+                "codLocal": null,
+                "direccion": null,
+                "ruc": null,
+                "ubigueo": null
+            }
+        },
+        "direction-ctor-values": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Direction",
+                "codLocal": null,
+                "direccion": "AV. 1",
+                "ruc": null,
+                "ubigueo": "150101"
+            }
+        },
+        "vehicle-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Vehicle",
+                "codEmisor": null,
+                "nroAutorizacion": null,
+                "nroCirculacion": null,
+                "placa": null,
+                "secundarios": null
+            }
+        },
+        "vehicle-empty-secundarios": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Vehicle",
+                "codEmisor": null,
+                "nroAutorizacion": null,
+                "nroCirculacion": null,
+                "placa": null,
+                "secundarios": []
+            }
+        },
+        "driver-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Driver",
+                "apellidos": null,
+                "licencia": null,
+                "nombres": null,
+                "nroDoc": null,
+                "tipo": null,
+                "tipoDoc": null
+            }
+        },
+        "puerto-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Puerto",
+                "codigo": null,
+                "nombre": null
+            }
+        },
+        "transportist-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Transportist",
+                "choferDoc": null,
+                "choferTipoDoc": null,
+                "nroMtc": null,
+                "numDoc": null,
+                "placa": null,
+                "rznSocial": null,
+                "tipoDoc": null
+            }
+        },
+        "despatch-detail-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "DespatchDetail",
+                "atributos": null,
+                "cantidad": null,
+                "codProdSunat": null,
+                "codigo": null,
+                "descripcion": null,
+                "unidad": null
+            }
+        },
+        "additional-doc-full": {
+            "calls": {
+                "getNro": "F001-1"
+            },
+            "snapshot": {
+                "$class": "AdditionalDoc",
+                "emisor": "20000000001",
+                "nro": "F001-1",
+                "tipo": "01",
+                "tipoDesc": "Factura"
+            }
+        },
+        "additional-doc-empty": {
+            "calls": {
+                "getNro": {
+                    "$error": {
+                        "class": "TypeError",
+                        "message": "CPEForge\\Model\\Despatch\\AdditionalDoc::getNro(): Return value must be of type string, null returned"
+                    }
+                }
+            },
+            "snapshot": {
+                "$class": "AdditionalDoc",
+                "emisor": null,
+                "nro": {
+                    "$error": {
+                        "class": "TypeError",
+                        "message": "CPEForge\\Model\\Despatch\\AdditionalDoc::getNro(): Return value must be of type string, null returned"
+                    }
+                },
+                "tipo": null,
+                "tipoDesc": null
+            }
+        },
+        "additional-doc-empty-nro": {
+            "calls": {
+                "getNro": ""
+            },
+            "snapshot": {
+                "$class": "AdditionalDoc",
+                "emisor": null,
+                "nro": "",
+                "tipo": null,
+                "tipoDesc": null
+            }
+        },
+        "despatch-additional-doc-null-nro": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Despatch",
+                "addDocs": [
+                    {
+                        "$class": "AdditionalDoc",
+                        "emisor": null,
+                        "nro": {
+                            "$error": {
+                                "class": "TypeError",
+                                "message": "CPEForge\\Model\\Despatch\\AdditionalDoc::getNro(): Return value must be of type string, null returned"
+                            }
+                        },
+                        "tipo": "01",
+                        "tipoDesc": null
+                    }
+                ],
+                "company": null,
+                "comprador": null,
+                "correlativo": null,
+                "destinatario": null,
+                "details": null,
+                "docBaja": null,
+                "envio": null,
+                "fechaEmision": null,
+                "observacion": null,
+                "relDoc": null,
+                "serie": null,
+                "tercero": null,
+                "tipoDoc": null,
+                "version": null
+            }
+        }
+    }
+}

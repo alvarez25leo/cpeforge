@@ -1,0 +1,304 @@
+{
+    "translation": {
+        "G001": "Proveedor",
+        "1003": "1003",
+        "desconocido": "desconocido",
+        "": ""
+    },
+    "translation_empty_provider": {
+        "G001": "Recurso G001",
+        "1003": "1003",
+        "unknown": "unknown"
+    },
+    "locale": "en",
+    "metadata": {
+        "invoice": true,
+        "stdClass": false,
+        "unknown_constraints": 0,
+        "unknown_properties": []
+    },
+    "stages": {
+        "default": [
+            [
+                "tipoDoc",
+                "This value should not be blank."
+            ],
+            [
+                "serie",
+                "This value should not be blank."
+            ],
+            [
+                "correlativo",
+                "This value should not be blank."
+            ],
+            [
+                "fechaEmision",
+                "This value should not be null."
+            ],
+            [
+                "tipoMoneda",
+                "This value should not be blank."
+            ],
+            [
+                "mtoOperGravadas",
+                "This value should not be null."
+            ],
+            [
+                "mtoOperInafectas",
+                "This value should not be null."
+            ],
+            [
+                "mtoOperExoneradas",
+                "This value should not be null."
+            ],
+            [
+                "mtoImpVenta",
+                "This value should not be null."
+            ],
+            [
+                "client",
+                "This value should not be null."
+            ],
+            [
+                "company",
+                "This value should not be null."
+            ]
+        ],
+        "2.1": [
+            [
+                "tipoOperacion",
+                "This value should not be blank."
+            ],
+            [
+                "tipoDoc",
+                "This value should not be blank."
+            ],
+            [
+                "serie",
+                "This value should not be blank."
+            ],
+            [
+                "correlativo",
+                "This value should not be blank."
+            ],
+            [
+                "fechaEmision",
+                "This value should not be null."
+            ],
+            [
+                "tipoMoneda",
+                "This value should not be blank."
+            ],
+            [
+                "totalImpuestos",
+                "This value should not be null."
+            ],
+            [
+                "valorVenta",
+                "This value should not be null."
+            ],
+            [
+                "mtoImpVenta",
+                "This value should not be null."
+            ],
+            [
+                "client",
+                "This value should not be null."
+            ],
+            [
+                "company",
+                "This value should not be null."
+            ],
+            [
+                "formaPago",
+                "This value should not be null."
+            ]
+        ],
+        "unknown": [
+            [
+                "tipoDoc",
+                "This value should not be blank."
+            ],
+            [
+                "serie",
+                "This value should not be blank."
+            ],
+            [
+                "correlativo",
+                "This value should not be blank."
+            ],
+            [
+                "fechaEmision",
+                "This value should not be null."
+            ],
+            [
+                "tipoMoneda",
+                "This value should not be blank."
+            ],
+            [
+                "mtoOperGravadas",
+                "This value should not be null."
+            ],
+            [
+                "mtoOperInafectas",
+                "This value should not be null."
+            ],
+            [
+                "mtoOperExoneradas",
+                "This value should not be null."
+            ],
+            [
+                "mtoImpVenta",
+                "This value should not be null."
+            ],
+            [
+                "client",
+                "This value should not be null."
+            ],
+            [
+                "company",
+                "This value should not be null."
+            ]
+        ],
+        "listener": [
+            [
+                "fechaEmision",
+                "Regla sintética"
+            ],
+            [
+                "tipoOperacion",
+                "This value should not be blank."
+            ],
+            [
+                "tipoDoc",
+                "This value should not be blank."
+            ],
+            [
+                "serie",
+                "This value should not be blank."
+            ],
+            [
+                "correlativo",
+                "This value should not be blank."
+            ],
+            [
+                "fechaEmision",
+                "This value should not be null."
+            ],
+            [
+                "tipoMoneda",
+                "This value should not be blank."
+            ],
+            [
+                "totalImpuestos",
+                "This value should not be null."
+            ],
+            [
+                "valorVenta",
+                "This value should not be null."
+            ],
+            [
+                "mtoImpVenta",
+                "This value should not be null."
+            ],
+            [
+                "client",
+                "This value should not be null."
+            ],
+            [
+                "company",
+                "This value should not be null."
+            ],
+            [
+                "formaPago",
+                "This value should not be null."
+            ]
+        ],
+        "default-again": [
+            [
+                "fechaEmision",
+                "Regla sintética"
+            ],
+            [
+                "tipoDoc",
+                "This value should not be blank."
+            ],
+            [
+                "serie",
+                "This value should not be blank."
+            ],
+            [
+                "correlativo",
+                "This value should not be blank."
+            ],
+            [
+                "fechaEmision",
+                "This value should not be null."
+            ],
+            [
+                "tipoMoneda",
+                "This value should not be blank."
+            ],
+            [
+                "mtoOperGravadas",
+                "This value should not be null."
+            ],
+            [
+                "mtoOperInafectas",
+                "This value should not be null."
+            ],
+            [
+                "mtoOperExoneradas",
+                "This value should not be null."
+            ],
+            [
+                "mtoImpVenta",
+                "This value should not be null."
+            ],
+            [
+                "client",
+                "This value should not be null."
+            ],
+            [
+                "company",
+                "This value should not be null."
+            ]
+        ]
+    },
+    "date_callback": {
+        "2025-01-01": [
+            [
+                "fechaEmision",
+                "Fecha emision superó 7 dias"
+            ]
+        ],
+        "2025-01-07": [],
+        "2025-01-20": [
+            [
+                "fechaEmision",
+                "Fecha emision superó 7 dias"
+            ]
+        ]
+    },
+    "property_extension": {
+        "has_email": true,
+        "violations": [
+            [
+                "tipoDoc",
+                "This value should not be blank."
+            ],
+            [
+                "numDoc",
+                "This value should not be blank."
+            ],
+            [
+                "rznSocial",
+                "This value should not be blank."
+            ],
+            [
+                "email",
+                "Email obligatoria"
+            ]
+        ]
+    }
+}

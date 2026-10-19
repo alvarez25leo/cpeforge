@@ -1,0 +1,515 @@
+{
+ "description": "Diferencias referencia↔Rust de cpeforge-cpe-validator observadas por crates/cpe-validator/tests/parity.rs, por caso (id) y ruta del primer campo divergente de cada paso. Cada entrada se valida con tests/support/perfil_seguro.rs: DIFERENCIA_DELIBERADA con motivo del perfil seguro (docs/verificacion-paridad.md) o CORREGIR pendiente, que bloquea LISTO.",
+ "differences": [
+  {
+   "id": "parser-null",
+   "path": "$.steps[0].outcome",
+   "family": "parser",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "tipado-estatico",
+   "category": "api",
+   "reason": "La referencia acepta null en una firma ?string y falla o devuelve null; la API Rust recibe &str/bytes y no puede representar null.",
+   "compatibility_note": "La entrada null no existe en Rust; el resto de valores coincide."
+  },
+  {
+   "id": "path-null-code",
+   "path": "$.steps[0].outcome",
+   "family": "path",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "tipado-estatico",
+   "category": "api",
+   "reason": "La referencia acepta null en una firma ?string y falla o devuelve null; la API Rust recibe &str/bytes y no puede representar null.",
+   "compatibility_note": "La entrada null no existe en Rust; el resto de valores coincide."
+  },
+  {
+   "id": "type-invoice-dtd",
+   "path": "$.steps[0].outcome",
+   "family": "type",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "seguridad",
+   "category": "dtd",
+   "reason": "El XML o la hoja declara DOCTYPE con entidades. La referencia lo procesa (las hojas importadas incluso sustituyen entidades); el perfil seguro rechaza todo DOCTYPE con DoctypeForbidden.",
+   "compatibility_note": "XML y XSL con DOCTYPE se rechazan."
+  },
+  {
+   "id": "type-voided-no-id",
+   "path": "$.steps[0].message",
+   "family": "type",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "diagnostico-runtime",
+   "category": "excepcion",
+   "reason": "Misma clase de excepción (error_class()) y mismo punto de fallo; el texto lo genera el runtime de la referencia (TypeError/ValueError internos o ext/xsl), no la referencia.",
+   "compatibility_note": "Comparar por error_class(); el mensaje Rust describe la causa en español."
+  },
+  {
+   "id": "type-voided-cbc-undefined",
+   "path": "$.steps[0].message",
+   "family": "type",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "diagnostico-runtime",
+   "category": "excepcion",
+   "reason": "Misma clase de excepción (error_class()) y mismo punto de fallo; el texto lo genera el runtime de la referencia (TypeError/ValueError internos o ext/xsl), no la referencia.",
+   "compatibility_note": "Comparar por error_class(); el mensaje Rust describe la causa en español."
+  },
+  {
+   "id": "type-malformed",
+   "path": "$.steps[0].outcome",
+   "family": "type",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "rechazo-explicito",
+   "category": "xml",
+   "reason": "XML mal formado: la referencia sigue con un DOMDocument sin raíz (avisos) y devuelve tipo null o el error 0305; Rust devuelve CpeValidatorError::MalformedXml.",
+   "compatibility_note": "Un XML ilegible ya no se informa como «tipo desconocido» (0305)."
+  },
+  {
+   "id": "type-not-xml",
+   "path": "$.steps[0].outcome",
+   "family": "type",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "rechazo-explicito",
+   "category": "xml",
+   "reason": "XML mal formado: la referencia sigue con un DOMDocument sin raíz (avisos) y devuelve tipo null o el error 0305; Rust devuelve CpeValidatorError::MalformedXml.",
+   "compatibility_note": "Un XML ilegible ya no se informa como «tipo desconocido» (0305)."
+  },
+  {
+   "id": "type-empty",
+   "path": "$.steps[0].message",
+   "family": "type",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "diagnostico-runtime",
+   "category": "excepcion",
+   "reason": "Misma clase de excepción (error_class()) y mismo punto de fallo; el texto lo genera el runtime de la referencia (TypeError/ValueError internos o ext/xsl), no la referencia.",
+   "compatibility_note": "Comparar por error_class(); el mensaje Rust describe la causa en español."
+  },
+  {
+   "id": "type-null",
+   "path": "$.steps[0].outcome",
+   "family": "type",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "tipado-estatico",
+   "category": "api",
+   "reason": "La referencia acepta null en una firma ?string y falla o devuelve null; la API Rust recibe &str/bytes y no puede representar null.",
+   "compatibility_note": "La entrada null no existe en Rust; el resto de valores coincide."
+  },
+  {
+   "id": "xsl-terminate-invalid",
+   "path": "$.steps[1].outcome",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "rechazo-explicito",
+   "category": "xslt",
+   "reason": "libxslt termina con error de ejecución o de compilación no fatal; la referencia devuelve los mensajes emitidos hasta ese punto como resultado normal. Rust devuelve Transform/StylesheetInvalid con los errores parciales y los diagnósticos.",
+   "compatibility_note": "Un fallo de la hoja ya no parece una validación completa."
+  },
+  {
+   "id": "xsl-param-nul",
+   "path": "$.steps[1].message",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "diagnostico-runtime",
+   "category": "excepcion",
+   "reason": "Misma clase de excepción (error_class()) y mismo punto de fallo; el texto lo genera el runtime de la referencia (TypeError/ValueError internos o ext/xsl), no la referencia.",
+   "compatibility_note": "Comparar por error_class(); el mensaje Rust describe la causa en español."
+  },
+  {
+   "id": "xsl-matches-false-comparison",
+   "path": "$.steps[1].outcome",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "rechazo-explicito",
+   "category": "pcre",
+   "reason": "preg_match devuelve false con un aviso (patrón PCRE inválido o delimitador roto por str_replace) y la regla sigue con false; Rust devuelve CpeValidatorError::Regex con el aviso de la referencia.",
+   "compatibility_note": "Una regla con regex inválida es un error de la hoja, no un resultado."
+  },
+  {
+   "id": "xsl-matches-invalid-regex",
+   "path": "$.steps[1].outcome",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "rechazo-explicito",
+   "category": "pcre",
+   "reason": "preg_match devuelve false con un aviso (patrón PCRE inválido o delimitador roto por str_replace) y la regla sigue con false; Rust devuelve CpeValidatorError::Regex con el aviso de la referencia.",
+   "compatibility_note": "Una regla con regex inválida es un error de la hoja, no un resultado."
+  },
+  {
+   "id": "xsl-matches-escaped-slash",
+   "path": "$.steps[1].outcome",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "rechazo-explicito",
+   "category": "pcre",
+   "reason": "preg_match devuelve false con un aviso (patrón PCRE inválido o delimitador roto por str_replace) y la regla sigue con false; Rust devuelve CpeValidatorError::Regex con el aviso de la referencia.",
+   "compatibility_note": "Una regla con regex inválida es un error de la hoja, no un resultado."
+  },
+  {
+   "id": "xsl-matches-trailing-backslash",
+   "path": "$.steps[1].outcome",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "rechazo-explicito",
+   "category": "pcre",
+   "reason": "preg_match devuelve false con un aviso (patrón PCRE inválido o delimitador roto por str_replace) y la regla sigue con false; Rust devuelve CpeValidatorError::Regex con el aviso de la referencia.",
+   "compatibility_note": "Una regla con regex inválida es un error de la hoja, no un resultado."
+  },
+  {
+   "id": "xsl-matches-backtrack-limit",
+   "path": "$.steps[1].outcome",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "seguridad",
+   "category": "pcre",
+   "reason": "Retroceso catastrófico: la referencia devuelve false sin aviso al superar pcre.backtrack_limit; Rust aplica el mismo límite y devuelve ResourceLimit(Regex).",
+   "compatibility_note": "El límite de coste PCRE es un error explícito."
+  },
+  {
+   "id": "xsl-runtime-undefined-variable",
+   "path": "$.steps[1].outcome",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "rechazo-explicito",
+   "category": "xslt",
+   "reason": "libxslt termina con error de ejecución o de compilación no fatal; la referencia devuelve los mensajes emitidos hasta ese punto como resultado normal. Rust devuelve Transform/StylesheetInvalid con los errores parciales y los diagnósticos.",
+   "compatibility_note": "Un fallo de la hoja ya no parece una validación completa."
+  },
+  {
+   "id": "xsl-runtime-unknown-function",
+   "path": "$.steps[1].outcome",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "rechazo-explicito",
+   "category": "xslt",
+   "reason": "libxslt termina con error de ejecución o de compilación no fatal; la referencia devuelve los mensajes emitidos hasta ese punto como resultado normal. Rust devuelve Transform/StylesheetInvalid con los errores parciales y los diagnósticos.",
+   "compatibility_note": "Un fallo de la hoja ya no parece una validación completa."
+  },
+  {
+   "id": "xsl-runtime-recursion-limit",
+   "path": "$.steps[1].outcome",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "seguridad",
+   "category": "limite",
+   "reason": "Recursión infinita de plantillas: libxslt se detiene en xsltMaxDepth en ambos; la referencia devuelve los mensajes previos y Rust ResourceLimit(TemplateDepth).",
+   "compatibility_note": "El agotamiento de profundidad es un error explícito."
+  },
+  {
+   "id": "xsl-runtime-bad-element-name",
+   "path": "$.steps[1].outcome",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "rechazo-explicito",
+   "category": "xslt",
+   "reason": "libxslt termina con error de ejecución o de compilación no fatal; la referencia devuelve los mensajes emitidos hasta ese punto como resultado normal. Rust devuelve Transform/StylesheetInvalid con los errores parciales y los diagnósticos.",
+   "compatibility_note": "Un fallo de la hoja ya no parece una validación completa."
+  },
+  {
+   "id": "xsl-compile-unknown-element",
+   "path": "$.steps[1].outcome",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "rechazo-explicito",
+   "category": "xslt",
+   "reason": "libxslt termina con error de ejecución o de compilación no fatal; la referencia devuelve los mensajes emitidos hasta ese punto como resultado normal. Rust devuelve Transform/StylesheetInvalid con los errores parciales y los diagnósticos.",
+   "compatibility_note": "Un fallo de la hoja ya no parece una validación completa."
+  },
+  {
+   "id": "xsl-compile-bad-xpath",
+   "path": "$.steps[1].message",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "diagnostico-runtime",
+   "category": "excepcion",
+   "reason": "Misma clase de excepción (error_class()) y mismo punto de fallo; el texto lo genera el runtime de la referencia (TypeError/ValueError internos o ext/xsl), no la referencia.",
+   "compatibility_note": "Comparar por error_class(); el mensaje Rust describe la causa en español."
+  },
+  {
+   "id": "xsl-xml-dtd",
+   "path": "$.steps[1].outcome",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "seguridad",
+   "category": "dtd",
+   "reason": "El XML o la hoja declara DOCTYPE con entidades. La referencia lo procesa (las hojas importadas incluso sustituyen entidades); el perfil seguro rechaza todo DOCTYPE con DoctypeForbidden.",
+   "compatibility_note": "XML y XSL con DOCTYPE se rechazan."
+  },
+  {
+   "id": "xsl-sheet-dtd",
+   "path": "$.steps[1].outcome",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "seguridad",
+   "category": "dtd",
+   "reason": "El XML o la hoja declara DOCTYPE con entidades. La referencia lo procesa (las hojas importadas incluso sustituyen entidades); el perfil seguro rechaza todo DOCTYPE con DoctypeForbidden.",
+   "compatibility_note": "XML y XSL con DOCTYPE se rechazan."
+  },
+  {
+   "id": "xsl-reuse-after-exception",
+   "path": "$.steps[3].errors",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "seguridad",
+   "category": "estado",
+   "reason": "Tras una excepción dentro de la transformación, XslValidator de la referencia no limpia los errores de libxml ni restaura libxml_use_internal_errors: la validación siguiente devuelve también mensajes del documento anterior. Rust no comparte estado entre validaciones.",
+   "compatibility_note": "Los errores de un documento no se filtran a la validación de otro."
+  },
+  {
+   "id": "xsl-document-outside-root",
+   "path": "$.steps[1].outcome",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "seguridad",
+   "category": "acceso",
+   "reason": "La referencia permite leer cualquier archivo o URL con document()/xsl:include/xsl:import y descarta la escritura en silencio; el perfil seguro solo lee dentro del directorio de reglas (enlaces resueltos), prohíbe red y escritura y devuelve AccessDenied/RuleOutsideRoot.",
+   "compatibility_note": "Hojas fuera del directorio de reglas, red y exsl:document se rechazan."
+  },
+  {
+   "id": "xsl-document-network",
+   "path": "$.steps[1].outcome",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "seguridad",
+   "category": "acceso",
+   "reason": "La referencia permite leer cualquier archivo o URL con document()/xsl:include/xsl:import y descarta la escritura en silencio; el perfil seguro solo lee dentro del directorio de reglas (enlaces resueltos), prohíbe red y escritura y devuelve AccessDenied/RuleOutsideRoot.",
+   "compatibility_note": "Hojas fuera del directorio de reglas, red y exsl:document se rechazan."
+  },
+  {
+   "id": "xsl-include-outside-root",
+   "path": "$.steps[1].outcome",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "seguridad",
+   "category": "acceso",
+   "reason": "La referencia permite leer cualquier archivo o URL con document()/xsl:include/xsl:import y descarta la escritura en silencio; el perfil seguro solo lee dentro del directorio de reglas (enlaces resueltos), prohíbe red y escritura y devuelve AccessDenied/RuleOutsideRoot.",
+   "compatibility_note": "Hojas fuera del directorio de reglas, red y exsl:document se rechazan."
+  },
+  {
+   "id": "xsl-include-missing",
+   "path": "$.steps[1].message",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "diagnostico-runtime",
+   "category": "excepcion",
+   "reason": "Misma clase de excepción (error_class()) y mismo punto de fallo; el texto lo genera el runtime de la referencia (TypeError/ValueError internos o ext/xsl), no la referencia.",
+   "compatibility_note": "Comparar por error_class(); el mensaje Rust describe la causa en español."
+  },
+  {
+   "id": "xsl-include-entity",
+   "path": "$.steps[1].outcome",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "seguridad",
+   "category": "dtd",
+   "reason": "El XML o la hoja declara DOCTYPE con entidades. La referencia lo procesa (las hojas importadas incluso sustituyen entidades); el perfil seguro rechaza todo DOCTYPE con DoctypeForbidden.",
+   "compatibility_note": "XML y XSL con DOCTYPE se rechazan."
+  },
+  {
+   "id": "xsl-exsl-document-write",
+   "path": "$.steps[1].outcome",
+   "family": "xsl",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "seguridad",
+   "category": "acceso",
+   "reason": "La referencia permite leer cualquier archivo o URL con document()/xsl:include/xsl:import y descarta la escritura en silencio; el perfil seguro solo lee dentro del directorio de reglas (enlaces resueltos), prohíbe red y escritura y devuelve AccessDenied/RuleOutsideRoot.",
+   "compatibility_note": "Hojas fuera del directorio de reglas, red y exsl:document se rechazan."
+  },
+  {
+   "id": "cpe-missing-rule-file",
+   "path": "$.steps[2].message",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "diagnostico-runtime",
+   "category": "excepcion",
+   "reason": "Misma clase de excepción (error_class()) y mismo punto de fallo; el texto lo genera el runtime de la referencia (TypeError/ValueError internos o ext/xsl), no la referencia.",
+   "compatibility_note": "Comparar por error_class(); el mensaje Rust describe la causa en español."
+  },
+  {
+   "id": "cpe-malformed-rule",
+   "path": "$.steps[2].message",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "diagnostico-runtime",
+   "category": "excepcion",
+   "reason": "Misma clase de excepción (error_class()) y mismo punto de fallo; el texto lo genera el runtime de la referencia (TypeError/ValueError internos o ext/xsl), no la referencia.",
+   "compatibility_note": "Comparar por error_class(); el mensaje Rust describe la causa en español."
+  },
+  {
+   "id": "cpe-empty-rule-file",
+   "path": "$.steps[2].message",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "diagnostico-runtime",
+   "category": "excepcion",
+   "reason": "Misma clase de excepción (error_class()) y mismo punto de fallo; el texto lo genera el runtime de la referencia (TypeError/ValueError internos o ext/xsl), no la referencia.",
+   "compatibility_note": "Comparar por error_class(); el mensaje Rust describe la causa en español."
+  },
+  {
+   "id": "cpe-not-a-stylesheet",
+   "path": "$.steps[2].message",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "diagnostico-runtime",
+   "category": "excepcion",
+   "reason": "Misma clase de excepción (error_class()) y mismo punto de fallo; el texto lo genera el runtime de la referencia (TypeError/ValueError internos o ext/xsl), no la referencia.",
+   "compatibility_note": "Comparar por error_class(); el mensaje Rust describe la causa en español."
+  },
+  {
+   "id": "cpe-compile-error-rule",
+   "path": "$.steps[2].message",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "diagnostico-runtime",
+   "category": "excepcion",
+   "reason": "Misma clase de excepción (error_class()) y mismo punto de fallo; el texto lo genera el runtime de la referencia (TypeError/ValueError internos o ext/xsl), no la referencia.",
+   "compatibility_note": "Comparar por error_class(); el mensaje Rust describe la causa en español."
+  },
+  {
+   "id": "cpe-malformed-xml",
+   "path": "$.steps[0].outcome",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "rechazo-explicito",
+   "category": "xml",
+   "reason": "XML mal formado: la referencia sigue con un DOMDocument sin raíz (avisos) y devuelve tipo null o el error 0305; Rust devuelve CpeValidatorError::MalformedXml.",
+   "compatibility_note": "Un XML ilegible ya no se informa como «tipo desconocido» (0305)."
+  },
+  {
+   "id": "cpe-malformed-xml",
+   "path": "$.steps[1].outcome",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "rechazo-explicito",
+   "category": "xml",
+   "reason": "XML mal formado: la referencia sigue con un DOMDocument sin raíz (avisos) y devuelve tipo null o el error 0305; Rust devuelve CpeValidatorError::MalformedXml.",
+   "compatibility_note": "Un XML ilegible ya no se informa como «tipo desconocido» (0305)."
+  },
+  {
+   "id": "cpe-malformed-xml",
+   "path": "$.steps[2].outcome",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "rechazo-explicito",
+   "category": "xml",
+   "reason": "XML mal formado: la referencia sigue con un DOMDocument sin raíz (avisos) y devuelve tipo null o el error 0305; Rust devuelve CpeValidatorError::MalformedXml.",
+   "compatibility_note": "Un XML ilegible ya no se informa como «tipo desconocido» (0305)."
+  },
+  {
+   "id": "cpe-empty-xml",
+   "path": "$.steps[0].message",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "diagnostico-runtime",
+   "category": "excepcion",
+   "reason": "Misma clase de excepción (error_class()) y mismo punto de fallo; el texto lo genera el runtime de la referencia (TypeError/ValueError internos o ext/xsl), no la referencia.",
+   "compatibility_note": "Comparar por error_class(); el mensaje Rust describe la causa en español."
+  },
+  {
+   "id": "cpe-empty-xml",
+   "path": "$.steps[1].message",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "diagnostico-runtime",
+   "category": "excepcion",
+   "reason": "Misma clase de excepción (error_class()) y mismo punto de fallo; el texto lo genera el runtime de la referencia (TypeError/ValueError internos o ext/xsl), no la referencia.",
+   "compatibility_note": "Comparar por error_class(); el mensaje Rust describe la causa en español."
+  },
+  {
+   "id": "cpe-empty-xml",
+   "path": "$.steps[2].message",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "diagnostico-runtime",
+   "category": "excepcion",
+   "reason": "Misma clase de excepción (error_class()) y mismo punto de fallo; el texto lo genera el runtime de la referencia (TypeError/ValueError internos o ext/xsl), no la referencia.",
+   "compatibility_note": "Comparar por error_class(); el mensaje Rust describe la causa en español."
+  },
+  {
+   "id": "cpe-xml-dtd",
+   "path": "$.steps[0].outcome",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "seguridad",
+   "category": "dtd",
+   "reason": "El XML o la hoja declara DOCTYPE con entidades. La referencia lo procesa (las hojas importadas incluso sustituyen entidades); el perfil seguro rechaza todo DOCTYPE con DoctypeForbidden.",
+   "compatibility_note": "XML y XSL con DOCTYPE se rechazan."
+  },
+  {
+   "id": "cpe-xml-dtd",
+   "path": "$.steps[1].outcome",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "seguridad",
+   "category": "dtd",
+   "reason": "El XML o la hoja declara DOCTYPE con entidades. La referencia lo procesa (las hojas importadas incluso sustituyen entidades); el perfil seguro rechaza todo DOCTYPE con DoctypeForbidden.",
+   "compatibility_note": "XML y XSL con DOCTYPE se rechazan."
+  },
+  {
+   "id": "cpe-xml-dtd",
+   "path": "$.steps[2].outcome",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "seguridad",
+   "category": "dtd",
+   "reason": "El XML o la hoja declara DOCTYPE con entidades. La referencia lo procesa (las hojas importadas incluso sustituyen entidades); el perfil seguro rechaza todo DOCTYPE con DoctypeForbidden.",
+   "compatibility_note": "XML y XSL con DOCTYPE se rechazan."
+  },
+  {
+   "id": "cpe-voided-without-id",
+   "path": "$.steps[0].message",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "diagnostico-runtime",
+   "category": "excepcion",
+   "reason": "Misma clase de excepción (error_class()) y mismo punto de fallo; el texto lo genera el runtime de la referencia (TypeError/ValueError internos o ext/xsl), no la referencia.",
+   "compatibility_note": "Comparar por error_class(); el mensaje Rust describe la causa en español."
+  },
+  {
+   "id": "cpe-voided-without-id",
+   "path": "$.steps[1].message",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "diagnostico-runtime",
+   "category": "excepcion",
+   "reason": "Misma clase de excepción (error_class()) y mismo punto de fallo; el texto lo genera el runtime de la referencia (TypeError/ValueError internos o ext/xsl), no la referencia.",
+   "compatibility_note": "Comparar por error_class(); el mensaje Rust describe la causa en español."
+  },
+  {
+   "id": "cpe-voided-without-id",
+   "path": "$.steps[2].message",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "diagnostico-runtime",
+   "category": "excepcion",
+   "reason": "Misma clase de excepción (error_class()) y mismo punto de fallo; el texto lo genera el runtime de la referencia (TypeError/ValueError internos o ext/xsl), no la referencia.",
+   "compatibility_note": "Comparar por error_class(); el mensaje Rust describe la causa en español."
+  },
+  {
+   "id": "cpe-xml-over-limit",
+   "path": "$.steps[2].outcome",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "seguridad",
+   "category": "limite",
+   "reason": "XML mayor que Limits::max_xml_bytes (aquí 512 bytes para la prueba); la referencia no tiene límite.",
+   "compatibility_note": "Entradas mayores que el límite configurado se rechazan con TooLarge."
+  },
+  {
+   "id": "cpe-include-outside-root",
+   "path": "$.steps[2].outcome",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "seguridad",
+   "category": "acceso",
+   "reason": "La referencia permite leer cualquier archivo o URL con document()/xsl:include/xsl:import y descarta la escritura en silencio; el perfil seguro solo lee dentro del directorio de reglas (enlaces resueltos), prohíbe red y escritura y devuelve AccessDenied/RuleOutsideRoot.",
+   "compatibility_note": "Hojas fuera del directorio de reglas, red y exsl:document se rechazan."
+  },
+  {
+   "id": "cpe-symlink-escape",
+   "path": "$.steps[2].outcome",
+   "family": "cpe",
+   "classification": "DIFERENCIA_DELIBERADA",
+   "motivo": "seguridad",
+   "category": "acceso",
+   "reason": "La referencia permite leer cualquier archivo o URL con document()/xsl:include/xsl:import y descarta la escritura en silencio; el perfil seguro solo lee dentro del directorio de reglas (enlaces resueltos), prohíbe red y escritura y devuelve AccessDenied/RuleOutsideRoot.",
+   "compatibility_note": "Hojas fuera del directorio de reglas, red y exsl:document se rechazan."
+  }
+ ]
+}

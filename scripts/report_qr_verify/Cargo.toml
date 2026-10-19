@@ -1,0 +1,13 @@
+# Decodificador QR independiente para la verificación de cpeforge-report.
+# No forma parte del workspace ni se publica: rqrr exige Rust 1.85.1 y su
+# licencia incluye ISC, así que se mantiene fuera de las puertas del workspace.
+[package]
+name = "report-qr-verify"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[dependencies]
+rqrr = "=0.11.0"

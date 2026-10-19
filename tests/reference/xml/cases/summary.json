@@ -1,0 +1,1687 @@
+{
+  "family": "summary",
+  "cases": [
+    {
+      "id": "summary-full-default",
+      "description": "Resumen diario con IVAP, IGV, ISC, otros, ICBPER y percepción [default]",
+      "builder": "SummaryBuilder",
+      "options": {},
+      "input": {
+        "$class": "Summary",
+        "correlativo": "001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-31T20:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecResumen": {
+          "$datetime": "2024-02-01T03:00:00+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "moneda": "PEN",
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": [
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-1",
+            "clienteTipo": "1",
+            "clienteNro": "00000001",
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-0"
+            },
+            "percepcion": {
+              "$class": "SummaryPerception",
+              "codReg": "01",
+              "tasa": {
+                "$decimal": "2.00"
+              },
+              "mtoBase": {
+                "$decimal": "100"
+              },
+              "mto": {
+                "$decimal": "2"
+              },
+              "mtoTotal": {
+                "$decimal": "102"
+              }
+            },
+            "estado": "1",
+            "total": {
+              "$decimal": "118.00"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18.00"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "100.00"
+            },
+            "mtoOperInafectas": {
+              "$decimal": "0"
+            },
+            "mtoOperExoneradas": {
+              "$decimal": "0"
+            },
+            "mtoOperExportacion": {
+              "$decimal": "0"
+            },
+            "mtoOperGratuitas": {
+              "$decimal": "0"
+            },
+            "mtoOtrosCargos": {
+              "$decimal": "0"
+            },
+            "mtoIGV": {
+              "$decimal": "18.00"
+            },
+            "mtoIvap": {
+              "$decimal": "0"
+            },
+            "mtoISC": {
+              "$decimal": "0"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0"
+            },
+            "mtoIcbper": {
+              "$decimal": "0.50"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-2",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "1",
+            "total": {
+              "$decimal": "10"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "0"
+            },
+            "mtoIvap": {
+              "$decimal": "1.5"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "07",
+            "serieNro": "BC01-1",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "3",
+            "total": {
+              "$decimal": "5"
+            },
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-1"
+            },
+            "mtoIGV": {
+              "$decimal": "0.9"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18"
+            },
+            "mtoISC": {
+              "$decimal": "0.5"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0.2"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "summary-full-cpeforge",
+      "description": "Resumen diario con IVAP, IGV, ISC, otros, ICBPER y percepción [cpeforge]",
+      "builder": "SummaryBuilder",
+      "options": {
+        "autoescape": false
+      },
+      "input": {
+        "$class": "Summary",
+        "correlativo": "001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-31T20:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecResumen": {
+          "$datetime": "2024-02-01T03:00:00+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "moneda": "PEN",
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": [
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-1",
+            "clienteTipo": "1",
+            "clienteNro": "00000001",
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-0"
+            },
+            "percepcion": {
+              "$class": "SummaryPerception",
+              "codReg": "01",
+              "tasa": {
+                "$decimal": "2.00"
+              },
+              "mtoBase": {
+                "$decimal": "100"
+              },
+              "mto": {
+                "$decimal": "2"
+              },
+              "mtoTotal": {
+                "$decimal": "102"
+              }
+            },
+            "estado": "1",
+            "total": {
+              "$decimal": "118.00"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18.00"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "100.00"
+            },
+            "mtoOperInafectas": {
+              "$decimal": "0"
+            },
+            "mtoOperExoneradas": {
+              "$decimal": "0"
+            },
+            "mtoOperExportacion": {
+              "$decimal": "0"
+            },
+            "mtoOperGratuitas": {
+              "$decimal": "0"
+            },
+            "mtoOtrosCargos": {
+              "$decimal": "0"
+            },
+            "mtoIGV": {
+              "$decimal": "18.00"
+            },
+            "mtoIvap": {
+              "$decimal": "0"
+            },
+            "mtoISC": {
+              "$decimal": "0"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0"
+            },
+            "mtoIcbper": {
+              "$decimal": "0.50"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-2",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "1",
+            "total": {
+              "$decimal": "10"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "0"
+            },
+            "mtoIvap": {
+              "$decimal": "1.5"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "07",
+            "serieNro": "BC01-1",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "3",
+            "total": {
+              "$decimal": "5"
+            },
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-1"
+            },
+            "mtoIGV": {
+              "$decimal": "0.9"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18"
+            },
+            "mtoISC": {
+              "$decimal": "0.5"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0.2"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "summary-full-tests",
+      "description": "Resumen diario con IVAP, IGV, ISC, otros, ICBPER y percepción [tests]",
+      "builder": "SummaryBuilder",
+      "options": {
+        "cache": false,
+        "strict_variables": true,
+        "autoescape": false
+      },
+      "input": {
+        "$class": "Summary",
+        "correlativo": "001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-31T20:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecResumen": {
+          "$datetime": "2024-02-01T03:00:00+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "moneda": "PEN",
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": [
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-1",
+            "clienteTipo": "1",
+            "clienteNro": "00000001",
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-0"
+            },
+            "percepcion": {
+              "$class": "SummaryPerception",
+              "codReg": "01",
+              "tasa": {
+                "$decimal": "2.00"
+              },
+              "mtoBase": {
+                "$decimal": "100"
+              },
+              "mto": {
+                "$decimal": "2"
+              },
+              "mtoTotal": {
+                "$decimal": "102"
+              }
+            },
+            "estado": "1",
+            "total": {
+              "$decimal": "118.00"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18.00"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "100.00"
+            },
+            "mtoOperInafectas": {
+              "$decimal": "0"
+            },
+            "mtoOperExoneradas": {
+              "$decimal": "0"
+            },
+            "mtoOperExportacion": {
+              "$decimal": "0"
+            },
+            "mtoOperGratuitas": {
+              "$decimal": "0"
+            },
+            "mtoOtrosCargos": {
+              "$decimal": "0"
+            },
+            "mtoIGV": {
+              "$decimal": "18.00"
+            },
+            "mtoIvap": {
+              "$decimal": "0"
+            },
+            "mtoISC": {
+              "$decimal": "0"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0"
+            },
+            "mtoIcbper": {
+              "$decimal": "0.50"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-2",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "1",
+            "total": {
+              "$decimal": "10"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "0"
+            },
+            "mtoIvap": {
+              "$decimal": "1.5"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "07",
+            "serieNro": "BC01-1",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "3",
+            "total": {
+              "$decimal": "5"
+            },
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-1"
+            },
+            "mtoIGV": {
+              "$decimal": "0.9"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18"
+            },
+            "mtoISC": {
+              "$decimal": "0.5"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0.2"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "summary-usd-default",
+      "description": "Resumen en USD [default]",
+      "builder": "SummaryBuilder",
+      "options": {},
+      "input": {
+        "$class": "Summary",
+        "correlativo": "001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-31T20:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecResumen": {
+          "$datetime": "2024-02-01T03:00:00+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "moneda": "USD",
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": [
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-1",
+            "clienteTipo": "1",
+            "clienteNro": "00000001",
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-0"
+            },
+            "percepcion": {
+              "$class": "SummaryPerception",
+              "codReg": "01",
+              "tasa": {
+                "$decimal": "2.00"
+              },
+              "mtoBase": {
+                "$decimal": "100"
+              },
+              "mto": {
+                "$decimal": "2"
+              },
+              "mtoTotal": {
+                "$decimal": "102"
+              }
+            },
+            "estado": "1",
+            "total": {
+              "$decimal": "118.00"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18.00"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "100.00"
+            },
+            "mtoOperInafectas": {
+              "$decimal": "0"
+            },
+            "mtoOperExoneradas": {
+              "$decimal": "0"
+            },
+            "mtoOperExportacion": {
+              "$decimal": "0"
+            },
+            "mtoOperGratuitas": {
+              "$decimal": "0"
+            },
+            "mtoOtrosCargos": {
+              "$decimal": "0"
+            },
+            "mtoIGV": {
+              "$decimal": "18.00"
+            },
+            "mtoIvap": {
+              "$decimal": "0"
+            },
+            "mtoISC": {
+              "$decimal": "0"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0"
+            },
+            "mtoIcbper": {
+              "$decimal": "0.50"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-2",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "1",
+            "total": {
+              "$decimal": "10"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "0"
+            },
+            "mtoIvap": {
+              "$decimal": "1.5"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "07",
+            "serieNro": "BC01-1",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "3",
+            "total": {
+              "$decimal": "5"
+            },
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-1"
+            },
+            "mtoIGV": {
+              "$decimal": "0.9"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18"
+            },
+            "mtoISC": {
+              "$decimal": "0.5"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0.2"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "summary-null-generation-default",
+      "description": "fecGeneracion nula usa la hora actual [default]",
+      "builder": "SummaryBuilder",
+      "options": {},
+      "input": {
+        "$class": "Summary",
+        "correlativo": "001",
+        "fecGeneracion": null,
+        "fecResumen": {
+          "$datetime": "2024-02-01T03:00:00+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "moneda": "PEN",
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": [
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-1",
+            "clienteTipo": "1",
+            "clienteNro": "00000001",
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-0"
+            },
+            "percepcion": {
+              "$class": "SummaryPerception",
+              "codReg": "01",
+              "tasa": {
+                "$decimal": "2.00"
+              },
+              "mtoBase": {
+                "$decimal": "100"
+              },
+              "mto": {
+                "$decimal": "2"
+              },
+              "mtoTotal": {
+                "$decimal": "102"
+              }
+            },
+            "estado": "1",
+            "total": {
+              "$decimal": "118.00"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18.00"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "100.00"
+            },
+            "mtoOperInafectas": {
+              "$decimal": "0"
+            },
+            "mtoOperExoneradas": {
+              "$decimal": "0"
+            },
+            "mtoOperExportacion": {
+              "$decimal": "0"
+            },
+            "mtoOperGratuitas": {
+              "$decimal": "0"
+            },
+            "mtoOtrosCargos": {
+              "$decimal": "0"
+            },
+            "mtoIGV": {
+              "$decimal": "18.00"
+            },
+            "mtoIvap": {
+              "$decimal": "0"
+            },
+            "mtoISC": {
+              "$decimal": "0"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0"
+            },
+            "mtoIcbper": {
+              "$decimal": "0.50"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-2",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "1",
+            "total": {
+              "$decimal": "10"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "0"
+            },
+            "mtoIvap": {
+              "$decimal": "1.5"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "07",
+            "serieNro": "BC01-1",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "3",
+            "total": {
+              "$decimal": "5"
+            },
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-1"
+            },
+            "mtoIGV": {
+              "$decimal": "0.9"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18"
+            },
+            "mtoISC": {
+              "$decimal": "0.5"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0.2"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "summary-null-resumen-default",
+      "description": "fecResumen nula: getXmlId lanza TypeError [default]",
+      "builder": "SummaryBuilder",
+      "options": {},
+      "input": {
+        "$class": "Summary",
+        "correlativo": "001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-31T20:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecResumen": null,
+        "moneda": "PEN",
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": [
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-1",
+            "clienteTipo": "1",
+            "clienteNro": "00000001",
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-0"
+            },
+            "percepcion": {
+              "$class": "SummaryPerception",
+              "codReg": "01",
+              "tasa": {
+                "$decimal": "2.00"
+              },
+              "mtoBase": {
+                "$decimal": "100"
+              },
+              "mto": {
+                "$decimal": "2"
+              },
+              "mtoTotal": {
+                "$decimal": "102"
+              }
+            },
+            "estado": "1",
+            "total": {
+              "$decimal": "118.00"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18.00"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "100.00"
+            },
+            "mtoOperInafectas": {
+              "$decimal": "0"
+            },
+            "mtoOperExoneradas": {
+              "$decimal": "0"
+            },
+            "mtoOperExportacion": {
+              "$decimal": "0"
+            },
+            "mtoOperGratuitas": {
+              "$decimal": "0"
+            },
+            "mtoOtrosCargos": {
+              "$decimal": "0"
+            },
+            "mtoIGV": {
+              "$decimal": "18.00"
+            },
+            "mtoIvap": {
+              "$decimal": "0"
+            },
+            "mtoISC": {
+              "$decimal": "0"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0"
+            },
+            "mtoIcbper": {
+              "$decimal": "0.50"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-2",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "1",
+            "total": {
+              "$decimal": "10"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "0"
+            },
+            "mtoIvap": {
+              "$decimal": "1.5"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "07",
+            "serieNro": "BC01-1",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "3",
+            "total": {
+              "$decimal": "5"
+            },
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-1"
+            },
+            "mtoIGV": {
+              "$decimal": "0.9"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18"
+            },
+            "mtoISC": {
+              "$decimal": "0.5"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0.2"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "summary-null-resumen-tests",
+      "description": "fecResumen nula: getXmlId lanza TypeError [tests]",
+      "builder": "SummaryBuilder",
+      "options": {
+        "cache": false,
+        "strict_variables": true,
+        "autoescape": false
+      },
+      "input": {
+        "$class": "Summary",
+        "correlativo": "001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-31T20:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecResumen": null,
+        "moneda": "PEN",
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": [
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-1",
+            "clienteTipo": "1",
+            "clienteNro": "00000001",
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-0"
+            },
+            "percepcion": {
+              "$class": "SummaryPerception",
+              "codReg": "01",
+              "tasa": {
+                "$decimal": "2.00"
+              },
+              "mtoBase": {
+                "$decimal": "100"
+              },
+              "mto": {
+                "$decimal": "2"
+              },
+              "mtoTotal": {
+                "$decimal": "102"
+              }
+            },
+            "estado": "1",
+            "total": {
+              "$decimal": "118.00"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18.00"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "100.00"
+            },
+            "mtoOperInafectas": {
+              "$decimal": "0"
+            },
+            "mtoOperExoneradas": {
+              "$decimal": "0"
+            },
+            "mtoOperExportacion": {
+              "$decimal": "0"
+            },
+            "mtoOperGratuitas": {
+              "$decimal": "0"
+            },
+            "mtoOtrosCargos": {
+              "$decimal": "0"
+            },
+            "mtoIGV": {
+              "$decimal": "18.00"
+            },
+            "mtoIvap": {
+              "$decimal": "0"
+            },
+            "mtoISC": {
+              "$decimal": "0"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0"
+            },
+            "mtoIcbper": {
+              "$decimal": "0.50"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-2",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "1",
+            "total": {
+              "$decimal": "10"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "0"
+            },
+            "mtoIvap": {
+              "$decimal": "1.5"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "07",
+            "serieNro": "BC01-1",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "3",
+            "total": {
+              "$decimal": "5"
+            },
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-1"
+            },
+            "mtoIGV": {
+              "$decimal": "0.9"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18"
+            },
+            "mtoISC": {
+              "$decimal": "0.5"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0.2"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "summary-empty-details-default",
+      "description": "Sin líneas [default]",
+      "builder": "SummaryBuilder",
+      "options": {},
+      "input": {
+        "$class": "Summary",
+        "correlativo": "001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-31T20:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecResumen": {
+          "$datetime": "2024-02-01T03:00:00+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "moneda": "PEN",
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": []
+      }
+    },
+    {
+      "id": "summary-no-company-default",
+      "description": "Sin emisor [default]",
+      "builder": "SummaryBuilder",
+      "options": {},
+      "input": {
+        "$class": "Summary",
+        "correlativo": "001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-31T20:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecResumen": {
+          "$datetime": "2024-02-01T03:00:00+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "moneda": "PEN",
+        "company": null,
+        "details": [
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-1",
+            "clienteTipo": "1",
+            "clienteNro": "00000001",
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-0"
+            },
+            "percepcion": {
+              "$class": "SummaryPerception",
+              "codReg": "01",
+              "tasa": {
+                "$decimal": "2.00"
+              },
+              "mtoBase": {
+                "$decimal": "100"
+              },
+              "mto": {
+                "$decimal": "2"
+              },
+              "mtoTotal": {
+                "$decimal": "102"
+              }
+            },
+            "estado": "1",
+            "total": {
+              "$decimal": "118.00"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18.00"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "100.00"
+            },
+            "mtoOperInafectas": {
+              "$decimal": "0"
+            },
+            "mtoOperExoneradas": {
+              "$decimal": "0"
+            },
+            "mtoOperExportacion": {
+              "$decimal": "0"
+            },
+            "mtoOperGratuitas": {
+              "$decimal": "0"
+            },
+            "mtoOtrosCargos": {
+              "$decimal": "0"
+            },
+            "mtoIGV": {
+              "$decimal": "18.00"
+            },
+            "mtoIvap": {
+              "$decimal": "0"
+            },
+            "mtoISC": {
+              "$decimal": "0"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0"
+            },
+            "mtoIcbper": {
+              "$decimal": "0.50"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-2",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "1",
+            "total": {
+              "$decimal": "10"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "0"
+            },
+            "mtoIvap": {
+              "$decimal": "1.5"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "07",
+            "serieNro": "BC01-1",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "3",
+            "total": {
+              "$decimal": "5"
+            },
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-1"
+            },
+            "mtoIGV": {
+              "$decimal": "0.9"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18"
+            },
+            "mtoISC": {
+              "$decimal": "0.5"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0.2"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "summary-no-company-cpeforge",
+      "description": "Sin emisor [cpeforge]",
+      "builder": "SummaryBuilder",
+      "options": {
+        "autoescape": false
+      },
+      "input": {
+        "$class": "Summary",
+        "correlativo": "001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-31T20:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecResumen": {
+          "$datetime": "2024-02-01T03:00:00+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "moneda": "PEN",
+        "company": null,
+        "details": [
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-1",
+            "clienteTipo": "1",
+            "clienteNro": "00000001",
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-0"
+            },
+            "percepcion": {
+              "$class": "SummaryPerception",
+              "codReg": "01",
+              "tasa": {
+                "$decimal": "2.00"
+              },
+              "mtoBase": {
+                "$decimal": "100"
+              },
+              "mto": {
+                "$decimal": "2"
+              },
+              "mtoTotal": {
+                "$decimal": "102"
+              }
+            },
+            "estado": "1",
+            "total": {
+              "$decimal": "118.00"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18.00"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "100.00"
+            },
+            "mtoOperInafectas": {
+              "$decimal": "0"
+            },
+            "mtoOperExoneradas": {
+              "$decimal": "0"
+            },
+            "mtoOperExportacion": {
+              "$decimal": "0"
+            },
+            "mtoOperGratuitas": {
+              "$decimal": "0"
+            },
+            "mtoOtrosCargos": {
+              "$decimal": "0"
+            },
+            "mtoIGV": {
+              "$decimal": "18.00"
+            },
+            "mtoIvap": {
+              "$decimal": "0"
+            },
+            "mtoISC": {
+              "$decimal": "0"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0"
+            },
+            "mtoIcbper": {
+              "$decimal": "0.50"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-2",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "1",
+            "total": {
+              "$decimal": "10"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "0"
+            },
+            "mtoIvap": {
+              "$decimal": "1.5"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "07",
+            "serieNro": "BC01-1",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "3",
+            "total": {
+              "$decimal": "5"
+            },
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-1"
+            },
+            "mtoIGV": {
+              "$decimal": "0.9"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18"
+            },
+            "mtoISC": {
+              "$decimal": "0.5"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0.2"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "summary-no-company-tests",
+      "description": "Sin emisor [tests]",
+      "builder": "SummaryBuilder",
+      "options": {
+        "cache": false,
+        "strict_variables": true,
+        "autoescape": false
+      },
+      "input": {
+        "$class": "Summary",
+        "correlativo": "001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-31T20:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecResumen": {
+          "$datetime": "2024-02-01T03:00:00+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "moneda": "PEN",
+        "company": null,
+        "details": [
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-1",
+            "clienteTipo": "1",
+            "clienteNro": "00000001",
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-0"
+            },
+            "percepcion": {
+              "$class": "SummaryPerception",
+              "codReg": "01",
+              "tasa": {
+                "$decimal": "2.00"
+              },
+              "mtoBase": {
+                "$decimal": "100"
+              },
+              "mto": {
+                "$decimal": "2"
+              },
+              "mtoTotal": {
+                "$decimal": "102"
+              }
+            },
+            "estado": "1",
+            "total": {
+              "$decimal": "118.00"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18.00"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "100.00"
+            },
+            "mtoOperInafectas": {
+              "$decimal": "0"
+            },
+            "mtoOperExoneradas": {
+              "$decimal": "0"
+            },
+            "mtoOperExportacion": {
+              "$decimal": "0"
+            },
+            "mtoOperGratuitas": {
+              "$decimal": "0"
+            },
+            "mtoOtrosCargos": {
+              "$decimal": "0"
+            },
+            "mtoIGV": {
+              "$decimal": "18.00"
+            },
+            "mtoIvap": {
+              "$decimal": "0"
+            },
+            "mtoISC": {
+              "$decimal": "0"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0"
+            },
+            "mtoIcbper": {
+              "$decimal": "0.50"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "03",
+            "serieNro": "B001-2",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "1",
+            "total": {
+              "$decimal": "10"
+            },
+            "mtoOperGravadas": {
+              "$decimal": "0"
+            },
+            "mtoIvap": {
+              "$decimal": "1.5"
+            }
+          },
+          {
+            "$class": "SummaryDetail",
+            "tipoDoc": "07",
+            "serieNro": "BC01-1",
+            "clienteTipo": "1",
+            "clienteNro": "1",
+            "estado": "3",
+            "total": {
+              "$decimal": "5"
+            },
+            "docReferencia": {
+              "$class": "Document",
+              "tipoDoc": "03",
+              "nroDoc": "B001-1"
+            },
+            "mtoIGV": {
+              "$decimal": "0.9"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18"
+            },
+            "mtoISC": {
+              "$decimal": "0.5"
+            },
+            "mtoOtrosTributos": {
+              "$decimal": "0.2"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "summary-empty-line-default",
+      "description": "Línea vacía: mtoIGV nulo en n_format [default]",
+      "builder": "SummaryBuilder",
+      "options": {},
+      "input": {
+        "$class": "Summary",
+        "correlativo": "001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-31T20:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecResumen": {
+          "$datetime": "2024-02-01T03:00:00+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "moneda": "PEN",
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": [
+          {
+            "$class": "SummaryDetail"
+          }
+        ]
+      }
+    },
+    {
+      "id": "summary-empty-line-cpeforge",
+      "description": "Línea vacía: mtoIGV nulo en n_format [cpeforge]",
+      "builder": "SummaryBuilder",
+      "options": {
+        "autoescape": false
+      },
+      "input": {
+        "$class": "Summary",
+        "correlativo": "001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-31T20:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecResumen": {
+          "$datetime": "2024-02-01T03:00:00+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "moneda": "PEN",
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": [
+          {
+            "$class": "SummaryDetail"
+          }
+        ]
+      }
+    },
+    {
+      "id": "summary-empty-line-tests",
+      "description": "Línea vacía: mtoIGV nulo en n_format [tests]",
+      "builder": "SummaryBuilder",
+      "options": {
+        "cache": false,
+        "strict_variables": true,
+        "autoescape": false
+      },
+      "input": {
+        "$class": "Summary",
+        "correlativo": "001",
+        "fecGeneracion": {
+          "$datetime": "2024-01-31T20:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "fecResumen": {
+          "$datetime": "2024-02-01T03:00:00+00:00",
+          "tz": "UTC",
+          "class": "DateTimeImmutable"
+        },
+        "moneda": "PEN",
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "details": [
+          {
+            "$class": "SummaryDetail"
+          }
+        ]
+      }
+    }
+  ]
+}

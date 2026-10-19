@@ -1,0 +1,43 @@
+[package]
+name = "cpeforge-report"
+version = "0.1.0"
+description = "Representación impresa HTML (siete plantillas, CSS y QR SVG) de comprobantes electrónicos peruanos."
+readme = "README.md"
+keywords = ["sunat", "peru", "report", "html", "cpe"]
+categories = ["template-engine"]
+# Las pruebas y el benchmark dependen de los fixtures del workspace
+# (tests/reference); no se publican.
+exclude = ["tests/", "benches/"]
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+base64.workspace = true
+cpeforge-core.workspace = true
+cpeforge-xml-limits.workspace = true
+jiff.workspace = true
+minijinja.workspace = true
+qrcodegen.workspace = true
+roxmltree.workspace = true
+rust_decimal.workspace = true
+
+[dev-dependencies]
+cpeforge-core = { workspace = true, features = ["serde"] }
+serde.workspace = true
+serde_json.workspace = true
+serde_path_to_error.workspace = true
+sha2.workspace = true
+tempfile.workspace = true
+
+[[example]]
+name = "invoice_html"
+
+[[bench]]
+name = "render"
+harness = false
+
+[lints]
+workspace = true

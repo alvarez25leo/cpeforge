@@ -1,0 +1,1 @@
+{% if params.user.fmt %}{{ doc.fechaEmision|date(params.user.fmt) }}{% else %}{{ doc.fechaEmision|date }}{% endif %}

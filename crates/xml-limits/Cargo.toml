@@ -1,0 +1,20 @@
+[package]
+name = "cpeforge-xml-limits"
+version = "0.1.0"
+description = "Límite de anidamiento XML comprobado sobre el texto, antes de que un parser recursivo agote la pila"
+readme = "README.md"
+keywords = ["xml", "depth", "stack", "parser", "security"]
+categories = ["parser-implementations"]
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+
+[dev-dependencies]
+roxmltree.workspace = true
+
+[lints]
+workspace = true

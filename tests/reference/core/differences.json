@@ -1,0 +1,117 @@
+{
+  "description": "Divergencias referencia↔Rust observadas por crates/core/tests/parity.rs. Cada entrada se valida con tests/support/perfil_seguro.rs: DIFERENCIA_DELIBERADA con motivo admitido por el perfil seguro (docs/verificacion-paridad.md#perfil-seguro) o CORREGIR pendiente, que bloquea LISTO.",
+  "differences": [
+    {
+      "case": "amount-nineteen-significant",
+      "path": "snapshot.factor",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "Rust conserva el decimal exacto con rust_decimal; la referencia lo almacena como float binario de 64 bits y lo redondea a 12345678901234568.0. Usar float para importes está prohibido por los estándares del proyecto.",
+      "compatibility_note": "Los valores con hasta 15 cifras significativas coinciden. Con más cifras, Rust conserva dígitos que la referencia pierde; un XML generado por Rust podría diferir del de la referencia si la plantilla no redondea antes.",
+      "motivo": "precision-decimal"
+    },
+    {
+      "case": "amount-nineteen-significant",
+      "path": "snapshot.monto",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "Rust conserva el decimal exacto con rust_decimal; la referencia lo almacena como float binario de 64 bits y lo redondea a 12345678901234568.0. Usar float para importes está prohibido por los estándares del proyecto.",
+      "compatibility_note": "Los valores con hasta 15 cifras significativas coinciden. Con más cifras, Rust conserva dígitos que la referencia pierde; un XML generado por Rust podría diferir del de la referencia si la plantilla no redondea antes.",
+      "motivo": "precision-decimal"
+    },
+    {
+      "case": "amount-many-decimals",
+      "path": "snapshot.factor",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "Rust conserva el decimal exacto con rust_decimal; la referencia lo almacena como float binario de 64 bits y lo redondea a 0.12345678901234568. Usar float para importes está prohibido por los estándares del proyecto.",
+      "compatibility_note": "Los valores con hasta 15 cifras significativas coinciden. Con más cifras, Rust conserva dígitos que la referencia pierde; un XML generado por Rust podría diferir del de la referencia si la plantilla no redondea antes.",
+      "motivo": "precision-decimal"
+    },
+    {
+      "case": "amount-many-decimals",
+      "path": "snapshot.monto",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "Rust conserva el decimal exacto con rust_decimal; la referencia lo almacena como float binario de 64 bits y lo redondea a 0.12345678901234568. Usar float para importes está prohibido por los estándares del proyecto.",
+      "compatibility_note": "Los valores con hasta 15 cifras significativas coinciden. Con más cifras, Rust conserva dígitos que la referencia pierde; un XML generado por Rust podría diferir del de la referencia si la plantilla no redondea antes.",
+      "motivo": "precision-decimal"
+    },
+    {
+      "case": "amount-max-safe-integer",
+      "path": "snapshot.factor",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "Rust conserva el decimal exacto con rust_decimal; la referencia lo almacena como float binario de 64 bits y lo redondea a 9007199254740992.0. Usar float para importes está prohibido por los estándares del proyecto.",
+      "compatibility_note": "Los valores con hasta 15 cifras significativas coinciden. Con más cifras, Rust conserva dígitos que la referencia pierde; un XML generado por Rust podría diferir del de la referencia si la plantilla no redondea antes.",
+      "motivo": "precision-decimal"
+    },
+    {
+      "case": "amount-max-safe-integer",
+      "path": "snapshot.monto",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "Rust conserva el decimal exacto con rust_decimal; la referencia lo almacena como float binario de 64 bits y lo redondea a 9007199254740992.0. Usar float para importes está prohibido por los estándares del proyecto.",
+      "compatibility_note": "Los valores con hasta 15 cifras significativas coinciden. Con más cifras, Rust conserva dígitos que la referencia pierde; un XML generado por Rust podría diferir del de la referencia si la plantilla no redondea antes.",
+      "motivo": "precision-decimal"
+    },
+    {
+      "case": "amount-decimal-max",
+      "path": "snapshot.factor",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "Rust conserva el decimal exacto con rust_decimal; la referencia lo almacena como float binario de 64 bits y lo redondea a 7.922816251426434e+28. Usar float para importes está prohibido por los estándares del proyecto.",
+      "compatibility_note": "Los valores con hasta 15 cifras significativas coinciden. Con más cifras, Rust conserva dígitos que la referencia pierde; un XML generado por Rust podría diferir del de la referencia si la plantilla no redondea antes.",
+      "motivo": "precision-decimal"
+    },
+    {
+      "case": "amount-decimal-max",
+      "path": "snapshot.monto",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "Rust conserva el decimal exacto con rust_decimal; la referencia lo almacena como float binario de 64 bits y lo redondea a 7.922816251426434e+28. Usar float para importes está prohibido por los estándares del proyecto.",
+      "compatibility_note": "Los valores con hasta 15 cifras significativas coinciden. Con más cifras, Rust conserva dígitos que la referencia pierde; un XML generado por Rust podría diferir del de la referencia si la plantilla no redondea antes.",
+      "motivo": "precision-decimal"
+    },
+    {
+      "case": "amount-beyond-decimal-max",
+      "path": "hydrate",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "79228162514264337593543950336 excede el rango de rust_decimal (28 dígitos, máximo 79228162514264337593543950335). La referencia lo acepta como float aproximado; Rust lo rechaza con error en lugar de redondear en silencio.",
+      "compatibility_note": "Importes fuera de ±7.9e28 o con más de 28 decimales no son representables en Rust. Ningún importe SUNAT real se acerca a ese límite.",
+      "motivo": "rango-de-tipo"
+    },
+    {
+      "case": "amount-large-exponent",
+      "path": "hydrate",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "1e30 excede el rango de rust_decimal (28 dígitos, máximo 79228162514264337593543950335). La referencia lo acepta como float aproximado; Rust lo rechaza con error en lugar de redondear en silencio.",
+      "compatibility_note": "Importes fuera de ±7.9e28 o con más de 28 decimales no son representables en Rust. Ningún importe SUNAT real se acerca a ese límite.",
+      "motivo": "rango-de-tipo"
+    },
+    {
+      "case": "invalid-object-type",
+      "path": "hydrate",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "La referencia rechaza un objeto Address vacío en setCompany por su clase. En Rust, el tipo de cada campo se comprueba al compilar; en serde JSON no hay etiqueta de clase, así que un objeto {} es un Company válido con todos los campos en None.",
+      "compatibility_note": "Con la API tipada de Rust el error no puede ocurrir. En JSON, un objeto de otra clase con algún campo sí se rechaza (deny_unknown_fields; caso invalid-object-type-with-fields).",
+      "motivo": "tipado-estatico"
+    },
+    {
+      "case": "summary-date-max-four-digit-year",
+      "path": "hydrate",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "jiff solo representa instantes entre -9999-01-02T01:59:59Z y 9999-12-30T22:00:00Z. 9999-12-31T23:59:59-05:00 queda fuera; la referencia DateTime lo admite.",
+      "compatibility_note": "Las fechas posteriores a 9999-12-30T22:00:00Z (o anteriores al año -9999) no son representables. Las fechas hasta 9999-12-30 funcionan (caso *-late-year-9999).",
+      "motivo": "rango-de-tipo"
+    },
+    {
+      "case": "voided-date-max-four-digit-year",
+      "path": "hydrate",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "jiff solo representa instantes entre -9999-01-02T01:59:59Z y 9999-12-30T22:00:00Z. 9999-12-31T23:59:59-05:00 queda fuera; la referencia DateTime lo admite.",
+      "compatibility_note": "Las fechas posteriores a 9999-12-30T22:00:00Z (o anteriores al año -9999) no son representables. Las fechas hasta 9999-12-30 funcionan (caso *-late-year-9999).",
+      "motivo": "rango-de-tipo"
+    },
+    {
+      "case": "reversion-date-max-four-digit-year",
+      "path": "hydrate",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "jiff solo representa instantes entre -9999-01-02T01:59:59Z y 9999-12-30T22:00:00Z. 9999-12-31T23:59:59-05:00 queda fuera; la referencia DateTime lo admite.",
+      "compatibility_note": "Las fechas posteriores a 9999-12-30T22:00:00Z (o anteriores al año -9999) no son representables. Las fechas hasta 9999-12-30 funcionan (caso *-late-year-9999).",
+      "motivo": "rango-de-tipo"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+[package]
+name = "cpeforge-gre-api"
+version = "0.1.0"
+description = "Cliente HTTP de la API GRE de SUNAT (token, envío y consulta de guías de remisión)."
+readme = "README.md"
+keywords = ["sunat", "gre", "guia-remision", "api", "cpe"]
+categories = ["api-bindings", "web-programming::http-client"]
+# Las pruebas dependen de fixtures del workspace (tests/reference); no se publican.
+exclude = ["tests/"]
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[features]
+default = ["reqwest"]
+## Transporte `ReqwestTransport` (TLS nativo verificado).
+reqwest = ["dep:reqwest", "dep:hyper", "dep:url"]
+
+[dependencies]
+serde_json.workspace = true
+reqwest = { workspace = true, optional = true }
+hyper = { workspace = true, optional = true }
+url = { workspace = true, optional = true }
+
+[dev-dependencies]
+tokio = { workspace = true }
+
+[[test]]
+name = "parity"
+
+[[example]]
+name = "flujo_gre"
+
+[lints]
+workspace = true

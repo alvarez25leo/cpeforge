@@ -1,0 +1,474 @@
+{
+  "description": "Diferencias referencia↔Rust de cpeforge-xml-parser observadas por crates/xml-parser/tests/parity.rs, por caso (id) y ruta. Cada entrada se valida con tests/support/perfil_seguro.rs: DIFERENCIA_DELIBERADA con motivo del perfil seguro (docs/verificacion-paridad.md) o CORREGIR pendiente, que bloquea LISTO.",
+  "differences": [
+    {
+      "id": "invoice-date-utc",
+      "path": "$.snapshot.fechaEmision.tz",
+      "family": "invoice",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "tipado-estatico",
+      "category": "fecha",
+      "reason": "Fecha con sufijo Z. La referencia crea un DateTime con zona de tipo abreviatura «Z»; jiff representa el desplazamiento cero como la zona UTC. El instante, la hora local y el desplazamiento coinciden.",
+      "compatibility_note": "Solo cambia el nombre de la zona (UTC en vez de Z)."
+    },
+    {
+      "id": "invoice-date-invalid",
+      "path": "$.error.message",
+      "family": "invoice",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "diagnostico-runtime",
+      "category": "fecha",
+      "reason": "Fecha inválida: ambos fallan con DateMalformedStringException; la referencia añade al mensaje la posición y el carácter del error de su analizador de fechas, que Rust no reproduce.",
+      "compatibility_note": "Misma clase y mismo prefijo «Failed to parse time string (…)»; sin posición ni carácter."
+    },
+    {
+      "id": "invoice-date-relative",
+      "path": "$.outcome",
+      "family": "invoice",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "category": "fecha",
+      "reason": "Formato de fecha fuera del subconjunto ISO admitido (relativo «tomorrow» o año de dos cifras). La referencia lo interpreta con strtotime; Rust lo rechaza en vez de adivinar.",
+      "compatibility_note": "Rust devuelve XmlParserError::Date { unsupported: true }."
+    },
+    {
+      "id": "invoice-date-date-z",
+      "path": "$.snapshot.fechaEmision.tz",
+      "family": "invoice",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "tipado-estatico",
+      "category": "fecha",
+      "reason": "Fecha con sufijo Z. La referencia crea un DateTime con zona de tipo abreviatura «Z»; jiff representa el desplazamiento cero como la zona UTC. El instante, la hora local y el desplazamiento coinciden.",
+      "compatibility_note": "Solo cambia el nombre de la zona (UTC en vez de Z)."
+    },
+    {
+      "id": "invoice-date-month-13",
+      "path": "$.error.message",
+      "family": "invoice",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "diagnostico-runtime",
+      "category": "fecha",
+      "reason": "Fecha inválida: ambos fallan con DateMalformedStringException; la referencia añade al mensaje la posición y el carácter del error de su analizador de fechas, que Rust no reproduce.",
+      "compatibility_note": "Misma clase y mismo prefijo «Failed to parse time string (…)»; sin posición ni carácter."
+    },
+    {
+      "id": "invoice-date-day-32",
+      "path": "$.error.message",
+      "family": "invoice",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "diagnostico-runtime",
+      "category": "fecha",
+      "reason": "Fecha inválida: ambos fallan con DateMalformedStringException; la referencia añade al mensaje la posición y el carácter del error de su analizador de fechas, que Rust no reproduce.",
+      "compatibility_note": "Misma clase y mismo prefijo «Failed to parse time string (…)»; sin posición ni carácter."
+    },
+    {
+      "id": "invoice-date-year-short",
+      "path": "$.outcome",
+      "family": "invoice",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "category": "fecha",
+      "reason": "Formato de fecha fuera del subconjunto ISO admitido (relativo «tomorrow» o año de dos cifras). La referencia lo interpreta con strtotime; Rust lo rechaza en vez de adivinar.",
+      "compatibility_note": "Rust devuelve XmlParserError::Date { unsupported: true }."
+    },
+    {
+      "id": "invoice-amount-precision",
+      "path": "$.snapshot.mtoImpVenta",
+      "family": "invoice",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "precision-decimal",
+      "category": "importe",
+      "reason": "Importe con más cifras de las que guarda un double. La referencia redondea a float binario; Rust conserva el decimal exacto (hasta 28 cifras).",
+      "compatibility_note": "Rust es más preciso; para importes SUNAT (hasta 2-10 decimales) el resultado coincide."
+    },
+    {
+      "id": "invoice-amount-huge-exp",
+      "path": "$.outcome",
+      "family": "invoice",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rango-de-tipo",
+      "category": "importe",
+      "reason": "Importe 1e400 / 1e-40. La referencia obtiene INF o un float minúsculo; no caben en Decimal (±7.9e28, 28 decimales) y Rust devuelve error en vez de saturar o redondear a cero.",
+      "compatibility_note": "Rust devuelve XmlParserError::Number."
+    },
+    {
+      "id": "invoice-amount-tiny-exp",
+      "path": "$.outcome",
+      "family": "invoice",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rango-de-tipo",
+      "category": "importe",
+      "reason": "Importe 1e400 / 1e-40. La referencia obtiene INF o un float minúsculo; no caben en Decimal (±7.9e28, 28 decimales) y Rust devuelve error en vez de saturar o redondear a cero.",
+      "compatibility_note": "Rust devuelve XmlParserError::Number."
+    },
+    {
+      "id": "invoice-amount-long-fraction",
+      "path": "$.snapshot.mtoImpVenta",
+      "family": "invoice",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "precision-decimal",
+      "category": "importe",
+      "reason": "Importe con más cifras de las que guarda un double. La referencia redondea a float binario; Rust conserva el decimal exacto (hasta 28 cifras).",
+      "compatibility_note": "Rust es más preciso; para importes SUNAT (hasta 2-10 decimales) el resultado coincide."
+    },
+    {
+      "id": "invoice-malformed",
+      "path": "$.error.class",
+      "family": "invoice",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "category": "xml-invalido",
+      "reason": "XML truncado. La referencia sigue con un DOMDocument sin raíz: según el parser devuelve un documento con valores por defecto o falla después con un Error/TypeError ajeno al problema real.",
+      "compatibility_note": "Rust devuelve XmlParserError::Malformed con el error del analizador."
+    },
+    {
+      "id": "invoice-malformed",
+      "path": "$.error.message",
+      "family": "invoice",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "category": "xml-invalido",
+      "reason": "XML truncado. La referencia sigue con un DOMDocument sin raíz: según el parser devuelve un documento con valores por defecto o falla después con un Error/TypeError ajeno al problema real.",
+      "compatibility_note": "Rust devuelve XmlParserError::Malformed con el error del analizador."
+    },
+    {
+      "id": "invoice-dtd-entity",
+      "path": "$.outcome",
+      "family": "invoice",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "dtd",
+      "reason": "El XML declara una DTD con entidades. La referencia (DOMDocument::loadXML sin LIBXML_NOENT) expande las entidades internas y sigue; el perfil seguro rechaza toda DTD con declaraciones.",
+      "compatibility_note": "Rust devuelve XmlParserError::Dtd; no expande entidades."
+    },
+    {
+      "id": "invoice-external-entity",
+      "path": "$.outcome",
+      "family": "invoice",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "dtd",
+      "reason": "DTD con entidad externa SYSTEM. La referencia no carga el recurso y deja la referencia sin expandir; Rust rechaza la DTD antes de analizar el contenido.",
+      "compatibility_note": "Rust devuelve XmlParserError::Dtd y nunca accede al sistema de archivos ni a la red."
+    },
+    {
+      "id": "note-malformed",
+      "path": "$.error.class",
+      "family": "note",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "category": "xml-invalido",
+      "reason": "XML truncado. La referencia sigue con un DOMDocument sin raíz: según el parser devuelve un documento con valores por defecto o falla después con un Error/TypeError ajeno al problema real.",
+      "compatibility_note": "Rust devuelve XmlParserError::Malformed con el error del analizador."
+    },
+    {
+      "id": "note-malformed",
+      "path": "$.error.message",
+      "family": "note",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "category": "xml-invalido",
+      "reason": "XML truncado. La referencia sigue con un DOMDocument sin raíz: según el parser devuelve un documento con valores por defecto o falla después con un Error/TypeError ajeno al problema real.",
+      "compatibility_note": "Rust devuelve XmlParserError::Malformed con el error del analizador."
+    },
+    {
+      "id": "note-dtd-entity",
+      "path": "$.outcome",
+      "family": "note",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "dtd",
+      "reason": "El XML declara una DTD con entidades. La referencia (DOMDocument::loadXML sin LIBXML_NOENT) expande las entidades internas y sigue; el perfil seguro rechaza toda DTD con declaraciones.",
+      "compatibility_note": "Rust devuelve XmlParserError::Dtd; no expande entidades."
+    },
+    {
+      "id": "note-external-entity",
+      "path": "$.outcome",
+      "family": "note",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "dtd",
+      "reason": "DTD con entidad externa SYSTEM. La referencia no carga el recurso y deja la referencia sin expandir; Rust rechaza la DTD antes de analizar el contenido.",
+      "compatibility_note": "Rust devuelve XmlParserError::Dtd y nunca accede al sistema de archivos ni a la red."
+    },
+    {
+      "id": "despatch-malformed",
+      "path": "$.outcome",
+      "family": "despatch",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "category": "xml-invalido",
+      "reason": "XML truncado. La referencia sigue con un DOMDocument sin raíz: según el parser devuelve un documento con valores por defecto o falla después con un Error/TypeError ajeno al problema real.",
+      "compatibility_note": "Rust devuelve XmlParserError::Malformed con el error del analizador."
+    },
+    {
+      "id": "despatch-dtd-entity",
+      "path": "$.outcome",
+      "family": "despatch",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "dtd",
+      "reason": "El XML declara una DTD con entidades. La referencia (DOMDocument::loadXML sin LIBXML_NOENT) expande las entidades internas y sigue; el perfil seguro rechaza toda DTD con declaraciones.",
+      "compatibility_note": "Rust devuelve XmlParserError::Dtd; no expande entidades."
+    },
+    {
+      "id": "despatch-external-entity",
+      "path": "$.outcome",
+      "family": "despatch",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "dtd",
+      "reason": "DTD con entidad externa SYSTEM. La referencia no carga el recurso y deja la referencia sin expandir; Rust rechaza la DTD antes de analizar el contenido.",
+      "compatibility_note": "Rust devuelve XmlParserError::Dtd y nunca accede al sistema de archivos ni a la red."
+    },
+    {
+      "id": "receipt-malformed",
+      "path": "$.outcome",
+      "family": "receipt",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "category": "xml-invalido",
+      "reason": "XML truncado. La referencia sigue con un DOMDocument sin raíz: según el parser devuelve un documento con valores por defecto o falla después con un Error/TypeError ajeno al problema real.",
+      "compatibility_note": "Rust devuelve XmlParserError::Malformed con el error del analizador."
+    },
+    {
+      "id": "receipt-dtd-entity",
+      "path": "$.outcome",
+      "family": "receipt",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "dtd",
+      "reason": "El XML declara una DTD con entidades. La referencia (DOMDocument::loadXML sin LIBXML_NOENT) expande las entidades internas y sigue; el perfil seguro rechaza toda DTD con declaraciones.",
+      "compatibility_note": "Rust devuelve XmlParserError::Dtd; no expande entidades."
+    },
+    {
+      "id": "receipt-external-entity",
+      "path": "$.outcome",
+      "family": "receipt",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "dtd",
+      "reason": "DTD con entidad externa SYSTEM. La referencia no carga el recurso y deja la referencia sin expandir; Rust rechaza la DTD antes de analizar el contenido.",
+      "compatibility_note": "Rust devuelve XmlParserError::Dtd y nunca accede al sistema de archivos ni a la red."
+    },
+    {
+      "id": "summary-malformed",
+      "path": "$.outcome",
+      "family": "summary",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "category": "xml-invalido",
+      "reason": "XML truncado. La referencia sigue con un DOMDocument sin raíz: según el parser devuelve un documento con valores por defecto o falla después con un Error/TypeError ajeno al problema real.",
+      "compatibility_note": "Rust devuelve XmlParserError::Malformed con el error del analizador."
+    },
+    {
+      "id": "summary-dtd-entity",
+      "path": "$.outcome",
+      "family": "summary",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "dtd",
+      "reason": "El XML declara una DTD con entidades. La referencia (DOMDocument::loadXML sin LIBXML_NOENT) expande las entidades internas y sigue; el perfil seguro rechaza toda DTD con declaraciones.",
+      "compatibility_note": "Rust devuelve XmlParserError::Dtd; no expande entidades."
+    },
+    {
+      "id": "summary-external-entity",
+      "path": "$.outcome",
+      "family": "summary",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "dtd",
+      "reason": "DTD con entidad externa SYSTEM. La referencia no carga el recurso y deja la referencia sin expandir; Rust rechaza la DTD antes de analizar el contenido.",
+      "compatibility_note": "Rust devuelve XmlParserError::Dtd y nunca accede al sistema de archivos ni a la red."
+    },
+    {
+      "id": "voided-malformed",
+      "path": "$.outcome",
+      "family": "voided",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "category": "xml-invalido",
+      "reason": "XML truncado. La referencia sigue con un DOMDocument sin raíz: según el parser devuelve un documento con valores por defecto o falla después con un Error/TypeError ajeno al problema real.",
+      "compatibility_note": "Rust devuelve XmlParserError::Malformed con el error del analizador."
+    },
+    {
+      "id": "voided-dtd-entity",
+      "path": "$.outcome",
+      "family": "voided",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "dtd",
+      "reason": "El XML declara una DTD con entidades. La referencia (DOMDocument::loadXML sin LIBXML_NOENT) expande las entidades internas y sigue; el perfil seguro rechaza toda DTD con declaraciones.",
+      "compatibility_note": "Rust devuelve XmlParserError::Dtd; no expande entidades."
+    },
+    {
+      "id": "voided-external-entity",
+      "path": "$.outcome",
+      "family": "voided",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "dtd",
+      "reason": "DTD con entidad externa SYSTEM. La referencia no carga el recurso y deja la referencia sin expandir; Rust rechaza la DTD antes de analizar el contenido.",
+      "compatibility_note": "Rust devuelve XmlParserError::Dtd y nunca accede al sistema de archivos ni a la red."
+    },
+    {
+      "id": "retention-malformed",
+      "path": "$.error.class",
+      "family": "retention",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "category": "xml-invalido",
+      "reason": "XML truncado. La referencia sigue con un DOMDocument sin raíz: según el parser devuelve un documento con valores por defecto o falla después con un Error/TypeError ajeno al problema real.",
+      "compatibility_note": "Rust devuelve XmlParserError::Malformed con el error del analizador."
+    },
+    {
+      "id": "retention-malformed",
+      "path": "$.error.message",
+      "family": "retention",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "category": "xml-invalido",
+      "reason": "XML truncado. La referencia sigue con un DOMDocument sin raíz: según el parser devuelve un documento con valores por defecto o falla después con un Error/TypeError ajeno al problema real.",
+      "compatibility_note": "Rust devuelve XmlParserError::Malformed con el error del analizador."
+    },
+    {
+      "id": "retention-dtd-entity",
+      "path": "$.outcome",
+      "family": "retention",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "dtd",
+      "reason": "El XML declara una DTD con entidades. La referencia (DOMDocument::loadXML sin LIBXML_NOENT) expande las entidades internas y sigue; el perfil seguro rechaza toda DTD con declaraciones.",
+      "compatibility_note": "Rust devuelve XmlParserError::Dtd; no expande entidades."
+    },
+    {
+      "id": "retention-external-entity",
+      "path": "$.outcome",
+      "family": "retention",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "dtd",
+      "reason": "DTD con entidad externa SYSTEM. La referencia no carga el recurso y deja la referencia sin expandir; Rust rechaza la DTD antes de analizar el contenido.",
+      "compatibility_note": "Rust devuelve XmlParserError::Dtd y nunca accede al sistema de archivos ni a la red."
+    },
+    {
+      "id": "perception-malformed",
+      "path": "$.error.class",
+      "family": "perception",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "category": "xml-invalido",
+      "reason": "XML truncado. La referencia sigue con un DOMDocument sin raíz: según el parser devuelve un documento con valores por defecto o falla después con un Error/TypeError ajeno al problema real.",
+      "compatibility_note": "Rust devuelve XmlParserError::Malformed con el error del analizador."
+    },
+    {
+      "id": "perception-malformed",
+      "path": "$.error.message",
+      "family": "perception",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "category": "xml-invalido",
+      "reason": "XML truncado. La referencia sigue con un DOMDocument sin raíz: según el parser devuelve un documento con valores por defecto o falla después con un Error/TypeError ajeno al problema real.",
+      "compatibility_note": "Rust devuelve XmlParserError::Malformed con el error del analizador."
+    },
+    {
+      "id": "perception-dtd-entity",
+      "path": "$.outcome",
+      "family": "perception",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "dtd",
+      "reason": "El XML declara una DTD con entidades. La referencia (DOMDocument::loadXML sin LIBXML_NOENT) expande las entidades internas y sigue; el perfil seguro rechaza toda DTD con declaraciones.",
+      "compatibility_note": "Rust devuelve XmlParserError::Dtd; no expande entidades."
+    },
+    {
+      "id": "perception-external-entity",
+      "path": "$.outcome",
+      "family": "perception",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "dtd",
+      "reason": "DTD con entidad externa SYSTEM. La referencia no carga el recurso y deja la referencia sin expandir; Rust rechaza la DTD antes de analizar el contenido.",
+      "compatibility_note": "Rust devuelve XmlParserError::Dtd y nunca accede al sistema de archivos ni a la red."
+    },
+    {
+      "id": "hostile-deep-300",
+      "path": "$.error.class",
+      "family": "hostile",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "limite",
+      "reason": "Anidamiento de 300 niveles. libxml2 corta a 256 niveles y la referencia falla después con TypeError en registerNamespace; Rust corta antes de analizar con el límite de profundidad (64 por defecto).",
+      "compatibility_note": "Rust devuelve XmlParserError::TooDeep; el límite es configurable con Limits::max_depth."
+    },
+    {
+      "id": "hostile-deep-300",
+      "path": "$.error.message",
+      "family": "hostile",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "limite",
+      "reason": "Anidamiento de 300 niveles. libxml2 corta a 256 niveles y la referencia falla después con TypeError en registerNamespace; Rust corta antes de analizar con el límite de profundidad (64 por defecto).",
+      "compatibility_note": "Rust devuelve XmlParserError::TooDeep; el límite es configurable con Limits::max_depth."
+    },
+    {
+      "id": "hostile-deep-100",
+      "path": "$.outcome",
+      "family": "hostile",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "limite",
+      "reason": "Factura válida con 100 niveles de elementos ajenos al UBL. La referencia la acepta (libxml2 admite 256 niveles); Rust aplica max_depth = 64 porque roxmltree desciende recursivamente y un anidamiento mayor puede agotar la pila.",
+      "compatibility_note": "Rust devuelve XmlParserError::TooDeep; se puede subir Limits::max_depth en hilos con pila suficiente."
+    },
+    {
+      "id": "hostile-billion-laughs",
+      "path": "$.outcome",
+      "family": "hostile",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "dtd",
+      "reason": "El XML declara una DTD con entidades. La referencia (DOMDocument::loadXML sin LIBXML_NOENT) expande las entidades internas y sigue; el perfil seguro rechaza toda DTD con declaraciones.",
+      "compatibility_note": "Rust devuelve XmlParserError::Dtd; no expande entidades."
+    },
+    {
+      "id": "hostile-huge-11mib",
+      "path": "$.outcome",
+      "family": "hostile",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "category": "limite",
+      "reason": "Entrada de 11 MiB. La referencia la analiza completa; Rust aplica el límite de tamaño (10 MiB por defecto) antes de decodificar.",
+      "compatibility_note": "Rust devuelve XmlParserError::TooLarge; el límite es configurable con Limits::max_bytes."
+    },
+    {
+      "id": "hostile-koi8r",
+      "path": "$.outcome",
+      "family": "hostile",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "codificacion-fuera-de-alcance",
+      "category": "codificacion",
+      "reason": "Codificación declarada KOI8-R. libxml2 la convierte con iconv; Rust admite UTF-8, UTF-16, ISO-8859-1, US-ASCII, windows-1252 e ISO-8859-15.",
+      "compatibility_note": "Rust devuelve XmlParserError::Encoding; los comprobantes SUNAT usan UTF-8 o ISO-8859-1."
+    },
+    {
+      "id": "hostile-bad-utf8",
+      "path": "$.outcome",
+      "family": "hostile",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "category": "codificacion",
+      "reason": "Bytes inválidos en UTF-8. libxml2 aborta el análisis y la referencia sigue con un documento vacío (Reversion sin datos); Rust rechaza la entrada.",
+      "compatibility_note": "Rust devuelve XmlParserError::Encoding."
+    },
+    {
+      "id": "reader-api",
+      "path": "$.reader[10]",
+      "family": "reader",
+      "classification": "CORREGIR",
+      "category": "xpath",
+      "reason": "XmlReader::getValue('count(cac:InvoiceLine)'): DOMXPath evalúa XPath 1.0 completo (aquí la expresión devuelve un número y getValue el valor por defecto); el XmlReader Rust solo admite rutas por nombre y rechaza la expresión.",
+      "next_step": "Ampliar el evaluador del XmlReader a XPath 1.0 (funciones, predicados, ejes) reutilizando o extrayendo el evaluador de cpeforge-xmldsig, o fijar con el responsable del plan que el subconjunto es el contrato público."
+    }
+  ]
+}

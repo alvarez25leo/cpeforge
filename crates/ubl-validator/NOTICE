@@ -1,0 +1,12 @@
+cpeforge-ubl-validator
+Copyright (c) 2026 Contribuidores de CPEForge
+Licencia: MIT (ver LICENSE).
+
+Partes de la lógica derivan de software de terceros distribuido bajo
+licencia MIT, Copyright (c) 2017 Giancarlos Salas; ver LICENSE-THIRD-PARTY.
+
+Los 45 XSD UBL no se incluyen en este crate. Tienen procedencia OASIS,
+UN/CEFACT, W3C, ETSI y SUNAT; sus rutas, SHA-256, imports y avisos están en
+schema-manifest.json. Seis archivos aún necesitan una decisión sobre derechos
+de redistribución. Cada usuario debe aportar su copia autorizada del
+directorio XSD fijado.

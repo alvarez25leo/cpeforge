@@ -1,0 +1,25 @@
+[package]
+name = "cpeforge-validator"
+version = "0.1.0"
+description = "Reglas de validación de modelos de comprobantes electrónicos peruanos de CPEForge."
+readme = "README.md"
+keywords = ["sunat", "validator", "ubl", "cpe", "peru"]
+categories = ["data-structures"]
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+exclude = ["tests/"]
+
+[dependencies]
+cpeforge-core = { workspace = true, features = ["serde"] }
+serde.workspace = true
+serde_json.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true
+jiff.workspace = true
+
+[lints]
+workspace = true

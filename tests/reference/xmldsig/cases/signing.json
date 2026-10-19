@@ -1,0 +1,2299 @@
+{
+  "family": "signing",
+  "cases": [
+    {
+      "id": "sunat-sign-inv21",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-sign-inv21-sha256",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "signature_alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+      "digest_alg": "http://www.w3.org/2001/04/xmlenc#sha256"
+    },
+    {
+      "id": "sunat-sign-inv20",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/invoice/inv20-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-sign-inv20-sha256",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/invoice/inv20-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "signature_alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+      "digest_alg": "http://www.w3.org/2001/04/xmlenc#sha256"
+    },
+    {
+      "id": "sunat-sign-boleta21",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/invoice/boleta21-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-sign-boleta21-sha256",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/invoice/boleta21-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "signature_alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+      "digest_alg": "http://www.w3.org/2001/04/xmlenc#sha256"
+    },
+    {
+      "id": "sunat-sign-cr21",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/note/cr21-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-sign-cr21-sha256",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/note/cr21-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "signature_alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+      "digest_alg": "http://www.w3.org/2001/04/xmlenc#sha256"
+    },
+    {
+      "id": "sunat-sign-db20",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/note/db20-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-sign-db20-sha256",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/note/db20-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "signature_alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+      "digest_alg": "http://www.w3.org/2001/04/xmlenc#sha256"
+    },
+    {
+      "id": "sunat-sign-desp2022",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/despatch/desp2022-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-sign-desp2022-sha256",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/despatch/desp2022-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "signature_alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+      "digest_alg": "http://www.w3.org/2001/04/xmlenc#sha256"
+    },
+    {
+      "id": "sunat-sign-desp",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/despatch/desp-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-sign-desp-sha256",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/despatch/desp-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "signature_alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+      "digest_alg": "http://www.w3.org/2001/04/xmlenc#sha256"
+    },
+    {
+      "id": "sunat-sign-summary",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/summary/summary-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-sign-summary-sha256",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/summary/summary-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "signature_alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+      "digest_alg": "http://www.w3.org/2001/04/xmlenc#sha256"
+    },
+    {
+      "id": "sunat-sign-voided",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/voided/voided-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-sign-voided-sha256",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/voided/voided-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "signature_alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+      "digest_alg": "http://www.w3.org/2001/04/xmlenc#sha256"
+    },
+    {
+      "id": "sunat-sign-reversion",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/voided/reversion-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-sign-reversion-sha256",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/voided/reversion-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "signature_alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+      "digest_alg": "http://www.w3.org/2001/04/xmlenc#sha256"
+    },
+    {
+      "id": "sunat-sign-retention",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/retention-perception/retention-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-sign-retention-sha256",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/retention-perception/retention-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "signature_alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+      "digest_alg": "http://www.w3.org/2001/04/xmlenc#sha256"
+    },
+    {
+      "id": "sunat-sign-perception",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/retention-perception/perception-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-sign-perception-sha256",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/retention-perception/perception-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "signature_alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+      "digest_alg": "http://www.w3.org/2001/04/xmlenc#sha256"
+    },
+    {
+      "id": "sunat-sign-special",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/invoice/inv21-special-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-sign-special-sha256",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/invoice/inv21-special-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "signature_alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+      "digest_alg": "http://www.w3.org/2001/04/xmlenc#sha256"
+    },
+    {
+      "id": "sunat-sign-formatted",
+      "scenario": "sunat_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Invoice xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2\" xmlns:ext=\"urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2\" xmlns:cbc=\"urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2\">\n    <ext:UBLExtensions>\n        <ext:UBLExtension>\n            <ext:ExtensionContent>\n            </ext:ExtensionContent>\n        </ext:UBLExtension>\n    </ext:UBLExtensions>\n    <cbc:ID>F001-1</cbc:ID>\n    <!-- comentario -->\n    <cbc:PayableAmount currencyID=\"PEN\">118.00</cbc:PayableAmount>\n</Invoice>\n",
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-sign-no-extension",
+      "scenario": "sunat_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><Invoice xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2\" xmlns:cbc=\"urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2\"><cbc:ID>F001-1</cbc:ID></Invoice>",
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-sign-occupied",
+      "scenario": "sunat_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><Invoice xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2\" xmlns:ext=\"urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2\"><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><x>ocupado</x></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions><ID>1</ID></Invoice>",
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-sign-no-ds-ns",
+      "scenario": "sunat_sign",
+      "xml": "<Root xmlns=\"urn:r\" xmlns:ext=\"urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2\"><ext:ExtensionContent/><Amount>10.00</Amount></Root>",
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-sign-mixed-sha256-sha1",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "signature_alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"
+    },
+    {
+      "id": "sunat-sign-mixed-sha1-sha256",
+      "scenario": "sunat_sign",
+      "xml": {
+        "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+      },
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "digest_alg": "http://www.w3.org/2001/04/xmlenc#sha256"
+    },
+    {
+      "id": "sunat-sign-unsupported-signature",
+      "scenario": "sunat_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><Invoice xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2\" xmlns:cbc=\"urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2\"><cbc:ID>F001-1</cbc:ID></Invoice>",
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "signature_alg": "http://www.w3.org/2000/09/xmldsig#dsa-sha1"
+    },
+    {
+      "id": "sunat-sign-unsupported-sha512",
+      "scenario": "sunat_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><Invoice xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2\" xmlns:cbc=\"urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2\"><cbc:ID>F001-1</cbc:ID></Invoice>",
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "signature_alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"
+    },
+    {
+      "id": "sunat-sign-unsupported-digest",
+      "scenario": "sunat_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><Invoice xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2\" xmlns:cbc=\"urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2\"><cbc:ID>F001-1</cbc:ID></Invoice>",
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "digest_alg": "http://www.w3.org/2001/04/xmldsig-more#sha384"
+    },
+    {
+      "id": "sunat-sign-no-key",
+      "scenario": "sunat_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><Invoice xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2\" xmlns:cbc=\"urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2\"><cbc:ID>F001-1</cbc:ID></Invoice>"
+    },
+    {
+      "id": "sunat-sign-invalid-key",
+      "scenario": "sunat_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><Invoice xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2\" xmlns:cbc=\"urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2\"><cbc:ID>F001-1</cbc:ID></Invoice>",
+      "cert": "no es un certificado"
+    },
+    {
+      "id": "sunat-sign-key-without-cert",
+      "scenario": "sunat_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><Invoice xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2\" xmlns:cbc=\"urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2\"><cbc:ID>F001-1</cbc:ID></Invoice>",
+      "cert": {
+        "key": "a",
+        "suffix": "key"
+      }
+    },
+    {
+      "id": "sunat-sign-cert-file-missing",
+      "scenario": "sunat_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><Invoice xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2\" xmlns:cbc=\"urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2\"><cbc:ID>F001-1</cbc:ID></Invoice>",
+      "cert_file": "/no/existe.pem"
+    },
+    {
+      "id": "sunat-sign-file-missing",
+      "scenario": "sunat_sign",
+      "sign_file": "/no/existe.xml",
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-sign-malformed",
+      "scenario": "sunat_sign",
+      "xml": "<Invoice><a></Invoice>",
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-verify-valid",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      }
+    },
+    {
+      "id": "sunat-verify-valid-sha256",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        },
+        "signature_alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "digest_alg": "http://www.w3.org/2001/04/xmlenc#sha256"
+      }
+    },
+    {
+      "id": "sunat-verify-valid-20",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv20-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      }
+    },
+    {
+      "id": "sunat-verify-tampered-amount",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": ">237.59<",
+          "to": ">337.59<"
+        }
+      ]
+    },
+    {
+      "id": "sunat-verify-tampered-id",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": "<cbc:ID>F001-123</cbc:ID>",
+          "to": "<cbc:ID>F001-124</cbc:ID>"
+        }
+      ]
+    },
+    {
+      "id": "sunat-verify-tampered-digest",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "mutations": [
+        {
+          "op": "flip_base64",
+          "tag": "ds:DigestValue"
+        }
+      ]
+    },
+    {
+      "id": "sunat-verify-tampered-signature",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "mutations": [
+        {
+          "op": "flip_base64",
+          "tag": "ds:SignatureValue"
+        }
+      ]
+    },
+    {
+      "id": "sunat-verify-tampered-signedinfo-alg",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": "Algorithm=\"http://www.w3.org/2000/09/xmldsig#rsa-sha1\"",
+          "to": "Algorithm=\"http://www.w3.org/2001/04/xmldsig-more#rsa-sha256\""
+        }
+      ]
+    },
+    {
+      "id": "sunat-verify-tampered-cert",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "mutations": [
+        {
+          "op": "flip_base64",
+          "tag": "ds:X509Certificate"
+        }
+      ]
+    },
+    {
+      "id": "sunat-verify-whitespace-added",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": "<cbc:Note",
+          "to": "\n<cbc:Note"
+        }
+      ]
+    },
+    {
+      "id": "sunat-verify-configured-wrong-cert",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "configured_cert": {
+        "key": "b",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-verify-configured-right-cert",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "configured_cert": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "sunat-verify-dom-configured-wrong-cert",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "configured_cert": {
+        "key": "b",
+        "suffix": "pem"
+      },
+      "dom": true
+    },
+    {
+      "id": "sunat-verify-dom-configured-right-cert",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "configured_cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "dom": true
+    },
+    {
+      "id": "sunat-verify-dom-no-cert",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "dom": true
+    },
+    {
+      "id": "sunat-verify-signed-by-b-cert-a",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "b",
+          "suffix": "pem"
+        }
+      },
+      "mutations": []
+    },
+    {
+      "id": "sunat-verify-expired-cert",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "expired",
+          "suffix": "pem"
+        }
+      }
+    },
+    {
+      "id": "sunat-verify-no-keyinfo",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": "<ds:KeyInfo>",
+          "to": "<ds:Removed>"
+        },
+        {
+          "op": "replace",
+          "from": "</ds:KeyInfo>",
+          "to": "</ds:Removed>"
+        }
+      ]
+    },
+    {
+      "id": "sunat-verify-external-uri",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": "<ds:Reference URI=\"\">",
+          "to": "<ds:Reference URI=\"http://127.0.0.1:9/doc.xml\">"
+        }
+      ]
+    },
+    {
+      "id": "sunat-verify-missing-signature-value",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "mutations": [
+        {
+          "op": "element_text",
+          "tag": "ds:SignatureValue",
+          "to": ""
+        }
+      ]
+    },
+    {
+      "id": "sunat-verify-unsigned",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "input": {
+        "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+      }
+    },
+    {
+      "id": "sunat-verify-second-signature-wrapping",
+      "scenario": "sunat_verify",
+      "sign": {
+        "xml": {
+          "file": "tests/reference/xml/expected/invoice/inv21-full-default.xml"
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": "<ext:UBLExtension><ext:ExtensionContent>",
+          "to": "<ext:UBLExtension><ext:ExtensionContent><ds:Signature xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"><ds:SignedInfo/></ds:Signature>"
+        }
+      ]
+    },
+    {
+      "id": "dsig-sign-enveloped-c14n-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+      "references": [
+        {
+          "target": "document",
+          "transforms": [
+            "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
+          ],
+          "options": {
+            "force_uri": true
+          }
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-enveloped-c14n-hmac",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "load": "clave-hmac"
+      },
+      "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+      "references": [
+        {
+          "target": "document",
+          "transforms": [
+            "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
+          ],
+          "options": {
+            "force_uri": true
+          }
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-enveloped-c14n-comments-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments",
+      "references": [
+        {
+          "target": "document",
+          "transforms": [
+            "http://www.w3.org/2000/09/xmldsig#enveloped-signature",
+            "http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"
+          ]
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-exc-c14n-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+      "references": [
+        {
+          "target": "document",
+          "transforms": [
+            "http://www.w3.org/2000/09/xmldsig#enveloped-signature",
+            "http://www.w3.org/2001/10/xml-exc-c14n#"
+          ]
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-no-force-uri-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+      "references": [
+        {
+          "target": "document",
+          "transforms": [
+            "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
+          ]
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-id-generated-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+      "references": [
+        {
+          "target": "tag:urn:r|other",
+          "transforms": [
+            "http://www.w3.org/2001/10/xml-exc-c14n#"
+          ]
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-id-existing-overwrite-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+      "references": [
+        {
+          "target": "id:d1",
+          "transforms": [
+            "http://www.w3.org/2001/10/xml-exc-c14n#"
+          ],
+          "options": {
+            "overwrite": false
+          }
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-id-existing-overwrite-hmac",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "load": "clave-hmac"
+      },
+      "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+      "references": [
+        {
+          "target": "id:d1",
+          "transforms": [
+            "http://www.w3.org/2001/10/xml-exc-c14n#"
+          ],
+          "options": {
+            "overwrite": false
+          }
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-id-custom-name-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+      "references": [
+        {
+          "target": "id:d1",
+          "transforms": [
+            "http://www.w3.org/2001/10/xml-exc-c14n#"
+          ],
+          "options": {
+            "id_name": "ID",
+            "overwrite": false
+          }
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-id-prefixed-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+      "references": [
+        {
+          "target": "tag:urn:r|other",
+          "transforms": [
+            "http://www.w3.org/2001/10/xml-exc-c14n#"
+          ],
+          "options": {
+            "prefix": "wsu",
+            "prefix_ns": "urn:wsu"
+          }
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-default-transform-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+      "references": [
+        {
+          "target": "id:d1",
+          "options": {
+            "overwrite": false
+          }
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-multiple-refs-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+      "references": [
+        {
+          "target": "id:d1",
+          "transforms": [
+            "http://www.w3.org/2001/10/xml-exc-c14n#"
+          ],
+          "options": {
+            "overwrite": false
+          }
+        },
+        {
+          "target": "tag:urn:r|other",
+          "transforms": [
+            "http://www.w3.org/2001/10/xml-exc-c14n#"
+          ],
+          "digest": "http://www.w3.org/2001/04/xmlenc#sha256"
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-multiple-refs-hmac",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "load": "clave-hmac"
+      },
+      "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+      "references": [
+        {
+          "target": "id:d1",
+          "transforms": [
+            "http://www.w3.org/2001/10/xml-exc-c14n#"
+          ],
+          "options": {
+            "overwrite": false
+          }
+        },
+        {
+          "target": "tag:urn:r|other",
+          "transforms": [
+            "http://www.w3.org/2001/10/xml-exc-c14n#"
+          ],
+          "digest": "http://www.w3.org/2001/04/xmlenc#sha256"
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-digest-sha384-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+      "references": [
+        {
+          "target": "document",
+          "transforms": [
+            "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
+          ],
+          "digest": "http://www.w3.org/2001/04/xmldsig-more#sha384"
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-digest-sha512-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+      "references": [
+        {
+          "target": "document",
+          "transforms": [
+            "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
+          ],
+          "digest": "http://www.w3.org/2001/04/xmlenc#sha512"
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-digest-ripemd160-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+      "references": [
+        {
+          "target": "document",
+          "transforms": [
+            "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
+          ],
+          "digest": "http://www.w3.org/2001/04/xmlenc#ripemd160"
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-prefix-none-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "prefix": "",
+      "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+      "references": [
+        {
+          "target": "document",
+          "transforms": [
+            "http://www.w3.org/2000/09/xmldsig#enveloped-signature",
+            "http://www.w3.org/2001/10/xml-exc-c14n#"
+          ]
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-prefix-custom-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "prefix": "sig",
+      "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+      "references": [
+        {
+          "target": "document",
+          "transforms": [
+            "http://www.w3.org/2000/09/xmldsig#enveloped-signature",
+            "http://www.w3.org/2001/10/xml-exc-c14n#"
+          ]
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-object-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+      "references": [
+        {
+          "target": "id:d1",
+          "transforms": [
+            "http://www.w3.org/2001/10/xml-exc-c14n#"
+          ],
+          "options": {
+            "overwrite": false
+          }
+        }
+      ],
+      "object": "datos del objeto",
+      "object_mime": "text/plain",
+      "object_encoding": "utf-8",
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-object-hmac",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "load": "clave-hmac"
+      },
+      "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+      "references": [
+        {
+          "target": "id:d1",
+          "transforms": [
+            "http://www.w3.org/2001/10/xml-exc-c14n#"
+          ],
+          "options": {
+            "overwrite": false
+          }
+        }
+      ],
+      "object": "datos del objeto",
+      "object_mime": "text/plain",
+      "object_encoding": "utf-8",
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-cert-options-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+      "references": [
+        {
+          "target": "document",
+          "transforms": [
+            "http://www.w3.org/2000/09/xmldsig#enveloped-signature",
+            "http://www.w3.org/2001/10/xml-exc-c14n#"
+          ]
+        }
+      ],
+      "append_to": "root",
+      "cert": {
+        "key": "a",
+        "suffix": "pem"
+      },
+      "cert_options": {
+        "issuerSerial": true,
+        "subjectName": true
+      }
+    },
+    {
+      "id": "dsig-sign-append-signature-before-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+      "references": [
+        {
+          "target": "id:d1",
+          "transforms": [
+            "http://www.w3.org/2001/10/xml-exc-c14n#"
+          ],
+          "options": {
+            "overwrite": false
+          }
+        }
+      ],
+      "append_signature": "root",
+      "insert_before": true
+    },
+    {
+      "id": "dsig-sign-not-appended-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+      "references": [
+        {
+          "target": "id:d1",
+          "transforms": [
+            "http://www.w3.org/2001/10/xml-exc-c14n#"
+          ],
+          "options": {
+            "overwrite": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "dsig-sign-xpath-transform-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+      "references": [
+        {
+          "target": "document",
+          "transforms": [
+            {
+              "http://www.w3.org/TR/1999/REC-xpath-19991116": {
+                "query": "not(ancestor-or-self::secdsig:Signature)",
+                "namespaces": {
+                  "secdsig": "http://www.w3.org/2000/09/xmldsig#"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-no-canonical-method-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "references": [
+        {
+          "target": "id:d1",
+          "options": {
+            "overwrite": false
+          }
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-invalid-canonical-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "urn:no-valido",
+      "references": [
+        {
+          "target": "document"
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-unsupported-digest-rsa",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+      "references": [
+        {
+          "target": "document",
+          "digest": "urn:no-valido"
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-rsa-sha256",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+      "references": [
+        {
+          "target": "document",
+          "transforms": [
+            "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
+          ],
+          "options": {
+            "force_uri": true
+          }
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-rsa-sha384",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+      "references": [
+        {
+          "target": "document",
+          "transforms": [
+            "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
+          ],
+          "options": {
+            "force_uri": true
+          }
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-sign-rsa-sha512",
+      "scenario": "dsig_sign",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+      "references": [
+        {
+          "target": "document",
+          "transforms": [
+            "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
+          ],
+          "options": {
+            "force_uri": true
+          }
+        }
+      ],
+      "append_to": "root"
+    },
+    {
+      "id": "dsig-verify-enveloped",
+      "scenario": "dsig_verify",
+      "sign": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+        "key": {
+          "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+          "type": "private",
+          "load": {
+            "key": "a",
+            "suffix": "pem"
+          }
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        },
+        "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+        "references": [
+          {
+            "target": "document",
+            "transforms": [
+              "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
+            ],
+            "options": {
+              "force_uri": true
+            }
+          }
+        ],
+        "append_to": "root"
+      }
+    },
+    {
+      "id": "dsig-verify-enveloped-wrong-key",
+      "scenario": "dsig_verify",
+      "sign": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+        "key": {
+          "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+          "type": "private",
+          "load": {
+            "key": "a",
+            "suffix": "pem"
+          }
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        },
+        "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+        "references": [
+          {
+            "target": "document",
+            "transforms": [
+              "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
+            ],
+            "options": {
+              "force_uri": true
+            }
+          }
+        ],
+        "append_to": "root"
+      },
+      "verify_with": {
+        "key": "b",
+        "suffix": "crt"
+      }
+    },
+    {
+      "id": "dsig-verify-enveloped-tampered",
+      "scenario": "dsig_verify",
+      "sign": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+        "key": {
+          "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+          "type": "private",
+          "load": {
+            "key": "a",
+            "suffix": "pem"
+          }
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        },
+        "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+        "references": [
+          {
+            "target": "document",
+            "transforms": [
+              "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
+            ],
+            "options": {
+              "force_uri": true
+            }
+          }
+        ],
+        "append_to": "root"
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": "importe 10.00",
+          "to": "importe 99.00"
+        }
+      ]
+    },
+    {
+      "id": "dsig-verify-enveloped-comment-added",
+      "scenario": "dsig_verify",
+      "sign": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+        "key": {
+          "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+          "type": "private",
+          "load": {
+            "key": "a",
+            "suffix": "pem"
+          }
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        },
+        "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+        "references": [
+          {
+            "target": "document",
+            "transforms": [
+              "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
+            ],
+            "options": {
+              "force_uri": true
+            }
+          }
+        ],
+        "append_to": "root"
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": "<other>",
+          "to": "<!-- nuevo --><other>"
+        }
+      ]
+    },
+    {
+      "id": "dsig-verify-by-id",
+      "scenario": "dsig_verify",
+      "sign": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+        "key": {
+          "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+          "type": "private",
+          "load": {
+            "key": "a",
+            "suffix": "pem"
+          }
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        },
+        "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+        "references": [
+          {
+            "target": "id:d1",
+            "transforms": [
+              "http://www.w3.org/2001/10/xml-exc-c14n#"
+            ],
+            "options": {
+              "overwrite": false
+            }
+          },
+          {
+            "target": "tag:urn:r|other",
+            "transforms": [
+              "http://www.w3.org/2001/10/xml-exc-c14n#"
+            ],
+            "digest": "http://www.w3.org/2001/04/xmlenc#sha256"
+          }
+        ],
+        "append_to": "root"
+      },
+      "verify_with": {
+        "key": "a",
+        "suffix": "crt"
+      }
+    },
+    {
+      "id": "dsig-verify-by-id-tampered-unsigned-part",
+      "scenario": "dsig_verify",
+      "sign": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+        "key": {
+          "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+          "type": "private",
+          "load": {
+            "key": "a",
+            "suffix": "pem"
+          }
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        },
+        "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+        "references": [
+          {
+            "target": "id:d1",
+            "transforms": [
+              "http://www.w3.org/2001/10/xml-exc-c14n#"
+            ],
+            "options": {
+              "overwrite": false
+            }
+          },
+          {
+            "target": "tag:urn:r|other",
+            "transforms": [
+              "http://www.w3.org/2001/10/xml-exc-c14n#"
+            ],
+            "digest": "http://www.w3.org/2001/04/xmlenc#sha256"
+          }
+        ],
+        "append_to": "root"
+      },
+      "verify_with": {
+        "key": "a",
+        "suffix": "crt"
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": "<!-- c -->",
+          "to": "<extra>no firmado</extra>"
+        }
+      ]
+    },
+    {
+      "id": "dsig-verify-by-id-duplicate-before",
+      "scenario": "dsig_verify",
+      "sign": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+        "key": {
+          "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+          "type": "private",
+          "load": {
+            "key": "a",
+            "suffix": "pem"
+          }
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        },
+        "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+        "references": [
+          {
+            "target": "id:d1",
+            "transforms": [
+              "http://www.w3.org/2001/10/xml-exc-c14n#"
+            ],
+            "options": {
+              "overwrite": false
+            }
+          },
+          {
+            "target": "tag:urn:r|other",
+            "transforms": [
+              "http://www.w3.org/2001/10/xml-exc-c14n#"
+            ],
+            "digest": "http://www.w3.org/2001/04/xmlenc#sha256"
+          }
+        ],
+        "append_to": "root"
+      },
+      "verify_with": {
+        "key": "a",
+        "suffix": "crt"
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": "<data Id=\"d1\">",
+          "to": "<data Id=\"d1\">falso</data><data Id=\"d1\">"
+        }
+      ]
+    },
+    {
+      "id": "dsig-verify-by-id-duplicate-after",
+      "scenario": "dsig_verify",
+      "sign": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+        "key": {
+          "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+          "type": "private",
+          "load": {
+            "key": "a",
+            "suffix": "pem"
+          }
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        },
+        "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+        "references": [
+          {
+            "target": "id:d1",
+            "transforms": [
+              "http://www.w3.org/2001/10/xml-exc-c14n#"
+            ],
+            "options": {
+              "overwrite": false
+            }
+          },
+          {
+            "target": "tag:urn:r|other",
+            "transforms": [
+              "http://www.w3.org/2001/10/xml-exc-c14n#"
+            ],
+            "digest": "http://www.w3.org/2001/04/xmlenc#sha256"
+          }
+        ],
+        "append_to": "root"
+      },
+      "verify_with": {
+        "key": "a",
+        "suffix": "crt"
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": "<!-- c -->",
+          "to": "<data Id=\"d1\">importe 99.00</data>"
+        }
+      ]
+    },
+    {
+      "id": "dsig-verify-by-id-missing",
+      "scenario": "dsig_verify",
+      "sign": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+        "key": {
+          "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+          "type": "private",
+          "load": {
+            "key": "a",
+            "suffix": "pem"
+          }
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        },
+        "canonical": "http://www.w3.org/2001/10/xml-exc-c14n#",
+        "references": [
+          {
+            "target": "id:d1",
+            "transforms": [
+              "http://www.w3.org/2001/10/xml-exc-c14n#"
+            ],
+            "options": {
+              "overwrite": false
+            }
+          },
+          {
+            "target": "tag:urn:r|other",
+            "transforms": [
+              "http://www.w3.org/2001/10/xml-exc-c14n#"
+            ],
+            "digest": "http://www.w3.org/2001/04/xmlenc#sha256"
+          }
+        ],
+        "append_to": "root"
+      },
+      "verify_with": {
+        "key": "a",
+        "suffix": "crt"
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": "Id=\"d1\"",
+          "to": "Id=\"d2\""
+        }
+      ]
+    },
+    {
+      "id": "dsig-verify-id-keys",
+      "scenario": "dsig_verify",
+      "sign": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+        "key": {
+          "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+          "type": "private",
+          "load": {
+            "key": "a",
+            "suffix": "pem"
+          }
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        },
+        "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+        "references": [
+          {
+            "target": "id:d1",
+            "transforms": [
+              "http://www.w3.org/2001/10/xml-exc-c14n#"
+            ],
+            "options": {
+              "id_name": "ID",
+              "overwrite": false
+            }
+          }
+        ],
+        "append_to": "root"
+      },
+      "verify_with": {
+        "key": "a",
+        "suffix": "crt"
+      },
+      "id_keys": [
+        "ID"
+      ]
+    },
+    {
+      "id": "dsig-verify-external-uri",
+      "scenario": "dsig_verify",
+      "sign": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+        "key": {
+          "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+          "type": "private",
+          "load": {
+            "key": "a",
+            "suffix": "pem"
+          }
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        },
+        "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+        "references": [
+          {
+            "target": "document",
+            "transforms": [
+              "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
+            ],
+            "options": {
+              "force_uri": true
+            }
+          }
+        ],
+        "append_to": "root"
+      },
+      "verify_with": {
+        "key": "a",
+        "suffix": "crt"
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": "URI=\"\"",
+          "to": "URI=\"http://127.0.0.1:9/x\""
+        }
+      ]
+    },
+    {
+      "id": "dsig-verify-keyinfo-cert",
+      "scenario": "dsig_verify",
+      "sign": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+        "key": {
+          "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+          "type": "private",
+          "load": {
+            "key": "a",
+            "suffix": "pem"
+          }
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        },
+        "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+        "references": [
+          {
+            "target": "document",
+            "transforms": [
+              "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
+            ],
+            "options": {
+              "force_uri": true
+            }
+          }
+        ],
+        "append_to": "root"
+      }
+    },
+    {
+      "id": "dsig-verify-hmac",
+      "scenario": "dsig_verify",
+      "sign": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+        "key": {
+          "alg": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+          "load": "clave-hmac"
+        },
+        "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+        "references": [
+          {
+            "target": "document",
+            "transforms": [
+              "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
+            ],
+            "options": {
+              "force_uri": true
+            }
+          }
+        ],
+        "append_to": "root"
+      },
+      "verify_with": "clave-hmac",
+      "verify_is_cert": false
+    },
+    {
+      "id": "dsig-verify-position-1",
+      "scenario": "dsig_verify",
+      "sign": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+        "key": {
+          "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+          "type": "private",
+          "load": {
+            "key": "a",
+            "suffix": "pem"
+          }
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        },
+        "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+        "references": [
+          {
+            "target": "document",
+            "transforms": [
+              "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
+            ],
+            "options": {
+              "force_uri": true
+            }
+          }
+        ],
+        "append_to": "root"
+      },
+      "position": 1
+    },
+    {
+      "id": "dsig-verify-xpath",
+      "scenario": "dsig_verify",
+      "sign": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+        "key": {
+          "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+          "type": "private",
+          "load": {
+            "key": "a",
+            "suffix": "pem"
+          }
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        },
+        "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+        "references": [
+          {
+            "target": "document",
+            "transforms": [
+              {
+                "http://www.w3.org/TR/1999/REC-xpath-19991116": {
+                  "query": "not(ancestor-or-self::secdsig:Signature)",
+                  "namespaces": {
+                    "secdsig": "http://www.w3.org/2000/09/xmldsig#"
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "append_to": "root"
+      },
+      "verify_with": {
+        "key": "a",
+        "suffix": "crt"
+      }
+    },
+    {
+      "id": "dsig-verify-xpath-tampered",
+      "scenario": "dsig_verify",
+      "sign": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+        "key": {
+          "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+          "type": "private",
+          "load": {
+            "key": "a",
+            "suffix": "pem"
+          }
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        },
+        "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+        "references": [
+          {
+            "target": "document",
+            "transforms": [
+              {
+                "http://www.w3.org/TR/1999/REC-xpath-19991116": {
+                  "query": "not(ancestor-or-self::secdsig:Signature)",
+                  "namespaces": {
+                    "secdsig": "http://www.w3.org/2000/09/xmldsig#"
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "append_to": "root"
+      },
+      "verify_with": {
+        "key": "a",
+        "suffix": "crt"
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": "importe 10.00",
+          "to": "importe 99.00"
+        }
+      ]
+    },
+    {
+      "id": "dsig-verify-xpath-unsigned-part",
+      "scenario": "dsig_verify",
+      "sign": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><data Id=\"d1\">importe 10.00</data><other>otro</other><!-- c --></root>",
+        "key": {
+          "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+          "type": "private",
+          "load": {
+            "key": "a",
+            "suffix": "pem"
+          }
+        },
+        "cert": {
+          "key": "a",
+          "suffix": "pem"
+        },
+        "canonical": "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+        "references": [
+          {
+            "target": "document",
+            "transforms": [
+              {
+                "http://www.w3.org/TR/1999/REC-xpath-19991116": {
+                  "query": "not(ancestor-or-self::secdsig:Signature or ancestor-or-self::r:other)",
+                  "namespaces": {
+                    "secdsig": "http://www.w3.org/2000/09/xmldsig#",
+                    "r": "urn:r"
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "append_to": "root"
+      },
+      "verify_with": {
+        "key": "a",
+        "suffix": "crt"
+      },
+      "mutations": [
+        {
+          "op": "replace",
+          "from": "<other>otro</other>",
+          "to": "<other>cambiado</other>"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,302 @@
+{
+  "family": "amounts",
+  "cases": [
+    {
+      "id": "amount-zero",
+      "description": "Importe 0",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "0"
+        },
+        "factor": {
+          "$decimal": "0"
+        }
+      }
+    },
+    {
+      "id": "amount-zero-scale-2",
+      "description": "Importe 0.00",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "0.00"
+        },
+        "factor": {
+          "$decimal": "0.00"
+        }
+      }
+    },
+    {
+      "id": "amount-negative-zero",
+      "description": "Importe -0.00",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "-0.00"
+        },
+        "factor": {
+          "$decimal": "-0.00"
+        }
+      }
+    },
+    {
+      "id": "amount-cent",
+      "description": "Importe 0.01",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "0.01"
+        },
+        "factor": {
+          "$decimal": "0.01"
+        }
+      }
+    },
+    {
+      "id": "amount-negative",
+      "description": "Importe -15.30",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "-15.30"
+        },
+        "factor": {
+          "$decimal": "-15.30"
+        }
+      }
+    },
+    {
+      "id": "amount-three-decimals",
+      "description": "Importe 1234567.891",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "1234567.891"
+        },
+        "factor": {
+          "$decimal": "1234567.891"
+        }
+      }
+    },
+    {
+      "id": "amount-binary-inexact",
+      "description": "Importe 0.1",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "0.1"
+        },
+        "factor": {
+          "$decimal": "0.1"
+        }
+      }
+    },
+    {
+      "id": "amount-half-cent",
+      "description": "Importe 1.005",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "1.005"
+        },
+        "factor": {
+          "$decimal": "1.005"
+        }
+      }
+    },
+    {
+      "id": "amount-thirteen-digits",
+      "description": "Importe 99999999999.99",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "99999999999.99"
+        },
+        "factor": {
+          "$decimal": "99999999999.99"
+        }
+      }
+    },
+    {
+      "id": "amount-fifteen-significant",
+      "description": "Importe 1234567890123.45",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "1234567890123.45"
+        },
+        "factor": {
+          "$decimal": "1234567890123.45"
+        }
+      }
+    },
+    {
+      "id": "amount-sixteen-significant",
+      "description": "Importe 12345678901234.56",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "12345678901234.56"
+        },
+        "factor": {
+          "$decimal": "12345678901234.56"
+        }
+      }
+    },
+    {
+      "id": "amount-seventeen-significant",
+      "description": "Importe 123456789012345.67",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "123456789012345.67"
+        },
+        "factor": {
+          "$decimal": "123456789012345.67"
+        }
+      }
+    },
+    {
+      "id": "amount-nineteen-significant",
+      "description": "Importe 12345678901234567.89",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "12345678901234567.89"
+        },
+        "factor": {
+          "$decimal": "12345678901234567.89"
+        }
+      }
+    },
+    {
+      "id": "amount-many-decimals",
+      "description": "Importe 0.1234567890123456789",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "0.1234567890123456789"
+        },
+        "factor": {
+          "$decimal": "0.1234567890123456789"
+        }
+      }
+    },
+    {
+      "id": "amount-tiny",
+      "description": "Importe 0.000001",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "0.000001"
+        },
+        "factor": {
+          "$decimal": "0.000001"
+        }
+      }
+    },
+    {
+      "id": "amount-exponent-input",
+      "description": "Importe 1e3",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "1e3"
+        },
+        "factor": {
+          "$decimal": "1e3"
+        }
+      }
+    },
+    {
+      "id": "amount-integer-trailing-zeros",
+      "description": "Importe 1000.000",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "1000.000"
+        },
+        "factor": {
+          "$decimal": "1000.000"
+        }
+      }
+    },
+    {
+      "id": "amount-max-safe-integer",
+      "description": "Importe 9007199254740993",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "9007199254740993"
+        },
+        "factor": {
+          "$decimal": "9007199254740993"
+        }
+      }
+    },
+    {
+      "id": "amount-decimal-max",
+      "description": "Importe 79228162514264337593543950335",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "79228162514264337593543950335"
+        },
+        "factor": {
+          "$decimal": "79228162514264337593543950335"
+        }
+      }
+    },
+    {
+      "id": "amount-beyond-decimal-max",
+      "description": "Importe 79228162514264337593543950336",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "79228162514264337593543950336"
+        },
+        "factor": {
+          "$decimal": "79228162514264337593543950336"
+        }
+      }
+    },
+    {
+      "id": "amount-large-exponent",
+      "description": "Importe 1e30",
+      "input": {
+        "$class": "Charge",
+        "monto": {
+          "$decimal": "1e30"
+        },
+        "factor": {
+          "$decimal": "1e30"
+        }
+      }
+    },
+    {
+      "id": "int-negative-bultos",
+      "description": "numBultos negativo",
+      "input": {
+        "$class": "Shipment",
+        "numBultos": -1
+      }
+    },
+    {
+      "id": "int-max-bultos",
+      "description": "numBultos máximo de 64 bits",
+      "input": {
+        "$class": "Shipment",
+        "numBultos": 9223372036854775807
+      }
+    },
+    {
+      "id": "int-duracion-zero",
+      "description": "duracion cero",
+      "input": {
+        "$class": "DetailAttribute",
+        "duracion": 0
+      }
+    }
+  ]
+}

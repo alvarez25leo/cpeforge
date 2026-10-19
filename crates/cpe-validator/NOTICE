@@ -1,0 +1,13 @@
+cpeforge-cpe-validator
+Copyright (c) 2026 Contribuidores de CPEForge
+Licencia: MIT (ver LICENSE).
+
+Partes de la lógica derivan de software de terceros distribuido bajo
+licencia MIT, Copyright (c) 2020 Giancarlos Salas; ver LICENSE-THIRD-PARTY.
+No se incluye ninguna regla de validación SUNAT.
+
+Bibliotecas nativas enlazadas (no se distribuyen con el crate):
+- libxml2, libxslt y libexslt (licencia MIT), del sistema.
+- PCRE2 (licencia BSD-3-Clause con excepción de PCRE2), compilada desde las
+  fuentes que incluye pcre2-sys (Unlicense OR MIT) salvo que pkg-config
+  encuentre una PCRE2 del sistema.

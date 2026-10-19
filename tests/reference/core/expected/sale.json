@@ -1,0 +1,3214 @@
+{
+    "generator": "oracle/php/core/run_cases.php",
+    "reference": {
+        "tag": "v5.3.0",
+        "commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+    },
+    "reference_version": "8.4.17",
+    "timezone_db": "2025.2",
+    "cases_file": "sale.json",
+    "results": {
+        "base-sale-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "BaseSale",
+                "client": null,
+                "company": null,
+                "compra": null,
+                "correlativo": null,
+                "cuotas": null,
+                "details": null,
+                "fechaEmision": null,
+                "formaPago": null,
+                "guias": null,
+                "icbper": null,
+                "legends": null,
+                "mtoBaseIsc": null,
+                "mtoBaseIvap": null,
+                "mtoBaseOth": null,
+                "mtoIGV": null,
+                "mtoIGVGratuitas": null,
+                "mtoISC": null,
+                "mtoImpVenta": null,
+                "mtoIvap": null,
+                "mtoOperExoneradas": null,
+                "mtoOperExportacion": null,
+                "mtoOperGratuitas": null,
+                "mtoOperGravadas": null,
+                "mtoOperInafectas": null,
+                "mtoOtrosTributos": null,
+                "redondeo": null,
+                "relDocs": null,
+                "serie": null,
+                "sumOtrosCargos": null,
+                "tipoDoc": null,
+                "tipoMoneda": null,
+                "totalImpuestos": null,
+                "ublVersion": "2.0"
+            }
+        },
+        "base-sale-full": {
+            "calls": {
+                "getName": "20000000001-01-F002-9"
+            },
+            "snapshot": {
+                "$class": "BaseSale",
+                "client": {
+                    "$class": "Client",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "CALLE PRUEBA 456",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150122",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "cliente@example.test",
+                    "numDoc": "20000000002",
+                    "rznSocial": "CLIENTE SINTETICO S.A.",
+                    "telephone": "999000000",
+                    "tipoDoc": "6"
+                },
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "compra": "OC-0001",
+                "correlativo": "9",
+                "cuotas": [
+                    {
+                        "$class": "Cuota",
+                        "fechaPago": {
+                            "$datetime": {
+                                "class": "DateTimeImmutable",
+                                "local": "2024-02-29T12:00:00.000000",
+                                "offset": -18000,
+                                "unix": 1709226000,
+                                "micro": 0,
+                                "tz": "America/Lima"
+                            }
+                        },
+                        "moneda": "PEN",
+                        "monto": {
+                            "$float": "100.0"
+                        }
+                    },
+                    {
+                        "$class": "Cuota",
+                        "fechaPago": {
+                            "$datetime": {
+                                "class": "DateTimeImmutable",
+                                "local": "2024-03-31T12:00:00.000000",
+                                "offset": -18000,
+                                "unix": 1711904400,
+                                "micro": 0,
+                                "tz": "America/Lima"
+                            }
+                        },
+                        "moneda": "PEN",
+                        "monto": {
+                            "$float": "137.59"
+                        }
+                    }
+                ],
+                "details": [
+                    {
+                        "$class": "SaleDetail",
+                        "atributos": [
+                            {
+                                "$class": "DetailAttribute",
+                                "code": "5010",
+                                "duracion": 2,
+                                "fecFin": {
+                                    "$datetime": {
+                                        "class": "DateTime",
+                                        "local": "2024-03-02T08:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1709384400,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "fecInicio": {
+                                    "$datetime": {
+                                        "class": "DateTime",
+                                        "local": "2024-03-01T08:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1709298000,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "name": "Numero de placa",
+                                "value": "ABC-123"
+                            }
+                        ],
+                        "cantidad": {
+                            "$float": "2.0"
+                        },
+                        "cargos": [
+                            {
+                                "$class": "Charge",
+                                "codTipo": "47",
+                                "factor": {
+                                    "$float": "0.1"
+                                },
+                                "monto": {
+                                    "$float": "10.0"
+                                },
+                                "montoBase": {
+                                    "$float": "100.0"
+                                }
+                            }
+                        ],
+                        "codProdGS1": "7750000000000",
+                        "codProdSunat": "10000000",
+                        "codProducto": "P001",
+                        "descripcion": "PRODUCTO SINTETICO P001",
+                        "descuento": {
+                            "$float": "5.0"
+                        },
+                        "descuentos": [
+                            {
+                                "$class": "Charge",
+                                "codTipo": "00",
+                                "factor": {
+                                    "$float": "0.05"
+                                },
+                                "monto": {
+                                    "$float": "5.0"
+                                },
+                                "montoBase": {
+                                    "$float": "100.0"
+                                }
+                            }
+                        ],
+                        "factorIcbper": {
+                            "$float": "0.4"
+                        },
+                        "icbper": {
+                            "$float": "0.8"
+                        },
+                        "igv": {
+                            "$float": "18.0"
+                        },
+                        "isc": {
+                            "$float": "0.0"
+                        },
+                        "mtoBaseIgv": {
+                            "$float": "100.0"
+                        },
+                        "mtoBaseIsc": {
+                            "$float": "0.0"
+                        },
+                        "mtoBaseOth": {
+                            "$float": "0.0"
+                        },
+                        "mtoPrecioUnitario": {
+                            "$float": "59.0"
+                        },
+                        "mtoValorGratuito": {
+                            "$float": "0.0"
+                        },
+                        "mtoValorUnitario": {
+                            "$float": "50.0"
+                        },
+                        "mtoValorVenta": {
+                            "$float": "100.0"
+                        },
+                        "otroTributo": {
+                            "$float": "0.0"
+                        },
+                        "porcentajeIgv": {
+                            "$float": "18.0"
+                        },
+                        "porcentajeIsc": {
+                            "$float": "0.0"
+                        },
+                        "porcentajeOth": {
+                            "$float": "0.0"
+                        },
+                        "tipAfeIgv": "10",
+                        "tipSisIsc": "01",
+                        "totalImpuestos": {
+                            "$float": "18.8"
+                        },
+                        "unidad": "NIU"
+                    },
+                    {
+                        "$class": "SaleDetail",
+                        "atributos": [
+                            {
+                                "$class": "DetailAttribute",
+                                "code": "5010",
+                                "duracion": 2,
+                                "fecFin": {
+                                    "$datetime": {
+                                        "class": "DateTime",
+                                        "local": "2024-03-02T08:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1709384400,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "fecInicio": {
+                                    "$datetime": {
+                                        "class": "DateTime",
+                                        "local": "2024-03-01T08:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1709298000,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "name": "Numero de placa",
+                                "value": "ABC-123"
+                            }
+                        ],
+                        "cantidad": {
+                            "$float": "1.5"
+                        },
+                        "cargos": [
+                            {
+                                "$class": "Charge",
+                                "codTipo": "47",
+                                "factor": {
+                                    "$float": "0.1"
+                                },
+                                "monto": {
+                                    "$float": "10.0"
+                                },
+                                "montoBase": {
+                                    "$float": "100.0"
+                                }
+                            }
+                        ],
+                        "codProdGS1": "7750000000000",
+                        "codProdSunat": "10000000",
+                        "codProducto": "P002",
+                        "descripcion": "PRODUCTO SINTETICO P002",
+                        "descuento": {
+                            "$float": "5.0"
+                        },
+                        "descuentos": [
+                            {
+                                "$class": "Charge",
+                                "codTipo": "00",
+                                "factor": {
+                                    "$float": "0.05"
+                                },
+                                "monto": {
+                                    "$float": "5.0"
+                                },
+                                "montoBase": {
+                                    "$float": "100.0"
+                                }
+                            }
+                        ],
+                        "factorIcbper": {
+                            "$float": "0.4"
+                        },
+                        "icbper": {
+                            "$float": "0.8"
+                        },
+                        "igv": {
+                            "$float": "18.0"
+                        },
+                        "isc": {
+                            "$float": "0.0"
+                        },
+                        "mtoBaseIgv": {
+                            "$float": "100.0"
+                        },
+                        "mtoBaseIsc": {
+                            "$float": "0.0"
+                        },
+                        "mtoBaseOth": {
+                            "$float": "0.0"
+                        },
+                        "mtoPrecioUnitario": {
+                            "$float": "59.0"
+                        },
+                        "mtoValorGratuito": {
+                            "$float": "0.0"
+                        },
+                        "mtoValorUnitario": {
+                            "$float": "50.0"
+                        },
+                        "mtoValorVenta": {
+                            "$float": "100.0"
+                        },
+                        "otroTributo": {
+                            "$float": "0.0"
+                        },
+                        "porcentajeIgv": {
+                            "$float": "18.0"
+                        },
+                        "porcentajeIsc": {
+                            "$float": "0.0"
+                        },
+                        "porcentajeOth": {
+                            "$float": "0.0"
+                        },
+                        "tipAfeIgv": "10",
+                        "tipSisIsc": "01",
+                        "totalImpuestos": {
+                            "$float": "18.8"
+                        },
+                        "unidad": "NIU"
+                    }
+                ],
+                "fechaEmision": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-01-31T23:30:00.000000",
+                        "offset": -18000,
+                        "unix": 1706761800,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "formaPago": {
+                    "$class": "FormaPagoCredito",
+                    "moneda": "PEN",
+                    "monto": {
+                        "$float": "237.59"
+                    },
+                    "tipo": "Credito"
+                },
+                "guias": [
+                    {
+                        "$class": "Document",
+                        "nroDoc": "T001-1",
+                        "tipoDoc": "09"
+                    }
+                ],
+                "icbper": {
+                    "$float": "1.6"
+                },
+                "legends": [
+                    {
+                        "$class": "Legend",
+                        "code": "1000",
+                        "value": "SON DOSCIENTOS TREINTA Y SIETE CON 59/100 SOLES"
+                    }
+                ],
+                "mtoBaseIsc": {
+                    "$float": "0.0"
+                },
+                "mtoBaseIvap": {
+                    "$float": "0.0"
+                },
+                "mtoBaseOth": {
+                    "$float": "0.0"
+                },
+                "mtoIGV": {
+                    "$float": "36.0"
+                },
+                "mtoIGVGratuitas": {
+                    "$float": "0.0"
+                },
+                "mtoISC": {
+                    "$float": "0.0"
+                },
+                "mtoImpVenta": {
+                    "$float": "237.59"
+                },
+                "mtoIvap": {
+                    "$float": "0.0"
+                },
+                "mtoOperExoneradas": {
+                    "$float": "0.0"
+                },
+                "mtoOperExportacion": {
+                    "$float": "0.0"
+                },
+                "mtoOperGratuitas": {
+                    "$float": "0.0"
+                },
+                "mtoOperGravadas": {
+                    "$float": "200.0"
+                },
+                "mtoOperInafectas": {
+                    "$float": "0.0"
+                },
+                "mtoOtrosTributos": {
+                    "$float": "0.0"
+                },
+                "redondeo": {
+                    "$float": "-0.01"
+                },
+                "relDocs": [
+                    {
+                        "$class": "Document",
+                        "nroDoc": "X-1",
+                        "tipoDoc": "99"
+                    }
+                ],
+                "serie": "F002",
+                "sumOtrosCargos": {
+                    "$float": "1.0"
+                },
+                "tipoDoc": "01",
+                "tipoMoneda": "PEN",
+                "totalImpuestos": {
+                    "$float": "37.6"
+                },
+                "ublVersion": "2.1"
+            }
+        },
+        "invoice-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Invoice",
+                "anticipos": null,
+                "cargos": null,
+                "client": null,
+                "company": null,
+                "compra": null,
+                "correlativo": null,
+                "cuotas": null,
+                "descuentos": null,
+                "details": null,
+                "detraccion": null,
+                "direccionEntrega": null,
+                "fecVencimiento": null,
+                "fechaEmision": null,
+                "formaPago": null,
+                "guiaEmbebida": null,
+                "guias": null,
+                "icbper": null,
+                "legends": null,
+                "mtoBaseIsc": null,
+                "mtoBaseIvap": null,
+                "mtoBaseOth": null,
+                "mtoCargos": null,
+                "mtoDescuentos": null,
+                "mtoIGV": null,
+                "mtoIGVGratuitas": null,
+                "mtoISC": null,
+                "mtoImpVenta": null,
+                "mtoIvap": null,
+                "mtoOperExoneradas": null,
+                "mtoOperExportacion": null,
+                "mtoOperGratuitas": null,
+                "mtoOperGravadas": null,
+                "mtoOperInafectas": null,
+                "mtoOtrosTributos": null,
+                "observacion": null,
+                "perception": null,
+                "redondeo": null,
+                "relDocs": null,
+                "seller": null,
+                "serie": null,
+                "subTotal": null,
+                "sumDsctoGlobal": null,
+                "sumOtrosCargos": null,
+                "sumOtrosDescuentos": null,
+                "tipoDoc": null,
+                "tipoMoneda": null,
+                "tipoOperacion": null,
+                "totalAnticipos": null,
+                "totalImpuestos": null,
+                "ublVersion": "2.0",
+                "valorVenta": null
+            }
+        },
+        "invoice-empty-name": {
+            "calls": {
+                "getName": {
+                    "$error": {
+                        "class": "Error",
+                        "message": "Call to a member function getRuc() on null"
+                    }
+                }
+            },
+            "snapshot": {
+                "$class": "Invoice",
+                "anticipos": null,
+                "cargos": null,
+                "client": null,
+                "company": null,
+                "compra": null,
+                "correlativo": null,
+                "cuotas": null,
+                "descuentos": null,
+                "details": null,
+                "detraccion": null,
+                "direccionEntrega": null,
+                "fecVencimiento": null,
+                "fechaEmision": null,
+                "formaPago": null,
+                "guiaEmbebida": null,
+                "guias": null,
+                "icbper": null,
+                "legends": null,
+                "mtoBaseIsc": null,
+                "mtoBaseIvap": null,
+                "mtoBaseOth": null,
+                "mtoCargos": null,
+                "mtoDescuentos": null,
+                "mtoIGV": null,
+                "mtoIGVGratuitas": null,
+                "mtoISC": null,
+                "mtoImpVenta": null,
+                "mtoIvap": null,
+                "mtoOperExoneradas": null,
+                "mtoOperExportacion": null,
+                "mtoOperGratuitas": null,
+                "mtoOperGravadas": null,
+                "mtoOperInafectas": null,
+                "mtoOtrosTributos": null,
+                "observacion": null,
+                "perception": null,
+                "redondeo": null,
+                "relDocs": null,
+                "seller": null,
+                "serie": null,
+                "subTotal": null,
+                "sumDsctoGlobal": null,
+                "sumOtrosCargos": null,
+                "sumOtrosDescuentos": null,
+                "tipoDoc": null,
+                "tipoMoneda": null,
+                "tipoOperacion": null,
+                "totalAnticipos": null,
+                "totalImpuestos": null,
+                "ublVersion": "2.0",
+                "valorVenta": null
+            }
+        },
+        "invoice-full": {
+            "calls": {
+                "getName": "20000000001-01-F001-123"
+            },
+            "snapshot": {
+                "$class": "Invoice",
+                "anticipos": [
+                    {
+                        "$class": "Prepayment",
+                        "nroDocRel": "F001-100",
+                        "tipoDocRel": "02",
+                        "total": {
+                            "$float": "10.0"
+                        }
+                    }
+                ],
+                "cargos": [
+                    {
+                        "$class": "Charge",
+                        "codTipo": "50",
+                        "factor": {
+                            "$float": "0.02"
+                        },
+                        "monto": {
+                            "$float": "4.0"
+                        },
+                        "montoBase": {
+                            "$float": "200.0"
+                        }
+                    }
+                ],
+                "client": {
+                    "$class": "Client",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "CALLE PRUEBA 456",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150122",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "cliente@example.test",
+                    "numDoc": "20000000002",
+                    "rznSocial": "CLIENTE SINTETICO S.A.",
+                    "telephone": "999000000",
+                    "tipoDoc": "6"
+                },
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "compra": "OC-0001",
+                "correlativo": "123",
+                "cuotas": [
+                    {
+                        "$class": "Cuota",
+                        "fechaPago": {
+                            "$datetime": {
+                                "class": "DateTimeImmutable",
+                                "local": "2024-02-29T12:00:00.000000",
+                                "offset": -18000,
+                                "unix": 1709226000,
+                                "micro": 0,
+                                "tz": "America/Lima"
+                            }
+                        },
+                        "moneda": "PEN",
+                        "monto": {
+                            "$float": "100.0"
+                        }
+                    },
+                    {
+                        "$class": "Cuota",
+                        "fechaPago": {
+                            "$datetime": {
+                                "class": "DateTimeImmutable",
+                                "local": "2024-03-31T12:00:00.000000",
+                                "offset": -18000,
+                                "unix": 1711904400,
+                                "micro": 0,
+                                "tz": "America/Lima"
+                            }
+                        },
+                        "moneda": "PEN",
+                        "monto": {
+                            "$float": "137.59"
+                        }
+                    }
+                ],
+                "descuentos": [
+                    {
+                        "$class": "Charge",
+                        "codTipo": "02",
+                        "factor": {
+                            "$float": "0.01"
+                        },
+                        "monto": {
+                            "$float": "2.0"
+                        },
+                        "montoBase": {
+                            "$float": "200.0"
+                        }
+                    }
+                ],
+                "details": [
+                    {
+                        "$class": "SaleDetail",
+                        "atributos": [
+                            {
+                                "$class": "DetailAttribute",
+                                "code": "5010",
+                                "duracion": 2,
+                                "fecFin": {
+                                    "$datetime": {
+                                        "class": "DateTime",
+                                        "local": "2024-03-02T08:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1709384400,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "fecInicio": {
+                                    "$datetime": {
+                                        "class": "DateTime",
+                                        "local": "2024-03-01T08:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1709298000,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "name": "Numero de placa",
+                                "value": "ABC-123"
+                            }
+                        ],
+                        "cantidad": {
+                            "$float": "2.0"
+                        },
+                        "cargos": [
+                            {
+                                "$class": "Charge",
+                                "codTipo": "47",
+                                "factor": {
+                                    "$float": "0.1"
+                                },
+                                "monto": {
+                                    "$float": "10.0"
+                                },
+                                "montoBase": {
+                                    "$float": "100.0"
+                                }
+                            }
+                        ],
+                        "codProdGS1": "7750000000000",
+                        "codProdSunat": "10000000",
+                        "codProducto": "P001",
+                        "descripcion": "PRODUCTO SINTETICO P001",
+                        "descuento": {
+                            "$float": "5.0"
+                        },
+                        "descuentos": [
+                            {
+                                "$class": "Charge",
+                                "codTipo": "00",
+                                "factor": {
+                                    "$float": "0.05"
+                                },
+                                "monto": {
+                                    "$float": "5.0"
+                                },
+                                "montoBase": {
+                                    "$float": "100.0"
+                                }
+                            }
+                        ],
+                        "factorIcbper": {
+                            "$float": "0.4"
+                        },
+                        "icbper": {
+                            "$float": "0.8"
+                        },
+                        "igv": {
+                            "$float": "18.0"
+                        },
+                        "isc": {
+                            "$float": "0.0"
+                        },
+                        "mtoBaseIgv": {
+                            "$float": "100.0"
+                        },
+                        "mtoBaseIsc": {
+                            "$float": "0.0"
+                        },
+                        "mtoBaseOth": {
+                            "$float": "0.0"
+                        },
+                        "mtoPrecioUnitario": {
+                            "$float": "59.0"
+                        },
+                        "mtoValorGratuito": {
+                            "$float": "0.0"
+                        },
+                        "mtoValorUnitario": {
+                            "$float": "50.0"
+                        },
+                        "mtoValorVenta": {
+                            "$float": "100.0"
+                        },
+                        "otroTributo": {
+                            "$float": "0.0"
+                        },
+                        "porcentajeIgv": {
+                            "$float": "18.0"
+                        },
+                        "porcentajeIsc": {
+                            "$float": "0.0"
+                        },
+                        "porcentajeOth": {
+                            "$float": "0.0"
+                        },
+                        "tipAfeIgv": "10",
+                        "tipSisIsc": "01",
+                        "totalImpuestos": {
+                            "$float": "18.8"
+                        },
+                        "unidad": "NIU"
+                    },
+                    {
+                        "$class": "SaleDetail",
+                        "atributos": [
+                            {
+                                "$class": "DetailAttribute",
+                                "code": "5010",
+                                "duracion": 2,
+                                "fecFin": {
+                                    "$datetime": {
+                                        "class": "DateTime",
+                                        "local": "2024-03-02T08:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1709384400,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "fecInicio": {
+                                    "$datetime": {
+                                        "class": "DateTime",
+                                        "local": "2024-03-01T08:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1709298000,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "name": "Numero de placa",
+                                "value": "ABC-123"
+                            }
+                        ],
+                        "cantidad": {
+                            "$float": "1.5"
+                        },
+                        "cargos": [
+                            {
+                                "$class": "Charge",
+                                "codTipo": "47",
+                                "factor": {
+                                    "$float": "0.1"
+                                },
+                                "monto": {
+                                    "$float": "10.0"
+                                },
+                                "montoBase": {
+                                    "$float": "100.0"
+                                }
+                            }
+                        ],
+                        "codProdGS1": "7750000000000",
+                        "codProdSunat": "10000000",
+                        "codProducto": "P002",
+                        "descripcion": "PRODUCTO SINTETICO P002",
+                        "descuento": {
+                            "$float": "5.0"
+                        },
+                        "descuentos": [
+                            {
+                                "$class": "Charge",
+                                "codTipo": "00",
+                                "factor": {
+                                    "$float": "0.05"
+                                },
+                                "monto": {
+                                    "$float": "5.0"
+                                },
+                                "montoBase": {
+                                    "$float": "100.0"
+                                }
+                            }
+                        ],
+                        "factorIcbper": {
+                            "$float": "0.4"
+                        },
+                        "icbper": {
+                            "$float": "0.8"
+                        },
+                        "igv": {
+                            "$float": "18.0"
+                        },
+                        "isc": {
+                            "$float": "0.0"
+                        },
+                        "mtoBaseIgv": {
+                            "$float": "100.0"
+                        },
+                        "mtoBaseIsc": {
+                            "$float": "0.0"
+                        },
+                        "mtoBaseOth": {
+                            "$float": "0.0"
+                        },
+                        "mtoPrecioUnitario": {
+                            "$float": "59.0"
+                        },
+                        "mtoValorGratuito": {
+                            "$float": "0.0"
+                        },
+                        "mtoValorUnitario": {
+                            "$float": "50.0"
+                        },
+                        "mtoValorVenta": {
+                            "$float": "100.0"
+                        },
+                        "otroTributo": {
+                            "$float": "0.0"
+                        },
+                        "porcentajeIgv": {
+                            "$float": "18.0"
+                        },
+                        "porcentajeIsc": {
+                            "$float": "0.0"
+                        },
+                        "porcentajeOth": {
+                            "$float": "0.0"
+                        },
+                        "tipAfeIgv": "10",
+                        "tipSisIsc": "01",
+                        "totalImpuestos": {
+                            "$float": "18.8"
+                        },
+                        "unidad": "NIU"
+                    }
+                ],
+                "detraccion": {
+                    "$class": "Detraction",
+                    "codBienDetraccion": "037",
+                    "codMedioPago": "001",
+                    "ctaBanco": "00-000-000000",
+                    "mount": {
+                        "$float": "28.51"
+                    },
+                    "percent": {
+                        "$float": "12.0"
+                    },
+                    "valueRef": {
+                        "$float": "100.0"
+                    }
+                },
+                "direccionEntrega": {
+                    "$class": "Address",
+                    "codLocal": "0001",
+                    "codigoPais": "PE",
+                    "departamento": "LIMA",
+                    "direccion": "ENTREGA 789",
+                    "distrito": "LIMA",
+                    "provincia": "LIMA",
+                    "ubigueo": "150101",
+                    "urbanizacion": "CERCADO"
+                },
+                "fecVencimiento": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-03-31T00:00:00.000000",
+                        "offset": -18000,
+                        "unix": 1711861200,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "fechaEmision": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-01-31T23:30:00.000000",
+                        "offset": -18000,
+                        "unix": 1706761800,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "formaPago": {
+                    "$class": "FormaPagoCredito",
+                    "moneda": "PEN",
+                    "monto": {
+                        "$float": "237.59"
+                    },
+                    "tipo": "Credito"
+                },
+                "guiaEmbebida": {
+                    "$class": "EmbededDespatch",
+                    "llegada": {
+                        "$class": "Direction",
+                        "codLocal": "0002",
+                        "direccion": "AV. LLEGADA 1",
+                        "ruc": "20000000001",
+                        "ubigueo": "150101"
+                    },
+                    "modTraslado": "01",
+                    "nroLicencia": "Q00000000",
+                    "partida": {
+                        "$class": "Direction",
+                        "codLocal": null,
+                        "direccion": "AV. PARTIDA 2",
+                        "ruc": null,
+                        "ubigueo": "150203"
+                    },
+                    "pesoBruto": {
+                        "$float": "12.5"
+                    },
+                    "transpCodeAuth": "AUTH-1",
+                    "transpMarca": "MARCA",
+                    "transpPlaca": "ABC-123",
+                    "transportista": {
+                        "$class": "Client",
+                        "address": {
+                            "$class": "Address",
+                            "codLocal": "0001",
+                            "codigoPais": "PE",
+                            "departamento": "LIMA",
+                            "direccion": "CALLE PRUEBA 456",
+                            "distrito": "LIMA",
+                            "provincia": "LIMA",
+                            "ubigueo": "150122",
+                            "urbanizacion": "CERCADO"
+                        },
+                        "email": "cliente@example.test",
+                        "numDoc": "20000000003",
+                        "rznSocial": "TRANSPORTES SINTETICOS",
+                        "telephone": "999000000",
+                        "tipoDoc": "6"
+                    },
+                    "undPesoBruto": "KGM"
+                },
+                "guias": [
+                    {
+                        "$class": "Document",
+                        "nroDoc": "T001-1",
+                        "tipoDoc": "09"
+                    }
+                ],
+                "icbper": {
+                    "$float": "1.6"
+                },
+                "legends": [
+                    {
+                        "$class": "Legend",
+                        "code": "1000",
+                        "value": "SON DOSCIENTOS TREINTA Y SIETE CON 59/100 SOLES"
+                    }
+                ],
+                "mtoBaseIsc": {
+                    "$float": "0.0"
+                },
+                "mtoBaseIvap": {
+                    "$float": "0.0"
+                },
+                "mtoBaseOth": {
+                    "$float": "0.0"
+                },
+                "mtoCargos": {
+                    "$float": "4.0"
+                },
+                "mtoDescuentos": {
+                    "$float": "3.0"
+                },
+                "mtoIGV": {
+                    "$float": "36.0"
+                },
+                "mtoIGVGratuitas": {
+                    "$float": "0.0"
+                },
+                "mtoISC": {
+                    "$float": "0.0"
+                },
+                "mtoImpVenta": {
+                    "$float": "237.59"
+                },
+                "mtoIvap": {
+                    "$float": "0.0"
+                },
+                "mtoOperExoneradas": {
+                    "$float": "0.0"
+                },
+                "mtoOperExportacion": {
+                    "$float": "0.0"
+                },
+                "mtoOperGratuitas": {
+                    "$float": "0.0"
+                },
+                "mtoOperGravadas": {
+                    "$float": "200.0"
+                },
+                "mtoOperInafectas": {
+                    "$float": "0.0"
+                },
+                "mtoOtrosTributos": {
+                    "$float": "0.0"
+                },
+                "observacion": "Observación de prueba",
+                "perception": {
+                    "$class": "SalePerception",
+                    "codReg": "01",
+                    "mto": {
+                        "$float": "4.75"
+                    },
+                    "mtoBase": {
+                        "$float": "237.59"
+                    },
+                    "mtoTotal": {
+                        "$float": "242.34"
+                    },
+                    "porcentaje": {
+                        "$float": "0.02"
+                    }
+                },
+                "redondeo": {
+                    "$float": "-0.01"
+                },
+                "relDocs": [
+                    {
+                        "$class": "Document",
+                        "nroDoc": "X-1",
+                        "tipoDoc": "99"
+                    }
+                ],
+                "seller": {
+                    "$class": "Client",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "CALLE PRUEBA 456",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150122",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "cliente@example.test",
+                    "numDoc": "00000001",
+                    "rznSocial": "VENDEDOR SINTETICO",
+                    "telephone": "999000000",
+                    "tipoDoc": "1"
+                },
+                "serie": "F001",
+                "subTotal": {
+                    "$float": "237.6"
+                },
+                "sumDsctoGlobal": {
+                    "$float": "2.0"
+                },
+                "sumOtrosCargos": {
+                    "$float": "1.0"
+                },
+                "sumOtrosDescuentos": {
+                    "$float": "4.0"
+                },
+                "tipoDoc": "01",
+                "tipoMoneda": "PEN",
+                "tipoOperacion": "0101",
+                "totalAnticipos": {
+                    "$float": "10.0"
+                },
+                "totalImpuestos": {
+                    "$float": "37.6"
+                },
+                "ublVersion": "2.1",
+                "valorVenta": {
+                    "$float": "200.0"
+                }
+            }
+        },
+        "invoice-boleta-name": {
+            "calls": {
+                "getName": "20000000001-03-B001-1"
+            },
+            "snapshot": {
+                "$class": "Invoice",
+                "anticipos": null,
+                "cargos": null,
+                "client": null,
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "compra": null,
+                "correlativo": "1",
+                "cuotas": null,
+                "descuentos": null,
+                "details": null,
+                "detraccion": null,
+                "direccionEntrega": null,
+                "fecVencimiento": null,
+                "fechaEmision": null,
+                "formaPago": null,
+                "guiaEmbebida": null,
+                "guias": null,
+                "icbper": null,
+                "legends": null,
+                "mtoBaseIsc": null,
+                "mtoBaseIvap": null,
+                "mtoBaseOth": null,
+                "mtoCargos": null,
+                "mtoDescuentos": null,
+                "mtoIGV": null,
+                "mtoIGVGratuitas": null,
+                "mtoISC": null,
+                "mtoImpVenta": null,
+                "mtoIvap": null,
+                "mtoOperExoneradas": null,
+                "mtoOperExportacion": null,
+                "mtoOperGratuitas": null,
+                "mtoOperGravadas": null,
+                "mtoOperInafectas": null,
+                "mtoOtrosTributos": null,
+                "observacion": null,
+                "perception": null,
+                "redondeo": null,
+                "relDocs": null,
+                "seller": null,
+                "serie": "B001",
+                "subTotal": null,
+                "sumDsctoGlobal": null,
+                "sumOtrosCargos": null,
+                "sumOtrosDescuentos": null,
+                "tipoDoc": "03",
+                "tipoMoneda": null,
+                "tipoOperacion": null,
+                "totalAnticipos": null,
+                "totalImpuestos": null,
+                "ublVersion": "2.0",
+                "valorVenta": null
+            }
+        },
+        "invoice-name-null-parts": {
+            "calls": {
+                "getName": "---"
+            },
+            "snapshot": {
+                "$class": "Invoice",
+                "anticipos": null,
+                "cargos": null,
+                "client": null,
+                "company": {
+                    "$class": "Company",
+                    "address": null,
+                    "email": null,
+                    "nombreComercial": null,
+                    "razonSocial": null,
+                    "ruc": null,
+                    "telephone": null
+                },
+                "compra": null,
+                "correlativo": null,
+                "cuotas": null,
+                "descuentos": null,
+                "details": null,
+                "detraccion": null,
+                "direccionEntrega": null,
+                "fecVencimiento": null,
+                "fechaEmision": null,
+                "formaPago": null,
+                "guiaEmbebida": null,
+                "guias": null,
+                "icbper": null,
+                "legends": null,
+                "mtoBaseIsc": null,
+                "mtoBaseIvap": null,
+                "mtoBaseOth": null,
+                "mtoCargos": null,
+                "mtoDescuentos": null,
+                "mtoIGV": null,
+                "mtoIGVGratuitas": null,
+                "mtoISC": null,
+                "mtoImpVenta": null,
+                "mtoIvap": null,
+                "mtoOperExoneradas": null,
+                "mtoOperExportacion": null,
+                "mtoOperGratuitas": null,
+                "mtoOperGravadas": null,
+                "mtoOperInafectas": null,
+                "mtoOtrosTributos": null,
+                "observacion": null,
+                "perception": null,
+                "redondeo": null,
+                "relDocs": null,
+                "seller": null,
+                "serie": null,
+                "subTotal": null,
+                "sumDsctoGlobal": null,
+                "sumOtrosCargos": null,
+                "sumOtrosDescuentos": null,
+                "tipoDoc": null,
+                "tipoMoneda": null,
+                "tipoOperacion": null,
+                "totalAnticipos": null,
+                "totalImpuestos": null,
+                "ublVersion": "2.0",
+                "valorVenta": null
+            }
+        },
+        "invoice-name-empty-ruc": {
+            "calls": {
+                "getName": "-01-F001-00000001"
+            },
+            "snapshot": {
+                "$class": "Invoice",
+                "anticipos": null,
+                "cargos": null,
+                "client": null,
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "",
+                    "telephone": "01-0000000"
+                },
+                "compra": null,
+                "correlativo": "00000001",
+                "cuotas": null,
+                "descuentos": null,
+                "details": null,
+                "detraccion": null,
+                "direccionEntrega": null,
+                "fecVencimiento": null,
+                "fechaEmision": null,
+                "formaPago": null,
+                "guiaEmbebida": null,
+                "guias": null,
+                "icbper": null,
+                "legends": null,
+                "mtoBaseIsc": null,
+                "mtoBaseIvap": null,
+                "mtoBaseOth": null,
+                "mtoCargos": null,
+                "mtoDescuentos": null,
+                "mtoIGV": null,
+                "mtoIGVGratuitas": null,
+                "mtoISC": null,
+                "mtoImpVenta": null,
+                "mtoIvap": null,
+                "mtoOperExoneradas": null,
+                "mtoOperExportacion": null,
+                "mtoOperGratuitas": null,
+                "mtoOperGravadas": null,
+                "mtoOperInafectas": null,
+                "mtoOtrosTributos": null,
+                "observacion": null,
+                "perception": null,
+                "redondeo": null,
+                "relDocs": null,
+                "seller": null,
+                "serie": "F001",
+                "subTotal": null,
+                "sumDsctoGlobal": null,
+                "sumOtrosCargos": null,
+                "sumOtrosDescuentos": null,
+                "tipoDoc": "01",
+                "tipoMoneda": null,
+                "tipoOperacion": null,
+                "totalAnticipos": null,
+                "totalImpuestos": null,
+                "ublVersion": "2.0",
+                "valorVenta": null
+            }
+        },
+        "invoice-name-unicode": {
+            "calls": {
+                "getName": "20000000001-01-FÑ01-1-2"
+            },
+            "snapshot": {
+                "$class": "Invoice",
+                "anticipos": null,
+                "cargos": null,
+                "client": null,
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "compra": null,
+                "correlativo": "1-2",
+                "cuotas": null,
+                "descuentos": null,
+                "details": null,
+                "detraccion": null,
+                "direccionEntrega": null,
+                "fecVencimiento": null,
+                "fechaEmision": null,
+                "formaPago": null,
+                "guiaEmbebida": null,
+                "guias": null,
+                "icbper": null,
+                "legends": null,
+                "mtoBaseIsc": null,
+                "mtoBaseIvap": null,
+                "mtoBaseOth": null,
+                "mtoCargos": null,
+                "mtoDescuentos": null,
+                "mtoIGV": null,
+                "mtoIGVGratuitas": null,
+                "mtoISC": null,
+                "mtoImpVenta": null,
+                "mtoIvap": null,
+                "mtoOperExoneradas": null,
+                "mtoOperExportacion": null,
+                "mtoOperGratuitas": null,
+                "mtoOperGravadas": null,
+                "mtoOperInafectas": null,
+                "mtoOtrosTributos": null,
+                "observacion": null,
+                "perception": null,
+                "redondeo": null,
+                "relDocs": null,
+                "seller": null,
+                "serie": "FÑ01",
+                "subTotal": null,
+                "sumDsctoGlobal": null,
+                "sumOtrosCargos": null,
+                "sumOtrosDescuentos": null,
+                "tipoDoc": "01",
+                "tipoMoneda": null,
+                "tipoOperacion": null,
+                "totalAnticipos": null,
+                "totalImpuestos": null,
+                "ublVersion": "2.0",
+                "valorVenta": null
+            }
+        },
+        "invoice-forma-pago-contado": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Invoice",
+                "anticipos": null,
+                "cargos": null,
+                "client": null,
+                "company": null,
+                "compra": null,
+                "correlativo": null,
+                "cuotas": null,
+                "descuentos": null,
+                "details": null,
+                "detraccion": null,
+                "direccionEntrega": null,
+                "fecVencimiento": null,
+                "fechaEmision": null,
+                "formaPago": {
+                    "$class": "FormaPagoContado",
+                    "moneda": null,
+                    "monto": null,
+                    "tipo": "Contado"
+                },
+                "guiaEmbebida": null,
+                "guias": null,
+                "icbper": null,
+                "legends": null,
+                "mtoBaseIsc": null,
+                "mtoBaseIvap": null,
+                "mtoBaseOth": null,
+                "mtoCargos": null,
+                "mtoDescuentos": null,
+                "mtoIGV": null,
+                "mtoIGVGratuitas": null,
+                "mtoISC": null,
+                "mtoImpVenta": null,
+                "mtoIvap": null,
+                "mtoOperExoneradas": null,
+                "mtoOperExportacion": null,
+                "mtoOperGratuitas": null,
+                "mtoOperGravadas": null,
+                "mtoOperInafectas": null,
+                "mtoOtrosTributos": null,
+                "observacion": null,
+                "perception": null,
+                "redondeo": null,
+                "relDocs": null,
+                "seller": null,
+                "serie": null,
+                "subTotal": null,
+                "sumDsctoGlobal": null,
+                "sumOtrosCargos": null,
+                "sumOtrosDescuentos": null,
+                "tipoDoc": null,
+                "tipoMoneda": null,
+                "tipoOperacion": null,
+                "totalAnticipos": null,
+                "totalImpuestos": null,
+                "ublVersion": "2.0",
+                "valorVenta": null
+            }
+        },
+        "invoice-forma-pago-credito-default": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Invoice",
+                "anticipos": null,
+                "cargos": null,
+                "client": null,
+                "company": null,
+                "compra": null,
+                "correlativo": null,
+                "cuotas": null,
+                "descuentos": null,
+                "details": null,
+                "detraccion": null,
+                "direccionEntrega": null,
+                "fecVencimiento": null,
+                "fechaEmision": null,
+                "formaPago": {
+                    "$class": "FormaPagoCredito",
+                    "moneda": null,
+                    "monto": null,
+                    "tipo": "Credito"
+                },
+                "guiaEmbebida": null,
+                "guias": null,
+                "icbper": null,
+                "legends": null,
+                "mtoBaseIsc": null,
+                "mtoBaseIvap": null,
+                "mtoBaseOth": null,
+                "mtoCargos": null,
+                "mtoDescuentos": null,
+                "mtoIGV": null,
+                "mtoIGVGratuitas": null,
+                "mtoISC": null,
+                "mtoImpVenta": null,
+                "mtoIvap": null,
+                "mtoOperExoneradas": null,
+                "mtoOperExportacion": null,
+                "mtoOperGratuitas": null,
+                "mtoOperGravadas": null,
+                "mtoOperInafectas": null,
+                "mtoOtrosTributos": null,
+                "observacion": null,
+                "perception": null,
+                "redondeo": null,
+                "relDocs": null,
+                "seller": null,
+                "serie": null,
+                "subTotal": null,
+                "sumDsctoGlobal": null,
+                "sumOtrosCargos": null,
+                "sumOtrosDescuentos": null,
+                "tipoDoc": null,
+                "tipoMoneda": null,
+                "tipoOperacion": null,
+                "totalAnticipos": null,
+                "totalImpuestos": null,
+                "ublVersion": "2.0",
+                "valorVenta": null
+            }
+        },
+        "invoice-forma-pago-generic": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Invoice",
+                "anticipos": null,
+                "cargos": null,
+                "client": null,
+                "company": null,
+                "compra": null,
+                "correlativo": null,
+                "cuotas": null,
+                "descuentos": null,
+                "details": null,
+                "detraccion": null,
+                "direccionEntrega": null,
+                "fecVencimiento": null,
+                "fechaEmision": null,
+                "formaPago": {
+                    "$class": "PaymentTerms",
+                    "moneda": "USD",
+                    "monto": {
+                        "$float": "0.0"
+                    },
+                    "tipo": "Otro"
+                },
+                "guiaEmbebida": null,
+                "guias": null,
+                "icbper": null,
+                "legends": null,
+                "mtoBaseIsc": null,
+                "mtoBaseIvap": null,
+                "mtoBaseOth": null,
+                "mtoCargos": null,
+                "mtoDescuentos": null,
+                "mtoIGV": null,
+                "mtoIGVGratuitas": null,
+                "mtoISC": null,
+                "mtoImpVenta": null,
+                "mtoIvap": null,
+                "mtoOperExoneradas": null,
+                "mtoOperExportacion": null,
+                "mtoOperGratuitas": null,
+                "mtoOperGravadas": null,
+                "mtoOperInafectas": null,
+                "mtoOtrosTributos": null,
+                "observacion": null,
+                "perception": null,
+                "redondeo": null,
+                "relDocs": null,
+                "seller": null,
+                "serie": null,
+                "subTotal": null,
+                "sumDsctoGlobal": null,
+                "sumOtrosCargos": null,
+                "sumOtrosDescuentos": null,
+                "tipoDoc": null,
+                "tipoMoneda": null,
+                "tipoOperacion": null,
+                "totalAnticipos": null,
+                "totalImpuestos": null,
+                "ublVersion": "2.0",
+                "valorVenta": null
+            }
+        },
+        "invoice-empty-lists": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Invoice",
+                "anticipos": [],
+                "cargos": [],
+                "client": null,
+                "company": null,
+                "compra": null,
+                "correlativo": null,
+                "cuotas": [],
+                "descuentos": [],
+                "details": [],
+                "detraccion": null,
+                "direccionEntrega": null,
+                "fecVencimiento": null,
+                "fechaEmision": null,
+                "formaPago": null,
+                "guiaEmbebida": null,
+                "guias": [],
+                "icbper": null,
+                "legends": [],
+                "mtoBaseIsc": null,
+                "mtoBaseIvap": null,
+                "mtoBaseOth": null,
+                "mtoCargos": null,
+                "mtoDescuentos": null,
+                "mtoIGV": null,
+                "mtoIGVGratuitas": null,
+                "mtoISC": null,
+                "mtoImpVenta": null,
+                "mtoIvap": null,
+                "mtoOperExoneradas": null,
+                "mtoOperExportacion": null,
+                "mtoOperGratuitas": null,
+                "mtoOperGravadas": null,
+                "mtoOperInafectas": null,
+                "mtoOtrosTributos": null,
+                "observacion": null,
+                "perception": null,
+                "redondeo": null,
+                "relDocs": [],
+                "seller": null,
+                "serie": null,
+                "subTotal": null,
+                "sumDsctoGlobal": null,
+                "sumOtrosCargos": null,
+                "sumOtrosDescuentos": null,
+                "tipoDoc": null,
+                "tipoMoneda": null,
+                "tipoOperacion": null,
+                "totalAnticipos": null,
+                "totalImpuestos": null,
+                "ublVersion": "2.0",
+                "valorVenta": null
+            }
+        },
+        "note-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Note",
+                "client": null,
+                "codMotivo": null,
+                "company": null,
+                "compra": null,
+                "correlativo": null,
+                "cuotas": null,
+                "desMotivo": null,
+                "details": null,
+                "fechaEmision": null,
+                "formaPago": null,
+                "guias": null,
+                "icbper": null,
+                "legends": null,
+                "mtoBaseIsc": null,
+                "mtoBaseIvap": null,
+                "mtoBaseOth": null,
+                "mtoIGV": null,
+                "mtoIGVGratuitas": null,
+                "mtoISC": null,
+                "mtoImpVenta": null,
+                "mtoIvap": null,
+                "mtoOperExoneradas": null,
+                "mtoOperExportacion": null,
+                "mtoOperGratuitas": null,
+                "mtoOperGravadas": null,
+                "mtoOperInafectas": null,
+                "mtoOtrosTributos": null,
+                "numDocfectado": null,
+                "perception": null,
+                "redondeo": null,
+                "relDocs": null,
+                "serie": null,
+                "subTotal": null,
+                "sumOtrosCargos": null,
+                "tipDocAfectado": null,
+                "tipoDoc": null,
+                "tipoMoneda": null,
+                "totalImpuestos": null,
+                "ublVersion": "2.0",
+                "valorVenta": null
+            }
+        },
+        "note-credit-full": {
+            "calls": {
+                "getName": "20000000001-07-FC01-45"
+            },
+            "snapshot": {
+                "$class": "Note",
+                "client": {
+                    "$class": "Client",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "CALLE PRUEBA 456",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150122",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "cliente@example.test",
+                    "numDoc": "20000000002",
+                    "rznSocial": "CLIENTE SINTETICO S.A.",
+                    "telephone": "999000000",
+                    "tipoDoc": "6"
+                },
+                "codMotivo": "01",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "compra": "OC-0001",
+                "correlativo": "45",
+                "cuotas": [
+                    {
+                        "$class": "Cuota",
+                        "fechaPago": {
+                            "$datetime": {
+                                "class": "DateTimeImmutable",
+                                "local": "2024-02-29T12:00:00.000000",
+                                "offset": -18000,
+                                "unix": 1709226000,
+                                "micro": 0,
+                                "tz": "America/Lima"
+                            }
+                        },
+                        "moneda": "PEN",
+                        "monto": {
+                            "$float": "100.0"
+                        }
+                    },
+                    {
+                        "$class": "Cuota",
+                        "fechaPago": {
+                            "$datetime": {
+                                "class": "DateTimeImmutable",
+                                "local": "2024-03-31T12:00:00.000000",
+                                "offset": -18000,
+                                "unix": 1711904400,
+                                "micro": 0,
+                                "tz": "America/Lima"
+                            }
+                        },
+                        "moneda": "PEN",
+                        "monto": {
+                            "$float": "137.59"
+                        }
+                    }
+                ],
+                "desMotivo": "MOTIVO SINTETICO",
+                "details": [
+                    {
+                        "$class": "SaleDetail",
+                        "atributos": [
+                            {
+                                "$class": "DetailAttribute",
+                                "code": "5010",
+                                "duracion": 2,
+                                "fecFin": {
+                                    "$datetime": {
+                                        "class": "DateTime",
+                                        "local": "2024-03-02T08:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1709384400,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "fecInicio": {
+                                    "$datetime": {
+                                        "class": "DateTime",
+                                        "local": "2024-03-01T08:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1709298000,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "name": "Numero de placa",
+                                "value": "ABC-123"
+                            }
+                        ],
+                        "cantidad": {
+                            "$float": "2.0"
+                        },
+                        "cargos": [
+                            {
+                                "$class": "Charge",
+                                "codTipo": "47",
+                                "factor": {
+                                    "$float": "0.1"
+                                },
+                                "monto": {
+                                    "$float": "10.0"
+                                },
+                                "montoBase": {
+                                    "$float": "100.0"
+                                }
+                            }
+                        ],
+                        "codProdGS1": "7750000000000",
+                        "codProdSunat": "10000000",
+                        "codProducto": "P001",
+                        "descripcion": "PRODUCTO SINTETICO P001",
+                        "descuento": {
+                            "$float": "5.0"
+                        },
+                        "descuentos": [
+                            {
+                                "$class": "Charge",
+                                "codTipo": "00",
+                                "factor": {
+                                    "$float": "0.05"
+                                },
+                                "monto": {
+                                    "$float": "5.0"
+                                },
+                                "montoBase": {
+                                    "$float": "100.0"
+                                }
+                            }
+                        ],
+                        "factorIcbper": {
+                            "$float": "0.4"
+                        },
+                        "icbper": {
+                            "$float": "0.8"
+                        },
+                        "igv": {
+                            "$float": "18.0"
+                        },
+                        "isc": {
+                            "$float": "0.0"
+                        },
+                        "mtoBaseIgv": {
+                            "$float": "100.0"
+                        },
+                        "mtoBaseIsc": {
+                            "$float": "0.0"
+                        },
+                        "mtoBaseOth": {
+                            "$float": "0.0"
+                        },
+                        "mtoPrecioUnitario": {
+                            "$float": "59.0"
+                        },
+                        "mtoValorGratuito": {
+                            "$float": "0.0"
+                        },
+                        "mtoValorUnitario": {
+                            "$float": "50.0"
+                        },
+                        "mtoValorVenta": {
+                            "$float": "100.0"
+                        },
+                        "otroTributo": {
+                            "$float": "0.0"
+                        },
+                        "porcentajeIgv": {
+                            "$float": "18.0"
+                        },
+                        "porcentajeIsc": {
+                            "$float": "0.0"
+                        },
+                        "porcentajeOth": {
+                            "$float": "0.0"
+                        },
+                        "tipAfeIgv": "10",
+                        "tipSisIsc": "01",
+                        "totalImpuestos": {
+                            "$float": "18.8"
+                        },
+                        "unidad": "NIU"
+                    },
+                    {
+                        "$class": "SaleDetail",
+                        "atributos": [
+                            {
+                                "$class": "DetailAttribute",
+                                "code": "5010",
+                                "duracion": 2,
+                                "fecFin": {
+                                    "$datetime": {
+                                        "class": "DateTime",
+                                        "local": "2024-03-02T08:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1709384400,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "fecInicio": {
+                                    "$datetime": {
+                                        "class": "DateTime",
+                                        "local": "2024-03-01T08:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1709298000,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "name": "Numero de placa",
+                                "value": "ABC-123"
+                            }
+                        ],
+                        "cantidad": {
+                            "$float": "1.5"
+                        },
+                        "cargos": [
+                            {
+                                "$class": "Charge",
+                                "codTipo": "47",
+                                "factor": {
+                                    "$float": "0.1"
+                                },
+                                "monto": {
+                                    "$float": "10.0"
+                                },
+                                "montoBase": {
+                                    "$float": "100.0"
+                                }
+                            }
+                        ],
+                        "codProdGS1": "7750000000000",
+                        "codProdSunat": "10000000",
+                        "codProducto": "P002",
+                        "descripcion": "PRODUCTO SINTETICO P002",
+                        "descuento": {
+                            "$float": "5.0"
+                        },
+                        "descuentos": [
+                            {
+                                "$class": "Charge",
+                                "codTipo": "00",
+                                "factor": {
+                                    "$float": "0.05"
+                                },
+                                "monto": {
+                                    "$float": "5.0"
+                                },
+                                "montoBase": {
+                                    "$float": "100.0"
+                                }
+                            }
+                        ],
+                        "factorIcbper": {
+                            "$float": "0.4"
+                        },
+                        "icbper": {
+                            "$float": "0.8"
+                        },
+                        "igv": {
+                            "$float": "18.0"
+                        },
+                        "isc": {
+                            "$float": "0.0"
+                        },
+                        "mtoBaseIgv": {
+                            "$float": "100.0"
+                        },
+                        "mtoBaseIsc": {
+                            "$float": "0.0"
+                        },
+                        "mtoBaseOth": {
+                            "$float": "0.0"
+                        },
+                        "mtoPrecioUnitario": {
+                            "$float": "59.0"
+                        },
+                        "mtoValorGratuito": {
+                            "$float": "0.0"
+                        },
+                        "mtoValorUnitario": {
+                            "$float": "50.0"
+                        },
+                        "mtoValorVenta": {
+                            "$float": "100.0"
+                        },
+                        "otroTributo": {
+                            "$float": "0.0"
+                        },
+                        "porcentajeIgv": {
+                            "$float": "18.0"
+                        },
+                        "porcentajeIsc": {
+                            "$float": "0.0"
+                        },
+                        "porcentajeOth": {
+                            "$float": "0.0"
+                        },
+                        "tipAfeIgv": "10",
+                        "tipSisIsc": "01",
+                        "totalImpuestos": {
+                            "$float": "18.8"
+                        },
+                        "unidad": "NIU"
+                    }
+                ],
+                "fechaEmision": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-01-31T23:30:00.000000",
+                        "offset": -18000,
+                        "unix": 1706761800,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "formaPago": {
+                    "$class": "FormaPagoCredito",
+                    "moneda": "PEN",
+                    "monto": {
+                        "$float": "237.59"
+                    },
+                    "tipo": "Credito"
+                },
+                "guias": [
+                    {
+                        "$class": "Document",
+                        "nroDoc": "T001-1",
+                        "tipoDoc": "09"
+                    }
+                ],
+                "icbper": {
+                    "$float": "1.6"
+                },
+                "legends": [
+                    {
+                        "$class": "Legend",
+                        "code": "1000",
+                        "value": "SON DOSCIENTOS TREINTA Y SIETE CON 59/100 SOLES"
+                    }
+                ],
+                "mtoBaseIsc": {
+                    "$float": "0.0"
+                },
+                "mtoBaseIvap": {
+                    "$float": "0.0"
+                },
+                "mtoBaseOth": {
+                    "$float": "0.0"
+                },
+                "mtoIGV": {
+                    "$float": "36.0"
+                },
+                "mtoIGVGratuitas": {
+                    "$float": "0.0"
+                },
+                "mtoISC": {
+                    "$float": "0.0"
+                },
+                "mtoImpVenta": {
+                    "$float": "237.59"
+                },
+                "mtoIvap": {
+                    "$float": "0.0"
+                },
+                "mtoOperExoneradas": {
+                    "$float": "0.0"
+                },
+                "mtoOperExportacion": {
+                    "$float": "0.0"
+                },
+                "mtoOperGratuitas": {
+                    "$float": "0.0"
+                },
+                "mtoOperGravadas": {
+                    "$float": "200.0"
+                },
+                "mtoOperInafectas": {
+                    "$float": "0.0"
+                },
+                "mtoOtrosTributos": {
+                    "$float": "0.0"
+                },
+                "numDocfectado": "F001-123",
+                "perception": {
+                    "$class": "SalePerception",
+                    "codReg": "02",
+                    "mto": {
+                        "$float": "0.1"
+                    },
+                    "mtoBase": {
+                        "$float": "10.0"
+                    },
+                    "mtoTotal": {
+                        "$float": "10.1"
+                    },
+                    "porcentaje": {
+                        "$float": "0.01"
+                    }
+                },
+                "redondeo": {
+                    "$float": "-0.01"
+                },
+                "relDocs": [
+                    {
+                        "$class": "Document",
+                        "nroDoc": "X-1",
+                        "tipoDoc": "99"
+                    }
+                ],
+                "serie": "FC01",
+                "subTotal": {
+                    "$float": "236.0"
+                },
+                "sumOtrosCargos": {
+                    "$float": "1.0"
+                },
+                "tipDocAfectado": "01",
+                "tipoDoc": "07",
+                "tipoMoneda": "PEN",
+                "totalImpuestos": {
+                    "$float": "37.6"
+                },
+                "ublVersion": "2.1",
+                "valorVenta": {
+                    "$float": "200.0"
+                }
+            }
+        },
+        "note-debit-full": {
+            "calls": {
+                "getName": "20000000001-08-FD01-45"
+            },
+            "snapshot": {
+                "$class": "Note",
+                "client": {
+                    "$class": "Client",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "CALLE PRUEBA 456",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150122",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "cliente@example.test",
+                    "numDoc": "20000000002",
+                    "rznSocial": "CLIENTE SINTETICO S.A.",
+                    "telephone": "999000000",
+                    "tipoDoc": "6"
+                },
+                "codMotivo": "02",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "compra": "OC-0001",
+                "correlativo": "45",
+                "cuotas": [
+                    {
+                        "$class": "Cuota",
+                        "fechaPago": {
+                            "$datetime": {
+                                "class": "DateTimeImmutable",
+                                "local": "2024-02-29T12:00:00.000000",
+                                "offset": -18000,
+                                "unix": 1709226000,
+                                "micro": 0,
+                                "tz": "America/Lima"
+                            }
+                        },
+                        "moneda": "PEN",
+                        "monto": {
+                            "$float": "100.0"
+                        }
+                    },
+                    {
+                        "$class": "Cuota",
+                        "fechaPago": {
+                            "$datetime": {
+                                "class": "DateTimeImmutable",
+                                "local": "2024-03-31T12:00:00.000000",
+                                "offset": -18000,
+                                "unix": 1711904400,
+                                "micro": 0,
+                                "tz": "America/Lima"
+                            }
+                        },
+                        "moneda": "PEN",
+                        "monto": {
+                            "$float": "137.59"
+                        }
+                    }
+                ],
+                "desMotivo": "MOTIVO SINTETICO",
+                "details": [
+                    {
+                        "$class": "SaleDetail",
+                        "atributos": [
+                            {
+                                "$class": "DetailAttribute",
+                                "code": "5010",
+                                "duracion": 2,
+                                "fecFin": {
+                                    "$datetime": {
+                                        "class": "DateTime",
+                                        "local": "2024-03-02T08:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1709384400,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "fecInicio": {
+                                    "$datetime": {
+                                        "class": "DateTime",
+                                        "local": "2024-03-01T08:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1709298000,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "name": "Numero de placa",
+                                "value": "ABC-123"
+                            }
+                        ],
+                        "cantidad": {
+                            "$float": "2.0"
+                        },
+                        "cargos": [
+                            {
+                                "$class": "Charge",
+                                "codTipo": "47",
+                                "factor": {
+                                    "$float": "0.1"
+                                },
+                                "monto": {
+                                    "$float": "10.0"
+                                },
+                                "montoBase": {
+                                    "$float": "100.0"
+                                }
+                            }
+                        ],
+                        "codProdGS1": "7750000000000",
+                        "codProdSunat": "10000000",
+                        "codProducto": "P001",
+                        "descripcion": "PRODUCTO SINTETICO P001",
+                        "descuento": {
+                            "$float": "5.0"
+                        },
+                        "descuentos": [
+                            {
+                                "$class": "Charge",
+                                "codTipo": "00",
+                                "factor": {
+                                    "$float": "0.05"
+                                },
+                                "monto": {
+                                    "$float": "5.0"
+                                },
+                                "montoBase": {
+                                    "$float": "100.0"
+                                }
+                            }
+                        ],
+                        "factorIcbper": {
+                            "$float": "0.4"
+                        },
+                        "icbper": {
+                            "$float": "0.8"
+                        },
+                        "igv": {
+                            "$float": "18.0"
+                        },
+                        "isc": {
+                            "$float": "0.0"
+                        },
+                        "mtoBaseIgv": {
+                            "$float": "100.0"
+                        },
+                        "mtoBaseIsc": {
+                            "$float": "0.0"
+                        },
+                        "mtoBaseOth": {
+                            "$float": "0.0"
+                        },
+                        "mtoPrecioUnitario": {
+                            "$float": "59.0"
+                        },
+                        "mtoValorGratuito": {
+                            "$float": "0.0"
+                        },
+                        "mtoValorUnitario": {
+                            "$float": "50.0"
+                        },
+                        "mtoValorVenta": {
+                            "$float": "100.0"
+                        },
+                        "otroTributo": {
+                            "$float": "0.0"
+                        },
+                        "porcentajeIgv": {
+                            "$float": "18.0"
+                        },
+                        "porcentajeIsc": {
+                            "$float": "0.0"
+                        },
+                        "porcentajeOth": {
+                            "$float": "0.0"
+                        },
+                        "tipAfeIgv": "10",
+                        "tipSisIsc": "01",
+                        "totalImpuestos": {
+                            "$float": "18.8"
+                        },
+                        "unidad": "NIU"
+                    },
+                    {
+                        "$class": "SaleDetail",
+                        "atributos": [
+                            {
+                                "$class": "DetailAttribute",
+                                "code": "5010",
+                                "duracion": 2,
+                                "fecFin": {
+                                    "$datetime": {
+                                        "class": "DateTime",
+                                        "local": "2024-03-02T08:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1709384400,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "fecInicio": {
+                                    "$datetime": {
+                                        "class": "DateTime",
+                                        "local": "2024-03-01T08:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1709298000,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "name": "Numero de placa",
+                                "value": "ABC-123"
+                            }
+                        ],
+                        "cantidad": {
+                            "$float": "1.5"
+                        },
+                        "cargos": [
+                            {
+                                "$class": "Charge",
+                                "codTipo": "47",
+                                "factor": {
+                                    "$float": "0.1"
+                                },
+                                "monto": {
+                                    "$float": "10.0"
+                                },
+                                "montoBase": {
+                                    "$float": "100.0"
+                                }
+                            }
+                        ],
+                        "codProdGS1": "7750000000000",
+                        "codProdSunat": "10000000",
+                        "codProducto": "P002",
+                        "descripcion": "PRODUCTO SINTETICO P002",
+                        "descuento": {
+                            "$float": "5.0"
+                        },
+                        "descuentos": [
+                            {
+                                "$class": "Charge",
+                                "codTipo": "00",
+                                "factor": {
+                                    "$float": "0.05"
+                                },
+                                "monto": {
+                                    "$float": "5.0"
+                                },
+                                "montoBase": {
+                                    "$float": "100.0"
+                                }
+                            }
+                        ],
+                        "factorIcbper": {
+                            "$float": "0.4"
+                        },
+                        "icbper": {
+                            "$float": "0.8"
+                        },
+                        "igv": {
+                            "$float": "18.0"
+                        },
+                        "isc": {
+                            "$float": "0.0"
+                        },
+                        "mtoBaseIgv": {
+                            "$float": "100.0"
+                        },
+                        "mtoBaseIsc": {
+                            "$float": "0.0"
+                        },
+                        "mtoBaseOth": {
+                            "$float": "0.0"
+                        },
+                        "mtoPrecioUnitario": {
+                            "$float": "59.0"
+                        },
+                        "mtoValorGratuito": {
+                            "$float": "0.0"
+                        },
+                        "mtoValorUnitario": {
+                            "$float": "50.0"
+                        },
+                        "mtoValorVenta": {
+                            "$float": "100.0"
+                        },
+                        "otroTributo": {
+                            "$float": "0.0"
+                        },
+                        "porcentajeIgv": {
+                            "$float": "18.0"
+                        },
+                        "porcentajeIsc": {
+                            "$float": "0.0"
+                        },
+                        "porcentajeOth": {
+                            "$float": "0.0"
+                        },
+                        "tipAfeIgv": "10",
+                        "tipSisIsc": "01",
+                        "totalImpuestos": {
+                            "$float": "18.8"
+                        },
+                        "unidad": "NIU"
+                    }
+                ],
+                "fechaEmision": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-01-31T23:30:00.000000",
+                        "offset": -18000,
+                        "unix": 1706761800,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "formaPago": {
+                    "$class": "FormaPagoCredito",
+                    "moneda": "PEN",
+                    "monto": {
+                        "$float": "237.59"
+                    },
+                    "tipo": "Credito"
+                },
+                "guias": [
+                    {
+                        "$class": "Document",
+                        "nroDoc": "T001-1",
+                        "tipoDoc": "09"
+                    }
+                ],
+                "icbper": {
+                    "$float": "1.6"
+                },
+                "legends": [
+                    {
+                        "$class": "Legend",
+                        "code": "1000",
+                        "value": "SON DOSCIENTOS TREINTA Y SIETE CON 59/100 SOLES"
+                    }
+                ],
+                "mtoBaseIsc": {
+                    "$float": "0.0"
+                },
+                "mtoBaseIvap": {
+                    "$float": "0.0"
+                },
+                "mtoBaseOth": {
+                    "$float": "0.0"
+                },
+                "mtoIGV": {
+                    "$float": "36.0"
+                },
+                "mtoIGVGratuitas": {
+                    "$float": "0.0"
+                },
+                "mtoISC": {
+                    "$float": "0.0"
+                },
+                "mtoImpVenta": {
+                    "$float": "237.59"
+                },
+                "mtoIvap": {
+                    "$float": "0.0"
+                },
+                "mtoOperExoneradas": {
+                    "$float": "0.0"
+                },
+                "mtoOperExportacion": {
+                    "$float": "0.0"
+                },
+                "mtoOperGratuitas": {
+                    "$float": "0.0"
+                },
+                "mtoOperGravadas": {
+                    "$float": "200.0"
+                },
+                "mtoOperInafectas": {
+                    "$float": "0.0"
+                },
+                "mtoOtrosTributos": {
+                    "$float": "0.0"
+                },
+                "numDocfectado": "F001-123",
+                "perception": {
+                    "$class": "SalePerception",
+                    "codReg": "02",
+                    "mto": {
+                        "$float": "0.1"
+                    },
+                    "mtoBase": {
+                        "$float": "10.0"
+                    },
+                    "mtoTotal": {
+                        "$float": "10.1"
+                    },
+                    "porcentaje": {
+                        "$float": "0.01"
+                    }
+                },
+                "redondeo": {
+                    "$float": "-0.01"
+                },
+                "relDocs": [
+                    {
+                        "$class": "Document",
+                        "nroDoc": "X-1",
+                        "tipoDoc": "99"
+                    }
+                ],
+                "serie": "FD01",
+                "subTotal": {
+                    "$float": "236.0"
+                },
+                "sumOtrosCargos": {
+                    "$float": "1.0"
+                },
+                "tipDocAfectado": "01",
+                "tipoDoc": "08",
+                "tipoMoneda": "PEN",
+                "totalImpuestos": {
+                    "$float": "37.6"
+                },
+                "ublVersion": "2.1",
+                "valorVenta": {
+                    "$float": "200.0"
+                }
+            }
+        },
+        "note-empty-name": {
+            "calls": {
+                "getName": {
+                    "$error": {
+                        "class": "Error",
+                        "message": "Call to a member function getRuc() on null"
+                    }
+                }
+            },
+            "snapshot": {
+                "$class": "Note",
+                "client": null,
+                "codMotivo": null,
+                "company": null,
+                "compra": null,
+                "correlativo": null,
+                "cuotas": null,
+                "desMotivo": null,
+                "details": null,
+                "fechaEmision": null,
+                "formaPago": null,
+                "guias": null,
+                "icbper": null,
+                "legends": null,
+                "mtoBaseIsc": null,
+                "mtoBaseIvap": null,
+                "mtoBaseOth": null,
+                "mtoIGV": null,
+                "mtoIGVGratuitas": null,
+                "mtoISC": null,
+                "mtoImpVenta": null,
+                "mtoIvap": null,
+                "mtoOperExoneradas": null,
+                "mtoOperExportacion": null,
+                "mtoOperGratuitas": null,
+                "mtoOperGravadas": null,
+                "mtoOperInafectas": null,
+                "mtoOtrosTributos": null,
+                "numDocfectado": null,
+                "perception": null,
+                "redondeo": null,
+                "relDocs": null,
+                "serie": "FC01",
+                "subTotal": null,
+                "sumOtrosCargos": null,
+                "tipDocAfectado": null,
+                "tipoDoc": null,
+                "tipoMoneda": null,
+                "totalImpuestos": null,
+                "ublVersion": "2.0",
+                "valorVenta": null
+            }
+        },
+        "receipt-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Receipt",
+                "concepto": null,
+                "correlativo": null,
+                "fechaEmision": null,
+                "montoLetras": null,
+                "person": null,
+                "porcentaje": null,
+                "receptor": null,
+                "retencion": null,
+                "serie": null,
+                "subTotal": null,
+                "total": null
+            }
+        },
+        "receipt-full": {
+            "calls": {
+                "getName": "RHE100000000017"
+            },
+            "snapshot": {
+                "$class": "Receipt",
+                "concepto": "SERVICIO PROFESIONAL",
+                "correlativo": "7",
+                "fechaEmision": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-05-01T10:00:00.000000",
+                        "offset": -18000,
+                        "unix": 1714575600,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "montoLetras": "MIL CON 00/100 SOLES",
+                "person": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "PERSONA NATURAL SINTETICA",
+                    "ruc": "10000000001",
+                    "telephone": "01-0000000"
+                },
+                "porcentaje": {
+                    "$float": "8.0"
+                },
+                "receptor": {
+                    "$class": "Client",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "CALLE PRUEBA 456",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150122",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "cliente@example.test",
+                    "numDoc": "20000000002",
+                    "rznSocial": "CLIENTE SINTETICO S.A.",
+                    "telephone": "999000000",
+                    "tipoDoc": "6"
+                },
+                "retencion": {
+                    "$float": "80.0"
+                },
+                "serie": "E001",
+                "subTotal": {
+                    "$float": "1000.0"
+                },
+                "total": {
+                    "$float": "920.0"
+                }
+            }
+        },
+        "receipt-name-no-person": {
+            "calls": {
+                "getName": {
+                    "$error": {
+                        "class": "Error",
+                        "message": "Call to a member function getRuc() on null"
+                    }
+                }
+            },
+            "snapshot": {
+                "$class": "Receipt",
+                "concepto": "SERVICIO PROFESIONAL",
+                "correlativo": "7",
+                "fechaEmision": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-05-01T10:00:00.000000",
+                        "offset": -18000,
+                        "unix": 1714575600,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "montoLetras": "MIL CON 00/100 SOLES",
+                "person": null,
+                "porcentaje": {
+                    "$float": "8.0"
+                },
+                "receptor": {
+                    "$class": "Client",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "CALLE PRUEBA 456",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150122",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "cliente@example.test",
+                    "numDoc": "20000000002",
+                    "rznSocial": "CLIENTE SINTETICO S.A.",
+                    "telephone": "999000000",
+                    "tipoDoc": "6"
+                },
+                "retencion": {
+                    "$float": "80.0"
+                },
+                "serie": "E001",
+                "subTotal": {
+                    "$float": "1000.0"
+                },
+                "total": {
+                    "$float": "920.0"
+                }
+            }
+        },
+        "receipt-name-null-parts": {
+            "calls": {
+                "getName": "RHE"
+            },
+            "snapshot": {
+                "$class": "Receipt",
+                "concepto": null,
+                "correlativo": null,
+                "fechaEmision": null,
+                "montoLetras": null,
+                "person": {
+                    "$class": "Company",
+                    "address": null,
+                    "email": null,
+                    "nombreComercial": null,
+                    "razonSocial": null,
+                    "ruc": null,
+                    "telephone": null
+                },
+                "porcentaje": null,
+                "receptor": null,
+                "retencion": null,
+                "serie": null,
+                "subTotal": null,
+                "total": null
+            }
+        },
+        "sale-detail-defaults": {
+            "calls": {},
+            "snapshot": {
+                "$class": "SaleDetail",
+                "atributos": null,
+                "cantidad": null,
+                "cargos": null,
+                "codProdGS1": null,
+                "codProdSunat": null,
+                "codProducto": null,
+                "descripcion": null,
+                "descuento": null,
+                "descuentos": null,
+                "factorIcbper": {
+                    "$float": "0.3"
+                },
+                "icbper": null,
+                "igv": null,
+                "isc": null,
+                "mtoBaseIgv": null,
+                "mtoBaseIsc": null,
+                "mtoBaseOth": null,
+                "mtoPrecioUnitario": null,
+                "mtoValorGratuito": null,
+                "mtoValorUnitario": null,
+                "mtoValorVenta": null,
+                "otroTributo": null,
+                "porcentajeIgv": null,
+                "porcentajeIsc": null,
+                "porcentajeOth": null,
+                "tipAfeIgv": null,
+                "tipSisIsc": null,
+                "totalImpuestos": null,
+                "unidad": null
+            }
+        },
+        "sale-detail-null-factor": {
+            "calls": {},
+            "snapshot": {
+                "$class": "SaleDetail",
+                "atributos": null,
+                "cantidad": null,
+                "cargos": null,
+                "codProdGS1": null,
+                "codProdSunat": null,
+                "codProducto": null,
+                "descripcion": null,
+                "descuento": null,
+                "descuentos": null,
+                "factorIcbper": null,
+                "icbper": null,
+                "igv": null,
+                "isc": null,
+                "mtoBaseIgv": null,
+                "mtoBaseIsc": null,
+                "mtoBaseOth": null,
+                "mtoPrecioUnitario": null,
+                "mtoValorGratuito": null,
+                "mtoValorUnitario": null,
+                "mtoValorVenta": null,
+                "otroTributo": null,
+                "porcentajeIgv": null,
+                "porcentajeIsc": null,
+                "porcentajeOth": null,
+                "tipAfeIgv": null,
+                "tipSisIsc": null,
+                "totalImpuestos": null,
+                "unidad": null
+            }
+        },
+        "detail-attribute-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "DetailAttribute",
+                "code": null,
+                "duracion": null,
+                "fecFin": null,
+                "fecInicio": null,
+                "name": null,
+                "value": null
+            }
+        },
+        "detail-attribute-mutable-dates": {
+            "calls": {},
+            "snapshot": {
+                "$class": "DetailAttribute",
+                "code": "5010",
+                "duracion": 2,
+                "fecFin": {
+                    "$datetime": {
+                        "class": "DateTime",
+                        "local": "2024-03-02T08:00:00.000000",
+                        "offset": -18000,
+                        "unix": 1709384400,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "fecInicio": {
+                    "$datetime": {
+                        "class": "DateTime",
+                        "local": "2024-03-01T08:00:00.000000",
+                        "offset": -18000,
+                        "unix": 1709298000,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "name": "Numero de placa",
+                "value": "ABC-123"
+            }
+        },
+        "charge-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Charge",
+                "codTipo": null,
+                "factor": null,
+                "monto": null,
+                "montoBase": null
+            }
+        },
+        "cuota-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Cuota",
+                "fechaPago": null,
+                "moneda": null,
+                "monto": null
+            }
+        },
+        "detraction-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Detraction",
+                "codBienDetraccion": null,
+                "codMedioPago": null,
+                "ctaBanco": null,
+                "mount": null,
+                "percent": null,
+                "valueRef": null
+            }
+        },
+        "document-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Document",
+                "nroDoc": null,
+                "tipoDoc": null
+            }
+        },
+        "embeded-despatch-full": {
+            "calls": {},
+            "snapshot": {
+                "$class": "EmbededDespatch",
+                "llegada": {
+                    "$class": "Direction",
+                    "codLocal": "0002",
+                    "direccion": "AV. LLEGADA 1",
+                    "ruc": "20000000001",
+                    "ubigueo": "150101"
+                },
+                "modTraslado": "01",
+                "nroLicencia": "Q00000000",
+                "partida": {
+                    "$class": "Direction",
+                    "codLocal": null,
+                    "direccion": "AV. PARTIDA 2",
+                    "ruc": null,
+                    "ubigueo": "150203"
+                },
+                "pesoBruto": {
+                    "$float": "12.5"
+                },
+                "transpCodeAuth": "AUTH-1",
+                "transpMarca": "MARCA",
+                "transpPlaca": "ABC-123",
+                "transportista": {
+                    "$class": "Client",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "CALLE PRUEBA 456",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150122",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "cliente@example.test",
+                    "numDoc": "20000000003",
+                    "rznSocial": "TRANSPORTES SINTETICOS",
+                    "telephone": "999000000",
+                    "tipoDoc": "6"
+                },
+                "undPesoBruto": "KGM"
+            }
+        },
+        "legend-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Legend",
+                "code": null,
+                "value": null
+            }
+        },
+        "prepayment-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Prepayment",
+                "nroDocRel": null,
+                "tipoDocRel": null,
+                "total": null
+            }
+        },
+        "sale-perception-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "SalePerception",
+                "codReg": null,
+                "mto": null,
+                "mtoBase": null,
+                "mtoTotal": null,
+                "porcentaje": null
+            }
+        },
+        "payment-terms-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "PaymentTerms",
+                "moneda": null,
+                "monto": null,
+                "tipo": null
+            }
+        },
+        "forma-pago-contado": {
+            "calls": {},
+            "snapshot": {
+                "$class": "FormaPagoContado",
+                "moneda": null,
+                "monto": null,
+                "tipo": "Contado"
+            }
+        },
+        "forma-pago-contado-overridden": {
+            "calls": {},
+            "snapshot": {
+                "$class": "FormaPagoContado",
+                "moneda": "PEN",
+                "monto": {
+                    "$float": "5.0"
+                },
+                "tipo": "Credito"
+            }
+        },
+        "forma-pago-credito-full": {
+            "calls": {},
+            "snapshot": {
+                "$class": "FormaPagoCredito",
+                "moneda": "USD",
+                "monto": {
+                    "$float": "1500.75"
+                },
+                "tipo": "Credito"
+            }
+        },
+        "forma-pago-credito-monto-only": {
+            "calls": {},
+            "snapshot": {
+                "$class": "FormaPagoCredito",
+                "moneda": null,
+                "monto": {
+                    "$float": "10.0"
+                },
+                "tipo": "Credito"
+            }
+        }
+    }
+}

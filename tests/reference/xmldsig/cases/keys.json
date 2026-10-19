@@ -1,0 +1,1781 @@
+{
+  "family": "keys",
+  "cases": [
+    {
+      "id": "key-3des-no-type",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc"
+      }
+    },
+    {
+      "id": "key-3des-public",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "type": "public"
+      }
+    },
+    {
+      "id": "key-3des-private",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "type": "private"
+      }
+    },
+    {
+      "id": "key-3des-bogus",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "type": "bogus"
+      }
+    },
+    {
+      "id": "key-aes128-no-type",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+      }
+    },
+    {
+      "id": "key-aes128-public",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "type": "public"
+      }
+    },
+    {
+      "id": "key-aes128-private",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "type": "private"
+      }
+    },
+    {
+      "id": "key-aes128-bogus",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "type": "bogus"
+      }
+    },
+    {
+      "id": "key-aes192-no-type",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc"
+      }
+    },
+    {
+      "id": "key-aes192-public",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "type": "public"
+      }
+    },
+    {
+      "id": "key-aes192-private",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "type": "private"
+      }
+    },
+    {
+      "id": "key-aes192-bogus",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "type": "bogus"
+      }
+    },
+    {
+      "id": "key-aes256-no-type",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc"
+      }
+    },
+    {
+      "id": "key-aes256-public",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "type": "public"
+      }
+    },
+    {
+      "id": "key-aes256-private",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "type": "private"
+      }
+    },
+    {
+      "id": "key-aes256-bogus",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "type": "bogus"
+      }
+    },
+    {
+      "id": "key-rsa15-no-type",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5"
+      }
+    },
+    {
+      "id": "key-rsa15-public",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public"
+      }
+    },
+    {
+      "id": "key-rsa15-private",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "private"
+      }
+    },
+    {
+      "id": "key-rsa15-bogus",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "bogus"
+      }
+    },
+    {
+      "id": "key-oaep-no-type",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p"
+      }
+    },
+    {
+      "id": "key-oaep-public",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "public"
+      }
+    },
+    {
+      "id": "key-oaep-private",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "private"
+      }
+    },
+    {
+      "id": "key-oaep-bogus",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "bogus"
+      }
+    },
+    {
+      "id": "key-rsa-sha1-no-type",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1"
+      }
+    },
+    {
+      "id": "key-rsa-sha1-public",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "public"
+      }
+    },
+    {
+      "id": "key-rsa-sha1-private",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private"
+      }
+    },
+    {
+      "id": "key-rsa-sha1-bogus",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "bogus"
+      }
+    },
+    {
+      "id": "key-rsa-sha256-no-type",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"
+      }
+    },
+    {
+      "id": "key-rsa-sha256-public",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "type": "public"
+      }
+    },
+    {
+      "id": "key-rsa-sha256-private",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "type": "private"
+      }
+    },
+    {
+      "id": "key-rsa-sha256-bogus",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "type": "bogus"
+      }
+    },
+    {
+      "id": "key-rsa-sha384-no-type",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384"
+      }
+    },
+    {
+      "id": "key-rsa-sha384-public",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384",
+        "type": "public"
+      }
+    },
+    {
+      "id": "key-rsa-sha384-private",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384",
+        "type": "private"
+      }
+    },
+    {
+      "id": "key-rsa-sha384-bogus",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384",
+        "type": "bogus"
+      }
+    },
+    {
+      "id": "key-rsa-sha512-no-type",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"
+      }
+    },
+    {
+      "id": "key-rsa-sha512-public",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+        "type": "public"
+      }
+    },
+    {
+      "id": "key-rsa-sha512-private",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+        "type": "private"
+      }
+    },
+    {
+      "id": "key-rsa-sha512-bogus",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+        "type": "bogus"
+      }
+    },
+    {
+      "id": "key-hmac-no-type",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#hmac-sha1"
+      }
+    },
+    {
+      "id": "key-hmac-public",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "type": "public"
+      }
+    },
+    {
+      "id": "key-hmac-private",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "type": "private"
+      }
+    },
+    {
+      "id": "key-hmac-bogus",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "type": "bogus"
+      }
+    },
+    {
+      "id": "key-dsa-no-type",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#dsa-sha1"
+      }
+    },
+    {
+      "id": "key-dsa-public",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#dsa-sha1",
+        "type": "public"
+      }
+    },
+    {
+      "id": "key-dsa-private",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#dsa-sha1",
+        "type": "private"
+      }
+    },
+    {
+      "id": "key-dsa-bogus",
+      "scenario": "key_info",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#dsa-sha1",
+        "type": "bogus"
+      }
+    },
+    {
+      "id": "key-unknown-no-type",
+      "scenario": "key_info",
+      "key": {
+        "alg": "urn:desconocido"
+      }
+    },
+    {
+      "id": "key-unknown-public",
+      "scenario": "key_info",
+      "key": {
+        "alg": "urn:desconocido",
+        "type": "public"
+      }
+    },
+    {
+      "id": "key-unknown-private",
+      "scenario": "key_info",
+      "key": {
+        "alg": "urn:desconocido",
+        "type": "private"
+      }
+    },
+    {
+      "id": "key-unknown-bogus",
+      "scenario": "key_info",
+      "key": {
+        "alg": "urn:desconocido",
+        "type": "bogus"
+      }
+    },
+    {
+      "id": "session-3des",
+      "scenario": "session_key",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "type": "private"
+      }
+    },
+    {
+      "id": "session-aes128",
+      "scenario": "session_key",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "type": "private"
+      }
+    },
+    {
+      "id": "session-aes192",
+      "scenario": "session_key",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "type": "private"
+      }
+    },
+    {
+      "id": "session-aes256",
+      "scenario": "session_key",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "type": "private"
+      }
+    },
+    {
+      "id": "session-rsa15",
+      "scenario": "session_key",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "private"
+      }
+    },
+    {
+      "id": "session-oaep",
+      "scenario": "session_key",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "private"
+      }
+    },
+    {
+      "id": "session-rsa-sha1",
+      "scenario": "session_key",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private"
+      }
+    },
+    {
+      "id": "session-rsa-sha256",
+      "scenario": "session_key",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "type": "private"
+      }
+    },
+    {
+      "id": "session-rsa-sha384",
+      "scenario": "session_key",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384",
+        "type": "private"
+      }
+    },
+    {
+      "id": "session-rsa-sha512",
+      "scenario": "session_key",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+        "type": "private"
+      }
+    },
+    {
+      "id": "session-hmac",
+      "scenario": "session_key",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "type": "private"
+      }
+    },
+    {
+      "id": "sym-decrypt-3des-zero-blocks",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUy"
+        }
+      },
+      "data": {
+        "b64": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      }
+    },
+    {
+      "id": "sym-decrypt-3des-pattern",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUy"
+        }
+      },
+      "data": {
+        "b64": "AB8+XXybutn4FzZVdJOy0fAPLk1si6rJ6AcmRWSDosE="
+      }
+    },
+    {
+      "id": "sym-decrypt-3des-not-block",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUy"
+        }
+      },
+      "data": {
+        "b64": "AAAAAAAAAAAAAAA="
+      }
+    },
+    {
+      "id": "sym-decrypt-3des-iv-only",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUy"
+        }
+      },
+      "data": {
+        "b64": "AAAAAAAAAAA="
+      }
+    },
+    {
+      "id": "sym-short-key-3des",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCU="
+        }
+      },
+      "data": {
+        "b64": "AAAAAAAAAAAAAAAAAAAAAA=="
+      }
+    },
+    {
+      "id": "sym-long-key-3des",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUyZXh0cmE="
+        }
+      },
+      "data": "texto"
+    },
+    {
+      "id": "sym-roundtrip-3des-empty",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUy"
+        }
+      },
+      "data": ""
+    },
+    {
+      "id": "sym-roundtrip-3des-block-minus",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUy"
+        }
+      },
+      "data": "xxxxxxx"
+    },
+    {
+      "id": "sym-roundtrip-3des-block",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUy"
+        }
+      },
+      "data": "xxxxxxxx"
+    },
+    {
+      "id": "sym-roundtrip-3des-unicode",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUy"
+        }
+      },
+      "data": "ñandú 😀 <xml/>"
+    },
+    {
+      "id": "sym-decrypt-aes128-zero-blocks",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9yg=="
+        }
+      },
+      "data": {
+        "b64": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      }
+    },
+    {
+      "id": "sym-decrypt-aes128-pattern",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9yg=="
+        }
+      },
+      "data": {
+        "b64": "AB8+XXybutn4FzZVdJOy0fAPLk1si6rJ6AcmRWSDosHg/x49XHuaudj3FjVUc5Kx0O8OLUxriqnI5wYlRGOCoQ=="
+      }
+    },
+    {
+      "id": "sym-decrypt-aes128-not-block",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9yg=="
+        }
+      },
+      "data": {
+        "b64": "AAAAAAAAAAAAAAAAAAAAAAAAAA=="
+      }
+    },
+    {
+      "id": "sym-decrypt-aes128-iv-only",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9yg=="
+        }
+      },
+      "data": {
+        "b64": "AAAAAAAAAAAAAAAAAAAAAA=="
+      }
+    },
+    {
+      "id": "sym-short-key-aes128",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9"
+        }
+      },
+      "data": {
+        "b64": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+      }
+    },
+    {
+      "id": "sym-long-key-aes128",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ymV4dHJh"
+        }
+      },
+      "data": "texto"
+    },
+    {
+      "id": "sym-roundtrip-aes128-empty",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9yg=="
+        }
+      },
+      "data": ""
+    },
+    {
+      "id": "sym-roundtrip-aes128-block-minus",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9yg=="
+        }
+      },
+      "data": "xxxxxxxxxxxxxxx"
+    },
+    {
+      "id": "sym-roundtrip-aes128-block",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9yg=="
+        }
+      },
+      "data": "xxxxxxxxxxxxxxxx"
+    },
+    {
+      "id": "sym-roundtrip-aes128-unicode",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9yg=="
+        }
+      },
+      "data": "ñandú 😀 <xml/>"
+    },
+    {
+      "id": "sym-decrypt-aes192-zero-blocks",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUy"
+        }
+      },
+      "data": {
+        "b64": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      }
+    },
+    {
+      "id": "sym-decrypt-aes192-pattern",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUy"
+        }
+      },
+      "data": {
+        "b64": "AB8+XXybutn4FzZVdJOy0fAPLk1si6rJ6AcmRWSDosHg/x49XHuaudj3FjVUc5Kx0O8OLUxriqnI5wYlRGOCoQ=="
+      }
+    },
+    {
+      "id": "sym-decrypt-aes192-not-block",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUy"
+        }
+      },
+      "data": {
+        "b64": "AAAAAAAAAAAAAAAAAAAAAAAAAA=="
+      }
+    },
+    {
+      "id": "sym-decrypt-aes192-iv-only",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUy"
+        }
+      },
+      "data": {
+        "b64": "AAAAAAAAAAAAAAAAAAAAAA=="
+      }
+    },
+    {
+      "id": "sym-short-key-aes192",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCU="
+        }
+      },
+      "data": {
+        "b64": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+      }
+    },
+    {
+      "id": "sym-long-key-aes192",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUyZXh0cmE="
+        }
+      },
+      "data": "texto"
+    },
+    {
+      "id": "sym-roundtrip-aes192-empty",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUy"
+        }
+      },
+      "data": ""
+    },
+    {
+      "id": "sym-roundtrip-aes192-block-minus",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUy"
+        }
+      },
+      "data": "xxxxxxxxxxxxxxx"
+    },
+    {
+      "id": "sym-roundtrip-aes192-block",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUy"
+        }
+      },
+      "data": "xxxxxxxxxxxxxxxx"
+    },
+    {
+      "id": "sym-roundtrip-aes192-unicode",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUy"
+        }
+      },
+      "data": "ñandú 😀 <xml/>"
+    },
+    {
+      "id": "sym-decrypt-aes256-zero-blocks",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUyP0xZZnOAjZo="
+        }
+      },
+      "data": {
+        "b64": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      }
+    },
+    {
+      "id": "sym-decrypt-aes256-pattern",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUyP0xZZnOAjZo="
+        }
+      },
+      "data": {
+        "b64": "AB8+XXybutn4FzZVdJOy0fAPLk1si6rJ6AcmRWSDosHg/x49XHuaudj3FjVUc5Kx0O8OLUxriqnI5wYlRGOCoQ=="
+      }
+    },
+    {
+      "id": "sym-decrypt-aes256-not-block",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUyP0xZZnOAjZo="
+        }
+      },
+      "data": {
+        "b64": "AAAAAAAAAAAAAAAAAAAAAAAAAA=="
+      }
+    },
+    {
+      "id": "sym-decrypt-aes256-iv-only",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUyP0xZZnOAjZo="
+        }
+      },
+      "data": {
+        "b64": "AAAAAAAAAAAAAAAAAAAAAA=="
+      }
+    },
+    {
+      "id": "sym-short-key-aes256",
+      "scenario": "symmetric_decrypt",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUyP0xZZnOAjQ=="
+        }
+      },
+      "data": {
+        "b64": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+      }
+    },
+    {
+      "id": "sym-long-key-aes256",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUyP0xZZnOAjZpleHRyYQ=="
+        }
+      },
+      "data": "texto"
+    },
+    {
+      "id": "sym-roundtrip-aes256-empty",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUyP0xZZnOAjZo="
+        }
+      },
+      "data": ""
+    },
+    {
+      "id": "sym-roundtrip-aes256-block-minus",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUyP0xZZnOAjZo="
+        }
+      },
+      "data": "xxxxxxxxxxxxxxx"
+    },
+    {
+      "id": "sym-roundtrip-aes256-block",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUyP0xZZnOAjZo="
+        }
+      },
+      "data": "xxxxxxxxxxxxxxxx"
+    },
+    {
+      "id": "sym-roundtrip-aes256-unicode",
+      "scenario": "symmetric_roundtrip",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
+        "load": {
+          "b64": "BxQhLjtIVWJvfImWo7C9ytfk8f4LGCUyP0xZZnOAjZo="
+        }
+      },
+      "data": "ñandú 😀 <xml/>"
+    },
+    {
+      "id": "hmac-sign",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "load": "clave-hmac"
+      },
+      "data": "datos firmados"
+    },
+    {
+      "id": "hmac-sign-empty",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "load": "clave-hmac"
+      },
+      "data": ""
+    },
+    {
+      "id": "hmac-verify-other-data",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "load": "clave-hmac"
+      },
+      "data": "datos",
+      "verify_data": "otros"
+    },
+    {
+      "id": "hmac-verify-other-key",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "load": "clave-hmac"
+      },
+      "data": "datos",
+      "verify_key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#hmac-sha1",
+        "load": "otra"
+      }
+    },
+    {
+      "id": "rsa-sign-rsa-sha1",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "verify_key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "data": "datos firmados"
+    },
+    {
+      "id": "rsa-sign-rsa-sha1-pubkey",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "verify_key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "pub.pem"
+        }
+      },
+      "data": "d"
+    },
+    {
+      "id": "rsa-sign-rsa-sha1-wrong-key",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "verify_key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "public",
+        "load": {
+          "key": "b",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "data": "d"
+    },
+    {
+      "id": "rsa-sign-rsa-sha1-other-data",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "verify_key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "data": "d",
+      "verify_data": "e"
+    },
+    {
+      "id": "rsa-sign-rsa-sha256",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "verify_key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "data": "datos firmados"
+    },
+    {
+      "id": "rsa-sign-rsa-sha256-pubkey",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "verify_key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "pub.pem"
+        }
+      },
+      "data": "d"
+    },
+    {
+      "id": "rsa-sign-rsa-sha256-wrong-key",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "verify_key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "type": "public",
+        "load": {
+          "key": "b",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "data": "d"
+    },
+    {
+      "id": "rsa-sign-rsa-sha256-other-data",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "verify_key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "data": "d",
+      "verify_data": "e"
+    },
+    {
+      "id": "rsa-sign-rsa-sha384",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "verify_key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "data": "datos firmados"
+    },
+    {
+      "id": "rsa-sign-rsa-sha384-pubkey",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "verify_key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "pub.pem"
+        }
+      },
+      "data": "d"
+    },
+    {
+      "id": "rsa-sign-rsa-sha384-wrong-key",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "verify_key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384",
+        "type": "public",
+        "load": {
+          "key": "b",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "data": "d"
+    },
+    {
+      "id": "rsa-sign-rsa-sha384-other-data",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "verify_key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "data": "d",
+      "verify_data": "e"
+    },
+    {
+      "id": "rsa-sign-rsa-sha512",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "verify_key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "data": "datos firmados"
+    },
+    {
+      "id": "rsa-sign-rsa-sha512-pubkey",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "verify_key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "pub.pem"
+        }
+      },
+      "data": "d"
+    },
+    {
+      "id": "rsa-sign-rsa-sha512-wrong-key",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "verify_key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+        "type": "public",
+        "load": {
+          "key": "b",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "data": "d"
+    },
+    {
+      "id": "rsa-sign-rsa-sha512-other-data",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "verify_key": {
+        "alg": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "data": "d",
+      "verify_data": "e"
+    },
+    {
+      "id": "rsa-sign-pkcs1-key",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "rsa.pem"
+        }
+      },
+      "verify_key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "data": "d"
+    },
+    {
+      "id": "rsa-sign-encrypted-key",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "enc.pem"
+        },
+        "passphrase": "clave-sintetica-de-prueba"
+      },
+      "verify_key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "data": "d"
+    },
+    {
+      "id": "rsa-sign-encrypted-key-wrong-pass",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "enc.pem"
+        },
+        "passphrase": "otra"
+      },
+      "data": "d",
+      "openssl_detail_random": true
+    },
+    {
+      "id": "rsa-sign-invalid-key",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": "no es una clave"
+      },
+      "data": "d"
+    },
+    {
+      "id": "rsa-public-invalid",
+      "scenario": "key_x509",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "public",
+        "load": "no es una clave"
+      }
+    },
+    {
+      "id": "rsa-sign-with-public-key",
+      "scenario": "sign_data",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "pub.pem"
+        }
+      },
+      "data": "d"
+    },
+    {
+      "id": "rsa-rsa15-pub-priv-short",
+      "scenario": "rsa_roundtrip",
+      "encrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "decrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "data": "secreto"
+    },
+    {
+      "id": "rsa-rsa15-pub-priv-session",
+      "scenario": "rsa_roundtrip",
+      "encrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "decrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "data": {
+        "b64": "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8="
+      }
+    },
+    {
+      "id": "rsa-rsa15-pub-priv-empty",
+      "scenario": "rsa_roundtrip",
+      "encrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "decrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "data": ""
+    },
+    {
+      "id": "rsa-rsa15-priv-pub",
+      "scenario": "rsa_roundtrip",
+      "encrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "decrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "data": "firmado en bruto"
+    },
+    {
+      "id": "rsa-rsa15-wrong-key",
+      "scenario": "rsa_roundtrip",
+      "encrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "decrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "private",
+        "load": {
+          "key": "b",
+          "suffix": "pem"
+        }
+      },
+      "data": "x",
+      "outcome_only": true
+    },
+    {
+      "id": "rsa-rsa15-too-long",
+      "scenario": "rsa_roundtrip",
+      "encrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "decrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "data": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    {
+      "id": "rsa-oaep-pub-priv-short",
+      "scenario": "rsa_roundtrip",
+      "encrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "decrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "data": "secreto"
+    },
+    {
+      "id": "rsa-oaep-pub-priv-session",
+      "scenario": "rsa_roundtrip",
+      "encrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "decrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "data": {
+        "b64": "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8="
+      }
+    },
+    {
+      "id": "rsa-oaep-pub-priv-empty",
+      "scenario": "rsa_roundtrip",
+      "encrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "decrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "data": ""
+    },
+    {
+      "id": "rsa-oaep-priv-pub",
+      "scenario": "rsa_roundtrip",
+      "encrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "decrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "data": "firmado en bruto"
+    },
+    {
+      "id": "rsa-oaep-wrong-key",
+      "scenario": "rsa_roundtrip",
+      "encrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "decrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "private",
+        "load": {
+          "key": "b",
+          "suffix": "pem"
+        }
+      },
+      "data": "x",
+      "outcome_only": true
+    },
+    {
+      "id": "rsa-oaep-too-long",
+      "scenario": "rsa_roundtrip",
+      "encrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "decrypt_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      },
+      "data": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    {
+      "id": "key-x509-cert",
+      "scenario": "key_x509",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      }
+    },
+    {
+      "id": "key-x509-combined-pem",
+      "scenario": "key_x509",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        },
+        "is_cert": true
+      }
+    },
+    {
+      "id": "key-x509-not-cert",
+      "scenario": "key_x509",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "pub.pem"
+        }
+      }
+    },
+    {
+      "id": "key-x509-private",
+      "scenario": "key_x509",
+      "key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "private",
+        "load": {
+          "key": "a",
+          "suffix": "pem"
+        }
+      }
+    }
+  ]
+}

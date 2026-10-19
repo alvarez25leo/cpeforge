@@ -1,0 +1,4 @@
+# Las pruebas pueden abortar con unwrap/expect/panic; el código de biblioteca no.
+allow-unwrap-in-tests = true
+allow-expect-in-tests = true
+allow-panic-in-tests = true

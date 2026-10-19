@@ -1,0 +1,249 @@
+{
+    "reference_version": "8.4.17",
+    "timezone_db": "2025.2",
+    "libxml": "2.15.1",
+    "results": {
+        "xml-signed": {
+            "string": {
+                "hash": "SINTETICO+Digest/1="
+            },
+            "file": {
+                "hash": "SINTETICO+Digest/1="
+            },
+            "doc": {
+                "hash": "SINTETICO+Digest/1="
+            }
+        },
+        "xml-two-extensions": {
+            "string": {
+                "hash": "ULTIMA="
+            },
+            "file": {
+                "hash": "ULTIMA="
+            },
+            "doc": {
+                "hash": "ULTIMA="
+            }
+        },
+        "xml-last-without-signature": {
+            "string": {
+                "hash": "PRIMERA="
+            },
+            "file": {
+                "hash": "PRIMERA="
+            },
+            "doc": {
+                "hash": "PRIMERA="
+            }
+        },
+        "xml-both-signed": {
+            "string": {
+                "hash": "SEGUNDA="
+            },
+            "file": {
+                "hash": "SEGUNDA="
+            },
+            "doc": {
+                "hash": "SEGUNDA="
+            }
+        },
+        "xml-multiple-references": {
+            "string": {
+                "hash": "REF"
+            },
+            "file": {
+                "hash": "REF"
+            },
+            "doc": {
+                "hash": "REF"
+            }
+        },
+        "xml-other-prefixes": {
+            "string": {
+                "hash": "PREFIJOS="
+            },
+            "file": {
+                "hash": "PREFIJOS="
+            },
+            "doc": {
+                "hash": "PREFIJOS="
+            }
+        },
+        "xml-wrong-namespace": {
+            "string": {
+                "hash": ""
+            },
+            "file": {
+                "hash": ""
+            },
+            "doc": {
+                "hash": ""
+            }
+        },
+        "xml-no-extensions": {
+            "string": {
+                "hash": ""
+            },
+            "file": {
+                "hash": ""
+            },
+            "doc": {
+                "hash": ""
+            }
+        },
+        "xml-empty-extensions": {
+            "string": {
+                "hash": ""
+            },
+            "file": {
+                "hash": ""
+            },
+            "doc": {
+                "hash": ""
+            }
+        },
+        "xml-html": {
+            "string": {
+                "hash": ""
+            },
+            "file": {
+                "hash": ""
+            },
+            "doc": {
+                "hash": ""
+            }
+        },
+        "xml-empty-digest": {
+            "string": {
+                "hash": ""
+            },
+            "file": {
+                "hash": ""
+            },
+            "doc": {
+                "hash": ""
+            }
+        },
+        "xml-whitespace-digest": {
+            "string": {
+                "hash": "\n  ESPACIOS=\n  "
+            },
+            "file": {
+                "hash": "\n  ESPACIOS=\n  "
+            },
+            "doc": {
+                "hash": "\n  ESPACIOS=\n  "
+            }
+        },
+        "xml-cdata-digest": {
+            "string": {
+                "hash": "CDATA="
+            },
+            "file": {
+                "hash": "CDATA="
+            },
+            "doc": {
+                "hash": "CDATA="
+            }
+        },
+        "xml-nested-digest": {
+            "string": {
+                "hash": "ABC"
+            },
+            "file": {
+                "hash": "ABC"
+            },
+            "doc": {
+                "hash": "ABC"
+            }
+        },
+        "xml-summary-root": {
+            "string": {
+                "hash": "RESUMEN="
+            },
+            "file": {
+                "hash": "RESUMEN="
+            },
+            "doc": {
+                "hash": "RESUMEN="
+            }
+        },
+        "xml-latin1": {
+            "string": {
+                "hash": "LATIN1="
+            },
+            "file": {
+                "hash": "LATIN1="
+            },
+            "doc": {
+                "hash": "LATIN1="
+            }
+        },
+        "xml-malformed": {
+            "string": {
+                "hash": ""
+            },
+            "file": {
+                "hash": ""
+            },
+            "doc": {
+                "hash": ""
+            }
+        },
+        "xml-empty": {
+            "string": {
+                "error": {
+                    "class": "ValueError",
+                    "message": "DOMDocument::loadXML(): Argument #1 ($source) must not be empty"
+                }
+            },
+            "file": {
+                "hash": ""
+            },
+            "doc": {
+                "error": {
+                    "class": "ValueError",
+                    "message": "DOMDocument::loadXML(): Argument #1 ($source) must not be empty"
+                }
+            }
+        },
+        "xml-dtd-entity": {
+            "string": {
+                "hash": "ENTIDAD="
+            },
+            "file": {
+                "hash": "ENTIDAD="
+            },
+            "doc": {
+                "hash": "ENTIDAD="
+            }
+        },
+        "xml-dtd-external": {
+            "string": {
+                "hash": "EXTERNA="
+            },
+            "file": {
+                "hash": "EXTERNA="
+            },
+            "doc": {
+                "hash": "EXTERNA="
+            }
+        },
+        "xml-deep": {
+            "string": {
+                "hash": ""
+            },
+            "file": {
+                "hash": ""
+            },
+            "doc": {
+                "hash": ""
+            }
+        },
+        "xml-missing-file": {
+            "file": {
+                "hash": ""
+            }
+        }
+    }
+}

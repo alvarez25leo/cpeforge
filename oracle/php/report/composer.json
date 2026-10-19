@@ -1,0 +1,20 @@
+{
+    "name": "cpeforge/php-oracle-report",
+    "description": "Dependencias fijadas del oráculo de greenter/report v5.3.0: las mismas versiones de Twig, Bacon QR y sus dependencias que resolvió target/reference/v5.3.0-suite/composer.lock. greenter/report y greenter/core se cargan desde la referencia fijada (target/reference/v5.3.0).",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.1",
+        "twig/twig": "3.30.0",
+        "bacon/bacon-qr-code": "3.1.1",
+        "dasprid/enum": "1.0.7",
+        "symfony/polyfill-mbstring": "1.43.0",
+        "symfony/polyfill-ctype": "1.37.0",
+        "symfony/deprecation-contracts": "3.7.1"
+    },
+    "config": {
+        "vendor-dir": "../../../target/php-report-vendor",
+        "sort-packages": true,
+        "platform-check": false
+    }
+}

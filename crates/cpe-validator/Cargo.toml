@@ -1,0 +1,49 @@
+[package]
+name = "cpeforge-cpe-validator"
+version = "0.1.0"
+description = "Validación de CPE SUNAT con hojas XSL (XSLT 1.0 con libxslt) y perfil seguro."
+readme = "README.md"
+keywords = ["sunat", "peru", "xslt", "cpe", "validation"]
+categories = ["text-processing"]
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+build = "build.rs"
+# Las pruebas dependen de los fixtures del workspace (tests/reference); no se publican.
+exclude = ["tests/"]
+
+[dependencies]
+pcre2-sys.workspace = true
+
+[build-dependencies]
+cc.workspace = true
+pkg-config.workspace = true
+
+[dev-dependencies]
+cpeforge-core = { workspace = true, features = ["serde"] }
+cpeforge-xml = { path = "../xml", version = "0.1.0" }
+cpeforge-xml-parser = { path = "../xml-parser", version = "0.1.0" }
+serde_json.workspace = true
+
+[[example]]
+name = "validate_rules"
+
+# Mismas reglas que [workspace.lints], salvo `unsafe_code`: el crate necesita
+# FFI con libxml2/libxslt/PCRE2. Se deniega en todo el crate y solo
+# src/ffi.rs lo permite (#![allow(unsafe_code)]) con justificación por bloque.
+[lints.rust]
+unsafe_code = "deny"
+missing_docs = "warn"
+unreachable_pub = "warn"
+
+[lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+float_arithmetic = "warn"
+dbg_macro = "deny"
+todo = "deny"
+unimplemented = "deny"
+undocumented_unsafe_blocks = "deny"

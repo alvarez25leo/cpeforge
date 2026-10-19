@@ -1,0 +1,43 @@
+{
+    "reference_version": "8.4.17",
+    "timezone_db": "2025.2",
+    "libxml": "2.15.1",
+    "results": {
+        "resolver-invoice": {
+            "template": "invoice.html.twig"
+        },
+        "resolver-note": {
+            "template": "invoice.html.twig"
+        },
+        "resolver-retention": {
+            "template": "retention.html.twig"
+        },
+        "resolver-perception": {
+            "template": "perception.html.twig"
+        },
+        "resolver-despatch": {
+            "template": "despatch.html.twig"
+        },
+        "resolver-summary": {
+            "template": "summary.html.twig"
+        },
+        "resolver-voided": {
+            "template": "voided.html.twig"
+        },
+        "resolver-reversion": {
+            "template": "voided.html.twig"
+        },
+        "resolver-basesale": {
+            "error": {
+                "class": "CPEForge\\Report\\Resolver\\InvalidDocumentException",
+                "message": "Not found template for CPEForge\\Model\\Sale\\BaseSale"
+            }
+        },
+        "resolver-receipt": {
+            "error": {
+                "class": "CPEForge\\Report\\Resolver\\InvalidDocumentException",
+                "message": "Not found template for CPEForge\\Model\\Sale\\Receipt"
+            }
+        }
+    }
+}

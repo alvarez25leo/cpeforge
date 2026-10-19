@@ -1,0 +1,132 @@
+{
+  "family": "invalid",
+  "cases": [
+    {
+      "id": "invalid-string-into-float",
+      "description": "Texto en un importe",
+      "input": {
+        "$class": "Charge",
+        "monto": "abc"
+      }
+    },
+    {
+      "id": "invalid-number-into-string",
+      "description": "Número en un campo de texto",
+      "input": {
+        "$class": "Legend",
+        "code": 1000
+      }
+    },
+    {
+      "id": "invalid-bool-into-string",
+      "description": "Booleano en un campo de texto",
+      "input": {
+        "$class": "Legend",
+        "value": true
+      }
+    },
+    {
+      "id": "invalid-object-type",
+      "description": "Objeto vacío de otra clase",
+      "input": {
+        "$class": "Invoice",
+        "company": {
+          "$class": "Address"
+        }
+      }
+    },
+    {
+      "id": "invalid-object-type-with-fields",
+      "description": "Objeto de otra clase con datos",
+      "input": {
+        "$class": "Invoice",
+        "company": {
+          "$class": "Address",
+          "ubigueo": "150101"
+        }
+      }
+    },
+    {
+      "id": "invalid-string-into-date-nested",
+      "description": "Texto en una fecha anidada",
+      "input": {
+        "$class": "Cuota",
+        "fechaPago": "2024-01-01"
+      }
+    },
+    {
+      "id": "invalid-string-into-list-nested",
+      "description": "Texto en una lista de un modelo simple",
+      "input": {
+        "$class": "Summary",
+        "details": "x"
+      }
+    },
+    {
+      "id": "invalid-array-into-string",
+      "description": "Lista en un campo de texto",
+      "input": {
+        "$class": "Legend",
+        "value": [
+          "a"
+        ]
+      }
+    },
+    {
+      "id": "invalid-string-into-int",
+      "description": "Texto en un entero",
+      "input": {
+        "$class": "Shipment",
+        "numBultos": "3"
+      }
+    },
+    {
+      "id": "invalid-float-into-int",
+      "description": "Decimal en un entero",
+      "input": {
+        "$class": "Shipment",
+        "numBultos": {
+          "$decimal": "3.5"
+        }
+      }
+    },
+    {
+      "id": "invalid-string-into-bool",
+      "description": "Texto en un booleano",
+      "input": {
+        "$class": "Shipment",
+        "indTransbordo": "true"
+      }
+    },
+    {
+      "id": "invalid-string-into-date",
+      "description": "Texto en una fecha",
+      "input": {
+        "$class": "Invoice",
+        "fechaEmision": "2024-01-01"
+      }
+    },
+    {
+      "id": "invalid-string-into-list",
+      "description": "Texto en una lista",
+      "input": {
+        "$class": "Invoice",
+        "details": "x"
+      }
+    },
+    {
+      "id": "invalid-direction-missing-args",
+      "description": "Direction sin argumentos",
+      "input": {
+        "$class": "Direction"
+      }
+    },
+    {
+      "id": "invalid-token-missing-args",
+      "description": "BasicToken sin argumentos",
+      "input": {
+        "$class": "BasicToken"
+      }
+    }
+  ]
+}

@@ -1,0 +1,359 @@
+{
+  "consulta-cod-bool": [
+    "consultarEnvio: respuesta.codRespuesta: se esperaba string"
+  ],
+  "consulta-cod-float": [
+    "consultarEnvio: respuesta.codRespuesta: se esperaba string"
+  ],
+  "consulta-cod-int-0": [
+    "consultarEnvio: respuesta.codRespuesta: se esperaba string"
+  ],
+  "consulta-cod-int-98": [
+    "consultarEnvio: respuesta.codRespuesta: se esperaba string"
+  ],
+  "consulta-empty-body-sync": [
+    "consultarEnvio: respuesta no es JSON"
+  ],
+  "consulta-error-422": [
+    "consultarEnvio: respuesta.errors[1].cod: se esperaba string"
+  ],
+  "consulta-error-422-errors-object": [
+    "consultarEnvio: respuesta.errors: se esperaba arreglo"
+  ],
+  "consulta-error-json-string": [
+    "consultarEnvio: respuesta.error: se esperaba objeto"
+  ],
+  "consulta-error-list": [
+    "consultarEnvio: respuesta.error: se esperaba objeto"
+  ],
+  "consulta-error-null": [
+    "consultarEnvio: respuesta.error: null no declarado"
+  ],
+  "consulta-error-text": [
+    "consultarEnvio: respuesta.error: se esperaba objeto"
+  ],
+  "consulta-ind-int": [
+    "consultarEnvio: respuesta.indCdrGenerado: se esperaba string"
+  ],
+  "consulta-num-error-int": [
+    "consultarEnvio: respuesta.error.numError: se esperaba string"
+  ],
+  "consulta-redirect-cross-host": [
+    "consultarEnvio: estado 302 no declarado"
+  ],
+  "envio-async-422": [
+    "enviarCpe: respuesta.errors[1].cod: se esperaba string"
+  ],
+  "envio-content-type-text": [
+    "enviarCpe: Content-Type 'text/plain' (se declara application/json)"
+  ],
+  "envio-error-401-http_info": [
+    "enviarCpe: estado 401 no declarado"
+  ],
+  "envio-error-401-sync": [
+    "enviarCpe: estado 401 no declarado"
+  ],
+  "envio-error-422-empty-http_info": [
+    "enviarCpe: respuesta no es JSON"
+  ],
+  "envio-error-422-empty-sync": [
+    "enviarCpe: respuesta no es JSON"
+  ],
+  "envio-error-422-errors-object-http_info": [
+    "enviarCpe: respuesta.errors: se esperaba arreglo"
+  ],
+  "envio-error-422-errors-object-sync": [
+    "enviarCpe: respuesta.errors: se esperaba arreglo"
+  ],
+  "envio-error-422-errors-string-http_info": [
+    "enviarCpe: respuesta.errors: se esperaba arreglo"
+  ],
+  "envio-error-422-errors-string-sync": [
+    "enviarCpe: respuesta.errors: se esperaba arreglo"
+  ],
+  "envio-error-422-http_info": [
+    "enviarCpe: respuesta.errors[1].cod: se esperaba string"
+  ],
+  "envio-error-422-malformed-http_info": [
+    "enviarCpe: respuesta no es JSON"
+  ],
+  "envio-error-422-malformed-sync": [
+    "enviarCpe: respuesta no es JSON"
+  ],
+  "envio-error-422-msg-object-http_info": [
+    "enviarCpe: respuesta.msg: se esperaba string",
+    "enviarCpe: respuesta.errors: se esperaba arreglo"
+  ],
+  "envio-error-422-msg-object-sync": [
+    "enviarCpe: respuesta.msg: se esperaba string",
+    "enviarCpe: respuesta.errors: se esperaba arreglo"
+  ],
+  "envio-error-422-null-item-http_info": [
+    "enviarCpe: respuesta.errors[0]: se esperaba objeto"
+  ],
+  "envio-error-422-null-item-sync": [
+    "enviarCpe: respuesta.errors[0]: se esperaba objeto"
+  ],
+  "envio-error-422-sync": [
+    "enviarCpe: respuesta.errors[1].cod: se esperaba string"
+  ],
+  "envio-error-500-numeric-http_info": [
+    "enviarCpe: respuesta.cod: se esperaba string",
+    "enviarCpe: respuesta.msg: null no declarado"
+  ],
+  "envio-error-500-numeric-sync": [
+    "enviarCpe: respuesta.cod: se esperaba string",
+    "enviarCpe: respuesta.msg: null no declarado"
+  ],
+  "envio-error-503-text-http_info": [
+    "enviarCpe: estado 503 no declarado"
+  ],
+  "envio-error-503-text-sync": [
+    "enviarCpe: estado 503 no declarado"
+  ],
+  "envio-fecha-array": [
+    "enviarCpe: respuesta.fecRecepcion: se esperaba string"
+  ],
+  "envio-fecha-compact-offset": [
+    "enviarCpe: respuesta.fecRecepcion: no es date-time RFC 3339"
+  ],
+  "envio-fecha-date-only": [
+    "enviarCpe: respuesta.fecRecepcion: no es date-time RFC 3339"
+  ],
+  "envio-fecha-empty": [
+    "enviarCpe: respuesta.fecRecepcion: no es date-time RFC 3339"
+  ],
+  "envio-fecha-invalid": [
+    "enviarCpe: respuesta.fecRecepcion: no es date-time RFC 3339"
+  ],
+  "envio-fecha-no-offset": [
+    "enviarCpe: respuesta.fecRecepcion: no es date-time RFC 3339"
+  ],
+  "envio-fecha-number": [
+    "enviarCpe: respuesta.fecRecepcion: se esperaba string"
+  ],
+  "envio-fecha-relative": [
+    "enviarCpe: respuesta.fecRecepcion: no es date-time RFC 3339"
+  ],
+  "envio-fecha-space": [
+    "enviarCpe: respuesta.fecRecepcion: no es date-time RFC 3339"
+  ],
+  "envio-fecha-zero": [
+    "enviarCpe: respuesta.fecRecepcion: no es date-time RFC 3339"
+  ],
+  "envio-filename-dotdot": [
+    "ruta no declarada: POST /contribuyente/gem/"
+  ],
+  "envio-filename-empty": [
+    "enviarCpe: parámetro de ruta filename vacío"
+  ],
+  "envio-malformed-sync": [
+    "enviarCpe: respuesta no es JSON"
+  ],
+  "envio-no-document": [
+    "enviarCpe: cuerpo vacío"
+  ],
+  "envio-no-token": [
+    "enviarCpe: falta Authorization: Bearer",
+    "enviarCpe: estado 401 no declarado"
+  ],
+  "envio-ticket-number": [
+    "enviarCpe: respuesta.numTicket: se esperaba string"
+  ],
+  "envio-token-zero": [
+    "enviarCpe: falta Authorization: Bearer"
+  ],
+  "token-201": [
+    "getToken: estado 201 no declarado"
+  ],
+  "token-204-http-info": [
+    "getToken: estado 204 no declarado"
+  ],
+  "token-204-sync": [
+    "getToken: estado 204 no declarado"
+  ],
+  "token-300": [
+    "getToken: estado 300 no declarado"
+  ],
+  "token-async-401": [
+    "getToken: estado 401 no declarado"
+  ],
+  "token-async-http-info-500": [
+    "getToken: estado 500 no declarado"
+  ],
+  "token-body-empty-http_info": [
+    "getToken: respuesta no es JSON"
+  ],
+  "token-body-empty-sync": [
+    "getToken: respuesta no es JSON"
+  ],
+  "token-body-json-array-http_info": [
+    "getToken: respuesta: se esperaba objeto"
+  ],
+  "token-body-json-array-sync": [
+    "getToken: respuesta: se esperaba objeto"
+  ],
+  "token-body-json-bom-http_info": [
+    "getToken: respuesta no es JSON"
+  ],
+  "token-body-json-bom-sync": [
+    "getToken: respuesta no es JSON"
+  ],
+  "token-body-json-list-http_info": [
+    "getToken: respuesta: se esperaba objeto"
+  ],
+  "token-body-json-list-sync": [
+    "getToken: respuesta: se esperaba objeto"
+  ],
+  "token-body-json-null-http_info": [
+    "getToken: respuesta: se esperaba objeto"
+  ],
+  "token-body-json-null-sync": [
+    "getToken: respuesta: se esperaba objeto"
+  ],
+  "token-body-json-number-http_info": [
+    "getToken: respuesta: se esperaba objeto"
+  ],
+  "token-body-json-number-sync": [
+    "getToken: respuesta: se esperaba objeto"
+  ],
+  "token-body-json-string-http_info": [
+    "getToken: respuesta: se esperaba objeto"
+  ],
+  "token-body-json-string-sync": [
+    "getToken: respuesta: se esperaba objeto"
+  ],
+  "token-body-malformed-http_info": [
+    "getToken: respuesta no es JSON"
+  ],
+  "token-body-malformed-sync": [
+    "getToken: respuesta no es JSON"
+  ],
+  "token-content-type-empty": [
+    "getToken: Content-Type 'application/json' (se declara application/x-www-form-urlencoded)",
+    "getToken: formulario inválido: bad query field: '{\"grant_type\":\"password\",\"scope\":\"https:\\\\/\\\\/api-cpe.sunat.gob.pe\",\"client_id\":\"cliente-ficticio\",\"client_secret\":\"<secreto>\",\"username\":\"20000000001USUARIOX\",\"password\":\"<secreto>\"}'",
+    "getToken: form.grant_type: requerido",
+    "getToken: form.scope: requerido",
+    "getToken: form.client_id: requerido",
+    "getToken: form.client_secret: requerido",
+    "getToken: form.username: requerido",
+    "getToken: form.password: requerido"
+  ],
+  "token-content-type-json": [
+    "getToken: Content-Type 'application/json' (se declara application/x-www-form-urlencoded)",
+    "getToken: formulario inválido: bad query field: '{\"grant_type\":\"password\",\"scope\":\"https:\\\\/\\\\/api-cpe.sunat.gob.pe\",\"client_id\":\"cliente-ficticio\",\"client_secret\":\"<secreto>\",\"username\":\"20000000001USUARIOX\",\"password\":\"<secreto>\"}'",
+    "getToken: form.grant_type: requerido",
+    "getToken: form.scope: requerido",
+    "getToken: form.client_id: requerido",
+    "getToken: form.client_secret: requerido",
+    "getToken: form.username: requerido",
+    "getToken: form.password: requerido"
+  ],
+  "token-content-type-text": [
+    "getToken: Content-Type 'text/plain' (se declara application/x-www-form-urlencoded)"
+  ],
+  "token-empty-strings": [
+    "getToken: parámetro de ruta client_id vacío"
+  ],
+  "token-error-400-120-http_info": [
+    "getToken: estado 400 no declarado"
+  ],
+  "token-error-400-120-sync": [
+    "getToken: estado 400 no declarado"
+  ],
+  "token-error-400-long-http_info": [
+    "getToken: estado 400 no declarado"
+  ],
+  "token-error-400-long-sync": [
+    "getToken: estado 400 no declarado"
+  ],
+  "token-error-401-http_info": [
+    "getToken: estado 401 no declarado"
+  ],
+  "token-error-401-reason-http_info": [
+    "getToken: estado 401 no declarado"
+  ],
+  "token-error-401-reason-sync": [
+    "getToken: estado 401 no declarado"
+  ],
+  "token-error-401-sync": [
+    "getToken: estado 401 no declarado"
+  ],
+  "token-error-403-empty-http_info": [
+    "getToken: estado 403 no declarado"
+  ],
+  "token-error-403-empty-sync": [
+    "getToken: estado 403 no declarado"
+  ],
+  "token-error-404-html-http_info": [
+    "getToken: estado 404 no declarado"
+  ],
+  "token-error-404-html-sync": [
+    "getToken: estado 404 no declarado"
+  ],
+  "token-error-418-http_info": [
+    "getToken: estado 418 no declarado"
+  ],
+  "token-error-418-sync": [
+    "getToken: estado 418 no declarado"
+  ],
+  "token-error-500-control-http_info": [
+    "getToken: estado 500 no declarado"
+  ],
+  "token-error-500-control-sync": [
+    "getToken: estado 500 no declarado"
+  ],
+  "token-error-500-cut-utf8-http_info": [
+    "getToken: estado 500 no declarado"
+  ],
+  "token-error-500-cut-utf8-sync": [
+    "getToken: estado 500 no declarado"
+  ],
+  "token-error-599-no-reason-http_info": [
+    "getToken: estado 599 no declarado"
+  ],
+  "token-error-599-no-reason-sync": [
+    "getToken: estado 599 no declarado"
+  ],
+  "token-redirect-same-host": [
+    "getToken: estado 302 no declarado"
+  ],
+  "token-values-big-int": [
+    "getToken: respuesta.expires_in: fuera de int32"
+  ],
+  "token-values-expires-array": [
+    "getToken: respuesta.expires_in: se esperaba integer"
+  ],
+  "token-values-expires-bool": [
+    "getToken: respuesta.expires_in: se esperaba integer"
+  ],
+  "token-values-expires-float": [
+    "getToken: respuesta.expires_in: se esperaba integer"
+  ],
+  "token-values-expires-null": [
+    "getToken: respuesta.expires_in: null no declarado"
+  ],
+  "token-values-expires-prefix": [
+    "getToken: respuesta.expires_in: se esperaba integer"
+  ],
+  "token-values-expires-string": [
+    "getToken: respuesta.expires_in: se esperaba integer"
+  ],
+  "token-values-expires-text": [
+    "getToken: respuesta.expires_in: se esperaba integer"
+  ],
+  "token-values-token-array": [
+    "getToken: respuesta.access_token: se esperaba string"
+  ],
+  "token-values-token-bool": [
+    "getToken: respuesta.access_token: se esperaba string",
+    "getToken: respuesta.token_type: se esperaba string"
+  ],
+  "token-values-token-number": [
+    "getToken: respuesta.access_token: se esperaba string",
+    "getToken: respuesta.token_type: se esperaba string"
+  ],
+  "token-values-token-object": [
+    "getToken: respuesta.access_token: se esperaba string"
+  ]
+}

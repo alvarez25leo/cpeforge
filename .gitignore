@@ -1,0 +1,29 @@
+# Copia local del proyecto PHP para investigación y pruebas (repositorio Git
+# independiente; la referencia fijada se clona en target/ por los scripts).
+/greenter-php/
+# Artefactos de Cargo, referencia PHP aislada y herramientas locales.
+/target/
+# Dependencias PHP del oráculo (se instalan con composer desde el lock).
+/oracle/php/vendor/
+/oracle/php/*/vendor/
+# Material efímero y salidas locales de los gates: nunca se versionan.
+*.pem
+*.key
+*.pfx
+*.p12
+*.log
+.phpunit.result.cache
+__pycache__/
+# Sistema operativo y editores.
+.DS_Store
+.idea/
+.vscode/
+.claude/settings.local.json
+# Credenciales y certificados locales de los ejemplos: nunca se versionan.
+/cert/
+# Ejemplos: dependencias y salidas locales.
+/example/php/vendor/
+/example/php/out/
+/example/rust/target/
+/example/rust/out/
+/example/benchmark.md

@@ -1,0 +1,41 @@
+[package]
+name = "cpeforge-xml-parser"
+version = "0.1.0"
+description = "Lectura de comprobantes electrónicos SUNAT (UBL) a modelos de cpeforge-core, con perfil XML seguro."
+readme = "README.md"
+keywords = ["sunat", "peru", "ubl", "cpe", "xml"]
+categories = ["parser-implementations"]
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+# Las pruebas dependen de los fixtures del workspace (tests/reference); no se publican.
+exclude = ["tests/"]
+
+[dependencies]
+cpeforge-core.workspace = true
+cpeforge-xml-limits.workspace = true
+jiff.workspace = true
+roxmltree.workspace = true
+rust_decimal.workspace = true
+
+[dev-dependencies]
+cpeforge-core = { workspace = true, features = ["serde"] }
+cpeforge-xml = { path = "../xml", version = "0.1.0" }
+base64.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+
+[[bench]]
+name = "parse"
+harness = false
+
+[[example]]
+name = "parse_invoice"
+
+[[example]]
+name = "reader"
+
+[lints]
+workspace = true

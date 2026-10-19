@@ -1,0 +1,32 @@
+[package]
+name = "cpeforge-xmldsig"
+version = "0.1.0"
+description = "Firma, verificación, canonicalización y cifrado XML (perfil SUNAT)."
+readme = "README.md"
+keywords = ["xmldsig", "xmlenc", "c14n", "sunat", "xml-signature"]
+categories = ["cryptography", "encoding"]
+# Las pruebas dependen de fixtures del workspace (tests/reference); no se publican.
+exclude = ["tests/"]
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+base64.workspace = true
+openssl.workspace = true
+quick-xml.workspace = true
+zeroize.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true
+
+[[test]]
+name = "parity"
+
+[[example]]
+name = "sign_verify_invoice"
+
+[lints]
+workspace = true

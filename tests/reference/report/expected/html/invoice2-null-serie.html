@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Invoice</title>
+    <style type="text/css">
+        .clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        body {
+            position: relative;
+            width: 100%;
+            height: 29.7cm;
+            margin: 0;
+            color: #555555;
+            background: #FFFFFF;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+        header {
+            padding: 10px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #AAAAAA;
+        }
+        #logo {
+            float: left;
+            margin-top: 8px;
+        }
+        #logo img {
+            height: 70px;
+        }
+        #company {
+            float: right;
+            text-align: right;
+        }
+        #details {
+            margin-bottom: 50px;
+        }
+        #client {
+            padding-left: 6px;
+            border-left: 6px solid #0087C3;
+            float: left;
+        }
+        #qrcode {
+            margin-bottom: 20px;
+            float: right;
+        }
+        #client .to {
+            color: #777777;
+        }
+        h2.ruc {
+            font-size: 1.2em;
+            font-weight: normal;
+            margin: 0;
+        }
+        #invoice {
+            float: right;
+            text-align: right;
+        }
+        #invoice h1 {
+            color: #0087C3;
+            font-size: 2em;
+            line-height: 1em;
+            font-weight: normal;
+            margin: 0  0 10px 0;
+        }
+        #invoice .date {
+            font-size: 1.1em;
+            color: #777777;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin-bottom: 20px;
+        }
+        table th,
+        table td {
+            padding: 20px;
+            background: #EEEEEE;
+            text-align: center;
+            border-bottom: 1px solid #FFFFFF;
+        }
+        table th {
+            white-space: nowrap;
+            font-weight: normal;
+        }
+        table td {
+            text-align: right;
+        }
+        table td h3{
+            color: #57B223;
+            font-size: 1.2em;
+            font-weight: normal;
+            margin: 0 0 0.2em 0;
+        }
+        table .no {
+            color: #FFFFFF;
+            font-size: 1.2em;
+            text-align: center;
+            background: #57B223;
+        }
+        table .desc {
+            text-align: left;
+            width: 50%;
+        }
+        table .unit {
+            background: #DDDDDD;
+            text-align: center;
+        }
+        table .qty {
+        }
+        table .total {
+            background: #57B223;
+            color: #FFFFFF;
+        }
+        table td.unit,
+        table td.qty,
+        table td.total {
+            font-size: 1.2em;
+            text-align: center;
+        }
+        table tbody tr:last-child td {
+            border: none;
+        }
+        table tfoot td {
+            padding: 10px 20px;
+            background: #FFFFFF;
+            border-bottom: none;
+            font-size: 1.2em;
+            white-space: nowrap;
+            border-top: 1px solid #AAAAAA;
+        }
+        table tfoot tr:first-child td {
+            border-top: none;
+        }
+        table tfoot tr td:last-child {
+            text-align: center;
+        }
+        table tfoot tr:last-child td {
+            color: #57B223;
+            font-size: 1.4em;
+            border-top: 1px solid #57B223;
+        }
+        table tfoot tr td:first-child {
+            border: none;
+        }
+        #notices{
+            padding-left: 6px;
+            border-left: 6px solid #0087C3;
+        }
+        #notices .notice {
+            font-size: 1.2em;
+        }
+        .name {
+            font-size: 1.4em;
+            margin: 0.2em 0;
+        }
+    </style>
+</head>
+<body>
+<header class="clearfix">
+    <div id="logo">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR42mPQqzUCAAG6AN76d2wkAAAAAElFTkSuQmCC">
+    </div>
+    <div id="company">
+                <h2 style="margin-bottom:0">RUC 20000000001</h2>
+        <h3 style="margin:0.2em 0;font-size:1.3em">EMPRESA SINTETICA S.A.C.</h3>
+        <div>AV. FICTICIA 123</div>
+        <div>Telf: <b>(01) 000-0000</b></div>
+    </div>
+</header>
+<main>
+    <div id="details" class="clearfix">
+        <div id="client" style="max-width: 60%">
+            <div class="to">EMITIDO A:</div>
+                        <h2 class="ruc"><b>RUC</b> 20000000002</h2>
+            <span class="name">CLIENTE SINTETICO S.A.</span>
+            <div class="address"><i>CALLE PRUEBA 456</i></div>        </div>
+        <div id="invoice">
+                        <h1>FACTURA ELECTRÓNICA</h1>
+            <h1>-</h1>
+            <div class="date">EMITIDO: 31/01/2024</div>
+        </div>
+    </div>
+    <table border="0" cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th class="no">CANT.</th>
+            <th class="desc">DESCRIPCION</th>
+            <th class="unit">UNIDAD</th>
+            <th class="qty">P. UNIT</th>
+            <th class="total">TOTAL</th>
+        </tr>
+        </thead>
+        <tbody>
+                            <tr>
+                <td class="no">2.00</td>
+                <td class="desc">
+                    <h3>P001</h3>
+                    PRODUCTO SINTETICO P001
+                </td>
+                <td class="unit">NIU</td>
+                <td class="qty">S/50</td>
+                <td class="total">S/100</td>
+            </tr>
+                    <tr>
+                <td class="no">1.50</td>
+                <td class="desc">
+                    <h3>P002</h3>
+                    PRODUCTO SINTETICO P002
+                </td>
+                <td class="unit">NIU</td>
+                <td class="qty">S/50</td>
+                <td class="total">S/100</td>
+            </tr>
+                </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="2"></td>
+            <td colspan="2">Op. Gravadas</td>
+            <td>S/ 200.00</td>
+        </tr>
+                                <tr>
+            <td colspan="2"></td>
+            <td colspan="2">IGV (18%)</td>
+            <td>S/ 36.00</td>
+        </tr>
+                        <tr>
+            <td colspan="2"></td>
+            <td colspan="2">TOTAL</td>
+            <td>S/ 237.59</td>
+        </tr>
+        </tfoot>
+    </table>
+    <hr>
+    <div style="margin: 20px 0;width: 100%;text-align: center">
+        <span>
+            <b>IMPORTE EN LETRAS</b> SON DOSCIENTOS TREINTA Y SIETE CON 59/100 SOLES
+        </span>
+    </div>
+    <div class="clearfix">
+        <div style="float: left">
+            <div id="notices">
+                <div class="notice">
+                                            <strong>Resumen:</strong>   xkhakjjuui293/=33w<br>
+                                        Representación Impresa de la FACTURA ELECTRÓNICA.
+                </div>
+            </div>
+        </div>
+        <div id="qrcode">
+            <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iI2ZmZmZmZiIvPjxnIHRyYW5zZm9ybT0ic2NhbGUoMy4yNDMpIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLDApIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik04IDBMOCAxTDkgMUw5IDBaTTExIDBMMTEgM0wxMiAzTDEyIDRMMTEgNEwxMSA1TDEyIDVMMTIgN0wxMSA3TDExIDZMMTAgNkwxMCAyTDkgMkw5IDRMOCA0TDggN0w5IDdMOSA2TDEwIDZMMTAgN0wxMSA3TDExIDlMMTAgOUwxMCAxMUwxMSAxMUwxMSAxM0wxMCAxM0wxMCAxMkw4IDEyTDggMTRMOSAxNEw5IDE1TDExIDE1TDExIDEzTDEyIDEzTDEyIDE1TDEzIDE1TDEzIDE0TDE0IDE0TDE0IDE1TDE1IDE1TDE1IDE2TDEyIDE2TDEyIDE3TDExIDE3TDExIDE2TDEwIDE2TDEwIDE3TDkgMTdMOSAxNkw4IDE2TDggMTVMNyAxNUw3IDE0TDYgMTRMNiAxM0w3IDEzTDcgMTJMNiAxMkw2IDExTDcgMTFMNyAxMEw1IDEwTDUgOUw4IDlMOCA4TDEgOEwxIDlMMCA5TDAgMTBMMyAxMEwzIDExTDIgMTFMMiAxMkwxIDEyTDEgMTFMMCAxMUwwIDEyTDEgMTJMMSAxM0wwIDEzTDAgMTRMMSAxNEwxIDEzTDIgMTNMMiAxNUwzIDE1TDMgMTZMMSAxNkwxIDE3TDQgMTdMNCAxOEwyIDE4TDIgMjBMMSAyMEwxIDE5TDAgMTlMMCAyMUwxIDIxTDEgMjRMMCAyNEwwIDI5TDEgMjlMMSAyNEwyIDI0TDIgMjZMMyAyNkwzIDI3TDQgMjdMNCAyOEwzIDI4TDMgMjlMNCAyOUw0IDI4TDYgMjhMNiAyOUw4IDI5TDggMzZMOSAzNkw5IDM1TDEwIDM1TDEwIDM0TDExIDM0TDExIDM2TDEwIDM2TDEwIDM3TDExIDM3TDExIDM2TDEyIDM2TDEyIDM3TDEzIDM3TDEzIDM2TDE0IDM2TDE0IDM1TDE3IDM1TDE3IDM2TDE1IDM2TDE1IDM3TDE3IDM3TDE3IDM2TDE4IDM2TDE4IDM1TDE5IDM1TDE5IDM3TDIwIDM3TDIwIDM2TDIxIDM2TDIxIDM3TDIzIDM3TDIzIDM2TDI2IDM2TDI2IDM3TDI3IDM3TDI3IDM2TDI5IDM2TDI5IDM3TDMwIDM3TDMwIDM2TDMzIDM2TDMzIDM3TDM0IDM3TDM0IDM2TDM1IDM2TDM1IDM3TDM3IDM3TDM3IDM2TDM2IDM2TDM2IDM1TDM3IDM1TDM3IDMyTDM2IDMyTDM2IDMxTDM3IDMxTDM3IDI4TDM2IDI4TDM2IDI3TDM3IDI3TDM3IDI0TDM2IDI0TDM2IDIzTDM3IDIzTDM3IDIyTDM2IDIyTDM2IDIzTDM1IDIzTDM1IDIyTDM0IDIyTDM0IDI0TDMzIDI0TDMzIDI2TDMxIDI2TDMxIDI0TDMwIDI0TDMwIDIzTDMzIDIzTDMzIDIyTDMwIDIyTDMwIDIzTDI5IDIzTDI5IDIyTDI4IDIyTDI4IDIwTDI3IDIwTDI3IDE5TDI2IDE5TDI2IDE4TDI1IDE4TDI1IDE5TDI2IDE5TDI2IDIwTDI3IDIwTDI3IDIxTDI2IDIxTDI2IDIyTDI1IDIyTDI1IDIxTDIzIDIxTDIzIDIwTDI0IDIwTDI0IDE4TDIyIDE4TDIyIDE3TDIzIDE3TDIzIDE2TDI0IDE2TDI0IDE3TDI1IDE3TDI1IDE1TDI2IDE1TDI2IDE2TDI3IDE2TDI3IDE3TDI4IDE3TDI4IDE4TDMwIDE4TDMwIDE5TDI5IDE5TDI5IDIwTDMwIDIwTDMwIDIxTDMxIDIxTDMxIDIwTDMyIDIwTDMyIDE5TDMzIDE5TDMzIDE3TDMxIDE3TDMxIDE2TDMwIDE2TDMwIDE1TDMzIDE1TDMzIDE0TDM0IDE0TDM0IDE1TDM1IDE1TDM1IDE2TDM0IDE2TDM0IDE3TDM1IDE3TDM1IDE2TDM2IDE2TDM2IDE4TDM0IDE4TDM0IDIwTDMzIDIwTDMzIDIxTDM0IDIxTDM0IDIwTDM1IDIwTDM1IDE5TDM3IDE5TDM3IDE2TDM2IDE2TDM2IDE1TDM3IDE1TDM3IDEyTDM2IDEyTDM2IDExTDM1IDExTDM1IDEwTDM3IDEwTDM3IDhMMzYgOEwzNiA5TDM1IDlMMzUgMTBMMzQgMTBMMzQgOUwzMyA5TDMzIDhMMzEgOEwzMSA5TDMwIDlMMzAgMTFMMjkgMTFMMjkgMTBMMjggMTBMMjggOEwyNyA4TDI3IDZMMjggNkwyOCA3TDI5IDdMMjkgNUwyOCA1TDI4IDNMMjcgM0wyNyAyTDI5IDJMMjkgMUwyOCAxTDI4IDBMMjcgMEwyNyAyTDI2IDJMMjYgMUwyNSAxTDI1IDBMMjQgMEwyNCAzTDI1IDNMMjUgMkwyNiAyTDI2IDNMMjcgM0wyNyA2TDI2IDZMMjYgNUwyNSA1TDI1IDRMMjQgNEwyNCA1TDI1IDVMMjUgNkwyNCA2TDI0IDdMMjMgN0wyMyA2TDIyIDZMMjIgN0wyMSA3TDIxIDVMMjMgNUwyMyA0TDIyIDRMMjIgM0wyMyAzTDIzIDJMMjEgMkwyMSAzTDIwIDNMMjAgMUwyMiAxTDIyIDBMMjAgMEwyMCAxTDE2IDFMMTYgMEwxNSAwTDE1IDFMMTYgMUwxNiAyTDE1IDJMMTUgM0wxNCAzTDE0IDJMMTIgMkwxMiAwWk0xNiAyTDE2IDNMMTUgM0wxNSA0TDE0IDRMMTQgNUwxMyA1TDEzIDdMMTIgN0wxMiA5TDExIDlMMTEgMTBMMTIgMTBMMTIgOUwxMyA5TDEzIDdMMTQgN0wxNCA2TDE1IDZMMTUgN0wxNiA3TDE2IDhMMTcgOEwxNyA3TDE4IDdMMTggNkwxNyA2TDE3IDdMMTYgN0wxNiA2TDE1IDZMMTUgNUwxNiA1TDE2IDNMMTcgM0wxNyA1TDE4IDVMMTggMlpNMTkgM0wxOSA0TDIwIDRMMjAgNUwyMSA1TDIxIDRMMjAgNEwyMCAzWk0xOSA2TDE5IDdMMjAgN0wyMCA2Wk0yNSA2TDI1IDhMMjMgOEwyMyA5TDI1IDlMMjUgMTBMMjMgMTBMMjMgMTFMMjUgMTFMMjUgMTRMMjQgMTRMMjQgMTJMMjMgMTJMMjMgMTNMMjEgMTNMMjEgMTVMMjAgMTVMMjAgMTRMMTkgMTRMMTkgMTVMMTcgMTVMMTcgMTNMMTYgMTNMMTYgOUwxNSA5TDE1IDhMMTQgOEwxNCAxMEwxMyAxMEwxMyAxMUwxMiAxMUwxMiAxM0wxMyAxM0wxMyAxMkwxNCAxMkwxNCAxM0wxNiAxM0wxNiAxNEwxNSAxNEwxNSAxNUwxNyAxNUwxNyAxNkwxNiAxNkwxNiAxN0wxNSAxN0wxNSAxOEwxNiAxOEwxNiAxN0wxOCAxN0wxOCAxOEwxNyAxOEwxNyAxOUwxNiAxOUwxNiAyMEwxNCAyMEwxNCAyMUwxMyAyMUwxMyAyMEwxMiAyMEwxMiAxOUwxMSAxOUwxMSAxOEw5IDE4TDkgMTlMOCAxOUw4IDIwTDcgMjBMNyAxOUw1IDE5TDUgMThMNCAxOEw0IDIyTDUgMjJMNSAyMEw3IDIwTDcgMjFMNiAyMUw2IDIyTDkgMjJMOSAyM0w1IDIzTDUgMjRMOSAyNEw5IDIzTDEwIDIzTDEwIDI0TDEyIDI0TDEyIDI1TDYgMjVMNiAyNkw5IDI2TDkgMjdMNiAyN0w2IDI4TDkgMjhMOSAzMUwxMCAzMUwxMCAzMEwxMSAzMEwxMSAzMkw5IDMyTDkgMzRMMTAgMzRMMTAgMzNMMTEgMzNMMTEgMzRMMTIgMzRMMTIgMzZMMTMgMzZMMTMgMzRMMTIgMzRMMTIgMzBMMTMgMzBMMTMgMjhMMTQgMjhMMTQgMjdMMTEgMjdMMTEgMjZMMTQgMjZMMTQgMjVMMTUgMjVMMTUgMjRMMTQgMjRMMTQgMjVMMTMgMjVMMTMgMjRMMTIgMjRMMTIgMjNMMTQgMjNMMTQgMjJMMTYgMjJMMTYgMjFMMTcgMjFMMTcgMjNMMTYgMjNMMTYgMjRMMTcgMjRMMTcgMjNMMTggMjNMMTggMjVMMTcgMjVMMTcgMjZMMTggMjZMMTggMjdMMTcgMjdMMTcgMjhMMTggMjhMMTggMjlMMTcgMjlMMTcgMzBMMTYgMzBMMTYgMjlMMTUgMjlMMTUgMzBMMTYgMzBMMTYgMzFMMTcgMzFMMTcgMzNMMTYgMzNMMTYgMzJMMTQgMzJMMTQgMzFMMTMgMzFMMTMgMzNMMTQgMzNMMTQgMzRMMTUgMzRMMTUgMzNMMTYgMzNMMTYgMzRMMTcgMzRMMTcgMzNMMTkgMzNMMTkgMzRMMjAgMzRMMjAgMzVMMjEgMzVMMjEgMzZMMjIgMzZMMjIgMzRMMjAgMzRMMjAgMzNMMjEgMzNMMjEgMzJMMjAgMzJMMjAgMzFMMTkgMzFMMTkgMzJMMTggMzJMMTggMzFMMTcgMzFMMTcgMzBMMjEgMzBMMjEgMjlMMjIgMjlMMjIgMzFMMjUgMzFMMjUgMzBMMjcgMzBMMjcgMjhMMjkgMjhMMjkgMjdMMzAgMjdMMzAgMjhMMzMgMjhMMzMgMjdMMzQgMjdMMzQgMzBMMzMgMzBMMzMgMzFMMzQgMzFMMzQgMzJMMzUgMzJMMzUgMzNMMzMgMzNMMzMgMzRMMzIgMzRMMzIgMzNMMzEgMzNMMzEgMzVMMzMgMzVMMzMgMzZMMzQgMzZMMzQgMzRMMzUgMzRMMzUgMzVMMzYgMzVMMzYgMzRMMzUgMzRMMzUgMzNMMzYgMzNMMzYgMzJMMzUgMzJMMzUgMzFMMzYgMzFMMzYgMjhMMzUgMjhMMzUgMjdMMzQgMjdMMzQgMjZMMzUgMjZMMzUgMjVMMzYgMjVMMzYgMjRMMzQgMjRMMzQgMjZMMzMgMjZMMzMgMjdMMzAgMjdMMzAgMjRMMjkgMjRMMjkgMjNMMjcgMjNMMjcgMjJMMjYgMjJMMjYgMjNMMjUgMjNMMjUgMjJMMjMgMjJMMjMgMjFMMjIgMjFMMjIgMjJMMjEgMjJMMjEgMjRMMjAgMjRMMjAgMjNMMTggMjNMMTggMjJMMTkgMjJMMTkgMjFMMjAgMjFMMjAgMjBMMjIgMjBMMjIgMThMMjEgMThMMjEgMTlMMjAgMTlMMjAgMjBMMTkgMjBMMTkgMTlMMTggMTlMMTggMThMMjAgMThMMjAgMTdMMTkgMTdMMTkgMTVMMjAgMTVMMjAgMTZMMjMgMTZMMjMgMTVMMjUgMTVMMjUgMTRMMjYgMTRMMjYgMTVMMjcgMTVMMjcgMTZMMjggMTZMMjggMTdMMzAgMTdMMzAgMThMMzEgMThMMzEgMTdMMzAgMTdMMzAgMTZMMjkgMTZMMjkgMTVMMzAgMTVMMzAgMTJMMzEgMTJMMzEgMTRMMzMgMTRMMzMgMTFMMzQgMTFMMzQgMTRMMzUgMTRMMzUgMTVMMzYgMTVMMzYgMTRMMzUgMTRMMzUgMTNMMzYgMTNMMzYgMTJMMzUgMTJMMzUgMTFMMzQgMTFMMzQgMTBMMzMgMTBMMzMgOUwzMSA5TDMxIDEwTDMzIDEwTDMzIDExTDMwIDExTDMwIDEyTDI5IDEyTDI5IDExTDI3IDExTDI3IDhMMjYgOEwyNiA2Wk0xOCA4TDE4IDlMMTcgOUwxNyAxMkwxOCAxMkwxOCAxM0wxOSAxM0wxOSAxMUwyMCAxMUwyMCA4Wk0yMSA4TDIxIDlMMjIgOUwyMiA4Wk0zIDlMMyAxMEw0IDEwTDQgMTFMMyAxMUwzIDEyTDQgMTJMNCAxNEwzIDE0TDMgMTVMNCAxNUw0IDE0TDUgMTRMNSAxNkw3IDE2TDcgMTVMNiAxNUw2IDE0TDUgMTRMNSAxM0w2IDEzTDYgMTJMNCAxMkw0IDExTDUgMTFMNSAxMEw0IDEwTDQgOVpNOCAxMEw4IDExTDkgMTFMOSAxMFpNMTQgMTBMMTQgMTJMMTUgMTJMMTUgMTBaTTE4IDEwTDE4IDExTDE5IDExTDE5IDEwWk0yMSAxMEwyMSAxMkwyMiAxMkwyMiAxMFpNMjUgMTBMMjUgMTFMMjYgMTFMMjYgMTJMMjcgMTJMMjcgMTRMMjkgMTRMMjkgMTJMMjcgMTJMMjcgMTFMMjYgMTFMMjYgMTBaTTkgMTNMOSAxNEwxMCAxNEwxMCAxM1pNMjIgMTRMMjIgMTVMMjMgMTVMMjMgMTRaTTYgMTdMNiAxOEw4IDE4TDggMTdaTTEyIDE3TDEyIDE4TDEzIDE4TDEzIDE3Wk05IDE5TDkgMjBMMTAgMjBMMTAgMjFMOSAyMUw5IDIyTDExIDIyTDExIDIxTDEyIDIxTDEyIDIwTDEwIDIwTDEwIDE5Wk0xNyAxOUwxNyAyMUwxOSAyMUwxOSAyMEwxOCAyMEwxOCAxOVpNMzAgMTlMMzAgMjBMMzEgMjBMMzEgMTlaTTIgMjBMMiAyMUwzIDIxTDMgMjBaTTMgMjNMMyAyNEw0IDI0TDQgMjNaTTIzIDIzTDIzIDI0TDIyIDI0TDIyIDI1TDIxIDI1TDIxIDI2TDIwIDI2TDIwIDI3TDIxIDI3TDIxIDI4TDIwIDI4TDIwIDI5TDIxIDI5TDIxIDI4TDIyIDI4TDIyIDI5TDIzIDI5TDIzIDI4TDI0IDI4TDI0IDMwTDI1IDMwTDI1IDI3TDI2IDI3TDI2IDI4TDI3IDI4TDI3IDI3TDI5IDI3TDI5IDI2TDI4IDI2TDI4IDI0TDI3IDI0TDI3IDIzTDI2IDIzTDI2IDI0TDI3IDI0TDI3IDI3TDI2IDI3TDI2IDI2TDI1IDI2TDI1IDIzWk0yMyAyNEwyMyAyNUwyMiAyNUwyMiAyNkwyMSAyNkwyMSAyN0wyNSAyN0wyNSAyNkwyMyAyNkwyMyAyNUwyNCAyNUwyNCAyNFpNMyAyNUwzIDI2TDQgMjZMNCAyN0w1IDI3TDUgMjZMNCAyNkw0IDI1Wk0xNSAyNkwxNSAyN0wxNiAyN0wxNiAyNlpNMTAgMjdMMTAgMjlMMTIgMjlMMTIgMjhMMTEgMjhMMTEgMjdaTTE4IDI3TDE4IDI4TDE5IDI4TDE5IDI3Wk0yOSAyOUwyOSAzMkwzMiAzMkwzMiAyOVpNMzAgMzBMMzAgMzFMMzEgMzFMMzEgMzBaTTM0IDMwTDM0IDMxTDM1IDMxTDM1IDMwWk0yNyAzMUwyNyAzMkwyOCAzMkwyOCAzMVpNMjIgMzJMMjIgMzNMMjQgMzNMMjQgMzJaTTI1IDMyTDI1IDM0TDIzIDM0TDIzIDM1TDI1IDM1TDI1IDM0TDI2IDM0TDI2IDM2TDI3IDM2TDI3IDM0TDI4IDM0TDI4IDM1TDI5IDM1TDI5IDM2TDMwIDM2TDMwIDMzTDI5IDMzTDI5IDM0TDI4IDM0TDI4IDMzTDI2IDMzTDI2IDMyWk0wIDBMMCA3TDcgN0w3IDBaTTEgMUwxIDZMNiA2TDYgMVpNMiAyTDIgNUw1IDVMNSAyWk0zNyAwTDMwIDBMMzAgN0wzNyA3Wk0zNiAxTDMxIDFMMzEgNkwzNiA2Wk0zNSAyTDMyIDJMMzIgNUwzNSA1Wk0wIDM3TDcgMzdMNyAzMEwwIDMwWk0xIDM2TDYgMzZMNiAzMUwxIDMxWk0yIDM1TDUgMzVMNSAzMkwyIDMyWiIgZmlsbD0iIzAwMDAwMCIvPjwvZz48L2c+PC9zdmc+Cg==">
+        </div>
+    </div>
+</main>
+</body>
+</html>

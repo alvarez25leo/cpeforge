@@ -1,0 +1,1043 @@
+{
+    "generator": "oracle/php/core/run_cases.php",
+    "reference": {
+        "tag": "v5.3.0",
+        "commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+    },
+    "reference_version": "8.4.17",
+    "timezone_db": "2025.2",
+    "cases_file": "summary.json",
+    "results": {
+        "summary-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Summary",
+                "company": null,
+                "correlativo": null,
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": null,
+                "moneda": "PEN"
+            }
+        },
+        "summary-empty-calls": {
+            "calls": {
+                "getXmlId": {
+                    "$error": {
+                        "class": "TypeError",
+                        "message": "CPEForge\\Model\\Summary\\Summary::getDateWithTimezone(): Argument #1 ($date) must be of type DateTimeInterface, null given"
+                    }
+                },
+                "getName": {
+                    "$error": {
+                        "class": "Error",
+                        "message": "Call to a member function getRuc() on null"
+                    }
+                }
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": null,
+                "correlativo": null,
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": null,
+                "moneda": "PEN"
+            }
+        },
+        "summary-full": {
+            "calls": {
+                "getXmlId": "RC-20240131-001",
+                "getName": "20000000001-RC-20240131-001"
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "001",
+                "details": [
+                    {
+                        "$class": "SummaryDetail",
+                        "clienteNro": "00000001",
+                        "clienteTipo": "1",
+                        "docReferencia": {
+                            "$class": "Document",
+                            "nroDoc": "B001-0",
+                            "tipoDoc": "03"
+                        },
+                        "estado": "1",
+                        "mtoIGV": {
+                            "$float": "18.0"
+                        },
+                        "mtoISC": {
+                            "$float": "0.0"
+                        },
+                        "mtoIcbper": {
+                            "$float": "0.5"
+                        },
+                        "mtoIvap": {
+                            "$float": "0.0"
+                        },
+                        "mtoOperExoneradas": {
+                            "$float": "0.0"
+                        },
+                        "mtoOperExportacion": {
+                            "$float": "0.0"
+                        },
+                        "mtoOperGratuitas": {
+                            "$float": "0.0"
+                        },
+                        "mtoOperGravadas": {
+                            "$float": "100.0"
+                        },
+                        "mtoOperInafectas": {
+                            "$float": "0.0"
+                        },
+                        "mtoOtrosCargos": {
+                            "$float": "0.0"
+                        },
+                        "mtoOtrosTributos": {
+                            "$float": "0.0"
+                        },
+                        "percepcion": {
+                            "$class": "SummaryPerception",
+                            "codReg": "01",
+                            "mto": {
+                                "$float": "2.0"
+                            },
+                            "mtoBase": {
+                                "$float": "100.0"
+                            },
+                            "mtoTotal": {
+                                "$float": "102.0"
+                            },
+                            "tasa": {
+                                "$float": "2.0"
+                            }
+                        },
+                        "porcentajeIgv": {
+                            "$float": "18.0"
+                        },
+                        "serieNro": "B001-1",
+                        "tipoDoc": "03",
+                        "total": {
+                            "$float": "118.0"
+                        }
+                    },
+                    {
+                        "$class": "SummaryDetail",
+                        "clienteNro": null,
+                        "clienteTipo": null,
+                        "docReferencia": null,
+                        "estado": "3",
+                        "mtoIGV": null,
+                        "mtoISC": null,
+                        "mtoIcbper": null,
+                        "mtoIvap": null,
+                        "mtoOperExoneradas": null,
+                        "mtoOperExportacion": null,
+                        "mtoOperGratuitas": null,
+                        "mtoOperGravadas": null,
+                        "mtoOperInafectas": null,
+                        "mtoOtrosCargos": null,
+                        "mtoOtrosTributos": null,
+                        "percepcion": null,
+                        "porcentajeIgv": null,
+                        "serieNro": null,
+                        "tipoDoc": "07",
+                        "total": null
+                    }
+                ],
+                "fecGeneracion": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-01-31T20:00:00.000000",
+                        "offset": -18000,
+                        "unix": 1706749200,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "fecResumen": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-01-31T23:30:00.000000",
+                        "offset": -18000,
+                        "unix": 1706761800,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "moneda": "USD"
+            }
+        },
+        "summary-no-company": {
+            "calls": {
+                "getXmlId": "RC-20240131-2",
+                "getName": {
+                    "$error": {
+                        "class": "Error",
+                        "message": "Call to a member function getRuc() on null"
+                    }
+                }
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": null,
+                "correlativo": "2",
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-01-31T23:30:00.000000",
+                        "offset": -18000,
+                        "unix": 1706761800,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "moneda": "PEN"
+            }
+        },
+        "summary-null-correlativo": {
+            "calls": {
+                "getXmlId": "RC-20240131-",
+                "getName": "20000000001-RC-20240131-"
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": null,
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-01-31T23:30:00.000000",
+                        "offset": -18000,
+                        "unix": 1706761800,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "moneda": "PEN"
+            }
+        },
+        "summary-detail-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "SummaryDetail",
+                "clienteNro": null,
+                "clienteTipo": null,
+                "docReferencia": null,
+                "estado": null,
+                "mtoIGV": null,
+                "mtoISC": null,
+                "mtoIcbper": null,
+                "mtoIvap": null,
+                "mtoOperExoneradas": null,
+                "mtoOperExportacion": null,
+                "mtoOperGratuitas": null,
+                "mtoOperGravadas": null,
+                "mtoOperInafectas": null,
+                "mtoOtrosCargos": null,
+                "mtoOtrosTributos": null,
+                "percepcion": null,
+                "porcentajeIgv": null,
+                "serieNro": null,
+                "tipoDoc": null,
+                "total": null
+            }
+        },
+        "summary-detail-full": {
+            "calls": {},
+            "snapshot": {
+                "$class": "SummaryDetail",
+                "clienteNro": "00000001",
+                "clienteTipo": "1",
+                "docReferencia": {
+                    "$class": "Document",
+                    "nroDoc": "B001-0",
+                    "tipoDoc": "03"
+                },
+                "estado": "1",
+                "mtoIGV": {
+                    "$float": "18.0"
+                },
+                "mtoISC": {
+                    "$float": "0.0"
+                },
+                "mtoIcbper": {
+                    "$float": "0.5"
+                },
+                "mtoIvap": {
+                    "$float": "0.0"
+                },
+                "mtoOperExoneradas": {
+                    "$float": "0.0"
+                },
+                "mtoOperExportacion": {
+                    "$float": "0.0"
+                },
+                "mtoOperGratuitas": {
+                    "$float": "0.0"
+                },
+                "mtoOperGravadas": {
+                    "$float": "100.0"
+                },
+                "mtoOperInafectas": {
+                    "$float": "0.0"
+                },
+                "mtoOtrosCargos": {
+                    "$float": "0.0"
+                },
+                "mtoOtrosTributos": {
+                    "$float": "0.0"
+                },
+                "percepcion": {
+                    "$class": "SummaryPerception",
+                    "codReg": "01",
+                    "mto": {
+                        "$float": "2.0"
+                    },
+                    "mtoBase": {
+                        "$float": "100.0"
+                    },
+                    "mtoTotal": {
+                        "$float": "102.0"
+                    },
+                    "tasa": {
+                        "$float": "2.0"
+                    }
+                },
+                "porcentajeIgv": {
+                    "$float": "18.0"
+                },
+                "serieNro": "B001-1",
+                "tipoDoc": "03",
+                "total": {
+                    "$float": "118.0"
+                }
+            }
+        },
+        "summary-perception-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "SummaryPerception",
+                "codReg": null,
+                "mto": null,
+                "mtoBase": null,
+                "mtoTotal": null,
+                "tasa": null
+            }
+        },
+        "summary-date-lima-civil": {
+            "calls": {
+                "getXmlId": "RC-20240131-1",
+                "getName": "20000000001-RC-20240131-1"
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "1",
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-01-31T23:30:00.000000",
+                        "offset": -18000,
+                        "unix": 1706761800,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "moneda": "PEN"
+            }
+        },
+        "summary-date-utc-previous-day": {
+            "calls": {
+                "getXmlId": "RC-20240131-1",
+                "getName": "20000000001-RC-20240131-1"
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "1",
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-02-01T03:00:00.000000",
+                        "offset": 0,
+                        "unix": 1706756400,
+                        "micro": 0,
+                        "tz": "UTC"
+                    }
+                },
+                "moneda": "PEN"
+            }
+        },
+        "summary-date-utc-exact-midnight": {
+            "calls": {
+                "getXmlId": "RC-20240201-1",
+                "getName": "20000000001-RC-20240201-1"
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "1",
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-02-01T05:00:00.000000",
+                        "offset": 0,
+                        "unix": 1706763600,
+                        "micro": 0,
+                        "tz": "UTC"
+                    }
+                },
+                "moneda": "PEN"
+            }
+        },
+        "summary-date-utc-one-second-before": {
+            "calls": {
+                "getXmlId": "RC-20240131-1",
+                "getName": "20000000001-RC-20240131-1"
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "1",
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-02-01T04:59:59.000000",
+                        "offset": 0,
+                        "unix": 1706763599,
+                        "micro": 0,
+                        "tz": "UTC"
+                    }
+                },
+                "moneda": "PEN"
+            }
+        },
+        "summary-date-leap-day": {
+            "calls": {
+                "getXmlId": "RC-20240229-1",
+                "getName": "20000000001-RC-20240229-1"
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "1",
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-03-01T02:00:00.000000",
+                        "offset": 0,
+                        "unix": 1709258400,
+                        "micro": 0,
+                        "tz": "UTC"
+                    }
+                },
+                "moneda": "PEN"
+            }
+        },
+        "summary-date-year-boundary": {
+            "calls": {
+                "getXmlId": "RC-20241231-1",
+                "getName": "20000000001-RC-20241231-1"
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "1",
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2025-01-01T04:59:59.999999",
+                        "offset": 0,
+                        "unix": 1735707599,
+                        "micro": 999999,
+                        "tz": "UTC"
+                    }
+                },
+                "moneda": "PEN"
+            }
+        },
+        "summary-date-month-boundary": {
+            "calls": {
+                "getXmlId": "RC-20240430-1",
+                "getName": "20000000001-RC-20240430-1"
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "1",
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-05-01T00:30:00.000000",
+                        "offset": 0,
+                        "unix": 1714523400,
+                        "micro": 0,
+                        "tz": "UTC"
+                    }
+                },
+                "moneda": "PEN"
+            }
+        },
+        "summary-date-fixed-offset-east": {
+            "calls": {
+                "getXmlId": "RC-20240630-1",
+                "getName": "20000000001-RC-20240630-1"
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "1",
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-07-01T08:00:00.000000",
+                        "offset": 32400,
+                        "unix": 1719788400,
+                        "micro": 0,
+                        "tz": "+09:00"
+                    }
+                },
+                "moneda": "PEN"
+            }
+        },
+        "summary-date-named-zone-madrid": {
+            "calls": {
+                "getXmlId": "RC-20240630-1",
+                "getName": "20000000001-RC-20240630-1"
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "1",
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-07-01T01:30:00.000000",
+                        "offset": 7200,
+                        "unix": 1719790200,
+                        "micro": 0,
+                        "tz": "Europe/Madrid"
+                    }
+                },
+                "moneda": "PEN"
+            }
+        },
+        "summary-date-mutable-datetime": {
+            "calls": {
+                "getXmlId": "RC-20240131-1",
+                "getName": "20000000001-RC-20240131-1"
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "1",
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": {
+                    "$datetime": {
+                        "class": "DateTime",
+                        "local": "2024-02-01T03:00:00.000000",
+                        "offset": 0,
+                        "unix": 1706756400,
+                        "micro": 0,
+                        "tz": "UTC"
+                    }
+                },
+                "moneda": "PEN"
+            }
+        },
+        "summary-date-lima-dst-1994": {
+            "calls": {
+                "getXmlId": "RC-19940215-1",
+                "getName": "20000000001-RC-19940215-1"
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "1",
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "1994-02-15T04:30:00.000000",
+                        "offset": 0,
+                        "unix": 761286600,
+                        "micro": 0,
+                        "tz": "UTC"
+                    }
+                },
+                "moneda": "PEN"
+            }
+        },
+        "summary-date-lima-lmt-1900": {
+            "calls": {
+                "getXmlId": "RC-18991231-1",
+                "getName": "20000000001-RC-18991231-1"
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "1",
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "1900-01-01T05:05:00.000000",
+                        "offset": 0,
+                        "unix": -2208970500,
+                        "micro": 0,
+                        "tz": "UTC"
+                    }
+                },
+                "moneda": "PEN"
+            }
+        },
+        "summary-date-late-year-9999": {
+            "calls": {
+                "getXmlId": "RC-99991230-1",
+                "getName": "20000000001-RC-99991230-1"
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "1",
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "9999-12-30T12:00:00.000000",
+                        "offset": -18000,
+                        "unix": 253402189200,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "moneda": "PEN"
+            }
+        },
+        "summary-date-max-four-digit-year": {
+            "calls": {
+                "getXmlId": "RC-99991231-1",
+                "getName": "20000000001-RC-99991231-1"
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "1",
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "9999-12-31T23:59:59.000000",
+                        "offset": -18000,
+                        "unix": 253402318799,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "moneda": "PEN"
+            }
+        },
+        "summary-date-year-0999": {
+            "calls": {
+                "getXmlId": "RC-09990615-1",
+                "getName": "20000000001-RC-09990615-1"
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "1",
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "0999-06-15T12:00:00.000000",
+                        "offset": 0,
+                        "unix": -30627460800,
+                        "micro": 0,
+                        "tz": "UTC"
+                    }
+                },
+                "moneda": "PEN"
+            }
+        },
+        "summary-date-microseconds": {
+            "calls": {
+                "getXmlId": "RC-20240131-1",
+                "getName": "20000000001-RC-20240131-1"
+            },
+            "snapshot": {
+                "$class": "Summary",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "1",
+                "details": null,
+                "fecGeneracion": null,
+                "fecResumen": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-02-01T04:59:59.123456",
+                        "offset": 0,
+                        "unix": 1706763599,
+                        "micro": 123456,
+                        "tz": "UTC"
+                    }
+                },
+                "moneda": "PEN"
+            }
+        }
+    }
+}

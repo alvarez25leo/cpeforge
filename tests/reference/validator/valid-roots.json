@@ -1,0 +1,836 @@
+[
+  {
+    "id": "default/Invoice/_/valid-root",
+    "version": null,
+    "model": {
+      "type": "Invoice",
+      "fields": {
+        "tipoDoc": "01",
+        "serie": "F001",
+        "correlativo": "1",
+        "fechaEmision": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "tipoMoneda": "PEN",
+        "client": {
+          "type": "Client",
+          "fields": {
+            "tipoDoc": "6",
+            "numDoc": "20000000001",
+            "rznSocial": "CLIENTE FICTICIO"
+          }
+        },
+        "company": {
+          "type": "Company",
+          "fields": {
+            "ruc": "20000000001",
+            "razonSocial": "EMISOR FICTICIO",
+            "address": {
+              "type": "Address",
+              "fields": {
+                "ubigueo": "150101",
+                "codLocal": "0000"
+              }
+            }
+          }
+        },
+        "mtoImpVenta": 1,
+        "mtoOperGravadas": 1,
+        "mtoOperInafectas": 0,
+        "mtoOperExoneradas": 0
+      }
+    }
+  },
+  {
+    "id": "default/Note/_/valid-root",
+    "version": null,
+    "model": {
+      "type": "Note",
+      "fields": {
+        "tipoDoc": "07",
+        "serie": "F001",
+        "correlativo": "1",
+        "fechaEmision": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "tipoMoneda": "PEN",
+        "client": {
+          "type": "Client",
+          "fields": {
+            "tipoDoc": "6",
+            "numDoc": "20000000001",
+            "rznSocial": "CLIENTE FICTICIO"
+          }
+        },
+        "company": {
+          "type": "Company",
+          "fields": {
+            "ruc": "20000000001",
+            "razonSocial": "EMISOR FICTICIO",
+            "address": {
+              "type": "Address",
+              "fields": {
+                "ubigueo": "150101",
+                "codLocal": "0000"
+              }
+            }
+          }
+        },
+        "mtoImpVenta": 1,
+        "mtoOperGravadas": 1,
+        "mtoOperInafectas": 0,
+        "mtoOperExoneradas": 0,
+        "codMotivo": "01",
+        "desMotivo": "PRUEBA",
+        "tipDocAfectado": "01",
+        "numDocfectado": "F001-1"
+      }
+    }
+  },
+  {
+    "id": "default/Despatch/_/valid-root",
+    "version": null,
+    "model": {
+      "type": "Despatch",
+      "fields": {
+        "tipoDoc": "09",
+        "serie": "T001",
+        "correlativo": "1",
+        "fechaEmision": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "destinatario": {
+          "type": "Client",
+          "fields": {
+            "tipoDoc": "6",
+            "numDoc": "20000000001",
+            "rznSocial": "CLIENTE FICTICIO"
+          }
+        },
+        "company": {
+          "type": "Company",
+          "fields": {
+            "ruc": "20000000001",
+            "razonSocial": "EMISOR FICTICIO",
+            "address": {
+              "type": "Address",
+              "fields": {
+                "ubigueo": "150101",
+                "codLocal": "0000"
+              }
+            }
+          }
+        },
+        "envio": {
+          "type": "Shipment",
+          "fields": {
+            "codTraslado": "01",
+            "pesoTotal": 1,
+            "undPesoTotal": "KGM",
+            "modTraslado": "01",
+            "fecTraslado": {
+              "$date": "2025-01-10T12:00:00-05:00"
+            }
+          }
+        },
+        "details": [
+          {
+            "type": "DespatchDetail",
+            "fields": {
+              "cantidad": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "default/Summary/_/valid-root",
+    "version": null,
+    "model": {
+      "type": "Summary",
+      "fields": {
+        "correlativo": "1",
+        "fecGeneracion": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "fecResumen": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "company": {
+          "type": "Company",
+          "fields": {
+            "ruc": "20000000001",
+            "razonSocial": "EMISOR FICTICIO",
+            "address": {
+              "type": "Address",
+              "fields": {
+                "ubigueo": "150101",
+                "codLocal": "0000"
+              }
+            }
+          }
+        },
+        "details": [
+          {
+            "type": "SummaryDetail",
+            "fields": {
+              "tipoDoc": "03",
+              "serieNro": "B001-1",
+              "estado": "1",
+              "total": 1,
+              "mtoIGV": 0
+            }
+          }
+        ],
+        "moneda": "PEN"
+      }
+    }
+  },
+  {
+    "id": "default/Voided/_/valid-root",
+    "version": null,
+    "model": {
+      "type": "Voided",
+      "fields": {
+        "correlativo": "1",
+        "fecGeneracion": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "fecComunicacion": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "company": {
+          "type": "Company",
+          "fields": {
+            "ruc": "20000000001",
+            "razonSocial": "EMISOR FICTICIO",
+            "address": {
+              "type": "Address",
+              "fields": {
+                "ubigueo": "150101",
+                "codLocal": "0000"
+              }
+            }
+          }
+        },
+        "details": [
+          {
+            "type": "VoidedDetail",
+            "fields": {
+              "tipoDoc": "01",
+              "serie": "F001",
+              "correlativo": "1",
+              "desMotivoBaja": "PRUEBA"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "default/Reversion/_/valid-root",
+    "version": null,
+    "model": {
+      "type": "Reversion",
+      "fields": {
+        "correlativo": "1",
+        "fecGeneracion": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "fecComunicacion": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "company": {
+          "type": "Company",
+          "fields": {
+            "ruc": "20000000001",
+            "razonSocial": "EMISOR FICTICIO",
+            "address": {
+              "type": "Address",
+              "fields": {
+                "ubigueo": "150101",
+                "codLocal": "0000"
+              }
+            }
+          }
+        },
+        "details": [
+          {
+            "type": "VoidedDetail",
+            "fields": {
+              "tipoDoc": "01",
+              "serie": "F001",
+              "correlativo": "1",
+              "desMotivoBaja": "PRUEBA"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "default/Retention/_/valid-root",
+    "version": null,
+    "model": {
+      "type": "Retention",
+      "fields": {
+        "serie": "R001",
+        "correlativo": "1",
+        "fechaEmision": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "company": {
+          "type": "Company",
+          "fields": {
+            "ruc": "20000000001",
+            "razonSocial": "EMISOR FICTICIO",
+            "address": {
+              "type": "Address",
+              "fields": {
+                "ubigueo": "150101",
+                "codLocal": "0000"
+              }
+            }
+          }
+        },
+        "proveedor": {
+          "type": "Client",
+          "fields": {
+            "tipoDoc": "6",
+            "numDoc": "20000000001",
+            "rznSocial": "CLIENTE FICTICIO"
+          }
+        },
+        "regimen": "01",
+        "tasa": 1,
+        "impRetenido": 1,
+        "impPagado": 1,
+        "details": [
+          {
+            "type": "RetentionDetail",
+            "fields": {
+              "tipoDoc": "01",
+              "numDoc": "F001-1",
+              "fechaEmision": {
+                "$date": "2025-01-10T12:00:00-05:00"
+              },
+              "impTotal": 1,
+              "moneda": "PEN",
+              "pagos": [
+                {
+                  "type": "Payment",
+                  "fields": {
+                    "moneda": "PEN",
+                    "importe": 1,
+                    "fecha": {
+                      "$date": "2025-01-10T12:00:00-05:00"
+                    }
+                  }
+                }
+              ],
+              "impPagar": 1,
+              "fechaRetencion": {
+                "$date": "2025-01-10T12:00:00-05:00"
+              },
+              "impRetenido": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "default/Perception/_/valid-root",
+    "version": null,
+    "model": {
+      "type": "Perception",
+      "fields": {
+        "serie": "P001",
+        "correlativo": "1",
+        "fechaEmision": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "company": {
+          "type": "Company",
+          "fields": {
+            "ruc": "20000000001",
+            "razonSocial": "EMISOR FICTICIO",
+            "address": {
+              "type": "Address",
+              "fields": {
+                "ubigueo": "150101",
+                "codLocal": "0000"
+              }
+            }
+          }
+        },
+        "proveedor": {
+          "type": "Client",
+          "fields": {
+            "tipoDoc": "6",
+            "numDoc": "20000000001",
+            "rznSocial": "CLIENTE FICTICIO"
+          }
+        },
+        "regimen": "01",
+        "tasa": 1,
+        "impPercibido": 1,
+        "impCobrado": 1,
+        "details": [
+          {
+            "type": "PerceptionDetail",
+            "fields": {
+              "tipoDoc": "01",
+              "numDoc": "F001-1",
+              "fechaEmision": {
+                "$date": "2025-01-10T12:00:00-05:00"
+              },
+              "impTotal": 1,
+              "moneda": "PEN",
+              "cobros": [
+                {
+                  "type": "Payment",
+                  "fields": {
+                    "moneda": "PEN",
+                    "importe": 1,
+                    "fecha": {
+                      "$date": "2025-01-10T12:00:00-05:00"
+                    }
+                  }
+                }
+              ],
+              "impCobrar": 1,
+              "fechaPercepcion": {
+                "$date": "2025-01-10T12:00:00-05:00"
+              },
+              "impPercibido": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "2.1/Invoice/_/valid-root",
+    "version": "2.1",
+    "model": {
+      "type": "Invoice",
+      "fields": {
+        "tipoDoc": "01",
+        "serie": "F001",
+        "correlativo": "1",
+        "fechaEmision": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "tipoMoneda": "PEN",
+        "client": {
+          "type": "Client",
+          "fields": {
+            "tipoDoc": "6",
+            "numDoc": "20000000001",
+            "rznSocial": "CLIENTE FICTICIO"
+          }
+        },
+        "company": {
+          "type": "Company",
+          "fields": {
+            "ruc": "20000000001",
+            "razonSocial": "EMISOR FICTICIO",
+            "address": {
+              "type": "Address",
+              "fields": {
+                "ubigueo": "150101",
+                "codLocal": "0000"
+              }
+            }
+          }
+        },
+        "mtoImpVenta": 1,
+        "mtoOperGravadas": 1,
+        "mtoOperInafectas": 0,
+        "mtoOperExoneradas": 0,
+        "tipoOperacion": "0101",
+        "totalImpuestos": 0,
+        "valorVenta": 1,
+        "formaPago": {
+          "type": "FormaPagoContado",
+          "fields": {
+            "tipo": "Contado"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "2.1/Note/_/valid-root",
+    "version": "2.1",
+    "model": {
+      "type": "Note",
+      "fields": {
+        "tipoDoc": "07",
+        "serie": "F001",
+        "correlativo": "1",
+        "fechaEmision": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "tipoMoneda": "PEN",
+        "client": {
+          "type": "Client",
+          "fields": {
+            "tipoDoc": "6",
+            "numDoc": "20000000001",
+            "rznSocial": "CLIENTE FICTICIO"
+          }
+        },
+        "company": {
+          "type": "Company",
+          "fields": {
+            "ruc": "20000000001",
+            "razonSocial": "EMISOR FICTICIO",
+            "address": {
+              "type": "Address",
+              "fields": {
+                "ubigueo": "150101",
+                "codLocal": "0000"
+              }
+            }
+          }
+        },
+        "mtoImpVenta": 1,
+        "mtoOperGravadas": 1,
+        "mtoOperInafectas": 0,
+        "mtoOperExoneradas": 0,
+        "codMotivo": "01",
+        "desMotivo": "PRUEBA",
+        "tipDocAfectado": "01",
+        "numDocfectado": "F001-1",
+        "totalImpuestos": 0
+      }
+    }
+  },
+  {
+    "id": "2.1/Despatch/_/valid-root",
+    "version": "2.1",
+    "model": {
+      "type": "Despatch",
+      "fields": {
+        "tipoDoc": "09",
+        "serie": "T001",
+        "correlativo": "1",
+        "fechaEmision": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "destinatario": {
+          "type": "Client",
+          "fields": {
+            "tipoDoc": "6",
+            "numDoc": "20000000001",
+            "rznSocial": "CLIENTE FICTICIO"
+          }
+        },
+        "company": {
+          "type": "Company",
+          "fields": {
+            "ruc": "20000000001",
+            "razonSocial": "EMISOR FICTICIO",
+            "address": {
+              "type": "Address",
+              "fields": {
+                "ubigueo": "150101",
+                "codLocal": "0000"
+              }
+            }
+          }
+        },
+        "envio": {
+          "type": "Shipment",
+          "fields": {
+            "codTraslado": "01",
+            "pesoTotal": 1,
+            "undPesoTotal": "KGM",
+            "modTraslado": "01",
+            "fecTraslado": {
+              "$date": "2025-01-10T12:00:00-05:00"
+            }
+          }
+        },
+        "details": [
+          {
+            "type": "DespatchDetail",
+            "fields": {
+              "cantidad": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "2.1/Summary/_/valid-root",
+    "version": "2.1",
+    "model": {
+      "type": "Summary",
+      "fields": {
+        "correlativo": "1",
+        "fecGeneracion": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "fecResumen": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "company": {
+          "type": "Company",
+          "fields": {
+            "ruc": "20000000001",
+            "razonSocial": "EMISOR FICTICIO",
+            "address": {
+              "type": "Address",
+              "fields": {
+                "ubigueo": "150101",
+                "codLocal": "0000"
+              }
+            }
+          }
+        },
+        "details": [
+          {
+            "type": "SummaryDetail",
+            "fields": {
+              "tipoDoc": "03",
+              "serieNro": "B001-1",
+              "estado": "1",
+              "total": 1,
+              "mtoIGV": 0
+            }
+          }
+        ],
+        "moneda": "PEN"
+      }
+    }
+  },
+  {
+    "id": "2.1/Voided/_/valid-root",
+    "version": "2.1",
+    "model": {
+      "type": "Voided",
+      "fields": {
+        "correlativo": "1",
+        "fecGeneracion": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "fecComunicacion": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "company": {
+          "type": "Company",
+          "fields": {
+            "ruc": "20000000001",
+            "razonSocial": "EMISOR FICTICIO",
+            "address": {
+              "type": "Address",
+              "fields": {
+                "ubigueo": "150101",
+                "codLocal": "0000"
+              }
+            }
+          }
+        },
+        "details": [
+          {
+            "type": "VoidedDetail",
+            "fields": {
+              "tipoDoc": "01",
+              "serie": "F001",
+              "correlativo": "1",
+              "desMotivoBaja": "PRUEBA"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "2.1/Reversion/_/valid-root",
+    "version": "2.1",
+    "model": {
+      "type": "Reversion",
+      "fields": {
+        "correlativo": "1",
+        "fecGeneracion": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "fecComunicacion": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "company": {
+          "type": "Company",
+          "fields": {
+            "ruc": "20000000001",
+            "razonSocial": "EMISOR FICTICIO",
+            "address": {
+              "type": "Address",
+              "fields": {
+                "ubigueo": "150101",
+                "codLocal": "0000"
+              }
+            }
+          }
+        },
+        "details": [
+          {
+            "type": "VoidedDetail",
+            "fields": {
+              "tipoDoc": "01",
+              "serie": "F001",
+              "correlativo": "1",
+              "desMotivoBaja": "PRUEBA"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "2.1/Retention/_/valid-root",
+    "version": "2.1",
+    "model": {
+      "type": "Retention",
+      "fields": {
+        "serie": "R001",
+        "correlativo": "1",
+        "fechaEmision": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "company": {
+          "type": "Company",
+          "fields": {
+            "ruc": "20000000001",
+            "razonSocial": "EMISOR FICTICIO",
+            "address": {
+              "type": "Address",
+              "fields": {
+                "ubigueo": "150101",
+                "codLocal": "0000"
+              }
+            }
+          }
+        },
+        "proveedor": {
+          "type": "Client",
+          "fields": {
+            "tipoDoc": "6",
+            "numDoc": "20000000001",
+            "rznSocial": "CLIENTE FICTICIO"
+          }
+        },
+        "regimen": "01",
+        "tasa": 1,
+        "impRetenido": 1,
+        "impPagado": 1,
+        "details": [
+          {
+            "type": "RetentionDetail",
+            "fields": {
+              "tipoDoc": "01",
+              "numDoc": "F001-1",
+              "fechaEmision": {
+                "$date": "2025-01-10T12:00:00-05:00"
+              },
+              "impTotal": 1,
+              "moneda": "PEN",
+              "pagos": [
+                {
+                  "type": "Payment",
+                  "fields": {
+                    "moneda": "PEN",
+                    "importe": 1,
+                    "fecha": {
+                      "$date": "2025-01-10T12:00:00-05:00"
+                    }
+                  }
+                }
+              ],
+              "impPagar": 1,
+              "fechaRetencion": {
+                "$date": "2025-01-10T12:00:00-05:00"
+              },
+              "impRetenido": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "2.1/Perception/_/valid-root",
+    "version": "2.1",
+    "model": {
+      "type": "Perception",
+      "fields": {
+        "serie": "P001",
+        "correlativo": "1",
+        "fechaEmision": {
+          "$date": "2025-01-10T12:00:00-05:00"
+        },
+        "company": {
+          "type": "Company",
+          "fields": {
+            "ruc": "20000000001",
+            "razonSocial": "EMISOR FICTICIO",
+            "address": {
+              "type": "Address",
+              "fields": {
+                "ubigueo": "150101",
+                "codLocal": "0000"
+              }
+            }
+          }
+        },
+        "proveedor": {
+          "type": "Client",
+          "fields": {
+            "tipoDoc": "6",
+            "numDoc": "20000000001",
+            "rznSocial": "CLIENTE FICTICIO"
+          }
+        },
+        "regimen": "01",
+        "tasa": 1,
+        "impPercibido": 1,
+        "impCobrado": 1,
+        "details": [
+          {
+            "type": "PerceptionDetail",
+            "fields": {
+              "tipoDoc": "01",
+              "numDoc": "F001-1",
+              "fechaEmision": {
+                "$date": "2025-01-10T12:00:00-05:00"
+              },
+              "impTotal": 1,
+              "moneda": "PEN",
+              "cobros": [
+                {
+                  "type": "Payment",
+                  "fields": {
+                    "moneda": "PEN",
+                    "importe": 1,
+                    "fecha": {
+                      "$date": "2025-01-10T12:00:00-05:00"
+                    }
+                  }
+                }
+              ],
+              "impCobrar": 1,
+              "fechaPercepcion": {
+                "$date": "2025-01-10T12:00:00-05:00"
+              },
+              "impPercibido": 1
+            }
+          }
+        ]
+      }
+    }
+  }
+]

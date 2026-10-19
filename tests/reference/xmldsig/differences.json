@@ -1,0 +1,317 @@
+{
+  "description": "Diferencias referencia↔Rust de cpeforge-xmldsig observadas por crates/xmldsig/tests/parity.rs. Cada entrada se valida con tests/support/perfil_seguro.rs: DIFERENCIA_DELIBERADA con motivo admitido por el perfil seguro (docs/verificacion-paridad.md#perfil-seguro) o CORREGIR pendiente, que bloquea LISTO.",
+  "differences": [
+    {
+      "family": "signing",
+      "id": "sunat-sign-malformed",
+      "reason": "XML mal formado (incluye la secuencia ']]>' en contenido): la referencia emite un aviso y SignedXml::signXml devuelve un documento VACÍO sin firma; Rust devuelve error.",
+      "category": "xml-invalido",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "compatibility_note": "La referencia «firma» un documento vacío; Rust devuelve error en vez de producir un XML sin firma."
+    },
+    {
+      "family": "signing",
+      "id": "sunat-sign-special",
+      "reason": "XML mal formado (incluye la secuencia ']]>' en contenido): la referencia emite un aviso y SignedXml::signXml devuelve un documento VACÍO sin firma; Rust devuelve error.",
+      "category": "xml-invalido",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "compatibility_note": "La referencia «firma» un documento vacío; Rust devuelve error en vez de producir un XML sin firma."
+    },
+    {
+      "family": "signing",
+      "id": "sunat-sign-special-sha256",
+      "reason": "XML mal formado (incluye la secuencia ']]>' en contenido): la referencia emite un aviso y SignedXml::signXml devuelve un documento VACÍO sin firma; Rust devuelve error.",
+      "category": "xml-invalido",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "compatibility_note": "La referencia «firma» un documento vacío; Rust devuelve error en vez de producir un XML sin firma."
+    },
+    {
+      "family": "encryption",
+      "id": "x509-not-pfx",
+      "reason": "Ambos rechazan la entrada; la referencia lee el PKCS#12 con d2i_PKCS12_bio y Rust con d2i_PKCS12, que informan un error ASN.1 distinto.",
+      "category": "detalle-openssl",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "diagnostico-runtime",
+      "compatibility_note": "Ambos rechazan el PKCS#12; solo cambia el texto ASN.1 que genera OpenSSL."
+    },
+    {
+      "family": "hostile",
+      "id": "hostile-serialize-billion-laughs",
+      "reason": "Ambos rechazan: libxml2 por amplificación de entidades; Rust antes, por la presencia del DTD.",
+      "category": "politica-entradas",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "compatibility_note": "Los XML de la referencia y los CDR de SUNAT no declaran DTD y quedan muy por debajo de los límites (10 MiB, 1.000.000 de nodos, 10 millones de pasos XPath)."
+    },
+    {
+      "family": "hostile",
+      "id": "hostile-serialize-dtd-internal-entity",
+      "reason": "Rust rechaza todo XML con DTD (entidades internas o externas, DTD externo, entidades de parámetro, ATTLIST ID); la referencia lo acepta sin expandir entidades ni cargar recursos externos.",
+      "category": "politica-entradas",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "compatibility_note": "Los XML de la referencia y los CDR de SUNAT no declaran DTD y quedan muy por debajo de los límites (10 MiB, 1.000.000 de nodos, 10 millones de pasos XPath)."
+    },
+    {
+      "family": "hostile",
+      "id": "hostile-serialize-dtd-only",
+      "reason": "Rust rechaza todo XML con DTD (entidades internas o externas, DTD externo, entidades de parámetro, ATTLIST ID); la referencia lo acepta sin expandir entidades ni cargar recursos externos.",
+      "category": "politica-entradas",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "compatibility_note": "Los XML de la referencia y los CDR de SUNAT no declaran DTD y quedan muy por debajo de los límites (10 MiB, 1.000.000 de nodos, 10 millones de pasos XPath)."
+    },
+    {
+      "family": "hostile",
+      "id": "hostile-serialize-external-entity",
+      "reason": "Rust rechaza todo XML con DTD (entidades internas o externas, DTD externo, entidades de parámetro, ATTLIST ID); la referencia lo acepta sin expandir entidades ni cargar recursos externos.",
+      "category": "politica-entradas",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "compatibility_note": "Los XML de la referencia y los CDR de SUNAT no declaran DTD y quedan muy por debajo de los límites (10 MiB, 1.000.000 de nodos, 10 millones de pasos XPath)."
+    },
+    {
+      "family": "hostile",
+      "id": "hostile-serialize-external-dtd",
+      "reason": "Rust rechaza todo XML con DTD (entidades internas o externas, DTD externo, entidades de parámetro, ATTLIST ID); la referencia lo acepta sin expandir entidades ni cargar recursos externos.",
+      "category": "politica-entradas",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "compatibility_note": "Los XML de la referencia y los CDR de SUNAT no declaran DTD y quedan muy por debajo de los límites (10 MiB, 1.000.000 de nodos, 10 millones de pasos XPath)."
+    },
+    {
+      "family": "hostile",
+      "id": "hostile-serialize-parameter-entity",
+      "reason": "Rust rechaza todo XML con DTD (entidades internas o externas, DTD externo, entidades de parámetro, ATTLIST ID); la referencia lo acepta sin expandir entidades ni cargar recursos externos.",
+      "category": "politica-entradas",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "compatibility_note": "Los XML de la referencia y los CDR de SUNAT no declaran DTD y quedan muy por debajo de los límites (10 MiB, 1.000.000 de nodos, 10 millones de pasos XPath)."
+    },
+    {
+      "family": "hostile",
+      "id": "hostile-sunat-sign-dtd",
+      "reason": "Rust rechaza todo XML con DTD (entidades internas o externas, DTD externo, entidades de parámetro, ATTLIST ID); la referencia lo acepta sin expandir entidades ni cargar recursos externos.",
+      "category": "politica-entradas",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "compatibility_note": "Los XML de la referencia y los CDR de SUNAT no declaran DTD y quedan muy por debajo de los límites (10 MiB, 1.000.000 de nodos, 10 millones de pasos XPath)."
+    },
+    {
+      "family": "hostile",
+      "id": "hostile-sunat-verify-dtd-added",
+      "reason": "Rust rechaza todo XML con DTD (entidades internas o externas, DTD externo, entidades de parámetro, ATTLIST ID); la referencia lo acepta sin expandir entidades ni cargar recursos externos.",
+      "category": "politica-entradas",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "compatibility_note": "Los XML de la referencia y los CDR de SUNAT no declaran DTD y quedan muy por debajo de los límites (10 MiB, 1.000.000 de nodos, 10 millones de pasos XPath)."
+    },
+    {
+      "family": "hostile",
+      "id": "hostile-sunat-verify-entity-substitution",
+      "reason": "Rust rechaza todo XML con DTD (entidades internas o externas, DTD externo, entidades de parámetro, ATTLIST ID); la referencia lo acepta sin expandir entidades ni cargar recursos externos.",
+      "category": "politica-entradas",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "compatibility_note": "Los XML de la referencia y los CDR de SUNAT no declaran DTD y quedan muy por debajo de los límites (10 MiB, 1.000.000 de nodos, 10 millones de pasos XPath)."
+    },
+    {
+      "family": "hostile",
+      "id": "hostile-sunat-verify-external-entity",
+      "reason": "Rust rechaza todo XML con DTD (entidades internas o externas, DTD externo, entidades de parámetro, ATTLIST ID); la referencia lo acepta sin expandir entidades ni cargar recursos externos.",
+      "category": "politica-entradas",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "compatibility_note": "Los XML de la referencia y los CDR de SUNAT no declaran DTD y quedan muy por debajo de los límites (10 MiB, 1.000.000 de nodos, 10 millones de pasos XPath)."
+    },
+    {
+      "family": "hostile",
+      "id": "hostile-dsig-verify-dtd-id",
+      "reason": "Rust rechaza todo XML con DTD (entidades internas o externas, DTD externo, entidades de parámetro, ATTLIST ID); la referencia lo acepta sin expandir entidades ni cargar recursos externos.",
+      "category": "politica-entradas",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "compatibility_note": "Los XML de la referencia y los CDR de SUNAT no declaran DTD y quedan muy por debajo de los límites (10 MiB, 1.000.000 de nodos, 10 millones de pasos XPath)."
+    },
+    {
+      "family": "hostile",
+      "id": "hostile-serialize-huge-11mib",
+      "reason": "Rust limita la entrada a 10 MiB (ParseOptions::max_bytes); la referencia acepta 11 MiB.",
+      "category": "politica-entradas",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "compatibility_note": "Los XML de la referencia y los CDR de SUNAT no declaran DTD y quedan muy por debajo de los límites (10 MiB, 1.000.000 de nodos, 10 millones de pasos XPath)."
+    },
+    {
+      "family": "hostile",
+      "id": "hostile-sunat-verify-huge",
+      "reason": "Rust limita la entrada a 10 MiB (ParseOptions::max_bytes); la referencia acepta 11 MiB.",
+      "category": "politica-entradas",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "compatibility_note": "Los XML de la referencia y los CDR de SUNAT no declaran DTD y quedan muy por debajo de los límites (10 MiB, 1.000.000 de nodos, 10 millones de pasos XPath)."
+    },
+    {
+      "family": "hostile",
+      "id": "hostile-serialize-many-nodes",
+      "reason": "Rust limita el documento a 1.000.000 de nodos (ParseOptions::max_nodes); la referencia lo acepta.",
+      "category": "politica-entradas",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "compatibility_note": "Los XML de la referencia y los CDR de SUNAT no declaran DTD y quedan muy por debajo de los límites (10 MiB, 1.000.000 de nodos, 10 millones de pasos XPath)."
+    },
+    {
+      "family": "hostile",
+      "id": "hostile-c14n-xpath-quadratic",
+      "reason": "Rust limita la evaluación XPath a 10 millones de nodos recorridos por los ejes (expresiones cuadráticas como following:: en cada nodo) y devuelve error; la referencia la completa.",
+      "category": "politica-entradas",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "compatibility_note": "Los XML de la referencia y los CDR de SUNAT no declaran DTD y quedan muy por debajo de los límites (10 MiB, 1.000.000 de nodos, 10 millones de pasos XPath)."
+    },
+    {
+      "family": "encoding",
+      "id": "encoding-cyrillic-iso-8859-5",
+      "category": "codificacion-fuera-de-alcance",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "libxml2 convierte con iconv y la referencia acepta cualquier codificación que iconv conozca (ISO-8859-5 en el caso, además de griego, cirílico, asiáticas, EBCDIC…). Rust admite UTF-8, ISO-8859-1, US-ASCII, windows-1252 e ISO-8859-15 y devuelve UnsupportedEncoding con las demás.",
+      "motivo": "codificacion-fuera-de-alcance",
+      "compatibility_note": "Los comprobantes de la referencia y SUNAT usan UTF-8 o ISO-8859-1. Un XML en otra codificación debe convertirse a UTF-8 antes de firmarlo o verificarlo con Rust."
+    },
+    {
+      "family": "encoding",
+      "id": "encoding-cp1252-undefined-81",
+      "category": "dependiente-de-iconv",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "dependiente-de-iconv",
+      "only_when": {
+        "iconv_profile": "libiconv"
+      },
+      "reason": "El octeto 0x81 no está asignado en windows-1252. El libiconv de macOS lo lee como control C1 y la referencia carga el XML; el iconv de glibc lo rechaza. Rust lo rechaza, como glibc (servidores Linux) y la tabla de Unicode.",
+      "compatibility_note": "En Linux la referencia y Rust coinciden. Solo difiere frente a la referencia sobre macOS."
+    },
+    {
+      "family": "encoding",
+      "id": "encoding-cp1252-undefined-8d",
+      "category": "dependiente-de-iconv",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "dependiente-de-iconv",
+      "only_when": {
+        "iconv_profile": "libiconv"
+      },
+      "reason": "El octeto 0x8D no está asignado en windows-1252. El libiconv de macOS lo lee como control C1 y la referencia carga el XML; el iconv de glibc lo rechaza. Rust lo rechaza, como glibc (servidores Linux) y la tabla de Unicode.",
+      "compatibility_note": "En Linux la referencia y Rust coinciden. Solo difiere frente a la referencia sobre macOS."
+    },
+    {
+      "family": "encoding",
+      "id": "encoding-cp1252-undefined-8f",
+      "category": "dependiente-de-iconv",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "dependiente-de-iconv",
+      "only_when": {
+        "iconv_profile": "libiconv"
+      },
+      "reason": "El octeto 0x8F no está asignado en windows-1252. El libiconv de macOS lo lee como control C1 y la referencia carga el XML; el iconv de glibc lo rechaza. Rust lo rechaza, como glibc (servidores Linux) y la tabla de Unicode.",
+      "compatibility_note": "En Linux la referencia y Rust coinciden. Solo difiere frente a la referencia sobre macOS."
+    },
+    {
+      "family": "encoding",
+      "id": "encoding-cp1252-undefined-90",
+      "category": "dependiente-de-iconv",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "dependiente-de-iconv",
+      "only_when": {
+        "iconv_profile": "libiconv"
+      },
+      "reason": "El octeto 0x90 no está asignado en windows-1252. El libiconv de macOS lo lee como control C1 y la referencia carga el XML; el iconv de glibc lo rechaza. Rust lo rechaza, como glibc (servidores Linux) y la tabla de Unicode.",
+      "compatibility_note": "En Linux la referencia y Rust coinciden. Solo difiere frente a la referencia sobre macOS."
+    },
+    {
+      "family": "encoding",
+      "id": "encoding-cp1252-undefined-9d",
+      "category": "dependiente-de-iconv",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "dependiente-de-iconv",
+      "only_when": {
+        "iconv_profile": "libiconv"
+      },
+      "reason": "El octeto 0x9D no está asignado en windows-1252. El libiconv de macOS lo lee como control C1 y la referencia carga el XML; el iconv de glibc lo rechaza. Rust lo rechaza, como glibc (servidores Linux) y la tabla de Unicode.",
+      "compatibility_note": "En Linux la referencia y Rust coinciden. Solo difiere frente a la referencia sobre macOS."
+    },
+    {
+      "family": "encoding",
+      "id": "encoding-latin9-LATIN9",
+      "category": "dependiente-de-iconv",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "dependiente-de-iconv",
+      "only_when": {
+        "iconv_profile": "libiconv"
+      },
+      "reason": "El alias LATIN9 (ISO-8859-15) lo admite el iconv de glibc y no el libiconv de macOS. Rust lo admite, como glibc.",
+      "compatibility_note": "En Linux la referencia y Rust coinciden. Solo difiere frente a la referencia sobre macOS."
+    },
+    {
+      "family": "basics",
+      "id": "c14n-xpath-text-functions-document",
+      "category": "dependiente-de-libxml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "dependiente-de-libxml",
+      "only_when": {
+        "libxml_xpath": "limitado"
+      },
+      "reason": "La transformación XPath filtra con funciones de texto (`contains`, `normalize-space`) sobre `(.//. | .//@* | .//namespace::*)`. Con libxml2 2.9 (Ubuntu) la referencia no la evalúa y lanza «XPath query did not return a nodeset»; con libxml2 reciente (2.15 en macOS) la canonicaliza. Rust la canonicaliza, como la versión reciente.",
+      "compatibility_note": "Con libxml2 reciente la referencia y Rust coinciden. Solo difiere frente a la referencia con libxml2 2.9 y con un filtro XPath que las firmas SUNAT no usan (firman con URI=\"\" y la transformación enveloped)."
+    },
+    {
+      "family": "basics",
+      "id": "c14n-xpath-text-functions-root",
+      "category": "dependiente-de-libxml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "dependiente-de-libxml",
+      "only_when": {
+        "libxml_xpath": "limitado"
+      },
+      "reason": "La transformación XPath filtra con funciones de texto (`contains`, `normalize-space`) sobre `(.//. | .//@* | .//namespace::*)`. Con libxml2 2.9 (Ubuntu) la referencia no la evalúa y lanza «XPath query did not return a nodeset»; con libxml2 reciente (2.15 en macOS) la canonicaliza. Rust la canonicaliza, como la versión reciente.",
+      "compatibility_note": "Con libxml2 reciente la referencia y Rust coinciden. Solo difiere frente a la referencia con libxml2 2.9 y con un filtro XPath que las firmas SUNAT no usan (firman con URI=\"\" y la transformación enveloped)."
+    },
+    {
+      "family": "basics",
+      "id": "c14n-xpath-text-functions-id-target",
+      "category": "dependiente-de-libxml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "dependiente-de-libxml",
+      "only_when": {
+        "libxml_xpath": "limitado"
+      },
+      "reason": "La transformación XPath filtra con funciones de texto (`contains`, `normalize-space`) sobre `(.//. | .//@* | .//namespace::*)`. Con libxml2 2.9 (Ubuntu) la referencia no la evalúa y lanza «XPath query did not return a nodeset»; con libxml2 reciente (2.15 en macOS) la canonicaliza. Rust la canonicaliza, como la versión reciente.",
+      "compatibility_note": "Con libxml2 reciente la referencia y Rust coinciden. Solo difiere frente a la referencia con libxml2 2.9 y con un filtro XPath que las firmas SUNAT no usan (firman con URI=\"\" y la transformación enveloped)."
+    },
+    {
+      "family": "basics",
+      "id": "serialize-cdata",
+      "category": "dependiente-de-libxml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "dependiente-de-libxml",
+      "only_when": {
+        "libxml_cdata": "unidos"
+      },
+      "reason": "Dos secciones CDATA contiguas: libxml2 2.9 (Ubuntu) las une en un nodo al cargar y la referencia serializa una sola `<![CDATA[ <x> & second]]>`; libxml2 reciente (2.15 en macOS) las mantiene separadas. Rust las mantiene separadas, como la versión reciente.",
+      "compatibility_note": "Con libxml2 reciente la referencia y Rust coinciden. El texto representado es el mismo; solo cambia cuántas secciones CDATA se escriben."
+    },
+    {
+      "family": "basics",
+      "id": "serialize-text-escapes",
+      "category": "dependiente-de-libxml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "dependiente-de-libxml",
+      "only_when": {
+        "libxml_cr": "hex"
+      },
+      "reason": "Al serializar un retorno de carro, libxml2 2.9 (Ubuntu) escribe `&#xD;` y libxml2 reciente (2.15 en macOS) escribe `&#13;`. Rust escribe `&#13;`, como la versión reciente.",
+      "compatibility_note": "Ambas referencias representan el mismo carácter. Con libxml2 reciente la referencia y Rust coinciden byte a byte; la firma no se ve afectada porque C14N escribe siempre `&#xD;`."
+    }
+  ]
+}

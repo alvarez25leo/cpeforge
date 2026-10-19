@@ -1,0 +1,24 @@
+CPEForge
+Copyright (c) 2026 Contribuidores de CPEForge
+Licencia: MIT (ver LICENSE).
+
+CPEForge es un proyecto independiente que toma como referencia funcional
+determinadas capacidades de Greenter (https://github.com/thegreenter/greenter,
+v5.3.0, licencia MIT). No está afiliado a Greenter ni a SUNAT.
+
+Material de terceros incluido en los crates, distribuido bajo licencia MIT
+(Copyright (c) 2017-2021 Giancarlos Salas). Cada crate que lo incluye
+reproduce el aviso de copyright y de permiso en su archivo LICENSE-THIRD-PARTY:
+
+- cpeforge-xml: marcado UBL de las plantillas de documentos.
+- cpeforge-xcodes: catálogo CodeErrors.xml (SHA-256
+  dbfaaa646d538ce693d9129fc02ddc4adb660271167ee8cccd0624e9c8997fdb).
+- cpeforge-report: siete plantillas HTML, CSS y tablas de catálogos, con
+  adaptaciones para MiniJinja.
+- cpeforge-core, cpeforge-validator, cpeforge-xml-parser, cpeforge-ws,
+  cpeforge-gre-api, cpeforge, cpeforge-xmldsig, cpeforge-cpe-validator y
+  cpeforge-ubl-validator: partes del modelo de datos, de las reglas y de la
+  API pública.
+
+Los recursos WSDL/XSD de SUNAT, las reglas XSL de SUNAT y los fixtures de
+prueba no forman parte de los paquetes publicados.

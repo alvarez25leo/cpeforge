@@ -1,0 +1,20 @@
+{
+  "guia-sin-fecha-entrega": {
+    "codigo_esperado": "3617",
+    "motivo": "GRE de transporte público sin fecha de entrega de bienes",
+    "version_ubl": "2.1",
+    "xsd_raiz": "DespatchAdvice"
+  },
+  "nota-motivo13-con-total": {
+    "codigo_esperado": "3315",
+    "motivo": "Nota de crédito con motivo 13 e importe distinto de cero",
+    "version_ubl": "2.1",
+    "xsd_raiz": "CreditNote"
+  },
+  "resumen-sin-tasa": {
+    "codigo_esperado": "2992",
+    "motivo": "Resumen diario sin porcentaje IGV en las líneas",
+    "version_ubl": "2.0",
+    "xsd_raiz": "SummaryDocuments"
+  }
+}

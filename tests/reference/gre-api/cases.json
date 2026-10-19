@@ -1,0 +1,4155 @@
+{
+  "cases": [
+    {
+      "id": "token-ok-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ],
+          [
+            "X-Traza",
+            "a"
+          ],
+          [
+            "X-Traza",
+            "b"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"token_type\":\"Bearer\",\"expires_in\":3600}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-ok-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ],
+          [
+            "X-Traza",
+            "a"
+          ],
+          [
+            "X-Traza",
+            "b"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"token_type\":\"Bearer\",\"expires_in\":3600}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-ok-async",
+      "operation": "getToken",
+      "variant": "async",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ],
+          [
+            "X-Traza",
+            "a"
+          ],
+          [
+            "X-Traza",
+            "b"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"token_type\":\"Bearer\",\"expires_in\":3600}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-ok-async_http_info",
+      "operation": "getToken",
+      "variant": "async_http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ],
+          [
+            "X-Traza",
+            "a"
+          ],
+          [
+            "X-Traza",
+            "b"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"token_type\":\"Bearer\",\"expires_in\":3600}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-reserved-chars",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"token_type\":\"Bearer\",\"expires_in\":3600}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "id/ä ?&=#%",
+        "client_secret": "s&e=c+r%t ñ",
+        "username": "20000000001 USU",
+        "password": "p@ss w/ord ~*'()!"
+      }
+    },
+    {
+      "id": "token-content-type-json",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"token_type\":\"Bearer\",\"expires_in\":3600}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      },
+      "content_type": "application/json"
+    },
+    {
+      "id": "token-content-type-empty",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"token_type\":\"Bearer\",\"expires_in\":3600}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      },
+      "content_type": ""
+    },
+    {
+      "id": "token-content-type-text",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"token_type\":\"Bearer\",\"expires_in\":3600}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      },
+      "content_type": "text/plain"
+    },
+    {
+      "id": "token-empty-strings",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"token_type\":\"Bearer\",\"expires_in\":3600}"
+      },
+      "args": {
+        "grant_type": "",
+        "scope": "",
+        "client_id": "",
+        "client_secret": "",
+        "username": "",
+        "password": ""
+      }
+    },
+    {
+      "id": "token-null-client_id",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": null,
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      },
+      "rust": "no_aplica"
+    },
+    {
+      "id": "token-null-grant_type",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "args": {
+        "grant_type": null,
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      },
+      "rust": "no_aplica"
+    },
+    {
+      "id": "token-null-password",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": null
+      },
+      "rust": "no_aplica"
+    },
+    {
+      "id": "token-values-expires-string",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"expires_in\":\"3600\"}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-values-expires-float",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"expires_in\":3600.9}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-values-expires-text",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"expires_in\":\"abc\"}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-values-expires-prefix",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"expires_in\":\"120s\"}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-values-expires-bool",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"expires_in\":true}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-values-expires-null",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"expires_in\":null}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-values-expires-array",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"expires_in\":[1]}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-values-token-number",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":123,\"token_type\":1.5}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-values-token-bool",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":true,\"token_type\":false}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-values-token-array",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":[\"a\"]}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-values-token-object",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":{\"a\":1}}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-values-token-unicode",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":\"tökén-ñ-😀\",\"token_type\":\"Bearer\"}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-values-extra-fields",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"token_type\":\"Bearer\",\"expires_in\":3600,\"scope\":\"x\",\"otro\":{\"a\":1}}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-values-big-int",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"expires_in\":9223372036854775807}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-body-malformed-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{bad"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-body-malformed-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{bad"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-body-empty-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": ""
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-body-empty-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": ""
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-body-json-null-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "null"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-body-json-null-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "null"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-body-json-array-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "[]"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-body-json-array-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "[]"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-body-json-list-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "[1,2]"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-body-json-list-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "[1,2]"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-body-json-number-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "123"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-body-json-number-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "123"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-body-json-string-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "\"{\\\"access_token\\\": \\\"token-ficticio-0123456789\\\", \\\"token_type\\\": \\\"Bearer\\\", \\\"expires_in\\\": 3600}\""
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-body-json-string-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "\"{\\\"access_token\\\": \\\"token-ficticio-0123456789\\\", \\\"token_type\\\": \\\"Bearer\\\", \\\"expires_in\\\": 3600}\""
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-body-json-bom-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "﻿{\"access_token\": \"token-ficticio-0123456789\", \"token_type\": \"Bearer\", \"expires_in\": 3600}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-body-json-bom-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "﻿{\"access_token\": \"token-ficticio-0123456789\", \"token_type\": \"Bearer\", \"expires_in\": 3600}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-body-whitespace-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "  \n{\"access_token\": \"token-ficticio-0123456789\", \"token_type\": \"Bearer\", \"expires_in\": 3600}\n "
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-body-whitespace-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "  \n{\"access_token\": \"token-ficticio-0123456789\", \"token_type\": \"Bearer\", \"expires_in\": 3600}\n "
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-401-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 401,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"error\":\"invalid_client\",\"error_description\":\"Cliente no autorizado\"}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-401-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 401,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"error\":\"invalid_client\",\"error_description\":\"Cliente no autorizado\"}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-403-empty-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 403,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": ""
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-403-empty-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 403,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": ""
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-400-long-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 400,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-400-long-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 400,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-400-120-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 400,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-400-120-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 400,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-500-control-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 500,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "bad\u0001ctl"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-500-control-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 500,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "bad\u0001ctl"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-500-cut-utf8-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 500,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "añññññññññññññññññññññññññññññññññññññññññññññññññññññññññññññ"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-500-cut-utf8-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 500,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "añññññññññññññññññññññññññññññññññññññññññññññññññññññññññññññ"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-404-html-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 404,
+        "headers": [
+          [
+            "Content-Type",
+            "text/html"
+          ]
+        ],
+        "body": "<html><body>No encontrado</body></html>"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-404-html-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 404,
+        "headers": [
+          [
+            "Content-Type",
+            "text/html"
+          ]
+        ],
+        "body": "<html><body>No encontrado</body></html>"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-401-reason-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 401,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"error\":\"x\"}",
+        "reason": "Credenciales Invalidas"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-401-reason-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 401,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"error\":\"x\"}",
+        "reason": "Credenciales Invalidas"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-418-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 418,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "tea"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-418-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 418,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "tea"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-599-no-reason-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 599,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "z",
+        "reason": ""
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-error-599-no-reason-http_info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 599,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "z",
+        "reason": ""
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-async-401",
+      "operation": "getToken",
+      "variant": "async",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 401,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"error\":\"invalid_client\",\"error_description\":\"Cliente no autorizado\"}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-async-http-info-500",
+      "operation": "getToken",
+      "variant": "async_http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 500,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "error"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-201",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 201,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"token_type\":\"Bearer\",\"expires_in\":3600}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-204-sync",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 204,
+        "headers": [],
+        "body": ""
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-204-http-info",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 204,
+        "headers": [],
+        "body": ""
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-300",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 300,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "multiple"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-redirect-same-host",
+      "operation": "getToken",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 302,
+        "headers": [
+          [
+            "Location",
+            "@same/final"
+          ]
+        ],
+        "body": "",
+        "final": {
+          "status": 200,
+          "headers": [
+            [
+              "Content-Type",
+              "application/json"
+            ]
+          ],
+          "body": "{\"access_token\":\"token-ficticio-0123456789\",\"token_type\":\"Bearer\",\"expires_in\":3600}"
+        }
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-timeout",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"token_type\":\"Bearer\",\"expires_in\":3600}",
+        "delay": 3
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      },
+      "client": {
+        "timeout": 1
+      }
+    },
+    {
+      "id": "token-connection-refused",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "http://127.0.0.1:1"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-async-connection-refused",
+      "operation": "getToken",
+      "variant": "async",
+      "config": {
+        "host": "http://127.0.0.1:1"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-connection-closed",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "action": "close"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-user-agent-custom",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock",
+        "user_agent": "MiApp/2.0"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"token_type\":\"Bearer\",\"expires_in\":3600}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-user-agent-empty",
+      "operation": "getToken",
+      "variant": "sync",
+      "config": {
+        "host": "mock",
+        "user_agent": ""
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"access_token\":\"token-ficticio-0123456789\",\"token_type\":\"Bearer\",\"expires_in\":3600}"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "token-request-default",
+      "operation": "getToken",
+      "variant": "request",
+      "config": {
+        "host": "mock"
+      },
+      "args": {
+        "grant_type": "password",
+        "scope": "https://api-cpe.sunat.gob.pe",
+        "client_id": "cliente-ficticio",
+        "client_secret": "secreto-ficticio",
+        "username": "20000000001USUARIOX",
+        "password": "clave-ficticia"
+      }
+    },
+    {
+      "id": "envio-ok-sync",
+      "operation": "enviarCpe",
+      "variant": "sync",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02T10:20:30.123-05:00\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-ok-http_info",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02T10:20:30.123-05:00\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-ok-async",
+      "operation": "enviarCpe",
+      "variant": "async",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02T10:20:30.123-05:00\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-ok-async_http_info",
+      "operation": "enviarCpe",
+      "variant": "async_http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02T10:20:30.123-05:00\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-filename-reserved",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02T10:20:30.123-05:00\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1 ñ/x?#&",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-filename-dotdot",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02T10:20:30.123-05:00\"}"
+      },
+      "args": {
+        "filename": "..",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-filename-empty",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02T10:20:30.123-05:00\"}"
+      },
+      "args": {
+        "filename": "",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-no-document",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02T10:20:30.123-05:00\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": null
+      }
+    },
+    {
+      "id": "envio-document-empty",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02T10:20:30.123-05:00\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": null
+        }
+      }
+    },
+    {
+      "id": "envio-archivo-empty",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02T10:20:30.123-05:00\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {}
+        }
+      }
+    },
+    {
+      "id": "envio-json-escaping",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02T10:20:30.123-05:00\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "ñandú-\"q\"\\/<>&'.zip",
+            "arc_gre_zip": "ab/+cd==\u0001",
+            "hash_zip": "😀"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-content-type-text",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02T10:20:30.123-05:00\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      },
+      "content_type": "text/plain"
+    },
+    {
+      "id": "envio-content-type-json-charset",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02T10:20:30.123-05:00\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      },
+      "content_type": "Application/JSON; charset=utf-8"
+    },
+    {
+      "id": "envio-no-token",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock"
+      },
+      "response": {
+        "status": 401,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": ""
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-token-zero",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "0"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02T10:20:30.123-05:00\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-large",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02T10:20:30.123-05:00\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "grande.zip",
+            "arc_gre_zip": {
+              "repeat": {
+                "unit": "QUJD",
+                "count": 400000
+              }
+            },
+            "hash_zip": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-422-sync",
+      "operation": "enviarCpe",
+      "variant": "sync",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 422,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":\"422\",\"msg\":\"Unprocessable Entity\",\"errors\":[{\"cod\":\"2001\",\"msg\":\"El nombre no coincide\"},{\"cod\":2002,\"msg\":\"Hash\"}]}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-422-http_info",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 422,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":\"422\",\"msg\":\"Unprocessable Entity\",\"errors\":[{\"cod\":\"2001\",\"msg\":\"El nombre no coincide\"},{\"cod\":2002,\"msg\":\"Hash\"}]}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-422-null-item-sync",
+      "operation": "enviarCpe",
+      "variant": "sync",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 422,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":\"422\",\"errors\":[null,{\"cod\":\"1\"}]}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-422-null-item-http_info",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 422,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":\"422\",\"errors\":[null,{\"cod\":\"1\"}]}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-422-errors-object-sync",
+      "operation": "enviarCpe",
+      "variant": "sync",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 422,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":\"422\",\"errors\":{\"cod\":\"1\"}}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-422-errors-object-http_info",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 422,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":\"422\",\"errors\":{\"cod\":\"1\"}}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-422-errors-string-sync",
+      "operation": "enviarCpe",
+      "variant": "sync",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 422,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":\"422\",\"errors\":\"[{\\\"cod\\\": \\\"9\\\"}]\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-422-errors-string-http_info",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 422,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":\"422\",\"errors\":\"[{\\\"cod\\\": \\\"9\\\"}]\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-422-malformed-sync",
+      "operation": "enviarCpe",
+      "variant": "sync",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 422,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{no json"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-422-malformed-http_info",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 422,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{no json"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-422-empty-sync",
+      "operation": "enviarCpe",
+      "variant": "sync",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 422,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": ""
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-422-empty-http_info",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 422,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": ""
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-422-msg-object-sync",
+      "operation": "enviarCpe",
+      "variant": "sync",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 422,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":\"422\",\"msg\":{\"x\":1},\"errors\":{\"y\":1}}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-422-msg-object-http_info",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 422,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":\"422\",\"msg\":{\"x\":1},\"errors\":{\"y\":1}}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-500-sync",
+      "operation": "enviarCpe",
+      "variant": "sync",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 500,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":\"500\",\"msg\":\"Error interno\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-500-http_info",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 500,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":\"500\",\"msg\":\"Error interno\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-500-numeric-sync",
+      "operation": "enviarCpe",
+      "variant": "sync",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 500,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":500,\"msg\":null}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-500-numeric-http_info",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 500,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":500,\"msg\":null}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-401-sync",
+      "operation": "enviarCpe",
+      "variant": "sync",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 401,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":\"401\",\"msg\":\"No autorizado\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-401-http_info",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 401,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":\"401\",\"msg\":\"No autorizado\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-503-text-sync",
+      "operation": "enviarCpe",
+      "variant": "sync",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 503,
+        "headers": [
+          [
+            "Content-Type",
+            "text/plain"
+          ],
+          [
+            "Retry-After",
+            "30"
+          ]
+        ],
+        "body": "Servicio no disponible"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-error-503-text-http_info",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 503,
+        "headers": [
+          [
+            "Content-Type",
+            "text/plain"
+          ],
+          [
+            "Retry-After",
+            "30"
+          ]
+        ],
+        "body": "Servicio no disponible"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-async-422",
+      "operation": "enviarCpe",
+      "variant": "async",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 422,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":\"422\",\"msg\":\"Unprocessable Entity\",\"errors\":[{\"cod\":\"2001\",\"msg\":\"El nombre no coincide\"},{\"cod\":2002,\"msg\":\"Hash\"}]}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-fecha-z",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02T10:20:30Z\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-fecha-micro7",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02T10:20:30.1234567-05:00\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-fecha-compact-offset",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02T10:20:30+0500\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-fecha-no-offset",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02T10:20:30\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-fecha-date-only",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-fecha-space",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-01-02 10:20:30-05:00\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-fecha-empty",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-fecha-zero",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"0\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-fecha-invalid",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"abc\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-fecha-relative",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"first day of January 2024\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-fecha-overflow",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":\"2024-02-30T00:00:00Z\"}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-fecha-number",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":1704208830}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-fecha-array",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":\"1a2b3c4d-0000-4000-8000-0123456789ab\",\"fecRecepcion\":[\"2024\"]}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-ticket-number",
+      "operation": "enviarCpe",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"numTicket\":123}"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-malformed-sync",
+      "operation": "enviarCpe",
+      "variant": "sync",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "<html>"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "envio-request-default",
+      "operation": "enviarCpe",
+      "variant": "request",
+      "config": {
+        "access_token": "token-ficticio-0123456789"
+      },
+      "args": {
+        "filename": "20000000001-09-T001-1",
+        "document": {
+          "archivo": {
+            "nom_archivo": "20000000001-09-T001-1.zip",
+            "arc_gre_zip": "UEsDBBQACAgIAAAAIQAAAAAAAAAAAAAAAAAMAAAA+/ab/cd+ef==",
+            "hash_zip": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    {
+      "id": "consulta-98-sync",
+      "operation": "consultarEnvio",
+      "variant": "sync",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"codRespuesta\":\"98\"}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-98-http_info",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"codRespuesta\":\"98\"}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-98-async",
+      "operation": "consultarEnvio",
+      "variant": "async",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"codRespuesta\":\"98\"}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-98-async_http_info",
+      "operation": "consultarEnvio",
+      "variant": "async_http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"codRespuesta\":\"98\"}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-99",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"codRespuesta\":\"99\",\"error\":{\"numError\":\"1033\",\"desError\":\"El comprobante fue registrado previamente\"},\"indCdrGenerado\":\"0\"}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-0",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"codRespuesta\":\"0\",\"arcCdr\":\"UEsDBBQAAAAIAA==\",\"indCdrGenerado\":\"1\"}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-cod-int-0",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"codRespuesta\":0}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-cod-int-98",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"codRespuesta\":98}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-cod-float",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"codRespuesta\":0.0}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-cod-bool",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"codRespuesta\":true}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-ind-int",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"codRespuesta\":\"0\",\"indCdrGenerado\":1}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-num-error-int",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"codRespuesta\":\"99\",\"error\":{\"numError\":1033}}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-error-json-string",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"codRespuesta\":\"99\",\"error\":\"{\\\"numError\\\": \\\"7\\\", \\\"desError\\\": \\\"x\\\"}\"}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-error-list",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"codRespuesta\":\"99\",\"error\":[]}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-error-text",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"codRespuesta\":\"99\",\"error\":\"x\"}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-error-null",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"codRespuesta\":\"99\",\"error\":null}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-empty-object",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-ticket-reserved",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"codRespuesta\":\"98\"}"
+      },
+      "args": {
+        "ticket": "a b/c?d#e"
+      }
+    },
+    {
+      "id": "consulta-empty-body-sync",
+      "operation": "consultarEnvio",
+      "variant": "sync",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": ""
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-content-type-text",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 200,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"codRespuesta\":\"98\"}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      },
+      "content_type": "text/plain"
+    },
+    {
+      "id": "consulta-error-422",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 422,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":\"422\",\"msg\":\"Unprocessable Entity\",\"errors\":[{\"cod\":\"2001\",\"msg\":\"El nombre no coincide\"},{\"cod\":2002,\"msg\":\"Hash\"}]}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-error-500",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 500,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":\"500\",\"msg\":\"Error interno\"}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-error-422-errors-object",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 422,
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ]
+        ],
+        "body": "{\"cod\":\"422\",\"errors\":{\"cod\":\"1\"}}"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-redirect-cross-host",
+      "operation": "consultarEnvio",
+      "variant": "http_info",
+      "config": {
+        "host": "mock",
+        "access_token": "token-ficticio-0123456789"
+      },
+      "response": {
+        "status": 302,
+        "headers": [
+          [
+            "Location",
+            "@other/final"
+          ]
+        ],
+        "body": "",
+        "final": {
+          "status": 200,
+          "headers": [
+            [
+              "Content-Type",
+              "application/json"
+            ]
+          ],
+          "body": "{\"codRespuesta\":\"0\"}"
+        }
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "consulta-request-default-config",
+      "operation": "consultarEnvio",
+      "variant": "request",
+      "config": {
+        "access_token": "token-ficticio-0123456789"
+      },
+      "args": {
+        "ticket": "1a2b3c4d-0000-4000-8000-0123456789ab"
+      }
+    },
+    {
+      "id": "config-defaults",
+      "operation": "config",
+      "variant": "config",
+      "config": {
+        "host": "mock"
+      }
+    }
+  ]
+}

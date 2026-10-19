@@ -1,0 +1,45 @@
+{
+ "cases": [
+  {
+   "class": "Invoice",
+   "id": "resolver-invoice"
+  },
+  {
+   "class": "Note",
+   "id": "resolver-note"
+  },
+  {
+   "class": "Retention",
+   "id": "resolver-retention"
+  },
+  {
+   "class": "Perception",
+   "id": "resolver-perception"
+  },
+  {
+   "class": "Despatch",
+   "id": "resolver-despatch"
+  },
+  {
+   "class": "Summary",
+   "id": "resolver-summary"
+  },
+  {
+   "class": "Voided",
+   "id": "resolver-voided"
+  },
+  {
+   "class": "Reversion",
+   "id": "resolver-reversion"
+  },
+  {
+   "class": "BaseSale",
+   "id": "resolver-basesale"
+  },
+  {
+   "class": "Receipt",
+   "id": "resolver-receipt"
+  }
+ ],
+ "family": "resolver"
+}

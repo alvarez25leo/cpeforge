@@ -1,0 +1,1718 @@
+{
+  "xsd": [
+    {
+      "path": "2.0/common/CCTS_CCT_SchemaModule-2.0.xsd",
+      "sha256": "dd546e4809df86b6445589f69f0d6c9df162840ae386574ddfc1da7638103e15",
+      "bytes": 45268,
+      "target_namespace": "urn:un:unece:uncefact:data:specification:CoreComponentTypeSchemaModule:2",
+      "owners_in_header": [
+        "un/cefact"
+      ],
+      "rights_basis": "permiso UN/CEFACT indicado en archivo; exige conservar aviso",
+      "notices": [
+        "Copyright (C) UN/CEFACT (2006). All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to others,",
+        "in its implementation may be prepared, copied, published and distributed,",
+        "above copyright notice and this paragraph are included on all such copies",
+        "and derivative works. However, this document itself may not be modified in",
+        "any way, such as by removing the copyright notice or references to",
+        "specifications, in which case the procedures for copyrights defined in the"
+      ],
+      "references": []
+    },
+    {
+      "path": "2.0/common/CodeList_CurrencyCode_ISO_7_04.xsd",
+      "sha256": "ae0915575bad36b2f66fb19fff54eb00c9a9b333b3913c8484bae637db74b9a2",
+      "bytes": 50402,
+      "target_namespace": "urn:un:unece:uncefact:codelist:specification:54217:2001",
+      "owners_in_header": [
+        "un/cefact"
+      ],
+      "rights_basis": "permiso UN/CEFACT indicado en archivo; exige conservar aviso",
+      "notices": [
+        "Copyright (C) UN/CEFACT (2006). All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to others,",
+        "in its implementation may be prepared, copied, published and distributed,",
+        "above copyright notice and this paragraph are included on all such copies",
+        "and derivative works. However, this document itself may not be modified in",
+        "any way, such as by removing the copyright notice or references to",
+        "specifications, in which case the procedures for copyrights defined in the"
+      ],
+      "references": []
+    },
+    {
+      "path": "2.0/common/CodeList_LanguageCode_ISO_7_04.xsd",
+      "sha256": "22d2d1ad89dd003c919963bc7baa42dc0cd02d5575bece1aad7c62ed724841b0",
+      "bytes": 79877,
+      "target_namespace": "urn:un:unece:uncefact:codelist:specification:5639:1988",
+      "owners_in_header": [
+        "un/cefact"
+      ],
+      "rights_basis": "permiso UN/CEFACT indicado en archivo; exige conservar aviso",
+      "notices": [
+        "Copyright (C) UN/CEFACT (2006). All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to others,",
+        "in its implementation may be prepared, copied, published and distributed,",
+        "above copyright notice and this paragraph are included on all such copies",
+        "and derivative works. However, this document itself may not be modified in",
+        "any way, such as by removing the copyright notice or references to",
+        "specifications, in which case the procedures for copyrights defined in the"
+      ],
+      "references": []
+    },
+    {
+      "path": "2.0/common/CodeList_MIMEMediaTypeCode_IANA_7_04.xsd",
+      "sha256": "a41729942fbd2ca58e8a51f4c1e788ee279756a2f563f864c9d815466b36faee",
+      "bytes": 37347,
+      "target_namespace": "urn:un:unece:uncefact:codelist:specification:IANAMIMEMediaType:2003",
+      "owners_in_header": [
+        "un/cefact"
+      ],
+      "rights_basis": "permiso UN/CEFACT indicado en archivo; exige conservar aviso",
+      "notices": [
+        "Copyright (C) UN/CEFACT (2006). All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to others,",
+        "in its implementation may be prepared, copied, published and distributed,",
+        "above copyright notice and this paragraph are included on all such copies",
+        "and derivative works. However, this document itself may not be modified in",
+        "any way, such as by removing the copyright notice or references to",
+        "specifications, in which case the procedures for copyrights defined in the"
+      ],
+      "references": []
+    },
+    {
+      "path": "2.0/common/CodeList_UnitCode_UNECE_7_04.xsd",
+      "sha256": "a96efddf9cc051ea8f27d1dd4f26c21f7e5204c18cabe71e9f6a948980e49cce",
+      "bytes": 320008,
+      "target_namespace": "urn:un:unece:uncefact:codelist:specification:66411:2001",
+      "owners_in_header": [
+        "un/cefact"
+      ],
+      "rights_basis": "permiso UN/CEFACT indicado en archivo; exige conservar aviso",
+      "notices": [
+        "Copyright (C) UN/CEFACT (2006). All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to others,",
+        "in its implementation may be prepared, copied, published and distributed,",
+        "above copyright notice and this paragraph are included on all such copies",
+        "and derivative works. However, this document itself may not be modified in",
+        "any way, such as by removing the copyright notice or references to",
+        "specifications, in which case the procedures for copyrights defined in the"
+      ],
+      "references": []
+    },
+    {
+      "path": "2.0/common/UBL-CommonAggregateComponents-2.0.xsd",
+      "sha256": "4b69627a99a555fd496e05383066132d6f2b2ba576c57eaac137a440a49a193d",
+      "bytes": 942582,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "<!-- ===== Copyright Notice ===== -->",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "Copyright (C) OASIS Open 2001-2006. All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "UBL-CommonBasicComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2",
+          "location": "UnqualifiedDataTypeSchemaModule-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2",
+          "location": "UBL-QualifiedDatatypes-2.0.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.0/common/UBL-CommonBasicComponents-2.0.xsd",
+      "sha256": "75c20d92bcc199a758992eee392526bb6d39754b960a2705b4eea1e65be80df1",
+      "bytes": 113226,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "<!-- ===== Copyright Notice ===== -->",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "Copyright (C) OASIS Open 2001-2006. All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2",
+          "location": "UnqualifiedDataTypeSchemaModule-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2",
+          "location": "UBL-QualifiedDatatypes-2.0.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.0/common/UBL-CommonExtensionComponents-2.0.xsd",
+      "sha256": "6e089271a6ae484c084fe569ab11ca4434b3bdbcd69bbd52b8858f9ac31f04b4",
+      "bytes": 10671,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "Modified 2006-07-19 11:21:29.64-04:00 to",
+        "<!-- ===== Copyright Notice ===== -->",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "Copyright (C) OASIS Open 2001-2006. All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2",
+          "location": "UnqualifiedDataTypeSchemaModule-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "UBL-CommonBasicComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "include",
+          "namespace": null,
+          "location": "UBL-ExtensionContentDatatype-2.0.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.0/common/UBL-CoreComponentParameters-2.0.xsd",
+      "sha256": "aa39af4869e406832923a44915514c5ee40dd9fe15ba04f07316ab3288789d22",
+      "bytes": 3061,
+      "target_namespace": "urn:un:unece:uncefact:documentation:2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "<!-- ===== Copyright Notice ===== -->",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "Copyright (C) OASIS Open 2001-2006. All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": []
+    },
+    {
+      "path": "2.0/common/UBL-ExtensionContentDatatype-2.0.xsd",
+      "sha256": "84f94821ff88a86524360eba608d2e861055916a76ed012866a7fc009c9ad67a",
+      "bytes": 3530,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "Modified 2006-07-19 11:21:29.64-04:00 to",
+        "<!-- ===== Copyright Notice ===== -->",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "Copyright (C) OASIS Open 2001-2006. All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,"
+      ],
+      "references": []
+    },
+    {
+      "path": "2.0/common/UBL-QualifiedDatatypes-2.0.xsd",
+      "sha256": "ab24e3db721b0cf6bc57905a0454b55aa84481d01b8f58f54c7deebedb948b7f",
+      "bytes": 96745,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "<!-- ===== Copyright Notice ===== -->",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "Copyright (C) OASIS Open 2001-2006. All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2",
+          "location": "UnqualifiedDataTypeSchemaModule-2.0.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.0/common/UBLPE-SunatAggregateComponents-1.0.xsd",
+      "sha256": "4d40fea8076e1c92a2d08985881106db7f4625ea2abe51522724207f49f5350d",
+      "bytes": 46493,
+      "target_namespace": "urn:sunat:names:specification:ubl:peru:schema:xsd:SunatAggregateComponents-1",
+      "owners_in_header": [
+        "oasis",
+        "sunat"
+      ],
+      "rights_basis": "sin licencia individual explícita; atribución y permiso por verificar",
+      "notices": [],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+          "location": "UBL-CommonAggregateComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "UBL-CommonBasicComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2",
+          "location": "UnqualifiedDataTypeSchemaModule-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2",
+          "location": "UBL-QualifiedDatatypes-2.0.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.0/common/UBLPE-SunatAggregateComponents-1.1.xsd",
+      "sha256": "d1bf518886189747435a201559700d72ea4bd18f4fda062db15f9d88948d8952",
+      "bytes": 49065,
+      "target_namespace": "urn:sunat:names:specification:ubl:peru:schema:xsd:SunatAggregateComponents-1",
+      "owners_in_header": [
+        "oasis",
+        "sunat"
+      ],
+      "rights_basis": "sin licencia individual explícita; atribución y permiso por verificar",
+      "notices": [],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+          "location": "UBL-CommonAggregateComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "UBL-CommonBasicComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2",
+          "location": "UnqualifiedDataTypeSchemaModule-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2",
+          "location": "UBL-QualifiedDatatypes-2.0.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.0/common/UnqualifiedDataTypeSchemaModule-2.0.xsd",
+      "sha256": "5ea24968de932549bbbcaccc9f3cc365b443f5481096ed327f50a98af1153ca6",
+      "bytes": 69538,
+      "target_namespace": "urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2",
+      "owners_in_header": [
+        "un/cefact"
+      ],
+      "rights_basis": "permiso UN/CEFACT indicado en archivo; exige conservar aviso",
+      "notices": [
+        "Copyright (C) UN/CEFACT (2006). All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to others,",
+        "in its implementation may be prepared, copied, published and distributed,",
+        "above copyright notice and this paragraph are included on all such copies",
+        "and derivative works. However, this document itself may not be modified in",
+        "any way, such as by removing the copyright notice or references to",
+        "specifications, in which case the procedures for copyrights defined in the"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:codelist:specification:66411:2001",
+          "location": "CodeList_UnitCode_UNECE_7_04.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:codelist:specification:IANAMIMEMediaType:2003",
+          "location": "CodeList_MIMEMediaTypeCode_IANA_7_04.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:codelist:specification:54217:2001",
+          "location": "CodeList_CurrencyCode_ISO_7_04.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:codelist:specification:5639:1988",
+          "location": "CodeList_LanguageCode_ISO_7_04.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.0/common/xmldsig-core-schema.xsd",
+      "sha256": "125aa4cbd585d3e0f3c2b0a06da7fa42748dcdf679f92bad5517aca398b2b0e0",
+      "bytes": 9924,
+      "target_namespace": "http://www.w3.org/2000/09/xmldsig#",
+      "owners_in_header": [
+        "w3c",
+        "etsi"
+      ],
+      "rights_basis": "W3C Software License indicado en cabecera",
+      "notices": [
+        "Copyright 2001 The Internet Society and W3C (Massachusetts Institute",
+        "This document is governed by the W3C Software License [1] as described",
+        "[1] http://www.w3.org/Consortium/Legal/copyright-software-19980720"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "http://uri.etsi.org/01903/v1.3.2#",
+          "location": "XAdES.xsd",
+          "exists": false
+        }
+      ]
+    },
+    {
+      "path": "2.0/maindoc/UBL-ApplicationResponse-2.0.xsd",
+      "sha256": "272830ccbec55864b31ca9fccedc818ab48e0002c5adce8df2cf97b594dbcf73",
+      "bytes": 17499,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:ApplicationResponse-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "<!-- ===== Copyright Notice ===== -->",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "Copyright (C) OASIS Open 2001-2006. All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+          "location": "../common/UBL-CommonAggregateComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "../common/UBL-CommonBasicComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2",
+          "location": "../common/UnqualifiedDataTypeSchemaModule-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+          "location": "../common/UBL-CommonExtensionComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2",
+          "location": "../common/UBL-QualifiedDatatypes-2.0.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.0/maindoc/UBL-CreditNote-2.0.xsd",
+      "sha256": "22ccbd52fca822a78c02cc00dc256b1ad40c08fec9173a46d4a32f5b3d17bbd6",
+      "bytes": 36304,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "<!-- ===== Copyright Notice ===== -->",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "Copyright (C) OASIS Open 2001-2006. All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+          "location": "../common/UBL-CommonAggregateComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "../common/UBL-CommonBasicComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2",
+          "location": "../common/UnqualifiedDataTypeSchemaModule-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+          "location": "../common/UBL-CommonExtensionComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2",
+          "location": "../common/UBL-QualifiedDatatypes-2.0.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.0/maindoc/UBL-DebitNote-2.0.xsd",
+      "sha256": "ccdc5087332148e70426a4aaa7372c15364cb01a66c105ddfeead901c69b7e56",
+      "bytes": 36235,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:DebitNote-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "<!-- ===== Copyright Notice ===== -->",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "Copyright (C) OASIS Open 2001-2006. All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+          "location": "../common/UBL-CommonAggregateComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "../common/UBL-CommonBasicComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2",
+          "location": "../common/UnqualifiedDataTypeSchemaModule-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+          "location": "../common/UBL-CommonExtensionComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2",
+          "location": "../common/UBL-QualifiedDatatypes-2.0.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.0/maindoc/UBL-DespatchAdvice-2.0.xsd",
+      "sha256": "b70d2215a8bd6d431505705ec51d88f384183f5fcc3cab4caeb007f1a0bf86ca",
+      "bytes": 25367,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:DespatchAdvice-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "<!-- ===== Copyright Notice ===== -->",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "Copyright (C) OASIS Open 2001-2006. All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+          "location": "../common/UBL-CommonAggregateComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "../common/UBL-CommonBasicComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2",
+          "location": "../common/UnqualifiedDataTypeSchemaModule-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+          "location": "../common/UBL-CommonExtensionComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2",
+          "location": "../common/UBL-QualifiedDatatypes-2.0.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.0/maindoc/UBL-Invoice-2.0.xsd",
+      "sha256": "9957faf2ef930f6124b0cb6fd12f066be4cb0fe2ca3d7c10293dfec14bd55b83",
+      "bytes": 42026,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
+      "owners_in_header": [
+        "oasis",
+        "sunat"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "<!-- ===== Copyright Notice ===== -->",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "Copyright (C) OASIS Open 2001-2006. All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+          "location": "../common/UBL-CommonAggregateComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "../common/UBL-CommonBasicComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2",
+          "location": "../common/UnqualifiedDataTypeSchemaModule-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+          "location": "../common/UBL-CommonExtensionComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2",
+          "location": "../common/UBL-QualifiedDatatypes-2.0.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.0/maindoc/UBL-Perception-2.0.xsd",
+      "sha256": "d9aeeeb41a197108daf43cb838845ef50994ebe0f2f536388e870269a6c10bff",
+      "bytes": 6031,
+      "target_namespace": "urn:sunat:names:specification:ubl:peru:schema:xsd:Perception-1",
+      "owners_in_header": [
+        "oasis",
+        "sunat"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "<!-- ===== Copyright Notice ===== -->",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "Copyright (C) OASIS Open 2001-2006. All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:sunat:names:specification:ubl:peru:schema:xsd:SunatAggregateComponents-1",
+          "location": "../common/UBLPE-SunatAggregateComponents-1.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+          "location": "../common/UBL-CommonAggregateComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "../common/UBL-CommonBasicComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2",
+          "location": "../common/UnqualifiedDataTypeSchemaModule-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+          "location": "../common/UBL-CommonExtensionComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2",
+          "location": "../common/UBL-QualifiedDatatypes-2.0.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.0/maindoc/UBL-Retention-2.0.xsd",
+      "sha256": "1f3efe268f76f987c4146c5ce0407318fcba70f9aeabb7cced48595f20cb8130",
+      "bytes": 5987,
+      "target_namespace": "urn:sunat:names:specification:ubl:peru:schema:xsd:Retention-1",
+      "owners_in_header": [
+        "oasis",
+        "sunat"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "<!-- ===== Copyright Notice ===== -->",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "Copyright (C) OASIS Open 2001-2006. All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:sunat:names:specification:ubl:peru:schema:xsd:SunatAggregateComponents-1",
+          "location": "../common/UBLPE-SunatAggregateComponents-1.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+          "location": "../common/UBL-CommonAggregateComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "../common/UBL-CommonBasicComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2",
+          "location": "../common/UnqualifiedDataTypeSchemaModule-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+          "location": "../common/UBL-CommonExtensionComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2",
+          "location": "../common/UBL-QualifiedDatatypes-2.0.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.0/maindoc/UBL-SummaryDocuments-2.0.xsd",
+      "sha256": "f35a2a202c0f134f7c8e8c8769b297abbe60207f40df3205ecd5c7c6a3b3ad88",
+      "bytes": 9839,
+      "target_namespace": "urn:sunat:names:specification:ubl:peru:schema:xsd:SummaryDocuments-1",
+      "owners_in_header": [
+        "oasis",
+        "sunat"
+      ],
+      "rights_basis": "sin licencia individual explícita; atribución y permiso por verificar",
+      "notices": [],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:sunat:names:specification:ubl:peru:schema:xsd:SunatAggregateComponents-1",
+          "location": "../common/UBLPE-SunatAggregateComponents-1.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+          "location": "../common/UBL-CommonAggregateComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "../common/UBL-CommonBasicComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2",
+          "location": "../common/UnqualifiedDataTypeSchemaModule-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+          "location": "../common/UBL-CommonExtensionComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2",
+          "location": "../common/UBL-QualifiedDatatypes-2.0.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.0/maindoc/UBL-VoidedDocuments-2.0.xsd",
+      "sha256": "6d469604bb8302f71327a14e16a7e9e428bbd045b6eda92780db157d46295c1a",
+      "bytes": 9917,
+      "target_namespace": "urn:sunat:names:specification:ubl:peru:schema:xsd:VoidedDocuments-1",
+      "owners_in_header": [
+        "oasis",
+        "sunat"
+      ],
+      "rights_basis": "sin licencia individual explícita; atribución y permiso por verificar",
+      "notices": [],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:sunat:names:specification:ubl:peru:schema:xsd:SunatAggregateComponents-1",
+          "location": "../common/UBLPE-SunatAggregateComponents-1.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+          "location": "../common/UBL-CommonAggregateComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "../common/UBL-CommonBasicComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2",
+          "location": "../common/UnqualifiedDataTypeSchemaModule-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+          "location": "../common/UBL-CommonExtensionComponents-2.0.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2",
+          "location": "../common/UBL-QualifiedDatatypes-2.0.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.1/common/CCTS_CCT_SchemaModule-2.1.xsd",
+      "sha256": "dd546e4809df86b6445589f69f0d6c9df162840ae386574ddfc1da7638103e15",
+      "bytes": 45268,
+      "target_namespace": "urn:un:unece:uncefact:data:specification:CoreComponentTypeSchemaModule:2",
+      "owners_in_header": [
+        "un/cefact"
+      ],
+      "rights_basis": "permiso UN/CEFACT indicado en archivo; exige conservar aviso",
+      "notices": [
+        "Copyright (C) UN/CEFACT (2006). All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to others,",
+        "in its implementation may be prepared, copied, published and distributed,",
+        "above copyright notice and this paragraph are included on all such copies",
+        "and derivative works. However, this document itself may not be modified in",
+        "any way, such as by removing the copyright notice or references to",
+        "specifications, in which case the procedures for copyrights defined in the"
+      ],
+      "references": []
+    },
+    {
+      "path": "2.1/common/UBL-CommonAggregateComponents-2.1.xsd",
+      "sha256": "939172ad8dd057cd403e7f763f6532184dd5ed4b9de24c42ebb35db4792ba613",
+      "bytes": 2420444,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "Copyright (c) OASIS Open 2013. All Rights Reserved.",
+        "<!-- ===== Copyright Notice ===== --><!--",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "UBL-CommonBasicComponents-2.1.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.1/common/UBL-CommonBasicComponents-2.1.xsd",
+      "sha256": "bd4ad043ee1d9da1c7f8018dabf739cfafdfb59143d0d16b9ef769e6b7c408a7",
+      "bytes": 219895,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "Copyright (c) OASIS Open 2013. All Rights Reserved.",
+        "<!-- ===== Copyright Notice ===== --><!--",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:QualifiedDataTypes-2",
+          "location": "UBL-QualifiedDataTypes-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2",
+          "location": "UBL-UnqualifiedDataTypes-2.1.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.1/common/UBL-CommonExtensionComponents-2.1.xsd",
+      "sha256": "ad7a4e490978adfbcfc5ec0bb20941cf11ac960ccf0c4de8791a7c731a8dbe87",
+      "bytes": 9491,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "Copyright (c) OASIS Open 2013. All Rights Reserved.",
+        "<!-- ===== Copyright Notice ===== -->",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or pat",
+        "<!-- ===== Copyright Notice ===== -->",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "This document and translations of it may be copied and furnished to"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2",
+          "location": "UBL-UnqualifiedDataTypes-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "UBL-CommonBasicComponents-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "include",
+          "namespace": null,
+          "location": "UBL-ExtensionContentDataType-2.1.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.1/common/UBL-CommonSignatureComponents-2.1.xsd",
+      "sha256": "3db472305f029bba5c1ae157bfd0178f715c3f9b94bd8e6c557dbce5e88da874",
+      "bytes": 5548,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonSignatureComponents-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "Copyright (c) OASIS Open 2013. All Rights Reserved.",
+        "<!-- ===== Copyright Notice ===== --><!--",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:SignatureAggregateComponents-2",
+          "location": "UBL-SignatureAggregateComponents-2.1.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.1/common/UBL-CoreComponentParameters-2.1.xsd",
+      "sha256": "8be3379dbdcbcc7802fafdd16bac72c48fff1c0bb364213a31a17911dd06100b",
+      "bytes": 3173,
+      "target_namespace": "urn:un:unece:uncefact:documentation:2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "Copyright (c) OASIS Open 2013. All Rights Reserved.",
+        "<!-- ===== Copyright Notice ===== -->",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": []
+    },
+    {
+      "path": "2.1/common/UBL-ExtensionContentDataType-2.1.xsd",
+      "sha256": "fcee77a11870208e6377ea6311b9f2a050bca24bdad8606ea02d71e9f9e72f8d",
+      "bytes": 4314,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "Copyright (c) OASIS Open 2013. All Rights Reserved.",
+        "<!-- ===== Copyright Notice ===== -->",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonSignatureComponents-2",
+          "location": "UBL-CommonSignatureComponents-2.1.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.1/common/UBL-QualifiedDataTypes-2.1.xsd",
+      "sha256": "7dcb156e610239c97ae70940cf4653b88e48c3595bf5f56a2204a32e2893e6cf",
+      "bytes": 3590,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:QualifiedDataTypes-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "Copyright (c) OASIS Open 2013. All Rights Reserved.",
+        "<!-- ===== Copyright Notice ===== -->",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2",
+          "location": "UBL-UnqualifiedDataTypes-2.1.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.1/common/UBL-SignatureAggregateComponents-2.1.xsd",
+      "sha256": "17bb6b62d709b4fd81449a37655af36aa6a1276ad4fdb1b2e249a5ed4b7c2172",
+      "bytes": 7784,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:SignatureAggregateComponents-2",
+      "owners_in_header": [
+        "oasis",
+        "w3c",
+        "etsi"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "Copyright (c) OASIS Open 2013. All Rights Reserved.",
+        "<!-- ===== Copyright Notice ===== --><!--",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:SignatureBasicComponents-2",
+          "location": "UBL-SignatureBasicComponents-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "UBL-CommonBasicComponents-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "http://www.w3.org/2000/09/xmldsig#",
+          "location": "UBL-xmldsig-core-schema-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "http://uri.etsi.org/01903/v1.3.2#",
+          "location": "UBL-XAdESv132-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "http://uri.etsi.org/01903/v1.4.1#",
+          "location": "UBL-XAdESv141-2.1.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.1/common/UBL-SignatureBasicComponents-2.1.xsd",
+      "sha256": "cef924d7ba3d1d8ade14469325cde1364f8c174e46f0198ec02da8e9e748a489",
+      "bytes": 4207,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:SignatureBasicComponents-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "Copyright (c) OASIS Open 2013. All Rights Reserved.",
+        "<!-- ===== Copyright Notice ===== --><!--",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:QualifiedDataTypes-2",
+          "location": "UBL-QualifiedDataTypes-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2",
+          "location": "UBL-UnqualifiedDataTypes-2.1.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.1/common/UBL-UnqualifiedDataTypes-2.1.xsd",
+      "sha256": "09052d406b4293e2a5f9c2bfee6df10ad4d8d5f0b36e24a6349d7f7936d89eb6",
+      "bytes": 27300,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "Copyright (c) OASIS Open 2013. All Rights Reserved.",
+        "</xsd:schema><!-- ===== Copyright Notice ===== --><!--",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:un:unece:uncefact:data:specification:CoreComponentTypeSchemaModule:2",
+          "location": "CCTS_CCT_SchemaModule-2.1.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.1/common/UBL-XAdESv132-2.1.xsd",
+      "sha256": "a4f726bcf8cc3f7d9ffa4dab99e005535a8e8b60dced1e5d94578d2e05afa96e",
+      "bytes": 21664,
+      "target_namespace": "http://uri.etsi.org/01903/v1.3.2#",
+      "owners_in_header": [
+        "oasis",
+        "etsi"
+      ],
+      "rights_basis": "derivado ETSI; permiso de redistribución por verificar",
+      "notices": [
+        "This is a copy of http://uri.etsi.org/01903/v1.3.2/XAdES.xsd modified"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "http://www.w3.org/2000/09/xmldsig#",
+          "location": "UBL-xmldsig-core-schema-2.1.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.1/common/UBL-XAdESv141-2.1.xsd",
+      "sha256": "1fa4625e9cefcb7a9abb5ac1b64315547450031eece8a55bd584e4ba4b79dbc1",
+      "bytes": 1316,
+      "target_namespace": "http://uri.etsi.org/01903/v1.4.1#",
+      "owners_in_header": [
+        "oasis",
+        "etsi"
+      ],
+      "rights_basis": "derivado ETSI; permiso de redistribución por verificar",
+      "notices": [
+        "This is a copy of http://uri.etsi.org/01903/v1.4.1/XAdESv141.xsd modified",
+        "This is a copy of http://uri.etsi.org/01903/v1.4.1/XAdESv141.xsd modified"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "http://uri.etsi.org/01903/v1.3.2#",
+          "location": "UBL-XAdESv132-2.1.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.1/common/UBL-xmldsig-core-schema-2.1.xsd",
+      "sha256": "101909c9f06456d61ddcc4fb982f1d40dc357b439f393b1a2eb46e42acd60809",
+      "bytes": 10750,
+      "target_namespace": "http://www.w3.org/2000/09/xmldsig#",
+      "owners_in_header": [
+        "oasis",
+        "w3c"
+      ],
+      "rights_basis": "W3C Software License indicado en cabecera",
+      "notices": [
+        "modified only to remove these PUBLIC and SYSTEM identifiers from the DOCTYPE:",
+        "Copyright 2001 The Internet Society and W3C (Massachusetts Institute",
+        "This document is governed by the W3C Software License [1] as described",
+        "[1] http://www.w3.org/Consortium/Legal/copyright-software-19980720"
+      ],
+      "references": []
+    },
+    {
+      "path": "2.1/maindoc/UBL-ApplicationResponse-2.1.xsd",
+      "sha256": "b9adc27c538c937a54479e678d1e19b0a91bb7ce36ac0b558961173508466125",
+      "bytes": 21665,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:ApplicationResponse-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "Copyright (c) OASIS Open 2013. All Rights Reserved.",
+        "<!-- ===== Copyright Notice ===== --><!--",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+          "location": "../common/UBL-CommonAggregateComponents-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "../common/UBL-CommonBasicComponents-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+          "location": "../common/UBL-CommonExtensionComponents-2.1.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.1/maindoc/UBL-CreditNote-2.1.xsd",
+      "sha256": "21eee9df7418a4ec2a26d92ad80c9b41d5e884959a698793311d2c5c6754c4b0",
+      "bytes": 57727,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "Copyright (c) OASIS Open 2013. All rights reserved.",
+        "<!-- ===== Copyright Notice ===== --><!--",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "Copyright (C) OASIS Open 2001-2013. All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+          "location": "../common/UBL-CommonAggregateComponents-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "../common/UBL-CommonBasicComponents-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+          "location": "../common/UBL-CommonExtensionComponents-2.1.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.1/maindoc/UBL-DebitNote-2.1.xsd",
+      "sha256": "ea5303c2191dfb579d6d53a66e41094020f33dca0531086da1bd62f722202da0",
+      "bytes": 55464,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:DebitNote-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "Copyright (c) OASIS Open 2013. All rights reserved.",
+        "<!-- ===== Copyright Notice ===== --><!--",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "Copyright (C) OASIS Open 2001-2013. All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+          "location": "../common/UBL-CommonAggregateComponents-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "../common/UBL-CommonBasicComponents-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+          "location": "../common/UBL-CommonExtensionComponents-2.1.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.1/maindoc/UBL-DespatchAdvice-2.1.xsd",
+      "sha256": "35c1a053744d57b332da258f5ae0bb8ba8f1b22e24077d580fcdea07f93dd93a",
+      "bytes": 26678,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:DespatchAdvice-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "Copyright (c) OASIS Open 2013. All Rights Reserved.",
+        "<!-- ===== Copyright Notice ===== -->",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+          "location": "../common/UBL-CommonAggregateComponents-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "../common/UBL-CommonBasicComponents-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+          "location": "../common/UBL-CommonExtensionComponents-2.1.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.1/maindoc/UBL-Invoice-2.1.xsd",
+      "sha256": "6943ac608d877dc014b6bda8accdd985f526e3a3314b6f6abdb7eb4ff558cc36",
+      "bytes": 60208,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "Copyright (c) OASIS Open 2013. All rights reserved.",
+        "<!-- ===== Copyright Notice ===== --><!--",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "Copyright (C) OASIS Open 2001-2013. All Rights Reserved.",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+          "location": "../common/UBL-CommonAggregateComponents-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "../common/UBL-CommonBasicComponents-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+          "location": "../common/UBL-CommonExtensionComponents-2.1.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.1/maindoc/UBL-SelfBilledCreditNote-2.1.xsd",
+      "sha256": "0d8596cebe481f88e815497b2cbd13b5406e3384c48fa8a9338ddda33be3fd3b",
+      "bytes": 57169,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:SelfBilledCreditNote-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "Copyright (c) OASIS Open 2013. All Rights Reserved.",
+        "<!-- ===== Copyright Notice ===== --><!--",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+          "location": "../common/UBL-CommonAggregateComponents-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "../common/UBL-CommonBasicComponents-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+          "location": "../common/UBL-CommonExtensionComponents-2.1.xsd",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "path": "2.1/maindoc/UBL-SelfBilledInvoice-2.1.xsd",
+      "sha256": "b5476aee79f3aa202398af0dd056c20e4272522738843b9486f5fa51a3b71ae5",
+      "bytes": 57368,
+      "target_namespace": "urn:oasis:names:specification:ubl:schema:xsd:SelfBilledInvoice-2",
+      "owners_in_header": [
+        "oasis"
+      ],
+      "rights_basis": "permiso OASIS indicado en archivo; exige conservar aviso y no modificar el XSD",
+      "notices": [
+        "Copyright (c) OASIS Open 2013. All Rights Reserved.",
+        "<!-- ===== Copyright Notice ===== --><!--",
+        "document or the extent to which any license under such rights",
+        "available for publication and any assurances of licenses to be made",
+        "license or permission for the use of such proprietary rights by",
+        "copyrights, patents or patent applications, or other proprietary",
+        "This document and translations of it may be copied and furnished to",
+        "it or assist in its implementation may be prepared, copied,",
+        "any kind, provided that the above copyright notice and this",
+        "However, this document itself may not be modified in any way,",
+        "such as by removing the copyright notice or references to OASIS,",
+        "specifications, in which case the procedures for copyrights defined"
+      ],
+      "references": [
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+          "location": "../common/UBL-CommonAggregateComponents-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+          "location": "../common/UBL-CommonBasicComponents-2.1.xsd",
+          "exists": true
+        },
+        {
+          "kind": "import",
+          "namespace": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+          "location": "../common/UBL-CommonExtensionComponents-2.1.xsd",
+          "exists": true
+        }
+      ]
+    }
+  ]
+}

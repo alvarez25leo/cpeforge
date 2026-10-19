@@ -1,0 +1,130 @@
+{
+  "family": "identity",
+  "cases": [
+    {
+      "id": "address-defaults",
+      "description": "Address recién creado: codigoPais=PE y codLocal=0000 por defecto",
+      "input": {
+        "$class": "Address"
+      }
+    },
+    {
+      "id": "address-full",
+      "description": "Address con todos los campos",
+      "input": {
+        "$class": "Address",
+        "ubigueo": "150101",
+        "departamento": "LIMA",
+        "provincia": "LIMA",
+        "distrito": "LIMA",
+        "urbanizacion": "CERCADO",
+        "direccion": "AV. FICTICIA 123",
+        "codigoPais": "PE",
+        "codLocal": "0001"
+      }
+    },
+    {
+      "id": "address-null-over-defaults",
+      "description": "Establecer null sobre valores por defecto los reemplaza por null",
+      "input": {
+        "$class": "Address",
+        "codigoPais": null,
+        "codLocal": null
+      }
+    },
+    {
+      "id": "address-empty-strings",
+      "description": "Cadenas vacías se conservan y no equivalen a null",
+      "input": {
+        "$class": "Address",
+        "ubigueo": "",
+        "codigoPais": "",
+        "codLocal": "",
+        "direccion": ""
+      }
+    },
+    {
+      "id": "company-empty",
+      "description": "Company sin datos",
+      "input": {
+        "$class": "Company"
+      }
+    },
+    {
+      "id": "company-full",
+      "description": "Company con dirección anidada",
+      "input": {
+        "$class": "Company",
+        "ruc": "20000000001",
+        "razonSocial": "EMPRESA SINTETICA S.A.C.",
+        "nombreComercial": "SINTETICA",
+        "address": {
+          "$class": "Address",
+          "ubigueo": "150101",
+          "departamento": "LIMA",
+          "provincia": "LIMA",
+          "distrito": "LIMA",
+          "urbanizacion": "CERCADO",
+          "direccion": "AV. FICTICIA 123",
+          "codigoPais": "PE",
+          "codLocal": "0001"
+        },
+        "email": "facturacion@example.test",
+        "telephone": "01-0000000"
+      }
+    },
+    {
+      "id": "client-empty",
+      "description": "Client sin datos",
+      "input": {
+        "$class": "Client"
+      }
+    },
+    {
+      "id": "client-full",
+      "description": "Client con dirección anidada",
+      "input": {
+        "$class": "Client",
+        "tipoDoc": "6",
+        "numDoc": "20000000002",
+        "rznSocial": "CLIENTE SINTETICO S.A.",
+        "address": {
+          "$class": "Address",
+          "ubigueo": "150122",
+          "departamento": "LIMA",
+          "provincia": "LIMA",
+          "distrito": "LIMA",
+          "urbanizacion": "CERCADO",
+          "direccion": "CALLE PRUEBA 456",
+          "codigoPais": "PE",
+          "codLocal": "0001"
+        },
+        "email": "cliente@example.test",
+        "telephone": "999000000"
+      }
+    },
+    {
+      "id": "client-unicode",
+      "description": "Texto Unicode, comillas y caracteres de control comunes se conservan",
+      "input": {
+        "$class": "Client",
+        "tipoDoc": "6",
+        "numDoc": "20000000002",
+        "rznSocial": "ÑANDÚ & CÍA \"LOS ÁLAMOS\" <S.R.L.>",
+        "address": {
+          "$class": "Address",
+          "ubigueo": "150122",
+          "departamento": "LIMA",
+          "provincia": "LIMA",
+          "distrito": "LIMA",
+          "urbanizacion": "CERCADO",
+          "direccion": "CALLE PRUEBA 456",
+          "codigoPais": "PE",
+          "codLocal": "0001"
+        },
+        "email": "ñ@example.test",
+        "telephone": "\t01\n"
+      }
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "description": "Diferencias deliberadas referencia↔Rust de cpeforge-ws admitidas por el perfil seguro (docs/verificacion-paridad.md#perfil-seguro). crates/ws/tests/parity.rs falla ante cualquier diferencia no registrada y ante cualquier registro obsoleto.",
+  "differences": [
+    {
+      "id": "zip-traversal",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "La referencia (nelexa/zip) acepta el nombre ../escape.xml; Rust rechaza nombres con rutas ascendentes, absolutas, '\\\\', ':' o NUL.",
+      "compatibility_note": "Los nombres que genera la referencia (RUC-tipo-serie-número.xml) no contienen esos caracteres; solo cambia el resultado con nombres manipulados."
+    },
+    {
+      "id": "cdr-invalid",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "reason": "Con un CDR mal formado la referencia emite avisos de DOM y devuelve un CdrResponse vacío; Rust devuelve WsError::Xml.",
+      "compatibility_note": "Un CDR ilegible ya no se confunde con un CDR sin datos."
+    },
+    {
+      "id": "cdr-xxe",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "Con un CDR que declara DTD/entidad externa la referencia devuelve un CdrResponse vacío; Rust rechaza todo DTD.",
+      "compatibility_note": "Los CDR de SUNAT no declaran DTD."
+    },
+    {
+      "id": "scripts/ws_tls_probe.sh",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "SoapClient.php fija verify_peer=false, verify_peer_name=false y allow_self_signed=true; Rust verifica el certificado y el nombre del servidor.",
+      "compatibility_note": "Un endpoint con certificado inválido o autofirmado falla en Rust. Se comprueba con scripts/ws_tls_probe.sh, no con offline_parity."
+    },
+    {
+      "id": "zip-varied-55k",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "El filtro zlib.deflate de la referencia comprime con memLevel=9; flate2 fija memLevel=8. Con entradas grandes o de alta entropía (XML firmado) el DEFLATE difiere en unos bytes; el contenido descomprimido es idéntico y los ZIP pequeños coinciden byte a byte.",
+      "motivo": "compresion-equivalente",
+      "compatibility_note": "El ZIP descomprime a los mismos nombres y bytes y es válido; SUNAT lo descomprime igual. Solo cambian unos bytes del flujo DEFLATE (memLevel 8 frente a 9), así que el SHA-256 del ZIP difiere del que calcularía la referencia para el mismo XML, y Rust envía el hash de su propio ZIP."
+    },
+    {
+      "id": "scripts/ws_http_probe.sh#ns-undeclared-prefix",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "reason": "Con prefijos de espacio de nombres sin declarar, libxml lee el documento y ext/soap da el fault VersionMismatch («Wrong Version»); roxmltree lo rechaza y Rust da el fault Client «looks like we got no XML document».",
+      "compatibility_note": "Ambos devuelven un error en el resultado; solo cambian el código y el texto. Un envelope de SUNAT declara sus espacios de nombres."
+    },
+    {
+      "id": "scripts/ws_http_probe.sh#dtd-malformed",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "Rust nunca procesa un DTD: lo informa («DTD are not supported by SOAP») en cuanto lo encuentra. libxml solo lo informa si el resto del documento es correcto; si no, da «looks like we got no XML document».",
+      "compatibility_note": "Con un DTD en un documento correcto, ambos dan el mismo fault (caso body-dtd). Solo cambia el texto del error cuando, además, el documento está mal formado."
+    },
+    {
+      "id": "scripts/ws_http_probe.sh#latin1-declared",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "codificacion-fuera-de-alcance",
+      "reason": "libxml decodifica una respuesta declarada en ISO-8859-1; Rust solo lee respuestas SOAP en UTF-8 y da el fault Client «looks like we got no XML document».",
+      "compatibility_note": "SUNAT responde en UTF-8. Una respuesta en otra codificación se informa como error en el resultado."
+    },
+    {
+      "id": "scripts/ws_http_probe.sh#fault-detail-xsitype",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "reason": "Si un elemento del detail de un fault lleva xsi:type, ext/soap lo convierte al tipo XSD (xsd:int da un entero en el JSON del mensaje). Rust no reproduce esa conversión: devuelve WsError::InvalidResponse en vez de un mensaje distinto.",
+      "compatibility_note": "Los faults de SUNAT no usan xsi:type en el detail. Si llegara uno, Rust devuelve un error explícito en lugar de un BillResult con otro texto."
+    },
+    {
+      "id": "scripts/ws_http_probe.sh#fault-cdata-two",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "dependiente-de-libxml",
+      "only_when": {
+        "libxml_cdata": "unidos"
+      },
+      "reason": "Con un faultstring formado por dos secciones CDATA contiguas, libxml2 2.9 (Ubuntu) las une en un nodo y ext/soap devuelve su texto; las versiones recientes (2.15 en macOS) las dejan separadas y ext/soap da «SOAP-ERROR: Encoding: Violation of encoding rules». Rust sigue a la versión reciente.",
+      "compatibility_note": "Solo cambia frente a la referencia con libxml2 2.9 y con un fault que SUNAT no emite (dos CDATA seguidas en el faultstring). La sonda detecta el perfil y la entrada solo aplica allí."
+    },
+    {
+      "id": "scripts/ws_http_probe.sh#fault-detail-depth-257",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "Rust rechaza antes de parsear una respuesta SOAP con más de 256 niveles de anidamiento y devuelve el fault Client «looks like we got no XML document»; ext/soap lee el documento: con libxml2 2.15.1 se midió que admite hasta 2048 niveles y rechaza 2049 con ese mismo fault (perfil de XML_PARSE_HUGE); con libxml2 2.9 no se midió y ese perfil no limita la profundidad. roxmltree analiza los elementos de forma recursiva: sin el límite, unos 3100 niveles agotan la pila de 2 MiB de un worker de Tokio y abortan el proceso.",
+      "compatibility_note": "Solo cambia con respuestas de más de 256 niveles; un envelope de SUNAT con CDR no llega a 20. El error es el mismo que ext/soap da por encima de su propio límite."
+    },
+    {
+      "id": "scripts/ws_http_probe.sh#body-depth-257",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "Rust rechaza antes de parsear una respuesta SOAP con más de 256 niveles de anidamiento y devuelve el fault Client «looks like we got no XML document»; ext/soap lee el documento: con libxml2 2.15.1 se midió que admite hasta 2048 niveles y rechaza 2049 con ese mismo fault (perfil de XML_PARSE_HUGE); con libxml2 2.9 no se midió y ese perfil no limita la profundidad. roxmltree analiza los elementos de forma recursiva: sin el límite, unos 3100 niveles agotan la pila de 2 MiB de un worker de Tokio y abortan el proceso.",
+      "compatibility_note": "Solo cambia con respuestas de más de 256 niveles; un envelope de SUNAT con CDR no llega a 20. El error es el mismo que ext/soap da por encima de su propio límite."
+    }
+  ]
+}

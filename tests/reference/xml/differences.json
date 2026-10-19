@@ -1,0 +1,196 @@
+{
+  "description": "Divergencias referencia↔Rust de la referencia observadas por crates/xml/tests/parity.rs. Cada entrada se valida con tests/support/perfil_seguro.rs: DIFERENCIA_DELIBERADA con motivo admitido por el perfil seguro (docs/verificacion-paridad.md#perfil-seguro) o CORREGIR pendiente, que bloquea LISTO.",
+  "differences": [
+    {
+      "case": "inv21-precision-default",
+      "kind": "xml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "El valor tiene más de 15 cifras significativas. La referencia lo convierte en float de 64 bits antes de formatear y number_format redondea esa aproximación; Rust formatea el Decimal exacto. Usar float para importes está prohibido por los estándares del proyecto (misma causa que la diferencia D1 de core).",
+      "compatibility_note": "Con importes de hasta 15 cifras significativas el XML es idéntico. Con más cifras Rust conserva dígitos que la referencia pierde o inventa.",
+      "motivo": "precision-decimal"
+    },
+    {
+      "case": "inv20-special-default",
+      "kind": "xml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "Un valor impreso con |raw dentro de <![CDATA[…]]> contiene ']]>'. La referencia cierra la sección CDATA a mitad del valor: el XML queda mal formado y un texto preparado puede insertar elementos UBL (inyección XML). Rust divide la sección en ']]]]><![CDATA[>', que se lee como el mismo texto (XML 1.0 §2.7).",
+      "compatibility_note": "Solo cambia la salida cuando un texto en CDATA (descripción, razón social, dirección, observación, motivo) contiene ']]>'; en ese caso el XML de Rust es bien formado y conserva el texto. Sin ']]>' el XML es idéntico al de la referencia."
+    },
+    {
+      "case": "inv20-special-cpeforge",
+      "kind": "xml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "Un valor impreso con |raw dentro de <![CDATA[…]]> contiene ']]>'. La referencia cierra la sección CDATA a mitad del valor: el XML queda mal formado y un texto preparado puede insertar elementos UBL (inyección XML). Rust divide la sección en ']]]]><![CDATA[>', que se lee como el mismo texto (XML 1.0 §2.7).",
+      "compatibility_note": "Solo cambia la salida cuando un texto en CDATA (descripción, razón social, dirección, observación, motivo) contiene ']]>'; en ese caso el XML de Rust es bien formado y conserva el texto. Sin ']]>' el XML es idéntico al de la referencia."
+    },
+    {
+      "case": "inv21-special-default",
+      "kind": "xml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "Un valor impreso con |raw dentro de <![CDATA[…]]> contiene ']]>'. La referencia cierra la sección CDATA a mitad del valor: el XML queda mal formado y un texto preparado puede insertar elementos UBL (inyección XML). Rust divide la sección en ']]]]><![CDATA[>', que se lee como el mismo texto (XML 1.0 §2.7).",
+      "compatibility_note": "Solo cambia la salida cuando un texto en CDATA (descripción, razón social, dirección, observación, motivo) contiene ']]>'; en ese caso el XML de Rust es bien formado y conserva el texto. Sin ']]>' el XML es idéntico al de la referencia."
+    },
+    {
+      "case": "inv21-special-cpeforge",
+      "kind": "xml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "Un valor impreso con |raw dentro de <![CDATA[…]]> contiene ']]>'. La referencia cierra la sección CDATA a mitad del valor: el XML queda mal formado y un texto preparado puede insertar elementos UBL (inyección XML). Rust divide la sección en ']]]]><![CDATA[>', que se lee como el mismo texto (XML 1.0 §2.7).",
+      "compatibility_note": "Solo cambia la salida cuando un texto en CDATA (descripción, razón social, dirección, observación, motivo) contiene ']]>'; en ese caso el XML de Rust es bien formado y conserva el texto. Sin ']]>' el XML es idéntico al de la referencia."
+    },
+    {
+      "case": "inv21-special-tests",
+      "kind": "xml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "Un valor impreso con |raw dentro de <![CDATA[…]]> contiene ']]>'. La referencia cierra la sección CDATA a mitad del valor: el XML queda mal formado y un texto preparado puede insertar elementos UBL (inyección XML). Rust divide la sección en ']]]]><![CDATA[>', que se lee como el mismo texto (XML 1.0 §2.7).",
+      "compatibility_note": "Solo cambia la salida cuando un texto en CDATA (descripción, razón social, dirección, observación, motivo) contiene ']]>'; en ese caso el XML de Rust es bien formado y conserva el texto. Sin ']]>' el XML es idéntico al de la referencia."
+    }
+  ],
+  "filter_differences": [
+    {
+      "input": {
+        "fn": "n_format",
+        "value": {
+          "$decimal": "1.0049999999999999"
+        }
+      },
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "El valor tiene más de 15 cifras significativas. La referencia lo convierte en float de 64 bits antes de formatear y number_format redondea esa aproximación; Rust formatea el Decimal exacto. Usar float para importes está prohibido por los estándares del proyecto (misma causa que la diferencia D1 de core).",
+      "compatibility_note": "Con importes de hasta 15 cifras significativas el XML es idéntico. Con más cifras Rust conserva dígitos que la referencia pierde o inventa.",
+      "motivo": "precision-decimal"
+    },
+    {
+      "input": {
+        "fn": "n_format",
+        "value": {
+          "$decimal": "99999999999.995"
+        },
+        "decimals": 6
+      },
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "number_format con 6 decimales muestra el error binario del float (99999999999.995 → 99999999999.994995). Rust imprime el decimal exacto.",
+      "compatibility_note": "Solo afecta a valores con muchas cifras enteras formateados con 6 decimales (tipo de cambio). Con tipos de cambio realistas coincide.",
+      "motivo": "precision-decimal"
+    },
+    {
+      "input": {
+        "fn": "n_format",
+        "value": {
+          "$decimal": "123456789012345.67"
+        },
+        "decimals": 3
+      },
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "El valor tiene más de 15 cifras significativas. La referencia lo convierte en float de 64 bits antes de formatear y number_format redondea esa aproximación; Rust formatea el Decimal exacto. Usar float para importes está prohibido por los estándares del proyecto (misma causa que la diferencia D1 de core).",
+      "compatibility_note": "Con importes de hasta 15 cifras significativas el XML es idéntico. Con más cifras Rust conserva dígitos que la referencia pierde o inventa.",
+      "motivo": "precision-decimal"
+    },
+    {
+      "input": {
+        "fn": "n_format",
+        "value": {
+          "$decimal": "123456789012345.67"
+        },
+        "decimals": 6
+      },
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "El valor tiene más de 15 cifras significativas. La referencia lo convierte en float de 64 bits antes de formatear y number_format redondea esa aproximación; Rust formatea el Decimal exacto. Usar float para importes está prohibido por los estándares del proyecto (misma causa que la diferencia D1 de core).",
+      "compatibility_note": "Con importes de hasta 15 cifras significativas el XML es idéntico. Con más cifras Rust conserva dígitos que la referencia pierde o inventa.",
+      "motivo": "precision-decimal"
+    },
+    {
+      "input": {
+        "fn": "n_format_limit",
+        "value": {
+          "$decimal": "123456789012345.67"
+        },
+        "decimals": 5
+      },
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "El valor tiene más de 15 cifras significativas. La referencia lo convierte en float de 64 bits antes de formatear y number_format redondea esa aproximación; Rust formatea el Decimal exacto. Usar float para importes está prohibido por los estándares del proyecto (misma causa que la diferencia D1 de core).",
+      "compatibility_note": "Con importes de hasta 15 cifras significativas el XML es idéntico. Con más cifras Rust conserva dígitos que la referencia pierde o inventa.",
+      "motivo": "precision-decimal"
+    },
+    {
+      "input": {
+        "fn": "n_format_limit",
+        "value": {
+          "$decimal": "123456789012345.67"
+        },
+        "decimals": 10
+      },
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "El valor tiene más de 15 cifras significativas. La referencia lo convierte en float de 64 bits antes de formatear y number_format redondea esa aproximación; Rust formatea el Decimal exacto. Usar float para importes está prohibido por los estándares del proyecto (misma causa que la diferencia D1 de core).",
+      "compatibility_note": "Con importes de hasta 15 cifras significativas el XML es idéntico. Con más cifras Rust conserva dígitos que la referencia pierde o inventa.",
+      "motivo": "precision-decimal"
+    },
+    {
+      "input": {
+        "fn": "n_format",
+        "value": {
+          "$decimal": "12345678901234567.89"
+        }
+      },
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "El valor tiene más de 15 cifras significativas. La referencia lo convierte en float de 64 bits antes de formatear y number_format redondea esa aproximación; Rust formatea el Decimal exacto. Usar float para importes está prohibido por los estándares del proyecto (misma causa que la diferencia D1 de core).",
+      "compatibility_note": "Con importes de hasta 15 cifras significativas el XML es idéntico. Con más cifras Rust conserva dígitos que la referencia pierde o inventa.",
+      "motivo": "precision-decimal"
+    },
+    {
+      "input": {
+        "fn": "n_format",
+        "value": {
+          "$decimal": "12345678901234567.89"
+        },
+        "decimals": 3
+      },
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "El valor tiene más de 15 cifras significativas. La referencia lo convierte en float de 64 bits antes de formatear y number_format redondea esa aproximación; Rust formatea el Decimal exacto. Usar float para importes está prohibido por los estándares del proyecto (misma causa que la diferencia D1 de core).",
+      "compatibility_note": "Con importes de hasta 15 cifras significativas el XML es idéntico. Con más cifras Rust conserva dígitos que la referencia pierde o inventa.",
+      "motivo": "precision-decimal"
+    },
+    {
+      "input": {
+        "fn": "n_format",
+        "value": {
+          "$decimal": "12345678901234567.89"
+        },
+        "decimals": 6
+      },
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "El valor tiene más de 15 cifras significativas. La referencia lo convierte en float de 64 bits antes de formatear y number_format redondea esa aproximación; Rust formatea el Decimal exacto. Usar float para importes está prohibido por los estándares del proyecto (misma causa que la diferencia D1 de core).",
+      "compatibility_note": "Con importes de hasta 15 cifras significativas el XML es idéntico. Con más cifras Rust conserva dígitos que la referencia pierde o inventa.",
+      "motivo": "precision-decimal"
+    },
+    {
+      "input": {
+        "fn": "n_format_limit",
+        "value": {
+          "$decimal": "12345678901234567.89"
+        },
+        "decimals": 5
+      },
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "El valor tiene más de 15 cifras significativas. La referencia lo convierte en float de 64 bits antes de formatear y number_format redondea esa aproximación; Rust formatea el Decimal exacto. Usar float para importes está prohibido por los estándares del proyecto (misma causa que la diferencia D1 de core).",
+      "compatibility_note": "Con importes de hasta 15 cifras significativas el XML es idéntico. Con más cifras Rust conserva dígitos que la referencia pierde o inventa.",
+      "motivo": "precision-decimal"
+    },
+    {
+      "input": {
+        "fn": "n_format_limit",
+        "value": {
+          "$decimal": "12345678901234567.89"
+        },
+        "decimals": 10
+      },
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "El valor tiene más de 15 cifras significativas. La referencia lo convierte en float de 64 bits antes de formatear y number_format redondea esa aproximación; Rust formatea el Decimal exacto. Usar float para importes está prohibido por los estándares del proyecto (misma causa que la diferencia D1 de core).",
+      "compatibility_note": "Con importes de hasta 15 cifras significativas el XML es idéntico. Con más cifras Rust conserva dígitos que la referencia pierde o inventa.",
+      "motivo": "precision-decimal"
+    }
+  ]
+}

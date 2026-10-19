@@ -1,0 +1,158 @@
+{
+    "generator": "oracle/php/core/run_cases.php",
+    "reference": {
+        "tag": "v5.3.0",
+        "commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+    },
+    "reference_version": "8.4.17",
+    "timezone_db": "2025.2",
+    "cases_file": "identity.json",
+    "results": {
+        "address-defaults": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Address",
+                "codLocal": "0000",
+                "codigoPais": "PE",
+                "departamento": null,
+                "direccion": null,
+                "distrito": null,
+                "provincia": null,
+                "ubigueo": null,
+                "urbanizacion": null
+            }
+        },
+        "address-full": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Address",
+                "codLocal": "0001",
+                "codigoPais": "PE",
+                "departamento": "LIMA",
+                "direccion": "AV. FICTICIA 123",
+                "distrito": "LIMA",
+                "provincia": "LIMA",
+                "ubigueo": "150101",
+                "urbanizacion": "CERCADO"
+            }
+        },
+        "address-null-over-defaults": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Address",
+                "codLocal": null,
+                "codigoPais": null,
+                "departamento": null,
+                "direccion": null,
+                "distrito": null,
+                "provincia": null,
+                "ubigueo": null,
+                "urbanizacion": null
+            }
+        },
+        "address-empty-strings": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Address",
+                "codLocal": "",
+                "codigoPais": "",
+                "departamento": null,
+                "direccion": "",
+                "distrito": null,
+                "provincia": null,
+                "ubigueo": "",
+                "urbanizacion": null
+            }
+        },
+        "company-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Company",
+                "address": null,
+                "email": null,
+                "nombreComercial": null,
+                "razonSocial": null,
+                "ruc": null,
+                "telephone": null
+            }
+        },
+        "company-full": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Company",
+                "address": {
+                    "$class": "Address",
+                    "codLocal": "0001",
+                    "codigoPais": "PE",
+                    "departamento": "LIMA",
+                    "direccion": "AV. FICTICIA 123",
+                    "distrito": "LIMA",
+                    "provincia": "LIMA",
+                    "ubigueo": "150101",
+                    "urbanizacion": "CERCADO"
+                },
+                "email": "facturacion@example.test",
+                "nombreComercial": "SINTETICA",
+                "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                "ruc": "20000000001",
+                "telephone": "01-0000000"
+            }
+        },
+        "client-empty": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Client",
+                "address": null,
+                "email": null,
+                "numDoc": null,
+                "rznSocial": null,
+                "telephone": null,
+                "tipoDoc": null
+            }
+        },
+        "client-full": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Client",
+                "address": {
+                    "$class": "Address",
+                    "codLocal": "0001",
+                    "codigoPais": "PE",
+                    "departamento": "LIMA",
+                    "direccion": "CALLE PRUEBA 456",
+                    "distrito": "LIMA",
+                    "provincia": "LIMA",
+                    "ubigueo": "150122",
+                    "urbanizacion": "CERCADO"
+                },
+                "email": "cliente@example.test",
+                "numDoc": "20000000002",
+                "rznSocial": "CLIENTE SINTETICO S.A.",
+                "telephone": "999000000",
+                "tipoDoc": "6"
+            }
+        },
+        "client-unicode": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Client",
+                "address": {
+                    "$class": "Address",
+                    "codLocal": "0001",
+                    "codigoPais": "PE",
+                    "departamento": "LIMA",
+                    "direccion": "CALLE PRUEBA 456",
+                    "distrito": "LIMA",
+                    "provincia": "LIMA",
+                    "ubigueo": "150122",
+                    "urbanizacion": "CERCADO"
+                },
+                "email": "ñ@example.test",
+                "numDoc": "20000000002",
+                "rznSocial": "ÑANDÚ & CÍA \"LOS ÁLAMOS\" <S.R.L.>",
+                "telephone": "\t01\n",
+                "tipoDoc": "6"
+            }
+        }
+    }
+}

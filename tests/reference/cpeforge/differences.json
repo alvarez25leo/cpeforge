@@ -1,0 +1,47 @@
+{
+  "description": "Diferencias deliberadas referencia↔Rust de cpeforge admitidas por el perfil seguro (docs/verificacion-paridad.md#perfil-seguro). crates/cpeforge/tests/live_parity.rs falla ante cualquier diferencia no registrada y ante cualquier registro obsoleto.",
+  "differences": [
+    {
+      "id": "see_unknown_error_message",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "tipado-estatico",
+      "reason": "La referencia resuelve el builder con un nombre de clase arbitrario y lanza Error «Class \"UnknownBuilder\" not found»; Rust solo acepta DocumentKind y devuelve CpeForgeError::UnsupportedDocument.",
+      "compatibility_note": "Un tipo de documento desconocido falla igual en ambos; Rust no tiene nombres de clase dinámicos."
+    },
+    {
+      "id": "see_invalid_xml_error_message",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "reason": "Con XML mal formado en sendXmlFile la referencia emite avisos de DOM y luego XmlReaderException «UBL version  no soportada.»; Rust rechaza el XML en el parser de ws con un error tipado.",
+      "compatibility_note": "El fallo ocurre en el mismo método; Rust informa la causa real (XML mal formado)."
+    },
+    {
+      "id": "see_call_1_zip_hash",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "Con XML firmado de ~8 KiB el ZIP difiere en unos bytes: el filtro zlib.deflate de la referencia usa memLevel=9 y flate2 fija memLevel=8. Con la hora normalizada, los ZIP pequeños son idénticos y el contenido XML coincide.",
+      "motivo": "compresion-equivalente",
+      "compatibility_note": "El ZIP descomprime a los mismos nombres y bytes y es válido; SUNAT lo descomprime igual. Solo cambian unos bytes del flujo DEFLATE (memLevel 8 frente a 9), así que el SHA-256 del ZIP difiere del que calcularía la referencia para el mismo XML, y Rust envía el hash de su propio ZIP."
+    },
+    {
+      "id": "see_call_1_zip_bytes",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "Con XML firmado de ~8 KiB el ZIP difiere en unos bytes: el filtro zlib.deflate de la referencia usa memLevel=9 y flate2 fija memLevel=8. Con la hora normalizada, los ZIP pequeños son idénticos y el contenido XML coincide.",
+      "motivo": "compresion-equivalente",
+      "compatibility_note": "El ZIP descomprime a los mismos nombres y bytes y es válido; SUNAT lo descomprime igual. Solo cambian unos bytes del flujo DEFLATE (memLevel 8 frente a 9), así que el SHA-256 del ZIP difiere del que calcularía la referencia para el mismo XML, y Rust envía el hash de su propio ZIP."
+    },
+    {
+      "id": "see_call_2_zip_hash",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "Con XML firmado de ~8 KiB el ZIP difiere en unos bytes: el filtro zlib.deflate de la referencia usa memLevel=9 y flate2 fija memLevel=8. Con la hora normalizada, los ZIP pequeños son idénticos y el contenido XML coincide.",
+      "motivo": "compresion-equivalente",
+      "compatibility_note": "El ZIP descomprime a los mismos nombres y bytes y es válido; SUNAT lo descomprime igual. Solo cambian unos bytes del flujo DEFLATE (memLevel 8 frente a 9), así que el SHA-256 del ZIP difiere del que calcularía la referencia para el mismo XML, y Rust envía el hash de su propio ZIP."
+    },
+    {
+      "id": "see_call_2_zip_bytes",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "Con XML firmado de ~8 KiB el ZIP difiere en unos bytes: el filtro zlib.deflate de la referencia usa memLevel=9 y flate2 fija memLevel=8. Con la hora normalizada, los ZIP pequeños son idénticos y el contenido XML coincide.",
+      "motivo": "compresion-equivalente",
+      "compatibility_note": "El ZIP descomprime a los mismos nombres y bytes y es válido; SUNAT lo descomprime igual. Solo cambian unos bytes del flujo DEFLATE (memLevel 8 frente a 9), así que el SHA-256 del ZIP difiere del que calcularía la referencia para el mismo XML, y Rust envía el hash de su propio ZIP."
+    }
+  ]
+}

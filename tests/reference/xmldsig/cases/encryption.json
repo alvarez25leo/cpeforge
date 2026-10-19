@@ -1,0 +1,1114 @@
+{
+  "family": "encryption",
+  "cases": [
+    {
+      "id": "enc-aes128-element-rsa15",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Element",
+      "key_transport": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      }
+    },
+    {
+      "id": "dec-aes128-element-rsa15",
+      "scenario": "enc_decrypt",
+      "encrypt": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+        "session": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+        },
+        "target": "id:s1",
+        "type": "http://www.w3.org/2001/04/xmlenc#Element",
+        "key_transport": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+          "type": "public",
+          "load": {
+            "key": "a",
+            "suffix": "crt"
+          },
+          "is_cert": true
+        }
+      },
+      "private_key": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "enc-aes128-element-oaep",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Element",
+      "key_transport": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      }
+    },
+    {
+      "id": "dec-aes128-element-oaep",
+      "scenario": "enc_decrypt",
+      "encrypt": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+        "session": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+        },
+        "target": "id:s1",
+        "type": "http://www.w3.org/2001/04/xmlenc#Element",
+        "key_transport": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+          "type": "public",
+          "load": {
+            "key": "a",
+            "suffix": "crt"
+          },
+          "is_cert": true
+        }
+      },
+      "private_key": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "enc-aes128-content-rsa15",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Content",
+      "key_transport": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      }
+    },
+    {
+      "id": "dec-aes128-content-rsa15",
+      "scenario": "enc_decrypt",
+      "encrypt": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+        "session": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+        },
+        "target": "id:s1",
+        "type": "http://www.w3.org/2001/04/xmlenc#Content",
+        "key_transport": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+          "type": "public",
+          "load": {
+            "key": "a",
+            "suffix": "crt"
+          },
+          "is_cert": true
+        }
+      },
+      "private_key": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "enc-aes128-content-oaep",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Content",
+      "key_transport": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      }
+    },
+    {
+      "id": "dec-aes128-content-oaep",
+      "scenario": "enc_decrypt",
+      "encrypt": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+        "session": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+        },
+        "target": "id:s1",
+        "type": "http://www.w3.org/2001/04/xmlenc#Content",
+        "key_transport": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+          "type": "public",
+          "load": {
+            "key": "a",
+            "suffix": "crt"
+          },
+          "is_cert": true
+        }
+      },
+      "private_key": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "enc-aes192-element-rsa15",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Element",
+      "key_transport": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      }
+    },
+    {
+      "id": "dec-aes192-element-rsa15",
+      "scenario": "enc_decrypt",
+      "encrypt": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+        "session": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc"
+        },
+        "target": "id:s1",
+        "type": "http://www.w3.org/2001/04/xmlenc#Element",
+        "key_transport": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+          "type": "public",
+          "load": {
+            "key": "a",
+            "suffix": "crt"
+          },
+          "is_cert": true
+        }
+      },
+      "private_key": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "enc-aes192-element-oaep",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Element",
+      "key_transport": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      }
+    },
+    {
+      "id": "dec-aes192-element-oaep",
+      "scenario": "enc_decrypt",
+      "encrypt": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+        "session": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc"
+        },
+        "target": "id:s1",
+        "type": "http://www.w3.org/2001/04/xmlenc#Element",
+        "key_transport": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+          "type": "public",
+          "load": {
+            "key": "a",
+            "suffix": "crt"
+          },
+          "is_cert": true
+        }
+      },
+      "private_key": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "enc-aes192-content-rsa15",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Content",
+      "key_transport": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      }
+    },
+    {
+      "id": "dec-aes192-content-rsa15",
+      "scenario": "enc_decrypt",
+      "encrypt": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+        "session": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc"
+        },
+        "target": "id:s1",
+        "type": "http://www.w3.org/2001/04/xmlenc#Content",
+        "key_transport": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+          "type": "public",
+          "load": {
+            "key": "a",
+            "suffix": "crt"
+          },
+          "is_cert": true
+        }
+      },
+      "private_key": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "enc-aes192-content-oaep",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Content",
+      "key_transport": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      }
+    },
+    {
+      "id": "dec-aes192-content-oaep",
+      "scenario": "enc_decrypt",
+      "encrypt": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+        "session": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#aes192-cbc"
+        },
+        "target": "id:s1",
+        "type": "http://www.w3.org/2001/04/xmlenc#Content",
+        "key_transport": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+          "type": "public",
+          "load": {
+            "key": "a",
+            "suffix": "crt"
+          },
+          "is_cert": true
+        }
+      },
+      "private_key": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "enc-aes256-element-rsa15",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Element",
+      "key_transport": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      }
+    },
+    {
+      "id": "dec-aes256-element-rsa15",
+      "scenario": "enc_decrypt",
+      "encrypt": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+        "session": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc"
+        },
+        "target": "id:s1",
+        "type": "http://www.w3.org/2001/04/xmlenc#Element",
+        "key_transport": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+          "type": "public",
+          "load": {
+            "key": "a",
+            "suffix": "crt"
+          },
+          "is_cert": true
+        }
+      },
+      "private_key": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "enc-aes256-element-oaep",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Element",
+      "key_transport": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      }
+    },
+    {
+      "id": "dec-aes256-element-oaep",
+      "scenario": "enc_decrypt",
+      "encrypt": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+        "session": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc"
+        },
+        "target": "id:s1",
+        "type": "http://www.w3.org/2001/04/xmlenc#Element",
+        "key_transport": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+          "type": "public",
+          "load": {
+            "key": "a",
+            "suffix": "crt"
+          },
+          "is_cert": true
+        }
+      },
+      "private_key": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "enc-aes256-content-rsa15",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Content",
+      "key_transport": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      }
+    },
+    {
+      "id": "dec-aes256-content-rsa15",
+      "scenario": "enc_decrypt",
+      "encrypt": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+        "session": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc"
+        },
+        "target": "id:s1",
+        "type": "http://www.w3.org/2001/04/xmlenc#Content",
+        "key_transport": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+          "type": "public",
+          "load": {
+            "key": "a",
+            "suffix": "crt"
+          },
+          "is_cert": true
+        }
+      },
+      "private_key": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "enc-aes256-content-oaep",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Content",
+      "key_transport": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      }
+    },
+    {
+      "id": "dec-aes256-content-oaep",
+      "scenario": "enc_decrypt",
+      "encrypt": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+        "session": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#aes256-cbc"
+        },
+        "target": "id:s1",
+        "type": "http://www.w3.org/2001/04/xmlenc#Content",
+        "key_transport": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+          "type": "public",
+          "load": {
+            "key": "a",
+            "suffix": "crt"
+          },
+          "is_cert": true
+        }
+      },
+      "private_key": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "enc-3des-element-rsa15",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Element",
+      "key_transport": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      }
+    },
+    {
+      "id": "dec-3des-element-rsa15",
+      "scenario": "enc_decrypt",
+      "encrypt": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+        "session": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc"
+        },
+        "target": "id:s1",
+        "type": "http://www.w3.org/2001/04/xmlenc#Element",
+        "key_transport": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+          "type": "public",
+          "load": {
+            "key": "a",
+            "suffix": "crt"
+          },
+          "is_cert": true
+        }
+      },
+      "private_key": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "enc-3des-element-oaep",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Element",
+      "key_transport": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      }
+    },
+    {
+      "id": "dec-3des-element-oaep",
+      "scenario": "enc_decrypt",
+      "encrypt": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+        "session": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc"
+        },
+        "target": "id:s1",
+        "type": "http://www.w3.org/2001/04/xmlenc#Element",
+        "key_transport": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+          "type": "public",
+          "load": {
+            "key": "a",
+            "suffix": "crt"
+          },
+          "is_cert": true
+        }
+      },
+      "private_key": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "enc-3des-content-rsa15",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Content",
+      "key_transport": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      }
+    },
+    {
+      "id": "dec-3des-content-rsa15",
+      "scenario": "enc_decrypt",
+      "encrypt": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+        "session": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc"
+        },
+        "target": "id:s1",
+        "type": "http://www.w3.org/2001/04/xmlenc#Content",
+        "key_transport": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+          "type": "public",
+          "load": {
+            "key": "a",
+            "suffix": "crt"
+          },
+          "is_cert": true
+        }
+      },
+      "private_key": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "enc-3des-content-oaep",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Content",
+      "key_transport": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      }
+    },
+    {
+      "id": "dec-3des-content-oaep",
+      "scenario": "enc_decrypt",
+      "encrypt": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+        "session": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc"
+        },
+        "target": "id:s1",
+        "type": "http://www.w3.org/2001/04/xmlenc#Content",
+        "key_transport": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+          "type": "public",
+          "load": {
+            "key": "a",
+            "suffix": "crt"
+          },
+          "is_cert": true
+        }
+      },
+      "private_key": {
+        "key": "a",
+        "suffix": "pem"
+      }
+    },
+    {
+      "id": "enc-no-replace",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Element",
+      "replace": false
+    },
+    {
+      "id": "enc-key-not-appended",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Element",
+      "key_transport": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true
+      },
+      "append_key": false
+    },
+    {
+      "id": "enc-key-named",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Element",
+      "key_transport": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public",
+        "load": {
+          "key": "a",
+          "suffix": "crt"
+        },
+        "is_cert": true,
+        "name": "clave-sitio"
+      }
+    },
+    {
+      "id": "enc-document-element",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+      },
+      "target": "root",
+      "type": "http://www.w3.org/2001/04/xmlenc#Element"
+    },
+    {
+      "id": "enc-invalid-type",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+      },
+      "target": "id:s1",
+      "type": "urn:otro"
+    },
+    {
+      "id": "enc-unknown-session",
+      "scenario": "enc_encrypt",
+      "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+      "session": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public"
+      },
+      "target": "id:s1",
+      "type": "http://www.w3.org/2001/04/xmlenc#Element"
+    },
+    {
+      "id": "dec-no-key-transport-session",
+      "scenario": "enc_decrypt",
+      "encrypt": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+        "session": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+          "load": {
+            "b64": "AAAAAAAAAAAAAAAAAAAAAA=="
+          }
+        },
+        "target": "id:s1",
+        "type": "http://www.w3.org/2001/04/xmlenc#Element",
+        "generate": false
+      },
+      "session_key": {
+        "b64": "AAAAAAAAAAAAAAAAAAAAAA=="
+      }
+    },
+    {
+      "id": "dec-wrong-private-key",
+      "scenario": "enc_decrypt",
+      "encrypt": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+        "session": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+        },
+        "target": "id:s1",
+        "type": "http://www.w3.org/2001/04/xmlenc#Element",
+        "key_transport": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p",
+          "type": "public",
+          "load": {
+            "key": "a",
+            "suffix": "crt"
+          },
+          "is_cert": true
+        }
+      },
+      "private_key": {
+        "key": "b",
+        "suffix": "pem"
+      },
+      "outcome_only": true
+    },
+    {
+      "id": "dec-no-encrypted-data",
+      "scenario": "enc_decrypt",
+      "input": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>"
+    },
+    {
+      "id": "dec-no-replace",
+      "scenario": "enc_decrypt",
+      "encrypt": {
+        "xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><root xmlns=\"urn:r\"><secret Id=\"s1\">dato <b>sensible</b> &amp; ñ</secret><public>visible</public></root>",
+        "session": {
+          "alg": "http://www.w3.org/2001/04/xmlenc#aes128-cbc",
+          "load": {
+            "b64": "AAAAAAAAAAAAAAAAAAAAAA=="
+          }
+        },
+        "target": "id:s1",
+        "type": "http://www.w3.org/2001/04/xmlenc#Element",
+        "generate": false
+      },
+      "session_key": {
+        "b64": "AAAAAAAAAAAAAAAAAAAAAA=="
+      },
+      "replace": false
+    },
+    {
+      "id": "keyinfo-keyname",
+      "scenario": "enc_key_info",
+      "xml": "<root xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"><t><ds:KeyInfo><ds:KeyName>clave-1</ds:KeyName></ds:KeyInfo></t></root>",
+      "target": "tag:|t",
+      "base_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public"
+      }
+    },
+    {
+      "id": "keyinfo-rsakeyvalue",
+      "scenario": "enc_key_info",
+      "xml": "<root xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"><t><ds:KeyInfo><ds:KeyValue><ds:RSAKeyValue><ds:Modulus>wwECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6e3x9fn8=</ds:Modulus><ds:Exponent>AQAB</ds:Exponent></ds:RSAKeyValue></ds:KeyValue></ds:KeyInfo></t></root>",
+      "target": "tag:|t",
+      "base_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public"
+      }
+    },
+    {
+      "id": "keyinfo-rsakeyvalue-missing",
+      "scenario": "enc_key_info",
+      "xml": "<root xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"><t><ds:KeyInfo><ds:KeyValue><ds:RSAKeyValue><ds:Modulus>AQAB</ds:Modulus></ds:RSAKeyValue></ds:KeyValue></ds:KeyInfo></t></root>",
+      "target": "tag:|t",
+      "base_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public"
+      }
+    },
+    {
+      "id": "keyinfo-dsakeyvalue",
+      "scenario": "enc_key_info",
+      "xml": "<root xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"><t><ds:KeyInfo><ds:KeyValue><ds:DSAKeyValue/></ds:KeyValue></ds:KeyInfo></t></root>",
+      "target": "tag:|t",
+      "base_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public"
+      }
+    },
+    {
+      "id": "keyinfo-retrieval",
+      "scenario": "enc_key_info",
+      "xml": "<root xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\" xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\"><t><ds:KeyInfo><ds:RetrievalMethod Type=\"http://www.w3.org/2001/04/xmlenc#EncryptedKey\" URI=\"#k1\"/></ds:KeyInfo></t><xenc:EncryptedKey Id=\"k1\"><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-1_5\"/><xenc:CipherData><xenc:CipherValue>AAAA</xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></root>",
+      "target": "tag:|t",
+      "base_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public"
+      }
+    },
+    {
+      "id": "keyinfo-retrieval-missing",
+      "scenario": "enc_key_info",
+      "xml": "<root xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"><t><ds:KeyInfo><ds:RetrievalMethod Type=\"http://www.w3.org/2001/04/xmlenc#EncryptedKey\" URI=\"#nada\"/></ds:KeyInfo></t></root>",
+      "target": "tag:|t",
+      "base_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public"
+      }
+    },
+    {
+      "id": "keyinfo-retrieval-other-type",
+      "scenario": "enc_key_info",
+      "xml": "<root xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"><t><ds:KeyInfo><ds:RetrievalMethod Type=\"urn:otro\" URI=\"#k1\"/><ds:KeyName>n</ds:KeyName></ds:KeyInfo></t></root>",
+      "target": "tag:|t",
+      "base_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public"
+      }
+    },
+    {
+      "id": "keyinfo-retrieval-not-local",
+      "scenario": "enc_key_info",
+      "xml": "<root xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"><t><ds:KeyInfo><ds:RetrievalMethod Type=\"http://www.w3.org/2001/04/xmlenc#EncryptedKey\" URI=\"http://x/k\"/></ds:KeyInfo></t></root>",
+      "target": "tag:|t",
+      "base_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public"
+      }
+    },
+    {
+      "id": "keyinfo-encryptedkey",
+      "scenario": "enc_key_info",
+      "xml": "<root xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\" xmlns:xenc=\"http://www.w3.org/2001/04/xmlenc#\"><t><ds:KeyInfo><xenc:EncryptedKey><xenc:EncryptionMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p\"/><ds:KeyInfo><ds:KeyName>interna</ds:KeyName></ds:KeyInfo></xenc:EncryptedKey></ds:KeyInfo></t></root>",
+      "target": "tag:|t",
+      "base_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public"
+      }
+    },
+    {
+      "id": "keyinfo-no-keyinfo",
+      "scenario": "enc_key_info",
+      "xml": "<root><t/></root>",
+      "target": "tag:|t",
+      "base_key": {
+        "alg": "http://www.w3.org/2001/04/xmlenc#rsa-1_5",
+        "type": "public"
+      }
+    },
+    {
+      "id": "keyinfo-x509",
+      "scenario": "enc_key_info",
+      "xml": {
+        "key_info_cert": "a"
+      },
+      "target": "tag:|t",
+      "base_key": {
+        "alg": "http://www.w3.org/2000/09/xmldsig#rsa-sha1",
+        "type": "public"
+      }
+    },
+    {
+      "id": "keyinfo-no-base",
+      "scenario": "enc_key_info",
+      "xml": "<root xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"><t><ds:KeyInfo><ds:KeyName>clave-1</ds:KeyName></ds:KeyInfo></t></root>",
+      "target": "tag:|t"
+    },
+    {
+      "id": "x509-pfx",
+      "scenario": "x509",
+      "pfx": {
+        "key": "a",
+        "suffix": "pfx"
+      },
+      "password": {
+        "key": "pfx",
+        "suffix": "pass"
+      }
+    },
+    {
+      "id": "x509-pfx-wrong-password",
+      "scenario": "x509",
+      "pfx": {
+        "key": "a",
+        "suffix": "pfx"
+      },
+      "password": "incorrecta"
+    },
+    {
+      "id": "x509-ext-ca",
+      "scenario": "x509",
+      "pfx": {
+        "key": "ext-ca",
+        "suffix": "pfx"
+      },
+      "password": {
+        "key": "pfx",
+        "suffix": "pass"
+      }
+    },
+    {
+      "id": "x509-ext-server",
+      "scenario": "x509",
+      "pfx": {
+        "key": "ext-server",
+        "suffix": "pfx"
+      },
+      "password": {
+        "key": "pfx",
+        "suffix": "pass"
+      }
+    },
+    {
+      "id": "x509-ext-tsa",
+      "scenario": "x509",
+      "pfx": {
+        "key": "ext-tsa",
+        "suffix": "pfx"
+      },
+      "password": {
+        "key": "pfx",
+        "suffix": "pass"
+      }
+    },
+    {
+      "id": "x509-ext-codesign",
+      "scenario": "x509",
+      "pfx": {
+        "key": "ext-codesign",
+        "suffix": "pfx"
+      },
+      "password": {
+        "key": "pfx",
+        "suffix": "pass"
+      }
+    },
+    {
+      "id": "x509-ext-nsca",
+      "scenario": "x509",
+      "pfx": {
+        "key": "ext-nsca",
+        "suffix": "pfx"
+      },
+      "password": {
+        "key": "pfx",
+        "suffix": "pass"
+      }
+    },
+    {
+      "id": "x509-ext-kuonly",
+      "scenario": "x509",
+      "pfx": {
+        "key": "ext-kuonly",
+        "suffix": "pfx"
+      },
+      "password": {
+        "key": "pfx",
+        "suffix": "pass"
+      }
+    },
+    {
+      "id": "x509-ext-invalid",
+      "scenario": "x509",
+      "pfx": {
+        "key": "ext-invalid",
+        "suffix": "pfx"
+      },
+      "password": {
+        "key": "pfx",
+        "suffix": "pass"
+      }
+    },
+    {
+      "id": "x509-ext-saninvalid",
+      "scenario": "x509",
+      "pfx": {
+        "key": "ext-saninvalid",
+        "suffix": "pfx"
+      },
+      "password": {
+        "key": "pfx",
+        "suffix": "pass"
+      }
+    },
+    {
+      "id": "x509-ext-v1",
+      "scenario": "x509",
+      "pfx": {
+        "key": "ext-v1",
+        "suffix": "pfx"
+      },
+      "password": {
+        "key": "pfx",
+        "suffix": "pass"
+      }
+    },
+    {
+      "id": "x509-not-pfx",
+      "scenario": "x509",
+      "pfx": "no es un pfx",
+      "password": "x"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+[package]
+name = "cpeforge-xml"
+version = "0.1.0"
+description = "XML UBL sin firma de comprobantes electrónicos peruanos."
+readme = "README.md"
+keywords = ["sunat", "peru", "ubl", "xml", "cpe"]
+categories = ["encoding"]
+# Las pruebas dependen de los fixtures del workspace (tests/reference); no se publican.
+exclude = ["tests/"]
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+cpeforge-core.workspace = true
+jiff.workspace = true
+rust_decimal.workspace = true
+
+[dev-dependencies]
+cpeforge-core = { workspace = true, features = ["serde"] }
+roxmltree.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+serde_path_to_error.workspace = true
+
+[[test]]
+name = "parity"
+
+[[example]]
+name = "invoice_xml"
+
+[[example]]
+name = "despatch_2022_xml"
+
+[lints]
+workspace = true

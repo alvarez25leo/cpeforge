@@ -1,0 +1,677 @@
+{
+    "generator": "oracle/php/xml/run_cases.php",
+    "reference": {
+        "tag": "v5.3.0",
+        "commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+    },
+    "reference_version": "8.4.17",
+    "twig_version": "v3.30.0",
+    "timezone_db": "2025.2",
+    "cases_file": "invoice.json",
+    "results": {
+        "inv21-full-default": {
+            "now": 1792253926,
+            "sha256": "0976aa74e7ac4fd857f191d496fd62335cdd7d3524db69fe08c90ecd35fe4939",
+            "bytes": 14718,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-full-cpeforge": {
+            "now": 1792253926,
+            "sha256": "0976aa74e7ac4fd857f191d496fd62335cdd7d3524db69fe08c90ecd35fe4939",
+            "bytes": 14718,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-full-tests": {
+            "now": 1792253926,
+            "sha256": "0976aa74e7ac4fd857f191d496fd62335cdd7d3524db69fe08c90ecd35fe4939",
+            "bytes": 14718,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv20-full-default": {
+            "now": 1792253926,
+            "sha256": "c820ee35a7a07cd04fb7aa515cf6089d3db0c2aee12dd9e96be3f2ea910f47ff",
+            "bytes": 10532,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1."
+            ]
+        },
+        "inv20-full-cpeforge": {
+            "now": 1792253926,
+            "sha256": "c820ee35a7a07cd04fb7aa515cf6089d3db0c2aee12dd9e96be3f2ea910f47ff",
+            "bytes": 10532,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1."
+            ]
+        },
+        "inv20-full-tests": {
+            "now": 1792253926,
+            "sha256": "c820ee35a7a07cd04fb7aa515cf6089d3db0c2aee12dd9e96be3f2ea910f47ff",
+            "bytes": 10532,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1."
+            ]
+        },
+        "inv21-minimal-default": {
+            "now": 1792253926,
+            "sha256": "e9fc5acaf161652325f98864be77488fbafc352ba814e5d26a75ce70faadcbaf",
+            "bytes": 4212,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-minimal-cpeforge": {
+            "now": 1792253926,
+            "sha256": "e9fc5acaf161652325f98864be77488fbafc352ba814e5d26a75ce70faadcbaf",
+            "bytes": 4212,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-minimal-tests": {
+            "now": 1792253926,
+            "sha256": "e9fc5acaf161652325f98864be77488fbafc352ba814e5d26a75ce70faadcbaf",
+            "bytes": 4212,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv20-minimal-default": {
+            "now": 1792253926,
+            "sha256": "722c4bcedb149ca3bda7694c3593eb504d8626cf0478a85872973b2070dc017f",
+            "bytes": 4689,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv20-minimal-cpeforge": {
+            "now": 1792253926,
+            "sha256": "722c4bcedb149ca3bda7694c3593eb504d8626cf0478a85872973b2070dc017f",
+            "bytes": 4689,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv20-minimal-tests": {
+            "now": 1792253926,
+            "sha256": "722c4bcedb149ca3bda7694c3593eb504d8626cf0478a85872973b2070dc017f",
+            "bytes": 4689,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "boleta21-default": {
+            "now": 1792253926,
+            "sha256": "2aa9b75d517ab42912d167b2d15cba9e27891afb2e74d64629176f82d8f6dd72",
+            "bytes": 4213,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "boleta21-tests": {
+            "now": 1792253926,
+            "sha256": "2aa9b75d517ab42912d167b2d15cba9e27891afb2e74d64629176f82d8f6dd72",
+            "bytes": 4213,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "boleta20-default": {
+            "now": 1792253926,
+            "sha256": "ba9761ffdc4965aca99b8241bf2270f3f40664acb97b3e40200c73689d84f850",
+            "bytes": 4690,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "boleta20-tests": {
+            "now": 1792253926,
+            "sha256": "ba9761ffdc4965aca99b8241bf2270f3f40664acb97b3e40200c73689d84f850",
+            "bytes": 4690,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv21-taxes-default": {
+            "now": 1792253926,
+            "sha256": "ecaebc5e7e02e9c92fb9c1ae84653dd7da7efd16793f268230cbd8fd47095d18",
+            "bytes": 22131,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-taxes-tests": {
+            "now": 1792253926,
+            "sha256": "ecaebc5e7e02e9c92fb9c1ae84653dd7da7efd16793f268230cbd8fd47095d18",
+            "bytes": 22131,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv20-taxes-default": {
+            "now": 1792253926,
+            "sha256": "77807ce98b99a16fa737b3dc5bb5ef761d02b83c0e77b6206ae39335b6114153",
+            "bytes": 18063,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1."
+            ]
+        },
+        "inv20-taxes-tests": {
+            "now": 1792253927,
+            "sha256": "77807ce98b99a16fa737b3dc5bb5ef761d02b83c0e77b6206ae39335b6114153",
+            "bytes": 18063,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1."
+            ]
+        },
+        "inv21-zero-totals-default": {
+            "now": 1792253927,
+            "sha256": "4ebfb096e57b0b6c0c6b98ccc9f430c3a81b2bf29aa5f4fa2216208fbed9acb1",
+            "bytes": 5591,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv20-zero-totals-default": {
+            "now": 1792253927,
+            "sha256": "d0693a2106966b58ad276274f5c35f875abf7d78c1f3b98f2957adc344dc5397",
+            "bytes": 4607,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1."
+            ]
+        },
+        "inv21-null-totals-default": {
+            "now": 1792253927,
+            "sha256": "2c11aa3a2efd13dfb45560e34b4e14b8a0102428e0d66b2d712d5e16a4b73acd",
+            "bytes": 3908,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv21-null-totals-tests": {
+            "now": 1792253927,
+            "sha256": "2c11aa3a2efd13dfb45560e34b4e14b8a0102428e0d66b2d712d5e16a4b73acd",
+            "bytes": 3908,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv20-null-totals-default": {
+            "now": 1792253927,
+            "sha256": "ab1936e385532ea3ea31febbd1a0febe4b2e9819f2710a47f9faab37875c753f",
+            "bytes": 4543,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv20-null-totals-tests": {
+            "now": 1792253927,
+            "sha256": "ab1936e385532ea3ea31febbd1a0febe4b2e9819f2710a47f9faab37875c753f",
+            "bytes": 4543,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv21-credit-default": {
+            "now": 1792253927,
+            "sha256": "ba8ed0d2a471ca354be178e3a670bb6090b71721e4d1bb3db3a5c9fc69933524",
+            "bytes": 6890,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-credit-tests": {
+            "now": 1792253927,
+            "sha256": "ba8ed0d2a471ca354be178e3a670bb6090b71721e4d1bb3db3a5c9fc69933524",
+            "bytes": 6890,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-contado-default": {
+            "now": 1792253927,
+            "sha256": "6d3a676ed462346dc7269b967eeb70a1a1c65b730fa04453bb4aa161c6fcc0fd",
+            "bytes": 4323,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-forma-pago-zero-default": {
+            "now": 1792253927,
+            "sha256": "d7d8e09a997639b14a03d410f27ad440816cad75dc5e07c87367e009bfefef0b",
+            "bytes": 4323,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-cuota-empty-currency-default": {
+            "now": 1792253927,
+            "sha256": "a2789118a07ff8ed574c6d0e535471e23a95beb21466c365313ae7cb0af540e7",
+            "bytes": 4423,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-charges-default": {
+            "now": 1792253927,
+            "sha256": "7cd3946095235139765c646814fff22d832abfd413285024d1e773f18fc4b481",
+            "bytes": 6979,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-charges-tests": {
+            "now": 1792253927,
+            "sha256": "7cd3946095235139765c646814fff22d832abfd413285024d1e773f18fc4b481",
+            "bytes": 6979,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv20-charges-default": {
+            "now": 1792253927,
+            "sha256": "b51da3aec2b3daeef65f59a65ca09fb0ecd60903ee98164d198ba6aca15a13c4",
+            "bytes": 5344,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv21-attributes-default": {
+            "now": 1792253927,
+            "sha256": "5c688aa75041ba46ebc30adb0d6ce53ae6c3e6a3629159c805ae9b0b0a25b984",
+            "bytes": 5342,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-parties-default": {
+            "now": 1792253927,
+            "sha256": "2d252cd871e4ce7c26c0d0db1937cd37debcaa60322f89194614e9c8a15510cd",
+            "bytes": 5373,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-parties-tests": {
+            "now": 1792253927,
+            "sha256": "2d252cd871e4ce7c26c0d0db1937cd37debcaa60322f89194614e9c8a15510cd",
+            "bytes": 5373,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv20-parties-default": {
+            "now": 1792253927,
+            "sha256": "9a51ffb4e153b57ccb065e48fb3559fcca0a98d94dbeb0438291ab4f945cae95",
+            "bytes": 5384,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv20-parties-tests": {
+            "now": 1792253927,
+            "sha256": "9a51ffb4e153b57ccb065e48fb3559fcca0a98d94dbeb0438291ab4f945cae95",
+            "bytes": 5384,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv21-no-contact-default": {
+            "now": 1792253927,
+            "sha256": "b21e79657cc7debee39e17bab3d12abd9e03331ce8ea101112602fcb28b16496",
+            "bytes": 4063,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-special-default": {
+            "now": 1792253928,
+            "sha256": "e4d7c1a30b61f6187727c154c4cf966c2902949792b30c4783dda2d5e0faded2",
+            "bytes": 4305,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-special-cpeforge": {
+            "now": 1792253928,
+            "sha256": "2cdef6c4f9a46d41d3508b62ee72020aff72b22a0dc738a092a175fd116b61ac",
+            "bytes": 4280,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-special-tests": {
+            "now": 1792253928,
+            "sha256": "2cdef6c4f9a46d41d3508b62ee72020aff72b22a0dc738a092a175fd116b61ac",
+            "bytes": 4280,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv20-special-default": {
+            "now": 1792253928,
+            "sha256": "54167104eecfd5db09ac6d443085b3d7ccd8a9646cb782c2c178d345b200ffde",
+            "bytes": 4737,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv20-special-cpeforge": {
+            "now": 1792253928,
+            "sha256": "effedd829f08661dd5281c503c916f2b236cb75ffe62235d71db25d64f6fce5d",
+            "bytes": 4712,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv21-dates-utc-default": {
+            "now": 1792253928,
+            "sha256": "60e830ff71d0483caef4ecef2a7d1a22d3af38ba9e80ac5ae713f2b2587b2e90",
+            "bytes": 4249,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv20-dates-utc-default": {
+            "now": 1792253928,
+            "sha256": "d18fa740e2e159c6df63ce6f27cd8286c5bf56959a43cfb9389110d6313061f5",
+            "bytes": 4823,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv21-dates-mutable-default": {
+            "now": 1792253928,
+            "sha256": "e38b43cca715ea47e0c256157cc053acccaa9e86c03433375703737660392bcc",
+            "bytes": 4212,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-null-date-default": {
+            "now": 1792253928,
+            "sha256": "29d4390b0977b36416edcf201883e88f89e5be4c9fa0fe18980c9a3ad3c01b8a",
+            "bytes": 4212,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-null-date-tests": {
+            "now": 1792253928,
+            "sha256": "29d4390b0977b36416edcf201883e88f89e5be4c9fa0fe18980c9a3ad3c01b8a",
+            "bytes": 4212,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-amounts-default": {
+            "now": 1792253928,
+            "sha256": "5a55e272b3a712904365b7616e510c4604817276719ac52f075c9313513994d6",
+            "bytes": 8655,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-precision-default": {
+            "now": 1792253928,
+            "sha256": "eaa47a7303f3e0fb7874b3ce3ccbc15d288ac971ed9db16737fb19920626f78f",
+            "bytes": 4264,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv20-amounts-default": {
+            "now": 1792253928,
+            "sha256": "d782a197bfe2171e09bc005aa3feef533fcd6731b1043a6c7ed00bba7abd50d1",
+            "bytes": 7783,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv-empty-default": {
+            "now": 1792253928,
+            "sha256": "2eff2ac5d689cd095ff4508b3463b38a8166b6b5cd57296690549e7b4a739e49",
+            "bytes": 3160,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv-empty-cpeforge": {
+            "now": 1792253928,
+            "sha256": "2eff2ac5d689cd095ff4508b3463b38a8166b6b5cd57296690549e7b4a739e49",
+            "bytes": 3160,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv-empty-tests": {
+            "now": 1792253928,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "Impossible to access an attribute (\"ruc\") on a null variable in \"invoice2.0.xml.twig\" at line 109."
+            },
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv21-empty-default": {
+            "now": 1792253928,
+            "sha256": "cf13e9b489389ff3942df846f6ddd9e1dce489d62c0491eaba32756e823d411b",
+            "bytes": 2316,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv21-empty-cpeforge": {
+            "now": 1792253928,
+            "sha256": "cf13e9b489389ff3942df846f6ddd9e1dce489d62c0491eaba32756e823d411b",
+            "bytes": 2316,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv21-empty-tests": {
+            "now": 1792253928,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "Impossible to access an attribute (\"ruc\") on a null variable in \"invoice2.1.xml.twig\" at line 62."
+            },
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-no-client-default": {
+            "now": 1792253928,
+            "sha256": "e9808e353326ffb0b916a7b065d1b701cb3058b34b0fae8261c778c1b1a43e00",
+            "bytes": 4193,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-no-client-cpeforge": {
+            "now": 1792253928,
+            "sha256": "e9808e353326ffb0b916a7b065d1b701cb3058b34b0fae8261c778c1b1a43e00",
+            "bytes": 4193,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-no-client-tests": {
+            "now": 1792253928,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "Impossible to access an attribute (\"tipoDoc\") on a null variable in \"invoice2.1.xml.twig\" at line 123."
+            },
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-company-no-address-default": {
+            "now": 1792253929,
+            "sha256": "e0cecdfcd535c34f956adda3b95cc79d3b77757542a7c104ac371a69458e9e11",
+            "bytes": 4114,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-company-no-address-cpeforge": {
+            "now": 1792253929,
+            "sha256": "e0cecdfcd535c34f956adda3b95cc79d3b77757542a7c104ac371a69458e9e11",
+            "bytes": 4114,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv21-company-no-address-tests": {
+            "now": 1792253929,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "Impossible to access an attribute (\"ubigueo\") on a null variable in \"invoice2.1.xml.twig\" at line 91."
+            },
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv20-company-no-address-default": {
+            "now": 1792253929,
+            "sha256": "1d8f0eb092898f361b339fb1908a103e0473fa1b985f77c47d057e01f22a476c",
+            "bytes": 4653,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv20-company-no-address-cpeforge": {
+            "now": 1792253929,
+            "sha256": "1d8f0eb092898f361b339fb1908a103e0473fa1b985f77c47d057e01f22a476c",
+            "bytes": 4653,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv20-company-no-address-tests": {
+            "now": 1792253929,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "Impossible to access an attribute (\"ubigueo\") on a null variable in \"invoice2.0.xml.twig\" at line 133."
+            },
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv20-embedded-partial-default": {
+            "now": 1792253929,
+            "sha256": "9541cf13b47b7f04c45204005da381645f5d4aa93859cc5339ab3fabd635e969",
+            "bytes": 5641,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv20-embedded-partial-cpeforge": {
+            "now": 1792253929,
+            "sha256": "9541cf13b47b7f04c45204005da381645f5d4aa93859cc5339ab3fabd635e969",
+            "bytes": 5641,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv20-embedded-partial-tests": {
+            "now": 1792253929,
+            "error": {
+                "class": "Twig\\Error\\RuntimeError",
+                "message": "Impossible to access an attribute (\"ubigueo\") on a null variable in \"embededDespatch.xml.twig\" at line 3."
+            },
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.0.xml.twig at line 1.",
+                "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
+            ]
+        },
+        "inv21-empty-lists-default": {
+            "now": 1792253929,
+            "sha256": "8a639cb1f212bf3cb310818881afae64822b3b9c55da0fef24c609d15c74c31f",
+            "bytes": 3119,
+            "deprecations": [
+                "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/invoice2.1.xml.twig at line 1."
+            ]
+        },
+        "inv-version-v22": {
+            "now": 1792253929,
+            "error": {
+                "class": "Twig\\Error\\LoaderError",
+                "message": "Unable to find template \"invoice2.2.xml.twig\" (looked into: <xml-src>/Xml/Builder/../Templates)."
+            },
+            "deprecations": []
+        },
+        "inv-version-vnull": {
+            "now": 1792253929,
+            "error": {
+                "class": "Twig\\Error\\LoaderError",
+                "message": "Unable to find template \"invoice.xml.twig\" (looked into: <xml-src>/Xml/Builder/../Templates)."
+            },
+            "deprecations": []
+        },
+        "inv-version-vempty": {
+            "now": 1792253929,
+            "error": {
+                "class": "Twig\\Error\\LoaderError",
+                "message": "Unable to find template \"invoice.xml.twig\" (looked into: <xml-src>/Xml/Builder/../Templates)."
+            },
+            "deprecations": []
+        },
+        "inv-version-vspace": {
+            "now": 1792253929,
+            "error": {
+                "class": "Twig\\Error\\LoaderError",
+                "message": "Unable to find template \"invoice2.1 .xml.twig\" (looked into: <xml-src>/Xml/Builder/../Templates)."
+            },
+            "deprecations": []
+        },
+        "inv-version-v2": {
+            "now": 1792253929,
+            "error": {
+                "class": "Twig\\Error\\LoaderError",
+                "message": "Unable to find template \"invoice2.xml.twig\" (looked into: <xml-src>/Xml/Builder/../Templates)."
+            },
+            "deprecations": []
+        },
+        "inv-version-vtraversal": {
+            "now": 1792253929,
+            "error": {
+                "class": "Twig\\Error\\LoaderError",
+                "message": "Unable to find template \"invoice2.1.xml.twig/../invoice2.0.xml.twig\" (looked into: <xml-src>/Xml/Builder/../Templates)."
+            },
+            "deprecations": []
+        }
+    }
+}

@@ -8,7 +8,9 @@ use std::future::Future;
 
 use base64::Engine as _;
 use cpeforge_gre_api::{HttpRequest, HttpResponse, HttpTransport, Method, Secret};
-use cpeforge_xml_limits::exceeds_depth;
+use cpeforge_xml_limits::{
+    DEFAULT_MAX_ATTRIBUTES, DEFAULT_MAX_NAMESPACE_SCOPE, check_tree_markup, exceeds_depth,
+};
 use roxmltree::{Document, Node, ParsingOptions};
 
 use crate::WsError;
@@ -329,14 +331,20 @@ struct DocumentOwned {
 
 impl DocumentOwned {
     /// `None` si el cuerpo estaba vacío. Los DTD no se procesan nunca, y un
-    /// documento con más de [`MAX_SOAP_DEPTH`] niveles se rechaza antes de
-    /// construir el árbol, sin agotar la pila.
+    /// documento con más de [`MAX_SOAP_DEPTH`] niveles, o con demasiados
+    /// atributos o espacios de nombres, se rechaza antes de construir el
+    /// árbol.
     fn parse(&self) -> Result<Option<Document<'_>>, WsError> {
         let Some(xml) = &self.xml else {
             return Ok(None);
         };
         if exceeds_depth(xml, MAX_SOAP_DEPTH) {
             return Err(packet::no_xml_document());
+        }
+        // Atributos por elemento y ámbitos de espacios de nombres: `roxmltree`
+        // es cuadrático en los primeros y copia los segundos por elemento.
+        if check_tree_markup(xml, DEFAULT_MAX_ATTRIBUTES, DEFAULT_MAX_NAMESPACE_SCOPE).is_err() {
+            return Err(WsError::Soap("límite de nodos XML"));
         }
         Document::parse_with_options(
             xml,

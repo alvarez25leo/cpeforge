@@ -10,7 +10,10 @@
 use std::collections::HashMap;
 use std::fmt;
 
-use cpeforge_xml_limits::exceeds_depth;
+use cpeforge_xml_limits::{
+    DEFAULT_MAX_ATTRIBUTES, DEFAULT_MAX_NAMESPACE_SCOPE, MarkupRejection, check_tree_markup,
+    exceeds_depth,
+};
 
 use crate::encoding::decode_input;
 use crate::error::XmlParserError;
@@ -79,8 +82,11 @@ struct NodeData {
     children: (usize, usize),
 }
 
-/// Prefijo (`None` para el espacio por defecto) y URI en ámbito.
-type Scope = Vec<(Option<Box<str>>, Box<str>)>;
+/// Prefijos con nombre y URI en ámbito, internados en `XmlDocument::names`
+/// (las consultas solo resuelven prefijos con nombre). Ocho bytes por
+/// entrada: un documento que redeclara prefijos en miles de elementos no
+/// multiplica cadenas.
+type Scope = Vec<(Name, Name)>;
 
 /// Documento XML analizado, que los parsers aceptan en lugar de bytes
 /// (`parse_document`) para no analizar dos veces el mismo XML.
@@ -137,6 +143,7 @@ impl XmlDocument {
         // Antes de analizar: `roxmltree` desciende recursivamente por cada
         // elemento anidado.
         check_depth(text, limits.max_depth)?;
+        check_tree(text)?;
         let options = roxmltree::ParsingOptions {
             allow_dtd: false,
             nodes_limit: limits.max_nodes,
@@ -186,7 +193,7 @@ impl XmlDocument {
                 if depth > max_depth {
                     return Err(XmlParserError::TooDeep { limit: max_depth });
                 }
-                let scope = doc.scope_for(node, parent.map(|(i, _)| i));
+                let scope = doc.scope_for(node, parent.map(|(i, _)| i), &mut interner);
                 let mut intern = |name: &'t str| doc_intern(&mut doc.names, &mut interner, name);
                 let attrs = node
                     .attributes()
@@ -289,32 +296,44 @@ impl XmlDocument {
         }
     }
 
-    /// Ámbito de espacios de nombres de `node`: el del padre si coincide
-    /// (comparado sin copiarlo) o uno nuevo.
-    fn scope_for(&mut self, node: roxmltree::Node<'_, '_>, parent: Option<usize>) -> usize {
+    /// Ámbito de espacios de nombres de `node`: el del padre o el último
+    /// creado si coinciden (comparados sin copiarlos; así los hermanos que
+    /// redeclaran los mismos prefijos comparten ámbito) o uno nuevo.
+    fn scope_for<'t>(
+        &mut self,
+        node: roxmltree::Node<'t, 't>,
+        parent: Option<usize>,
+        interner: &mut HashMap<&'t str, Name>,
+    ) -> usize {
+        let named = || {
+            node.namespaces()
+                .filter_map(|ns| Some((ns.name()?, ns.uri())))
+        };
         let parent_scope = parent.and_then(|p| match &self.nodes.get(p)?.kind {
             Kind::Element { scope, .. } => Some(*scope),
             Kind::Text(_) => None,
         });
-        if let Some(id) = parent_scope {
+        let last = self.scopes.len().checked_sub(1);
+        for id in [parent_scope, last].into_iter().flatten() {
             let same = self.scopes.get(id).is_some_and(|scope| {
-                scope.len() == node.namespaces().len()
-                    && scope
-                        .iter()
-                        .zip(node.namespaces())
-                        .all(|((prefix, uri), ns)| {
-                            prefix.as_deref() == ns.name() && **uri == *ns.uri()
-                        })
+                scope.len() == named().count()
+                    && scope.iter().zip(named()).all(|(&(prefix, uri), (p, u))| {
+                        self.name(prefix) == p && self.name(uri) == u
+                    })
             });
             if same {
                 return id;
             }
         }
-        self.scopes.push(
-            node.namespaces()
-                .map(|ns| (ns.name().map(Into::into), ns.uri().into()))
-                .collect(),
-        );
+        let scope = named()
+            .map(|(prefix, uri)| {
+                (
+                    doc_intern(&mut self.names, interner, prefix),
+                    doc_intern(&mut self.names, interner, uri),
+                )
+            })
+            .collect();
+        self.scopes.push(scope);
         self.scopes.len() - 1
     }
 
@@ -352,6 +371,22 @@ fn check_depth(text: &str, max_depth: usize) -> Result<(), XmlParserError> {
         Err(XmlParserError::TooDeep { limit: max_depth })
     } else {
         Ok(())
+    }
+}
+
+/// Rechaza, antes de analizar, los elementos con más de
+/// [`DEFAULT_MAX_ATTRIBUTES`] atributos (`roxmltree` busca duplicados en
+/// tiempo cuadrático) y los ámbitos de espacios de nombres que superan
+/// [`DEFAULT_MAX_NAMESPACE_SCOPE`] (se copian por cada elemento que declara).
+fn check_tree(text: &str) -> Result<(), XmlParserError> {
+    match check_tree_markup(text, DEFAULT_MAX_ATTRIBUTES, DEFAULT_MAX_NAMESPACE_SCOPE) {
+        Ok(()) => Ok(()),
+        Err(MarkupRejection::TooManyAttributes) => Err(XmlParserError::TooManyAttributes {
+            limit: DEFAULT_MAX_ATTRIBUTES,
+        }),
+        Err(_) => Err(XmlParserError::TooManyNamespaces {
+            limit: DEFAULT_MAX_NAMESPACE_SCOPE,
+        }),
     }
 }
 
@@ -579,8 +614,8 @@ impl<'a> Node<'a> {
             .scopes
             .get(*scope)?
             .iter()
-            .find(|(p, _)| p.as_deref() == Some(prefix))
-            .map(|(_, uri)| &**uri)
+            .find(|&&(p, _)| self.doc.name(p) == prefix)
+            .map(|&(_, uri)| self.doc.name(uri))
     }
 }
 
@@ -590,6 +625,31 @@ mod tests {
 
     fn doc(xml: &str) -> XmlDocument {
         XmlDocument::parse(xml.as_bytes()).unwrap_or_else(|e| unreachable!("{e}"))
+    }
+
+    #[test]
+    fn sibling_scopes_are_shared_and_resolved_per_element() {
+        let d = doc(
+            "<r xmlns:a='urn:a' xmlns='urn:d'><x xmlns:b='urn:b'><y/></x><x xmlns:b='urn:b'/><z xmlns:b='urn:b2'/><w/></r>",
+        );
+        let root = d.root();
+        let elements: Vec<_> = root.child_elements().collect();
+        let scope_of = |n: Node<'_>| match &n.data().kind {
+            Kind::Element { scope, .. } => *scope,
+            Kind::Text(_) => usize::MAX,
+        };
+        // Los dos `x` comparten ámbito; `z` redeclara `b` con otra URI.
+        assert_eq!(scope_of(elements[0]), scope_of(elements[1]));
+        assert_ne!(scope_of(elements[1]), scope_of(elements[2]));
+        assert_eq!(scope_of(elements[3]), scope_of(root));
+        let y = elements[0].child_elements().next().unwrap_or(root);
+        assert_eq!(y.lookup_namespace("b"), Some("urn:b"));
+        assert_eq!(y.lookup_namespace("a"), Some("urn:a"));
+        assert_eq!(elements[2].lookup_namespace("b"), Some("urn:b2"));
+        assert_eq!(elements[3].lookup_namespace("b"), None);
+        // El espacio por defecto no se resuelve por prefijo.
+        assert_eq!(root.lookup_namespace(""), None);
+        assert_eq!(d.scopes.len(), 3);
     }
 
     #[test]

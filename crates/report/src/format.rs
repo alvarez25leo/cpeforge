@@ -293,8 +293,12 @@ pub enum Number {
 /// Los enteros, y los `f64` de magnitud ≥ 2^52 que caben en un `i64`, se
 /// formatean con aritmética entera exacta. Con `decimals` negativo redondea a
 /// decenas, centenas… y no imprime decimales.
+///
+/// `decimals` se acota a [`MAX_DECIMALS`]: más decimales no aportan nada a un
+/// importe y harían crecer la salida sin límite.
 #[must_use]
 pub fn number_format(value: Number, decimals: i64) -> String {
+    let decimals = decimals.min(MAX_DECIMALS);
     match value {
         Number::Int(n) => number_format_long(n, decimals),
         Number::Float(f) => {
@@ -312,6 +316,10 @@ pub fn number_format(value: Number, decimals: i64) -> String {
         }
     }
 }
+
+/// Máximo de decimales de [`number_format`] (el filtro `n_format` rechaza
+/// más).
+pub const MAX_DECIMALS: i64 = 100;
 
 fn number_format_long(num: i64, dec: i64) -> String {
     let negative = num < 0;

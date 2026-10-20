@@ -25,6 +25,9 @@ pub enum MarkupRejection {
     Declaration,
     /// Un elemento con más atributos que el máximo indicado.
     TooManyAttributes,
+    /// El coste de los ámbitos de espacios de nombres supera el máximo
+    /// (solo [`check_tree_markup`](crate::check_tree_markup)).
+    TooManyNamespaces,
     /// UTF-32, UCS-4, EBCDIC u otra codificación no compatible con ASCII.
     UnsupportedEncoding,
 }
@@ -34,6 +37,7 @@ impl fmt::Display for MarkupRejection {
         f.write_str(match self {
             Self::Declaration => "declaración DOCTYPE/ENTITY no permitida",
             Self::TooManyAttributes => "un elemento supera el máximo de atributos",
+            Self::TooManyNamespaces => "demasiadas declaraciones de espacios de nombres en ámbito",
             Self::UnsupportedEncoding => "codificación no admitida (UTF-32, UCS-4 o EBCDIC)",
         })
     }

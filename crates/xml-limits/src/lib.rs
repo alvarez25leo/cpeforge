@@ -1,6 +1,7 @@
 //! Límites XML comprobados sobre el texto, antes de construir el árbol:
-//! anidamiento ([`exceeds_depth`]) y marcado peligroso para libxml2
-//! ([`check_markup`]).
+//! anidamiento ([`exceeds_depth`]), marcado peligroso para libxml2
+//! ([`check_markup`]) y para un parser que guarda el árbol completo
+//! ([`check_tree_markup`]).
 //!
 //! `roxmltree` (0.21.1, la última publicada) analiza los elementos de forma
 //! recursiva y no limita la profundidad: con un hilo de 2 MiB (los workers de
@@ -23,8 +24,10 @@
 //! ```
 
 mod markup;
+mod tree;
 
 pub use markup::{DEFAULT_MAX_ATTRIBUTES, MarkupRejection, check_markup};
+pub use tree::{DEFAULT_MAX_NAMESPACE_SCOPE, check_tree_markup};
 
 static LIBXML_INIT: std::sync::Mutex<()> = std::sync::Mutex::new(());
 

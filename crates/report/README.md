@@ -27,10 +27,20 @@ plantillas, CSS y QR SVG). Recibe los modelos de `cpeforge-core`.
 - Las plantillas propias no pueden salir de su carpeta (`..`, rutas absolutas
   o con unidad, enlaces simbólicos), deben ser archivos regulares, tienen
   tamaño máximo (1 MiB) y el motor no ofrece acceso a archivos, red ni
-  entorno. `ReportOptions::fuel` limita el coste de render: conviene fijarlo
-  si las plantillas no son de confianza.
+  entorno. Una plantilla propia es código de confianza: puede desactivar el
+  escape (`|raw`, `|safe`, `{% autoescape false %}`) y `fuel` limita sus
+  instrucciones pero no la memoria de filtros u operadores. El HTML generado
+  tiene un máximo de 32 MiB (`max_output_bytes`), `n_format` admite hasta 100
+  decimales y el QR rechaza contenidos mayores que la versión 40 antes de
+  codificarlos. La carpeta de plantillas no debe ser escribible por terceros
+  (la comprobación de rutas no cubre enlaces duros ni cambios simultáneos).
+- El HTML lo convierte a PDF un navegador: ejecutarlo sin JavaScript y sin
+  salida a red (Gotenberg con `--chromium-disable-javascript` y egress
+  bloqueado) como defensa en profundidad.
 - Logo de hasta 10 MiB por defecto (`max_logo_bytes`).
-- `XmlUtils` rechaza DTD, XML mal formado y anidamiento mayor de 256 niveles.
+- `XmlUtils` rechaza DTD, XML mal formado, anidamiento mayor de 256 niveles,
+  elementos con más de 256 atributos y ámbitos de espacios de nombres
+  desmedidos (`cpeforge_xml_limits::check_tree_markup`).
 
 ## Importes
 

@@ -50,6 +50,35 @@ assert_eq!(
 );
 ```
 
+## Marcado antes de `roxmltree`
+
+`roxmltree` 0.21.1 compara cada atributo con los anteriores del mismo
+elemento para detectar duplicados (40 000 atributos tardan casi un segundo;
+los 8 MiB de un CDR, minutos) y cada elemento que declara un espacio de
+nombres copia las referencias de todos los heredados (250 `xmlns` en la raíz
+y miles de hijos que redeclaran un prefijo multiplican la memoria por
+cientos). `check_tree_markup` recibe el texto ya decodificado y rechaza los
+elementos con más de `max_attributes` atributos (contando los `xmlns`) y los
+documentos cuyo coste de ámbitos (por cada elemento que declara, los
+espacios en ámbito tras declarar) supera el máximo:
+
+```rust
+use cpeforge_xml_limits::{
+    DEFAULT_MAX_ATTRIBUTES, DEFAULT_MAX_NAMESPACE_SCOPE, MarkupRejection, check_tree_markup,
+};
+
+let declarations: String = (0..250).map(|i| format!(" xmlns:p{i}='urn:{i}'")).collect();
+let attack = format!("<r{declarations}>{}</r>", "<x xmlns:z='u'/>".repeat(20_000));
+assert_eq!(
+    check_tree_markup(&attack, DEFAULT_MAX_ATTRIBUTES, DEFAULT_MAX_NAMESPACE_SCOPE),
+    Err(MarkupRejection::TooManyNamespaces)
+);
+```
+
+No comprueba codificación ni `DOCTYPE` (el parser los rechaza) y se detiene
+donde el parser se detendría. Lo usan `cpeforge-ws` (CDR y SOAP),
+`cpeforge-xml-parser` y `cpeforge-report` (`XmlUtils`).
+
 `with_libxml_init_lock` serializa la inicialización de libxml2 entre los
 crates que la enlazan (antes de 2.11 `xmlInitParser` no es seguro en
 paralelo). Los usan `cpeforge-cpe-validator` y `cpeforge-ubl-validator`.

@@ -7,7 +7,12 @@ la ejecuta con libxslt (XSLT 1.0 + EXSLT) y `ErrorResultParser` convierte cada
 `xsl:message` `nivel|código|mensaje[|ruta|valor]` en un `CpeError`.
 
 El crate **no distribuye las reglas SUNAT**: el resultado depende de la
-versión de las hojas que provea el consumidor.
+versión de las hojas que provea el consumidor. Las hojas tal como las publica
+SUNAT («Archivo XSL – 2.1») no se ejecutan directamente: incluyen
+`local:///commons/…` de IBM DataPower (no publicados) y usan EXSLT
+`regexp:match`; se rechazan al compilar sin leer nada fuera del directorio de
+reglas. Deben convertirse como en la referencia (`regexp:match` →
+`MATCHES_HANDLER`, `commons` incluidos en el directorio de reglas).
 
 ```rust,no_run
 use cpeforge_cpe_validator::CpeValidator;

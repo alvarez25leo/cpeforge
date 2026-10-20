@@ -274,7 +274,8 @@ impl<T: HttpTransport + Clone, S: TokenStore, C: Clock> ApiFactory<T, S, C> {
     ///
     /// # Errors
     ///
-    /// Tienda, reloj, autorización o respuesta inválida.
+    /// Tienda, reloj, autorización, `client_id` igual a `.` o `..`, o
+    /// respuesta inválida.
     pub async fn create(&self, request: &TokenRequest) -> Result<CpeApi<T>, WsError> {
         let key = self.cache_key(request);
         let token = match self.cached(&key)? {
@@ -315,6 +316,7 @@ impl<T: HttpTransport + Clone, S: TokenStore, C: Clock> ApiFactory<T, S, C> {
     }
 
     async fn renew(&self, request: &TokenRequest, key: &str) -> Result<Secret, WsError> {
+        path_segment(&request.client_id)?;
         let now = self.clock.now();
         let auth = AuthApi::new(self.transport.clone(), self.auth_config.clone());
         let response = auth.get_token(request).await.map_err(WsError::GreApi)?;
@@ -380,8 +382,10 @@ impl<T: HttpTransport> GreSender<T> {
     ///
     /// # Errors
     ///
-    /// ZIP inválido o fallo de transporte no representable como resultado.
+    /// ZIP inválido, `filename` igual a `.` o `..`, o fallo de transporte no
+    /// representable como resultado.
     pub async fn send(&self, filename: &str, xml: &[u8]) -> Result<SummaryResult, WsError> {
+        path_segment(filename)?;
         let zip = compress_at(&format!("{filename}.xml"), xml, self.zip_time)?;
         let digest = Sha256::digest(&zip);
         let mut hash = String::with_capacity(64);
@@ -416,8 +420,10 @@ impl<T: HttpTransport> GreSender<T> {
     ///
     /// # Errors
     ///
-    /// Base64/CDR inválido o fallo de transporte no representable.
+    /// `ticket` igual a `.` o `..`, Base64/CDR inválido o fallo de transporte
+    /// no representable.
     pub async fn status(&self, ticket: &str) -> Result<StatusResult, WsError> {
+        path_segment(ticket)?;
         let mut result = StatusResult::default();
         let status = match self.api.consultar_envio(ticket).await {
             Ok(value) => value,
@@ -455,6 +461,15 @@ impl<T: HttpTransport> GreSender<T> {
         }
         Ok(result)
     }
+}
+
+/// El valor va como segmento de ruta de la URL: `.` y `..` se normalizarían
+/// y la solicitud, con el token o las credenciales, iría a otra ruta del host.
+fn path_segment(value: &str) -> Result<(), WsError> {
+    if matches!(value, "." | "..") {
+        return Err(WsError::Security("segmento de ruta «.» o «..»"));
+    }
+    Ok(())
 }
 
 fn api_error(error: ApiError) -> Result<ResponseError, WsError> {

@@ -33,6 +33,18 @@ pub enum XmlParserError {
         /// Límite configurado.
         limit: u32,
     },
+    /// Un elemento supera el máximo de atributos (incluidas las declaraciones
+    /// `xmlns`).
+    TooManyAttributes {
+        /// Límite aplicado.
+        limit: usize,
+    },
+    /// Las declaraciones de espacios de nombres en ámbito superan el coste
+    /// máximo (ver `cpeforge_xml_limits::check_tree_markup`).
+    TooManyNamespaces {
+        /// Límite aplicado.
+        limit: usize,
+    },
     /// DTD con declaraciones (entidades internas o externas): se rechaza.
     Dtd,
     /// Codificación declarada no admitida o bytes inválidos para ella.
@@ -138,6 +150,15 @@ impl fmt::Display for XmlParserError {
             }
             Self::TooDeep { limit } => write!(f, "XML con más de {limit} niveles de anidamiento"),
             Self::TooManyNodes { limit } => write!(f, "XML con más de {limit} nodos"),
+            Self::TooManyAttributes { limit } => {
+                write!(f, "XML con un elemento de más de {limit} atributos")
+            }
+            Self::TooManyNamespaces { limit } => {
+                write!(
+                    f,
+                    "XML con espacios de nombres en ámbito de coste mayor que {limit}"
+                )
+            }
             Self::Dtd => f.write_str("DTD con declaraciones no admitida"),
             Self::Encoding { name } => {
                 write!(f, "codificación no admitida o bytes inválidos: {name}")

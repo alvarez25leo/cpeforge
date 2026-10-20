@@ -38,7 +38,8 @@ pub enum XmlUtilsError {
     Dtd,
     /// Codificación distinta de UTF-8 o ISO-8859-1 con bytes no ASCII.
     UnsupportedEncoding(String),
-    /// Supera el tamaño o la profundidad máximos.
+    /// Supera el tamaño, la profundidad, los atributos por elemento o los
+    /// espacios de nombres máximos.
     Limit(String),
     /// No se pudo leer el archivo.
     Io(String),
@@ -134,6 +135,14 @@ impl XmlUtils {
                 self.max_depth
             )));
         }
+        // `roxmltree` busca atributos duplicados en tiempo cuadrático y copia
+        // el ámbito de espacios de nombres en cada elemento que declara uno.
+        cpeforge_xml_limits::check_tree_markup(
+            &text,
+            cpeforge_xml_limits::DEFAULT_MAX_ATTRIBUTES,
+            cpeforge_xml_limits::DEFAULT_MAX_NAMESPACE_SCOPE,
+        )
+        .map_err(|e| XmlUtilsError::Limit(e.to_string()))?;
         let options = roxmltree::ParsingOptions {
             allow_dtd: false,
             ..roxmltree::ParsingOptions::default()

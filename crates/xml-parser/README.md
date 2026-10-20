@@ -37,8 +37,11 @@ configurada. Los errores de lectura exponen `error_class()` y
 **Perfil seguro:** se rechaza el XML mal formado, cualquier DTD con
 declaraciones (sin expansión de entidades ni acceso externo), las
 codificaciones distintas de UTF-8/UTF-16/ISO-8859-1/US-ASCII/windows-1252/
-ISO-8859-15 y las entradas que superan `Limits` (10 MiB, 64 niveles,
-1 000 000 de nodos por defecto). Las pruebas usan solo XML sintéticos.
+ISO-8859-15, las entradas que superan `Limits` (10 MiB, 64 niveles,
+1 000 000 de nodos por defecto) y, antes de construir el árbol, los elementos
+con más de 256 atributos y los ámbitos de espacios de nombres desmedidos
+(`cpeforge_xml_limits::check_tree_markup`). Las pruebas usan solo XML
+sintéticos.
 
 `cargo run -p cpeforge-xml-parser --example parse_invoice`,
 `cargo run -p cpeforge-xml-parser --example reader` y

@@ -43,8 +43,12 @@ pub struct ReportOptions {
     pub max_template_bytes: u64,
     /// Tamaño máximo de `params.system.logo`; `None` sin límite.
     pub max_logo_bytes: Option<usize>,
-    /// Instrucciones máximas del motor por render; `None` sin límite.
+    /// Instrucciones máximas del motor por render; `None` sin límite. No
+    /// acota la memoria de filtros u operadores (`'x' * n`): una plantilla
+    /// propia es código de confianza.
     pub fuel: Option<u64>,
+    /// Tamaño máximo del HTML generado; `None` sin límite.
+    pub max_output_bytes: Option<usize>,
 }
 
 impl Default for ReportOptions {
@@ -59,6 +63,7 @@ impl Default for ReportOptions {
             max_template_bytes: 1024 * 1024,
             max_logo_bytes: Some(10 * 1024 * 1024),
             fuel: None,
+            max_output_bytes: Some(32 * 1024 * 1024),
         }
     }
 }
@@ -132,6 +137,29 @@ pub struct HtmlReport {
     template: String,
     now: Option<Timestamp>,
     max_logo_bytes: Option<usize>,
+    max_output_bytes: Option<usize>,
+}
+
+/// Destino del render que corta al superar el máximo de bytes.
+struct LimitedOutput {
+    buf: Vec<u8>,
+    max: usize,
+    exceeded: bool,
+}
+
+impl std::io::Write for LimitedOutput {
+    fn write(&mut self, data: &[u8]) -> std::io::Result<usize> {
+        if self.buf.len().saturating_add(data.len()) > self.max {
+            self.exceeded = true;
+            return Err(std::io::Error::other("salida demasiado grande"));
+        }
+        self.buf.extend_from_slice(data);
+        Ok(data.len())
+    }
+
+    fn flush(&mut self) -> std::io::Result<()> {
+        Ok(())
+    }
 }
 
 impl std::fmt::Debug for HtmlReport {
@@ -197,6 +225,7 @@ impl HtmlReport {
             template: DEFAULT_TEMPLATE.to_owned(),
             now: options.now,
             max_logo_bytes: options.max_logo_bytes,
+            max_output_bytes: options.max_output_bytes,
         }
     }
 
@@ -256,7 +285,31 @@ impl HtmlReport {
             .env
             .get_template(&self.template)
             .map_err(|e| from_engine(&e))?;
-        template.render(context).map_err(|e| from_engine(&e))
+        let Some(max) = self.max_output_bytes else {
+            return template.render(context).map_err(|e| from_engine(&e));
+        };
+        let mut out = LimitedOutput {
+            buf: Vec::new(),
+            max,
+            exceeded: false,
+        };
+        let result = template.render_captured_to(context, &mut out);
+        if out.exceeded {
+            return Err(ReportError::Render {
+                template: Some(self.template.clone()),
+                line: None,
+                cause: RenderCause::Limit(format!("HTML de más de {max} bytes")),
+                message: "salida demasiado grande".to_owned(),
+            });
+        }
+        result.map_err(|e| from_engine(&e))?;
+        // minijinja escribe texto UTF-8 completo en cada llamada.
+        String::from_utf8(out.buf).map_err(|_| ReportError::Render {
+            template: Some(self.template.clone()),
+            line: None,
+            cause: RenderCause::Limit("salida no UTF-8".to_owned()),
+            message: "salida no UTF-8".to_owned(),
+        })
     }
 }
 

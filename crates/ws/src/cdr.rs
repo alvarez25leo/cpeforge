@@ -1,7 +1,9 @@
 //! Lectura de CDR y resolución de nombres y tipos de documentos UBL.
 
 use cpeforge_core::model::response::CdrResponse;
-use cpeforge_xml_limits::exceeds_depth;
+use cpeforge_xml_limits::{
+    DEFAULT_MAX_ATTRIBUTES, DEFAULT_MAX_NAMESPACE_SCOPE, check_tree_markup, exceeds_depth,
+};
 use roxmltree::{Document, Node, ParsingOptions};
 
 use crate::WsError;
@@ -23,13 +25,19 @@ pub const MAX_XML_DEPTH: usize = 64;
 /// Máximo de nodos del árbol XML.
 const MAX_XML_NODES: u32 = 100_000;
 
-/// Analiza `xml` sin DTD y dentro de los límites de tamaño, profundidad y nodos.
+/// Analiza `xml` sin DTD y dentro de los límites de tamaño, profundidad,
+/// nodos, atributos por elemento y ámbitos de espacios de nombres.
 fn parse(xml: &str) -> Result<Document<'_>, WsError> {
     if xml.len() > MAX_XML_BYTES {
         return Err(WsError::Xml("documento demasiado grande"));
     }
     if exceeds_depth(xml, MAX_XML_DEPTH) {
         return Err(WsError::Xml("anidamiento demasiado profundo"));
+    }
+    // `roxmltree` busca atributos duplicados en tiempo cuadrático y copia el
+    // ámbito heredado en cada declaración de espacio de nombres.
+    if check_tree_markup(xml, DEFAULT_MAX_ATTRIBUTES, DEFAULT_MAX_NAMESPACE_SCOPE).is_err() {
+        return Err(WsError::Xml("demasiados atributos o espacios de nombres"));
     }
     Document::parse_with_options(
         xml,

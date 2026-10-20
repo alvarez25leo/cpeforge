@@ -3,7 +3,9 @@
 //! profundidad real de elementos. Si contara menos, un documento hostil podría
 //! pasar el pre-escaneo y desbordar la pila.
 
-use cpeforge_xml_limits::exceeds_depth;
+use cpeforge_xml_limits::{
+    DEFAULT_MAX_ATTRIBUTES, DEFAULT_MAX_NAMESPACE_SCOPE, check_tree_markup, exceeds_depth,
+};
 
 /// xorshift64*: generador determinista sin dependencias.
 struct Rng(u64);
@@ -76,9 +78,17 @@ fn real_depth(xml: &str) -> Option<usize> {
 }
 
 fn assert_exact(xml: &str) -> bool {
+    // Nunca entra en pánico, tampoco con límites mínimos.
+    let _ = check_tree_markup(xml, 0, 0);
     let Some(depth) = real_depth(xml) else {
         return false;
     };
+    // Ningún documento generado se acerca a los límites por defecto.
+    assert_eq!(
+        check_tree_markup(xml, DEFAULT_MAX_ATTRIBUTES, DEFAULT_MAX_NAMESPACE_SCOPE),
+        Ok(()),
+        "{xml}"
+    );
     assert!(!exceeds_depth(xml, depth), "cuenta de más ({depth}): {xml}");
     assert!(
         depth == 0 || exceeds_depth(xml, depth - 1),

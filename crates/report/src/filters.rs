@@ -437,8 +437,15 @@ pub fn mime_type(raw: &[u8]) -> &'static str {
 /// detecta con [`mime_type`].
 #[must_use]
 pub fn image_data_uri(image: &[u8], mime: Option<&str>) -> String {
+    // Solo un subtipo MIME simple (`png`, `svg+xml`…): nada que cierre el
+    // atributo o cambie el tipo del URI aunque el resultado no se escape.
     let mime = mime
         .filter(|m| !m.is_empty() && *m != "0")
+        .filter(|m| {
+            m.len() <= 64
+                && m.bytes()
+                    .all(|b| b.is_ascii_alphanumeric() || matches!(b, b'.' | b'+' | b'-'))
+        })
         .unwrap_or_else(|| mime_type(image));
     let prefix_len = "data:image/;base64,".len() + mime.len();
     let encoded_len = base64::encoded_len(image.len(), true).unwrap_or(0);
@@ -484,6 +491,12 @@ fn n_format(state: &State<'_, '_>, value: Value, decimals: Option<Value>) -> Res
         Some(d) => {
             defined(state, &d)?;
             match number(&d) {
+                Some(Number::Int(i)) if i > format::MAX_DECIMALS => {
+                    return Err(engine_error(RenderCause::Limit(format!(
+                        "number_format con {i} decimales (máximo {})",
+                        format::MAX_DECIMALS
+                    ))));
+                }
                 Some(Number::Int(i)) => i,
                 _ => return Err(type_error("number_format")),
             }

@@ -130,6 +130,9 @@ fn count_bits(mode: QrMode, version: u8) -> u32 {
     }
 }
 
+/// Capacidad numérica de la versión 40 con corrección Q (dígitos).
+const MAX_CONTENT_BYTES: usize = 3993;
+
 fn data_bits(mode: QrMode, len: u32) -> u32 {
     match mode {
         QrMode::Numeric => len / 3 * 10 + [0, 4, 7][usize::try_from(len % 3).unwrap_or(0)],
@@ -169,6 +172,11 @@ fn select_version(mode: QrMode, len: usize) -> Option<u8> {
 pub fn encode(content: &[u8]) -> Result<QrSymbol, QrError> {
     if content.is_empty() {
         return Err(QrError::EmptyContent);
+    }
+    // Nada mayor que la capacidad numérica de la versión 40-Q cabe: se
+    // rechaza antes de construir los segmentos (un bit por `bool`).
+    if content.len() > MAX_CONTENT_BYTES {
+        return Err(QrError::DataTooBig);
     }
     let text = std::str::from_utf8(content).map_err(|_| QrError::InvalidUtf8)?;
     let mode = choose_mode(content);

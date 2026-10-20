@@ -18,10 +18,5 @@
 - **Linux.** Confirmar en la CI (ubuntu-24.04) las comprobaciones de versión
   mínima de libxml2/libxslt de `build.rs` (pkg-config); solo se han visto
   pasar en macOS.
-- **Publicar la serie 0.2.** La revisión de la API (`#[non_exhaustive]`,
-  funciones retiradas de la API pública, variantes nuevas; ver
-  [estabilidad-api.md](estabilidad-api.md)) es incompatible con la 0.1
-  publicada: subir la versión menor de los crates afectados y de sus
-  dependencias internas antes de publicar.
 - **cpeforge** se declara estable después de `core`, `xml`, `xmldsig`,
   `gre-api` y `ws`.

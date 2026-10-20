@@ -293,9 +293,13 @@ jobs:
           extensions: dom
           tools: composer:v2
           coverage: none
-      - run: sudo apt-get update && sudo apt-get install -y libssl-dev pkg-config iptables
+      # libxml2-utils (xmllint) y los XSD UBL fijados: las pruebas roundtrip de
+      # cpeforge-xml-parser validan cada XML generado contra su esquema, y el
+      # paso siguiente corre sin red.
+      - run: sudo apt-get update && sudo apt-get install -y libssl-dev pkg-config iptables libxml2-utils
       - run: |
           bash scripts/prepare_php_reference.sh
+          bash scripts/prepare_ubl_validator_reference.sh
           PHP_REFERENCE_DIR="$PWD/target/reference/v5.3.0-suite" bash scripts/prepare_php_reference.sh
           cp oracle/php/ws/composer.lock target/reference/v5.3.0-suite/composer.lock
           composer install --working-dir=target/reference/v5.3.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php

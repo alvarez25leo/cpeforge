@@ -1,6 +1,6 @@
 [package]
 name = "cpeforge-core"
-version = "0.1.0"
+version = "0.1.1"
 description = "Modelos y contratos de comprobantes electrónicos peruanos (CPE) para CPEForge, sin XML, firma ni transporte."
 readme = "README.md"
 keywords = ["sunat", "peru", "facturacion", "cpe", "cpeforge"]

@@ -4,7 +4,8 @@ Estado al 19 de octubre de 2026. Los 13 crates compilan y sus pruebas pasan
 (`cargo test --workspace --all-features`), pero ninguno se considera estable
 todavía. Cada módulo indica qué hace y qué le falta.
 
-Los 13 crates `cpeforge` y `cpeforge-*` 0.1.0 están publicados en crates.io.
+Los 13 crates `cpeforge` y `cpeforge-*` están publicados en crates.io: 0.1.0,
+salvo `cpeforge-core` y `cpeforge-xml`, en 0.1.1 (19 de octubre de 2026).
 El CI del commit `9720dae` terminó correctamente en
 [GitHub Actions](https://github.com/alvarez25leo/cpeforge/actions/runs/39195271285).
 
@@ -31,7 +32,7 @@ Falta: casos de prueba para `NaN`/`Inf` en importes y revisión independiente.
 Genera el XML UBL sin firmar de los 13 tipos de documento (UBL 2.0/2.1, guía
 2022, resúmenes, bajas, retención y percepción).
 
-Corregido (sin publicar, versión del workspace): los cuatro casos que no
+Corregido en 0.1.1: los cuatro casos que no
 validaban contra XSD (cantidades con exponente, `MultiplierFactorNumeric`
 vacío, importes con relleno desde `1e14`, varios `cac:Payment` por
 comprobante, que ahora devuelve `XmlError::MultiplePayments`) y el pánico de
@@ -39,7 +40,7 @@ comprobante, que ahora devuelve `XmlError::MultiplePayments`) y el pánico de
 con la referencia están en `tests/reference/xml/differences.json` (motivo
 `conformidad-xsd` y `rechazo-explicito`).
 
-Falta: publicar la versión corregida; decidir si se soportan más estrategias
+Falta: decidir si se soportan más estrategias
 de escape (`js`, `css`, `url`) o solo `html`/desactivado; revisión
 independiente.
 

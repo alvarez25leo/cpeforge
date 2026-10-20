@@ -144,7 +144,7 @@ dependencies = [
 
 [[package]]
 name = "cpeforge-core"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "base64",
  "jiff",
@@ -254,7 +254,7 @@ dependencies = [
 
 [[package]]
 name = "cpeforge-xml"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "cpeforge-core",
  "jiff",

@@ -30,6 +30,10 @@ conexiones.
 - `ReqwestTransport` verifica TLS, fija timeouts, limita el cuerpo, no usa
   proxy, no reintenta y solo sigue redirecciones dentro del mismo origen. Solo
   acepta HTTP sin TLS para localhost/loopback salvo habilitación explícita.
+- Un `client_id`, `filename` o `numTicket` igual a `.` o `..` se rechaza
+  antes de enviar (`ApiError::InvalidRequest`): la URL se normalizaría y el
+  token o las credenciales irían a otra ruta del host. `ReqwestTransport`
+  también rechaza esos segmentos en solicitudes construidas con `_request`.
 - El User-Agent por defecto es `CPEForge/0.1.0`.
 - El crate no construye ZIP, no calcula hashes ni cachea tokens (eso lo hace
   `cpeforge-ws`). `Debug` y `Display` de solicitudes, respuestas y errores

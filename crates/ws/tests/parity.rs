@@ -13,7 +13,9 @@ use cpeforge_gre_api::{
     TokenRequest, TransportError,
 };
 use cpeforge_ws::WsError;
-use cpeforge_ws::api::{ApiFactory, CachedToken, Clock, GreSender, InMemoryStore, TokenStore};
+use cpeforge_ws::api::{
+    ApiFactory, CacheKey, CachedToken, Clock, GreSender, InMemoryStore, TokenStore,
+};
 use cpeforge_ws::cdr::{extract_filename, read_cdr, resolve_type};
 use cpeforge_ws::services::{BillSender, ConsultCdrService, ExtService, SummarySender};
 use cpeforge_ws::soap::{SoapClient, SoapStatus, SunatEndpoints, WsClient};
@@ -163,7 +165,9 @@ async fn run_gre(case: &Value, cdr_xml: &str) -> (Result<Value, WsError>, Vec<Va
             "https://api-cpe.sunat.gob.pe/v1",
             store.clone(),
             FixedClock,
-        );
+        )
+        // La referencia guarda el token con el `client_id` como clave.
+        .with_cache_key(CacheKey::ClientId);
         let request = TokenRequest::password_grant(
             "CLIENTE-FICTICIO",
             "SECRETO-FICTICIO",

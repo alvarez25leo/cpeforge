@@ -38,8 +38,8 @@ pub enum XmlUtilsError {
     Dtd,
     /// Codificación distinta de UTF-8 o ISO-8859-1 con bytes no ASCII.
     UnsupportedEncoding(String),
-    /// Supera el tamaño, la profundidad, los atributos por elemento o los
-    /// espacios de nombres máximos.
+    /// Supera el tamaño, la profundidad, los nodos, los atributos por
+    /// elemento o los espacios de nombres máximos.
     Limit(String),
     /// No se pudo leer el archivo.
     Io(String),
@@ -60,12 +60,19 @@ impl fmt::Display for XmlUtilsError {
 
 impl std::error::Error for XmlUtilsError {}
 
+/// Máximo de nodos del árbol (elementos, textos, comentarios…). Un
+/// comprobante real no pasa de unas decenas de miles.
+pub const MAX_NODES: u32 = 1_000_000;
+
 /// Extractor del resumen de la firma con límites configurables.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct XmlUtils {
     /// Tamaño máximo del XML en bytes.
     pub max_bytes: usize,
-    /// Profundidad máxima de elementos (256 por defecto).
+    /// Profundidad máxima de elementos (64 por defecto). `roxmltree`
+    /// desciende de forma recursiva: en debug desborda la pila de 2 MiB de un
+    /// hilo de Tokio hacia los 120 niveles, así que subirlo exige hilos con
+    /// pila suficiente.
     pub max_depth: usize,
 }
 
@@ -73,7 +80,7 @@ impl Default for XmlUtils {
     fn default() -> Self {
         Self {
             max_bytes: 16 * 1024 * 1024,
-            max_depth: 256,
+            max_depth: 64,
         }
     }
 }
@@ -145,10 +152,14 @@ impl XmlUtils {
         .map_err(|e| XmlUtilsError::Limit(e.to_string()))?;
         let options = roxmltree::ParsingOptions {
             allow_dtd: false,
+            nodes_limit: MAX_NODES,
             ..roxmltree::ParsingOptions::default()
         };
         let doc = roxmltree::Document::parse_with_options(&text, options).map_err(|e| match e {
             roxmltree::Error::DtdDetected => XmlUtilsError::Dtd,
+            roxmltree::Error::NodesLimitReached => {
+                XmlUtilsError::Limit(format!("más de {MAX_NODES} nodos"))
+            }
             other => XmlUtilsError::Malformed(other.to_string()),
         })?;
         Ok(Self::hash_sign_from_document(&doc))

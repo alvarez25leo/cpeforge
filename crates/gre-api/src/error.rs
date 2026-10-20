@@ -60,6 +60,13 @@ pub enum ApiError {
         /// Mensaje.
         message: String,
     },
+    /// Solicitud rechazada antes de enviarla: un parámetro de ruta `.` o `..`
+    /// (la URL se normalizaría y el token o las credenciales irían a otra
+    /// ruta del host). Código 0, clase `InvalidArgumentException`.
+    InvalidRequest {
+        /// Mensaje.
+        message: String,
+    },
 }
 
 impl ApiError {
@@ -68,7 +75,7 @@ impl ApiError {
     pub fn code(&self) -> u16 {
         match self {
             Self::Http { code, .. } => *code,
-            Self::Transport { .. } | Self::Decode { .. } => 0,
+            Self::Transport { .. } | Self::Decode { .. } | Self::InvalidRequest { .. } => 0,
         }
     }
 
@@ -78,17 +85,20 @@ impl ApiError {
         match self {
             Self::Http { message, .. }
             | Self::Transport { message, .. }
-            | Self::Decode { message, .. } => message,
+            | Self::Decode { message, .. }
+            | Self::InvalidRequest { message } => message,
         }
     }
 
     /// Clase del error: `CPEForge\Sunat\GRE\ApiException` para
-    /// [`Self::Http`] y [`Self::Transport`], o la `class` de la otra variante.
+    /// [`Self::Http`] y [`Self::Transport`], `InvalidArgumentException` para
+    /// [`Self::InvalidRequest`] o la `class` de [`Self::Decode`].
     #[must_use]
     pub fn error_class(&self) -> &'static str {
         match self {
             Self::Http { .. } | Self::Transport { .. } => "CPEForge\\Sunat\\GRE\\ApiException",
             Self::Decode { class, .. } => class,
+            Self::InvalidRequest { .. } => "InvalidArgumentException",
         }
     }
 
@@ -134,6 +144,9 @@ impl fmt::Display for ApiError {
                 f,
                 "error de respuesta GRE ({class}); consulte message() en un contexto seguro"
             ),
+            Self::InvalidRequest { .. } => f.write_str(
+                "solicitud GRE rechazada antes de enviarla; consulte message() en un contexto seguro",
+            ),
         }
     }
 }
@@ -158,6 +171,10 @@ impl fmt::Debug for ApiError {
             Self::Decode { class, .. } => f
                 .debug_struct("Decode")
                 .field("class", class)
+                .field("message", &"<oculto>")
+                .finish(),
+            Self::InvalidRequest { .. } => f
+                .debug_struct("InvalidRequest")
                 .field("message", &"<oculto>")
                 .finish(),
         }

@@ -125,3 +125,20 @@ fn xml_utils_bounds_attributes_and_namespace_scopes() {
         Ok(String::new())
     );
 }
+
+#[test]
+fn xml_utils_bounds_nodes_and_default_depth() {
+    let utils = XmlUtils::default();
+    let nested = |depth: usize| format!("{}{}", "<a>".repeat(depth), "</a>".repeat(depth));
+    assert!(utils.hash_sign(nested(64).as_bytes()).is_ok());
+    assert!(matches!(
+        utils.hash_sign(nested(65).as_bytes()),
+        Err(XmlUtilsError::Limit(_))
+    ));
+    let max = usize::try_from(cpeforge_report::xml_utils::MAX_NODES).unwrap();
+    let flat = format!("<r>{}</r>", "<a/>".repeat(max));
+    assert!(matches!(
+        utils.hash_sign(flat.as_bytes()),
+        Err(XmlUtilsError::Limit(_))
+    ));
+}

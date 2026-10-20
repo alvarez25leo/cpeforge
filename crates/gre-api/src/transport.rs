@@ -101,7 +101,7 @@ pub enum TransportErrorKind {
     TooLarge,
     /// URL `http://` a un host que no es local, rechazada.
     InsecureUrl,
-    /// URL inválida.
+    /// URL inválida o con un segmento de ruta `.` o `..`.
     InvalidUrl,
     /// Otro error de E/S o de protocolo (conexión cerrada sin respuesta).
     Other,
@@ -136,6 +136,21 @@ impl fmt::Display for TransportError {
 }
 
 impl std::error::Error for TransportError {}
+
+/// Indica si la ruta de `url` tiene un segmento `.` o `..` (también
+/// codificado como `%2e`), que el analizador de URL normaliza: la solicitud
+/// iría a otra ruta del host.
+pub(crate) fn has_dot_segment(url: &str) -> bool {
+    let rest = url.split_once("://").map_or(url, |(_, rest)| rest);
+    let path = rest.find('/').map_or("", |at| &rest[at..]);
+    let path = path.split(['?', '#']).next().unwrap_or_default();
+    path.split('/').any(|segment| {
+        matches!(
+            segment.to_ascii_lowercase().as_str(),
+            "." | ".." | "%2e" | ".%2e" | "%2e." | "%2e%2e"
+        )
+    })
+}
 
 /// Envío de una solicitud HTTP.
 pub trait HttpTransport: Send + Sync {
@@ -328,6 +343,12 @@ mod reqwest_impl {
 
     impl HttpTransport for ReqwestTransport {
         async fn send(&self, request: HttpRequest) -> Result<HttpResponse, TransportError> {
+            if super::has_dot_segment(&request.url) {
+                return Err(TransportError {
+                    kind: TransportErrorKind::InvalidUrl,
+                    message: "la ruta contiene un segmento «.» o «..»".to_owned(),
+                });
+            }
             let original_url = reqwest::Url::parse(&request.url).map_err(|e| TransportError {
                 kind: TransportErrorKind::InvalidUrl,
                 message: format!("URL inválida: {e}"),

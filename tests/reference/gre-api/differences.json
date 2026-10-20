@@ -77,6 +77,13 @@
       "motivo": "diagnostico-runtime",
       "reason": "El valor resultante es el mismo («Array»); la referencia además emite el aviso del intérprete «Array to string conversion».",
       "compatibility_note": "Rust no emite avisos del runtime."
+    },
+    {
+      "id": "envio-filename-dotdot",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "reason": "Con filename '..' la referencia envía el POST a una URL que el cliente HTTP normaliza (/contribuyente/gem/comprobantes/.. → /contribuyente/gem/), con el token Bearer; Rust rechaza antes de enviar todo parámetro de ruta '.' o '..' con InvalidArgumentException (ApiError::InvalidRequest, código 0).",
+      "compatibility_note": "Los nombres y tickets de SUNAT (RUC-tipo-serie-número, UUID) nunca son '.' ni '..'; solo cambia el resultado con valores manipulados."
     }
   ],
   "not_applicable": [

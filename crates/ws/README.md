@@ -12,15 +12,17 @@ construcción de una solicitud SOAP local sin enviarla.
 - `cdr::read_cdr_checked` exige raíz `ApplicationResponse`, `ResponseCode` y
   `ReferenceID`; `cdr::read_cdr` es la variante tolerante.
 - `api::ApiFactory` emite una sola solicitud de token por clave aunque haya
-  llamadas concurrentes; `CacheKey::Scoped` aísla ambientes y usuarios. Con
-  la clave por defecto (`client_id`), varias empresas o ambientes en una
-  misma tienda comparten token si comparten `client_id`: en un servicio
-  multiempresa usar `CacheKey::Scoped` o una tienda por empresa.
+  llamadas concurrentes. La clave por defecto (`CacheKey::Scoped`) aísla
+  ambientes y usuarios en una misma tienda; `CacheKey::ClientId` usa solo el
+  `client_id`, el formato que comparten otras implementaciones, y exige una
+  tienda por ambiente y usuario.
 - Las respuestas SOAP y los CDR se rechazan antes de construir el árbol si
   superan 64 niveles, 256 atributos por elemento o el coste de ámbitos de
   espacios de nombres (`cpeforge_xml_limits::check_tree_markup`). `GreSender`
   y `ApiFactory` rechazan `.` y `..` como nombre, ticket o `client_id`
   (irían como segmento de ruta de la URL).
+- Un ZIP recibido se rechaza antes de abrirlo si algún registro de fin de
+  directorio central declara más de 64 entradas o marca ZIP64.
 - `cargo bench -p cpeforge-ws --bench pipeline` mide cada etapa local (ZIP,
   SHA-256, Base64, SOAP, CDR, OAuth2, GRE) con transportes simulados.
 

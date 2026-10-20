@@ -136,11 +136,12 @@ pub enum CacheKey {
     /// Solo `client_id`: el formato de clave compatible con otras
     /// implementaciones que comparten la tienda. Dos ambientes (beta y
     /// producción) o dos usuarios SOL con el mismo `client_id` comparten
-    /// token: usar una tienda distinta por ambiente o [`CacheKey::Scoped`].
-    #[default]
+    /// token: usarla solo con una tienda por ambiente y usuario.
     ClientId,
     /// Host de autenticación, `scope`, `client_id` y usuario SOL, separados
-    /// por U+001F. Aísla ambientes y usuarios dentro de una misma tienda.
+    /// por U+001F. Aísla ambientes y usuarios dentro de una misma tienda. Es
+    /// la clave por defecto.
+    #[default]
     Scoped,
 }
 
@@ -248,7 +249,7 @@ impl<T: HttpTransport + Clone, S: TokenStore, C: Clock> ApiFactory<T, S, C> {
         }
     }
 
-    /// Cambia la clave de caché (por defecto, [`CacheKey::ClientId`]).
+    /// Cambia la clave de caché (por defecto, [`CacheKey::Scoped`]).
     #[must_use]
     pub fn with_cache_key(mut self, cache_key: CacheKey) -> Self {
         self.cache_key = cache_key;

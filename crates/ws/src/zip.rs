@@ -339,6 +339,9 @@ fn read_entries(
     if bytes.len() > MAX_ZIP_BYTES {
         return Err(WsError::Zip("ZIP demasiado grande"));
     }
+    if !declared_entries_fit(bytes) {
+        return Err(WsError::Zip("demasiadas entradas"));
+    }
     let mut archive =
         ZipArchive::new(Cursor::new(bytes)).map_err(|_| WsError::Zip("estructura ZIP inválida"))?;
     if archive.len() > MAX_ENTRIES {
@@ -391,6 +394,53 @@ fn read_entries(
         }
     }
     Ok(result)
+}
+
+/// Firma del registro de fin del directorio central (EOCD).
+const EOCD_SIGNATURE: [u8; 4] = [0x50, 0x4b, 0x05, 0x06];
+/// Bytes fijos del EOCD sin la firma.
+const EOCD_FIELDS: usize = 18;
+
+/// Indica si ningún registro de fin de directorio central que el lector
+/// podría elegir declara más de [`MAX_ENTRIES`] entradas ni marca ZIP64.
+///
+/// `ZipArchive::new` lee todas las entradas que declara el registro antes de
+/// que se pueda contar `archive.len()`: un ZIP de 16 MiB declara decenas de
+/// miles. El lector prueba varios candidatos (cualquier firma `PK\x05\x06`
+/// cuyo comentario termine dentro del archivo), así que se comprueban todos:
+/// si se aceptara uno y el lector eligiera otro, el límite se saltaría. Sin
+/// los valores `0xFFFF`/`0xFFFFFFFF` que activan ZIP64, el lector usa los
+/// recuentos de 16 bits ya comprobados.
+fn declared_entries_fit(bytes: &[u8]) -> bool {
+    let mut from = 0;
+    while let Some(offset) = bytes.get(from..).and_then(|rest| {
+        rest.windows(EOCD_SIGNATURE.len())
+            .position(|w| w == EOCD_SIGNATURE)
+    }) {
+        let at = from + offset;
+        from = at + 1;
+        let start = at + EOCD_SIGNATURE.len();
+        let Some(fields) = bytes.get(start..start + EOCD_FIELDS) else {
+            continue;
+        };
+        let u16_at = |i: usize| u16::from_le_bytes([fields[i], fields[i + 1]]);
+        let u32_at =
+            |i: usize| u32::from_le_bytes([fields[i], fields[i + 1], fields[i + 2], fields[i + 3]]);
+        // Un comentario que pasa del final descarta el candidato.
+        if start + EOCD_FIELDS + usize::from(u16_at(16)) > bytes.len() {
+            continue;
+        }
+        let entries_on_disk = usize::from(u16_at(4));
+        let entries = usize::from(u16_at(6));
+        if entries_on_disk > MAX_ENTRIES
+            || entries > MAX_ENTRIES
+            || u32_at(8) == u32::MAX
+            || u32_at(12) == u32::MAX
+        {
+            return false;
+        }
+    }
+    true
 }
 
 /// Contenido de la primera entrada con extensión `.xml` (sin distinguir
@@ -456,6 +506,41 @@ mod tests {
             (23 << 11 | 59 << 5 | 29, 127 << 9 | 12 << 5 | 31)
         );
         assert_eq!(DosDateTime::from_unix(i64::MIN, 0), DosDateTime::MIN);
+    }
+
+    /// EOCD con `entries` entradas, tamaño y desplazamiento del directorio y
+    /// comentario de `comment` bytes declarados.
+    fn eocd(entries: u16, size: u32, offset: u32, comment: u16) -> Vec<u8> {
+        let mut out = EOCD_SIGNATURE.to_vec();
+        for value in [0u16, 0, entries, entries] {
+            out.extend_from_slice(&value.to_le_bytes());
+        }
+        out.extend_from_slice(&size.to_le_bytes());
+        out.extend_from_slice(&offset.to_le_bytes());
+        out.extend_from_slice(&comment.to_le_bytes());
+        out
+    }
+
+    #[test]
+    fn declared_entries_are_checked_on_every_candidate() {
+        let zipped = compress("A.xml", b"<A/>").unwrap_or_default();
+        assert!(declared_entries_fit(&zipped));
+        // Más entradas que el máximo, o ZIP64.
+        assert!(!declared_entries_fit(&eocd(65, 0, 0, 0)));
+        assert!(!declared_entries_fit(&eocd(1, u32::MAX, 0, 0)));
+        assert!(!declared_entries_fit(&eocd(1, 0, u32::MAX, 0)));
+        // Un candidato válido al final no oculta uno anterior que el lector
+        // también podría elegir.
+        let mut two = eocd(60_000, 0, 0, 22);
+        two.extend(eocd(1, 0, 0, 0));
+        assert!(!declared_entries_fit(&two));
+        // Un candidato cuyo comentario pasa del final no cuenta.
+        assert!(declared_entries_fit(&eocd(60_000, 0, 0, 1)));
+        assert!(declared_entries_fit(&EOCD_SIGNATURE));
+        assert_eq!(
+            decompress(&eocd(60_000, 0, 0, 0)),
+            Err(WsError::Zip("demasiadas entradas"))
+        );
     }
 
     #[test]

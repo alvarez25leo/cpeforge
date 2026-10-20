@@ -355,13 +355,15 @@ async fn scoped_keys_isolate_tenants_and_environments() {
     };
     let store = Arc::new(InMemoryStore::default());
     // Clave compatible: mismo client_id con otro usuario reutiliza el token.
-    let shared = factory(auth.clone(), store.clone());
+    let shared = factory(auth.clone(), store.clone()).with_cache_key(CacheKey::ClientId);
     assert!(shared.create(&token_request("C", "U1")).await.is_ok());
     assert!(shared.create(&token_request("C", "U2")).await.is_ok());
     assert_eq!(calls.load(Ordering::SeqCst), 1);
     assert_eq!(shared.cache_key(&token_request("C", "U1")), "C");
 
-    let scoped = factory(auth.clone(), store.clone()).with_cache_key(CacheKey::Scoped);
+    // La clave por defecto aísla usuarios.
+    let scoped = factory(auth.clone(), store.clone());
+    assert_eq!(CacheKey::default(), CacheKey::Scoped);
     assert!(scoped.create(&token_request("C", "U1")).await.is_ok());
     assert!(scoped.create(&token_request("C", "U2")).await.is_ok());
     assert_eq!(calls.load(Ordering::SeqCst), 3);
@@ -398,7 +400,7 @@ async fn invalidation_and_expired_tokens() -> Result<(), WsError> {
             expires_at: now + Duration::from_secs(600),
         },
     )?;
-    let factory = factory(auth, store.clone());
+    let factory = factory(auth, store.clone()).with_cache_key(CacheKey::ClientId);
     // Le quedan 600 s exactos: se renueva.
     factory.create(&token_request("C", "U")).await?;
     assert_eq!(calls.load(Ordering::SeqCst), 1);

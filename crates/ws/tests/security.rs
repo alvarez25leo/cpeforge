@@ -14,7 +14,7 @@ use cpeforge_gre_api::{
     TokenRequest, TransportError, TransportErrorKind,
 };
 use cpeforge_ws::WsError;
-use cpeforge_ws::api::{ApiFactory, CachedToken, Clock, InMemoryStore, TokenStore};
+use cpeforge_ws::api::{ApiFactory, CacheKey, CachedToken, Clock, InMemoryStore, TokenStore};
 use cpeforge_ws::cdr::read_cdr;
 use cpeforge_ws::services::{BillSender, SummarySender};
 use cpeforge_ws::soap::{SoapClient, WsClient};
@@ -127,7 +127,8 @@ async fn token_margin_is_strict_and_debug_is_redacted() -> Result<(), WsError> {
         "http://127.0.0.1:1/v1",
         store.clone(),
         FixedClock,
-    );
+    )
+    .with_cache_key(CacheKey::ClientId);
     let at_600 = CachedToken {
         value: Secret::new("TOKEN-CACHE"),
         expires_at: FixedClock.now() + Duration::from_secs(600),

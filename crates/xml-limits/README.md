@@ -28,8 +28,8 @@ Omite comentarios, CDATA, instrucciones de procesamiento y declaraciones
 Solo es una cota válida si el parser no expande entidades declaradas
 (`allow_dtd: false`).
 
-Lo usan `cpeforge-xml-parser` (64 niveles por defecto), `cpeforge-ws` (256
-para SOAP y CDR) y `cpeforge-report`.
+Lo usan `cpeforge-xml-parser`, `cpeforge-ws` (SOAP y CDR) y
+`cpeforge-report` (`XmlUtils`), con 64 niveles por defecto.
 
 ## Marcado antes de libxml2
 

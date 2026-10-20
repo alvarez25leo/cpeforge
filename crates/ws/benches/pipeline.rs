@@ -27,7 +27,9 @@ use cpeforge_gre_api::{
     Configuration, CpeApi, HttpRequest, HttpResponse, HttpTransport, Secret, TokenRequest,
     TransportError,
 };
-use cpeforge_ws::api::{ApiFactory, CachedToken, Clock, GreSender, InMemoryStore, TokenStore};
+use cpeforge_ws::api::{
+    ApiFactory, CacheKey, CachedToken, Clock, GreSender, InMemoryStore, TokenStore,
+};
 use cpeforge_ws::cdr::{read_cdr, read_cdr_zip};
 use cpeforge_ws::services::BillSender;
 use cpeforge_ws::soap::{SoapClient, WsClient};
@@ -524,7 +526,8 @@ fn main() {
         "http://127.0.0.1:1/v1",
         store,
         FixedClock,
-    );
+    )
+    .with_cache_key(CacheKey::ClientId);
     bench(&filter, "oauth/cache_hit", None, || {
         black_box(block_on(&rt, hit.create(&request)).ok());
     });

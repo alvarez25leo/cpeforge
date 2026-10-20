@@ -319,6 +319,12 @@ async fn execute<T, M>(
 where
     T: HttpTransport,
 {
+    // `client_id`, `filename` o `numTicket` iguales a `.` o `..`.
+    if crate::transport::has_dot_segment(&request.url) {
+        return Err(ApiError::InvalidRequest {
+            message: "parámetro de ruta «.» o «..» no admitido".to_owned(),
+        });
+    }
     let response = match transport.send(request.clone()).await {
         Ok(r) => r,
         Err(e) => {

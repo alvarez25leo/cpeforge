@@ -38,9 +38,10 @@ plantillas, CSS y QR SVG). Recibe los modelos de `cpeforge-core`.
   salida a red (Gotenberg con `--chromium-disable-javascript` y egress
   bloqueado) como defensa en profundidad.
 - Logo de hasta 10 MiB por defecto (`max_logo_bytes`).
-- `XmlUtils` rechaza DTD, XML mal formado, anidamiento mayor de 256 niveles,
-  elementos con más de 256 atributos y ámbitos de espacios de nombres
-  desmedidos (`cpeforge_xml_limits::check_tree_markup`).
+- `XmlUtils` rechaza DTD, XML mal formado, anidamiento mayor de 64 niveles
+  (configurable), más de 1 000 000 de nodos (`MAX_NODES`), elementos con más
+  de 256 atributos y ámbitos de espacios de nombres desmedidos
+  (`cpeforge_xml_limits::check_tree_markup`).
 
 ## Importes
 

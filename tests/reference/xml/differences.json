@@ -5,8 +5,8 @@
       "case": "inv21-precision-default",
       "kind": "xml",
       "classification": "DIFERENCIA_DELIBERADA",
-      "reason": "El valor tiene más de 15 cifras significativas. La referencia lo convierte en float de 64 bits antes de formatear y number_format redondea esa aproximación; Rust formatea el Decimal exacto. Usar float para importes está prohibido por los estándares del proyecto (misma causa que la diferencia D1 de core).",
-      "compatibility_note": "Con importes de hasta 15 cifras significativas el XML es idéntico. Con más cifras Rust conserva dígitos que la referencia pierde o inventa.",
+      "reason": "El valor tiene más de 15 cifras significativas. La referencia lo convierte en float de 64 bits antes de formatear y number_format redondea esa aproximación; Rust formatea el Decimal exacto. Usar float para importes está prohibido por los estándares del proyecto (misma causa que la diferencia D1 de core). Además, el PriceAmount de ese valor (fuera de rango, notación exponencial en la referencia) sale sin los ceros de relleno de n_format: 123456789012345.671875 en vez de 123456789012345.6718750000 (25 dígitos, que superan la precisión de xsd:decimal en libxml2).",
+      "compatibility_note": "Con importes de hasta 15 cifras significativas el XML es idéntico. Con más cifras Rust conserva dígitos que la referencia pierde o inventa. Desde 1e14, n_format_limit no rellena con ceros: el XML de Rust valida contra el XSD.",
       "motivo": "precision-decimal"
     },
     {
@@ -48,6 +48,78 @@
       "motivo": "seguridad",
       "reason": "Un valor impreso con |raw dentro de <![CDATA[…]]> contiene ']]>'. La referencia cierra la sección CDATA a mitad del valor: el XML queda mal formado y un texto preparado puede insertar elementos UBL (inyección XML). Rust divide la sección en ']]]]><![CDATA[>', que se lee como el mismo texto (XML 1.0 §2.7).",
       "compatibility_note": "Solo cambia la salida cuando un texto en CDATA (descripción, razón social, dirección, observación, motivo) contiene ']]>'; en ese caso el XML de Rust es bien formado y conserva el texto. Sin ']]>' el XML es idéntico al de la referencia."
+    },
+    {
+      "case": "inv20-amounts-default",
+      "kind": "xml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "conformidad-xsd",
+      "reason": "La referencia imprime {{ x }} con la conversión de float de PHP (precision=14), que usa notación exponencial fuera de [1e-4, 1e14): 1.0E-6, 1.0E+14, 1.0E-5. xsd:decimal no admite exponente y el XML no valida. Rust escribe el mismo valor (mismas 14 cifras significativas y redondeo) en notación posicional: 0.000001, 100000000000000. En n_format_limit, los valores desde 1e14 salen sin los ceros de relleno que superan la precisión de xsd:decimal en libxml2.",
+      "compatibility_note": "Solo cambian cantidades, porcentajes e importes de cargos de línea menores que 1e-4 o desde 1e14 (fuera de los formatos SUNAT, que admiten 10 decimales y 12 enteros), y los valores n_format_limit desde 1e14. En el rango habitual el XML es idéntico."
+    },
+    {
+      "case": "inv21-amounts-default",
+      "kind": "xml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "conformidad-xsd",
+      "reason": "La referencia imprime {{ x }} con la conversión de float de PHP (precision=14), que usa notación exponencial fuera de [1e-4, 1e14): 1.0E-6, 1.0E+14, 1.0E-5. xsd:decimal no admite exponente y el XML no valida. Rust escribe el mismo valor (mismas 14 cifras significativas y redondeo) en notación posicional: 0.000001, 100000000000000. En n_format_limit, los valores desde 1e14 salen sin los ceros de relleno que superan la precisión de xsd:decimal en libxml2.",
+      "compatibility_note": "Solo cambian cantidades, porcentajes e importes de cargos de línea menores que 1e-4 o desde 1e14 (fuera de los formatos SUNAT, que admiten 10 decimales y 12 enteros), y los valores n_format_limit desde 1e14. En el rango habitual el XML es idéntico."
+    },
+    {
+      "case": "inv21-charges-default",
+      "kind": "xml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "conformidad-xsd",
+      "reason": "Un cargo o descuento sin factor produce <cbc:MultiplierFactorNumeric></cbc:MultiplierFactorNumeric> en la referencia; el texto vacío no es un xsd:decimal y el XML no valida. El elemento es opcional en UBL 2.1 (minOccurs=0): Rust lo omite cuando el factor es nulo, en cargos y descuentos de línea y globales, y en la percepción de la factura.",
+      "compatibility_note": "Con factor informado el XML es idéntico. Sin factor, Rust omite el elemento en vez de dejarlo vacío; SUNAT exige el factor en algunos códigos del catálogo 53, y ese rechazo ahora llega por regla de negocio y no por esquema."
+    },
+    {
+      "case": "inv21-charges-tests",
+      "kind": "xml",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "conformidad-xsd",
+      "reason": "Un cargo o descuento sin factor produce <cbc:MultiplierFactorNumeric></cbc:MultiplierFactorNumeric> en la referencia; el texto vacío no es un xsd:decimal y el XML no valida. El elemento es opcional en UBL 2.1 (minOccurs=0): Rust lo omite cuando el factor es nulo, en cargos y descuentos de línea y globales, y en la percepción de la factura.",
+      "compatibility_note": "Con factor informado el XML es idéntico. Sin factor, Rust omite el elemento en vez de dejarlo vacío; SUNAT exige el factor en algunos códigos del catálogo 53, y ese rechazo ahora llega por regla de negocio y no por esquema."
+    },
+    {
+      "case": "retention-full-default",
+      "kind": "error",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "reason": "Un comprobante relacionado con varios pagos genera varios cac:Payment; el esquema SUNAT de retención y de percepción admite uno (maxOccurs=1) y SUNAT rechaza el XML. El modelo guarda un único importe retenido/percibido por comprobante, así que no hay forma correcta de repartirlo entre pagos: Rust devuelve XmlError::MultiplePayments en vez de generar un XML inválido.",
+      "compatibility_note": "Con cero o un pago por comprobante el XML es idéntico. Con varios, el llamador recibe un error tipado y debe informar cada pago como un comprobante relacionado propio (como pide SUNAT)."
+    },
+    {
+      "case": "retention-full-cpeforge",
+      "kind": "error",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "reason": "Un comprobante relacionado con varios pagos genera varios cac:Payment; el esquema SUNAT de retención y de percepción admite uno (maxOccurs=1) y SUNAT rechaza el XML. El modelo guarda un único importe retenido/percibido por comprobante, así que no hay forma correcta de repartirlo entre pagos: Rust devuelve XmlError::MultiplePayments en vez de generar un XML inválido.",
+      "compatibility_note": "Con cero o un pago por comprobante el XML es idéntico. Con varios, el llamador recibe un error tipado y debe informar cada pago como un comprobante relacionado propio (como pide SUNAT)."
+    },
+    {
+      "case": "retention-full-tests",
+      "kind": "error",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "reason": "Un comprobante relacionado con varios pagos genera varios cac:Payment; el esquema SUNAT de retención y de percepción admite uno (maxOccurs=1) y SUNAT rechaza el XML. El modelo guarda un único importe retenido/percibido por comprobante, así que no hay forma correcta de repartirlo entre pagos: Rust devuelve XmlError::MultiplePayments en vez de generar un XML inválido.",
+      "compatibility_note": "Con cero o un pago por comprobante el XML es idéntico. Con varios, el llamador recibe un error tipado y debe informar cada pago como un comprobante relacionado propio (como pide SUNAT)."
+    },
+    {
+      "case": "retention-no-provider-default",
+      "kind": "error",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "reason": "Un comprobante relacionado con varios pagos genera varios cac:Payment; el esquema SUNAT de retención y de percepción admite uno (maxOccurs=1) y SUNAT rechaza el XML. El modelo guarda un único importe retenido/percibido por comprobante, así que no hay forma correcta de repartirlo entre pagos: Rust devuelve XmlError::MultiplePayments en vez de generar un XML inválido.",
+      "compatibility_note": "Con cero o un pago por comprobante el XML es idéntico. Con varios, el llamador recibe un error tipado y debe informar cada pago como un comprobante relacionado propio (como pide SUNAT)."
+    },
+    {
+      "case": "retention-no-provider-cpeforge",
+      "kind": "error",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "rechazo-explicito",
+      "reason": "Un comprobante relacionado con varios pagos genera varios cac:Payment; el esquema SUNAT de retención y de percepción admite uno (maxOccurs=1) y SUNAT rechaza el XML. El modelo guarda un único importe retenido/percibido por comprobante, así que no hay forma correcta de repartirlo entre pagos: Rust devuelve XmlError::MultiplePayments en vez de generar un XML inválido.",
+      "compatibility_note": "Con cero o un pago por comprobante el XML es idéntico. Con varios, el llamador recibe un error tipado y debe informar cada pago como un comprobante relacionado propio (como pide SUNAT)."
     }
   ],
   "filter_differences": [

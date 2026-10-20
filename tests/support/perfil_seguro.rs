@@ -5,9 +5,12 @@
 
 use serde_json::Value;
 
-/// Motivos admitidos para una `DIFERENCIA_DELIBERADA`.
-pub(crate) const MOTIVOS: [&str; 10] = [
+/// Motivos admitidos para una `DIFERENCIA_DELIBERADA`. `conformidad-xsd`:
+/// la salida de la referencia no valida contra el esquema UBL/SUNAT y Rust
+/// la corrige (comprobado en `crates/xml/tests/schema.rs`).
+pub(crate) const MOTIVOS: [&str; 11] = [
     "seguridad",
+    "conformidad-xsd",
     "precision-decimal",
     "rechazo-explicito",
     "tipado-estatico",

@@ -32,6 +32,20 @@ pub enum XmlError {
         /// Error del modelo.
         source: CoreError,
     },
+    /// Un comprobante relacionado de una retención o percepción tiene más de
+    /// un pago o cobro. El esquema SUNAT admite un solo `cac:Payment` por
+    /// comprobante (`maxOccurs="1"`) y el modelo guarda un único importe
+    /// retenido o percibido por comprobante, así que no se puede repartir:
+    /// cada pago se informa como un comprobante relacionado propio. La
+    /// referencia genera el XML y SUNAT lo rechaza por esquema.
+    MultiplePayments {
+        /// Plantilla referencia equivalente.
+        template: &'static str,
+        /// Posición del comprobante relacionado (desde 0).
+        detail: usize,
+        /// Pagos o cobros informados.
+        count: usize,
+    },
 }
 
 impl fmt::Display for XmlError {
@@ -46,6 +60,14 @@ impl fmt::Display for XmlError {
             } => write!(
                 f,
                 "Impossible to access an attribute (\"{attribute}\") on a null variable in \"{template}\""
+            ),
+            Self::MultiplePayments {
+                template,
+                detail,
+                count,
+            } => write!(
+                f,
+                "el comprobante relacionado {detail} tiene {count} pagos; el esquema admite uno por comprobante en \"{template}\""
             ),
             Self::Document { template, source } => {
                 write!(

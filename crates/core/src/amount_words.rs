@@ -272,6 +272,14 @@ fn hundreds_word(n: u64) -> &'static str {
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn huge_amounts_are_rejected_without_panic() {
+        assert_eq!(
+            to_invoice(Decimal::MAX, "SOLES"),
+            Err(AmountWordsError::TooLarge)
+        );
+    }
+
     use super::*;
     use std::str::FromStr;
 

@@ -33,11 +33,23 @@ fechas nulas.
   (`despatch`) existen por compatibilidad. SUNAT exige UBL 2.1 para
   comprobantes de pago y la guía 2022 (`DespatchBuilder` con
   `version = "2022"`) para la guía electrónica.
-- La validación XSD (`tests/schema.rs`) documenta los casos que aún generan
-  XML no válido: cantidades menores que `1e-4` impresas como `1.0E-6`
-  (no admitido por `xsd:decimal`), cargos globales sin factor
-  (`MultiplierFactorNumeric` vacío), importes con más dígitos de los admitidos
-  y retenciones con varios `cac:Payment`.
+- Todo XML generado valida contra el XSD (`tests/schema.rs`, con `xmllint`)
+  salvo los documentos vacíos o incompletos y los textos sin escapar con
+  `Autoescape::Disabled`. Para lograrlo:
+  - cantidades, porcentajes e importes de cargos de línea se escriben en
+    notación posicional (`0.000001`, `100000000000000`), nunca con exponente;
+  - los importes con límite de decimales desde `1e14` no se rellenan con
+    ceros (`1000000000000000`, no `1000000000000000.0000000000`, que supera
+    la precisión de `xsd:decimal` en libxml2);
+  - un cargo o descuento sin factor omite `cbc:MultiplierFactorNumeric` en
+    vez de dejarlo vacío;
+  - una retención o percepción con más de un pago o cobro en un comprobante
+    relacionado devuelve `XmlError::MultiplePayments`: el esquema admite un
+    `cac:Payment` por comprobante, así que cada pago se informa como un
+    comprobante relacionado propio.
+- `cpeforge_xml::format` conserva además las conversiones exactas
+  (`float_string`, `n_format`, `n_format_limit`) y ofrece las variantes
+  válidas para XSD (`xsd_float_string`, `xsd_n_format_limit`).
 
 ## Rendimiento
 

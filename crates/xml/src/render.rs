@@ -6,7 +6,7 @@ use cpeforge_core::{CoreError, Decimal, Zoned};
 use crate::error::XmlError;
 use std::fmt::Write as _;
 
-use crate::format::{write_float, write_n_format, write_n_format_limit};
+use crate::format::{write_n_format, write_xsd_float, write_xsd_n_format_limit};
 use crate::options::{Autoescape, RenderOptions};
 
 pub(crate) type Result<T> = std::result::Result<T, XmlError>;
@@ -120,10 +120,12 @@ impl<'o> Out<'o> {
         self
     }
 
-    /// `{{ numero }}` con un `float`: conversión de la referencia con `precision=14`.
+    /// `{{ numero }}` con un `float`: conversión de la referencia con
+    /// `precision=14`, sin notación exponencial (`xsd:decimal` no la admite;
+    /// ver [`crate::format::xsd_float_string`]).
     pub(crate) fn num(&mut self, value: Option<Decimal>) -> &mut Self {
         if let Some(value) = value {
-            write_float(&mut self.buf, value);
+            write_xsd_float(&mut self.buf, value);
         }
         self
     }
@@ -153,9 +155,10 @@ impl<'o> Out<'o> {
         self.fmt(value, 2)
     }
 
-    /// `{{ x|n_format_limit(n) }}`.
+    /// `{{ x|n_format_limit(n) }}`, sin ceros de relleno donde la referencia
+    /// usaría exponente (ver [`crate::format::xsd_n_format_limit`]).
     pub(crate) fn limit(&mut self, value: Option<Decimal>, decimals: u32) -> &mut Self {
-        write_n_format_limit(&mut self.buf, value, decimals);
+        write_xsd_n_format_limit(&mut self.buf, value, decimals);
         self
     }
 

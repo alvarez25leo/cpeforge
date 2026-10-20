@@ -13,6 +13,7 @@ use cpeforge_core::model::retention::{Exchange, Payment, Retention};
 
 use super::invoice20::postal_address_20;
 use super::shared::{self, EMPTY_EXTENSIONS, XML_DECLARATION};
+use crate::XmlError;
 use crate::options::RenderOptions;
 use crate::render::{Out, Result, truthy_list, truthy_num, truthy_str};
 
@@ -226,7 +227,15 @@ fn render(
         .raw("</sac:")
         .raw(names.total_paid)
         .raw(">");
-    for det in details {
+    for (position, det) in details.iter().enumerate() {
+        let count = det.payments.map_or(0, Vec::len);
+        if count > 1 {
+            return Err(XmlError::MultiplePayments {
+                template,
+                detail: position,
+                count,
+            });
+        }
         out.raw("<sac:")
             .raw(names.reference)
             .raw("><cbc:ID schemeID=\"")

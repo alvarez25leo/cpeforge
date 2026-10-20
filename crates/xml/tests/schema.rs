@@ -12,7 +12,9 @@
 //!
 //! Cada caso debe validar, salvo los de `EXPECTED_INVALID`, que documentan por
 //! qué la referencia genera ese XML no válido; para ellos se exige que falle. En
-//! `REFERENCE_ONLY_INVALID` solo falla el XML de la referencia y se exige que el de Rust valide.
+//! `REFERENCE_ONLY_INVALID` y `REFERENCE_ONLY_INVALID_FIXED` solo falla el XML
+//! de la referencia y se exige que el de Rust valide; en `RUST_REJECTS` la
+//! referencia genera XML inválido y Rust devuelve un error tipado.
 
 #![allow(
     clippy::unwrap_used,
@@ -53,6 +55,56 @@ const REFERENCE_ONLY_INVALID: &[(&str, &str)] = &[
     (
         "inv21-special-default",
         "`]]>` en una descripción con |raw dentro de CDATA: la referencia genera XML mal formado; Rust divide la sección CDATA",
+    ),
+];
+
+/// Casos en los que el XML de la referencia no valida y Rust lo corrige
+/// (diferencias `conformidad-xsd` de `differences.json`).
+const REFERENCE_ONLY_INVALID_FIXED: &[(&str, &str)] = &[
+    (
+        "inv20-amounts-default",
+        "cantidades como 1.0E-6/1.0E+14 en la referencia; Rust usa notación posicional",
+    ),
+    (
+        "inv21-amounts-default",
+        "cantidades y porcentajes con exponente en la referencia; Rust usa notación posicional",
+    ),
+    (
+        "inv21-charges-default",
+        "MultiplierFactorNumeric vacío en la referencia; Rust omite el elemento sin factor",
+    ),
+    (
+        "inv21-charges-tests",
+        "MultiplierFactorNumeric vacío en la referencia; Rust omite el elemento sin factor",
+    ),
+    (
+        "inv21-precision-default",
+        "PriceAmount de 25 dígitos con ceros de relleno en la referencia; Rust no rellena desde 1e14",
+    ),
+];
+
+/// Casos en los que la referencia genera XML no válido y Rust rechaza el
+/// documento con un error tipado (no hay XML de Rust que validar).
+const RUST_REJECTS: &[(&str, &str)] = &[
+    (
+        "retention-full-default",
+        "varios cac:Payment; el XSD de retención admite uno: XmlError::MultiplePayments",
+    ),
+    (
+        "retention-full-cpeforge",
+        "varios cac:Payment; el XSD de retención admite uno: XmlError::MultiplePayments",
+    ),
+    (
+        "retention-full-tests",
+        "varios cac:Payment; el XSD de retención admite uno: XmlError::MultiplePayments",
+    ),
+    (
+        "retention-no-provider-default",
+        "varios cac:Payment; el XSD de retención admite uno: XmlError::MultiplePayments",
+    ),
+    (
+        "retention-no-provider-cpeforge",
+        "varios cac:Payment; el XSD de retención admite uno: XmlError::MultiplePayments",
     ),
 ];
 
@@ -108,46 +160,6 @@ const EXPECTED_INVALID: &[(&str, &str)] = &[
     (
         "cr21-special-cpeforge",
         "sin autoescape un `<` produce XML mal formado",
-    ),
-    (
-        "inv20-amounts-default",
-        "La referencia imprime cantidades pequeñas como 1.0E-6, no admitido por xsd:decimal",
-    ),
-    (
-        "inv21-amounts-default",
-        "La referencia imprime cantidades pequeñas como 1.0E-6, no admitido por xsd:decimal",
-    ),
-    (
-        "inv21-charges-default",
-        "cargo global sin factor: MultiplierFactorNumeric vacío",
-    ),
-    (
-        "inv21-charges-tests",
-        "cargo global sin factor: MultiplierFactorNumeric vacío",
-    ),
-    (
-        "inv21-precision-default",
-        "importe con más dígitos de los admitidos por el esquema",
-    ),
-    (
-        "retention-full-default",
-        "varios cac:Payment; el XSD de retención admite uno",
-    ),
-    (
-        "retention-full-cpeforge",
-        "varios cac:Payment; el XSD de retención admite uno",
-    ),
-    (
-        "retention-full-tests",
-        "varios cac:Payment; el XSD de retención admite uno",
-    ),
-    (
-        "retention-no-provider-default",
-        "varios cac:Payment; el XSD de retención admite uno",
-    ),
-    (
-        "retention-no-provider-cpeforge",
-        "varios cac:Payment; el XSD de retención admite uno",
     ),
 ];
 
@@ -287,11 +299,30 @@ fn xml_validates_against_xsd() -> TestResult {
                     .join(&family)
                     .join(format!("{id}.xml")),
             )?;
-            let rust_xml = render(case, expected_case["now"].as_i64().unwrap_or_default())?
-                .ok_or_else(|| harness_error(format!("{id}: Rust no generó XML")))?;
+            let rust_xml = render(case, expected_case["now"].as_i64().unwrap_or_default())?;
+            let rejected = RUST_REJECTS.iter().find(|(case_id, _)| *case_id == id);
+            let rust_xml = match (rust_xml, rejected) {
+                (Some(xml), None) => xml,
+                (None, Some(_)) => {
+                    // Solo queda el XML de la referencia, que debe fallar.
+                    if validate(&reference_xml, &format!("{id}-reference"), &xsd)? {
+                        problems.push(format!("{id} [reference]: valida, pero Rust lo rechaza"));
+                    } else {
+                        invalid += 1;
+                    }
+                    seen_invalid.push(id.to_owned());
+                    continue;
+                }
+                (None, None) => return Err(harness_error(format!("{id}: Rust no generó XML"))),
+                (Some(_), Some(_)) => {
+                    problems.push(format!("{id} [rust]: generó XML, pero debía rechazarlo"));
+                    continue;
+                }
+            };
             let both = EXPECTED_INVALID.iter().find(|(case_id, _)| *case_id == id);
             let reference_only = REFERENCE_ONLY_INVALID
                 .iter()
+                .chain(REFERENCE_ONLY_INVALID_FIXED)
                 .find(|(case_id, _)| *case_id == id);
             for (origin, xml) in [("reference", &reference_xml), ("rust", &rust_xml)] {
                 let expectation = both.or(if origin == "reference" {
@@ -316,7 +347,12 @@ fn xml_validates_against_xsd() -> TestResult {
             }
         }
     }
-    for (id, _) in EXPECTED_INVALID.iter().chain(REFERENCE_ONLY_INVALID) {
+    for (id, _) in EXPECTED_INVALID
+        .iter()
+        .chain(REFERENCE_ONLY_INVALID)
+        .chain(REFERENCE_ONLY_INVALID_FIXED)
+        .chain(RUST_REJECTS)
+    {
         if !seen_invalid.iter().any(|seen| seen == id) {
             problems.push(format!(
                 "clasificación obsoleta: {id} no existe o no generó XML"

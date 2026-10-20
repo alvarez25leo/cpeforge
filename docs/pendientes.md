@@ -31,11 +31,17 @@ Falta: casos de prueba para `NaN`/`Inf` en importes y revisión independiente.
 Genera el XML UBL sin firmar de los 13 tipos de documento (UBL 2.0/2.1, guía
 2022, resúmenes, bajas, retención y percepción).
 
-Falta: corregir los XML que hoy no validan contra XSD (cantidades menores que
-`1e-4` impresas como `1.0E-6`, `MultiplierFactorNumeric` vacío en cargos sin
-factor, importes con más dígitos de los admitidos, retenciones con varios
-`cac:Payment`); decidir si se soportan más estrategias de escape (`js`, `css`,
-`url`) o solo `html`/desactivado; revisión independiente.
+Corregido (sin publicar, versión del workspace): los cuatro casos que no
+validaban contra XSD (cantidades con exponente, `MultiplierFactorNumeric`
+vacío, importes con relleno desde `1e14`, varios `cac:Payment` por
+comprobante, que ahora devuelve `XmlError::MultiplePayments`) y el pánico de
+`n_format` con importes enormes y decimales (p. ej. `1e23` con 10 decimales). Las diferencias
+con la referencia están en `tests/reference/xml/differences.json` (motivo
+`conformidad-xsd` y `rechazo-explicito`).
+
+Falta: publicar la versión corregida; decidir si se soportan más estrategias
+de escape (`js`, `css`, `url`) o solo `html`/desactivado; revisión
+independiente.
 
 ## cpeforge-xmldsig
 

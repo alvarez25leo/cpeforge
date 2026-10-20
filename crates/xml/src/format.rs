@@ -52,6 +52,31 @@ fn mantissa_digits(value: u128, buf: &mut [u8; 40]) -> &[u8] {
 
 /// [`float_string`] escrito al final de `out`.
 pub(crate) fn write_float(out: &mut String, value: Decimal) {
+    write_float_with(out, value, true);
+}
+
+/// Como [`float_string`], pero siempre en notación posicional: mismas 14
+/// cifras significativas y mismo redondeo, sin exponente (`1.0E-6` se escribe
+/// `0.000001` y `1.0E+14`, `100000000000000`).
+///
+/// Es la conversión que usan las plantillas: `xsd:decimal` no admite
+/// exponente, así que el texto de la referencia con exponente no valida
+/// contra el esquema.
+#[must_use]
+pub fn xsd_float_string(value: Decimal) -> String {
+    let mut out = String::new();
+    write_xsd_float(&mut out, value);
+    out
+}
+
+/// [`xsd_float_string`] escrito al final de `out`.
+pub(crate) fn write_xsd_float(out: &mut String, value: Decimal) {
+    write_float_with(out, value, false);
+}
+
+/// Conversión de `float` a texto; `exponent` decide si se usa la notación
+/// exponencial de la referencia fuera del rango `[1e-4, 1e14)`.
+fn write_float_with(out: &mut String, value: Decimal, exponent: bool) {
     if value.is_zero() {
         out.push_str(if value.is_sign_negative() { "-0" } else { "0" });
         return;
@@ -92,7 +117,7 @@ pub(crate) fn write_float(out: &mut String, value: Decimal) {
     }
     let ndigit = i64::try_from(PRECISION).unwrap_or(i64::MAX);
     // `zend_gcvt`: exponente si decpt < -3 (valores < 1e-4) o decpt > 14.
-    if decpt < -3 || decpt > ndigit {
+    if exponent && (decpt < -3 || decpt > ndigit) {
         let exponent = decpt - 1;
         out.push(char::from(digits[0]));
         out.push('.');
@@ -165,8 +190,19 @@ pub(crate) fn write_n_format(out: &mut String, value: Option<Decimal>, decimals:
     if rounded.is_zero() {
         rounded.set_sign_positive(true);
     }
-    let width = usize::try_from(decimals).unwrap_or(usize::MAX);
-    let _ = write!(out, "{rounded:.width$}");
+    // Sin `{:.width$}`: `rust_decimal` entra en pánico si el texto con
+    // relleno supera su búfer interno (p. ej. 1e23 con 10 decimales). Se
+    // escribe el valor redondeado y se completan los ceros a mano.
+    let _ = write!(out, "{rounded}");
+    let scale = rounded.scale();
+    if decimals > 0 {
+        if scale == 0 {
+            out.push('.');
+        }
+        for _ in scale..decimals {
+            out.push('0');
+        }
+    }
 }
 
 /// `FormatFilter::numberLimit` (`|n_format_limit`).
@@ -195,6 +231,41 @@ pub(crate) fn write_n_format_limit(out: &mut String, value: Option<Decimal>, dec
     if decimals_len > limit || text.contains('E') {
         out.truncate(start);
         write_n_format(out, Some(value), decimals);
+    }
+}
+
+/// Como [`n_format_limit`], pero sin ceros de relleno en valores desde
+/// `1e14`: ahí la referencia pasa por notación exponencial y rellena con
+/// `n_format`, por ejemplo `1000000000000000.0000000000` (26 dígitos), que
+/// supera la precisión de `xsd:decimal` en libxml2 (24 dígitos) y no valida.
+/// Aquí sale `1000000000000000`, el mismo valor redondeado a `decimals`
+/// cifras. Con valores menores el texto es idéntico a [`n_format_limit`].
+#[must_use]
+pub fn xsd_n_format_limit(value: Option<Decimal>, decimals: u32) -> String {
+    let mut out = String::new();
+    write_xsd_n_format_limit(&mut out, value, decimals);
+    out
+}
+
+/// [`xsd_n_format_limit`] escrito al final de `out`.
+pub(crate) fn write_xsd_n_format_limit(out: &mut String, value: Option<Decimal>, decimals: u32) {
+    let Some(value) = value else {
+        return;
+    };
+    let start = out.len();
+    write_float(out, value);
+    let text = &out[start..];
+    let decimals_len = text.rfind('.').map_or(0, |pos| text.len() - pos - 1);
+    let limit = usize::try_from(decimals).unwrap_or(usize::MAX);
+    let exponent = text.contains('E');
+    if decimals_len > limit || exponent {
+        out.truncate(start);
+        write_n_format(out, Some(value), decimals);
+        let large = value.abs() >= Decimal::from(100_000_000_000_000_i64);
+        if exponent && large && out[start..].contains('.') {
+            let trimmed = out.trim_end_matches('0').trim_end_matches('.').len();
+            out.truncate(trimmed);
+        }
     }
 }
 
@@ -310,7 +381,66 @@ mod tests {
     }
 
     #[test]
+    fn xsd_numbers_never_use_exponent() {
+        for (input, expected) in [
+            ("0.000001", "0.000001"),
+            ("0.00001", "0.00001"),
+            ("-0.00001", "-0.00001"),
+            ("100000000000000", "100000000000000"),
+            ("123456789012345", "123456789012340"),
+            ("1000000000000000000000", "1000000000000000000000"),
+            ("99999999999999.5", "100000000000000"),
+            ("0.1", "0.1"),
+            ("2.000", "2"),
+        ] {
+            assert_eq!(xsd_float_string(d(input)), expected, "{input}");
+        }
+        // Mismo valor que la referencia: solo cambia la notación.
+        for input in ["0.00001", "123456789012345", "0.0000012345678901234567"] {
+            let reference = float_string(d(input)).replace("E+", "e").replace('E', "e");
+            assert_eq!(
+                Decimal::from_scientific(&reference).unwrap(),
+                d(&xsd_float_string(d(input))),
+                "{input}"
+            );
+        }
+    }
+
+    #[test]
+    fn xsd_number_limit_has_no_padding_from_1e14() {
+        assert_eq!(
+            xsd_n_format_limit(Some(d("1000000000000000")), 10),
+            "1000000000000000"
+        );
+        assert_eq!(
+            xsd_n_format_limit(Some(d("123456789012345.671875")), 10),
+            "123456789012345.671875"
+        );
+        assert_eq!(
+            n_format_limit(Some(d("1000000000000000")), 10),
+            "1000000000000000.0000000000"
+        );
+        // Por debajo de 1e14, idéntico a la referencia (incluido el relleno).
+        for (input, decimals) in [("0.000001", 10), ("0.123456", 5), ("59.0", 10), ("1.5", 2)] {
+            assert_eq!(
+                xsd_n_format_limit(Some(d(input)), decimals),
+                n_format_limit(Some(d(input)), decimals),
+                "{input}"
+            );
+        }
+        assert_eq!(xsd_n_format_limit(None, 10), "");
+    }
+
+    #[test]
     fn number_format() {
+        // Importes enormes: sin pánico y con el relleno completo.
+        assert_eq!(
+            n_format(Some(d("100000000000000000000000")), 10),
+            "100000000000000000000000.0000000000"
+        );
+        assert_eq!(n_format(Some(d("0.5")), 0), "1");
+        assert_eq!(n_format(Some(d("12")), 3), "12.000");
+        assert_eq!(n_format(Some(d("1.10")), 2), "1.10");
         assert_eq!(n_format(Some(d("1.005")), 2), "1.01");
         assert_eq!(n_format(Some(d("-0.004")), 2), "0.00");
         assert_eq!(n_format(Some(d("-0.005")), 2), "-0.01");

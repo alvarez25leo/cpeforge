@@ -4,6 +4,7 @@
 //! mismas lecturas de atributos y en el mismo orden (importa para el error de
 //! `strict_variables`).
 
+use cpeforge_core::Decimal;
 use cpeforge_core::model::client::Client;
 use cpeforge_core::model::company::{Address, Company};
 use cpeforge_core::model::sale::{Charge, DetailAttribute, RelatedDocument, SaleDetail};
@@ -476,6 +477,17 @@ pub(crate) fn lines_21(
     Ok(())
 }
 
+/// `cbc:MultiplierFactorNumeric` con el factor a 5 decimales, o nada si no
+/// hay factor. La referencia escribe el elemento vacío, que no es un
+/// `xsd:decimal` válido; el elemento es opcional en UBL 2.1.
+pub(crate) fn multiplier_factor(out: &mut Out<'_>, factor: Option<Decimal>) {
+    if factor.is_some() {
+        out.raw("<cbc:MultiplierFactorNumeric>")
+            .limit(factor, 5)
+            .raw("</cbc:MultiplierFactorNumeric>");
+    }
+}
+
 /// Cargos o descuentos de una línea UBL 2.1 (importes impresos sin formato).
 fn line_charges(
     out: &mut Out<'_>,
@@ -489,9 +501,9 @@ fn line_charges(
                 .raw(indicator)
                 .raw("</cbc:ChargeIndicator><cbc:AllowanceChargeReasonCode>")
                 .text(charge.cod_tipo.as_deref())
-                .raw("</cbc:AllowanceChargeReasonCode><cbc:MultiplierFactorNumeric>")
-                .limit(charge.factor, 5)
-                .raw("</cbc:MultiplierFactorNumeric><cbc:Amount currencyID=\"")
+                .raw("</cbc:AllowanceChargeReasonCode>");
+            multiplier_factor(out, charge.factor);
+            out.raw("<cbc:Amount currencyID=\"")
                 .text(currency)
                 .raw("\">")
                 .num(charge.monto)

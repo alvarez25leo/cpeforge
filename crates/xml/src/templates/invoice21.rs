@@ -135,14 +135,14 @@ pub(crate) fn render(doc: &Invoice, options: &RenderOptions) -> Result<String> {
                 .raw("</cbc:PaidAmount></cac:PrepaidPayment>");
         }
     }
-    global_charges(&mut out, doc.cargos.as_ref(), "true", currency, false);
-    global_charges(&mut out, doc.descuentos.as_ref(), "false", currency, true);
+    global_charges(&mut out, doc.cargos.as_ref(), "true", currency);
+    global_charges(&mut out, doc.descuentos.as_ref(), "false", currency);
     if let Some(perc) = doc.perception.as_ref() {
         out.raw("<cac:AllowanceCharge><cbc:ChargeIndicator>true</cbc:ChargeIndicator><cbc:AllowanceChargeReasonCode>")
             .text(perc.cod_reg.as_deref())
-            .raw("</cbc:AllowanceChargeReasonCode><cbc:MultiplierFactorNumeric>")
-            .limit(perc.porcentaje, 5)
-            .raw("</cbc:MultiplierFactorNumeric><cbc:Amount currencyID=\"PEN\">")
+            .raw("</cbc:AllowanceChargeReasonCode>");
+        shared::multiplier_factor(&mut out, perc.porcentaje);
+        out.raw("<cbc:Amount currencyID=\"PEN\">")
             .amount(perc.mto)
             .raw("</cbc:Amount><cbc:BaseAmount currencyID=\"PEN\">")
             .amount(perc.mto_base)
@@ -326,13 +326,12 @@ pub(crate) fn payment_terms_21(
     Ok(())
 }
 
-/// Cargos o descuentos globales; los descuentos omiten el factor nulo.
+/// Cargos o descuentos globales; sin factor se omite `MultiplierFactorNumeric`.
 fn global_charges(
     out: &mut Out<'_>,
     charges: Option<&Vec<Charge>>,
     indicator: &str,
     currency: Option<&str>,
-    factor_optional: bool,
 ) {
     if truthy_list(charges) {
         for charge in charges.into_iter().flatten() {
@@ -341,11 +340,7 @@ fn global_charges(
                 .raw("</cbc:ChargeIndicator><cbc:AllowanceChargeReasonCode>")
                 .text(charge.cod_tipo.as_deref())
                 .raw("</cbc:AllowanceChargeReasonCode>");
-            if !factor_optional || charge.factor.is_some() {
-                out.raw("<cbc:MultiplierFactorNumeric>")
-                    .limit(charge.factor, 5)
-                    .raw("</cbc:MultiplierFactorNumeric>");
-            }
+            shared::multiplier_factor(out, charge.factor);
             out.raw("<cbc:Amount currencyID=\"")
                 .text(currency)
                 .raw("\">")

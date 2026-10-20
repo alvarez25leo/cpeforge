@@ -22,9 +22,6 @@
 
 ## Revisión y repositorio
 
-- **Publicar** `cpeforge-ws` y `cpeforge-report` 0.1.1: el límite de
-  profundidad de 64 niveles y la validación de plantillas al cargarlas están en
-  el repositorio, no en crates.io.
 - **Revisión independiente** de seguridad y de API de todos los crates antes de
   declarar una versión estable. Prioridad: `cpeforge-xmldsig` (DOM, C14N,
   evaluador XPath, verificación de referencias) y el FFI de

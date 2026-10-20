@@ -564,7 +564,8 @@ impl XmlSecurityKey {
             (Class::Asymmetric { .. }, Material::Public(_) | Material::None) => {
                 Err(failure(String::new()))
             }
-            _ => Ok(Vec::new()),
+            // La referencia devolvía una firma vacía en silencio.
+            _ => Err(Error::UnsupportedSigningKey),
         }
     }
 

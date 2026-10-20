@@ -46,6 +46,7 @@ mod error;
 mod ffi;
 mod options;
 mod parser;
+mod prescan;
 mod resolver;
 mod stylesheet;
 mod validator;

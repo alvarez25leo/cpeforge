@@ -93,6 +93,12 @@ enum SigLocation {
     None,
 }
 
+/// Máximo de `Reference` por firma. Cada una canonicaliza y calcula el
+/// digest de su nodo: sin tope, un documento con miles de referencias al
+/// mismo nodo multiplica el costo antes de evaluar la confianza. Un
+/// comprobante SUNAT usa una sola.
+pub const MAX_REFERENCES: usize = 32;
+
 /// Nodo validado por `validateReference` (`getValidatedNodes()`).
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ValidatedNode {
@@ -546,6 +552,9 @@ impl XmlSecurityDsig {
         if refs.is_empty() {
             return Err(Error::ReferenceNodesNotFound);
         }
+        if refs.len() > MAX_REFERENCES {
+            return Err(Error::TooManyReferences(refs.len()));
+        }
         self.validated_nodes = Some(Vec::new());
         for reference in refs {
             match self.process_ref_node(doc, doc, reference) {
@@ -568,6 +577,8 @@ impl XmlSecurityDsig {
         let refs = references(&template, sig);
         let result = if refs.is_empty() {
             Err(Error::ReferenceNodesNotFound)
+        } else if refs.len() > MAX_REFERENCES {
+            Err(Error::TooManyReferences(refs.len()))
         } else {
             self.validated_nodes = Some(Vec::new());
             let mut result = Ok(true);
@@ -638,6 +649,13 @@ impl XmlSecurityDsig {
                 Some(data_doc.document_node())
             }
         };
+        // La referencia calculaba el digest de una cadena vacía cuando el
+        // destino no existe o la URI es externa: una firma con ese digest
+        // «validaba» sin cubrir ningún contenido. Aquí no valida nunca (mismo
+        // `Reference validation failed` que la referencia para el caso común).
+        if data.is_none() {
+            return Ok(false);
+        }
         let algorithm = reference_doc
             .child_ns(reference, XMLDSIGNS, "DigestMethod")
             .and_then(|m| reference_doc.attribute(m, "Algorithm"))
@@ -1212,7 +1230,7 @@ impl XmlSecurityDsig {
 }
 
 /// Referencias `./SignedInfo/Reference` de una firma.
-fn references(doc: &Document, sig: NodeId) -> Vec<NodeId> {
+pub(crate) fn references(doc: &Document, sig: NodeId) -> Vec<NodeId> {
     doc.children_ns(sig, XMLDSIGNS, "SignedInfo")
         .into_iter()
         .flat_map(|s| doc.children_ns(s, XMLDSIGNS, "Reference"))

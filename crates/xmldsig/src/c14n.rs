@@ -257,6 +257,10 @@ struct Engine<'a, 's> {
     doc: &'a Document,
     method: &'a Method,
     visibility: Visibility,
+    /// Nodos del subárbol (`Visibility::Subtree`): pertenencia en O(1). Subir
+    /// por los padres en cada consulta multiplicaba el costo por la
+    /// profundidad.
+    subtree: Option<HashSet<NodeId>>,
     stack: NsStack<'a>,
     pos: Pos,
     parent_is_doc: bool,
@@ -272,10 +276,19 @@ impl<'a, 's> Engine<'a, 's> {
         visibility: Visibility,
         sink: Option<&'s mut dyn FnMut(&str)>,
     ) -> Self {
+        let subtree = match &visibility {
+            Visibility::Subtree(apex) => {
+                let mut set: HashSet<NodeId> = doc.descendants(*apex).into_iter().collect();
+                set.insert(*apex);
+                Some(set)
+            }
+            Visibility::All | Visibility::Set(_) => None,
+        };
         Self {
             doc,
             method,
             visibility,
+            subtree,
             stack: NsStack {
                 entries: Vec::new(),
                 index: None,
@@ -317,6 +330,9 @@ impl<'a, 's> Engine<'a, 's> {
     }
 
     fn in_subtree(&self, apex: NodeId, node: NodeId) -> bool {
+        if let Some(set) = &self.subtree {
+            return set.contains(&node);
+        }
         let mut cur = Some(node);
         while let Some(n) = cur {
             if n == apex {
@@ -611,16 +627,20 @@ impl<'a, 's> Engine<'a, 's> {
         if !self.method.exclusive && visible {
             if let Some(parent) = doc.parent(node) {
                 if !self.visible(&Key::Node(parent)) {
+                    // Nombres xml:* ya presentes (el más cercano gana): con un
+                    // conjunto, la herencia es lineal en los atributos de los
+                    // ancestros (antes, cuadrática: 2,9 MB → 35 s).
+                    let mut taken: HashSet<&str> = list
+                        .iter()
+                        .filter(|x| x.namespace.as_deref() == Some(XML_NS))
+                        .map(|x| x.local.as_str())
+                        .collect();
                     let mut ancestor = Some(parent);
                     while let Some(a) = ancestor {
                         if let Some(e) = doc.element(a) {
                             for attr in &e.attributes {
-                                let is_xml = attr.namespace.as_deref() == Some(XML_NS);
-                                if is_xml
-                                    && !list.iter().any(|x| {
-                                        x.namespace.as_deref() == Some(XML_NS)
-                                            && x.local == attr.local
-                                    })
+                                if attr.namespace.as_deref() == Some(XML_NS)
+                                    && taken.insert(attr.local.as_str())
                                 {
                                     list.push(attr);
                                 }

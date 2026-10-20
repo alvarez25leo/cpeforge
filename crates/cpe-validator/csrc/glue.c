@@ -651,6 +651,9 @@ int gcv_transform(xsltStylesheetPtr style, xmlDocPtr src, const char *param_name
         xmlFreeDoc(copy);
         return -1;
     }
+    /* El valor por defecto es global (xsltSetXIncludeDefault): se fija aquí
+     * para que otro código del proceso no active XInclude en las fuentes. */
+    ctxt->xinclude = 0;
     sec = gcv_new_prefs();
     if (sec == NULL || xsltSetCtxtSecurityPrefs(sec, ctxt) != 0) {
         status = -1;

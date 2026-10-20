@@ -93,6 +93,16 @@ pub enum Error {
     UnsupportedDigestAlgorithm(String),
     /// `Certificate File not found` / `File to sign, not found`.
     FileNotFound(&'static str),
+    /// Una clave pública o un certificado de `KeyInfo` no se acepta como
+    /// secreto HMAC (confusión de algoritmo: con el certificado público, que
+    /// es conocido, cualquiera calcularía el HMAC). No existe en la referencia.
+    PublicKeyAsHmacSecret,
+    /// La firma tiene más referencias que [`crate::dsig::MAX_REFERENCES`]
+    /// (cada una canonicaliza y calcula el digest de su nodo).
+    TooManyReferences(usize),
+    /// Se pidió firmar con una clave simétrica o HMAC desde la API de firma
+    /// asimétrica (la referencia devolvía una firma vacía).
+    UnsupportedSigningKey,
     /// Otro error con el mensaje de la referencia.
     Message(String),
 }
@@ -134,6 +144,15 @@ impl fmt::Display for Error {
             }
             Self::UnsupportedDigestAlgorithm(a) => write!(f, "Unsupported digest algorithm: {a}"),
             Self::FileNotFound(m) => f.write_str(m),
+            Self::PublicKeyAsHmacSecret => f.write_str(
+                "A public key or certificate from KeyInfo cannot be used as an HMAC secret",
+            ),
+            Self::TooManyReferences(n) => write!(
+                f,
+                "Too many references: {n} (max {})",
+                crate::dsig::MAX_REFERENCES
+            ),
+            Self::UnsupportedSigningKey => f.write_str("The key cannot produce a signature"),
             Self::Message(m) => f.write_str(m),
         }
     }

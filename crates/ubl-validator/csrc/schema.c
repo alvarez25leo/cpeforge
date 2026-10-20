@@ -1,9 +1,24 @@
 #include <libxml/parser.h>
+#include <libxml/xmlversion.h>
 #include <libxml/xmlschemas.h>
 #include <string.h>
 
+/* libxml2 2.12 declara const el error de xmlStructuredErrorFunc. */
+#if LIBXML_VERSION >= 21200
+#define CPEFORGE_CONST_ERROR const xmlError *
+#else
+#define CPEFORGE_CONST_ERROR xmlErrorPtr
+#endif
+
 typedef void (*cpeforge_error_cb)(void *, int, int, int, int, const char *);
 typedef struct { cpeforge_error_cb callback; void *user; } cpeforge_sink;
+
+/* Inicializa libxml2. Antes de 2.11 xmlInitParser no es seguro si dos hilos
+ * lo llaman a la vez; el lado Rust lo invoca una sola vez (std::sync::Once)
+ * antes de cualquier otra función de este archivo. */
+void cpeforge_init(void) {
+    xmlInitParser();
+}
 
 /* Conserva la semántica de codificaciones XML de libxml2. No usa NOENT ni
  * DTDLOAD: la declaración se inspecciona antes de usar el documento. */
@@ -41,7 +56,7 @@ int cpeforge_preflight_xml(const unsigned char *xml, int length,
     return 1;
 }
 
-static void report(void *ctx, xmlErrorPtr error) {
+static void report(void *ctx, CPEFORGE_CONST_ERROR error) {
     cpeforge_sink *sink = (cpeforge_sink *)ctx;
     if (sink && sink->callback && error) {
         sink->callback(sink->user, error->level, error->code,

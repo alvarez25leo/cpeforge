@@ -757,6 +757,9 @@ pub(crate) struct Evaluator<'a> {
     preorder: Vec<NodeId>,
     ns_cache: HashMap<NodeId, Vec<NsDecl>>,
     visits: usize,
+    /// Trabajo de métodos sin `&mut self` (valor de texto, nodos de
+    /// namespace, `id()`): se suma a `visits` en el siguiente [`Self::tick`].
+    pending: std::cell::Cell<usize>,
 }
 
 impl<'a> Evaluator<'a> {
@@ -770,6 +773,7 @@ impl<'a> Evaluator<'a> {
             preorder,
             ns_cache: HashMap::new(),
             visits: 0,
+            pending: std::cell::Cell::new(0),
         }
     }
 
@@ -812,8 +816,18 @@ impl<'a> Evaluator<'a> {
         }
     }
 
+    /// Registra trabajo que no recorre ejes (comparaciones entre conjuntos,
+    /// valor de texto de un elemento, nodos de namespace, `id()`). Antes no
+    /// se contaba: 21 KB con mil declaraciones `xmlns` tardaban 40 s.
+    fn charge(&self, n: usize) {
+        self.pending.set(self.pending.get().saturating_add(n));
+    }
+
     fn tick(&mut self, n: usize) -> Result<(), Error> {
-        self.visits += n;
+        self.visits = self
+            .visits
+            .saturating_add(n)
+            .saturating_add(self.pending.replace(0));
         if self.visits > MAX_VISITS {
             Err(err("evaluación XPath demasiado costosa"))
         } else {
@@ -1050,6 +1064,8 @@ impl<'a> Evaluator<'a> {
     }
 
     fn eval(&mut self, e: &Expr, ctx: Ctx) -> Result<Value, Error> {
+        // Aplica el trabajo acumulado por los métodos sin `&mut self`.
+        self.tick(0)?;
         Ok(match e {
             Expr::Literal(s) => Value::Str(s.clone()),
             Expr::Number(n) => Value::Num(*n),
@@ -1120,7 +1136,17 @@ impl<'a> Evaluator<'a> {
             }
             _ => {
                 let (l, r) = (self.eval(a, ctx)?, self.eval(b, ctx)?);
-                Ok(Value::Bool(self.compare(op, &l, &r)))
+                // Conjunto × conjunto compara cada par: se cobra antes.
+                match (&l, &r) {
+                    (Value::Nodes(x), Value::Nodes(y)) => {
+                        self.tick(x.len().saturating_mul(y.len()))?;
+                    }
+                    (Value::Nodes(x), _) | (_, Value::Nodes(x)) => self.tick(x.len())?,
+                    _ => {}
+                }
+                let result = self.compare(op, &l, &r);
+                self.tick(0)?;
+                Ok(Value::Bool(result))
             }
         }
     }
@@ -1227,17 +1253,22 @@ impl<'a> Evaluator<'a> {
             XNode::Node(id) => match doc.kind(id) {
                 NodeKind::Text(t) | NodeKind::CData(t) | NodeKind::Comment(t) => t.clone(),
                 NodeKind::ProcessingInstruction { data, .. } => data.clone(),
-                NodeKind::Element(_) | NodeKind::Document => doc.text_content(id),
+                NodeKind::Element(_) | NodeKind::Document => {
+                    // Recorre todo el subárbol: `string(/)` sobre el documento.
+                    let text = doc.text_content(id);
+                    self.charge(1 + text.len() / 8);
+                    text
+                }
             },
             XNode::Attr(id, i) => doc
                 .element(id)
                 .map(|e| e.attributes[i].value.clone())
                 .unwrap_or_default(),
-            XNode::Ns(id, i) => doc
-                .namespace_nodes(id)
-                .get(i)
-                .map(|d| d.uri.clone())
-                .unwrap_or_default(),
+            XNode::Ns(id, i) => {
+                let nodes = doc.namespace_nodes(id);
+                self.charge(1 + nodes.len());
+                nodes.get(i).map(|d| d.uri.clone()).unwrap_or_default()
+            }
         }
     }
 
@@ -1268,8 +1299,9 @@ impl<'a> Evaluator<'a> {
                 })
                 .unwrap_or_default(),
             XNode::Ns(id, i) => {
-                let p = doc
-                    .namespace_nodes(id)
+                let nodes = doc.namespace_nodes(id);
+                self.charge(1 + nodes.len());
+                let p = nodes
                     .get(i)
                     .and_then(|d| d.prefix.clone())
                     .unwrap_or_default();
@@ -1490,6 +1522,8 @@ impl<'a> Evaluator<'a> {
                     .filter(|t| !t.is_empty())
                     .collect();
                 let doc = self.doc;
+                // Recorre todo el documento.
+                self.charge(self.preorder.len());
                 let mut found: Vec<XNode> = self
                     .preorder
                     .iter()

@@ -44,8 +44,8 @@ pub enum Encrypted {
     Template,
 }
 
-/// Resultado de [`XmlSecEnc::decrypt_node`].
-#[derive(Debug)]
+/// Resultado de [`XmlSecEnc::decrypt_node`]. `Debug` no muestra el
+/// contenido descifrado (solo su tamaño).
 pub enum Decrypted {
     /// Elemento descifrado que reemplazó a `EncryptedData`.
     Node(NodeId),
@@ -55,6 +55,17 @@ pub enum Decrypted {
     Document(Box<Document>),
     /// Bytes descifrados, sin reemplazar.
     Data(Vec<u8>),
+}
+
+impl std::fmt::Debug for Decrypted {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Node(n) => f.debug_tuple("Node").field(n).finish(),
+            Self::Parent(n) => f.debug_tuple("Parent").field(n).finish(),
+            Self::Document(_) => f.write_str("Document(<oculto>)"),
+            Self::Data(bytes) => write!(f, "Data(<{} bytes ocultos>)", bytes.len()),
+        }
+    }
 }
 
 #[derive(Debug, Clone)]
@@ -481,6 +492,9 @@ impl XmlSecEnc {
                                 };
                                 let pem = convert_rsa(&m, &e);
                                 match base.as_mut() {
+                                    Some(k) if k.is_hmac() => {
+                                        return Err(Error::PublicKeyAsHmacSecret);
+                                    }
                                     Some(k) => k.load_key(pem.as_bytes(), false)?,
                                     None => {
                                         return Err(Error::Message(
@@ -525,6 +539,9 @@ impl XmlSecEnc {
                             .collect();
                         let pem = crate::x509::pem_from_body(&body);
                         match base.as_mut() {
+                            // El certificado es público: como secreto HMAC
+                            // permitiría falsificar la firma.
+                            Some(k) if k.is_hmac() => return Err(Error::PublicKeyAsHmacSecret),
                             Some(k) => k.load_key(pem.as_bytes(), true)?,
                             None => {
                                 return Err(Error::Message(

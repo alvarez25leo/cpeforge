@@ -312,6 +312,42 @@
       },
       "reason": "Al serializar un retorno de carro, libxml2 2.9 (Ubuntu) escribe `&#xD;` y libxml2 reciente (2.15 en macOS) escribe `&#13;`. Rust escribe `&#13;`, como la versión reciente.",
       "compatibility_note": "Ambas referencias representan el mismo carácter. Con libxml2 reciente la referencia y Rust coinciden byte a byte; la firma no se ve afectada porque C14N escribe siempre `&#xD;`."
+    },
+    {
+      "family": "signing",
+      "id": "sunat-sign-key-without-cert",
+      "reason": "PEM con clave privada y sin certificado: la referencia guarda el PEM completo como «clave pública» y emite un <ds:X509Data/> vacío; Rust guarda como clave pública solo los bloques CERTIFICATE, así que no agrega KeyInfo.",
+      "category": "politica-entradas",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "compatibility_note": "getPublicKey/configured_public_key nunca devuelven la clave privada; la firma es la misma y solo falta el KeyInfo vacío."
+    },
+    {
+      "family": "signing",
+      "id": "sunat-verify-dom-configured-right-cert",
+      "reason": "verify(dom) reemplazaba la clave pública y el algoritmo del firmante por los del documento verificado; Rust no modifica el estado del firmante al verificar.",
+      "category": "politica-entradas",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "compatibility_note": "Un documento verificado ya no puede cambiar el certificado ni el algoritmo de las firmas siguientes (ni convertir el PEM privado en secreto HMAC). El resultado de la verificación no cambia."
+    },
+    {
+      "family": "signing",
+      "id": "sunat-verify-dom-configured-wrong-cert",
+      "reason": "verify(dom) reemplazaba la clave pública y el algoritmo del firmante por los del documento verificado; Rust no modifica el estado del firmante al verificar.",
+      "category": "politica-entradas",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "compatibility_note": "Un documento verificado ya no puede cambiar el certificado ni el algoritmo de las firmas siguientes. El resultado de la verificación no cambia."
+    },
+    {
+      "family": "signing",
+      "id": "sunat-verify-second-signature-wrapping",
+      "reason": "La firma no cumple el perfil SUNAT (una sola Reference URI=\"\" con enveloped): la referencia sigue y falla por falta de clave; Rust devuelve false sin buscar la clave.",
+      "category": "politica-entradas",
+      "classification": "DIFERENCIA_DELIBERADA",
+      "motivo": "seguridad",
+      "compatibility_note": "SignedXml solo acepta la forma de firma que emite SUNAT; cierra el trasplante de firmas por #Id o URI externa y los costos de XPath. La verificación sigue siendo negativa."
     }
   ]
 }

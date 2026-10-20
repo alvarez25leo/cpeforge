@@ -240,10 +240,18 @@ fn resolve_reference(name: &str) -> Result<char, XmlError> {
         "quot" => Some('"'),
         "apos" => Some('\''),
         _ => {
+            // Solo dígitos: `from_str_radix`/`parse` aceptan un `+` inicial
+            // que XML no admite (`&#+65;`).
             let code = if let Some(hex) = name.strip_prefix("#x") {
-                u32::from_str_radix(hex, 16).ok()
+                hex.bytes()
+                    .all(|b| b.is_ascii_hexdigit())
+                    .then(|| u32::from_str_radix(hex, 16).ok())
+                    .flatten()
             } else if let Some(dec) = name.strip_prefix('#') {
-                dec.parse::<u32>().ok()
+                dec.bytes()
+                    .all(|b| b.is_ascii_digit())
+                    .then(|| dec.parse::<u32>().ok())
+                    .flatten()
             } else {
                 return Err(XmlError::UndefinedEntity(name.to_owned()));
             };
@@ -711,16 +719,32 @@ impl Document {
             in_scope,
         });
         let namespace = lookup_scope(scopes, prefix.as_deref()).map(str::to_owned);
+        // Namespaces in XML §5: un prefijo debe estar declarado (libxml2 lo
+        // rechaza). Sin esto `@x` de XPath coincidía con `p:x` y la C14N emitía
+        // prefijos sin declarar.
+        if let Some(p) = prefix.as_deref()
+            && namespace.is_none()
+        {
+            return Err(XmlError::Malformed(format!("prefijo no declarado {p}")));
+        }
         let mut attributes: Vec<Attribute> = Vec::with_capacity(raw_attrs.len());
+        // Duplicados por (namespace, nombre local) en tiempo lineal: comparar
+        // con todos los anteriores era cuadrático (160 000 atributos → 15 s).
+        let mut seen: std::collections::HashSet<(String, String)> =
+            std::collections::HashSet::with_capacity(raw_attrs.len());
         for (key, value) in raw_attrs {
             let (p, l) = split_qname(&key);
             let namespace = p
                 .as_deref()
                 .and_then(|p| lookup_scope(scopes, Some(p)))
                 .map(str::to_owned);
-            if attributes
-                .iter()
-                .any(|a| a.local == l && a.namespace == namespace && namespace.is_some())
+            if let Some(p) = p.as_deref()
+                && namespace.is_none()
+            {
+                return Err(XmlError::Malformed(format!("prefijo no declarado {p}")));
+            }
+            if let Some(ns) = &namespace
+                && !seen.insert((ns.clone(), l.clone()))
             {
                 return Err(XmlError::Malformed(format!("atributo duplicado {key}")));
             }

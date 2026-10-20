@@ -9,6 +9,20 @@
 //! - La verificación solo comprueba la validez matemática de la firma y los
 //!   digest; no evalúa la confianza, la vigencia ni la cadena del
 //!   certificado. Para eso usar [`crate::trust`].
+//!
+//! Endurecido frente a la referencia (perfil SUNAT):
+//!
+//! - La firma debe tener **una sola** `Reference` con `URI=""` y la
+//!   transformación *enveloped* (más, opcionalmente, una C14N). Cualquier otra
+//!   forma (referencia por `#Id`, URI externa, XPath, varias referencias)
+//!   verifica `false`: es lo único que emite SUNAT y cierra el trasplante de
+//!   firmas y los costos de XPath.
+//! - Verificar no cambia la clave ni el algoritmo con que el firmante firma
+//!   después.
+//! - [`SignedXml::configured_public_key`] devuelve solo el certificado, nunca
+//!   la clave privada del PEM configurado.
+//! - Las variantes con `&str` exigen UTF-8: un documento que declara otra
+//!   codificación debe pasar por las variantes en bytes.
 
 use std::fmt;
 use std::path::Path;
@@ -85,6 +99,7 @@ impl SignedXml {
     /// XML inválido (incluidos DTD y entidades), falta de clave privada o
     /// errores de firma.
     pub fn sign_xml(&self, content: &str) -> Result<String, Error> {
+        require_utf8(content)?;
         let mut doc = Document::parse(content)?;
         self.sign(&mut doc)?;
         Ok(doc.to_xml())
@@ -108,8 +123,9 @@ impl SignedXml {
     ///
     /// XML inválido, firma ausente o sin clave para verificar.
     pub fn verify_xml(&mut self, content: &str) -> Result<bool, Error> {
+        require_utf8(content)?;
         let mut doc = Document::parse(content)?;
-        let preloaded = self.public_key_from_node(&doc)?;
+        let preloaded = Self::key_from_node(&doc)?;
         self.verify_with(&mut doc, preloaded)
     }
 
@@ -120,14 +136,15 @@ impl SignedXml {
     /// Los de [`Self::verify_xml`].
     pub fn verify_xml_bytes(&mut self, content: &[u8]) -> Result<bool, Error> {
         let mut doc = Document::parse_bytes(content)?;
-        let preloaded = self.public_key_from_node(&doc)?;
+        let preloaded = Self::key_from_node(&doc)?;
         self.verify_with(&mut doc, preloaded)
     }
 
-    /// `setCertificate($pem)`: PEM con clave privada y certificado.
+    /// `setCertificate($pem)`: PEM con clave privada y certificado. Como clave
+    /// pública se guardan solo los bloques `CERTIFICATE`.
     pub fn set_certificate(&mut self, cert: &str) {
         self.private_key = Some(Zeroizing::new(cert.to_owned()));
-        self.public_key = Some(Zeroizing::new(cert.to_owned()));
+        self.public_key = certificate_blocks(cert).map(Zeroizing::new);
         self.loaded_key = OnceLock::new();
     }
 
@@ -192,19 +209,22 @@ impl SignedXml {
     }
 
     /// `getPublicKey($doc)`: con documento, reemplaza la clave pública por el
-    /// certificado de su firma (si la tiene).
+    /// certificado de su firma (si la tiene). El algoritmo de firma
+    /// configurado no cambia.
     ///
     /// # Errors
     ///
     /// Los de lectura de `KeyInfo`.
     pub fn public_key(&mut self, doc: Option<&Document>) -> Result<Option<&str>, Error> {
-        if let Some(doc) = doc {
-            self.set_public_key_from_node(doc)?;
+        if let Some(doc) = doc
+            && let Some(key) = Self::key_from_node(doc)?
+        {
+            self.public_key = key.x509_certificate().map(|c| Zeroizing::new(c.to_owned()));
         }
         Ok(self.public_key.as_ref().map(|k| k.as_str()))
     }
 
-    /// Clave pública configurada, sin leer documentos.
+    /// Certificado configurado (solo bloques `CERTIFICATE`), sin leer documentos.
     #[must_use]
     pub fn configured_public_key(&self) -> Option<&str> {
         self.public_key.as_ref().map(|k| k.as_str())
@@ -289,10 +309,11 @@ impl SignedXml {
         self.verify_with(doc, None)
     }
 
-    /// [`Self::verify`] reutilizando, si corresponde, la clave que
-    /// [`Self::public_key_from_node`] ya cargó del mismo certificado.
+    /// Verifica con la clave del certificado de la firma (`preloaded`) o, si
+    /// el documento no trae certificado, con la clave pública configurada.
+    /// No modifica el estado del firmante.
     fn verify_with(
-        &mut self,
+        &self,
         doc: &mut Document,
         preloaded: Option<XmlSecurityKey>,
     ) -> Result<bool, Error> {
@@ -302,39 +323,18 @@ impl SignedXml {
         let Some(sig) = dsig.locate_signature(doc, root, 0) else {
             return Err(Error::SignatureNotFound);
         };
-        dsig.canonicalize_signed_info(doc);
-        let mut key: Option<XmlSecurityKey> = None;
-        if !self.has_public_key() {
-            let located = dsig.locate_key(doc).ok_or(Error::MissingVerificationKey)?;
-            let located = XmlSecEnc::static_locate_key_info(doc, Some(located), sig)?;
-            if let Some(k) = located {
-                self.public_key = k.x509_certificate().map(|c| Zeroizing::new(c.to_owned()));
-                k.algorithm().clone_into(&mut self.key_algorithm);
-                key = Some(k);
-            }
+        if !sunat_profile(doc, sig) {
+            return Ok(false);
         }
-        let key = match key {
-            Some(k) => k,
-            None => {
-                let located = dsig.locate_key(doc);
-                // La clave ya cargada del certificado de la firma es la misma
-                // que se obtendría al leer de nuevo `public_key`: mismo
-                // algoritmo (`SignatureMethod`) y mismo PEM.
-                let configured = self.public_key.as_ref().map(|k| k.as_str());
-                if let (Some(l), Some(p)) = (&located, preloaded) {
-                    if l.algorithm() == p.algorithm()
-                        && p.key_type() == l.key_type()
-                        && p.x509_certificate().is_some()
-                        && p.x509_certificate() == configured
-                    {
-                        return Self::check(&mut dsig, doc, &p);
-                    }
-                }
-                let mut k = match located {
+        dsig.canonicalize_signed_info(doc);
+        let key = match preloaded {
+            Some(key) => key,
+            None if self.has_public_key() => {
+                let mut key = match dsig.locate_key(doc) {
                     Some(k) => k,
                     None => XmlSecurityKey::new(&self.key_algorithm, Some("public"))?,
                 };
-                k.load_key(
+                key.load_key(
                     self.public_key
                         .as_ref()
                         .map(|k| k.as_str())
@@ -342,7 +342,12 @@ impl SignedXml {
                         .as_bytes(),
                     false,
                 )?;
-                k
+                key
+            }
+            None => {
+                let located = dsig.locate_key(doc).ok_or(Error::MissingVerificationKey)?;
+                XmlSecEnc::static_locate_key_info(doc, Some(located), sig)?
+                    .ok_or(Error::MissingVerificationKey)?
             }
         };
         Self::check(&mut dsig, doc, &key)
@@ -370,13 +375,8 @@ impl SignedXml {
             .is_some_and(|p| !p.is_empty() && p != "0")
     }
 
-    fn set_public_key_from_node(&mut self, doc: &Document) -> Result<(), Error> {
-        self.public_key_from_node(doc).map(|_| ())
-    }
-
-    /// Toma la clave pública del certificado de la firma de `doc` y
-    /// devuelve la clave cargada (para no volver a leerla al verificar).
-    fn public_key_from_node(&mut self, doc: &Document) -> Result<Option<XmlSecurityKey>, Error> {
+    /// Clave del certificado de la firma de `doc`, si tiene `KeyInfo`.
+    fn key_from_node(doc: &Document) -> Result<Option<XmlSecurityKey>, Error> {
         let mut dsig = XmlSecurityDsig::default();
         let Some(sig) = dsig.locate_signature(doc, doc.document_node(), 0) else {
             return Ok(None);
@@ -384,12 +384,67 @@ impl SignedXml {
         let Some(key) = dsig.locate_key(doc) else {
             return Ok(None);
         };
-        let key = XmlSecEnc::static_locate_key_info(doc, Some(key), sig)?;
-        if let Some(k) = &key {
-            self.public_key = k.x509_certificate().map(|c| Zeroizing::new(c.to_owned()));
-            k.algorithm().clone_into(&mut self.key_algorithm);
+        // Solo cuenta si de verdad trae un certificado: si no, se usa la
+        // clave configurada.
+        Ok(XmlSecEnc::static_locate_key_info(doc, Some(key), sig)?
+            .filter(|k| k.x509_certificate().is_some()))
+    }
+}
+
+/// Perfil SUNAT: una sola `Reference` con `URI=""`, la transformación
+/// *enveloped* y, como mucho, una C14N.
+fn sunat_profile(doc: &Document, sig: NodeId) -> bool {
+    use crate::dsig::{C14N, C14N_COMMENTS, EXC_C14N, EXC_C14N_COMMENTS, XMLDSIGNS};
+    let refs = crate::dsig::references(doc, sig);
+    let [reference] = refs.as_slice() else {
+        return false;
+    };
+    if doc.attribute(*reference, "URI") != Some("") {
+        return false;
+    }
+    let transforms: Vec<&str> = doc
+        .child_ns(*reference, XMLDSIGNS, "Transforms")
+        .map(|t| {
+            doc.children_ns(t, XMLDSIGNS, "Transform")
+                .into_iter()
+                .map(|n| doc.attribute(n, "Algorithm").unwrap_or(""))
+                .collect()
+        })
+        .unwrap_or_default();
+    let c14n = [C14N, C14N_COMMENTS, EXC_C14N, EXC_C14N_COMMENTS];
+    transforms.iter().filter(|a| **a == ENVELOPED).count() == 1
+        && transforms.iter().filter(|a| c14n.contains(a)).count() <= 1
+        && transforms
+            .iter()
+            .all(|a| *a == ENVELOPED || c14n.contains(a))
+}
+
+/// Bloques `-----BEGIN CERTIFICATE-----` del PEM (sin claves privadas).
+fn certificate_blocks(pem: &str) -> Option<String> {
+    const BEGIN: &str = "-----BEGIN CERTIFICATE-----";
+    const END: &str = "-----END CERTIFICATE-----";
+    let mut out = String::new();
+    let mut rest = pem;
+    while let Some(start) = rest.find(BEGIN) {
+        let after = &rest[start..];
+        let Some(end) = after.find(END) else { break };
+        out.push_str(&after[..end + END.len()]);
+        out.push('\n');
+        rest = &after[end + END.len()..];
+    }
+    (!out.is_empty()).then_some(out)
+}
+
+/// Las variantes `&str` ya reciben texto Unicode: una declaración de otra
+/// codificación haría que se firme algo distinto de lo que se envía.
+fn require_utf8(content: &str) -> Result<(), Error> {
+    match crate::encoding::declared(content.as_bytes()) {
+        Some(name) if !name.eq_ignore_ascii_case("utf-8") && !name.eq_ignore_ascii_case("utf8") => {
+            Err(Error::Xml(crate::error::XmlError::UnsupportedEncoding(
+                format!("{name} (use las variantes en bytes para documentos no UTF-8)"),
+            )))
         }
-        Ok(key)
+        _ => Ok(()),
     }
 }
 

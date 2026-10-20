@@ -2,13 +2,25 @@
 #![allow(unsafe_code)]
 
 use std::ffi::{CStr, CString, c_char, c_int, c_void};
-use std::sync::Mutex;
+use std::sync::{Mutex, MutexGuard, Once};
 
 use crate::{InfrastructureError, XmlError};
 
 static XML_LOCK: Mutex<()> = Mutex::new(());
+static XML_INIT: Once = Once::new();
+
+/// Serializa las llamadas a libxml2 e inicializa la biblioteca la primera vez.
+fn lock() -> MutexGuard<'static, ()> {
+    // SAFETY: `cpeforge_init` solo llama a `xmlInitParser`; `Once` impide dos
+    // llamadas concurrentes, que antes de libxml2 2.11 no son seguras.
+    XML_INIT.call_once(|| unsafe { cpeforge_init() });
+    XML_LOCK
+        .lock()
+        .unwrap_or_else(std::sync::PoisonError::into_inner)
+}
 
 unsafe extern "C" {
+    fn cpeforge_init();
     fn cpeforge_preflight_xml(
         xml: *const u8,
         length: c_int,
@@ -37,9 +49,7 @@ pub(crate) fn preflight(
     max_nodes: usize,
     max_depth: usize,
 ) -> Result<(), InfrastructureError> {
-    let _guard = XML_LOCK
-        .lock()
-        .unwrap_or_else(std::sync::PoisonError::into_inner);
+    let _guard = lock();
     let length = c_int::try_from(xml.len()).map_err(|_| InfrastructureError::XmlLimit)?;
     let max_nodes = c_int::try_from(max_nodes).map_err(|_| InfrastructureError::XmlLimit)?;
     let max_depth = c_int::try_from(max_depth).map_err(|_| InfrastructureError::XmlLimit)?;
@@ -54,9 +64,7 @@ pub(crate) fn preflight(
 }
 
 pub(crate) fn probe(xml: &[u8]) -> Result<Option<(String, String)>, InfrastructureError> {
-    let _guard = XML_LOCK
-        .lock()
-        .unwrap_or_else(std::sync::PoisonError::into_inner);
+    let _guard = lock();
     let length = c_int::try_from(xml.len()).map_err(|_| InfrastructureError::XmlLimit)?;
     let mut name = [0 as c_char; 1024];
     let mut version = [0 as c_char; 1024];
@@ -125,9 +133,7 @@ pub(crate) fn validate(
     xml: &[u8],
     path: &str,
 ) -> Result<(bool, Vec<XmlError>), InfrastructureError> {
-    let _guard = XML_LOCK
-        .lock()
-        .unwrap_or_else(std::sync::PoisonError::into_inner);
+    let _guard = lock();
     let path = CString::new(path).map_err(|_| InfrastructureError::UnsafePath)?;
     let length = c_int::try_from(xml.len()).map_err(|_| InfrastructureError::XmlLimit)?;
     let mut errors = Vec::<XmlError>::new();

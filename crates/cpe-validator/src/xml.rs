@@ -3,6 +3,7 @@
 use crate::error::{CpeValidatorError, InputSource};
 use crate::ffi::{self, Parsed};
 use crate::options::Limits;
+use crate::prescan::{MAX_ATTRIBUTES_PER_ELEMENT, Rejection};
 
 /// XML ya analizado, reutilizable en varias validaciones.
 ///
@@ -53,6 +54,26 @@ impl XmlDocument {
                 limit: limits.max_xml_bytes,
                 actual,
             });
+        }
+        match crate::prescan::prescan(bytes) {
+            Ok(()) => {}
+            Err(Rejection::Doctype) => {
+                return Err(CpeValidatorError::DoctypeForbidden {
+                    source: InputSource::Xml,
+                });
+            }
+            Err(Rejection::Attributes) => {
+                return Err(CpeValidatorError::MalformedXml {
+                    diagnostics: vec![format!(
+                        "un elemento supera {MAX_ATTRIBUTES_PER_ELEMENT} atributos"
+                    )],
+                });
+            }
+            Err(Rejection::Encoding) => {
+                return Err(CpeValidatorError::MalformedXml {
+                    diagnostics: vec!["codificación no admitida (UTF-32, UCS-4 o EBCDIC)".into()],
+                });
+            }
         }
         match ffi::parse_xml(bytes).map_err(CpeValidatorError::Engine)? {
             Parsed::Doc(doc) => Ok(Self { doc }),

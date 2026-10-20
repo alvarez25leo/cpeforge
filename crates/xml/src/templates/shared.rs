@@ -517,7 +517,11 @@ fn line_charges(
 }
 
 /// `cac:AdditionalItemProperty` de UBL 2.1 (con periodo de uso).
-fn item_property_21(out: &mut Out<'_>, atr: &DetailAttribute, value_not_null: bool) -> Result<()> {
+pub(crate) fn item_property_21(
+    out: &mut Out<'_>,
+    atr: &DetailAttribute,
+    value_not_null: bool,
+) -> Result<()> {
     out.raw("<cac:AdditionalItemProperty ><cbc:Name>")
         .text(atr.name.as_deref())
         .raw("</cbc:Name><cbc:NameCode>")

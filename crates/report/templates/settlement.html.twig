@@ -1,0 +1,236 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+        {% include 'assets/style.css' %}
+    </style>
+</head>
+<body class="white-bg">
+{# Liquidación de compra electrónica (tipo 04): plantilla propia de CPEForge. #}
+{% set cp = doc.company %}
+{% set vd = doc.vendedor %}
+{% set lugar = doc.lugarOperacion %}
+{% set moneda = doc.tipoMoneda|catalog('02') %}
+{% set documentos = {'1': 'DNI', '4': 'CARNÉ DE EXTRANJERÍA', '7': 'PASAPORTE'} %}
+{% set condiciones = {'01': 'Punto de venta', '02': 'Producción', '03': 'Extracción', '04': 'Explotación', '05': 'Otros'} %}
+{% set operaciones = {'0501': 'Compra interna', '0502': 'Anticipos', '0503': 'Compra de oro'} %}
+{% set afectaciones = {'10': 'Gravado', '20': 'Exonerado', '30': 'Inafecto'} %}
+<table width="100%">
+    <tbody><tr>
+        <td style="padding:30px; !important">
+            <table width="100%" height="200px" border="0" aling="center" cellpadding="0" cellspacing="0">
+                <tbody><tr>
+                    <td width="50%" height="90" align="center">
+                        <span><img src="{{ params.system.logo|image_b64 }}" height="80" style="text-align:center" border="0"></span>
+                    </td>
+                    <td width="5%" height="40" align="center"></td>
+                    <td width="45%" rowspan="2" valign="bottom" style="padding-left:0">
+                        <div class="tabla_borde">
+                            <table width="100%" border="0" height="200" cellpadding="6" cellspacing="0">
+                                <tbody><tr>
+                                    <td align="center">
+                                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:29px" text-align="center">LIQUIDACIÓN DE COMPRA</span>
+                                        <br>
+                                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:19px" text-align="center">E L E C T R Ó N I C A</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <span style="font-size:15px" text-align="center">R.U.C.: {{ cp.ruc }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <span style="font-size:24px">{{ doc.serie }}-{{ doc.correlativo }}</span>
+                                    </td>
+                                </tr>
+                                </tbody></table>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="bottom" style="padding-left:0">
+                        <div class="tabla_borde">
+                            <table width="96%" height="100%" border="0" border-radius="" cellpadding="9" cellspacing="0">
+                                <tbody><tr>
+                                    <td align="center">
+                                        <strong><span style="font-size:15px">{{ cp.razonSocial }}</span></strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">
+                                        <strong>Dirección: </strong>{% if cp.address %}{{ cp.address.direccion }}{% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">
+                                        {{ params.user.header|raw }}
+                                    </td>
+                                </tr>
+                                </tbody></table>
+                        </div>
+                    </td>
+                </tr>
+                </tbody></table>
+            <br>
+            <div class="tabla_borde">
+                <table width="100%" border="0" cellpadding="5" cellspacing="0">
+                    <tbody>
+                    <tr>
+                        <td colspan="2">VENDEDOR</td>
+                    </tr>
+                    <tr class="border_top">
+                        <td width="60%" align="left"><strong>Apellidos y nombres:</strong>  {{ vd.rznSocial }}</td>
+                        <td width="40%" align="left"><strong>{{ documentos[vd.tipoDoc] | default('Documento') }}:</strong>  {{ vd.numDoc }}</td>
+                    </tr>
+                    <tr>
+                        <td width="60%" align="left"><strong>Domicilio:</strong>  {% if vd.address %}{{ vd.address.direccion }} - {{ vd.address.distrito }} - {{ vd.address.provincia }} - {{ vd.address.departamento }}{% endif %}</td>
+                        <td width="40%" align="left"><strong>Condición:</strong>  {{ condiciones[vd.condicion] | default(vd.condicion) }}</td>
+                    </tr>
+                    </tbody></table>
+            </div><br>
+            <div class="tabla_borde">
+                <table width="100%" border="0" cellpadding="5" cellspacing="0">
+                    <tbody>
+                    <tr>
+                        <td colspan="2">OPERACIÓN</td>
+                    </tr>
+                    <tr class="border_top">
+                        <td width="60%" align="left"><strong>Fecha Emisión:</strong>  {{ doc.fechaEmision|date('d/m/Y') }}</td>
+                        <td width="40%" align="left"><strong>Tipo de operación:</strong>  {{ operaciones[doc.tipoOperacion] | default(doc.tipoOperacion) }}</td>
+                    </tr>
+                    <tr>
+                        <td width="60%" align="left"><strong>Lugar:</strong>  {% if lugar and lugar.address %}{{ lugar.address.direccion }} - {{ lugar.address.distrito }} - {{ lugar.address.provincia }} - {{ lugar.address.departamento }}{% endif %}</td>
+                        <td width="40%" align="left"><strong>Condición del lugar:</strong>  {% if lugar %}{{ condiciones[lugar.condicion] | default(lugar.condicion) }}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td width="60%" align="left"><strong>Tipo Moneda:</strong>  {{ doc.tipoMoneda|catalog('021') }}</td>
+                        <td width="40%" align="left">{% for guia in doc.guias %}<strong>{{ guia.tipoDoc|catalog('01') }}:</strong>  {{ guia.nroDoc }}{% if not loop.last %}<br>{% endif %}{% endfor %}</td>
+                    </tr>
+                    </tbody></table>
+            </div><br>
+            <div class="tabla_borde">
+                <table width="100%" border="0" cellpadding="5" cellspacing="0">
+                    <tbody>
+                    <tr>
+                        <td align="center" class="bold">Cantidad</td>
+                        <td align="center" class="bold">Código</td>
+                        <td align="center" class="bold">Descripción</td>
+                        <td align="center" class="bold">Valor Unitario</td>
+                        <td align="center" class="bold">Valor Venta</td>
+                        <td align="center" class="bold">IGV</td>
+                        <td align="center" class="bold">Ret. Renta</td>
+                    </tr>
+                    {% for det in doc.details %}
+                        <tr class="border_top">
+                            <td align="center">{{ det.cantidad }} {{ det.unidad }}</td>
+                            <td align="center">{{ det.codProducto }}</td>
+                            <td align="left" width="300px">
+                                <span>{{ det.descripcion }}</span><br>
+                                <span style="font-size:9px">{{ afectaciones[det.tipAfeIgv] | default(det.tipAfeIgv) }}</span>
+                                {% for atr in det.atributos %}
+                                    <br><span style="font-size:9px">{{ atr.name }}: {{ atr.value }}</span>
+                                {% endfor %}
+                            </td>
+                            <td align="center">{{ moneda }} {{ det.mtoValorUnitario|n_format }}</td>
+                            <td align="center">{{ moneda }} {{ det.mtoValorVenta|n_format }}</td>
+                            <td align="center">{{ moneda }} {{ det.igv|n_format }}</td>
+                            <td align="center">{{ moneda }} {{ det.ir|n_format }} ({{ det.porcentajeIr }}%)</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table></div>
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tbody><tr>
+                    <td width="50%" valign="top">
+                        <table width="100%" border="0" cellpadding="5" cellspacing="0">
+                            <tbody>
+                            <tr>
+                                <td colspan="4">
+                                    <br>
+                                    {% for leg in doc.legends %}
+                                        <p><strong>{{ leg.value }}</strong></p>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td width="50%" valign="top">
+                        <br>
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-valores-totales">
+                            <tbody>
+                            {% if doc.mtoOperGravadas %}
+                            <tr class="border_bottom">
+                                <td align="right"><strong>Op. Gravadas:</strong></td>
+                                <td width="120" align="right"><span>{{ moneda }}  {{ doc.mtoOperGravadas|n_format }}</span></td>
+                            </tr>
+                            {% endif %}
+                            {% if doc.mtoOperExoneradas %}
+                            <tr class="border_bottom">
+                                <td align="right"><strong>Op. Exoneradas:</strong></td>
+                                <td width="120" align="right"><span>{{ moneda }}  {{ doc.mtoOperExoneradas|n_format }}</span></td>
+                            </tr>
+                            {% endif %}
+                            {% if doc.mtoOperInafectas %}
+                            <tr class="border_bottom">
+                                <td align="right"><strong>Op. Inafectas:</strong></td>
+                                <td width="120" align="right"><span>{{ moneda }}  {{ doc.mtoOperInafectas|n_format }}</span></td>
+                            </tr>
+                            {% endif %}
+                            <tr class="border_bottom">
+                                <td align="right"><strong>IGV:</strong></td>
+                                <td width="120" align="right"><span>{{ moneda }}  {{ doc.mtoIGV|n_format }}</span></td>
+                            </tr>
+                            <tr class="border_bottom">
+                                <td align="right"><strong>Total:</strong></td>
+                                <td width="120" align="right"><span>{{ moneda }}  {{ doc.subTotal|n_format }}</span></td>
+                            </tr>
+                            <tr class="border_bottom">
+                                <td align="right"><strong>IGV retenido:</strong></td>
+                                <td width="120" align="right"><span>- {{ moneda }}  {{ doc.mtoIGV|n_format }}</span></td>
+                            </tr>
+                            <tr class="border_bottom">
+                                <td align="right"><strong>IR - Retención:</strong></td>
+                                <td width="120" align="right"><span>- {{ moneda }}  {{ doc.mtoIr|n_format }}</span></td>
+                            </tr>
+                            {% if doc.redondeo %}
+                            <tr class="border_bottom">
+                                <td align="right"><strong>Redondeo:</strong></td>
+                                <td width="120" align="right"><span>{{ moneda }}  {{ doc.redondeo|n_format }}</span></td>
+                            </tr>
+                            {% endif %}
+                            <tr>
+                                <td align="right"><strong>IMPORTE TOTAL NETO:</strong></td>
+                                <td width="120" align="right"><span id="ride-importeTotal" class="ride-importeTotal">{{ moneda }}  {{ doc.mtoImpVenta|n_format }}</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody></table>
+            <br>
+            {% if max_items is defined and doc.details|length > max_items %}
+                <div style="page-break-after:always;"></div>
+            {% endif %}
+            <div>
+            <table>
+                <tbody>
+                <tr><td width="100%">
+                    <blockquote>
+                        {% if params.user.footer is defined %}
+                            {{ params.user.footer|raw }}
+                        {% endif %}
+                        {% if params.system.hash is defined and params.system.hash is twig_true %}
+                            <strong>Resumen:</strong>   {{ params.system.hash }}<br>
+                        {% endif %}
+                        <span>Representación Impresa de la LIQUIDACIÓN DE COMPRA ELECTRÓNICA.</span>
+                    </blockquote>
+                    </td>
+                </tr>
+                </tbody></table>
+            </div>
+        </td>
+    </tr>
+    </tbody></table>
+</body></html>

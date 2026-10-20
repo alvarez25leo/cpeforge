@@ -1,10 +1,11 @@
-//! Las ocho familias de documentos de extremo a extremo por las fachadas, con
+//! Las nueve familias de documentos de extremo a extremo por las fachadas, con
 //! un transporte local que responde como SUNAT: construir, firmar,
 //! comprimir, enviar y leer el CDR o el ticket. Incluye faults, CDR de
 //! rechazo y consulta de tickets, sin red.
 //!
 //! - `See` (SOAP): factura, boleta, notas de crédito y débito, percepción,
-//!   retención (CDR inmediato) y resumen, baja y reversión (ticket).
+//!   retención, liquidación de compra (CDR inmediato) y resumen, baja y
+//!   reversión (ticket).
 //! - `Api` (GRE): guía de remisión 2022 (ticket y consulta con CDR).
 
 #![allow(
@@ -26,6 +27,9 @@ use cpeforge_core::model::despatch::{Despatch, DespatchDetail, Direction, Shipme
 use cpeforge_core::model::perception::{Perception, PerceptionDetail};
 use cpeforge_core::model::retention::{Payment, Retention, RetentionDetail};
 use cpeforge_core::model::sale::{BaseSale, Invoice, Legend, Note, SaleDetail};
+use cpeforge_core::model::settlement::{
+    PurchaseSettlement, SettlementDetail, SettlementPlace, SettlementSeller,
+};
 use cpeforge_core::model::summary::{Summary, SummaryDetail};
 use cpeforge_core::model::voided::{Reversion, Voided, VoidedDetail};
 use cpeforge_core::{Decimal, Zoned};
@@ -202,6 +206,55 @@ fn retention() -> Retention {
             tipo_cambio: None,
         }]),
         ..Retention::default()
+    }
+}
+
+fn settlement() -> PurchaseSettlement {
+    PurchaseSettlement {
+        tipo_operacion: Some("0501".into()),
+        serie: Some("L001".into()),
+        correlativo: Some("1".into()),
+        fecha_emision: Some(lima("2024-07-03")),
+        tipo_moneda: Some("PEN".into()),
+        company: Some(company()),
+        vendedor: Some(SettlementSeller {
+            tipo_doc: Some("1".into()),
+            num_doc: Some("40123456".into()),
+            rzn_social: Some("QUISPE JUAN".into()),
+            address: Some(Address::default()),
+            condicion: Some("02".into()),
+        }),
+        lugar_operacion: Some(SettlementPlace {
+            address: Some(Address::default()),
+            condicion: Some("01".into()),
+        }),
+        mto_oper_gravadas: Some(dec("100")),
+        mto_igv: Some(dec("18")),
+        mto_base_ir: Some(dec("100")),
+        mto_ir: Some(dec("1.5")),
+        total_impuestos: Some(dec("18")),
+        valor_venta: Some(dec("100")),
+        sub_total: Some(dec("118")),
+        mto_imp_venta: Some(dec("98.5")),
+        details: Some(vec![SettlementDetail {
+            unidad: Some("KGM".into()),
+            cantidad: Some(dec("10")),
+            cod_prod_sunat: Some("10101501".into()),
+            descripcion: Some("CAFÉ".into()),
+            mto_valor_unitario: Some(dec("10")),
+            mto_precio_unitario: Some(dec("11.8")),
+            mto_valor_venta: Some(dec("100")),
+            tip_afe_igv: Some("10".into()),
+            mto_base_igv: Some(dec("100")),
+            porcentaje_igv: Some(dec("18")),
+            igv: Some(dec("18")),
+            mto_base_ir: Some(dec("100")),
+            porcentaje_ir: Some(dec("1.5")),
+            ir: Some(dec("1.5")),
+            total_impuestos: Some(dec("18")),
+            ..SettlementDetail::default()
+        }]),
+        ..PurchaseSettlement::default()
     }
 }
 
@@ -447,6 +500,7 @@ async fn every_soap_family_is_signed_sent_and_read() {
     let debito = note("08", "FD01");
     let percepcion = perception();
     let retencion = retention();
+    let liquidacion = settlement();
     let resumen = summary();
     let baja = voided();
     let reversion = Reversion {
@@ -461,7 +515,7 @@ async fn every_soap_family_is_signed_sent_and_read() {
         },
     };
 
-    let bills: [(DocumentRef<'_>, &str, &str); 6] = [
+    let bills: [(DocumentRef<'_>, &str, &str); 7] = [
         (
             DocumentRef::Invoice(&factura),
             "20000000001-01-F001-1",
@@ -491,6 +545,11 @@ async fn every_soap_family_is_signed_sent_and_read() {
             DocumentRef::Retention(&retencion),
             "20000000001-20-R001-1",
             "<Retention ",
+        ),
+        (
+            DocumentRef::Settlement(&liquidacion),
+            "20000000001-04-L001-1",
+            "<SelfBilledInvoice ",
         ),
     ];
     for (document, name, root) in bills {
@@ -546,7 +605,7 @@ async fn every_soap_family_is_signed_sent_and_read() {
             "{name}: sin firma"
         );
     }
-    assert_eq!(transport.sent.lock().unwrap().len(), 9);
+    assert_eq!(transport.sent.lock().unwrap().len(), 10);
 }
 
 fn facade_last_xml(facade: &See<Sunat>) -> String {

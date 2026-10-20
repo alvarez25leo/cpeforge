@@ -9,13 +9,14 @@ use cpeforge_core::model::despatch::Despatch;
 use cpeforge_core::model::perception::Perception;
 use cpeforge_core::model::retention::Retention;
 use cpeforge_core::model::sale::{Invoice, Note};
+use cpeforge_core::model::settlement::PurchaseSettlement;
 use cpeforge_core::model::summary::Summary;
 use cpeforge_core::model::voided::{Reversion, Voided};
 use cpeforge_core::ports::Builder;
 
 use crate::error::XmlError;
 use crate::options::RenderOptions;
-use crate::templates::{despatch, invoice20, invoice21, note, retention, summary};
+use crate::templates::{despatch, invoice20, invoice21, note, retention, settlement, summary};
 
 macro_rules! builder {
     ($(#[$meta:meta])* $name:ident) => {
@@ -72,6 +73,11 @@ builder!(
 builder!(
     /// `RetentionBuilder`: comprobante de retención.
     RetentionBuilder
+);
+builder!(
+    /// `SettlementBuilder`: liquidación de compra (`SelfBilledInvoice`, tipo
+    /// `04`).
+    SettlementBuilder
 );
 
 impl InvoiceBuilder {
@@ -214,6 +220,18 @@ impl RetentionBuilder {
     }
 }
 
+impl SettlementBuilder {
+    /// XML de una liquidación de compra.
+    ///
+    /// # Errors
+    ///
+    /// [`XmlError::Document`] si falta el emisor, el vendedor o el lugar de
+    /// la operación, y los errores de render de [`XmlError`].
+    pub fn render(&self, doc: &PurchaseSettlement) -> Result<String, XmlError> {
+        settlement::render(doc, &self.options)
+    }
+}
+
 macro_rules! port {
     ($builder:ty, $doc:ty, $method:ident) => {
         /// Contrato `BuilderInterface`: siempre devuelve `Some(xml)` o un error.
@@ -235,3 +253,4 @@ port!(VoidedBuilder, Voided, render);
 port!(VoidedBuilder, Reversion, render_reversion);
 port!(PerceptionBuilder, Perception, render);
 port!(RetentionBuilder, Retention, render);
+port!(SettlementBuilder, PurchaseSettlement, render);

@@ -56,8 +56,9 @@ fn report_port_is_implemented() {
 #[test]
 fn builtin_templates_and_helpers() {
     let names: Vec<_> = BUILTIN_TEMPLATES.iter().map(|(n, _)| *n).collect();
-    assert_eq!(names.len(), 8);
+    assert_eq!(names.len(), 9);
     assert!(names.contains(&"assets/style.css"));
+    assert!(names.contains(&"settlement.html.twig"));
     assert_eq!(catalog_value("07", "01"), "NOTA DE CRÉDITO");
     assert_eq!(catalog_value("99", "01"), "");
     assert_eq!(mime_type(b"GIF89a"), "gif");

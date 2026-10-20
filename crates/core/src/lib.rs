@@ -2,8 +2,8 @@
 //!
 //! Los antecedentes y la versión de referencia están en el README. Contiene:
 //!
-//! - modelos de venta, guías, resúmenes, bajas, retenciones, percepciones,
-//!   identidades y respuestas ([`model`]);
+//! - modelos de venta, liquidación de compra, guías, resúmenes, bajas,
+//!   retenciones, percepciones, identidades y respuestas ([`model`]);
 //! - el nombre de archivo de cada documento ([`Document::name`]) y el
 //!   identificador de resúmenes y bajas con la fecha de Perú
 //!   ([`model::summary::Summary::xml_id`]);

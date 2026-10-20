@@ -1,8 +1,9 @@
 //! Representación impresa HTML de comprobantes electrónicos peruanos.
 //!
-//! - [`HtmlReport`] implementa [`cpeforge_core::ports::Report`] con siete
+//! - [`HtmlReport`] implementa [`cpeforge_core::ports::Report`] con ocho
 //!   plantillas integradas (`invoice`, `invoice2`, `despatch`,
-//!   `perception`, `retention`, `summary`, `voided`) y su CSS. La plantilla
+//!   `perception`, `retention`, `summary`, `voided` y `settlement`, la
+//!   liquidación de compra) y su CSS. La plantilla
 //!   inicial es siempre `invoice.html.twig`; se cambia con
 //!   [`HtmlReport::set_template`]. Una carpeta del usuario
 //!   ([`ReportOptions::template_dir`]) tiene prioridad sobre las integradas.

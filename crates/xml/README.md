@@ -43,6 +43,17 @@ fechas nulas.
   `OriginatorCustomerParty`, `envio.subcontratador` en
   `Consignment/LogisticsOperatorParty` y `envio.transportista.nro_mtc` es su
   registro MTC; no lleva motivo ni modalidad de traslado.
+- `SettlementBuilder` genera la liquidación de compra (tipo `04`, UBL 2.1
+  `SelfBilledInvoice`, anexo N.º 9-A, literal e), de la R. S.
+  123-2022/SUNAT): el comprador que la emite va en
+  `AccountingCustomerParty`, el vendedor sin RUC en `AccountingSupplierParty`
+  (la condición de su domicilio, catálogo 60, en `AddressTypeCode`) y el
+  lugar de la operación en `DeliveryTerms`. Cada línea lleva el IGV y la
+  retención del impuesto a la renta (tributo `3000`, `IR`, `TOX`); el
+  `TaxAmount` total es el IGV y la renta va en su propio subtotal. Falta el
+  emisor, el vendedor o el lugar → `XmlError::Document`. Validado con
+  `xmllint` en `tests/settlement.rs` y aceptado por SUNAT beta (compra
+  interna `0501` y compra de oro `0503`).
 - Todo XML generado valida contra el XSD (`tests/schema.rs`, con `xmllint`)
   salvo los documentos vacíos o incompletos y los textos sin escapar con
   `Autoescape::Disabled`. Para lograrlo:

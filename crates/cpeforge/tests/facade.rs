@@ -142,9 +142,14 @@ fn selection_includes_reversion() {
         DocumentKind::Despatch,
         DocumentKind::Perception,
         DocumentKind::Retention,
+        DocumentKind::Settlement,
     ] {
         assert_eq!(sender_kind(kind), SenderKind::Bill);
     }
+    assert_eq!(
+        DocumentKind::from_class_name("CPEForge\\Model\\Settlement\\PurchaseSettlement").ok(),
+        Some(DocumentKind::Settlement)
+    );
     assert!(DocumentKind::from_class_name("Example\\Unknown").is_err());
 }
 

@@ -7,5 +7,6 @@ pub mod perception;
 pub mod response;
 pub mod retention;
 pub mod sale;
+pub mod settlement;
 pub mod summary;
 pub mod voided;

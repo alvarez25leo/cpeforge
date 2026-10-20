@@ -25,6 +25,9 @@ use cpeforge_core::model::sale::{
     BaseSale, Charge, Cuota, DetailAttribute, Detraction, EmbededDespatch, Invoice, Legend, Note,
     PaymentTerms, Prepayment, Receipt, RelatedDocument, SaleDetail, SalePerception,
 };
+use cpeforge_core::model::settlement::{
+    PurchaseSettlement, SettlementDetail, SettlementPlace, SettlementSeller,
+};
 use cpeforge_core::model::summary::{Summary, SummaryDetail, SummaryPerception};
 use cpeforge_core::model::voided::{Reversion, Voided, VoidedDetail};
 use cpeforge_core::{CoreError, Decimal, Document, Zoned};
@@ -943,6 +946,84 @@ pub(crate) fn reversion(r: &Reversion) -> Value {
     voided_fields("Reversion", &r.voided)
         .getter("getXmlId", computed(r.xml_id()))
         .getter("getName", computed(r.name()))
+        .build()
+}
+
+fn settlement_seller(v: &SettlementSeller) -> Value {
+    Builder::new("SettlementSeller")
+        .getter("getTipoDoc", text(v.tipo_doc.as_ref()))
+        .getter("getNumDoc", text(v.num_doc.as_ref()))
+        .getter("getRznSocial", text(v.rzn_social.as_ref()))
+        .getter("getAddress", object(v.address.as_ref(), address))
+        .getter("getCondicion", text(v.condicion.as_ref()))
+        .build()
+}
+
+fn settlement_place(p: &SettlementPlace) -> Value {
+    Builder::new("SettlementPlace")
+        .getter("getAddress", object(p.address.as_ref(), address))
+        .getter("getCondicion", text(p.condicion.as_ref()))
+        .build()
+}
+
+/// Getters de `SettlementDetail`, en orden; se evalúan al leerse.
+static SETTLEMENT_DETAIL: &[Getter<SettlementDetail>] = &[
+    ("getUnidad", |d| text(d.unidad.as_ref())),
+    ("getCantidad", |d| amount(d.cantidad)),
+    ("getCodProducto", |d| text(d.cod_producto.as_ref())),
+    ("getCodProdSunat", |d| text(d.cod_prod_sunat.as_ref())),
+    ("getDescripcion", |d| text(d.descripcion.as_ref())),
+    ("getMtoValorUnitario", |d| amount(d.mto_valor_unitario)),
+    ("getMtoPrecioUnitario", |d| amount(d.mto_precio_unitario)),
+    ("getMtoValorVenta", |d| amount(d.mto_valor_venta)),
+    ("getTipAfeIgv", |d| text(d.tip_afe_igv.as_ref())),
+    ("getMtoBaseIgv", |d| amount(d.mto_base_igv)),
+    ("getPorcentajeIgv", |d| amount(d.porcentaje_igv)),
+    ("getIgv", |d| amount(d.igv)),
+    ("getMtoBaseIr", |d| amount(d.mto_base_ir)),
+    ("getPorcentajeIr", |d| amount(d.porcentaje_ir)),
+    ("getIr", |d| amount(d.ir)),
+    ("getTotalImpuestos", |d| amount(d.total_impuestos)),
+    ("getAtributos", |d| list(d.atributos.as_ref(), attribute)),
+];
+
+/// Liquidación de compra: modelo propio de CPEForge, sin plantilla de
+/// referencia.
+pub(crate) fn settlement(d: &PurchaseSettlement) -> Value {
+    Builder::new("PurchaseSettlement")
+        .getter("getTipoOperacion", text(d.tipo_operacion.as_ref()))
+        .getter("getSerie", text(d.serie.as_ref()))
+        .getter("getCorrelativo", text(d.correlativo.as_ref()))
+        .getter("getFechaEmision", date(d.fecha_emision.as_ref()))
+        .getter("getTipoMoneda", text(d.tipo_moneda.as_ref()))
+        .getter("getCompany", object(d.company.as_ref(), company))
+        .getter(
+            "getVendedor",
+            object(d.vendedor.as_ref(), settlement_seller),
+        )
+        .getter(
+            "getLugarOperacion",
+            object(d.lugar_operacion.as_ref(), settlement_place),
+        )
+        .getter("getGuias", list(d.guias.as_ref(), related))
+        .getter("getRelDocs", list(d.rel_docs.as_ref(), related))
+        .getter("getMtoOperGravadas", amount(d.mto_oper_gravadas))
+        .getter("getMtoOperExoneradas", amount(d.mto_oper_exoneradas))
+        .getter("getMtoOperInafectas", amount(d.mto_oper_inafectas))
+        .getter("getMtoIGV", amount(d.mto_igv))
+        .getter("getMtoBaseIr", amount(d.mto_base_ir))
+        .getter("getMtoIr", amount(d.mto_ir))
+        .getter("getTotalImpuestos", amount(d.total_impuestos))
+        .getter("getValorVenta", amount(d.valor_venta))
+        .getter("getSubTotal", amount(d.sub_total))
+        .getter("getRedondeo", amount(d.redondeo))
+        .getter("getMtoImpVenta", amount(d.mto_imp_venta))
+        .getter("getLegends", list(d.legends.as_ref(), legend))
+        .getter(
+            "getDetails",
+            rows(d.details.as_ref(), "SettlementDetail", SETTLEMENT_DETAIL),
+        )
+        .getter("getName", computed(d.name()))
         .build()
 }
 

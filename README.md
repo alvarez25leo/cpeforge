@@ -177,17 +177,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-El proyecto [`example/rust`](example/rust) emite 45 casos: facturas
+El proyecto [`example/rust`](example/rust) emite 48 casos: facturas
 (gravadas, exoneradas, de exportación, con detracción, percepción,
 anticipo o cargos…), boletas, notas de crédito y débito, resúmenes diarios,
-bajas, retenciones, percepciones y guías de remisión remitente y
-transportista por la API de SUNAT.
+bajas, retenciones, percepciones, liquidaciones de compra (con su reversión)
+y guías de remisión remitente y transportista por la API de SUNAT.
 
 ## Qué cubre
 
 - **Comprobantes:** factura, boleta, notas de crédito y débito, resumen
-  diario, comunicación de baja, reversión, retención, percepción y guía de
-  remisión remitente y transportista (UBL 2.0 y 2.1).
+  diario, comunicación de baja, reversión, retención, percepción,
+  liquidación de compra (incluida la compra de oro) y guía de remisión
+  remitente y transportista (UBL 2.0 y 2.1).
 - **Envío:** servicios SOAP de SUNAT (`sendBill`, `sendSummary`, consulta de
   tickets y de CDR) y la API REST de guías de remisión con OAuth2.
 - **Firma:** XMLDSig con el perfil de SUNAT, C14N inclusiva y exclusiva,

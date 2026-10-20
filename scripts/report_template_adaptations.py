@@ -9,6 +9,9 @@ MiniJinja difiere (ver crates/report/README.md):
 - una cadena "0" es falsa en PHP;
 - `null ~ 'x'` concatena una cadena vacía.
 
+Las plantillas de `CPEFORGE_TEMPLATES` (liquidación de compra) no existen
+en la referencia y quedan fuera de la comparación.
+
 Además, `despatch.html.twig` agrega los datos de la guía de remisión
 transportista (tipo 31, extensión de CPEForge) en bloques que solo se
 evalúan con ese tipo: la salida de la guía remitente (09) no cambia.
@@ -95,6 +98,9 @@ CARRIER = [
         "                    {% endif %}\n", "                    {% endif %}\n" + _SUB, 1), 1),
 ]
 
+# Plantillas propias de CPEForge, sin equivalente en la referencia.
+CPEFORGE_TEMPLATES = {"settlement.html.twig"}
+
 ADAPTATIONS: dict[str, list[tuple[str, str, int]]] = {
     "invoice.html.twig": [
         ("{% set isInvoice = doc.tipoDoc in ['01', '03'] %}",
@@ -139,7 +145,8 @@ def main() -> int:
     mode, php_dir, rust_dir = sys.argv[1], Path(sys.argv[2]), Path(sys.argv[3])
     php_files = sorted(str(p.relative_to(php_dir)) for p in php_dir.rglob("*") if p.is_file())
     rust_files = sorted(str(p.relative_to(rust_dir)) for p in rust_dir.rglob("*")
-                        if p.is_file() and p.name != "README.md")
+                        if p.is_file() and p.name != "README.md"
+                        and str(p.relative_to(rust_dir)) not in CPEFORGE_TEMPLATES)
     if php_files != sorted(ADAPTATIONS) or rust_files != sorted(ADAPTATIONS):
         print(f"conjunto de plantillas distinto: PHP {php_files}, Rust {rust_files}", file=sys.stderr)
         return 1

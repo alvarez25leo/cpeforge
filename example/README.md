@@ -1,6 +1,6 @@
 # Ejemplo de emisión con CPEForge
 
-`rust/` construye, firma y (opcionalmente) envía 45 comprobantes de ejemplo
+`rust/` construye, firma y (opcionalmente) envía 48 comprobantes de ejemplo
 con los crates de CPEForge, contra los entornos de prueba de SUNAT.
 
 ```bash
@@ -27,6 +27,7 @@ certificado que lleva incluido.
 | Percepción y retención | `percepcion`, `retencion` |
 | Guías de remisión remitente 2022 (GRE, tipo 09) | `guia-remision`, `guia-extra-atributos`, `guia-misma-empresa`, `guia-transporteM1L`, `guia-transportePrivado` |
 | Guía de remisión transportista (GRE, tipo 31) | `guia-transportista` (solo en Rust) |
+| Liquidación de compra (tipo 04) | `liquidacion-compra` (compra interna 0501), `liquidacion-compra-oro` (compra de oro 0503, renta 4 %) y `reversion-liquidacion` (RR); solo en Rust |
 
 Casos de rechazo (`--errores`), con el código que devuelve el entorno de
 prueba:
@@ -36,6 +37,7 @@ prueba:
 | `guia-sin-fecha-entrega` | GRE de transporte público sin fecha de entrega de bienes | `3617` |
 | `nota-motivo13-con-total` | Nota de crédito con motivo 13 e importe total distinto de cero | `3315` |
 | `resumen-sin-tasa` | Resumen RC sin `porcentajeIgv` en sus líneas | `2992` |
+| `liquidacion-vendedor-ruc` | Liquidación de compra a un vendedor con RUC (solo en Rust) | `2800` |
 
 ## Credenciales
 
@@ -69,10 +71,11 @@ Los servicios están fijos en entornos de prueba: SUNAT BETA (`FE_BETA` y
 producción de SUNAT. `factura-beatose` nunca se envía.
 
 Cada tipo va por su vía:
-- comprobantes: `sendBill` y CDR;
+- comprobantes y liquidaciones de compra: `sendBill` y CDR;
 - percepción y retención: `sendBill` al servicio de retenciones;
 - resumen y baja: `sendSummary`, ticket y `getStatus`;
-- reversión: igual, en el servicio de retenciones;
+- reversión (también de una liquidación de compra): igual, en el servicio de
+  retenciones;
 - guías: API GRE, ticket y estado.
 
 SUNAT BETA responde `401` a los envíos muy seguidos: entre uno y otro se
@@ -104,6 +107,8 @@ suya en `example/benchmark.md`.
 
 `php/` contiene los mismos casos en la implementación de referencia y se
 conserva tal cual. Los scripts que generan ambos y comparan el XML están en
-`oracle/ejemplos/` (fuera de los ejemplos). `guia-transportista` no tiene
-equivalente en PHP: está listado en `oracle/ejemplos/solo-rust.txt`, y el
-script lo valida contra el XSD sin compararlo.
+`oracle/ejemplos/` (fuera de los ejemplos). `guia-transportista` y las
+liquidaciones de compra no tienen equivalente en PHP: están listados en
+`oracle/ejemplos/solo-rust.txt` (patrones de nombre), y el script los valida
+contra el XSD sin compararlos; `liquidacion-vendedor-ruc` está marcado
+`solo_rust` en `oracle/ejemplos/errores/casos.json`.

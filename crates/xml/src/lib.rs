@@ -12,6 +12,7 @@
 //! | [`SummaryBuilder`] | `summary` |
 //! | [`VoidedBuilder`] | `voided` (baja `RA` y reversión `RR`) |
 //! | [`RetentionBuilder`] / [`PerceptionBuilder`] | `retention`, `perception` |
+//! | [`SettlementBuilder`] | liquidación de compra (`SelfBilledInvoice`), propia de CPEForge |
 //!
 //! No firma, no comprime ni envía: el XML devuelto deja vacío el
 //! `ext:ExtensionContent` reservado para la firma.
@@ -64,7 +65,7 @@ mod templates;
 
 pub use builder::{
     DespatchBuilder, InvoiceBuilder, NoteBuilder, PerceptionBuilder, RetentionBuilder,
-    SummaryBuilder, VoidedBuilder,
+    SettlementBuilder, SummaryBuilder, VoidedBuilder,
 };
 pub use error::XmlError;
 pub use options::{Autoescape, RenderOptions};

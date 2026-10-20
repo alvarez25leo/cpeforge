@@ -64,9 +64,28 @@ fn guia_sin_fecha_entrega(contexto: &Contexto) -> Resultado {
     Ok(Documento::Despatch(guia))
 }
 
+/// Liquidación de compra a un vendedor con RUC: solo se emite a personas sin
+/// RUC (SUNAT responde 2800). Caso propio de CPEForge.
+fn liquidacion_vendedor_ruc(contexto: &Contexto) -> Resultado {
+    let Documento::Settlement(mut liquidacion): Documento =
+        positivo("liquidacion-compra", contexto)?
+    else {
+        return Err("liquidacion-compra no construyó una liquidación".into());
+    };
+    liquidacion.correlativo = s("901");
+    let vendedor = liquidacion
+        .vendedor
+        .as_mut()
+        .ok_or("liquidación sin vendedor")?;
+    vendedor.tipo_doc = s("6");
+    vendedor.num_doc = s("20123456789");
+    Ok(Documento::Settlement(liquidacion))
+}
+
 /// Casos de rechazo, en el mismo orden que `ksort` de la referencia.
 pub const CASOS_ERROR: &[(&str, Constructor)] = &[
     ("guia-sin-fecha-entrega", guia_sin_fecha_entrega),
+    ("liquidacion-vendedor-ruc", liquidacion_vendedor_ruc),
     ("nota-motivo13-con-total", nota_motivo13_con_total),
     ("resumen-sin-tasa", resumen_sin_tasa),
 ];

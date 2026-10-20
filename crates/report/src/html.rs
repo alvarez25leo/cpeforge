@@ -7,6 +7,7 @@ use cpeforge_core::model::despatch::Despatch;
 use cpeforge_core::model::perception::Perception;
 use cpeforge_core::model::retention::Retention;
 use cpeforge_core::model::sale::{BaseSale, Invoice, Note, Receipt};
+use cpeforge_core::model::settlement::PurchaseSettlement;
 use cpeforge_core::model::summary::Summary;
 use cpeforge_core::model::voided::{Reversion, Voided};
 use cpeforge_core::ports::Report;
@@ -118,6 +119,7 @@ reportable! {
     Despatch => context::despatch, "CPEForge\\Model\\Despatch\\Despatch";
     Perception => context::perception, "CPEForge\\Model\\Perception\\Perception";
     Retention => context::retention, "CPEForge\\Model\\Retention\\Retention";
+    PurchaseSettlement => context::settlement, "CPEForge\\Model\\Settlement\\PurchaseSettlement";
     Summary => context::summary, "CPEForge\\Model\\Summary\\Summary";
     Voided => context::voided, "CPEForge\\Model\\Voided\\Voided";
     Reversion => context::reversion, "CPEForge\\Model\\Voided\\Reversion";

@@ -5,11 +5,12 @@ use cpeforge_core::model::despatch::Despatch;
 use cpeforge_core::model::perception::Perception;
 use cpeforge_core::model::retention::Retention;
 use cpeforge_core::model::sale::{Invoice, Note};
+use cpeforge_core::model::settlement::PurchaseSettlement;
 use cpeforge_core::model::summary::Summary;
 use cpeforge_core::model::voided::{Reversion, Voided};
 use cpeforge_xml::{
     DespatchBuilder, InvoiceBuilder, NoteBuilder, PerceptionBuilder, RenderOptions,
-    RetentionBuilder, SummaryBuilder, VoidedBuilder,
+    RetentionBuilder, SettlementBuilder, SummaryBuilder, VoidedBuilder,
 };
 
 use crate::CpeForgeError;
@@ -34,6 +35,8 @@ pub enum DocumentRef<'a> {
     Perception(&'a Perception),
     /// Retención.
     Retention(&'a Retention),
+    /// Liquidación de compra (tipo `04`).
+    Settlement(&'a PurchaseSettlement),
 }
 
 impl std::fmt::Debug for DocumentRef<'_> {
@@ -55,6 +58,7 @@ impl DocumentRef<'_> {
             Self::Reversion(_) => DocumentKind::Reversion,
             Self::Perception(_) => DocumentKind::Perception,
             Self::Retention(_) => DocumentKind::Retention,
+            Self::Settlement(_) => DocumentKind::Settlement,
         }
     }
 
@@ -69,6 +73,7 @@ impl DocumentRef<'_> {
             Self::Reversion(d) => d.name(),
             Self::Perception(d) => d.name(),
             Self::Retention(d) => d.name(),
+            Self::Settlement(d) => d.name(),
         };
         value.map_err(Into::into)
     }
@@ -94,6 +99,8 @@ pub enum DocumentKind {
     Perception,
     /// Retención.
     Retention,
+    /// Liquidación de compra.
+    Settlement,
 }
 
 impl DocumentKind {
@@ -109,6 +116,7 @@ impl DocumentKind {
             "CPEForge\\Model\\Voided\\Reversion" => Ok(Self::Reversion),
             "CPEForge\\Model\\Perception\\Perception" => Ok(Self::Perception),
             "CPEForge\\Model\\Retention\\Retention" => Ok(Self::Retention),
+            "CPEForge\\Model\\Settlement\\PurchaseSettlement" => Ok(Self::Settlement),
             _ => Err(CpeForgeError::UnsupportedDocument),
         }
     }
@@ -186,6 +194,7 @@ impl XmlBuilder for ResolvedBuilder {
             DocumentRef::Reversion(d) => VoidedBuilder::new(opts).render_reversion(d),
             DocumentRef::Perception(d) => PerceptionBuilder::new(opts).render(d),
             DocumentRef::Retention(d) => RetentionBuilder::new(opts).render(d),
+            DocumentRef::Settlement(d) => SettlementBuilder::new(opts).render(d),
         }
         .map_err(Into::into)
     }

@@ -22,8 +22,11 @@ cargo run -q --release --locked --manifest-path "$ex/rust/Cargo.toml" > /dev/nul
 
 xsd="$root/target/reference/ubl-validator-v2.3.0/src/xsd"
 php_files=$(cd "$ex/php/out" && ls ./*.xml | sort)
-# Casos que solo existen en Rust (solo-rust.txt): se validan aparte.
-solo_rust=$(grep -v -e '^#' -e '^$' "$here/solo-rust.txt" | sed 's#^#./#' || true)
+# Casos que solo existen en Rust (solo-rust.txt, patrones de nombre): se
+# validan aparte.
+solo_rust=$(cd "$ex/rust/out" && for patron in $(grep -v -e '^#' -e '^$' "$here/solo-rust.txt"); do
+  ls $patron 2> /dev/null || echo "$patron"
+done | sort -u | sed 's#^#./#' || true)
 rust_files=$(cd "$ex/rust/out" && ls ./*.xml | sort | grep -v -x -F -e "${solo_rust:-/}" || true)
 if test "$php_files" != "$rust_files"; then
   echo "PHP y Rust generaron archivos distintos:"
@@ -73,10 +76,14 @@ for name in $solo_rust; do
   esquema="sin XSD"
   if test -d "$xsd"; then
     raiz="$(xmllint --xpath 'local-name(/*)' "$rust_xml")"
-    if xmllint --noout --nonet --schema "$xsd/2.1/maindoc/UBL-$raiz-2.1.xsd" "$rust_xml" 2> /dev/null; then
-      esquema="XSD $raiz 2.1 válido"
+    case "$raiz" in
+      SummaryDocuments | VoidedDocuments) version=2.0 ;;
+      *) version=2.1 ;;
+    esac
+    if xmllint --noout --nonet --schema "$xsd/$version/maindoc/UBL-$raiz-$version.xsd" "$rust_xml" 2> /dev/null; then
+      esquema="XSD $raiz $version válido"
     else
-      esquema="XSD $raiz 2.1 INVÁLIDO"
+      esquema="XSD $raiz $version INVÁLIDO"
       fallos=$((fallos + 1))
     fi
   fi

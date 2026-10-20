@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Compara XML firmado y, si se envió, código y mensaje SUNAT PHP ↔ Rust."""
+"""Compara XML firmado y, si se envió, código y mensaje SUNAT PHP ↔ Rust.
+
+Los casos marcados `solo_rust` en casos.json no tienen equivalente PHP: se
+validan contra el XSD y, con --enviar, se exige su código de rechazo.
+"""
 
 from __future__ import annotations
 
@@ -34,6 +38,34 @@ def informe(lenguaje: str) -> dict[str, dict]:
     return {case["caso"]: case for case in cases}
 
 
+def xsd_problems(name: str, case: dict, xml: Path, xsd: Path, language: str) -> list[str]:
+    if not xsd.is_dir():
+        print(f"{name}: XSD no ejecutado (falta el directorio de esquemas)")
+        return []
+    root, version = case["xsd_raiz"], case["version_ubl"]
+    schema = xsd / version / "maindoc" / f"UBL-{root}-{version}.xsd"
+    result = subprocess.run(
+        ["xmllint", "--noout", "--nonet", "--schema", str(schema), str(xml)],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if result.returncode:
+        return [f"{name}: XSD inválido en {language}: {result.stderr.strip()[:300]}"]
+    return []
+
+
+def solo_rust(name: str, case: dict, response: dict, xsd: Path, enviar: bool) -> list[str]:
+    """Caso sin equivalente PHP: XSD y, si se envió, el código de rechazo esperado."""
+    problems = xsd_problems(name, case, EXAMPLE / "rust/out/errores" / response["archivo"], xsd, "Rust")
+    if enviar and str(response["codigo"]) != case["codigo_esperado"]:
+        problems.append(f"{name}: Rust código {response['codigo']} != {case['codigo_esperado']}")
+    if not problems:
+        detalle = f"rechazo {response['codigo']}" if enviar else "XSD válido"
+        print(f"{name}: solo Rust, {detalle} ({response['archivo']})")
+    return problems
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--enviar", action="store_true", help="exige respuestas de los servicios de prueba")
@@ -45,12 +77,16 @@ def main() -> int:
     if unknown or len(selected) != len(set(selected)):
         raise ValueError(f"casos desconocidos o repetidos: {sorted(unknown)}")
     php, rust = informe("php"), informe("rust")
-    if set(php) != set(selected) or set(rust) != set(selected):
+    shared = [name for name in selected if not manifest[name].get("solo_rust")]
+    if set(php) != set(shared) or set(rust) != set(selected):
         raise ValueError("los resultados PHP/Rust no contienen exactamente los casos elegidos")
 
     xsd = ROOT / "target/reference/ubl-validator-v2.3.0/src/xsd"
     problems = []
     for name in selected:
+        if manifest[name].get("solo_rust"):
+            problems += solo_rust(name, manifest[name], rust[name], xsd, args.enviar)
+            continue
         left, right = php[name], rust[name]
         filename = left["archivo"]
         if filename != right["archivo"]:

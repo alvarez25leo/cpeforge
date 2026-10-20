@@ -26,6 +26,7 @@ pub trait TemplateResolver {
 /// | `Despatch` | `despatch.html.twig` |
 /// | `Summary` | `summary.html.twig` |
 /// | `Voided`, `Reversion` | `voided.html.twig` |
+/// | `PurchaseSettlement` | `settlement.html.twig` |
 ///
 /// Otro tipo (`BaseSale`, `Receipt`) produce [`ReportError::InvalidDocument`]
 /// con el identificador de clase del modelo
@@ -43,6 +44,7 @@ impl TemplateResolver for DefaultTemplateResolver {
             "Despatch" => "despatch",
             "Summary" => "summary",
             "Voided" | "Reversion" => "voided",
+            "PurchaseSettlement" => "settlement",
             _ => {
                 return Err(ReportError::InvalidDocument {
                     class: class.to_owned(),

@@ -230,6 +230,7 @@ pub fn resolve_type_and_filename(
 fn type_of(root: Node<'_, '_>) -> &'static str {
     match root.tag_name().name() {
         "Invoice" => "CPEForge\\Model\\Sale\\Invoice",
+        "SelfBilledInvoice" => "CPEForge\\Model\\Settlement\\PurchaseSettlement",
         "CreditNote" | "DebitNote" => "CPEForge\\Model\\Sale\\Note",
         "DespatchAdvice" => "CPEForge\\Model\\Despatch\\Despatch",
         "Perception" => "CPEForge\\Model\\Perception\\Perception",
@@ -269,6 +270,11 @@ fn filename_of(root: Node<'_, '_>) -> Result<String, WsError> {
             .and_then(|n| child(n, CBC, "ID")),
         "DespatchAdvice" => child(root, CAC, "DespatchSupplierParty")
             .and_then(|n| child(n, CBC, "CustomerAssignedAccountID")),
+        // Liquidación de compra: el emisor es el comprador.
+        "SelfBilledInvoice" => child(root, CAC, "AccountingCustomerParty")
+            .and_then(|n| child(n, CAC, "Party"))
+            .and_then(|n| child(n, CAC, "PartyIdentification"))
+            .and_then(|n| child(n, CBC, "ID")),
         _ => match value(child(root, CBC, "UBLVersionID")).as_deref() {
             Some("2.0") => child(root, CAC, "AccountingSupplierParty")
                 .and_then(|n| child(n, CBC, "CustomerAssignedAccountID")),
@@ -287,7 +293,9 @@ fn filename_of(root: Node<'_, '_>) -> Result<String, WsError> {
     let ruc = value(ruc).unwrap_or_default();
     let id = value(child(root, CBC, "ID")).unwrap_or_default();
     let kind = match name {
-        "Invoice" => value(child(root, CBC, "InvoiceTypeCode")).unwrap_or_default(),
+        "Invoice" | "SelfBilledInvoice" => {
+            value(child(root, CBC, "InvoiceTypeCode")).unwrap_or_default()
+        }
         "CreditNote" => "07".to_owned(),
         "DebitNote" => "08".to_owned(),
         "DespatchAdvice" => "09".to_owned(),

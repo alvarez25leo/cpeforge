@@ -8,6 +8,7 @@ use cpeforge_core::model::despatch::Despatch;
 use cpeforge_core::model::perception::Perception;
 use cpeforge_core::model::retention::Retention;
 use cpeforge_core::model::sale::{Invoice, Note};
+use cpeforge_core::model::settlement::PurchaseSettlement;
 use cpeforge_core::model::summary::Summary;
 use cpeforge_core::model::voided::{Reversion, Voided};
 
@@ -48,6 +49,8 @@ mod inicio_boleta;
 mod inicio_factura_credito;
 mod inicio_factura_exonerada;
 mod inicio_factura_gravada;
+mod liquidacion_compra;
+mod liquidacion_compra_oro;
 mod nota_credito;
 mod nota_credito_boleta;
 mod nota_credito_forma_pago;
@@ -58,6 +61,7 @@ mod resumen_contingencia;
 mod resumen_usd;
 mod retencion;
 mod reversion;
+mod reversion_liquidacion;
 
 /// Documento construido por un caso.
 // Cada documento se construye, firma y envía una vez: el tamaño de la variante
@@ -80,6 +84,8 @@ pub enum Documento {
     Perception(Perception),
     /// Retención.
     Retention(Retention),
+    /// Liquidación de compra.
+    Settlement(PurchaseSettlement),
 }
 
 impl Documento {
@@ -94,6 +100,7 @@ impl Documento {
             Self::Reversion(d) => DocumentRef::Reversion(d),
             Self::Perception(d) => DocumentRef::Perception(d),
             Self::Retention(d) => DocumentRef::Retention(d),
+            Self::Settlement(d) => DocumentRef::Settlement(d),
         }
     }
 }
@@ -159,6 +166,8 @@ pub const CASOS: &[(&str, Constructor)] = &[
         inicio_factura_exonerada::documento,
     ),
     ("inicio-factura-gravada", inicio_factura_gravada::documento),
+    ("liquidacion-compra", liquidacion_compra::documento),
+    ("liquidacion-compra-oro", liquidacion_compra_oro::documento),
     ("nota-credito", nota_credito::documento),
     ("nota-credito-boleta", nota_credito_boleta::documento),
     (
@@ -172,4 +181,5 @@ pub const CASOS: &[(&str, Constructor)] = &[
     ("resumen-usd", resumen_usd::documento),
     ("retencion", retencion::documento),
     ("reversion", reversion::documento),
+    ("reversion-liquidacion", reversion_liquidacion::documento),
 ];

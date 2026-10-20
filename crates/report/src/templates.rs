@@ -48,6 +48,10 @@ pub const BUILTIN_TEMPLATES: &[(&str, &str)] = &[
         include_str!("../templates/voided.html.twig"),
     ),
     (
+        "settlement.html.twig",
+        include_str!("../templates/settlement.html.twig"),
+    ),
+    (
         "assets/style.css",
         include_str!("../templates/assets/style.css"),
     ),

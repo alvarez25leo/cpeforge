@@ -5,6 +5,13 @@
     "version_ubl": "2.1",
     "xsd_raiz": "DespatchAdvice"
   },
+  "liquidacion-vendedor-ruc": {
+    "codigo_esperado": "2800",
+    "motivo": "Liquidación de compra a un vendedor con RUC (solo se emite a personas sin RUC)",
+    "solo_rust": true,
+    "version_ubl": "2.1",
+    "xsd_raiz": "SelfBilledInvoice"
+  },
   "nota-motivo13-con-total": {
     "codigo_esperado": "3315",
     "motivo": "Nota de crédito con motivo 13 e importe distinto de cero",

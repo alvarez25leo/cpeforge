@@ -1,13 +1,15 @@
 # cpeforge-report
 
-Representación impresa HTML de comprobantes electrónicos peruanos (siete
+Representación impresa HTML de comprobantes electrónicos peruanos (ocho
 plantillas, CSS y QR SVG). Recibe los modelos de `cpeforge-core`.
 
 ## Alcance
 
-- `HtmlReport` (contrato `Report` de `cpeforge-core`): siete plantillas
+- `HtmlReport` (contrato `Report` de `cpeforge-core`): ocho plantillas
   (`invoice`, `invoice2`, `despatch`, `perception`, `retention`, `summary`,
-  `voided`) y su CSS. `despatch` muestra también la guía de remisión
+  `voided` y `settlement`) y su CSS. `settlement` es la liquidación de compra
+  (tipo 04): vendedor, lugar de la operación, IGV y renta retenidos e
+  importe neto. `despatch` muestra también la guía de remisión
   transportista (tipo 31): remitente, registro MTC, pagador del flete, TUC y
   subcontratista. La plantilla inicial es `invoice.html.twig`; se cambia
   con `set_template`. Opciones: carpeta de plantillas propias,

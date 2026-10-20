@@ -54,6 +54,35 @@ que lleguen a tu cliente:
   crate con `xmllint` y `openssl`, la transformación XPath se contrasta byte a
   byte con libxml2 y los XML generados validan contra los esquemas UBL.
 
+## Rust y PHP, frente a frente
+
+Los mismos 43 comprobantes de [`example/`](example) (facturas, boletas,
+notas, resúmenes, bajas, retenciones, percepciones y guías), generados,
+firmados y enviados con una implementación en PHP y con CPEForge:
+
+| Suma de los 43 comprobantes | PHP 8.4 | Rust | Rust es |
+| --- | ---: | ---: | ---: |
+| Generar el XML UBL | 2,9 ms | 113 µs | **25× más rápido** |
+| Firmar (XMLDSig) | 25,6 ms | 16,0 ms | **1,6× más rápido** |
+| XML firmado de principio a fin | 31,9 ms | 16,3 ms | **2× más rápido** |
+| Primera llamada, en frío | 97,8 ms | 29,9 ms | **3,3× más rápido** |
+| Envío a SUNAT beta (red) | 11,33 s | 5,61 s | **2× más rápido** |
+| Aceptados por SUNAT | 42/42 | 42/42 | mismo resultado |
+| Rechazos esperados (3617, 3315, 2992) | 3/3 | 3/3 | mismo código |
+
+Mediana de 30 llamadas por caso en un Apple M5, PHP 8.4.17 CLI y Rust 1.99
+en release. Con OPcache y JIT activados en PHP la ventaja se mantiene
+(19,6× al generar el XML y 1,9× en el XML firmado). El envío es una sola
+medición y depende de la latencia de SUNAT. Las cifras completas, caso por
+caso, están en [docs/benchmark.md](docs/benchmark.md) y se reproducen
+con `bash oracle/ejemplos/comparar.sh` y `bash oracle/ejemplos/enviar.sh`.
+
+**El mismo comprobante, la misma respuesta de SUNAT, en la mitad del
+tiempo.** Con CPEForge tu servidor emite más comprobantes con menos
+máquinas, arranca en frío tres veces más rápido y responde ágil en las horas
+pico de facturación, con la tranquilidad de un compilador que revisa cada
+importe, cada fecha y cada error antes de que lleguen a producción.
+
 ## Empieza en cinco minutos
 
 ```toml

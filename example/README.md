@@ -93,8 +93,11 @@ hora actual.
 Cada ejecución mide cada caso por fases (construir, xml, firma,
 `get_xml_signed`, primera llamada y, con `--enviar`, envío y estado) y deja
 `rust/out/benchmark.json`. Compilar en release para medir. Suma de medianas de
-los 43 casos en Apple Silicon: construir 24 µs, xml 148 µs, firma 18,2 ms,
-`get_xml_signed` 18,7 ms.
+los 43 casos en un Apple M5: construir 27 µs, xml 113 µs, firma 16,0 ms,
+`get_xml_signed` 16,3 ms. La comparación completa con la implementación PHP
+(CPU, red y resultados de SUNAT) está en
+[docs/benchmark.md](../docs/benchmark.md); cada corrida de los scripts deja la
+suya en `example/benchmark.md`.
 
 ## Contraste
 

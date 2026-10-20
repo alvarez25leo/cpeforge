@@ -3,7 +3,7 @@
 Estos casos parten de los ejemplos de éxito de `example/php/casos/` y
 `example/rust/src/casos/`. Cambian el mismo dato en PHP y Rust, generan y
 firman el XML y comprueban que ambos envían el mismo documento. Viven aparte
-para que `oracle/ejemplos/comparar.sh` y `oracle/ejemplos/enviar.sh` mantengan sus 43 casos de
+para que `oracle/ejemplos/comparar.sh` y `oracle/ejemplos/enviar.sh` mantengan sus 44 casos de
 éxito.
 
 | Caso | Cambio deliberado | Código observado en prueba |

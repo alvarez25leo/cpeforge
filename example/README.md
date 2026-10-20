@@ -1,6 +1,6 @@
 # Ejemplo de emisión con CPEForge
 
-`rust/` construye, firma y (opcionalmente) envía 43 comprobantes de ejemplo
+`rust/` construye, firma y (opcionalmente) envía 44 comprobantes de ejemplo
 con los crates de CPEForge, contra los entornos de prueba de SUNAT.
 
 ```bash
@@ -19,7 +19,7 @@ certificado que lleva incluido.
 
 | Tipo | Casos |
 | --- | --- |
-| Facturas (24) | `factura`, `factura-anticipo`, `factura-beatose`, `factura-compleja`, `factura-contingencia`, `factura-credito`, `factura-descuento-global`, `factura-descuento-linea`, `factura-descuento-nobase`, `factura-detraccion`, `factura-exonerado`, `factura-exportacion`, `factura-gratuita`, `factura-icbper`, `factura-icbper-gratuita`, `factura-inafecta`, `factura-isc`, `factura-ivap`, `factura-percepcion`, `factura-rel-guia-remision`, `factura-retencion`, `inicio-factura-gravada`, `inicio-factura-exonerada`, `inicio-factura-credito` |
+| Facturas (25) | `factura`, `factura-anticipo`, `factura-beatose`, `factura-cargos`, `factura-compleja`, `factura-contingencia`, `factura-credito`, `factura-descuento-global`, `factura-descuento-linea`, `factura-descuento-nobase`, `factura-detraccion`, `factura-exonerado`, `factura-exportacion`, `factura-gratuita`, `factura-icbper`, `factura-icbper-gratuita`, `factura-inafecta`, `factura-isc`, `factura-ivap`, `factura-percepcion`, `factura-rel-guia-remision`, `factura-retencion`, `inicio-factura-gravada`, `inicio-factura-exonerada`, `inicio-factura-credito` |
 | Boletas | `boleta`, `boleta-icbper`, `inicio-boleta` |
 | Notas | `nota-credito`, `nota-credito-boleta`, `nota-credito-forma-pago`, `nota-debito` |
 | Resúmenes diarios (RC) | `resumen`, `resumen-contingencia`, `resumen-usd` |

@@ -19,6 +19,7 @@ mod comunicacion_baja;
 mod factura;
 mod factura_anticipo;
 mod factura_beatose;
+mod factura_cargos;
 mod factura_compleja;
 mod factura_contingencia;
 mod factura_credito;
@@ -110,6 +111,7 @@ pub const CASOS: &[(&str, Constructor)] = &[
     ("factura", factura::documento),
     ("factura-anticipo", factura_anticipo::documento),
     ("factura-beatose", factura_beatose::documento),
+    ("factura-cargos", factura_cargos::documento),
     ("factura-compleja", factura_compleja::documento),
     ("factura-contingencia", factura_contingencia::documento),
     ("factura-credito", factura_credito::documento),

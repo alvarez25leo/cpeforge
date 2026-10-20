@@ -1,6 +1,6 @@
 [package]
 name = "cpeforge-ubl-validator"
-version = "0.1.0"
+version = "0.1.1"
 description = "Validador XSD 1.0 de documentos UBL 2.0 y 2.1 con recursos locales verificados."
 readme = "README.md"
 keywords = ["ubl", "xsd", "xml", "sunat", "cpe"]

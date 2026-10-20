@@ -22,24 +22,24 @@ Biblioteca principal:
 
 ```toml
 [dependencies]
-cpeforge = "0.1.0"
+cpeforge = "0.1"
 ```
 
 Componentes independientes:
 
 ```toml
 [dependencies]
-cpeforge-core = "0.1.0"
-cpeforge-xml = "0.1.0"
-cpeforge-xmldsig = "0.1.0"
-cpeforge-ubl-validator = "0.1.0"
-cpeforge-report = "0.1.0"
+cpeforge-core = "0.1"
+cpeforge-xml = "0.1"
+cpeforge-xmldsig = "0.1"
+cpeforge-ubl-validator = "0.1"
+cpeforge-report = "0.1"
 ```
 
 Los 13 paquetes `cpeforge` y `cpeforge-*` están publicados en
-[crates.io](https://crates.io/crates/cpeforge/0.1.0) como versión 0.1.0.
-Esta versión sigue en desarrollo; los pendientes para una versión estable se
-detallan en [docs/pendientes.md](docs/pendientes.md).
+[crates.io](https://crates.io/crates/cpeforge) en la serie 0.1. Siguen en
+desarrollo; lo que falta para una versión estable está en
+[docs/pendientes.md](docs/pendientes.md).
 
 ## Paquetes
 
@@ -54,7 +54,7 @@ detallan en [docs/pendientes.md](docs/pendientes.md).
 | `cpeforge-validator` | `crates/validator` | Reglas de validación de modelos |
 | `cpeforge-xcodes` | `crates/xcodes` | Catálogo de códigos de error de SUNAT |
 | `cpeforge-xml-parser` | `crates/xml-parser` | Lectura de XML de comprobantes a modelos |
-| `cpeforge-xml-limits` | `crates/xml-limits` | Límite de anidamiento XML (apoyo) |
+| `cpeforge-xml-limits` | `crates/xml-limits` | Límites de anidamiento y marcado XML (apoyo) |
 | `cpeforge-cpe-validator` | `crates/cpe-validator` | Validación con reglas XSL de SUNAT |
 | `cpeforge-ubl-validator` | `crates/ubl-validator` | Validación XSD de UBL |
 | `cpeforge-report` | `crates/report` | Representación impresa HTML y QR |
@@ -71,9 +71,10 @@ cargo test --workspace --all-features
 ```
 
 MSRV: Rust 1.85 (`cpeforge` y `cpeforge-ws`: 1.88). `cpeforge-cpe-validator`
-y `cpeforge-ubl-validator` necesitan libxml2/libxslt del sistema;
-`cpeforge-xmldsig` necesita OpenSSL 3. El ejemplo completo de emisión está en
-`example/rust/`. Ninguna prueba llama a SUNAT/OSE de producción.
+y `cpeforge-ubl-validator` necesitan libxml2 ≥ 2.9.11 (y libxslt ≥ 1.1.34)
+del sistema; `cpeforge-xmldsig` necesita OpenSSL 3. El ejemplo completo de
+emisión está en `example/rust/`. Ninguna prueba llama a SUNAT/OSE de
+producción.
 
 ## Origen y reconocimientos
 

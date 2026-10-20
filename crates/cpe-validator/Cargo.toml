@@ -1,6 +1,6 @@
 [package]
 name = "cpeforge-cpe-validator"
-version = "0.1.0"
+version = "0.1.1"
 description = "Validación de CPE SUNAT con hojas XSL (XSLT 1.0 con libxslt) y perfil seguro."
 readme = "README.md"
 keywords = ["sunat", "peru", "xslt", "cpe", "validation"]

@@ -48,7 +48,7 @@ o posterior, o Linux con libxml2 ≥ 2.9.11.
 
 ## Estado
 
-Versión 0.1.0 en desarrollo. Lo que falta para la primera versión estable está en
+Versión 0.1.1 en desarrollo. Lo que falta para la primera versión estable está en
 [docs/pendientes.md](https://github.com/alvarez25leo/cpeforge/blob/main/docs/pendientes.md).
 
 ## Licencia

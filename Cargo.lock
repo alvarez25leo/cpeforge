@@ -156,7 +156,7 @@ dependencies = [
 
 [[package]]
 name = "cpeforge-cpe-validator"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "cc",
  "cpeforge-core",
@@ -200,7 +200,7 @@ dependencies = [
 
 [[package]]
 name = "cpeforge-ubl-validator"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "cc",
  "cpeforge-core",
@@ -291,7 +291,7 @@ dependencies = [
 
 [[package]]
 name = "cpeforge-xmldsig"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "base64",
  "openssl",

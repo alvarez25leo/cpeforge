@@ -12,12 +12,6 @@
 
 ## Revisión y repositorio
 
-- **Publicar** la revisión de seguridad del 2026-10-19 (las versiones de
-  crates.io no la tienen), en este orden: `cpeforge-xml-limits` 0.1.1
-  (`check_markup`, `with_libxml_init_lock`), `cpeforge-xmldsig`,
-  `cpeforge-cpe-validator` y `cpeforge-ubl-validator`. `xmldsig` cambia
-  valores por defecto (`XmlSecEnc` rechaza AES-CBC/3DES/RSA-1.5;
-  `TrustPolicy` exige `keyUsage` de firma): publicarlo como 0.2.0.
 - **Linux.** Las comprobaciones de versión mínima de libxml2/libxslt en
   `build.rs` (pkg-config) solo se probaron en macOS; confirmarlas en la CI.
 - **Revisión independiente** de la API de todos los crates, y de seguridad de

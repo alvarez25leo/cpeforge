@@ -125,7 +125,7 @@ checksum = "773648b94d0e5d620f64f280777445740e61fe701025087ec8b57f45c791888b"
 
 [[package]]
 name = "cpeforge"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "base64",
  "cpeforge-core",
@@ -144,7 +144,7 @@ dependencies = [
 
 [[package]]
 name = "cpeforge-core"
-version = "0.1.1"
+version = "0.2.0"
 dependencies = [
  "base64",
  "jiff",
@@ -181,7 +181,7 @@ dependencies = [
 
 [[package]]
 name = "cpeforge-report"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "base64",
  "cpeforge-core",
@@ -217,7 +217,7 @@ dependencies = [
 
 [[package]]
 name = "cpeforge-validator"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "cpeforge-core",
  "jiff",
@@ -227,7 +227,7 @@ dependencies = [
 
 [[package]]
 name = "cpeforge-ws"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "base64",
  "cpeforge-core",
@@ -244,7 +244,7 @@ dependencies = [
 
 [[package]]
 name = "cpeforge-xcodes"
-version = "0.3.0"
+version = "0.4.0"
 dependencies = [
  "cpeforge-core",
  "cpeforge-validator",
@@ -255,7 +255,7 @@ dependencies = [
 
 [[package]]
 name = "cpeforge-xml"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "cpeforge-core",
  "jiff",
@@ -275,7 +275,7 @@ dependencies = [
 
 [[package]]
 name = "cpeforge-xml-parser"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "base64",
  "cpeforge-core",

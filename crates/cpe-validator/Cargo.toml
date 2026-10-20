@@ -24,8 +24,8 @@ pkg-config.workspace = true
 
 [dev-dependencies]
 cpeforge-core = { workspace = true, features = ["serde"] }
-cpeforge-xml = { path = "../xml", version = "0.2.0" }
-cpeforge-xml-parser = { path = "../xml-parser", version = "0.2.0" }
+cpeforge-xml = { path = "../xml", version = "0.3.0" }
+cpeforge-xml-parser = { path = "../xml-parser", version = "0.3.0" }
 serde_json.workspace = true
 
 [[example]]

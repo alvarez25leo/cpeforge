@@ -25,7 +25,7 @@ cc.workspace = true
 pkg-config.workspace = true
 
 [dev-dependencies]
-cpeforge-xml = { path = "../xml", version = "0.2.0" }
+cpeforge-xml = { path = "../xml", version = "0.3.0" }
 cpeforge-core = { workspace = true, features = ["serde"] }
 jiff.workspace = true
 serde_path_to_error.workspace = true

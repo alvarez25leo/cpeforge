@@ -1,6 +1,6 @@
 [package]
 name = "cpeforge-xml-parser"
-version = "0.2.0"
+version = "0.3.0"
 description = "Lectura de comprobantes electrónicos SUNAT (UBL) a modelos de cpeforge-core, con perfil XML seguro."
 readme = "README.md"
 keywords = ["sunat", "peru", "ubl", "cpe", "xml"]
@@ -22,7 +22,7 @@ rust_decimal.workspace = true
 
 [dev-dependencies]
 cpeforge-core = { workspace = true, features = ["serde"] }
-cpeforge-xml = { path = "../xml", version = "0.2.0" }
+cpeforge-xml = { path = "../xml", version = "0.3.0" }
 base64.workspace = true
 serde.workspace = true
 serde_json.workspace = true

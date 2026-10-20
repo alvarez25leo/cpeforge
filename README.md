@@ -88,10 +88,10 @@ producción.
 
 ```toml
 [dependencies]
-cpeforge = "0.2"
-cpeforge-core = "0.1"
+cpeforge = "0.3"
+cpeforge-core = "0.2"
 cpeforge-gre-api = "0.2"
-cpeforge-ws = "0.2"
+cpeforge-ws = "0.3"
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 ```
 

@@ -9,6 +9,10 @@ MiniJinja difiere (ver crates/report/README.md):
 - una cadena "0" es falsa en PHP;
 - `null ~ 'x'` concatena una cadena vacía.
 
+Además, `despatch.html.twig` agrega los datos de la guía de remisión
+transportista (tipo 31, extensión de CPEForge) en bloques que solo se
+evalúan con ese tipo: la salida de la guía remitente (09) no cambia.
+
 Uso:
   report_template_adaptations.py check <plantillas PHP> <plantillas Rust>
   report_template_adaptations.py apply <plantillas PHP> <plantillas Rust>
@@ -24,6 +28,72 @@ HASH = ("{% if params.system.hash is defined and params.system.hash%}",
 HASH_SP = ("{% if params.system.hash is defined and params.system.hash %}",
            "{% if params.system.hash is defined and params.system.hash is twig_true %}")
 OBS = ("{% if doc.observacion %}", "{% if doc.observacion is twig_true %}")
+
+# GRE transportista (31): remitente, registro MTC, pagador del flete, TUC y
+# subcontratista. Las etiquetas nuevas van en la columna 0 para que, con
+# `trim_blocks`, la guía remitente (09) produzca el mismo HTML que PHP.
+_REM_ANCHOR = """            <br>
+            <div class="tabla_borde">
+                {% set cl = doc.destinatario %}
+                <table width="100%" border="0" cellpadding="5" cellspacing="0">
+                    <tbody>
+                    <tr>
+                        <td colspan="2">DESTINATARIO</td>"""
+_REM_BLOCK = """{% if doc.tipoDoc == '31' and doc.remitente %}
+            <div class="tabla_borde">
+                {% set rem = doc.remitente %}
+                <table width="100%" border="0" cellpadding="5" cellspacing="0">
+                    <tbody>
+                    <tr>
+                        <td colspan="2">REMITENTE</td>
+                    </tr>
+                    <tr class="border_top">
+                        <td width="60%" align="left"><strong>Razón Social:</strong>  {{ rem.rznSocial }}</td>
+                        <td width="40%" align="left"><strong>{{ rem.tipoDoc|catalog('06') }}:</strong>  {{ rem.numDoc }}</td>
+                    </tr>
+                    </tbody></table>
+            </div><br>
+{% endif %}
+"""
+_MOTIVO = """                    <tr>
+                        <td width="60%" align="left"><strong>Motivo Traslado:</strong>  {{ doc.envio.codTraslado|catalog('20') }} </td>
+                        <td width="40%" align="left"><strong>Modalidad de Transporte:</strong>  {{ doc.envio.modTraslado|catalog('18') }} </td>
+                    </tr>
+"""
+_MTC = """{% if doc.tipoDoc == '31' %}
+                    <tr>
+                        <td width="60%" align="left"><strong>Registro MTC:</strong>  {% if doc.envio.transportista %}{{ doc.envio.transportista.nroMtc }}{% endif %} </td>
+                        <td width="40%" align="left">{% if doc.pagadorFlete %}<strong>Pagador del flete:</strong>  {{ doc.pagadorFlete.numDoc }} - {{ doc.pagadorFlete.rznSocial }}{% endif %} </td>
+                    </tr>
+{% else %}
+"""
+_PLACA = """                            <strong>Vehículo principal:</strong>  {{ vehiculo.placa }}
+"""
+_TUC = """{% if doc.tipoDoc == '31' and vehiculo.nroCirculacion %}
+                            <br>
+                            <strong>TUC o certificado:</strong>  {{ vehiculo.nroCirculacion }}
+{% endif %}
+"""
+_TRANSPORTE_END = """                        </td>
+                    </tr>
+                    {% endif %}
+                    </tbody></table>
+            </div><br>"""
+_SUB = """{% if doc.tipoDoc == '31' and doc.envio.subcontratador %}
+                    <tr>
+                        <td colspan="2" align="left"><strong>Subcontratista:</strong>  {{ doc.envio.subcontratador.numDoc }} - {{ doc.envio.subcontratador.rznSocial }}</td>
+                    </tr>
+{% endif %}
+"""
+CARRIER = [
+    (_REM_ANCHOR, _REM_ANCHOR.replace("            <br>\n", "            <br>\n" + _REM_BLOCK, 1), 1),
+    (_MOTIVO, _MTC + _MOTIVO + "{% endif %}\n", 1),
+    ("                    {% if transportista %}",
+     "                    {% if transportista and doc.tipoDoc != '31' %}", 1),
+    (_PLACA, _PLACA + _TUC, 1),
+    (_TRANSPORTE_END, _TRANSPORTE_END.replace(
+        "                    {% endif %}\n", "                    {% endif %}\n" + _SUB, 1), 1),
+]
 
 ADAPTATIONS: dict[str, list[tuple[str, str, int]]] = {
     "invoice.html.twig": [
@@ -41,7 +111,7 @@ ADAPTATIONS: dict[str, list[tuple[str, str, int]]] = {
          "{% set serieNro = doc.serie|twig_string ~ '-' ~ doc.correlativo|twig_string %}", 1),
         (*HASH, 1),
     ],
-    "despatch.html.twig": [(*OBS, 1), (*HASH, 1)],
+    "despatch.html.twig": [(*OBS, 1), (*HASH, 1), *CARRIER],
     "perception.html.twig": [(*OBS, 1), (*HASH, 1)],
     "retention.html.twig": [(*OBS, 1), (*HASH, 1)],
     "summary.html.twig": [(*HASH, 1)],

@@ -66,6 +66,21 @@
                 </tr>
                 </tbody></table>
             <br>
+{% if doc.tipoDoc == '31' and doc.remitente %}
+            <div class="tabla_borde">
+                {% set rem = doc.remitente %}
+                <table width="100%" border="0" cellpadding="5" cellspacing="0">
+                    <tbody>
+                    <tr>
+                        <td colspan="2">REMITENTE</td>
+                    </tr>
+                    <tr class="border_top">
+                        <td width="60%" align="left"><strong>Razón Social:</strong>  {{ rem.rznSocial }}</td>
+                        <td width="40%" align="left"><strong>{{ rem.tipoDoc|catalog('06') }}:</strong>  {{ rem.numDoc }}</td>
+                    </tr>
+                    </tbody></table>
+            </div><br>
+{% endif %}
             <div class="tabla_borde">
                 {% set cl = doc.destinatario %}
                 <table width="100%" border="0" cellpadding="5" cellspacing="0">
@@ -95,10 +110,17 @@
                         </td>
                         <td width="40%" align="left"><strong>Fecha Inicio de Traslado:</strong>  {{ doc.envio.fecTraslado|date('d/m/Y') }} </td>
                     </tr>
+{% if doc.tipoDoc == '31' %}
+                    <tr>
+                        <td width="60%" align="left"><strong>Registro MTC:</strong>  {% if doc.envio.transportista %}{{ doc.envio.transportista.nroMtc }}{% endif %} </td>
+                        <td width="40%" align="left">{% if doc.pagadorFlete %}<strong>Pagador del flete:</strong>  {{ doc.pagadorFlete.numDoc }} - {{ doc.pagadorFlete.rznSocial }}{% endif %} </td>
+                    </tr>
+{% else %}
                     <tr>
                         <td width="60%" align="left"><strong>Motivo Traslado:</strong>  {{ doc.envio.codTraslado|catalog('20') }} </td>
                         <td width="40%" align="left"><strong>Modalidad de Transporte:</strong>  {{ doc.envio.modTraslado|catalog('18') }} </td>
                     </tr>
+{% endif %}
                     <tr>
                         <td width="60%" align="left"><strong>Peso Bruto Total ({{ doc.envio.undPesoTotal }}):</strong>  {{ doc.envio.pesoTotal }} </td>
                         <td width="40%">{% if doc.envio.numBultos %}<strong>Número de Bultos:</strong>  {{ doc.envio.numBultos }}{% endif %}</td>
@@ -119,7 +141,7 @@
                     <tr>
                         <td colspan="2">TRANSPORTE</td>
                     </tr>
-                    {% if transportista %}
+                    {% if transportista and doc.tipoDoc != '31' %}
                     <tr class="border_top">
                         <td width="60%" align="left"><strong>Razón Social:</strong>  {{ transportista.rznSocial }}</td>
                         <td width="40%" align="left"><strong>{{ transportista.tipoDoc|catalog('06') }}:</strong>  {{ transportista.numDoc }}</td>
@@ -129,6 +151,10 @@
                     <tr>
                         <td width="60%" align="left">
                             <strong>Vehículo principal:</strong>  {{ vehiculo.placa }}
+{% if doc.tipoDoc == '31' and vehiculo.nroCirculacion %}
+                            <br>
+                            <strong>TUC o certificado:</strong>  {{ vehiculo.nroCirculacion }}
+{% endif %}
                             {% for secundario in vehiculo.secundarios %}
                             <br>
                             <strong>Vehículo secundario:</strong>  {{ secundario.placa }}
@@ -144,6 +170,11 @@
                         </td>
                     </tr>
                     {% endif %}
+{% if doc.tipoDoc == '31' and doc.envio.subcontratador %}
+                    <tr>
+                        <td colspan="2" align="left"><strong>Subcontratista:</strong>  {{ doc.envio.subcontratador.numDoc }} - {{ doc.envio.subcontratador.rznSocial }}</td>
+                    </tr>
+{% endif %}
                     </tbody></table>
             </div><br>
             <div class="tabla_borde">

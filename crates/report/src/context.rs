@@ -736,6 +736,10 @@ fn shipment(s: &Shipment) -> Value {
         .getter("getChoferes", list(s.choferes.as_ref(), driver))
         .getter("getLlegada", object(s.llegada.as_ref(), direction))
         .getter("getPartida", object(s.partida.as_ref(), direction))
+        .getter(
+            "getSubcontratador",
+            object(s.subcontratador.as_ref(), client),
+        )
         .build()
 }
 
@@ -751,6 +755,8 @@ pub(crate) fn despatch(d: &Despatch) -> Value {
         .getter("getDestinatario", object(d.destinatario.as_ref(), client))
         .getter("getTercero", object(d.tercero.as_ref(), client))
         .getter("getComprador", object(d.comprador.as_ref(), client))
+        .getter("getRemitente", object(d.remitente.as_ref(), client))
+        .getter("getPagadorFlete", object(d.pagador_flete.as_ref(), client))
         .getter("getEnvio", object(d.envio.as_ref(), shipment))
         .getter("getDocBaja", object(d.doc_baja.as_ref(), related))
         .getter("getRelDoc", object(d.rel_doc.as_ref(), related))

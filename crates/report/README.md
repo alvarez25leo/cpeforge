@@ -7,7 +7,9 @@ plantillas, CSS y QR SVG). Recibe los modelos de `cpeforge-core`.
 
 - `HtmlReport` (contrato `Report` de `cpeforge-core`): siete plantillas
   (`invoice`, `invoice2`, `despatch`, `perception`, `retention`, `summary`,
-  `voided`) y su CSS. La plantilla inicial es `invoice.html.twig`; se cambia
+  `voided`) y su CSS. `despatch` muestra también la guía de remisión
+  transportista (tipo 31): remitente, registro MTC, pagador del flete, TUC y
+  subcontratista. La plantilla inicial es `invoice.html.twig`; se cambia
   con `set_template`. Opciones: carpeta de plantillas propias,
   `strict_variables`, escape automático, globales (`max_items`) y reloj
   inyectable para `date(null)`.

@@ -147,6 +147,11 @@ mod tests {
             ("\u{0}1", 0),
             ("", 0),
             ("-", 0),
+            // Textos no finitos: `(int)` de la referencia no los interpreta.
+            ("NaN", 0),
+            ("INF", 0),
+            ("-inf", 0),
+            ("Infinity", 0),
         ];
         for (text, expected) in cases {
             assert_eq!(int_cast(text), *expected, "entrada {text:?}");

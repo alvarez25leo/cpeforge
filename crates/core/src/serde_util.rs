@@ -163,6 +163,38 @@ pub(crate) mod decimal_option {
     }
 }
 
+#[cfg(test)]
+mod decimal_option_tests {
+    use serde::de::IntoDeserializer;
+    use serde::de::value::{Error, F64Deserializer};
+
+    use super::decimal_option::{deserialize, parse};
+
+    /// Un importe nunca es `NaN` ni infinito: `Decimal` no los representa,
+    /// los textos se rechazan y un `f64` (incluidos `NaN`/`inf`) también.
+    #[test]
+    fn non_finite_amounts_are_rejected() {
+        for text in [
+            "NaN",
+            "nan",
+            "-NaN",
+            "inf",
+            "-inf",
+            "INF",
+            "Infinity",
+            "-Infinity",
+            "1e400",
+            "-1e400",
+        ] {
+            assert!(parse(text).is_err(), "{text}");
+        }
+        for value in [f64::NAN, f64::INFINITY, f64::NEG_INFINITY, 1.5] {
+            let de: F64Deserializer<Error> = value.into_deserializer();
+            assert!(deserialize(de).is_err(), "{value}");
+        }
+    }
+}
+
 /// `Option<Zoned>` como texto RFC 9557 (`2024-01-31T23:30:00-05:00[America/Lima]`).
 ///
 /// Al deserializar acepta además RFC 3339 con desfase y sin zona

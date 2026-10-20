@@ -26,8 +26,9 @@ no está afiliado a Greenter ni a SUNAT.
 | `greenter/htmltopdf` | sin implementar | — |
 | `greenter/data` | sin equivalente (datos de ejemplo) | — |
 
-Los crates `greenter-rs-*` 0.1.0 publicados antes del cambio de nombre se
-retiran de crates.io; sus sucesores son los `cpeforge-*` de la tabla.
+Los crates `greenter-rs-*` publicados antes del cambio de nombre ya no
+existen en crates.io; sus sucesores son los `cpeforge-*` de la tabla. Lo que
+falta en cada crate está en [pendientes.md](pendientes.md).
 
 ## Identificadores que cambiaron
 

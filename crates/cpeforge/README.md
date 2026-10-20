@@ -15,6 +15,12 @@ cpeforge = "0.2"
 La feature `xcodes` conecta el catálogo de códigos de error de
 `cpeforge-xcodes` (`cargo run -p cpeforge --example see_with_xcodes --features xcodes`).
 
+Al actualizar desde 0.1, ver la guía de migración del
+[CHANGELOG](https://github.com/alvarez25leo/cpeforge/blob/main/CHANGELOG.md):
+ramas `_` en los `match` sobre `SendResult` y demás enums, opciones creadas
+desde `Default` y la clave por defecto de la caché de tokens GRE, que ahora
+separa empresas y ambientes (`CacheKey::Scoped`).
+
 ## Importe en letras (leyenda 1000)
 
 Los comprobantes de venta llevan la leyenda `1000` con el total en letras

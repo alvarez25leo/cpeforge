@@ -222,6 +222,15 @@ impl Clock for SystemClock {
 /// falla, la siguiente en espera lo intenta de nuevo; los errores no se
 /// guardan. La coordinación es por proceso: con varias instancias, cada una
 /// renueva por su cuenta aunque compartan un [`TokenStore`] externo.
+///
+/// # Clave de la caché
+///
+/// Por defecto los tokens se guardan con [`CacheKey::Scoped`] (host de
+/// autenticación, `scope`, `client_id` y usuario SOL): una misma tienda sirve
+/// a varias empresas y ambientes sin mezclar sus tokens. Hasta la versión 0.1
+/// la clave era solo el `client_id`; para compartir la tienda con otra
+/// implementación que use ese formato, usar
+/// `.with_cache_key(CacheKey::ClientId)` y una tienda por ambiente y usuario.
 pub struct ApiFactory<T, S, C> {
     transport: T,
     auth_config: Configuration,

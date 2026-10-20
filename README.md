@@ -63,6 +63,8 @@ siendo compatibles). Siguen en desarrollo; lo que falta para una versión establ
 Cada crate tiene su README con alcance, seguridad y ejemplos. Las reglas de
 compatibilidad de la API (qué puede crecer sin romper, dependencias públicas,
 hilos y errores) están en [docs/estabilidad-api.md](docs/estabilidad-api.md);
+los cambios de cada versión y la guía de migración, en
+[CHANGELOG.md](CHANGELOG.md);
 lo que falta para la primera versión estable, en
 [docs/pendientes.md](docs/pendientes.md).
 

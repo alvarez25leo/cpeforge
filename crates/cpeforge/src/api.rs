@@ -17,6 +17,12 @@ pub const DEFAULT_AUTH_HOST: &str = "https://api-seguridad.sunat.gob.pe/v1";
 pub const DEFAULT_CPE_HOST: &str = "https://api-cpe.sunat.gob.pe/v1";
 
 /// Fachada para la API GRE. El store y reloj residen en `ws::ApiFactory`.
+///
+/// Los tokens se guardan en el [`TokenStore`] de la factory con la clave
+/// `CacheKey::Scoped` por defecto (host, `scope`, `client_id` y usuario SOL),
+/// así que una tienda compartida entre varias empresas no mezcla sus tokens.
+/// Para otra clave, crear la factory con `ApiFactory::with_cache_key` y
+/// pasarla a [`Api::new`].
 pub struct Api<T, S, C> {
     factory: ApiFactory<T, S, C>,
     signer: SignedXml,

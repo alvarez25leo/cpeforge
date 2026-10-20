@@ -15,7 +15,10 @@ construcción de una solicitud SOAP local sin enviarla.
   llamadas concurrentes. La clave por defecto (`CacheKey::Scoped`) aísla
   ambientes y usuarios en una misma tienda; `CacheKey::ClientId` usa solo el
   `client_id`, el formato que comparten otras implementaciones, y exige una
-  tienda por ambiente y usuario.
+  tienda por ambiente y usuario. Hasta la 0.1 la clave por defecto era
+  `ClientId`: al actualizar, los tokens guardados no se reutilizan y se pide
+  uno nuevo una vez (ver el
+  [CHANGELOG](https://github.com/alvarez25leo/cpeforge/blob/main/CHANGELOG.md)).
 - Las respuestas SOAP y los CDR se rechazan antes de construir el árbol si
   superan 64 niveles, 256 atributos por elemento o el coste de ámbitos de
   espacios de nombres (`cpeforge_xml_limits::check_tree_markup`). `GreSender`

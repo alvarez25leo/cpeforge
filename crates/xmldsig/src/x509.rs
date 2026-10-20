@@ -13,6 +13,7 @@ pub use crate::x509_ext::Purpose;
 
 /// `X509ContentType`: formato de [`X509Certificate::export`].
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum X509ContentType {
     /// `X509ContentType::PEM` (1): certificado y clave privada.
     Pem,
@@ -37,6 +38,7 @@ impl X509ContentType {
 /// Valor de un campo de nombre agrupado como en `openssl_x509_parse`: un
 /// texto o, si el atributo se repite, la lista de valores.
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum NameValue {
     /// Un solo valor.
     Single(String),
@@ -49,6 +51,7 @@ pub type GroupedName = Vec<(String, NameValue)>;
 
 /// Datos de `openssl_x509_parse` usados por la biblioteca.
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct CertInfo {
     /// `name`: `X509_NAME_oneline` del sujeto.
     pub name: String,
@@ -74,7 +77,7 @@ impl CertInfo {
     /// Datos de `openssl_x509_parse`. `None` cuando la lectura falla
     /// (por ejemplo, con un `subjectAltName` que no se puede decodificar).
     #[must_use]
-    pub fn from_x509(cert: &X509) -> Option<Self> {
+    pub(crate) fn from_x509(cert: &X509) -> Option<Self> {
         let details = crate::x509_ext::details(cert)?;
         let epoch = Asn1Time::from_unix(0).ok()?;
         let seconds = |t: &openssl::asn1::Asn1TimeRef| -> Option<i64> {

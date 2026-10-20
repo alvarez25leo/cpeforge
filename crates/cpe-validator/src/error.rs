@@ -9,6 +9,7 @@ use crate::entity::CpeError;
 
 /// Origen de una entrada rechazada.
 #[derive(Clone, Debug, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum InputSource {
     /// XML a validar.
     Xml,
@@ -20,6 +21,7 @@ pub enum InputSource {
 
 /// Límite de recursos alcanzado.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum LimitKind {
     /// `pcre.backtrack_limit` o `pcre.recursion_limit` en `matches`.
     Regex,
@@ -31,6 +33,7 @@ pub enum LimitKind {
 
 /// Operación de E/S rechazada por la política de hojas.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum AccessKind {
     /// Lectura de archivo (`xsl:include`, `xsl:import`, `document()`).
     ReadFile,

@@ -59,8 +59,11 @@ desarrollo; lo que falta para una versión estable está en
 | `cpeforge-ubl-validator` | `crates/ubl-validator` | Validación XSD de UBL |
 | `cpeforge-report` | `crates/report` | Representación impresa HTML y QR |
 
-Cada crate tiene su README con alcance, seguridad y ejemplos. Lo que falta
-para la primera versión estable está en [docs/pendientes.md](docs/pendientes.md).
+Cada crate tiene su README con alcance, seguridad y ejemplos. Las reglas de
+compatibilidad de la API (qué puede crecer sin romper, dependencias públicas,
+hilos y errores) están en [docs/estabilidad-api.md](docs/estabilidad-api.md);
+lo que falta para la primera versión estable, en
+[docs/pendientes.md](docs/pendientes.md).
 
 ## Desarrollo
 

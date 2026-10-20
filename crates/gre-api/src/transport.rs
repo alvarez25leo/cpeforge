@@ -9,6 +9,7 @@ use std::future::Future;
 
 /// Método HTTP de las tres operaciones.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum Method {
     /// `GET`.
     Get,

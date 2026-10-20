@@ -231,10 +231,7 @@ fn validate(xml: &str, name: &str, xsd: &Path) -> TestResult<bool> {
 }
 
 fn render(case: &Value, now: i64) -> TestResult<Option<String>> {
-    let mut options = RenderOptions {
-        now: Some(Timestamp::from_second(now)?),
-        ..RenderOptions::default()
-    };
+    let mut options = RenderOptions::default().with_now(Timestamp::from_second(now)?);
     if case["options"]["autoescape"] == Value::Bool(false) {
         options.autoescape = Autoescape::Disabled;
     }

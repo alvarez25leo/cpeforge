@@ -11,6 +11,7 @@ use crate::resolver::{DocumentRef, XmlBuilder};
 
 /// Resultado de los dos tipos de sender.
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum SendResult {
     /// `BillSender`, con CDR.
     Bill(BillResult),

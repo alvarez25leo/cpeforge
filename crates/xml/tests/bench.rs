@@ -80,10 +80,7 @@ fn time(label: &str, iters: u32, mut f: impl FnMut() -> usize) {
 #[test]
 #[ignore = "benchmark: ejecutar con --release --ignored"]
 fn render_throughput() {
-    let options = RenderOptions {
-        now: Some(Timestamp::from_second(1_706_745_600).unwrap()),
-        ..RenderOptions::default()
-    };
+    let options = RenderOptions::default().with_now(Timestamp::from_second(1_706_745_600).unwrap());
     let invoice = InvoiceBuilder::new(options.clone());
     let note = NoteBuilder::new(options.clone());
     let despatch = DespatchBuilder::new(options.clone());
@@ -122,10 +119,7 @@ fn render_peak_memory() {
     let mut doc: Invoice = model(&case("invoice", "inv21-full-default"));
     let details = doc.base.details.take().unwrap();
     doc.base.details = Some(details.iter().cycle().take(5000).cloned().collect());
-    let options = RenderOptions {
-        now: Some(Timestamp::from_second(1_706_745_600).unwrap()),
-        ..RenderOptions::default()
-    };
+    let options = RenderOptions::default().with_now(Timestamp::from_second(1_706_745_600).unwrap());
     let xml = InvoiceBuilder::new(options).render(&doc).unwrap();
     println!("XML: {} bytes", xml.len());
 }

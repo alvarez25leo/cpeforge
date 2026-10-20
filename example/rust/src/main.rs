@@ -396,6 +396,8 @@ async fn enviar_documento(
             medida.estado_ms = Some(consultas);
             estado(status, &name, out, medida)
         }
+        // `SendResult` admite variantes nuevas en versiones futuras.
+        _ => Err("resultado de envío no admitido por este ejemplo".into()),
     }
 }
 

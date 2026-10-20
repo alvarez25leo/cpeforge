@@ -76,10 +76,8 @@ fn inject(value: &mut Value) -> usize {
 }
 
 fn render(builder: &str, class: &str, input: Value) -> Option<Result<String, XmlError>> {
-    let options = RenderOptions {
-        now: Some(Timestamp::from_second(1_706_745_600).unwrap()),
-        ..RenderOptions::default()
-    };
+    let mut options = RenderOptions::default();
+    options.now = Some(Timestamp::from_second(1_706_745_600).unwrap());
     let value = to_serde(&input).unwrap().ok()?;
     macro_rules! go {
         ($ty:ty, $b:expr, $m:ident) => {

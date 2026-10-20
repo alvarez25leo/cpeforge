@@ -66,6 +66,7 @@ pub const MAX_NODES: u32 = 1_000_000;
 
 /// Extractor del resumen de la firma con límites configurables.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct XmlUtils {
     /// Tamaño máximo del XML en bytes.
     pub max_bytes: usize,
@@ -188,7 +189,7 @@ impl XmlUtils {
     /// `DigestValue` de un documento ya analizado; cadena vacía si no hay
     /// extensión con firma.
     #[must_use]
-    pub fn hash_sign_from_document(doc: &roxmltree::Document<'_>) -> String {
+    fn hash_sign_from_document(doc: &roxmltree::Document<'_>) -> String {
         let root = doc.root_element();
         let extensions: Vec<roxmltree::Node<'_, '_>> =
             children(root, EXT_NAMESPACE, "UBLExtensions")

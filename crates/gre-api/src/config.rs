@@ -39,6 +39,7 @@ pub const DEFAULT_GRANT_TYPE: &str = "password";
 
 /// Host conocido y su descripción.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct HostSetting {
     /// URL base.
     pub url: &'static str,

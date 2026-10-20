@@ -19,10 +19,7 @@ use cpeforge_xml::{
 };
 
 fn fixed() -> RenderOptions {
-    RenderOptions {
-        now: Some("2024-01-01T12:00:00Z".parse().unwrap()),
-        ..RenderOptions::default()
-    }
+    RenderOptions::default().with_now("2024-01-01T12:00:00Z".parse().unwrap())
 }
 
 fn invoice(version: Option<&str>) -> Invoice {
@@ -148,10 +145,7 @@ fn despatch_2022_only_on_exact_version() {
 
 #[test]
 fn strict_variables_and_model_errors() {
-    let strict = RenderOptions {
-        strict_variables: true,
-        ..fixed()
-    };
+    let strict = fixed().with_strict_variables(true);
     let err = InvoiceBuilder::new(strict.clone())
         .render(&Invoice {
             base: BaseSale {

@@ -186,6 +186,7 @@ const NS_ANY_CA: u32 = 0x07;
 /// Resultado de `X509_check_purpose` para un propósito estándar, como el
 /// arreglo `[hoja, ca, nombre corto]` indexado por `id`.
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct Purpose {
     /// `X509_PURPOSE_get_id` (1 = `sslclient` … 10 = `codesign`).
     pub id: i32,

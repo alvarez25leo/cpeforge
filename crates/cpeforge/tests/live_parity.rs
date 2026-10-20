@@ -502,11 +502,9 @@ async fn live_reference_parity() -> Result<(), Box<dyn Error>> {
     if let Some(client) = html_invoice.base.client.as_mut() {
         client.rzn_social = Some("CLIENTE & SINTETICO".into());
     }
-    let html_options = RenderOptions {
-        autoescape: Autoescape::Html,
-        strict_variables: true,
-        ..RenderOptions::cpeforge()
-    };
+    let mut html_options = RenderOptions::cpeforge();
+    html_options.autoescape = Autoescape::Html;
+    html_options.strict_variables = true;
     compare(
         &expected,
         &mut differences,
@@ -518,15 +516,13 @@ async fn live_reference_parity() -> Result<(), Box<dyn Error>> {
         ),
     );
     let mut html_see = See::new(OracleTransport::default());
+    let mut strict = BuilderOptionsPatch::default();
+    strict.strict_variables = Some(true);
+    let mut escaped = BuilderOptionsPatch::default();
+    escaped.autoescape = Some(Autoescape::Html);
     html_see
-        .set_builder_options(BuilderOptionsPatch {
-            strict_variables: Some(true),
-            ..BuilderOptionsPatch::default()
-        })
-        .set_builder_options(BuilderOptionsPatch {
-            autoescape: Some(Autoescape::Html),
-            ..BuilderOptionsPatch::default()
-        })
+        .set_builder_options(strict)
+        .set_builder_options(escaped)
         .set_cache_path(None);
     html_see.set_certificate(&pem)?;
     compare(
@@ -582,5 +578,6 @@ fn result(value: SendResult) -> Value {
         SendResult::Summary(s) => {
             json!({"success":s.base.success,"ticket":s.ticket,"error":s.base.error.as_ref().map(|e| json!({"code":e.code,"message":e.message}))})
         }
+        _ => json!({"harness_error": "variante de SendResult desconocida"}),
     }
 }

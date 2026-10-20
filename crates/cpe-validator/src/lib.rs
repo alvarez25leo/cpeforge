@@ -64,6 +64,7 @@ pub use xslt_ext::MATCHES_HANDLER;
 
 /// Versiones de las bibliotecas nativas en tiempo de ejecución.
 #[derive(Clone, Debug, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct EngineInfo {
     /// `xmlParserVersion` (p. ej. `20913`).
     pub libxml2: String,

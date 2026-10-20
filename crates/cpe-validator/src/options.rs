@@ -8,6 +8,7 @@
 /// de la referencia, y la profundidad de plantillas es la de libxslt
 /// (`xsltMaxDepth`, 3000), igual que en la referencia.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct Limits {
     /// Tamaño máximo del XML a validar (bytes).
     pub max_xml_bytes: u64,

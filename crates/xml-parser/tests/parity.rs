@@ -125,6 +125,7 @@ fn run_parser(case: &Value, options: ParseOptions, bytes: &[u8]) -> Value {
             match result {
                 Ok(VoidedDocument::Voided(v)) => outcome("Voided", Ok(v)),
                 Ok(VoidedDocument::Reversion(r)) => outcome("Reversion", Ok(r)),
+                Ok(_) => json!({"harness_error": "variante de VoidedDocument desconocida"}),
                 Err(err) => error_value(&err),
             }
         }

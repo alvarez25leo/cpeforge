@@ -70,6 +70,14 @@ pub struct BillSender<C> {
     zip_time: ZipTime,
 }
 
+impl<C> std::fmt::Debug for BillSender<C> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("BillSender")
+            .field("zip_time", &self.zip_time)
+            .finish_non_exhaustive()
+    }
+}
+
 impl<C: WsClient> BillSender<C> {
     /// Inyecta un cliente SOAP real o simulado.
     #[must_use]
@@ -123,6 +131,14 @@ pub struct SummarySender<C> {
     zip_time: ZipTime,
 }
 
+impl<C> std::fmt::Debug for SummarySender<C> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("SummarySender")
+            .field("zip_time", &self.zip_time)
+            .finish_non_exhaustive()
+    }
+}
+
 impl<C: WsClient> SummarySender<C> {
     /// Inyecta cliente.
     #[must_use]
@@ -172,6 +188,12 @@ impl<C: WsClient> SummarySender<C> {
 /// Consulta un ticket SOAP del servicio de facturación.
 pub struct ExtService<C> {
     client: C,
+}
+
+impl<C> std::fmt::Debug for ExtService<C> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("ExtService").finish_non_exhaustive()
+    }
 }
 
 impl<C: WsClient> ExtService<C> {
@@ -248,6 +270,12 @@ fn ext_result(status: SoapStatus) -> Result<StatusResult, WsError> {
 /// Consulta estado y CDR por RUC, tipo, serie y número.
 pub struct ConsultCdrService<C> {
     client: C,
+}
+
+impl<C> std::fmt::Debug for ConsultCdrService<C> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("ConsultCdrService").finish_non_exhaustive()
+    }
 }
 
 impl<C: WsClient> ConsultCdrService<C> {

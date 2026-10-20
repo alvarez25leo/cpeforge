@@ -180,7 +180,7 @@ pub(crate) fn error_out(e: &ApiError) -> Value {
         out["object"] = match e.response_object() {
             Some(ErrorObject::Server(x)) => x.dump(),
             Some(ErrorObject::Validation(x)) => x.dump(),
-            None => Value::Null,
+            Some(_) | None => Value::Null,
         };
     }
     out

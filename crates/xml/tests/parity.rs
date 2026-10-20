@@ -57,10 +57,7 @@ fn read_json(path: &Path) -> TestResult<Value> {
 /// Opciones Rust equivalentes a las opciones Twig del caso.
 fn options(case: &Value, now: i64) -> TestResult<RenderOptions> {
     let opts = case["options"].as_object().ok_or("options no es objeto")?;
-    let mut out = RenderOptions {
-        now: Some(Timestamp::from_second(now)?),
-        ..RenderOptions::default()
-    };
+    let mut out = RenderOptions::default().with_now(Timestamp::from_second(now)?);
     for (key, value) in opts {
         match (key.as_str(), value) {
             ("autoescape", Value::Bool(false)) => out.autoescape = Autoescape::Disabled,

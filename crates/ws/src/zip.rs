@@ -17,6 +17,7 @@ pub const MAX_ENTRIES: usize = 64;
 
 /// Entrada descomprimida en el orden del archivo.
 #[derive(Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct ZipEntry {
     /// Nombre del archivo, sin rutas ascendentes.
     pub filename: String,
@@ -140,6 +141,7 @@ impl DosDateTime {
 
 /// Instante que se escribe en la entrada ZIP.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum ZipTime {
     /// Hora actual del sistema en UTC.
     #[default]

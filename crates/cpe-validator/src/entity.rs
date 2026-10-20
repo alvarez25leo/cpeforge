@@ -8,6 +8,7 @@ use std::fmt;
 /// (`01`) o boleta (`03`), y `VoidedDocuments` comunicación de baja (`RA`)
 /// o resumen de reversión (`RR`).
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord)]
+#[non_exhaustive]
 pub enum DocumentType {
     /// `01`
     Factura,
@@ -79,6 +80,7 @@ impl fmt::Display for DocumentType {
 
 /// Nivel de un error de regla (`ErrorLevel`).
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+#[non_exhaustive]
 pub enum ErrorLevel {
     /// `'1'`: rechazo.
     Exception,
@@ -100,6 +102,7 @@ impl ErrorLevel {
 /// Error devuelto por una regla (`CpeError`). Los cinco campos son
 /// opcionales como en la referencia: `None` (null) es distinto de `Some("")`.
 #[derive(Clone, Debug, Default, PartialEq, Eq, Hash)]
+#[non_exhaustive]
 pub struct CpeError {
     /// Código de la regla (p. ej. `2074`, o `0305` si no hay regla).
     pub code: Option<String>,

@@ -139,11 +139,9 @@ fn main() {
     parser_case!("parse/perception-full", "perception-full", PerceptionParser);
 
     let base = case(&cases, "invoice-full");
-    let big = Limits {
-        max_bytes: 64 * 1024 * 1024,
-        max_nodes: 10_000_000,
-        ..Limits::default()
-    };
+    let mut big = Limits::default();
+    big.max_bytes = 64 * 1024 * 1024;
+    big.max_nodes = 10_000_000;
     let invoices = InvoiceParser::with_options(options.clone().with_limits(big));
     for (label, target) in [
         ("10KB", 0),

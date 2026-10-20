@@ -10,8 +10,7 @@
 //! - referencia por `Id` con C14N exclusiva, firmada con RSA-SHA512 y con
 //!   HMAC-SHA1.
 //!
-//! La transformación XPath no se contrasta aquí: ningún binario disponible
-//! calcula el conjunto de nodos de un filtro XPath de XMLDSig.
+//! La transformación XPath se contrasta con libxml2 en `external_xpath.rs`.
 
 #![allow(
     clippy::unwrap_used,
@@ -186,10 +185,8 @@ fn sign_enveloped(pem: &str, signature: &str, digest: &str) -> String {
     key.load_key(pem.as_bytes(), false).unwrap();
     let mut dsig = XmlSecurityDsig::default();
     dsig.set_canonical_method(&mut doc, C14N).unwrap();
-    let options = ReferenceOptions {
-        force_uri: true,
-        ..ReferenceOptions::default()
-    };
+    let mut options = ReferenceOptions::default();
+    options.force_uri = true;
     let root = doc.document_node();
     dsig.add_reference(
         &mut doc,

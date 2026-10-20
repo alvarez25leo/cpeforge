@@ -57,7 +57,12 @@ de firma de comprobantes SUNAT.
   crate: `xmllint` (C14N de libxml2) y `openssl` recalculan el digest y la
   firma de referencias `URI=""` enveloped (RSA-SHA1/256/384/512, SHA-1/256/
   384/512, RIPEMD-160) y por `Id` con C14N exclusiva (RSA-SHA512, HMAC-SHA1).
-  La transformación XPath solo se prueba internamente.
+  `tests/external_xpath.rs` contrasta la transformación XPath con libxml2
+  (XPath 1.0 y C14N con conjunto de nodos, el motor de xmlsec, invocado con
+  `ctypes` desde Python): unas 6 000 combinaciones de documento, expresión
+  (catálogo de ejes, funciones y operadores, y expresiones aleatorias) y
+  método C14N coinciden byte a byte, y el digest de una firma con
+  transformación XPath se recalcula con libxml2 y `openssl`.
 - **Sin red.** `XmlSecurityDsig::add_509_cert` recibe el certificado como
   texto (PEM o base64); la carga por URL de la referencia no existe y no se
   añadirá: el crate nunca descarga nada.

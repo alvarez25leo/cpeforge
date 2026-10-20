@@ -49,6 +49,7 @@ impl Default for TrustPolicy {
 
 /// Resultado de la evaluación de confianza.
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum TrustResult {
     /// La cadena termina en una raíz de la política y está vigente.
     Trusted,

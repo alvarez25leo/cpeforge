@@ -23,6 +23,7 @@ use crate::error::XmlParserError;
 /// Los valores por defecto admiten cualquier comprobante SUNAT real y cortan
 /// entradas hostiles antes de construir el árbol completo.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct Limits {
     /// Tamaño máximo de la entrada en bytes. Por defecto 10 MiB.
     pub max_bytes: usize,

@@ -87,6 +87,7 @@ pub enum QrMode {
 
 /// Símbolo QR ya codificado.
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct QrSymbol {
     /// Modo del único segmento de datos.
     pub mode: QrMode,

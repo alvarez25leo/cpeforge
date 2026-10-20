@@ -55,6 +55,7 @@ pub const HMAC_SHA1: &str = "http://www.w3.org/2000/09/xmldsig#hmac-sha1";
 
 /// Uso de una clave asimétrica (`['type' => 'public'|'private']`).
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum KeyType {
     /// Clave pública o certificado.
     Public,
@@ -165,6 +166,7 @@ impl fmt::Debug for Material {
 
 /// Resultado de una verificación de firma (`openssl_verify` o HMAC).
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum SignatureCheck {
     /// Firma válida (`1` o `true`).
     Valid,

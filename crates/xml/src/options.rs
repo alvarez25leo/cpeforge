@@ -22,6 +22,7 @@ pub enum Autoescape {
 /// `Default` reproduce `new InvoiceBuilder()` sin opciones: escape `html`,
 /// `strict_variables` desactivado y reloj del sistema.
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
+#[non_exhaustive]
 pub struct RenderOptions {
     /// Escape automático de los valores.
     pub autoescape: Autoescape,
@@ -53,6 +54,27 @@ impl RenderOptions {
             strict_variables: true,
             now: None,
         }
+    }
+
+    /// Fija el escape automático.
+    #[must_use]
+    pub fn with_autoescape(mut self, autoescape: Autoescape) -> Self {
+        self.autoescape = autoescape;
+        self
+    }
+
+    /// Activa o desactiva `strict_variables`.
+    #[must_use]
+    pub fn with_strict_variables(mut self, strict: bool) -> Self {
+        self.strict_variables = strict;
+        self
+    }
+
+    /// Fija el instante de las fechas nulas (reloj inyectable).
+    #[must_use]
+    pub fn with_now(mut self, now: Timestamp) -> Self {
+        self.now = Some(now);
+        self
     }
 
     pub(crate) fn current_time(&self) -> Timestamp {

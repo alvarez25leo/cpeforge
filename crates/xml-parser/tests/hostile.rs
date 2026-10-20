@@ -187,11 +187,10 @@ fn entities_and_dtd_are_rejected() {
 
 #[test]
 fn size_and_node_limits() {
-    let limits = Limits {
-        max_bytes: 1024,
-        max_depth: 8,
-        max_nodes: 50,
-    };
+    let mut limits = Limits::default();
+    limits.max_bytes = 1024;
+    limits.max_depth = 8;
+    limits.max_nodes = 50;
     let big = format!("<r>{}</r>", "x".repeat(2000));
     assert!(matches!(
         XmlDocument::parse_with_limits(big.as_bytes(), &limits),

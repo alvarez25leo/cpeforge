@@ -322,12 +322,14 @@ impl Runner {
                         })
                         .collect()
                 });
-            let options = r.get("options").map(|o| ReferenceOptions {
-                prefix: s(&o["prefix"]).map(str::to_owned),
-                prefix_ns: s(&o["prefix_ns"]).map(str::to_owned),
-                id_name: s(&o["id_name"]).map(str::to_owned),
-                overwrite: o.get("overwrite").and_then(Value::as_bool),
-                force_uri: o["force_uri"].as_bool().unwrap_or(false),
+            let options = r.get("options").map(|o| {
+                let mut options = ReferenceOptions::default();
+                options.prefix = s(&o["prefix"]).map(str::to_owned);
+                options.prefix_ns = s(&o["prefix_ns"]).map(str::to_owned);
+                options.id_name = s(&o["id_name"]).map(str::to_owned);
+                options.overwrite = o.get("overwrite").and_then(Value::as_bool);
+                options.force_uri = o["force_uri"].as_bool().unwrap_or(false);
+                options
             });
             d.add_reference(
                 &mut doc,
@@ -353,10 +355,9 @@ impl Runner {
         d.sign(&mut doc, &key, append_to)?;
         if let Some(cert) = c.get("cert") {
             let opts = &c["cert_options"];
-            let options = CertOptions {
-                issuer_serial: opts["issuerSerial"].as_bool().unwrap_or(false),
-                subject_name: opts["subjectName"].as_bool().unwrap_or(false),
-            };
+            let mut options = CertOptions::default();
+            options.issuer_serial = opts["issuerSerial"].as_bool().unwrap_or(false);
+            options.subject_name = opts["subjectName"].as_bool().unwrap_or(false);
             d.add_509_cert(&mut doc, &self.in_text(cert)?, true, options);
         }
         if let Some(t) = s(&c["append_signature"]) {
@@ -413,6 +414,7 @@ impl Runner {
         let (document, encrypted) = match node {
             Encrypted::Node(n) => (doc.to_xml(), doc.node_to_xml(n)),
             Encrypted::Template => (doc.to_xml(), enc.encrypted_data_xml()),
+            _ => (doc.to_xml(), String::new()),
         };
         Ok(
             json!({"document": document, "encrypted": encrypted, "session_key": out_bytes(sym.raw_key().unwrap_or_default())}),
@@ -482,6 +484,7 @@ impl Runner {
             Decrypted::Document(d) => json!(d.to_xml()),
             Decrypted::Node(_) | Decrypted::Parent(_) => json!(doc.to_xml()),
             Decrypted::Data(d) => out_bytes(&d),
+            _ => Value::Null,
         };
         r.insert("result".into(), result);
         Ok(Value::Object(r))
@@ -782,6 +785,7 @@ impl Runner {
                                 match v {
                                     NameValue::Single(s) => json!(s),
                                     NameValue::Multiple(l) => json!(l),
+                                    _ => Value::Null,
                                 },
                             );
                         }
@@ -876,6 +880,7 @@ fn check_value(key: &XmlSecurityKey, check: &SignatureCheck) -> Value {
             SignatureCheck::Valid => 1,
             SignatureCheck::Invalid => 0,
             SignatureCheck::Error(_) => -1,
+            _ => -2,
         })
     }
 }

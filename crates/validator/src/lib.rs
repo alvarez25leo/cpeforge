@@ -45,6 +45,7 @@ const MAX_INPUT_BYTES: usize = 1_000_000;
 
 /// Fallo al serializar un modelo, leer las reglas o validar una entrada acotada.
 #[derive(Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum ValidatorError {
     /// La tabla congelada no se puede interpretar.
     RuleTable(String),
@@ -86,6 +87,7 @@ impl std::error::Error for ValidatorError {}
 
 /// Una violación de Symfony, incluida su ruta y los datos necesarios para comparar el oráculo.
 #[derive(Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[non_exhaustive]
 pub struct Violation {
     /// Ruta con índices de listas (`details[1].unidad`).
     pub path: String,

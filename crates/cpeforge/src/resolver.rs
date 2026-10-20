@@ -16,6 +16,7 @@ use crate::CpeForgeError;
 
 /// Una referencia a cada modelo que tiene builder en `cpeforge-xml`.
 #[derive(Clone, Copy)]
+#[non_exhaustive]
 pub enum DocumentRef<'a> {
     /// Factura o boleta.
     Invoice(&'a Invoice),
@@ -75,6 +76,7 @@ impl DocumentRef<'_> {
 
 /// Tipos de documento admitidos por `XmlBuilderResolver`.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum DocumentKind {
     /// Factura o boleta.
     Invoice,
@@ -114,6 +116,7 @@ impl DocumentKind {
 
 /// Rama del `WsSenderResolver`.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum SenderKind {
     /// Envío con CDR sincrónico.
     Bill,

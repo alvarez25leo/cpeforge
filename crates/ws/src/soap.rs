@@ -34,6 +34,7 @@ const MAX_SOAP_NODES: u32 = 100_000;
 
 /// Endpoints de los servicios SOAP de SUNAT. Son constantes: consultarlas no
 /// realiza ninguna solicitud de red.
+#[derive(Debug, Clone, Copy)]
 pub struct SunatEndpoints;
 
 impl SunatEndpoints {

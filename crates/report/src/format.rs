@@ -280,6 +280,7 @@ pub fn round_half_up(value: f64, places: i32) -> f64 {
 
 /// Número de una plantilla: entero o `f64`.
 #[derive(Debug, Clone, Copy, PartialEq)]
+#[non_exhaustive]
 pub enum Number {
     /// Entero de 64 bits.
     Int(i64),

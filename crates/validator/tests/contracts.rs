@@ -188,14 +188,16 @@ fn bordes_independientes_y_ruta_anidada() -> Result<(), Box<dyn std::error::Erro
 
 #[test]
 fn debug_redacta_valores_y_parametros() {
-    let violation = Violation {
-        path: "ruc".to_owned(),
-        message: "Error".to_owned(),
-        template: "Error".to_owned(),
-        code: None,
-        parameters: BTreeMap::from([("{{ value }}".to_owned(), "SECRETO".to_owned())]),
-        invalid: json!("SECRETO"),
-    };
+    // `Violation` no se construye fuera del crate: se deserializa.
+    let violation: Violation = serde_json::from_value(json!({
+        "path": "ruc",
+        "message": "Error",
+        "template": "Error",
+        "code": null,
+        "parameters": {"{{ value }}": "SECRETO"},
+        "invalid": "SECRETO",
+    }))
+    .unwrap();
     let debug = format!("{violation:?}");
     assert!(!debug.contains("SECRETO"));
     assert!(debug.contains("[REDACTED]"));

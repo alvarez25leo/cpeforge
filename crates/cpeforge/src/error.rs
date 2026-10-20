@@ -1,6 +1,7 @@
 use std::fmt;
 
 /// Fallos tipados de la orquestación de `cpeforge`.
+#[non_exhaustive]
 pub enum CpeForgeError {
     /// Nombre u otros datos del documento.
     Document(cpeforge_core::CoreError),

@@ -27,6 +27,7 @@ pub struct NodeId(usize);
 
 /// Declaración de namespace (`xmlns` o `xmlns:p`).
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct NsDecl {
     /// Prefijo; `None` para el namespace por defecto.
     pub prefix: Option<String>,
@@ -36,6 +37,7 @@ pub struct NsDecl {
 
 /// Atributo de un elemento.
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct Attribute {
     /// Prefijo tal como se escribió.
     pub prefix: Option<String>,
@@ -62,6 +64,7 @@ impl Attribute {
 
 /// Datos de un elemento.
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct Element {
     /// Prefijo tal como se escribió.
     pub prefix: Option<String>,
@@ -90,6 +93,7 @@ impl Element {
 
 /// Tipo y contenido de un nodo.
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum NodeKind {
     /// Nodo documento (raíz del árbol).
     Document,
@@ -119,6 +123,7 @@ struct NodeData {
 
 /// Declaración XML del documento.
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct XmlDeclaration {
     /// Versión (`1.0`).
     pub version: String,
@@ -128,8 +133,26 @@ pub struct XmlDeclaration {
     pub standalone: Option<String>,
 }
 
+impl XmlDeclaration {
+    /// Declaración con versión, codificación y `standalone` (para asignarla a
+    /// [`Document::declaration`]).
+    #[must_use]
+    pub fn new(
+        version: impl Into<String>,
+        encoding: Option<String>,
+        standalone: Option<String>,
+    ) -> Self {
+        Self {
+            version: version.into(),
+            encoding,
+            standalone,
+        }
+    }
+}
+
 /// Límites del analizador.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct ParseOptions {
     /// Tamaño máximo de entrada en bytes (10 MiB por defecto).
     pub max_bytes: usize,

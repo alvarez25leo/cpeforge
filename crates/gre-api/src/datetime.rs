@@ -20,6 +20,7 @@ pub struct DateTimeValue {
 
 /// Instante con desplazamiento, con precisión de microsegundos.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct ParsedDateTime {
     /// Año.
     pub year: i32,
@@ -41,6 +42,7 @@ pub struct ParsedDateTime {
 
 /// Por qué no se pudo interpretar una fecha.
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum DateTimeError {
     /// No tiene la forma `AAAA-MM-DD[THH:MM:SS[.f]](Z|±HH:MM|±HHMM)`.
     Format,

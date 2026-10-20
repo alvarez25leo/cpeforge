@@ -38,6 +38,7 @@ static CATALOG: OnceLock<Result<Catalog, CatalogError>> = OnceLock::new();
 
 /// Recurso incrustado roto o distinto del corte de la referencia fijado.
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum CatalogError {
     /// No hay BOM UTF-8 inicial.
     MissingBom,
@@ -99,6 +100,13 @@ struct Catalog {
 #[derive(Clone, Copy)]
 pub struct XmlErrorCodeProvider {
     catalog: &'static Catalog,
+}
+
+impl fmt::Debug for XmlErrorCodeProvider {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("XmlErrorCodeProvider")
+            .finish_non_exhaustive()
+    }
 }
 
 impl XmlErrorCodeProvider {

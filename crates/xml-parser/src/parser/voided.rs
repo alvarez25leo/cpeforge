@@ -13,6 +13,7 @@ super::parser!(VoidedParser, VoidedDocument, "Voided` o `Reversion");
 /// Resultado de [`VoidedParser`]: `Voided` si el identificador empieza por
 /// `RA` y `Reversion` en cualquier otro caso.
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum VoidedDocument {
     /// Comunicación de baja (`RA-…`).
     Voided(Voided),

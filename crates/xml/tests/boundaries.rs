@@ -232,10 +232,9 @@ fn html_escaping_keeps_xml_well_formed() {
         "😀",
         "\u{a0}",
     ];
-    let builder = InvoiceBuilder::new(RenderOptions {
-        now: Some("2024-01-01T00:00:00Z".parse().unwrap()),
-        ..RenderOptions::default()
-    });
+    let builder = InvoiceBuilder::new(
+        RenderOptions::default().with_now("2024-01-01T00:00:00Z".parse().unwrap()),
+    );
     let mut rng = Lcg(3);
     for _ in 0..2_000 {
         let len = rng.next() % 6;

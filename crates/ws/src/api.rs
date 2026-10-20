@@ -87,6 +87,15 @@ impl<T: TokenStore + ?Sized> TokenStore for Arc<T> {
 #[derive(Default)]
 pub struct InMemoryStore(Mutex<HashMap<String, CachedToken>>);
 
+impl std::fmt::Debug for InMemoryStore {
+    /// Solo el número de tokens guardados, nunca sus valores.
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("InMemoryStore")
+            .field("tokens", &self.len())
+            .finish()
+    }
+}
+
 impl InMemoryStore {
     fn map(&self) -> MutexGuard<'_, HashMap<String, CachedToken>> {
         self.0.lock().unwrap_or_else(PoisonError::into_inner)
@@ -196,6 +205,7 @@ pub trait Clock: Send + Sync {
 }
 
 /// Reloj del sistema.
+#[derive(Debug, Clone, Copy, Default)]
 pub struct SystemClock;
 
 impl Clock for SystemClock {

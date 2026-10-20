@@ -49,6 +49,7 @@ qrcodegen = "1.8.0"
 unsafe_code = "forbid"
 missing_docs = "warn"
 unreachable_pub = "warn"
+missing_debug_implementations = "warn"
 
 [workspace.lints.clippy]
 unwrap_used = "deny"

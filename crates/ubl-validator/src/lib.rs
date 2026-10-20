@@ -15,12 +15,10 @@ use std::fs;
 use std::path::{Component, Path, PathBuf};
 
 use cpeforge_xml_limits::{DEFAULT_MAX_ATTRIBUTES, MarkupRejection, check_markup};
-use roxmltree::Node;
 
 use serde::Deserialize;
 use sha2::{Digest, Sha256};
 
-const CBC_NS: &str = "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2";
 const MANIFEST: &str = include_str!("../schema-manifest.json");
 const MAX_XML_BYTES: usize = 10 * 1024 * 1024;
 const MAX_NODES: usize = 100_000;
@@ -46,6 +44,7 @@ struct SchemaReference {
 /// Error libxml observable de `SchemaValidator`; `file` es siempre `None`
 /// porque el mapper no asigna ese campo.
 #[derive(Clone, Debug, Eq, PartialEq)]
+#[non_exhaustive]
 pub struct XmlError {
     /// Severidad libxml: warning 1, error 2, fatal 3.
     pub level: i32,
@@ -74,6 +73,7 @@ impl fmt::Display for XmlError {
 /// Fallos de infraestructura o de la política de seguridad; separados de los
 /// errores de validación XSD, que producen [`Validation::valid`] `false`.
 #[derive(Clone, Debug, Eq, PartialEq)]
+#[non_exhaustive]
 pub enum InfrastructureError {
     /// El directorio de XSD no existe o no es legible.
     SchemaDirectory,
@@ -130,6 +130,7 @@ impl std::error::Error for InfrastructureError {}
 
 /// Resultado tipado de una llamada a `isValid`.
 #[derive(Clone, Debug, Eq, PartialEq)]
+#[non_exhaustive]
 pub struct Validation {
     /// Equivalente al booleano.
     pub valid: bool,
@@ -152,12 +153,28 @@ pub struct UblValidator {
     last: Option<Validation>,
 }
 
+impl fmt::Debug for UblValidator {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("UblValidator")
+            .field("schemas", &self.manifest.len())
+            .finish_non_exhaustive()
+    }
+}
+
 /// Acceso directo al motor XSD para uno de los 45 recursos aprobados.
 /// A diferencia de la referencia, un import ausente o alterado es un error de
 /// infraestructura antes de ejecutar libxml.
 pub struct SchemaValidator {
     owner: UblValidator,
     errors: Vec<XmlError>,
+}
+
+impl fmt::Debug for SchemaValidator {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("SchemaValidator")
+            .field("errors", &self.errors.len())
+            .finish_non_exhaustive()
+    }
 }
 
 impl SchemaValidator {
@@ -394,28 +411,6 @@ fn preflight_document(xml: &[u8]) -> Result<(), InfrastructureError> {
         Err(_) => return Err(InfrastructureError::XmlParse),
     }
     ffi::preflight(xml, MAX_NODES, MAX_DEPTH)
-}
-
-/// Equivalente a `UblVersionResolver::getVersion` para un XML con raíz.
-pub fn resolve_version(root: Node<'_, '_>) -> String {
-    // La referencia DOMXPath::query() autoregistra el prefijo `cbc` del nodo raíz y
-    // sobreescribe el registro explícito que hizo UblVersionResolver. Esta
-    // semántica se comprobó con la referencia/libxml fijado; si no hay declaración,
-    // sí se usa la URI constante del código de referencia.
-    let cbc_ns = root.lookup_namespace_uri(Some("cbc")).unwrap_or(CBC_NS);
-    root.children()
-        .find(|n| {
-            n.is_element()
-                && n.tag_name().name() == "UBLVersionID"
-                && n.tag_name().namespace() == Some(cbc_ns)
-        })
-        .map(|n| {
-            n.descendants()
-                .filter(|c| c.is_text())
-                .filter_map(|c| c.text())
-                .collect()
-        })
-        .unwrap_or_default()
 }
 
 /// Compone la ruta relativa de un esquema como `UblPathResolver::getPath`,

@@ -29,6 +29,7 @@ pub const EXC_C14N_COMMENTS: &str = "http://www.w3.org/2001/10/xml-exc-c14n#With
 
 /// Variante de canonicalización.
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct Method {
     /// Exclusiva (`true`) o inclusiva.
     pub exclusive: bool,
@@ -40,6 +41,23 @@ pub struct Method {
 }
 
 impl Method {
+    /// Método inclusivo o exclusivo, con o sin comentarios y sin `PrefixList`.
+    #[must_use]
+    pub fn new(exclusive: bool, with_comments: bool) -> Self {
+        Self {
+            exclusive,
+            with_comments,
+            inclusive_prefixes: Vec::new(),
+        }
+    }
+
+    /// Fija los prefijos tratados de forma inclusiva en el modo exclusivo.
+    #[must_use]
+    pub fn with_inclusive_prefixes(mut self, prefixes: Vec<String>) -> Self {
+        self.inclusive_prefixes = prefixes;
+        self
+    }
+
     /// Método a partir de su URI; `None` si no es uno de los cuatro de C14N 1.0.
     #[must_use]
     pub fn from_uri(uri: &str) -> Option<Self> {

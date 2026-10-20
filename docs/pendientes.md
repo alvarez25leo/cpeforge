@@ -10,8 +10,6 @@
   sin efecto. Además, los nombres del resolver (`Percepcion-1.0.1`,
   `GreRemitente-2.0.1`) no coinciden con los del ZIP (`Percepcion-1.0.2`,
   `GuiaRemitente-2.0.1`).
-- **cpeforge-xmldsig.** Contrastar con otra implementación la transformación
-  XPath.
 - **PDF.** Nuevo crate para generar el PDF de la representación impresa
   (`cpeforge-report` termina en HTML).
 
@@ -20,7 +18,10 @@
 - **Linux.** Confirmar en la CI (ubuntu-24.04) las comprobaciones de versión
   mínima de libxml2/libxslt de `build.rs` (pkg-config); solo se han visto
   pasar en macOS.
-- **Revisión independiente** de la API de todos los crates antes de declarar
-  una versión estable.
+- **Publicar la serie 0.2.** La revisión de la API (`#[non_exhaustive]`,
+  funciones retiradas de la API pública, variantes nuevas; ver
+  [estabilidad-api.md](estabilidad-api.md)) es incompatible con la 0.1
+  publicada: subir la versión menor de los crates afectados y de sus
+  dependencias internas antes de publicar.
 - **cpeforge** se declara estable después de `core`, `xml`, `xmldsig`,
   `gre-api` y `ws`.

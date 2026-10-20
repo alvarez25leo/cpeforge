@@ -15,6 +15,7 @@ pub type Headers = Vec<(String, Vec<String>)>;
 
 /// Cuerpo de error tipado ([`ApiError::response_object`]).
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum ErrorObject {
     /// HTTP 500 de `CpeApi`.
     Server(CpeError),

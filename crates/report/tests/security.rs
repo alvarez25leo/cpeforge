@@ -258,10 +258,8 @@ fn malicious_xml_is_rejected() {
         utils.hash_sign(deep.as_bytes()),
         Err(XmlUtilsError::Limit(_))
     ));
-    let small = XmlUtils {
-        max_bytes: 16,
-        ..XmlUtils::default()
-    };
+    let mut small = XmlUtils::default();
+    small.max_bytes = 16;
     assert!(matches!(
         small.hash_sign(b"<a>xxxxxxxxxxxxxxxxxxxx</a>"),
         Err(XmlUtilsError::Limit(_))

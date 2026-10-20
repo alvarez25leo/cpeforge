@@ -11,6 +11,14 @@ pub struct MessageTranslator<P> {
     resources: BTreeMap<String, String>,
 }
 
+impl<P> std::fmt::Debug for MessageTranslator<P> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("MessageTranslator")
+            .field("messages", &self.resources.len())
+            .finish_non_exhaustive()
+    }
+}
+
 impl<P> MessageTranslator<P>
 where
     P: ErrorCodeProvider,

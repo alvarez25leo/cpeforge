@@ -11,6 +11,9 @@ use crate::options::Limits;
 /// Perfil seguro: sin red, sin entidades externas ni sustitución de
 /// entidades, y se rechaza cualquier `DOCTYPE`. El documento no se modifica
 /// al validar (libxslt trabaja sobre una copia).
+///
+/// Es `Send` pero no `Sync`: se puede mover a otro hilo, no compartir entre
+/// hilos a la vez (cada hilo analiza su copia).
 pub struct XmlDocument {
     pub(crate) doc: ffi::Doc,
 }

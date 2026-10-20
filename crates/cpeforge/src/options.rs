@@ -6,6 +6,7 @@ use jiff::Timestamp;
 /// Campos de `setBuilderOptions` soportados por los builders Rust. `None`
 /// deja el valor previo.
 #[derive(Debug, Clone, Copy, Default)]
+#[non_exhaustive]
 pub struct BuilderOptionsPatch {
     /// Estrategia de `autoescape`.
     pub autoescape: Option<Autoescape>,

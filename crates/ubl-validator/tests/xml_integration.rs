@@ -31,10 +31,8 @@ fn rust_invoice_builder_produces_valid_xsd_document() -> Result<(), Box<dyn std:
         .ok_or("factura ausente")?;
     let value = to_serde(&case["input"])?.map_err(|e| format!("{e}"))?;
     let invoice: Invoice = deserialize(value).map_err(|e| format!("{e}"))?;
-    let options = RenderOptions {
-        now: Some(Timestamp::from_second(1_710_000_000)?),
-        ..RenderOptions::default()
-    };
+    let mut options = RenderOptions::default();
+    options.now = Some(Timestamp::from_second(1_710_000_000)?);
     let generated = InvoiceBuilder::new(options).render(&invoice)?;
     // El generador deja ExtensionContent vacío para que lo rellene la firma;
     // el XSD 2.1 exige al menos un nodo externo. Igual adaptación que el test

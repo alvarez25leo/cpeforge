@@ -37,6 +37,7 @@ fn template() -> Document {
 
 /// Resultado de [`XmlSecEnc::encrypt_node`].
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum Encrypted {
     /// `EncryptedData` importado en el documento de trabajo.
     Node(NodeId),
@@ -47,6 +48,7 @@ pub enum Encrypted {
 
 /// Resultado de [`XmlSecEnc::decrypt_node`]. `Debug` no muestra el
 /// contenido descifrado (solo su tamaño).
+#[non_exhaustive]
 pub enum Decrypted {
     /// Elemento descifrado que reemplazó a `EncryptedData`.
     Node(NodeId),

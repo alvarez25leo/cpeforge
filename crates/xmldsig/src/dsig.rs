@@ -40,6 +40,7 @@ pub const BASE_TEMPLATE: &str = "<Signature Id=\"CPEForgeSign\" xmlns=\"http://w
 
 /// Transformación de una referencia al firmar.
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub enum Transform {
     /// Algoritmo por URI (`Transform/@Algorithm`).
     Algorithm(String),
@@ -54,6 +55,7 @@ pub enum Transform {
 
 /// Opciones de `addReference` (`prefix`, `prefix_ns`, `id_name`, `overwrite`, `force_uri`).
 #[derive(Debug, Clone, Default, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct ReferenceOptions {
     /// Prefijo del atributo de identificador.
     pub prefix: Option<String>,
@@ -69,6 +71,7 @@ pub struct ReferenceOptions {
 
 /// Contenido de `addObject`.
 #[derive(Debug, Clone, Copy)]
+#[non_exhaustive]
 pub enum ObjectData<'a> {
     /// Texto.
     Text(&'a str),
@@ -78,6 +81,7 @@ pub enum ObjectData<'a> {
 
 /// Opciones de `add509Cert`.
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct CertOptions {
     /// Agrega `X509IssuerSerial`.
     pub issuer_serial: bool,
@@ -101,6 +105,7 @@ pub const MAX_REFERENCES: usize = 32;
 
 /// Nodo validado por `validateReference` (`getValidatedNodes()`).
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct ValidatedNode {
     /// Identificador del URI (`#id`) o `None` para el documento.
     pub id: Option<String>,

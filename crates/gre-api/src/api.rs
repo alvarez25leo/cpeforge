@@ -34,6 +34,7 @@ const JSON: &str = "application/json";
 
 /// Respuesta con metadatos HTTP (formas `*_with_http_info`).
 #[derive(Clone, PartialEq, Eq)]
+#[non_exhaustive]
 pub struct ApiResponse<T> {
     /// Cuerpo deserializado; `None` si el cuerpo no es JSON o es `null`.
     pub data: Option<T>,

@@ -4,9 +4,13 @@
 use std::time::{Duration, Instant};
 
 use cpeforge_xml_parser::{XmlDocument, XmlParserError};
+use std::fmt::Write as _;
 
 fn many_attributes(n: usize) -> String {
-    let attributes: String = (0..n).map(|i| format!(" a{i}=''")).collect();
+    let attributes: String = (0..n).fold(String::new(), |mut out, i| {
+        let _ = write!(out, " a{i}=''");
+        out
+    });
     format!("<Invoice{attributes}/>")
 }
 
@@ -14,8 +18,14 @@ fn many_attributes(n: usize) -> String {
 /// distinto: sin límite, cada hijo copia los 251 espacios en ámbito (645 KB
 /// de entrada llegaban a unos 685 MB de memoria).
 fn namespace_amplification(n: usize) -> String {
-    let declarations: String = (0..250).map(|i| format!(" xmlns:p{i}='urn:{i}'")).collect();
-    let children: String = (0..n).map(|i| format!("<x xmlns:z{i}='u'/>")).collect();
+    let declarations: String = (0..250).fold(String::new(), |mut out, i| {
+        let _ = write!(out, " xmlns:p{i}='urn:{i}'");
+        out
+    });
+    let children: String = (0..n).fold(String::new(), |mut out, i| {
+        let _ = write!(out, "<x xmlns:z{i}='u'/>");
+        out
+    });
     format!("<Invoice{declarations}>{children}</Invoice>")
 }
 

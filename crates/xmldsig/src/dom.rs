@@ -745,9 +745,7 @@ impl Document {
         // Namespaces in XML §5: un prefijo debe estar declarado (libxml2 lo
         // rechaza). Sin esto `@x` de XPath coincidía con `p:x` y la C14N emitía
         // prefijos sin declarar.
-        if let Some(p) = prefix.as_deref()
-            && namespace.is_none()
-        {
+        if let (Some(p), None) = (prefix.as_deref(), &namespace) {
             return Err(XmlError::Malformed(format!("prefijo no declarado {p}")));
         }
         let mut attributes: Vec<Attribute> = Vec::with_capacity(raw_attrs.len());
@@ -761,15 +759,13 @@ impl Document {
                 .as_deref()
                 .and_then(|p| lookup_scope(scopes, Some(p)))
                 .map(str::to_owned);
-            if let Some(p) = p.as_deref()
-                && namespace.is_none()
-            {
+            if let (Some(p), None) = (p.as_deref(), &namespace) {
                 return Err(XmlError::Malformed(format!("prefijo no declarado {p}")));
             }
-            if let Some(ns) = &namespace
-                && !seen.insert((ns.clone(), l.clone()))
-            {
-                return Err(XmlError::Malformed(format!("atributo duplicado {key}")));
+            if let Some(ns) = &namespace {
+                if !seen.insert((ns.clone(), l.clone())) {
+                    return Err(XmlError::Malformed(format!("atributo duplicado {key}")));
+                }
             }
             attributes.push(Attribute {
                 prefix: p,

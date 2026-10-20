@@ -36,6 +36,7 @@ use cpeforge_xmldsig::key::{
     HMAC_SHA1, RSA_SHA1, RSA_SHA256, RSA_SHA384, RSA_SHA512, XmlSecurityKey,
 };
 use cpeforge_xmldsig::sunat::SignedXml;
+use std::fmt::Write as _;
 
 const INVOICE: &str = r#"<?xml version="1.0" encoding="utf-8"?>
 <Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent/></ext:UBLExtension></ext:UBLExtensions><cbc:ID>F001-1</cbc:ID><cbc:Note><![CDATA[a & b]]></cbc:Note><cbc:PayableAmount currencyID="PEN">118.00</cbc:PayableAmount></Invoice>"#;
@@ -121,7 +122,10 @@ fn text_of<'a>(xml: &'a str, tag: &str) -> &'a str {
 /// ámbito (`namespaces`), como hace C14N con el apex de un subconjunto.
 fn with_namespaces(fragment: &str, namespaces: &[&str]) -> String {
     let name_end = fragment.find([' ', '>', '/']).unwrap();
-    let declarations: String = namespaces.iter().map(|ns| format!(" {ns}")).collect();
+    let declarations: String = namespaces.iter().fold(String::new(), |mut out, ns| {
+        let _ = write!(out, " {ns}");
+        out
+    });
     format!(
         "{}{declarations}{}",
         &fragment[..name_end],

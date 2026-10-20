@@ -11,6 +11,7 @@
 use std::time::{Duration, Instant};
 
 use cpeforge_cpe_validator::{CpeValidatorError, InputSource, XmlDocument};
+use std::fmt::Write as _;
 
 fn utf16le(text: &str) -> Vec<u8> {
     [0xFF, 0xFE]
@@ -21,7 +22,10 @@ fn utf16le(text: &str) -> Vec<u8> {
 
 #[test]
 fn elements_with_huge_attribute_lists_are_rejected_quickly() {
-    let attributes: String = (0..50_000).map(|i| format!(" a{i}=\"x\"")).collect();
+    let attributes: String = (0..50_000).fold(String::new(), |mut out, i| {
+        let _ = write!(out, " a{i}=\"x\"");
+        out
+    });
     let xml = format!("<Invoice{attributes}/>");
     let started = Instant::now();
     let error = XmlDocument::parse(&xml).err().unwrap();

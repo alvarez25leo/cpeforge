@@ -5,6 +5,18 @@ Los crates siguen SemVer: en la serie 0.x, subir la versión menor (0.1 → 0.2)
 indica cambios incompatibles. Las reglas de compatibilidad están en
 [docs/estabilidad-api.md](docs/estabilidad-api.md).
 
+## Sin publicar
+
+### Corregido
+
+- **`cpeforge-xmldsig`: compila con la versión mínima declarada (Rust
+  1.85).** Las versiones 0.1.1 y 0.2.0 usaban `if let … && let …` (estable
+  desde Rust 1.88) y fallaban al compilar con Rust 1.85–1.87 pese a declarar
+  `rust-version = "1.85"`. Con esas versiones, usar Rust 1.88 o posterior.
+- La documentación de `ApiFactory`, `cpeforge::Api` y los README de
+  `cpeforge` y `cpeforge-ws` explican la clave de caché `CacheKey::Scoped`
+  y enlazan la guía de migración.
+
 ## 0.2 — 2026-10-20
 
 | Crate | Versión |

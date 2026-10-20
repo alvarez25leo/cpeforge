@@ -12,6 +12,7 @@ use std::path::PathBuf;
 use std::time::{Duration, Instant};
 
 use cpeforge_ubl_validator::{InfrastructureError, UblValidator};
+use std::fmt::Write as _;
 
 fn validator() -> UblValidator {
     let dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
@@ -21,7 +22,10 @@ fn validator() -> UblValidator {
 
 #[test]
 fn elements_with_huge_attribute_lists_are_rejected_quickly() {
-    let attributes: String = (0..50_000).map(|i| format!(" a{i}=\"x\"")).collect();
+    let attributes: String = (0..50_000).fold(String::new(), |mut out, i| {
+        let _ = write!(out, " a{i}=\"x\"");
+        out
+    });
     let xml = format!("<Invoice{attributes}/>");
     let started = Instant::now();
     assert_eq!(

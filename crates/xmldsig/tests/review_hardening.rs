@@ -14,6 +14,7 @@
 #[path = "support/keys.rs"]
 mod keys;
 
+use std::fmt::Write as _;
 use std::fs;
 
 use cpeforge_xmldsig::Error;
@@ -221,7 +222,10 @@ fn undeclared_prefixes_and_signed_char_refs_are_rejected() {
 fn inherited_xml_attributes_are_linear() {
     // 200 ancestros con muchos xml:* y la firma dentro: 2,9 MB tardaban 35 s
     // antes de buscar siquiera la clave.
-    let attrs: String = (0..2_000).map(|i| format!(r#" xml:a{i}="""#)).collect();
+    let attrs = (0..2_000).fold(String::new(), |mut out, i| {
+        let _ = write!(out, r#" xml:a{i}="""#);
+        out
+    });
     let mut xml = String::new();
     for _ in 0..200 {
         xml.push_str(&format!("<e{attrs}>"));
@@ -242,9 +246,10 @@ fn xpath_over(doc: &str, expr: &str) -> (Result<String, Error>, Duration) {
 #[test]
 fn hidden_xpath_costs_are_charged() {
     // Nodos de namespace: 1 000 declaraciones × 1 000 elementos (40 s antes).
-    let decls: String = (0..1_000)
-        .map(|i| format!(r#" xmlns:p{i}="u{i}""#))
-        .collect();
+    let decls = (0..1_000).fold(String::new(), |mut out, i| {
+        let _ = write!(out, r#" xmlns:p{i}="u{i}""#);
+        out
+    });
     let doc = format!("<r{decls}>{}</r>", "<a/>".repeat(1_000));
     let (result, elapsed) = xpath_over(&doc, "count(namespace::*[. = 'zz']) = 0");
     assert!(matches!(result, Err(Error::XPath(_))), "{result:?}");

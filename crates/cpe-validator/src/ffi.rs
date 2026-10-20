@@ -101,11 +101,15 @@ static INIT: OnceLock<bool> = OnceLock::new();
 
 /// Inicializa libxml2/libexslt y el cargador seguro una sola vez.
 fn init() -> Result<(), &'static str> {
-    // SAFETY: gcv_init inicializa libxml2 y registra EXSLT, el cargador y las
-    // preferencias por defecto; OnceLock garantiza una única ejecución y el
-    // candado global, que no coincida con la de cpeforge-ubl-validator.
-    let ok = *INIT
-        .get_or_init(|| cpeforge_xml_limits::with_libxml_init_lock(|| unsafe { gcv_init() }) == 0);
+    let ok = *INIT.get_or_init(|| {
+        cpeforge_xml_limits::with_libxml_init_lock(|| {
+            // SAFETY: gcv_init inicializa libxml2 y registra EXSLT, el cargador
+            // y las preferencias por defecto; OnceLock garantiza una única
+            // ejecución y el candado global, que no coincida con la de
+            // cpeforge-ubl-validator.
+            unsafe { gcv_init() }
+        }) == 0
+    });
     if !ok {
         return Err("no se pudo inicializar libxslt");
     }

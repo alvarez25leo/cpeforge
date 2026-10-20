@@ -185,6 +185,15 @@ fn ascii_compatible(xml: &[u8]) -> bool {
 mod tests {
     use super::*;
 
+    /// `n` atributos ` a0='' a1='' …`.
+    fn attributes(n: usize) -> String {
+        use std::fmt::Write as _;
+        (0..n).fold(String::new(), |mut out, i| {
+            let _ = write!(out, " a{i}=''");
+            out
+        })
+    }
+
     fn scan_default(xml: &[u8]) -> Result<(), MarkupRejection> {
         check_markup(xml, DEFAULT_MAX_ATTRIBUTES)
     }
@@ -199,9 +208,7 @@ mod tests {
             scan_default(b"<?xml version='1.0'?>\n<!ENTITY x 'y'><a/>"),
             Err(MarkupRejection::Declaration)
         );
-        let many: String = (0..=DEFAULT_MAX_ATTRIBUTES)
-            .map(|i| format!(" a{i}=''"))
-            .collect();
+        let many = attributes(DEFAULT_MAX_ATTRIBUTES + 1);
         assert_eq!(
             scan_default(format!("<a{many}/>").as_bytes()),
             Err(MarkupRejection::TooManyAttributes)
@@ -221,9 +228,7 @@ mod tests {
         let ok = br#"<?xml version="1.0" encoding="ISO-8859-1"?>
 <!-- <!DOCTYPE dentro de un comentario --><a x="1>2 = 3" y='<!x'><![CDATA[<!DOCTYPE a=b=c>]]><?pi <!x?><b/></a>"#;
         assert_eq!(scan_default(ok), Ok(()));
-        let few: String = (0..DEFAULT_MAX_ATTRIBUTES)
-            .map(|i| format!(" a{i}=''"))
-            .collect();
+        let few = attributes(DEFAULT_MAX_ATTRIBUTES);
         assert_eq!(scan_default(format!("<a{few}/>").as_bytes()), Ok(()));
     }
 

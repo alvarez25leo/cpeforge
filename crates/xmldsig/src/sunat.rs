@@ -216,10 +216,10 @@ impl SignedXml {
     ///
     /// Los de lectura de `KeyInfo`.
     pub fn public_key(&mut self, doc: Option<&Document>) -> Result<Option<&str>, Error> {
-        if let Some(doc) = doc
-            && let Some(key) = Self::key_from_node(doc)?
-        {
-            self.public_key = key.x509_certificate().map(|c| Zeroizing::new(c.to_owned()));
+        if let Some(doc) = doc {
+            if let Some(key) = Self::key_from_node(doc)? {
+                self.public_key = key.x509_certificate().map(|c| Zeroizing::new(c.to_owned()));
+            }
         }
         Ok(self.public_key.as_ref().map(|k| k.as_str()))
     }

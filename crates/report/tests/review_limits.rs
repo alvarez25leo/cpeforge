@@ -19,6 +19,7 @@ use cpeforge_report::{
     HtmlReport, RenderCause, ReportError, ReportOptions, ReportParameters, XmlUtils, XmlUtilsError,
     image_data_uri,
 };
+use std::fmt::Write as _;
 
 fn invoice() -> Invoice {
     Invoice {
@@ -105,7 +106,10 @@ fn image_data_uri_only_takes_simple_mime_subtypes() {
 
 #[test]
 fn xml_utils_bounds_attributes_and_namespace_scopes() {
-    let attributes: String = (0..40_000).map(|i| format!(" a{i}=''")).collect();
+    let attributes: String = (0..40_000).fold(String::new(), |mut out, i| {
+        let _ = write!(out, " a{i}=''");
+        out
+    });
     let started = Instant::now();
     assert!(matches!(
         XmlUtils::default().hash_sign(format!("<Invoice{attributes}/>").as_bytes()),
@@ -113,7 +117,10 @@ fn xml_utils_bounds_attributes_and_namespace_scopes() {
     ));
     assert!(started.elapsed() < Duration::from_millis(500));
 
-    let declarations: String = (0..250).map(|i| format!(" xmlns:p{i}='urn:{i}'")).collect();
+    let declarations: String = (0..250).fold(String::new(), |mut out, i| {
+        let _ = write!(out, " xmlns:p{i}='urn:{i}'");
+        out
+    });
     let children = "<x xmlns:z='u'/>".repeat(20_000);
     assert!(matches!(
         XmlUtils::default()

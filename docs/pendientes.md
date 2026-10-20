@@ -12,8 +12,9 @@
 
 ## Revisión y repositorio
 
-- **Publicar** `cpeforge-xcodes` con el catálogo de SUNAT 2026-08-26 (2 077
-  códigos; cambia `ENTRY_COUNT` y 18 textos, conviene 0.2.0).
+- **Publicar** `cpeforge` 0.1.1: la versión publicada (0.1.0) depende de
+  `cpeforge-xcodes` 0.1.x; el repositorio ya pide la 0.2.0 (catálogo SUNAT
+  2026-08-26) para la feature `xcodes`.
 - **Revisión independiente** de seguridad y de API de todos los crates antes de
   declarar una versión estable. Prioridad: `cpeforge-xmldsig` (DOM, C14N,
   evaluador XPath, verificación de referencias) y el FFI de

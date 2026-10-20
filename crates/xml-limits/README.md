@@ -1,7 +1,9 @@
 # cpeforge-xml-limits
 
-Límite de anidamiento XML comprobado sobre el texto, antes de construir el
-árbol. Crate de apoyo de CPEForge, sin dependencias.
+Límites XML comprobados sobre el texto, antes de construir el árbol. Crate de
+apoyo de CPEForge, sin dependencias.
+
+## Anidamiento
 
 `roxmltree` 0.21.1 analiza los elementos de forma recursiva y no limita la
 profundidad. Con un hilo de 2 MiB (la pila de los workers de Tokio) aborta el
@@ -29,9 +31,32 @@ Solo es una cota válida si el parser no expande entidades declaradas
 Lo usan `cpeforge-xml-parser` (64 niveles por defecto), `cpeforge-ws` (256
 para SOAP y CDR) y `cpeforge-report`.
 
+## Marcado antes de libxml2
+
+libxml2 anterior a 2.12 compara cada atributo con los anteriores del mismo
+elemento (tiempo cuadrático) y analiza un `DOCTYPE` entero antes de que se
+pueda rechazar. `check_markup` recorre el documento una vez y rechaza
+cualquier declaración `<!…>` que no sea comentario o CDATA, los elementos con
+demasiados atributos y las codificaciones no compatibles con ASCII (UTF-16 se
+decodifica antes de recorrerlo):
+
+```rust
+use cpeforge_xml_limits::{DEFAULT_MAX_ATTRIBUTES, MarkupRejection, check_markup};
+
+assert_eq!(check_markup(b"<a x='1'/>", DEFAULT_MAX_ATTRIBUTES), Ok(()));
+assert_eq!(
+    check_markup(b"<!DOCTYPE a><a/>", DEFAULT_MAX_ATTRIBUTES),
+    Err(MarkupRejection::Declaration)
+);
+```
+
+`with_libxml_init_lock` serializa la inicialización de libxml2 entre los
+crates que la enlazan (antes de 2.11 `xmlInitParser` no es seguro en
+paralelo). Los usan `cpeforge-cpe-validator` y `cpeforge-ubl-validator`.
+
 ## Estado
 
-Versión 0.1.0 en desarrollo. Lo que falta para la primera versión estable está en
+Versión 0.1.1 en desarrollo. Lo que falta para la primera versión estable está en
 [docs/pendientes.md](https://github.com/alvarez25leo/cpeforge/blob/main/docs/pendientes.md).
 
 ## Licencia

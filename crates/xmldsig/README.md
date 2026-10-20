@@ -22,12 +22,19 @@ de firma de comprobantes SUNAT.
 - **Perfil por defecto RSA-SHA1 / SHA-1**, el que históricamente acepta
   SUNAT. SHA-1 ya no se considera resistente a colisiones: preferir
   `RSA_SHA256` y `SHA256` con `set_signature_algorithm` y
-  `set_digest_algorithm` cuando el receptor lo admita.
+  `set_digest_algorithm` cuando el receptor lo admita. Fuera del perfil
+  SUNAT, `XmlSecurityDsig::reject_sha1` rechaza al verificar un digest SHA-1
+  y una firma RSA-SHA1 o HMAC-SHA1.
 - **Validez matemática ≠ confianza.** `SignedXml::verify_xml` comprueba firma
   y digest con el certificado incluido en el documento y acepta certificados
   vencidos o autofirmados. Para decidir si el firmante es confiable usar
-  `trust::TrustPolicy` con raíces explícitas (valida cadena y vigencia, no
+  `trust::TrustPolicy` con raíces explícitas (valida cadena, vigencia,
+  `keyUsage` de firma y, si se indican, los `extendedKeyUsage` aceptados; no
   consulta CRL/OCSP).
+- **Cifrado XML.** `XmlSecEnc` solo acepta AES-GCM (XML Encryption 1.1) y
+  RSA-OAEP, y todo fallo de descifrado es `Error::DecryptionFailed`, sin
+  detalle que sirva de oráculo. AES-CBC, 3DES y RSA PKCS#1 v1.5 (los de la
+  referencia) requieren `allow_legacy_algorithms`.
 - **XPath y recursión acotados.** La transformación XPath corta tras recorrer
   10 millones de nodos y rechaza expresiones de más de 16 384 caracteres, con
   más de 32 niveles de anidamiento o 128 operadores. La resolución de

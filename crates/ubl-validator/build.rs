@@ -27,7 +27,11 @@ fn main() {
             std::process::exit(1);
         }
         _ => {
-            let found = match pkg_config::Config::new().probe("libxml-2.0") {
+            // Mínimo también comprobado en tiempo de ejecución (src/ffi.rs).
+            let found = match pkg_config::Config::new()
+                .atleast_version("2.9.11")
+                .probe("libxml-2.0")
+            {
                 Ok(found) => found,
                 Err(error) => {
                     eprintln!("libxml2-dev requerido: {error}");

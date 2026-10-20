@@ -103,6 +103,15 @@ pub enum Error {
     /// Se pidió firmar con una clave simétrica o HMAC desde la API de firma
     /// asimétrica (la referencia devolvía una firma vacía).
     UnsupportedSigningKey,
+    /// [`crate::enc::XmlSecEnc`] rechaza un algoritmo de cifrado heredado
+    /// (CBC, 3DES o RSA PKCS#1 v1.5) sin `allow_legacy_algorithms`.
+    LegacyEncryptionAlgorithm(String),
+    /// Algoritmo débil rechazado por
+    /// [`crate::dsig::XmlSecurityDsig::reject_sha1`].
+    WeakAlgorithm(String),
+    /// El descifrado falló. Sin detalle a propósito: distinguir relleno,
+    /// clave o etiqueta incorrectos sirve de oráculo a un atacante.
+    DecryptionFailed,
     /// Otro error con el mensaje de la referencia.
     Message(String),
 }
@@ -153,6 +162,12 @@ impl fmt::Display for Error {
                 crate::dsig::MAX_REFERENCES
             ),
             Self::UnsupportedSigningKey => f.write_str("The key cannot produce a signature"),
+            Self::LegacyEncryptionAlgorithm(uri) => write!(
+                f,
+                "Legacy encryption algorithm not allowed: {uri} (set allow_legacy_algorithms)"
+            ),
+            Self::DecryptionFailed => f.write_str("Decryption failed"),
+            Self::WeakAlgorithm(uri) => write!(f, "Weak algorithm not allowed: {uri}"),
             Self::Message(m) => f.write_str(m),
         }
     }

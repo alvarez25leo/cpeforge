@@ -1,9 +1,10 @@
 //! Documento XML analizado con libxml2 (el `DOMDocument` de la referencia).
 
+use cpeforge_xml_limits::{DEFAULT_MAX_ATTRIBUTES, MarkupRejection, check_markup};
+
 use crate::error::{CpeValidatorError, InputSource};
 use crate::ffi::{self, Parsed};
 use crate::options::Limits;
-use crate::prescan::{MAX_ATTRIBUTES_PER_ELEMENT, Rejection};
 
 /// XML ya analizado, reutilizable en varias validaciones.
 ///
@@ -55,23 +56,16 @@ impl XmlDocument {
                 actual,
             });
         }
-        match crate::prescan::prescan(bytes) {
+        match check_markup(bytes, DEFAULT_MAX_ATTRIBUTES) {
             Ok(()) => {}
-            Err(Rejection::Doctype) => {
+            Err(MarkupRejection::Declaration) => {
                 return Err(CpeValidatorError::DoctypeForbidden {
                     source: InputSource::Xml,
                 });
             }
-            Err(Rejection::Attributes) => {
+            Err(rejection) => {
                 return Err(CpeValidatorError::MalformedXml {
-                    diagnostics: vec![format!(
-                        "un elemento supera {MAX_ATTRIBUTES_PER_ELEMENT} atributos"
-                    )],
-                });
-            }
-            Err(Rejection::Encoding) => {
-                return Err(CpeValidatorError::MalformedXml {
-                    diagnostics: vec!["codificación no admitida (UTF-32, UCS-4 o EBCDIC)".into()],
+                    diagnostics: vec![rejection.to_string()],
                 });
             }
         }

@@ -12,7 +12,7 @@ use openssl::hash::{Hasher, MessageDigest, hash};
 use crate::c14n::{self, Method};
 use crate::dom::{Document, NodeId, NodeKind};
 use crate::error::Error;
-use crate::key::{SignatureCheck, XmlSecurityKey, lenient_base64_decode};
+use crate::key::{HMAC_SHA1, RSA_SHA1, SignatureCheck, XmlSecurityKey, lenient_base64_decode};
 use crate::xpath::{DOUBLE_QUOTE, EXTENDED_ALPHANUMERIC, filter_attr_name, filter_attr_value};
 
 /// `XMLSecurityDSig::XMLDSIGNS`.
@@ -126,6 +126,11 @@ pub struct XmlSecurityDsig {
     /// el primero en orden de documento). Activarlo en verificación cierra
     /// el vector de duplicación de identificadores de XML Signature Wrapping.
     pub reject_duplicate_ids: bool,
+    /// Rechaza con [`Error::WeakAlgorithm`] un `DigestMethod` SHA-1 al
+    /// validar referencias y una firma RSA-SHA1 o HMAC-SHA1 al verificar.
+    /// `false` por defecto: el perfil SUNAT ([`crate::sunat::SignedXml`])
+    /// exige RSA-SHA1 y SHA-1. Activarlo para firmas fuera de ese perfil.
+    pub reject_sha1: bool,
 }
 
 impl Default for XmlSecurityDsig {
@@ -165,6 +170,7 @@ impl XmlSecurityDsig {
             id_keys: Vec::new(),
             id_ns: Vec::new(),
             reject_duplicate_ids: false,
+            reject_sha1: false,
         }
     }
 
@@ -555,6 +561,7 @@ impl XmlSecurityDsig {
         if refs.len() > MAX_REFERENCES {
             return Err(Error::TooManyReferences(refs.len()));
         }
+        self.reject_weak_digests(doc, &refs)?;
         self.validated_nodes = Some(Vec::new());
         for reference in refs {
             match self.process_ref_node(doc, doc, reference) {
@@ -569,6 +576,23 @@ impl XmlSecurityDsig {
         Ok(true)
     }
 
+    /// Con [`Self::reject_sha1`], ninguna referencia puede usar SHA-1.
+    fn reject_weak_digests(&self, doc: &Document, refs: &[NodeId]) -> Result<(), Error> {
+        if !self.reject_sha1 {
+            return Ok(());
+        }
+        for &reference in refs {
+            let algorithm = doc
+                .child_ns(reference, XMLDSIGNS, "DigestMethod")
+                .and_then(|m| doc.attribute(m, "Algorithm"))
+                .unwrap_or("");
+            if algorithm == SHA1 {
+                return Err(Error::WeakAlgorithm(SHA1.to_owned()));
+            }
+        }
+        Ok(())
+    }
+
     fn validate_template_reference(&mut self) -> Result<bool, Error> {
         let SigLocation::Template(sig) = self.sig else {
             return Err(Error::ReferenceNodesNotFound);
@@ -579,6 +603,8 @@ impl XmlSecurityDsig {
             Err(Error::ReferenceNodesNotFound)
         } else if refs.len() > MAX_REFERENCES {
             Err(Error::TooManyReferences(refs.len()))
+        } else if let Err(e) = self.reject_weak_digests(&template, &refs) {
+            Err(e)
         } else {
             self.validated_nodes = Some(Vec::new());
             let mut result = Ok(true);
@@ -973,6 +999,18 @@ impl XmlSecurityDsig {
             .unwrap_or_default();
         if !is_set(&value) {
             return Err(Error::SignatureValueNotFound);
+        }
+        if self.reject_sha1 {
+            let declared = d
+                .child_ns(sig, XMLDSIGNS, "SignedInfo")
+                .and_then(|i| d.child_ns(i, XMLDSIGNS, "SignatureMethod"))
+                .and_then(|m| d.attribute(m, "Algorithm"))
+                .unwrap_or("");
+            for algorithm in [declared, key.algorithm()] {
+                if matches!(algorithm, RSA_SHA1 | HMAC_SHA1) {
+                    return Err(Error::WeakAlgorithm(algorithm.to_owned()));
+                }
+            }
         }
         let signed_info = self.signed_info.as_deref().unwrap_or("");
         Ok(key.verify_signature(signed_info.as_bytes(), &lenient_base64_decode(&value)))

@@ -2,25 +2,64 @@
 #![allow(unsafe_code)]
 
 use std::ffi::{CStr, CString, c_char, c_int, c_void};
-use std::sync::{Mutex, MutexGuard, Once};
+use std::sync::{Mutex, MutexGuard, OnceLock};
 
 use crate::{InfrastructureError, XmlError};
 
 static XML_LOCK: Mutex<()> = Mutex::new(());
-static XML_INIT: Once = Once::new();
+/// Versión de la libxml2 en tiempo de ejecución, si es la mínima admitida.
+static XML_INIT: OnceLock<Result<(), String>> = OnceLock::new();
 
-/// Serializa las llamadas a libxml2 e inicializa la biblioteca la primera vez.
-fn lock() -> MutexGuard<'static, ()> {
-    // SAFETY: `cpeforge_init` solo llama a `xmlInitParser`; `Once` impide dos
-    // llamadas concurrentes, que antes de libxml2 2.11 no son seguras.
-    XML_INIT.call_once(|| unsafe { cpeforge_init() });
-    XML_LOCK
+/// libxml2 mínima: 2.9.11 corrige CVE de XSD y del analizador (CVE-2020-24977,
+/// CVE-2021-3517/3518/3537) y añade el límite de operaciones XPath.
+pub(crate) const MIN_LIBXML_VERSION: u32 = 20911;
+
+/// Serializa las llamadas a libxml2 e inicializa la biblioteca la primera
+/// vez, comprobando la versión cargada.
+fn lock() -> Result<MutexGuard<'static, ()>, InfrastructureError> {
+    let init = XML_INIT.get_or_init(|| {
+        // SAFETY: `cpeforge_init` solo llama a `xmlInitParser`; `OnceLock` y
+        // el candado global impiden dos llamadas concurrentes (también con
+        // cpeforge-cpe-validator), que antes de libxml2 2.11 no son seguras.
+        // `cpeforge_libxml_version` devuelve una cadena estática.
+        let version = cpeforge_xml_limits::with_libxml_init_lock(|| unsafe {
+            cpeforge_init();
+            CStr::from_ptr(cpeforge_libxml_version())
+                .to_string_lossy()
+                .into_owned()
+        });
+        let number: u32 = version
+            .chars()
+            .take_while(char::is_ascii_digit)
+            .collect::<String>()
+            .parse()
+            .unwrap_or(0);
+        if number >= MIN_LIBXML_VERSION {
+            Ok(())
+        } else {
+            Err(format!(
+                "libxml2 {MIN_LIBXML_VERSION} o posterior requerida; cargada: {version}"
+            ))
+        }
+    });
+    if let Err(message) = init {
+        return Err(InfrastructureError::SchemaValidate(vec![XmlError {
+            level: 3,
+            code: 0,
+            column: 0,
+            message: message.clone(),
+            file: None,
+            line: 0,
+        }]));
+    }
+    Ok(XML_LOCK
         .lock()
-        .unwrap_or_else(std::sync::PoisonError::into_inner)
+        .unwrap_or_else(std::sync::PoisonError::into_inner))
 }
 
 unsafe extern "C" {
     fn cpeforge_init();
+    fn cpeforge_libxml_version() -> *const c_char;
     fn cpeforge_preflight_xml(
         xml: *const u8,
         length: c_int,
@@ -49,7 +88,7 @@ pub(crate) fn preflight(
     max_nodes: usize,
     max_depth: usize,
 ) -> Result<(), InfrastructureError> {
-    let _guard = lock();
+    let _guard = lock()?;
     let length = c_int::try_from(xml.len()).map_err(|_| InfrastructureError::XmlLimit)?;
     let max_nodes = c_int::try_from(max_nodes).map_err(|_| InfrastructureError::XmlLimit)?;
     let max_depth = c_int::try_from(max_depth).map_err(|_| InfrastructureError::XmlLimit)?;
@@ -64,7 +103,7 @@ pub(crate) fn preflight(
 }
 
 pub(crate) fn probe(xml: &[u8]) -> Result<Option<(String, String)>, InfrastructureError> {
-    let _guard = lock();
+    let _guard = lock()?;
     let length = c_int::try_from(xml.len()).map_err(|_| InfrastructureError::XmlLimit)?;
     let mut name = [0 as c_char; 1024];
     let mut version = [0 as c_char; 1024];
@@ -133,7 +172,7 @@ pub(crate) fn validate(
     xml: &[u8],
     path: &str,
 ) -> Result<(bool, Vec<XmlError>), InfrastructureError> {
-    let _guard = lock();
+    let _guard = lock()?;
     let path = CString::new(path).map_err(|_| InfrastructureError::UnsafePath)?;
     let length = c_int::try_from(xml.len()).map_err(|_| InfrastructureError::XmlLimit)?;
     let mut errors = Vec::<XmlError>::new();

@@ -57,8 +57,17 @@ fn main() {
             }
         }
         _ => {
-            for lib in ["libexslt", "libxslt"] {
-                match pkg_config::Config::new().probe(lib) {
+            // Mínimos también comprobados en tiempo de ejecución (src/ffi.rs).
+            for (lib, minimum) in [
+                ("libexslt", None),
+                ("libxslt", Some("1.1.34")),
+                ("libxml-2.0", Some("2.9.11")),
+            ] {
+                let mut config = pkg_config::Config::new();
+                if let Some(minimum) = minimum {
+                    config.atleast_version(minimum);
+                }
+                match config.probe(lib) {
                     Ok(found) => {
                         for path in found.include_paths {
                             build.include(path);

@@ -1,5 +1,6 @@
-//! Límite de anidamiento XML comprobado sobre el texto, antes de construir el
-//! árbol.
+//! Límites XML comprobados sobre el texto, antes de construir el árbol:
+//! anidamiento ([`exceeds_depth`]) y marcado peligroso para libxml2
+//! ([`check_markup`]).
 //!
 //! `roxmltree` (0.21.1, la última publicada) analiza los elementos de forma
 //! recursiva y no limita la profundidad: con un hilo de 2 MiB (los workers de
@@ -20,6 +21,26 @@
 //! assert!(exceeds_depth(&deep, 256));
 //! assert!(!exceeds_depth("<r><a/><a/></r>", 2));
 //! ```
+
+mod markup;
+
+pub use markup::{DEFAULT_MAX_ATTRIBUTES, MarkupRejection, check_markup};
+
+static LIBXML_INIT: std::sync::Mutex<()> = std::sync::Mutex::new(());
+
+/// Ejecuta `init` con un candado único en todo el proceso.
+///
+/// Antes de libxml2 2.11, `xmlInitParser` no es seguro si dos hilos lo llaman
+/// a la vez. Cada crate que enlaza libxml2 (`cpeforge-cpe-validator`,
+/// `cpeforge-ubl-validator`) inicializa la biblioteca dentro de este candado,
+/// así sus inicializaciones nunca se solapan aunque cada uno tenga su propio
+/// `OnceLock`.
+pub fn with_libxml_init_lock<T>(init: impl FnOnce() -> T) -> T {
+    let _guard = LIBXML_INIT
+        .lock()
+        .unwrap_or_else(std::sync::PoisonError::into_inner);
+    init()
+}
 
 /// Indica si algún elemento de `xml` está anidado a más de `max` niveles
 /// (el elemento raíz es el nivel 1).

@@ -26,8 +26,10 @@ println!("{}", result.error);
 Una entrada vacía devuelve `InfrastructureError::EmptyInput` (no una
 validación fallida), igual que la referencia: es el contrato del crate.
 
-Acepta las codificaciones XML que reconozca libxml2, sin DTD ni entidades
-declaradas; tamaño máximo 10 MiB, 100.000 nodos y 128 niveles. Rechaza
+Acepta las codificaciones XML que reconozca libxml2 salvo UTF-32 y EBCDIC,
+sin DTD ni entidades declaradas; tamaño máximo 10 MiB, 100.000 nodos, 128
+niveles y 256 atributos por elemento (`cpeforge_xml_limits::check_markup`).
+Requiere libxml2 ≥ 2.9.11, comprobada al compilar y al iniciar. Rechaza
 esquemas modificados y referencias fuera del conjunto fijado. En macOS usa
 libxml2 del SDK; en Linux requiere `libxml2-dev` y `pkg-config`. Sin soporte
 Windows todavía. MSRV: Rust 1.85.

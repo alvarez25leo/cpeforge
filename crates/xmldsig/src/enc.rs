@@ -10,8 +10,9 @@ use base64::engine::general_purpose::STANDARD;
 use crate::dom::{Document, NodeId, NodeKind};
 use crate::dsig::{XMLDSIGNS, XmlSecurityDsig, is_set};
 use crate::error::Error;
-use crate::key::{XmlSecurityKey, convert_rsa, lenient_base64_decode};
+use crate::key::{XmlSecurityKey, convert_rsa, is_legacy_encryption, lenient_base64_decode};
 use crate::xpath::{DOUBLE_QUOTE, filter_attr_value};
+use zeroize::Zeroizing;
 
 /// `XMLSecEnc::TEMPLATE`.
 pub const TEMPLATE: &str = "<xenc:EncryptedData xmlns:xenc='http://www.w3.org/2001/04/xmlenc#'>\n   <xenc:CipherData>\n      <xenc:CipherValue></xenc:CipherValue>\n   </xenc:CipherData>\n</xenc:EncryptedData>";
@@ -86,6 +87,13 @@ pub struct XmlSecEnc {
     pub kind: Option<String>,
     /// `encKey`: `EncryptedKey` creado sin anexar (en la plantilla).
     pub enc_key: Option<NodeId>,
+    /// Admite los algoritmos heredados de la referencia (AES-CBC, 3DES y
+    /// RSA PKCS#1 v1.5; ver [`crate::key::is_legacy_encryption`]) y sus
+    /// mensajes de error detallados. `false` por defecto: solo AES-GCM y
+    /// RSA-OAEP, y todo fallo de descifrado es [`Error::DecryptionFailed`].
+    /// Para descifrar un `EncryptedKey` con algoritmo heredado se activa
+    /// también en su contexto ([`XmlSecurityKey::encrypted_ctx`]).
+    pub allow_legacy_algorithms: bool,
     references: Vec<Reference>,
 }
 
@@ -104,8 +112,16 @@ impl XmlSecEnc {
             raw_node: None,
             kind: None,
             enc_key: None,
+            allow_legacy_algorithms: false,
             references: Vec::new(),
         }
+    }
+
+    fn check_algorithm(&self, key: &XmlSecurityKey) -> Result<(), Error> {
+        if !self.allow_legacy_algorithms && is_legacy_encryption(key.algorithm()) {
+            return Err(Error::LegacyEncryptionAlgorithm(key.algorithm().to_owned()));
+        }
+        Ok(())
     }
 
     /// Documento de la plantilla `EncryptedData`.
@@ -166,6 +182,7 @@ impl XmlSecEnc {
         key: &mut XmlSecurityKey,
         replace: bool,
     ) -> Result<Encrypted, Error> {
+        self.check_algorithm(key)?;
         let raw = self
             .raw_node
             .ok_or_else(|| Error::Message("Node to encrypt has not been set".into()))?;
@@ -288,18 +305,23 @@ impl XmlSecEnc {
         let Some(data) = data else {
             return Err(Error::Message("Cannot locate encrypted data".into()));
         };
-        let decrypted = key.decrypt_data(&data)?;
+        self.check_algorithm(key)?;
+        let decrypted = match key.decrypt_data(&data) {
+            Ok(d) => Zeroizing::new(d),
+            Err(e) if self.allow_legacy_algorithms => return Err(e),
+            Err(_) => return Err(Error::DecryptionFailed),
+        };
         if !replace {
-            return Ok(Decrypted::Data(decrypted));
+            return Ok(Decrypted::Data(decrypted.to_vec()));
         }
         let raw = self
             .raw_node
             .ok_or_else(|| Error::Message("Node to decrypt has not been set".into()))?;
-        let text = String::from_utf8(decrypted.clone()).map_err(|_| {
+        let text = Zeroizing::new(String::from_utf8(decrypted.to_vec()).map_err(|_| {
             Error::Xml(crate::XmlError::Malformed(
                 "contenido descifrado no es UTF-8".into(),
             ))
-        })?;
+        })?);
         match self.kind.as_deref() {
             Some(ELEMENT) => {
                 let newdoc = Document::parse(&text)?;
@@ -324,7 +346,7 @@ impl XmlSecEnc {
                 doc.remove_child(raw);
                 Ok(Decrypted::Parent(parent))
             }
-            _ => Ok(Decrypted::Data(decrypted)),
+            _ => Ok(Decrypted::Data(decrypted.to_vec())),
         }
     }
 
@@ -339,7 +361,8 @@ impl XmlSecEnc {
         session: &XmlSecurityKey,
         append: bool,
     ) -> Result<(), Error> {
-        let raw = session.raw_key().unwrap_or_default().to_vec();
+        self.check_algorithm(transport)?;
+        let raw = Zeroizing::new(session.raw_key().unwrap_or_default().to_vec());
         let encrypted = STANDARD.encode(transport.encrypt_data(&raw)?);
         let Some(root) = self.encdoc.document_element() else {
             return Ok(());

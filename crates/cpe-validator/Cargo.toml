@@ -15,6 +15,7 @@ build = "build.rs"
 exclude = ["tests/"]
 
 [dependencies]
+cpeforge-xml-limits.workspace = true
 pcre2-sys.workspace = true
 
 [build-dependencies]

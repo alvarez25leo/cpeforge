@@ -101,14 +101,39 @@ static INIT: OnceLock<bool> = OnceLock::new();
 
 /// Inicializa libxml2/libexslt y el cargador seguro una sola vez.
 fn init() -> Result<(), &'static str> {
-    // SAFETY: gcv_init solo registra EXSLT, el cargador y las preferencias
-    // por defecto; OnceLock garantiza una única ejecución.
-    let ok = *INIT.get_or_init(|| unsafe { gcv_init() } == 0);
-    if ok {
-        Ok(())
-    } else {
-        Err("no se pudo inicializar libxslt")
+    // SAFETY: gcv_init inicializa libxml2 y registra EXSLT, el cargador y las
+    // preferencias por defecto; OnceLock garantiza una única ejecución y el
+    // candado global, que no coincida con la de cpeforge-ubl-validator.
+    let ok = *INIT
+        .get_or_init(|| cpeforge_xml_limits::with_libxml_init_lock(|| unsafe { gcv_init() }) == 0);
+    if !ok {
+        return Err("no se pudo inicializar libxslt");
     }
+    let (libxml, libxslt) = runtime_versions();
+    if version_number(&libxml) < MIN_LIBXML_VERSION {
+        return Err("libxml2 2.9.11 o posterior requerida");
+    }
+    if version_number(&libxslt) < MIN_LIBXSLT_VERSION {
+        return Err("libxslt 1.1.34 o posterior requerida");
+    }
+    Ok(())
+}
+
+/// libxml2 mínima: 2.9.11 corrige CVE del analizador y añade el límite de
+/// operaciones XPath (`opLimit`).
+const MIN_LIBXML_VERSION: u32 = 20911;
+/// libxslt mínima: 1.1.34 corrige CVE-2019-11068 (las preferencias de
+/// seguridad se podían saltar).
+const MIN_LIBXSLT_VERSION: u32 = 10134;
+
+/// `"20913"` → `20913`; `0` si no empieza por dígitos.
+fn version_number(version: &str) -> u32 {
+    version
+        .chars()
+        .take_while(char::is_ascii_digit)
+        .collect::<String>()
+        .parse()
+        .unwrap_or(0)
 }
 
 fn lock_engine() -> MutexGuard<'static, ()> {

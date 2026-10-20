@@ -4,7 +4,8 @@
 //! cualquier certificado incluido en la firma, incluso vencido o
 //! autofirmado. Este módulo valida la cadena contra
 //! raíces explícitas y la vigencia en un instante dado, para usarlo después
-//! de comprobar la firma.
+//! de comprobar la firma. Exige además que el certificado firmante sirva
+//! para firmar (`keyUsage`) y, si se indican, sus usos extendidos.
 
 use openssl::stack::Stack;
 use openssl::x509::store::X509StoreBuilder;
@@ -12,14 +13,38 @@ use openssl::x509::verify::{X509VerifyFlags, X509VerifyParam};
 use openssl::x509::{X509, X509StoreContext};
 
 use crate::error::{Error, openssl_detail};
+use crate::x509_ext::signing_usage;
+
+/// OID de `anyExtendedKeyUsage`.
+pub const ANY_EXTENDED_KEY_USAGE: &str = "2.5.29.37.0";
 
 /// Política de confianza: raíces aceptadas e instante de evaluación.
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone)]
 pub struct TrustPolicy {
     roots: Vec<X509>,
     intermediates: Vec<X509>,
     /// Instante Unix para evaluar la vigencia; `None` usa la hora actual.
     pub at: Option<i64>,
+    /// Rechaza un certificado cuyo `keyUsage` no incluye `digitalSignature`
+    /// ni `nonRepudiation` (por ejemplo, uno solo de cifrado). `true` por
+    /// defecto; sin la extensión se acepta.
+    pub require_signing_key_usage: bool,
+    /// OIDs de `extendedKeyUsage` aceptados; vacío acepta cualquiera. Si el
+    /// certificado declara la extensión, debe incluir uno de estos o
+    /// [`ANY_EXTENDED_KEY_USAGE`]; sin la extensión se acepta (RFC 5280).
+    pub accepted_extended_key_usages: Vec<String>,
+}
+
+impl Default for TrustPolicy {
+    fn default() -> Self {
+        Self {
+            roots: Vec::new(),
+            intermediates: Vec::new(),
+            at: None,
+            require_signing_key_usage: true,
+            accepted_extended_key_usages: Vec::new(),
+        }
+    }
 }
 
 /// Resultado de la evaluación de confianza.
@@ -104,9 +129,36 @@ impl TrustPolicy {
                 })
             })
             .map_err(err)?;
-        Ok(match result {
+        if let Some(reason) = result {
+            return Ok(TrustResult::Untrusted(reason));
+        }
+        Ok(match self.usage_problem(&cert) {
             None => TrustResult::Trusted,
-            Some(reason) => TrustResult::Untrusted(reason),
+            Some(reason) => TrustResult::Untrusted(reason.to_owned()),
         })
+    }
+
+    fn usage_problem(&self, cert: &X509) -> Option<&'static str> {
+        let Some(usage) = signing_usage(cert) else {
+            return Some("unreadable certificate extensions");
+        };
+        if usage.invalid {
+            return Some("invalid or duplicated certificate extensions");
+        }
+        if self.require_signing_key_usage && !usage.can_sign {
+            return Some("keyUsage does not allow digitalSignature or nonRepudiation");
+        }
+        match usage.extended {
+            Some(oids)
+                if !self.accepted_extended_key_usages.is_empty()
+                    && !oids.iter().any(|oid| {
+                        oid == ANY_EXTENDED_KEY_USAGE
+                            || self.accepted_extended_key_usages.contains(oid)
+                    }) =>
+            {
+                Some("extendedKeyUsage does not include an accepted purpose")
+            }
+            _ => None,
+        }
     }
 }

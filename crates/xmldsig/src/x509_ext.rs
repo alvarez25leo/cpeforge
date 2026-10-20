@@ -1032,6 +1032,36 @@ pub(crate) fn details(cert: &X509) -> Option<Details> {
     })
 }
 
+/// Usos de clave del certificado, para [`crate::trust::TrustPolicy`].
+pub(crate) struct SigningUsage {
+    /// Extensiones repetidas o ilegibles (`EXFLAG_INVALID`).
+    pub(crate) invalid: bool,
+    /// `true` si `keyUsage` falta o incluye `digitalSignature` o
+    /// `nonRepudiation`.
+    pub(crate) can_sign: bool,
+    /// OIDs de `extendedKeyUsage`; `None` si falta (cualquier uso).
+    pub(crate) extended: Option<Vec<String>>,
+}
+
+/// `None` si el DER del certificado no se puede leer.
+pub(crate) fn signing_usage(cert: &X509) -> Option<SigningUsage> {
+    let der = cert.to_der().ok()?;
+    let (serial, extensions) = parse_certificate(&der)?;
+    let flags = cache_extensions(cert, &serial, &extensions);
+    let mut ignored = Flags::default();
+    let extended = decode(&extensions, OID_EXT_KEY_USAGE, &mut ignored, |v| {
+        sequence(v)?
+            .iter()
+            .map(|t| (t.tag == 0x06).then(|| oid_text(t.content)).flatten())
+            .collect::<Option<Vec<_>>>()
+    });
+    Some(SigningUsage {
+        invalid: flags.invalid,
+        can_sign: !flags.kusage || flags.ku & (KU_DIGITAL_SIGNATURE | KU_NON_REPUDIATION) != 0,
+        extended,
+    })
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

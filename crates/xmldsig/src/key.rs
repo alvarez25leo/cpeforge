@@ -29,6 +29,13 @@ pub const AES128_CBC: &str = "http://www.w3.org/2001/04/xmlenc#aes128-cbc";
 pub const AES192_CBC: &str = "http://www.w3.org/2001/04/xmlenc#aes192-cbc";
 /// `XMLSecurityKey::AES256_CBC`.
 pub const AES256_CBC: &str = "http://www.w3.org/2001/04/xmlenc#aes256-cbc";
+/// AES-128-GCM de XML Encryption 1.1 (no existe en la referencia): IV de 12
+/// bytes, texto cifrado y etiqueta de 16 bytes, en ese orden.
+pub const AES128_GCM: &str = "http://www.w3.org/2009/xmlenc11#aes128-gcm";
+/// AES-192-GCM de XML Encryption 1.1 (no existe en la referencia).
+pub const AES192_GCM: &str = "http://www.w3.org/2009/xmlenc11#aes192-gcm";
+/// AES-256-GCM de XML Encryption 1.1 (no existe en la referencia).
+pub const AES256_GCM: &str = "http://www.w3.org/2009/xmlenc11#aes256-gcm";
 /// `XMLSecurityKey::RSA_1_5`.
 pub const RSA_1_5: &str = "http://www.w3.org/2001/04/xmlenc#rsa-1_5";
 /// `XMLSecurityKey::RSA_OAEP_MGF1P` (OAEP con SHA-1 y MGF1-SHA-1).
@@ -68,6 +75,34 @@ enum Class {
         digest: Option<Digest>,
     },
     Hmac,
+    /// AES-GCM (cifrado autenticado).
+    Aead {
+        key_size: usize,
+    },
+}
+
+/// Tamaño del IV de AES-GCM en XML Encryption 1.1.
+const GCM_IV_LEN: usize = 12;
+/// Tamaño de la etiqueta de autenticación de AES-GCM.
+const GCM_TAG_LEN: usize = 16;
+
+fn gcm_cipher(key_size: usize) -> Cipher {
+    match key_size {
+        16 => Cipher::aes_128_gcm(),
+        24 => Cipher::aes_192_gcm(),
+        _ => Cipher::aes_256_gcm(),
+    }
+}
+
+/// Algoritmos de cifrado que solo se admiten por compatibilidad con la
+/// referencia: CBC sin autenticación (descifrado maleable y oráculo de
+/// relleno), 3DES (bloque de 64 bits) y RSA PKCS#1 v1.5 (Bleichenbacher).
+#[must_use]
+pub fn is_legacy_encryption(algorithm: &str) -> bool {
+    matches!(
+        algorithm,
+        TRIPLEDES_CBC | AES128_CBC | AES192_CBC | AES256_CBC | RSA_1_5
+    )
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -181,11 +216,14 @@ impl Drop for XmlSecurityKey {
     }
 }
 
-const ALGORITHMS: [&str; 12] = [
+const ALGORITHMS: [&str; 15] = [
     TRIPLEDES_CBC,
     AES128_CBC,
     AES192_CBC,
     AES256_CBC,
+    AES128_GCM,
+    AES192_GCM,
+    AES256_GCM,
     RSA_1_5,
     RSA_OAEP_MGF1P,
     RSA_SHA1,
@@ -243,6 +281,9 @@ impl XmlSecurityKey {
                 key_size: 32,
                 block_size: 16,
             },
+            AES128_GCM => Class::Aead { key_size: 16 },
+            AES192_GCM => Class::Aead { key_size: 24 },
+            AES256_GCM => Class::Aead { key_size: 32 },
             RSA_1_5 | RSA_SHA1 => asym(Padding::PKCS1, None)?,
             RSA_OAEP_MGF1P => asym(Padding::PKCS1_OAEP, None)?,
             RSA_SHA256 => asym(Padding::PKCS1, Some(Digest::Sha256))?,
@@ -284,7 +325,7 @@ impl XmlSecurityKey {
     #[must_use]
     pub fn symmetric_key_size(&self) -> Option<usize> {
         match self.class {
-            Class::Symmetric { key_size, .. } => Some(key_size),
+            Class::Symmetric { key_size, .. } | Class::Aead { key_size } => Some(key_size),
             _ => None,
         }
     }
@@ -396,6 +437,12 @@ impl XmlSecurityKey {
                 }
                 self.material = Material::Raw(key.to_vec());
             }
+            Class::Aead { key_size } => {
+                if key.len() < key_size {
+                    return Err(Error::SymmetricKeyTooShort);
+                }
+                self.material = Material::Raw(key[..key_size].to_vec());
+            }
             Class::Hmac => self.material = Material::Raw(key.to_vec()),
         }
         Ok(())
@@ -456,6 +503,29 @@ impl XmlSecurityKey {
                 };
                 result.map_err(|e| openssl_error(operation, &e))
             }
+            Class::Aead { key_size } => {
+                let key = match self.raw_key() {
+                    Some(k) if k.len() >= key_size => Zeroizing::new(k[..key_size].to_vec()),
+                    _ => return Err(Error::SymmetricKeyTooShort),
+                };
+                let mut iv = vec![0u8; GCM_IV_LEN];
+                let mut tag = [0u8; GCM_TAG_LEN];
+                let failure = |e: &openssl::error::ErrorStack| {
+                    openssl_error("Failure encrypting Data (AES-GCM) - ", e)
+                };
+                openssl::rand::rand_bytes(&mut iv).map_err(|e| failure(&e))?;
+                let encrypted = openssl::symm::encrypt_aead(
+                    gcm_cipher(key_size),
+                    &key,
+                    Some(&iv),
+                    &[],
+                    data,
+                    &mut tag,
+                )
+                .map_err(|e| failure(&e))?;
+                self.iv = Some(iv.clone());
+                Ok([iv, encrypted, tag.to_vec()].concat())
+            }
             Class::Hmac => Ok(Vec::new()),
         }
     }
@@ -481,9 +551,10 @@ impl XmlSecurityKey {
                         .map(|k| k[..key_size.min(k.len())].to_vec())
                         .unwrap_or_default(),
                 );
-                let decrypted = crypt(cipher, Mode::Decrypt, &key, &iv, body).map_err(|e| {
-                    openssl_error("Failure decrypting Data (openssl symmetric) - ", &e)
-                })?;
+                let decrypted =
+                    Zeroizing::new(crypt(cipher, Mode::Decrypt, &key, &iv, body).map_err(|e| {
+                        openssl_error("Failure decrypting Data (openssl symmetric) - ", &e)
+                    })?);
                 Ok(unpad_iso10126(&decrypted))
             }
             Class::Asymmetric {
@@ -511,6 +582,21 @@ impl XmlSecurityKey {
                     }
                 };
                 result.map_err(|e| openssl_error(operation, &e))
+            }
+            Class::Aead { key_size } => {
+                // Un solo error para clave, IV, etiqueta o datos alterados.
+                let key = match self.raw_key() {
+                    Some(k) if k.len() >= key_size => Zeroizing::new(k[..key_size].to_vec()),
+                    _ => return Err(Error::DecryptionFailed),
+                };
+                if data.len() < GCM_IV_LEN + GCM_TAG_LEN {
+                    return Err(Error::DecryptionFailed);
+                }
+                let (iv, rest) = data.split_at(GCM_IV_LEN);
+                let (body, tag) = rest.split_at(rest.len() - GCM_TAG_LEN);
+                self.iv = Some(iv.to_vec());
+                openssl::symm::decrypt_aead(gcm_cipher(key_size), &key, Some(iv), &[], body, tag)
+                    .map_err(|_| Error::DecryptionFailed)
             }
             Class::Hmac => Ok(Vec::new()),
         }

@@ -10,27 +10,16 @@
 - **PDF.** Nuevo crate para generar el PDF de la representación impresa
   (`cpeforge-report` termina en HTML).
 
-## Seguridad
-
-- **XML Encryption** (`xmldsig::enc`): admite AES-CBC sin autenticación,
-  RSA-1.5 y 3DES, y los errores de descifrado distinguen relleno de clave
-  (oráculo). No está en el camino SUNAT; antes de exponerlo, limitarlo a
-  AES-GCM y RSA-OAEP con un error único, y borrar de memoria las claves de
-  sesión (`zeroize`).
-- **Piso de algoritmos.** SUNAT exige RSA-SHA1/SHA-1; falta una opción para
-  rechazar SHA-1 fuera del perfil SUNAT.
-- **`TrustPolicy`** no comprueba `keyUsage`/`extendedKeyUsage` del certificado.
-- **Versión mínima de libxml2/libxslt.** No se comprueba al compilar ni al
-  iniciar; antes de 2.11 `xmlInitParser` no es seguro si los dos validadores
-  se inicializan a la vez en el mismo proceso.
-- **Preescaneo duplicado** en los dos validadores (`src/prescan.rs`): moverlo a
-  `cpeforge-xml-limits` en la próxima publicación de ese crate.
-
 ## Revisión y repositorio
 
-- **Publicar** `cpeforge-xmldsig`, `cpeforge-cpe-validator` y
-  `cpeforge-ubl-validator` con la revisión de seguridad del 2026-10-19 (las
-  versiones de crates.io no la tienen).
+- **Publicar** la revisión de seguridad del 2026-10-19 (las versiones de
+  crates.io no la tienen), en este orden: `cpeforge-xml-limits` 0.1.1
+  (`check_markup`, `with_libxml_init_lock`), `cpeforge-xmldsig`,
+  `cpeforge-cpe-validator` y `cpeforge-ubl-validator`. `xmldsig` cambia
+  valores por defecto (`XmlSecEnc` rechaza AES-CBC/3DES/RSA-1.5;
+  `TrustPolicy` exige `keyUsage` de firma): publicarlo como 0.2.0.
+- **Linux.** Las comprobaciones de versión mínima de libxml2/libxslt en
+  `build.rs` (pkg-config) solo se probaron en macOS; confirmarlas en la CI.
 - **Revisión independiente** de la API de todos los crates, y de seguridad de
   `ws`, `gre-api`, `xml-parser` y `report`, antes de declarar una versión
   estable.

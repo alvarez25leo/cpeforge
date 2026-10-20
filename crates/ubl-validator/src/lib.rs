@@ -7,7 +7,6 @@
 //! No se aceptan DTD, red, rutas fuera de ese directorio ni XML excesivo.
 
 mod ffi;
-mod prescan;
 
 use std::collections::{HashMap, HashSet};
 use std::fmt;
@@ -15,9 +14,9 @@ use std::fmt::Write as _;
 use std::fs;
 use std::path::{Component, Path, PathBuf};
 
+use cpeforge_xml_limits::{DEFAULT_MAX_ATTRIBUTES, MarkupRejection, check_markup};
 use roxmltree::Node;
 
-use crate::prescan::Rejection;
 use serde::Deserialize;
 use sha2::{Digest, Sha256};
 
@@ -388,11 +387,11 @@ fn preflight_document(xml: &[u8]) -> Result<(), InfrastructureError> {
     if xml.len() > MAX_XML_BYTES {
         return Err(InfrastructureError::XmlLimit);
     }
-    match prescan::prescan(xml) {
+    match check_markup(xml, DEFAULT_MAX_ATTRIBUTES) {
         Ok(()) => {}
-        Err(Rejection::Doctype) => return Err(InfrastructureError::DtdForbidden),
-        Err(Rejection::Attributes) => return Err(InfrastructureError::XmlLimit),
-        Err(Rejection::Encoding) => return Err(InfrastructureError::XmlParse),
+        Err(MarkupRejection::Declaration) => return Err(InfrastructureError::DtdForbidden),
+        Err(MarkupRejection::TooManyAttributes) => return Err(InfrastructureError::XmlLimit),
+        Err(_) => return Err(InfrastructureError::XmlParse),
     }
     ffi::preflight(xml, MAX_NODES, MAX_DEPTH)
 }

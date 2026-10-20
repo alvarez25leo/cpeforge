@@ -397,6 +397,8 @@ impl Runner {
             sym.generate_session_key()?;
         }
         let mut enc = XmlSecEnc::new();
+        // La referencia solo tiene algoritmos heredados (CBC, 3DES, RSA-1.5).
+        enc.allow_legacy_algorithms = true;
         enc.set_node(target(&doc, s(&c["target"]).unwrap_or(""))?);
         enc.kind = s(&c["type"]).map(str::to_owned);
         if let Some(t) = c.get("key_transport") {
@@ -434,6 +436,7 @@ impl Runner {
             return Ok(json!({"located": false}));
         };
         let mut enc = XmlSecEnc::new();
+        enc.allow_legacy_algorithms = true;
         enc.set_node(data);
         enc.kind = Some(doc.attribute(data, "Type").unwrap_or("").to_owned());
         let key = enc.locate_key(&doc, None);
@@ -457,6 +460,9 @@ impl Runner {
             Some(mut info) if info.is_encrypted => {
                 let pk = self.in_bytes(&c["private_key"])?;
                 info.load_key(&pk, false)?;
+                if let Some(ctx) = info.encrypted_ctx.as_mut() {
+                    ctx.allow_legacy_algorithms = true;
+                }
                 let session = info.decrypt_encrypted_key(&mut doc)?;
                 let mut k = XmlSecurityKey::new(algorithm, None)?;
                 k.load_key(&session, false)?;

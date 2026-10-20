@@ -14,10 +14,16 @@ typedef void (*cpeforge_error_cb)(void *, int, int, int, int, const char *);
 typedef struct { cpeforge_error_cb callback; void *user; } cpeforge_sink;
 
 /* Inicializa libxml2. Antes de 2.11 xmlInitParser no es seguro si dos hilos
- * lo llaman a la vez; el lado Rust lo invoca una sola vez (std::sync::Once)
- * antes de cualquier otra función de este archivo. */
+ * lo llaman a la vez; el lado Rust lo invoca una sola vez, con el candado de
+ * cpeforge_xml_limits::with_libxml_init_lock, antes de cualquier otra
+ * función de este archivo. */
 void cpeforge_init(void) {
     xmlInitParser();
+}
+
+/* Versión de la libxml2 cargada en tiempo de ejecución ("20913"). */
+const char *cpeforge_libxml_version(void) {
+    return xmlParserVersion;
 }
 
 /* Conserva la semántica de codificaciones XML de libxml2. No usa NOENT ni

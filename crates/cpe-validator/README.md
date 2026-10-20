@@ -34,8 +34,11 @@ operaciones XPath (si la libxml2 lo aplica, ver `engine_info()`) y de PCRE.
 Los fallos de infraestructura son `CpeValidatorError` (con `error_class()`),
 nunca una lista vacía.
 
-Requisitos: libxml2, libxslt y libexslt del sistema (`libxslt1-dev` en
-Debian/Ubuntu; el SDK en macOS). Windows no está soportado.
+Requisitos: libxml2 ≥ 2.9.11, libxslt ≥ 1.1.34 y libexslt del sistema
+(`libxslt1-dev` en Debian/Ubuntu; el SDK en macOS), comprobadas al compilar y
+al iniciar. Windows no está soportado. Antes de libxml2 el XML pasa por
+`cpeforge_xml_limits::check_markup` (sin `DOCTYPE`, como máximo 256 atributos
+por elemento).
 
 **Limitación conocida, sin soporte:** la libxml2 de Apple en macOS < 13 no
 ofrece el límite de operaciones XPath (`engine_info().xpath_operation_limit`

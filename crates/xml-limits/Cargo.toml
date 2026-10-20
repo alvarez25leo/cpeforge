@@ -1,7 +1,7 @@
 [package]
 name = "cpeforge-xml-limits"
-version = "0.1.0"
-description = "Límite de anidamiento XML comprobado sobre el texto, antes de que un parser recursivo agote la pila"
+version = "0.1.1"
+description = "Límites XML comprobados sobre el texto: anidamiento antes de un parser recursivo y marcado peligroso (DOCTYPE, miles de atributos) antes de libxml2"
 readme = "README.md"
 keywords = ["xml", "depth", "stack", "parser", "security"]
 categories = ["parser-implementations"]

@@ -5,7 +5,9 @@ Los crates siguen SemVer: en la serie 0.x, subir la versión menor (0.1 → 0.2)
 indica cambios incompatibles. Las reglas de compatibilidad están en
 [docs/estabilidad-api.md](docs/estabilidad-api.md).
 
-## Sin publicar
+## 0.2.1 — 2026-10-20
+
+`cpeforge-xmldsig`, `cpeforge-ws` y `cpeforge` 0.2.1, compatibles con 0.2.0.
 
 ### Corregido
 

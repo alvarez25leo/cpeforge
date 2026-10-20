@@ -1,6 +1,6 @@
 [package]
 name = "cpeforge"
-version = "0.2.0"
+version = "0.2.1"
 description = "CPEForge: SDK en Rust para facturación electrónica en Perú (envío SOAP y GRE a SUNAT)."
 readme = "README.md"
 keywords = ["sunat", "peru", "cpe", "ubl", "facturacion"]
@@ -18,9 +18,9 @@ xcodes = ["dep:cpeforge-xcodes"]
 [dependencies]
 cpeforge-core.workspace = true
 cpeforge-xml = { path = "../xml", version = "0.2.0" }
-cpeforge-xmldsig = { path = "../xmldsig", version = "0.2.0" }
+cpeforge-xmldsig = { path = "../xmldsig", version = "0.2.1" }
 cpeforge-gre-api = { path = "../gre-api", version = "0.2.0" }
-cpeforge-ws = { path = "../ws", version = "0.2.0" }
+cpeforge-ws = { path = "../ws", version = "0.2.1" }
 cpeforge-xcodes = { path = "../xcodes", version = "0.3.0", optional = true }
 jiff.workspace = true
 

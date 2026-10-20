@@ -1,6 +1,6 @@
 [package]
 name = "cpeforge-xmldsig"
-version = "0.2.0"
+version = "0.2.1"
 description = "Firma, verificación, canonicalización y cifrado XML (perfil SUNAT)."
 readme = "README.md"
 keywords = ["xmldsig", "xmlenc", "c14n", "sunat", "xml-signature"]

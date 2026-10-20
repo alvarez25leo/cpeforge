@@ -36,5 +36,3 @@
   estable.
 - **cpeforge** se declara estable después de `core`, `xml`, `xmldsig`,
   `gre-api` y `ws`.
-- **GitHub.** Añadir los topics del repositorio (hoy vacíos): `rust`, `sunat`,
-  `electronic-invoicing`, `peru`, `ubl`, `xml`, `xml-signature`, `cpe`, `sdk`.

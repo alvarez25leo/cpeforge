@@ -12,7 +12,12 @@ SUNAT («Archivo XSL – 2.1») no se ejecutan directamente: incluyen
 `local:///commons/…` de IBM DataPower (no publicados) y usan EXSLT
 `regexp:match`; se rechazan al compilar sin leer nada fuera del directorio de
 reglas. Deben convertirse como en la referencia (`regexp:match` →
-`MATCHES_HANDLER`, `commons` incluidos en el directorio de reglas).
+`MATCHES_HANDLER`, `commons` incluidos en el directorio de reglas). Los
+nombres que busca `XslPathResolver` son los de la referencia
+(`ValidaExprRegPercepcion-1.0.1.xsl`, `ValidaExprRegGreRemitente-2.0.1.xsl`);
+el ZIP de SUNAT trae `Percepcion-1.0.2` y `GuiaRemitente-2.0.1`, que se
+renombran al convertirlos o se ubican con un `RuleResolver` propio
+(`CpeValidator::with_parts`).
 
 ```rust,no_run
 use cpeforge_cpe_validator::CpeValidator;

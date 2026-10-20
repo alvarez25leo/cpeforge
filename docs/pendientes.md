@@ -20,8 +20,7 @@
 - **Linux.** Confirmar en la CI (ubuntu-24.04) las comprobaciones de versión
   mínima de libxml2/libxslt de `build.rs` (pkg-config); solo se han visto
   pasar en macOS.
-- **Revisión independiente** de la API de todos los crates y de seguridad de
-  `ws`, `gre-api`, `xml-parser` y `report` antes de declarar una versión
-  estable.
+- **Revisión independiente** de la API de todos los crates antes de declarar
+  una versión estable.
 - **cpeforge** se declara estable después de `core`, `xml`, `xmldsig`,
   `gre-api` y `ws`.

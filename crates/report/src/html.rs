@@ -19,6 +19,7 @@ use crate::error::{LoaderFailure, RenderCause, ReportError, from_engine};
 use crate::filters::{self, OrderedMap, RUNTIME_KEY, Runtime, RuntimeValue};
 use crate::params::{ParamValue, ReportParameters};
 use crate::templates;
+use crate::validate;
 
 /// Plantilla inicial de [`HtmlReport`].
 pub const DEFAULT_TEMPLATE: &str = "invoice.html.twig";
@@ -154,13 +155,12 @@ impl HtmlReport {
         let mut env = Environment::new();
         // Las plantillas se escriben contando con que se elimine el primer salto
         // de línea tras `%}` y `#}` y se conserve el último del archivo.
-        if let Ok(syntax) = SyntaxConfig::builder()
+        let syntax = SyntaxConfig::builder()
             .trim_blocks(true)
             .keep_trailing_newline(true)
             .build()
-        {
-            env.set_syntax(syntax);
-        }
+            .unwrap_or_default();
+        env.set_syntax(syntax.clone());
         let escape = if options.autoescape {
             AutoEscape::Html
         } else {
@@ -176,10 +176,20 @@ impl HtmlReport {
         let dir = options.template_dir.clone().map(Arc::new);
         let max = options.max_template_bytes;
         env.set_loader(move |name| {
-            templates::load(dir.as_deref().map(PathBuf::as_path), name, max).map_err(|err| {
-                minijinja::Error::new(minijinja::ErrorKind::InvalidOperation, err.to_string())
-                    .with_source(LoaderFailure(err))
-            })
+            // Cada plantilla cargada se valida antes de compilarla: filtros,
+            // tests y funciones desconocidos fallan aunque estén en una rama
+            // que no se ejecuta.
+            templates::load(dir.as_deref().map(PathBuf::as_path), name, max)
+                .and_then(|source| {
+                    if let Some(text) = &source {
+                        validate::check(name, text, &syntax)?;
+                    }
+                    Ok(source)
+                })
+                .map_err(|err| {
+                    minijinja::Error::new(minijinja::ErrorKind::InvalidOperation, err.to_string())
+                        .with_source(LoaderFailure(err))
+                })
         });
         filters::register(&mut env);
         Self {

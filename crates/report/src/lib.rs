@@ -84,6 +84,7 @@ mod params;
 pub mod qr;
 mod resolver;
 mod templates;
+mod validate;
 pub mod xml_utils;
 
 pub use error::{RenderCause, ReportError};

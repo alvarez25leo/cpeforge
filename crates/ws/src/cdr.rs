@@ -14,9 +14,12 @@ const APPLICATION_RESPONSE: &str =
 pub const MAX_XML_BYTES: usize = 8 * 1024 * 1024;
 /// Profundidad máxima de anidamiento de elementos (la raíz es el nivel 1).
 ///
-/// Es el límite por defecto de libxml2 sin `XML_PARSE_HUGE`; un CDR de SUNAT
-/// no supera la docena de niveles.
-pub const MAX_XML_DEPTH: usize = 256;
+/// Un CDR de SUNAT no supera la docena de niveles. `roxmltree` analiza de
+/// forma recursiva y en compilación debug usa unos 17 KB de pila por nivel:
+/// 64 niveles caben con holgura en los 2 MiB de un hilo de Tokio también en
+/// debug (con 256, unos 120 niveles ya abortaban el proceso). Es el mismo
+/// límite que `cpeforge-xml-parser` usa por defecto.
+pub const MAX_XML_DEPTH: usize = 64;
 /// Máximo de nodos del árbol XML.
 const MAX_XML_NODES: u32 = 100_000;
 

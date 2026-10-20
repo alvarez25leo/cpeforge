@@ -20,16 +20,10 @@
     {
       "case": "user-twig-only-syntax",
       "kind": "html",
-      "classification": "CORREGIR",
-      "reason": "Las plantillas del usuario se ejecutan con MiniJinja, no con Twig 3. El ternario (? :), ?: y ?? y las etiquetas exclusivas de Twig (apply, with, embed…) producen ReportError::Syntax en Rust y un render válido en la referencia. El rango 1..3 no falla: se evalúa como indefinido y se imprime vacío, también con strict_variables (prueba twig_range_operator_is_silently_undefined). El filtro format sí existe en MiniJinja, con el formato % de Python. Las siete plantillas integradas no usan esa sintaxis y son idénticas.",
-      "next_step": "Decidir el alcance de las plantillas personalizadas: (a) documentar que solo se admite el dialecto MiniJinja con los filtros listados en crates/report/README.md y retirar esta fila del alcance de paridad con aprobación explícita, o (b) implementar los operadores y filtros de Twig que falten con casos de paridad. En ambos casos, documentar o rechazar el rango .. silencioso."
-    },
-    {
-      "case": "user-unknown-function-dead-branch",
-      "kind": "html",
-      "classification": "CORREGIR",
-      "reason": "Twig compila toda la plantilla y lanza SyntaxError por una función inexistente aunque esté en una rama que no se ejecuta. MiniJinja resuelve funciones al ejecutar: la misma plantilla renderiza 'ok' en Rust. Solo afecta a plantillas del usuario con llamadas inexistentes.",
-      "next_step": "Validar al cargar las plantillas del usuario las funciones, filtros y tests referenciados (por ejemplo con el AST de MiniJinja tras fijar la API) o incluirlo en la decisión de alcance de user-twig-only-syntax."
+      "classification": "DIFERENCIA_DELIBERADA",
+      "reason": "Las plantillas del usuario se escriben en el dialecto MiniJinja, no en Twig 3 (decisión de alcance del 2026-10-20). El ternario (? :), ?: y ?? y las etiquetas exclusivas de Twig (apply, with, embed…) producen ReportError::Syntax en Rust y un render válido en la referencia. El rango 1..3 no es sintaxis MiniJinja: se evalúa como indefinido y se imprime vacío, también con strict_variables (prueba twig_range_operator_is_silently_undefined); está documentado en crates/report/README.md. El filtro format existe en MiniJinja con el formato % de Python. Filtros, tests y funciones desconocidos se rechazan al cargar la plantilla, también en ramas que no se ejecutan.",
+      "motivo": "rechazo-explicito",
+      "compatibility_note": "Las siete plantillas integradas no usan esa sintaxis y son idénticas. Una plantilla propia escrita para Twig debe adaptarse al dialecto MiniJinja con los filtros listados en crates/report/README.md (en lugar de 1..3, range(1, 4))."
     },
     {
       "case": "xml-dtd-entity",

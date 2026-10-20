@@ -180,7 +180,7 @@ dependencies = [
 
 [[package]]
 name = "cpeforge-report"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "base64",
  "cpeforge-core",
@@ -226,7 +226,7 @@ dependencies = [
 
 [[package]]
 name = "cpeforge-ws"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "base64",
  "cpeforge-core",

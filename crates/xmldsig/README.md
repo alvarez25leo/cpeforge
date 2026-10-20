@@ -46,6 +46,9 @@ de firma de comprobantes SUNAT.
   de memoria al soltarse (`zeroize`).
 - **Criptografía:** OpenSSL mediante el crate `openssl` (sin criptografía
   propia).
+- **Sin red.** `XmlSecurityDsig::add_509_cert` recibe el certificado como
+  texto (PEM o base64); la carga por URL de la referencia no existe y no se
+  añadirá: el crate nunca descarga nada.
 
 ## Rendimiento
 

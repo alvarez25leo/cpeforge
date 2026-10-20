@@ -23,6 +23,9 @@ use cpeforge_xml_parser::{
     VoidedDocument, VoidedParser, XmlParserError,
 };
 
+#[path = "support/xsd.rs"]
+mod xsd;
+
 type TestResult = Result<(), Box<dyn std::error::Error>>;
 
 fn dec(text: &str) -> Decimal {
@@ -154,6 +157,7 @@ fn invoice_ubl20_roundtrip() -> TestResult {
         ..Invoice::default()
     };
     let xml = InvoiceBuilder::new(RenderOptions::default()).render(&invoice)?;
+    xsd::assert_valid(&xml, "invoice-ubl20")?;
     let parsed = InvoiceParser::new()
         .parse(xml.as_bytes())?
         .ok_or("sin factura")?;
@@ -172,6 +176,7 @@ fn invoice_ubl21_fails_like_reference() -> TestResult {
         ..Invoice::default()
     };
     let xml = InvoiceBuilder::new(RenderOptions::default()).render(&invoice)?;
+    xsd::assert_valid(&xml, "invoice-ubl21")?;
     let err = InvoiceParser::new()
         .parse(xml.as_bytes())
         .err()
@@ -196,6 +201,7 @@ fn notes_roundtrip() -> TestResult {
             ..Note::default()
         };
         let xml = NoteBuilder::new(RenderOptions::default()).render(&note)?;
+        xsd::assert_valid(&xml, "note")?;
         let parsed = NoteParser::new().parse(xml.as_bytes())?.ok_or("sin nota")?;
         assert_sale_header(&parsed.base, &note.base);
         assert_eq!(parsed.base.tipo_doc.as_deref(), Some(expected));
@@ -256,6 +262,7 @@ fn despatch_roundtrip() -> TestResult {
         ..Despatch::default()
     };
     let xml = DespatchBuilder::new(RenderOptions::default()).render(&despatch)?;
+    xsd::assert_valid(&xml, "despatch")?;
     let parsed = DespatchParser::new()
         .parse(xml.as_bytes())?
         .ok_or("sin guía")?;
@@ -307,6 +314,7 @@ fn summary_roundtrip() -> TestResult {
         ..Summary::default()
     };
     let xml = SummaryBuilder::new(RenderOptions::default()).render(&summary)?;
+    xsd::assert_valid(&xml, "summary")?;
     let parsed = SummaryParser::new()
         .parse(xml.as_bytes())?
         .ok_or("sin resumen")?;
@@ -346,9 +354,9 @@ fn voided_and_reversion_roundtrip() -> TestResult {
     };
     let builder = VoidedBuilder::new(RenderOptions::default());
     let parser = VoidedParser::new();
-    let parsed = parser
-        .parse(builder.render(&voided)?.as_bytes())?
-        .ok_or("sin baja")?;
+    let xml = builder.render(&voided)?;
+    xsd::assert_valid(&xml, "voided")?;
+    let parsed = parser.parse(xml.as_bytes())?.ok_or("sin baja")?;
     assert!(matches!(parsed, VoidedDocument::Voided(_)));
     // La plantilla de bajas no incluye nombre comercial ni dirección.
     let expected = Voided {
@@ -363,9 +371,9 @@ fn voided_and_reversion_roundtrip() -> TestResult {
     let reversion = Reversion {
         voided: voided.clone(),
     };
-    let parsed = parser
-        .parse(builder.render_reversion(&reversion)?.as_bytes())?
-        .ok_or("sin reversión")?;
+    let xml = builder.render_reversion(&reversion)?;
+    xsd::assert_valid(&xml, "reversion")?;
+    let parsed = parser.parse(xml.as_bytes())?.ok_or("sin reversión")?;
     assert!(matches!(parsed, VoidedDocument::Reversion(_)));
     assert_eq!(parsed.voided(), &expected);
     Ok(())
@@ -409,6 +417,7 @@ fn retention_and_perception_roundtrip() -> TestResult {
         }]),
     };
     let xml = RetentionBuilder::new(RenderOptions::default()).render(&retention)?;
+    xsd::assert_valid(&xml, "retention")?;
     let parsed = RetentionParser::new()
         .parse(xml.as_bytes())?
         .ok_or("sin retención")?;
@@ -461,6 +470,7 @@ fn retention_and_perception_roundtrip() -> TestResult {
         }]),
     };
     let xml = PerceptionBuilder::new(RenderOptions::default()).render(&perception)?;
+    xsd::assert_valid(&xml, "perception")?;
     let parsed = PerceptionParser::new()
         .parse(xml.as_bytes())?
         .ok_or("sin percepción")?;
@@ -481,4 +491,12 @@ fn errors_are_typed() {
         XmlParserError::Empty.error_message().as_deref(),
         Some("DOMDocument::loadXML(): Argument #1 ($source) must not be empty")
     );
+}
+
+/// El validador XSD de estas pruebas rechaza un documento inválido (no es
+/// una comprobación vacía).
+#[test]
+fn xsd_check_rejects_invalid_documents() {
+    let invalid = r#"<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"><cbc:ID>F001-1</cbc:ID></Invoice>"#;
+    assert!(xsd::assert_valid(invalid, "invalid").is_err());
 }

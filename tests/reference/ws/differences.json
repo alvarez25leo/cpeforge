@@ -75,18 +75,18 @@
       "compatibility_note": "Solo cambia frente a la referencia con libxml2 2.9 y con un fault que SUNAT no emite (dos CDATA seguidas en el faultstring). La sonda detecta el perfil y la entrada solo aplica allí."
     },
     {
-      "id": "scripts/ws_http_probe.sh#fault-detail-depth-257",
+      "id": "scripts/ws_http_probe.sh#fault-detail-depth-65",
       "classification": "DIFERENCIA_DELIBERADA",
       "motivo": "seguridad",
-      "reason": "Rust rechaza antes de parsear una respuesta SOAP con más de 256 niveles de anidamiento y devuelve el fault Client «looks like we got no XML document»; ext/soap lee el documento: con libxml2 2.15.1 se midió que admite hasta 2048 niveles y rechaza 2049 con ese mismo fault (perfil de XML_PARSE_HUGE); con libxml2 2.9 no se midió y ese perfil no limita la profundidad. roxmltree analiza los elementos de forma recursiva: sin el límite, unos 3100 niveles agotan la pila de 2 MiB de un worker de Tokio y abortan el proceso.",
-      "compatibility_note": "Solo cambia con respuestas de más de 256 niveles; un envelope de SUNAT con CDR no llega a 20. El error es el mismo que ext/soap da por encima de su propio límite."
+      "reason": "Rust rechaza antes de parsear una respuesta SOAP con más de 64 niveles de anidamiento y devuelve el fault Client «looks like we got no XML document»; ext/soap lee el documento: con libxml2 2.15.1 se midió que admite hasta 2048 niveles y rechaza 2049 con ese mismo fault (perfil de XML_PARSE_HUGE); con libxml2 2.9 no se midió y ese perfil no limita la profundidad. roxmltree analiza los elementos de forma recursiva y en compilación debug usa unos 17 KB de pila por nivel: con un límite mayor, unos 120 niveles agotaban en debug la pila de 2 MiB de un worker de Tokio (unos 3100 en release) y abortaban el proceso.",
+      "compatibility_note": "Solo cambia con respuestas de más de 64 niveles; un envelope de SUNAT con CDR no llega a 20. El error es el mismo que ext/soap da por encima de su propio límite."
     },
     {
-      "id": "scripts/ws_http_probe.sh#body-depth-257",
+      "id": "scripts/ws_http_probe.sh#body-depth-65",
       "classification": "DIFERENCIA_DELIBERADA",
       "motivo": "seguridad",
-      "reason": "Rust rechaza antes de parsear una respuesta SOAP con más de 256 niveles de anidamiento y devuelve el fault Client «looks like we got no XML document»; ext/soap lee el documento: con libxml2 2.15.1 se midió que admite hasta 2048 niveles y rechaza 2049 con ese mismo fault (perfil de XML_PARSE_HUGE); con libxml2 2.9 no se midió y ese perfil no limita la profundidad. roxmltree analiza los elementos de forma recursiva: sin el límite, unos 3100 niveles agotan la pila de 2 MiB de un worker de Tokio y abortan el proceso.",
-      "compatibility_note": "Solo cambia con respuestas de más de 256 niveles; un envelope de SUNAT con CDR no llega a 20. El error es el mismo que ext/soap da por encima de su propio límite."
+      "reason": "Rust rechaza antes de parsear una respuesta SOAP con más de 64 niveles de anidamiento y devuelve el fault Client «looks like we got no XML document»; ext/soap lee el documento: con libxml2 2.15.1 se midió que admite hasta 2048 niveles y rechaza 2049 con ese mismo fault (perfil de XML_PARSE_HUGE); con libxml2 2.9 no se midió y ese perfil no limita la profundidad. roxmltree analiza los elementos de forma recursiva y en compilación debug usa unos 17 KB de pila por nivel: con un límite mayor, unos 120 niveles agotaban en debug la pila de 2 MiB de un worker de Tokio (unos 3100 en release) y abortaban el proceso.",
+      "compatibility_note": "Solo cambia con respuestas de más de 64 niveles; un envelope de SUNAT con CDR no llega a 20. El error es el mismo que ext/soap da por encima de su propio límite."
     }
   ]
 }

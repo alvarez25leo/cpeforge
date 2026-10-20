@@ -37,6 +37,12 @@ nunca una lista vacía.
 Requisitos: libxml2, libxslt y libexslt del sistema (`libxslt1-dev` en
 Debian/Ubuntu; el SDK en macOS). Windows no está soportado.
 
+**Limitación conocida, sin soporte:** la libxml2 de Apple en macOS < 13 no
+ofrece el límite de operaciones XPath (`engine_info().xpath_operation_limit`
+es `false`); con ella una hoja de reglas costosa no se corta por
+`Limits::xpath_operations`. Con reglas que no sean de confianza usar macOS 13
+o posterior, o Linux con libxml2 ≥ 2.9.11.
+
 ## Estado
 
 Versión 0.1.0 en desarrollo. Lo que falta para la primera versión estable está en

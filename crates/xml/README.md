@@ -18,7 +18,9 @@ fechas nulas.
 - Con `Autoescape::Html` (valor por defecto) los textos se escapan como
   `htmlspecialchars(ENT_QUOTES)`. Con `Autoescape::Disabled` (el modo que usa
   la fachada `cpeforge`) se insertan tal cual: un `&` o `<` produce XML mal
-  formado, así que esos textos deben llegar ya escapados.
+  formado, así que esos textos deben llegar ya escapados. Son las dos únicas
+  estrategias (contrato del crate): un XML UBL no contiene JavaScript, CSS ni
+  URL que necesiten otro escape, así que no se añadirán `js`, `css` ni `url`.
 - Los textos impresos dentro de `<![CDATA[…]]>` (descripciones, razones
   sociales, direcciones, observaciones, motivos) no se escapan. Un `]]>` en
   el valor se divide en `]]]]><![CDATA[>`: el XML sigue bien formado y
@@ -76,7 +78,7 @@ cargo run -p cpeforge-xml --example despatch_2022_xml
 
 ## Estado
 
-Versión 0.1.0 en desarrollo. Lo que falta para la primera versión estable está en
+Versión 0.1.1 en desarrollo. Lo que falta para la primera versión estable está en
 [docs/pendientes.md](https://github.com/alvarez25leo/cpeforge/blob/main/docs/pendientes.md).
 
 ## Licencia

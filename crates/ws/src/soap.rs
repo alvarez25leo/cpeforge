@@ -23,7 +23,10 @@ const PASSWORD_TYPE: &str = "http://docs.oasis-open.org/wss/2004/01/oasis-200401
 pub const MAX_SOAP_BYTES: usize = 16 * 1024 * 1024;
 /// Profundidad máxima de anidamiento de una respuesta SOAP (el `Envelope` es
 /// el nivel 1). Una respuesta más profunda se informa como documento ilegible.
-pub const MAX_SOAP_DEPTH: usize = 256;
+/// Un envelope de SUNAT con CDR no llega a 20 niveles; con 64 el análisis
+/// recursivo cabe en la pila de 2 MiB de un hilo de Tokio también en debug
+/// (ver [`crate::cdr::MAX_XML_DEPTH`]).
+pub const MAX_SOAP_DEPTH: usize = 64;
 /// Máximo de nodos del árbol de una respuesta SOAP.
 const MAX_SOAP_NODES: u32 = 100_000;
 

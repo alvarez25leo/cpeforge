@@ -40,7 +40,9 @@ cc = "1.2.0"
 pkg-config = "0.3.34"
 tempfile = "3.27.0"
 # report: motor de plantillas (subconjunto Twig, ver crates/report) y matriz QR.
-minijinja = { version = "3.0.1", default-features = false, features = ["builtins", "multi_template", "macros", "fuel"] }
+# Versión exacta: cpeforge-report usa `unstable_machinery` (sin garantías de
+# semver) para validar filtros, tests y funciones al cargar las plantillas.
+minijinja = { version = "=3.0.1", default-features = false, features = ["builtins", "multi_template", "macros", "fuel", "unstable_machinery"] }
 qrcodegen = "1.8.0"
 
 [workspace.lints.rust]

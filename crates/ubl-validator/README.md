@@ -17,6 +17,9 @@ println!("{}", result.error);
 # }
 ```
 
+Una entrada vacía devuelve `InfrastructureError::EmptyInput` (no una
+validación fallida), igual que la referencia: es el contrato del crate.
+
 Acepta las codificaciones XML que reconozca libxml2, sin DTD ni entidades
 declaradas; tamaño máximo 10 MiB, 100.000 nodos y 128 niveles. Rechaza
 esquemas modificados y referencias fuera del conjunto fijado. En macOS usa

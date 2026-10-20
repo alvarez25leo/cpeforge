@@ -465,10 +465,11 @@
       "id": "reader-api",
       "path": "$.reader[10]",
       "family": "reader",
-      "classification": "CORREGIR",
+      "classification": "DIFERENCIA_DELIBERADA",
       "category": "xpath",
-      "reason": "XmlReader::getValue('count(cac:InvoiceLine)'): DOMXPath evalúa XPath 1.0 completo (aquí la expresión devuelve un número y getValue el valor por defecto); el XmlReader Rust solo admite rutas por nombre y rechaza la expresión.",
-      "next_step": "Ampliar el evaluador del XmlReader a XPath 1.0 (funciones, predicados, ejes) reutilizando o extrayendo el evaluador de cpeforge-xmldsig, o fijar con el responsable del plan que el subconjunto es el contrato público."
+      "reason": "XmlReader::getValue('count(cac:InvoiceLine)'): DOMXPath evalúa XPath 1.0 completo (aquí la expresión devuelve un número y getValue el valor por defecto); el XmlReader Rust admite por contrato solo el subconjunto que usan los parsers (pasos por nombre, //, * y un atributo final) y rechaza el resto con XmlParserError::Query en vez de devolver un valor por defecto.",
+      "motivo": "rechazo-explicito",
+      "compatibility_note": "Los parsers solo usan rutas del subconjunto, así que su salida no cambia. Un llamador que pase funciones, predicados, ejes o uniones a XmlReader recibe un error tipado en lugar del valor por defecto: decisión de alcance del 2026-10-20 (subconjunto como contrato público, sin XPath 1.0 completo)."
     }
   ]
 }

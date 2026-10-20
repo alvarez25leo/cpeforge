@@ -40,9 +40,9 @@ for node in tree.body:
 '))
 test "${#cases[@]}" -gt 0
 php oracle/php/ws/http_probe.php "${cases[@]}" > "$scratch/php.json"
-# Pila amplia para los hilos de test: el caso fault-detail-depth-256 está en el
-# límite admitido y, en debug, roxmltree usa unos 17 KB de pila por nivel.
-WS_HTTP_EXPECTED="$scratch/php.json" RUST_MIN_STACK=67108864 cargo test -p cpeforge-ws --test security \
+# Sin pila ampliada: el caso fault-detail-depth-64 está en el límite admitido y
+# debe caber en los 2 MiB de un hilo de test también en debug.
+WS_HTTP_EXPECTED="$scratch/php.json" cargo test -p cpeforge-ws --test security \
   http_status_probe_matches_reference --locked -- --ignored --exact
 # Cada caso llegó una vez desde PHP y otra desde Rust.
 test "$(wc -l < "$scratch/requests" | tr -d ' ')" = "$((2 * ${#cases[@]}))"

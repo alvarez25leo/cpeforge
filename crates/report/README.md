@@ -40,13 +40,16 @@ half-up sobre ese valor. No se hace aritmética con esos valores ni se
 recalculan impuestos: se muestran los del documento. `tests/amounts.rs` acota
 la diferencia con el redondeo decimal exacto: son iguales mientras
 `|importe| · 10^decimales < 2^50` (con dos decimales, hasta ≈ 11 billones) y
-el importe tenga como mucho 15 cifras significativas.
+el importe tenga como mucho 15 cifras significativas. Esta conversión es parte
+del contrato: solo afecta a cómo se muestran los importes, nunca a su cálculo.
 
 ## Plantillas propias
 
 `ReportOptions::template_dir` se consulta antes que las plantillas
 integradas, así que un archivo `invoice.html.twig` o `assets/style.css` propio
-las sustituye. Las plantillas se ejecutan con **MiniJinja**: la sintaxis común
+las sustituye. Las plantillas se escriben y ejecutan en el dialecto
+**MiniJinja** (contrato del crate; no se implementará la sintaxis exclusiva de
+Twig): la sintaxis común
 (`{{ }}`, `{% if/for/set/include %}`, `|filtro`, `is defined`, `loop.index`)
 funciona, pero no operadores como `?:`, `??` o `..`, ni etiquetas como
 `apply`, `with`, `embed` o `sandbox`.
@@ -57,6 +60,9 @@ funciona, pero no operadores como `?:`, `??` o `..`, ni etiquetas como
 - **El rango `1..3` no falla**: se evalúa como indefinido y se imprime vacío,
   también con `strict_variables`. Usar `range(1, 4)`.
 - `|format` usa el formato `%` de Python (próximo a `sprintf`).
+- Cada plantilla se valida al cargarla (también las de `include`, `extends` e
+  `import`): un filtro, test o función que no existe es `ReportError::Syntax`
+  aunque esté en una rama que nunca se ejecuta.
 
 Filtros, funciones y tests disponibles:
 
@@ -90,7 +96,7 @@ líneas 11,9 ms (+13,5 MiB por render), QR de venta 92 µs.
 
 ## Estado
 
-Versión 0.1.0 en desarrollo. Lo que falta para la primera versión estable está en
+Versión 0.1.1 en desarrollo. Lo que falta para la primera versión estable está en
 [docs/pendientes.md](https://github.com/alvarez25leo/cpeforge/blob/main/docs/pendientes.md).
 
 ## Licencia

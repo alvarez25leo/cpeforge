@@ -519,11 +519,11 @@ fn deep_fault(depth: usize) -> String {
     )
 }
 
-/// Ejecuta `f` en un hilo con pila amplia: en debug, roxmltree usa unos 17 KB
-/// de pila por nivel y 256 niveles no caben en los 2 MiB del hilo de test.
-fn with_big_stack<T: Send + 'static>(f: impl FnOnce() -> T + Send + 'static) -> Option<T> {
+/// Ejecuta `f` en un hilo con la pila de un worker de Tokio (2 MiB): el
+/// límite de profundidad debe caber ahí también en compilación debug.
+fn with_worker_stack<T: Send + 'static>(f: impl FnOnce() -> T + Send + 'static) -> Option<T> {
     std::thread::Builder::new()
-        .stack_size(64 * 1024 * 1024)
+        .stack_size(2 * 1024 * 1024)
         .spawn(f)
         .ok()?
         .join()
@@ -533,8 +533,8 @@ fn with_big_stack<T: Send + 'static>(f: impl FnOnce() -> T + Send + 'static) -> 
 #[test]
 fn deep_soap_and_cdr_are_rejected_before_parsing() {
     let runtime = || tokio::runtime::Builder::new_current_thread().build();
-    // En el límite: se lee el fault completo.
-    let at_limit = with_big_stack(move || {
+    // En el límite: se lee el fault completo, en un hilo de 2 MiB.
+    let at_limit = with_worker_stack(move || {
         let rt = runtime().ok()?;
         rt.block_on(client(500, deep_fault(MAX_SOAP_DEPTH)).send_bill("A.zip", b""))
             .err()
@@ -557,14 +557,26 @@ fn deep_soap_and_cdr_are_rejected_before_parsing() {
             .map(|rt| rt.block_on(client(500, deep_fault(depth)).send_bill("A.zip", b"")));
         assert_eq!(result, Some(Err(no_xml.clone())), "{depth}");
     }
-    let deep_cdr = format!(
-        "<ApplicationResponse xmlns=\"{AR}\">{}{}</ApplicationResponse>",
-        "<a>".repeat(MAX_XML_DEPTH),
-        "</a>".repeat(MAX_XML_DEPTH)
-    );
+    let cdr = |depth: usize| {
+        format!(
+            "<ApplicationResponse xmlns=\"{AR}\">{}{}</ApplicationResponse>",
+            "<a>".repeat(depth - 1),
+            "</a>".repeat(depth - 1)
+        )
+    };
     assert_eq!(
-        read_cdr(&deep_cdr),
+        read_cdr(&cdr(MAX_XML_DEPTH + 1)),
         Err(WsError::Xml("anidamiento demasiado profundo"))
+    );
+    // En el límite, el CDR se analiza (aunque no tenga datos) sin agotar la
+    // pila de 2 MiB.
+    let at_limit = with_worker_stack(move || read_cdr(&cdr(MAX_XML_DEPTH)));
+    assert!(
+        !matches!(
+            at_limit,
+            Some(Err(WsError::Xml("anidamiento demasiado profundo"))) | None
+        ),
+        "{at_limit:?}"
     );
 }
 

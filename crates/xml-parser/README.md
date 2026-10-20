@@ -6,8 +6,11 @@ Lectura de comprobantes electrónicos SUNAT en XML a los modelos de
 `Voided` o `Reversion` según el prefijo `RA`), `RetentionParser` y
 `PerceptionParser`. Todos implementan `cpeforge_core::ports::DocumentParser`
 con entrada `[u8]` y aceptan además un `XmlDocument` ya analizado.
-`XmlReader` ofrece un subconjunto de XPath (pasos por nombre, `//`, `*` y
-atributo final).
+`XmlReader` ofrece, como contrato, el subconjunto de XPath que usan los
+parsers: rutas absolutas (`/a:b/c:d`) y relativas (`a:b/c:d`), descendientes
+(`//a:b`, `a//b`), comodín `*` y un `@atributo` final. Funciones (`count()`,
+`string()`…), predicados (`[1]`), ejes explícitos y uniones se rechazan con
+`XmlParserError::Query`; no está previsto implementar XPath 1.0 completo.
 
 ```rust
 use cpeforge_core::ports::DocumentParser;

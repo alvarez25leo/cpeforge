@@ -151,14 +151,14 @@ RESPONSES = {
     "summary-empty-200": (200, "OK", "text/xml", b""),
     "summary-fault-detail": ok(fault11("soap:Client.0151", "Nombre de archivo", "<detail><message>x</message></detail>")),
     "fault-prefixed-children": ok(env11('<soap:Body><soap:Fault><soap:faultcode>soap:Client.0156</soap:faultcode><soap:faultstring>prefijado</soap:faultstring></soap:Fault></soap:Body>')),
-    # Profundidad total del documento (Envelope = 1). Rust admite 256 niveles
+    # Profundidad total del documento (Envelope = 1). Rust admite 64 niveles
     # y rechaza el documento antes de parsearlo; ext/soap con libxml2 2.15
-    # admite 2048 (XML_PARSE_HUGE) y la 2.9 no limita, así que 257 difiere en
+    # admite 2048 (XML_PARSE_HUGE) y la 2.9 no limita, así que 65 difiere en
     # ambos perfiles. Casos por encima de 2048 dependerían de la versión.
-    "fault-detail-depth-256": ok(fault11("soap:Client.0111", "Profundo", "<detail>" + "<a>" * 252 + "x" + "</a>" * 252 + "</detail>")),
-    "fault-detail-depth-257": ok(fault11("soap:Client.0111", "Profundo", "<detail>" + "<a>" * 253 + "x" + "</a>" * 253 + "</detail>")),
-    "body-depth-257": ok(env11(f'<soap:Body><ns:sendBillResponse xmlns:ns="{SERVICE}"><applicationResponse>{CDR}</applicationResponse>'
-                               + "<x>" * 254 + "</x>" * 254 + '</ns:sendBillResponse></soap:Body>')),
+    "fault-detail-depth-64": ok(fault11("soap:Client.0111", "Profundo", "<detail>" + "<a>" * 60 + "x" + "</a>" * 60 + "</detail>")),
+    "fault-detail-depth-65": ok(fault11("soap:Client.0111", "Profundo", "<detail>" + "<a>" * 61 + "x" + "</a>" * 61 + "</detail>")),
+    "body-depth-65": ok(env11(f'<soap:Body><ns:sendBillResponse xmlns:ns="{SERVICE}"><applicationResponse>{CDR}</applicationResponse>'
+                              + "<x>" * 62 + "</x>" * 62 + '</ns:sendBillResponse></soap:Body>')),
 }
 
 

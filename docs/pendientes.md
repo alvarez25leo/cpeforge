@@ -2,26 +2,18 @@
 
 ## Código y pruebas
 
-- **cpeforge-ws.** Ampliar las pruebas de integración locales.
-- **cpeforge.** Cubrir todas las familias de documentos, errores y CDR contra
-  un servidor local: `facade.rs` y `robustness.rs` cubren sobre todo facturas;
-  `local_contract.rs` está ignorada (requiere `scripts/cpeforge_local_contract.sh`).
-- **cpeforge-cpe-validator.** Probar con las hojas de reglas SUNAT reales.
-- **cpeforge-xmldsig.** Ampliar la verificación externa (contra otra
-  implementación) de referencias por `Id`, transformación XPath, SHA-384/512,
-  RIPEMD-160 y HMAC; el código los admite, falta el contraste.
-- **PDF.** No existe generador de PDF: la representación impresa
-  (`cpeforge-report`) termina en HTML.
-
-## Decisiones
-
-- **cpeforge-ubl-validator.** Derechos de redistribución de seis XSD
-  (empaquetarlos o mantenerlos externos).
-- **cpeforge-xcodes.** Verificar la vigencia del catálogo de 1 710 códigos
-  frente a SUNAT y definir cómo se mantendrá actualizado.
+- **cpeforge-cpe-validator.** Probar con las hojas de reglas SUNAT reales
+  («Archivo XSL – 2.1», en <https://cpe.sunat.gob.pe/guias-y-manuales>).
+- **cpeforge-xmldsig.** Contrastar con otra implementación la transformación
+  XPath (las referencias enveloped y por `Id`, los digests y las firmas RSA y
+  HMAC ya se verifican con `xmllint` y `openssl` en `tests/external.rs`).
+- **PDF.** Nuevo crate para generar el PDF de la representación impresa
+  (`cpeforge-report` termina en HTML).
 
 ## Revisión y repositorio
 
+- **Publicar** `cpeforge-xcodes` con el catálogo de SUNAT 2026-08-26 (2 077
+  códigos; cambia `ENTRY_COUNT` y 18 textos, conviene 0.2.0).
 - **Revisión independiente** de seguridad y de API de todos los crates antes de
   declarar una versión estable. Prioridad: `cpeforge-xmldsig` (DOM, C14N,
   evaluador XPath, verificación de referencias) y el FFI de

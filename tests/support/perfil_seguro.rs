@@ -8,9 +8,12 @@ use serde_json::Value;
 /// Motivos admitidos para una `DIFERENCIA_DELIBERADA`. `conformidad-xsd`:
 /// la salida de la referencia no valida contra el esquema UBL/SUNAT y Rust
 /// la corrige (comprobado en `crates/xml/tests/schema.rs`).
-pub(crate) const MOTIVOS: [&str; 11] = [
+/// `catalogo-sunat-vigente`: dato que SUNAT actualizó después de la referencia
+/// (por ejemplo, textos de `CódigosRetorno` en `cpeforge-xcodes`).
+pub(crate) const MOTIVOS: [&str; 12] = [
     "seguridad",
     "conformidad-xsd",
+    "catalogo-sunat-vigente",
     "precision-decimal",
     "rechazo-explicito",
     "tipado-estatico",

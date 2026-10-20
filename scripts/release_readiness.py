@@ -40,6 +40,7 @@ PACKAGES = {
 MOTIVOS = {
     "seguridad",
     "conformidad-xsd",
+    "catalogo-sunat-vigente",
     "precision-decimal",
     "rechazo-explicito",
     "tipado-estatico",
@@ -94,6 +95,7 @@ def label(entry: dict) -> str:
 MOTIVO_TEXT = {
     "seguridad": "Seguridad",
     "conformidad-xsd": "Conformidad con el esquema XSD",
+    "catalogo-sunat-vigente": "Catálogo vigente de SUNAT",
     "precision-decimal": "Precisión decimal exacta",
     "rechazo-explicito": "Rechazo explícito de entradas inválidas",
     "tipado-estatico": "Tipado estático",

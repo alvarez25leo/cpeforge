@@ -46,6 +46,11 @@ de firma de comprobantes SUNAT.
   de memoria al soltarse (`zeroize`).
 - **Criptografía:** OpenSSL mediante el crate `openssl` (sin criptografía
   propia).
+- **Contraste externo.** `tests/external.rs` verifica las firmas fuera del
+  crate: `xmllint` (C14N de libxml2) y `openssl` recalculan el digest y la
+  firma de referencias `URI=""` enveloped (RSA-SHA1/256/384/512, SHA-1/256/
+  384/512, RIPEMD-160) y por `Id` con C14N exclusiva (RSA-SHA512, HMAC-SHA1).
+  La transformación XPath solo se prueba internamente.
 - **Sin red.** `XmlSecurityDsig::add_509_cert` recibe el certificado como
   texto (PEM o base64); la carga por URL de la referencia no existe y no se
   añadirá: el crate nunca descarga nada.

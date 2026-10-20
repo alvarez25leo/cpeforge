@@ -243,7 +243,7 @@ dependencies = [
 
 [[package]]
 name = "cpeforge-xcodes"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "cpeforge-core",
  "cpeforge-validator",

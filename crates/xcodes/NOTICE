@@ -3,7 +3,8 @@ Copyright (c) 2026 Contribuidores de CPEForge
 Licencia: MIT (ver LICENSE).
 
 Incluye el catálogo CodeErrors.xml (SHA-256
-dbfaaa646d538ce693d9129fc02ddc4adb660271167ee8cccd0624e9c8997fdb), distribuido
-bajo licencia MIT, Copyright (c) 2018 Giancarlos Salas; ver
-LICENSE-THIRD-PARTY. Los textos se conservan literalmente, sin afirmar su
-vigencia normativa actual.
+108d64164c0a3c0eb70de700c3e1f14e9a8aa724ce06aac52020170114f43216). Parte de
+la versión distribuida bajo licencia MIT, Copyright (c) 2018 Giancarlos Salas
+(ver LICENSE-THIRD-PARTY), actualizada con los códigos y textos de la hoja
+«CódigosRetorno» de las reglas de validación publicadas por SUNAT
+(versión 2026-08-26, https://cpe.sunat.gob.pe/guias-y-manuales).

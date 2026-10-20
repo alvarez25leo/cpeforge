@@ -1,7 +1,7 @@
 [package]
 name = "cpeforge-xcodes"
-version = "0.1.0"
-description = "Catálogo fijo de códigos de error de SUNAT."
+version = "0.2.0"
+description = "Catálogo de códigos de retorno de SUNAT, de las reglas de validación vigentes."
 readme = "README.md"
 keywords = ["sunat", "codes", "errors", "cpe", "peru"]
 categories = ["data-structures"]

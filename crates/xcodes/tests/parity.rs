@@ -2,7 +2,7 @@
 
 use cpeforge_core::ports::ErrorCodeProvider;
 use cpeforge_validator::Validator;
-use cpeforge_xcodes::{ENTRY_COUNT, XmlErrorCodeProvider};
+use cpeforge_xcodes::{CATALOG_VERSION, ENTRY_COUNT, XmlErrorCodeProvider};
 use serde_json::Value;
 use std::collections::{BTreeMap, BTreeSet};
 use std::error::Error;
@@ -12,6 +12,8 @@ mod perfil_seguro;
 
 const EXPECTED: &str = include_str!("../../../tests/reference/xcodes/expected.json");
 const DIFFERENCES: &str = include_str!("../../../tests/reference/xcodes/differences.json");
+/// Resumen de `scripts/update_xcodes.py`: códigos que SUNAT cambió o añadió.
+const SUNAT: &str = include_str!("../../../tests/reference/xcodes/sunat-catalog.json");
 const EXTRA_IDS: [&str; 14] = [
     "null",
     "empty",
@@ -50,9 +52,23 @@ fn reference_catalog_and_all_queries() -> Result<(), Box<dyn Error>> {
     let reference_queries = expected["values"]
         .as_array()
         .ok_or("sin getValue de la referencia")?;
-    assert_eq!(reference_rows.len(), ENTRY_COUNT);
-    assert_eq!(reference_queries.len(), ENTRY_COUNT + 14);
-    let extras = reference_queries[ENTRY_COUNT..]
+    let sunat: Value = serde_json::from_str(SUNAT)?;
+    assert_eq!(sunat["version"].as_str(), Some(CATALOG_VERSION));
+    assert_eq!(sunat["entries"].as_u64(), u64::try_from(ENTRY_COUNT).ok());
+    let codes = |key: &str| -> Result<BTreeSet<String>, Box<dyn Error>> {
+        Ok(sunat[key]
+            .as_array()
+            .ok_or("resumen SUNAT incompleto")?
+            .iter()
+            .filter_map(|code| code.as_str().map(str::to_owned))
+            .collect())
+    };
+    let changed = codes("changed")?;
+    let added = codes("added")?;
+    let reference_count = usize::try_from(sunat["reference_entries"].as_u64().unwrap_or(0))?;
+    assert_eq!(reference_rows.len(), reference_count);
+    assert_eq!(reference_queries.len(), reference_count + 14);
+    let extras = reference_queries[reference_count..]
         .iter()
         .map(|query| query["id"].as_str().ok_or("extra sin ID"))
         .collect::<Result<BTreeSet<_>, _>>()?;
@@ -67,36 +83,42 @@ fn reference_catalog_and_all_queries() -> Result<(), Box<dyn Error>> {
     let all = provider.all()?.ok_or("all() nulo")?;
     assert_eq!(all.len(), ENTRY_COUNT);
     assert_eq!(provider.iter().len(), ENTRY_COUNT);
-    for (index, ((code, message), row)) in all.iter().zip(reference_rows).enumerate() {
-        assert_eq!(
-            row["xml_code"].as_str(),
-            Some(code.as_str()),
-            "código en {index}"
-        );
-        assert_eq!(
-            row["message"].as_str(),
-            Some(message.as_str()),
-            "mensaje en {index}"
-        );
-        let canonical = code
-            .parse::<i64>()
-            .is_ok_and(|value| value.to_string() == *code);
-        if canonical {
-            assert_eq!(row["reference_key_type"], "integer", "tipo en {index}");
-            assert_eq!(
-                row["reference_key"].as_i64(),
-                code.parse::<i64>().ok(),
-                "clave de la referencia en {index}"
-            );
-        } else {
-            assert_eq!(row["reference_key_type"], "string", "tipo en {index}");
-            assert_eq!(
-                row["reference_key"].as_str(),
-                Some(code.as_str()),
-                "clave de la referencia en {index}"
-            );
+    // Cada código de la referencia sigue en el catálogo, en el mismo orden
+    // relativo y con el mismo texto salvo los que SUNAT cambió; los demás
+    // códigos son exactamente los nuevos de SUNAT.
+    let mut rows = reference_rows.iter().peekable();
+    let mut new_codes = BTreeSet::new();
+    for (code, message) in &all {
+        match rows.peek() {
+            Some(row) if row["xml_code"].as_str() == Some(code.as_str()) => {
+                if !changed.contains(code) {
+                    assert_eq!(row["message"].as_str(), Some(message.as_str()), "{code}");
+                }
+                let canonical = code
+                    .parse::<i64>()
+                    .is_ok_and(|value| value.to_string() == *code);
+                if canonical {
+                    assert_eq!(row["reference_key_type"], "integer", "tipo de {code}");
+                    assert_eq!(row["reference_key"].as_i64(), code.parse::<i64>().ok());
+                } else {
+                    assert_eq!(row["reference_key_type"], "string", "tipo de {code}");
+                    assert_eq!(row["reference_key"].as_str(), Some(code.as_str()));
+                }
+                rows.next();
+            }
+            _ => {
+                new_codes.insert(code.clone());
+            }
         }
     }
+    assert!(
+        rows.next().is_none(),
+        "códigos de la referencia fuera de orden o ausentes"
+    );
+    assert_eq!(
+        new_codes, added,
+        "códigos nuevos distintos del resumen SUNAT"
+    );
 
     let mut observed = BTreeSet::new();
     let mut seen_queries = BTreeSet::new();
@@ -110,9 +132,13 @@ fn reference_catalog_and_all_queries() -> Result<(), Box<dyn Error>> {
         let rust = provider.value(code)?.ok_or("valor Rust nulo")?;
         if rust != reference {
             assert!(registered.contains(id), "diferencia no registrada: {id}");
-            assert_eq!(id, "xpath-injection-0100");
-            assert_eq!(rust, "");
-            assert_eq!(reference, provider.get("0100"));
+            if id == "xpath-injection-0100" {
+                assert_eq!(rust, "");
+                assert_eq!(reference, provider.get("0100"));
+            } else {
+                // Texto actualizado por SUNAT.
+                assert!(changed.contains(code.unwrap_or_default()), "{id}");
+            }
             observed.insert(id);
         } else {
             assert!(!registered.contains(id), "registro obsoleto: {id}");

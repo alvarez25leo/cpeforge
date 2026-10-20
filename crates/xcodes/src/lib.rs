@@ -1,5 +1,10 @@
 //! Códigos y mensajes del catálogo de errores de SUNAT.
 //!
+//! El catálogo es el de la hoja «CódigosRetorno» de las reglas de validación
+//! de SUNAT en la versión [`CATALOG_VERSION`] (se regenera con
+//! `scripts/update_xcodes.py`). Los códigos de la referencia conservan su
+//! texto salvo los que SUNAT cambió.
+//!
 //! El catálogo se incrusta desde `CodeErrors.xml`, se comprueba antes del
 //! primer uso y se parsea una sola vez. Los códigos son cadenas: `0100` no
 //! equivale a `100`. Las consultas usan una clave literal, nunca XPath.
@@ -20,12 +25,15 @@ use std::fmt::{self, Write};
 use std::str;
 use std::sync::OnceLock;
 
-/// SHA-256 del `CodeErrors.xml` de la referencia.
-pub const XML_SHA256: &str = "dbfaaa646d538ce693d9129fc02ddc4adb660271167ee8cccd0624e9c8997fdb";
-/// Cantidad de códigos únicos de la referencia fijada.
-pub const ENTRY_COUNT: usize = 1_710;
+/// Versión de las reglas de validación de SUNAT de la que sale el catálogo
+/// («Reglas de validación - actualizado al 26.08.2026»).
+pub const CATALOG_VERSION: &str = "2026-08-26";
+/// SHA-256 del `CodeErrors.xml` incrustado.
+pub const XML_SHA256: &str = "108d64164c0a3c0eb70de700c3e1f14e9a8aa724ce06aac52020170114f43216";
+/// Cantidad de códigos únicos del catálogo.
+pub const ENTRY_COUNT: usize = 2_077;
 const XML_BYTES: &[u8] = include_bytes!("data/CodeErrors.xml");
-const XML_LENGTH: usize = 182_038;
+const XML_LENGTH: usize = 222_841;
 static CATALOG: OnceLock<Result<Catalog, CatalogError>> = OnceLock::new();
 
 /// Recurso incrustado roto o distinto del corte de la referencia fijado.
@@ -249,7 +257,7 @@ mod tests {
     #[test]
     fn literal_lookup() -> Result<(), CatalogError> {
         let provider = XmlErrorCodeProvider::new()?;
-        assert_eq!(provider.iter().len(), 1710);
+        assert_eq!(provider.iter().len(), super::ENTRY_COUNT);
         assert!(!provider.get("0100").is_empty());
         assert_eq!(provider.get("' or @code='0100"), "");
         assert_eq!(provider.get("000100"), "");

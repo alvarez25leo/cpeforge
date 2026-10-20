@@ -4,8 +4,14 @@ Valida documentos UBL 2.0 y 2.1 con libxml2 (XSD 1.0) contra un directorio
 local con los 45 esquemas fijados en `schema-manifest.json`. El crate
 comprueba el SHA-256 de cada esquema alcanzado y valida sobre una copia
 privada de esos bytes, para evitar cambios entre la comprobación y la carga.
-La distribución de los XSD está pendiente de revisión de sus avisos OASIS,
-W3C, ETSI y UN/CEFACT; por eso el crate aún no los empaqueta.
+**Los XSD no se empaquetan** (contrato del crate): sus avisos OASIS, W3C, ETSI
+y UN/CEFACT permiten copiarlos sin modificar, pero con condiciones distintas
+por titular, así que el crate solo incluye el manifiesto (ruta, SHA-256,
+titular y aviso de cada archivo) y se usan desde un directorio local. Para
+obtenerlos, `scripts/prepare_ubl_validator_reference.sh` del repositorio clona
+`thegreenter/ubl-validator` v2.3.0 en el commit fijado; los esquemas quedan en
+`target/reference/ubl-validator-v2.3.0/src/xsd`. Cualquier otra copia sirve si
+coincide con los SHA-256 del manifiesto.
 
 ```rust,no_run
 use cpeforge_ubl_validator::UblValidator;

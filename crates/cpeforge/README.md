@@ -15,11 +15,8 @@ cpeforge = "0.2"
 La feature `xcodes` conecta el catálogo de códigos de error de
 `cpeforge-xcodes` (`cargo run -p cpeforge --example see_with_xcodes --features xcodes`).
 
-Al actualizar desde 0.1, ver la guía de migración del
-[CHANGELOG](https://github.com/alvarez25leo/cpeforge/blob/main/CHANGELOG.md):
-ramas `_` en los `match` sobre `SendResult` y demás enums, opciones creadas
-desde `Default` y la clave por defecto de la caché de tokens GRE, que ahora
-separa empresas y ambientes (`CacheKey::Scoped`).
+La caché de tokens de `Api` separa empresas y ambientes
+(`CacheKey::Scoped`): una misma tienda sirve a un servicio multiempresa.
 
 ## Importe en letras (leyenda 1000)
 
@@ -92,8 +89,9 @@ dominados por la firma XML.
 
 ## Estado
 
-Versión 0.2.1 en desarrollo. Lo que falta para la primera versión estable está en
-[docs/pendientes.md](https://github.com/alvarez25leo/cpeforge/blob/main/docs/pendientes.md).
+Versión estable. La API pública sigue SemVer: los errores, resultados y
+opciones pueden crecer sin romper el código que la usa (ver el
+[README del repositorio](https://github.com/alvarez25leo/cpeforge#estado)).
 
 ## Licencia
 

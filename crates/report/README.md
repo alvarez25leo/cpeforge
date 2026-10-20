@@ -107,8 +107,9 @@ líneas 11,9 ms (+13,5 MiB por render), QR de venta 92 µs.
 
 ## Estado
 
-Versión 0.2.0 en desarrollo. Lo que falta para la primera versión estable está en
-[docs/pendientes.md](https://github.com/alvarez25leo/cpeforge/blob/main/docs/pendientes.md).
+Versión estable. La API pública sigue SemVer: los errores, resultados y
+opciones pueden crecer sin romper el código que la usa (ver el
+[README del repositorio](https://github.com/alvarez25leo/cpeforge#estado)).
 
 ## Licencia
 

@@ -1,7 +1,6 @@
 //! Fachadas de envío a SUNAT: `See` usa SOAP y `Api` la API GRE.
 //! El XML, firma, red, ZIP, CDR y tokens se
-//! implementan en los crates `cpeforge-*`. Los pendientes están en
-//! `docs/pendientes.md` del repositorio.
+//! implementan en los crates `cpeforge-*`.
 
 pub mod api;
 /// Errores de la orquestación.

@@ -2,10 +2,10 @@
 
 CPEForge es un SDK modular en Rust para facturación electrónica en Perú: 13
 crates en `crates/` (`cpeforge` en `crates/cpeforge` es el paquete principal y los
-demás se publican como `cpeforge-*`). Lo que falta en cada módulo está en
-[docs/pendientes.md](docs/pendientes.md); la tabla de equivalencias con el
-proyecto de referencia está en [docs/README.md](docs/README.md). Aplicar también
-las instrucciones del workspace padre.
+demás se publican como `cpeforge-*`). La API es estable y sigue SemVer; la
+tabla de equivalencias con el proyecto de referencia está en
+[docs/README.md](docs/README.md). Aplicar también las instrucciones del
+workspace padre.
 
 ## Estructura
 

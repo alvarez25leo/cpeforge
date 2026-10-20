@@ -30,6 +30,14 @@ use serde_json::{Map, Value, json};
 
 type TestResult<T = ()> = Result<T, Box<dyn std::error::Error>>;
 
+/// Campos de los modelos que no existen en la referencia (extensiones de
+/// CPEForge), por clase: la guía de remisión transportista (`31`).
+const CPEFORGE_EXTENSIONS: &[(&str, &str)] = &[
+    ("Despatch", "remitente"),
+    ("Despatch", "pagadorFlete"),
+    ("Shipment", "subcontratador"),
+];
+
 fn workspace() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("../..")
 }
@@ -263,6 +271,13 @@ impl Comparator {
             );
         }
         for extra in rust_keys.difference(&reference_keys) {
+            // Campos que solo existen en CPEForge: la referencia no los tiene
+            // y en sus casos siempre quedan vacíos.
+            if CPEFORGE_EXTENSIONS.contains(&(class.as_str(), extra.as_str()))
+                && rust_map[*extra].is_null()
+            {
+                continue;
+            }
             self.diff(
                 &format!("{path}.{extra}"),
                 &json!("<ausente en la referencia>"),

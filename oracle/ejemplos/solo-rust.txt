@@ -1,0 +1,4 @@
+# XML de example/rust sin equivalente en la referencia PHP (funciones que
+# solo tiene CPEForge). comparar.sh los valida contra el XSD pero no los
+# compara con PHP. Un nombre por línea, tal como queda en example/rust/out/.
+20161515648-31-V001-1.xml

@@ -22,7 +22,9 @@ cargo run -q --release --locked --manifest-path "$ex/rust/Cargo.toml" > /dev/nul
 
 xsd="$root/target/reference/ubl-validator-v2.3.0/src/xsd"
 php_files=$(cd "$ex/php/out" && ls ./*.xml | sort)
-rust_files=$(cd "$ex/rust/out" && ls ./*.xml | sort)
+# Casos que solo existen en Rust (solo-rust.txt): se validan aparte.
+solo_rust=$(grep -v -e '^#' -e '^$' "$here/solo-rust.txt" | sed 's#^#./#' || true)
+rust_files=$(cd "$ex/rust/out" && ls ./*.xml | sort | grep -v -x -F -e "${solo_rust:-/}" || true)
 if test "$php_files" != "$rust_files"; then
   echo "PHP y Rust generaron archivos distintos:"
   diff <(echo "$php_files") <(echo "$rust_files") || true
@@ -60,8 +62,28 @@ for php_xml in "$ex"/php/out/*.xml; do
     diff <(python3 "$here/normalizar.py" "$php_xml" | xmllint --format -) <(python3 "$here/normalizar.py" "$rust_xml" | xmllint --format -) | head -20 || true
   fi
 done
+for name in $solo_rust; do
+  rust_xml="$ex/rust/out/${name#./}"
+  total=$((total + 1))
+  if ! test -f "$rust_xml"; then
+    echo "SOLO RUST ${name#./}: no se generó"
+    fallos=$((fallos + 1))
+    continue
+  fi
+  esquema="sin XSD"
+  if test -d "$xsd"; then
+    raiz="$(xmllint --xpath 'local-name(/*)' "$rust_xml")"
+    if xmllint --noout --nonet --schema "$xsd/2.1/maindoc/UBL-$raiz-2.1.xsd" "$rust_xml" 2> /dev/null; then
+      esquema="XSD $raiz 2.1 válido"
+    else
+      esquema="XSD $raiz 2.1 INVÁLIDO"
+      fallos=$((fallos + 1))
+    fi
+  fi
+  echo "SOLO RUST ${name#./}  $esquema"
+done
 test -d "$xsd" || echo "XSD no instalados: ejecutar scripts/prepare_ubl_validator_reference.sh para validar contra los esquemas"
 test "$fallos" -eq 0
-echo "PHP y Rust: XML equivalente (sin firma ni identidad) en $total casos"
+echo "PHP y Rust: XML equivalente (sin firma ni identidad) en $((total - $(echo "$solo_rust" | grep -c .))) casos; $(echo "$solo_rust" | grep -c .) solo en Rust"
 echo
 python3 "$here/benchmark.py"

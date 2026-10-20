@@ -43,6 +43,7 @@ mod guia_misma_empresa;
 mod guia_remision;
 mod guia_transportem1l;
 mod guia_transporteprivado;
+mod guia_transportista;
 mod inicio_boleta;
 mod inicio_factura_credito;
 mod inicio_factura_exonerada;
@@ -150,6 +151,7 @@ pub const CASOS: &[(&str, Constructor)] = &[
     ("guia-remision", guia_remision::documento),
     ("guia-transporteM1L", guia_transportem1l::documento),
     ("guia-transportePrivado", guia_transporteprivado::documento),
+    ("guia-transportista", guia_transportista::documento),
     ("inicio-boleta", inicio_boleta::documento),
     ("inicio-factura-credito", inicio_factura_credito::documento),
     (

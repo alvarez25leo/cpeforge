@@ -1,5 +1,6 @@
 //! `despatch.xml.twig` y `despatch2022.xml.twig`.
 
+use cpeforge_core::CoreError;
 use cpeforge_core::model::client::Client;
 use cpeforge_core::model::despatch::{Despatch, Direction, Puerto, Vehicle};
 
@@ -12,6 +13,8 @@ pub(crate) const TEMPLATE_2022: &str = "despatch2022.xml.twig";
 
 const ROOT: &str = r#"<DespatchAdvice xmlns="urn:oasis:names:specification:ubl:schema:xsd:DespatchAdvice-2" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">"#;
 
+/// Tipo de documento de la guía de remisión transportista (catálogo 01).
+const CARRIER_TYPE: &str = "31";
 const IDENTITY_SCHEME: &str = r#"" schemeName="Documento de Identidad" schemeAgencyName="PE:SUNAT" schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06">"#;
 
 fn header(out: &mut Out<'_>, doc: &Despatch, customization: &str) -> Result<()> {
@@ -197,10 +200,23 @@ fn commodity(out: &mut Out<'_>, code: Option<&str>) {
     }
 }
 
-/// Guía versión 2022.
+/// Guía versión 2022: remitente (`09`) o transportista (`31`, anexo N.° 14
+/// de la R. S. 123-2022/SUNAT, con las rutas de la R. S. 108-2026/SUNAT).
 pub(crate) fn render_2022(doc: &Despatch, options: &RenderOptions) -> Result<String> {
     let mut out = Out::new(options, TEMPLATE_2022);
     let c = out.ctx();
+    let carrier = doc.tipo_doc.as_deref() == Some(CARRIER_TYPE);
+    // En la guía transportista el remitente es obligatorio (campos 16 y 17).
+    let remitente = if carrier {
+        Some(doc.remitente.as_ref().ok_or_else(|| {
+            c.document(CoreError::MissingField {
+                model: "Despatch",
+                field: "remitente",
+            })
+        })?)
+    } else {
+        None
+    };
     header(&mut out, doc, "2.0")?;
     out.raw(r#"<cbc:DespatchAdviceTypeCode listAgencyName="PE:SUNAT" listName="Tipo de Documento" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo01">"#)
         .text(doc.tipo_doc.as_deref())
@@ -243,21 +259,32 @@ pub(crate) fn render_2022(doc: &Despatch, options: &RenderOptions) -> Result<Str
     if doc.tercero.is_some() {
         party_2022(&mut out, c, "SellerSupplierParty", doc.tercero.as_ref())?;
     }
-    let envio = doc.envio.as_ref();
-    out.raw(r#"<cac:Shipment><cbc:ID>SUNAT_Envio</cbc:ID><cbc:HandlingCode listAgencyName="PE:SUNAT" listName="Motivo de traslado" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo20">"#)
-        .text(c.get(envio, "codTraslado", |e| e.cod_traslado.as_deref())?)
-        .raw("</cbc:HandlingCode>");
-    let des_traslado = c.get(envio, "desTraslado", |e| e.des_traslado.as_deref())?;
-    if truthy_str(des_traslado) {
-        out.raw("<cbc:HandlingInstructions>")
-            .text(des_traslado)
-            .raw("</cbc:HandlingInstructions>");
+    if carrier && doc.pagador_flete.is_some() {
+        party_2022(
+            &mut out,
+            c,
+            "OriginatorCustomerParty",
+            doc.pagador_flete.as_ref(),
+        )?;
     }
-    let sustento = c.get(envio, "sustentoPeso", |e| e.sustento_peso.as_deref())?;
-    if truthy_str(sustento) {
-        out.raw("<cbc:Information>")
-            .text(sustento)
-            .raw("</cbc:Information>");
+    let envio = doc.envio.as_ref();
+    out.raw("<cac:Shipment><cbc:ID>SUNAT_Envio</cbc:ID>");
+    if !carrier {
+        out.raw(r#"<cbc:HandlingCode listAgencyName="PE:SUNAT" listName="Motivo de traslado" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo20">"#)
+            .text(c.get(envio, "codTraslado", |e| e.cod_traslado.as_deref())?)
+            .raw("</cbc:HandlingCode>");
+        let des_traslado = c.get(envio, "desTraslado", |e| e.des_traslado.as_deref())?;
+        if truthy_str(des_traslado) {
+            out.raw("<cbc:HandlingInstructions>")
+                .text(des_traslado)
+                .raw("</cbc:HandlingInstructions>");
+        }
+        let sustento = c.get(envio, "sustentoPeso", |e| e.sustento_peso.as_deref())?;
+        if truthy_str(sustento) {
+            out.raw("<cbc:Information>")
+                .text(sustento)
+                .raw("</cbc:Information>");
+        }
     }
     out.raw("<cbc:GrossWeightMeasure unitCode=\"")
         .text(c.get(envio, "undPesoTotal", |e| e.und_peso_total.as_deref())?)
@@ -265,13 +292,13 @@ pub(crate) fn render_2022(doc: &Despatch, options: &RenderOptions) -> Result<Str
         .fmt(c.get(envio, "pesoTotal", |e| e.peso_total)?, 3)
         .raw("</cbc:GrossWeightMeasure>");
     let peso_items = c.get(envio, "pesoItems", |e| e.peso_items)?;
-    if peso_items.is_some_and(|p| !p.is_zero()) {
+    if !carrier && peso_items.is_some_and(|p| !p.is_zero()) {
         out.raw("<cbc:NetWeightMeasure unitCode=\"KGM\">")
             .fmt(peso_items, 3)
             .raw("</cbc:NetWeightMeasure>");
     }
     let bultos = c.get(envio, "numBultos", |e| e.num_bultos)?;
-    if bultos.is_some_and(|n| n != 0) {
+    if !carrier && bultos.is_some_and(|n| n != 0) {
         out.raw("<cbc:TotalTransportHandlingUnitQuantity>")
             .int(bultos)
             .raw("</cbc:TotalTransportHandlingUnitQuantity>");
@@ -285,16 +312,41 @@ pub(crate) fn render_2022(doc: &Despatch, options: &RenderOptions) -> Result<Str
             .text(Some(indicador))
             .raw("</cbc:SpecialInstructions>");
     }
-    out.raw(r#"<cac:ShipmentStage><cbc:TransportModeCode listName="Modalidad de traslado" listAgencyName="PE:SUNAT" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo18">"#)
-        .text(c.get(envio, "modTraslado", |e| e.mod_traslado.as_deref())?)
-        .raw("</cbc:TransportModeCode>");
+    if carrier {
+        if let Some(sub) = c.obj(envio, "subcontratador", |e| e.subcontratador.as_ref())? {
+            // Campos 60 y 61, con las rutas de la R. S. 108-2026/SUNAT.
+            out.raw("<cac:Consignment><cbc:ID>SUNAT_Envio</cbc:ID><cac:LogisticsOperatorParty><cac:PartyIdentification><cbc:ID schemeID=\"")
+                .text(sub.tipo_doc.as_deref())
+                .raw("\">")
+                .text(sub.num_doc.as_deref())
+                .raw("</cbc:ID></cac:PartyIdentification><cac:PartyLegalEntity><cbc:RegistrationName><![CDATA[")
+                .cdata(sub.rzn_social.as_deref())
+                .raw("]]></cbc:RegistrationName></cac:PartyLegalEntity></cac:LogisticsOperatorParty></cac:Consignment>");
+        }
+        out.raw("<cac:ShipmentStage>");
+    } else {
+        out.raw(r#"<cac:ShipmentStage><cbc:TransportModeCode listName="Modalidad de traslado" listAgencyName="PE:SUNAT" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo18">"#)
+            .text(c.get(envio, "modTraslado", |e| e.mod_traslado.as_deref())?)
+            .raw("</cbc:TransportModeCode>");
+    }
     let fec_traslado = c.obj(envio, "fecTraslado", |e| e.fec_traslado.as_ref())?;
     if fec_traslado.is_some() {
         out.raw("<cac:TransitPeriod><cbc:StartDate>")
             .date(fec_traslado)?
             .raw("</cbc:StartDate></cac:TransitPeriod>");
     }
-    if let Some(t) = c.obj(envio, "transportista", |e| e.transportista.as_ref())? {
+    let transportista = c.obj(envio, "transportista", |e| e.transportista.as_ref())?;
+    if carrier {
+        // Campo 10: registro MTC del transportista que emite la guía.
+        if let Some(mtc) = transportista
+            .and_then(|t| t.nro_mtc.as_deref())
+            .filter(|m| truthy_str(Some(m)))
+        {
+            out.raw("<cac:CarrierParty><cac:PartyLegalEntity><cbc:CompanyID>")
+                .text(Some(mtc))
+                .raw("</cbc:CompanyID></cac:PartyLegalEntity></cac:CarrierParty>");
+        }
+    } else if let Some(t) = transportista {
         out.raw("<cac:CarrierParty><cac:PartyIdentification><cbc:ID schemeID=\"")
             .text(t.tipo_doc.as_deref())
             .raw("\">")
@@ -306,7 +358,7 @@ pub(crate) fn render_2022(doc: &Despatch, options: &RenderOptions) -> Result<Str
             .raw("</cbc:CompanyID></cac:PartyLegalEntity></cac:CarrierParty>");
     }
     let entrega = c.obj(envio, "fecEntregaBienes", |e| e.fec_entrega_bienes.as_ref())?;
-    if entrega.is_some() {
+    if !carrier && entrega.is_some() {
         out.raw("<cac:LoadingTransportEvent><cbc:OccurrenceDate>")
             .date(entrega)?
             .raw("</cbc:OccurrenceDate></cac:LoadingTransportEvent>");
@@ -342,7 +394,18 @@ pub(crate) fn render_2022(doc: &Despatch, options: &RenderOptions) -> Result<Str
         c,
         c.obj(envio, "partida", |e| e.partida.as_ref())?,
     )?;
-    out.raw("</cac:DespatchAddress></cac:Despatch></cac:Delivery>");
+    out.raw("</cac:DespatchAddress>");
+    if let Some(rem) = remitente {
+        // Campos 16 y 17, con la ruta de la R. S. 108-2026/SUNAT.
+        out.raw("<cac:DespatchParty><cac:PartyIdentification><cbc:ID schemeID=\"")
+            .text(rem.tipo_doc.as_deref())
+            .raw(IDENTITY_SCHEME)
+            .text(rem.num_doc.as_deref())
+            .raw("</cbc:ID></cac:PartyIdentification><cac:PartyLegalEntity><cbc:RegistrationName><![CDATA[")
+            .cdata(rem.rzn_social.as_deref())
+            .raw("]]></cbc:RegistrationName></cac:PartyLegalEntity></cac:DespatchParty>");
+    }
+    out.raw("</cac:Despatch></cac:Delivery>");
     for (index, precinto) in c
         .obj(envio, "contenedores", |e| e.contenedores.as_ref())?
         .into_iter()

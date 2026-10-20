@@ -18,6 +18,11 @@ pub struct Despatch {
     /// Versión de la guía.
     pub version: Option<String>,
     /// Tipo de documento (`09` remitente, `31` transportista).
+    ///
+    /// En la guía transportista (`31`), `company` es el transportista que la
+    /// emite, `remitente` es quien entrega los bienes y en `envio` no van el
+    /// motivo ni la modalidad de traslado (`envio.transportista` solo aporta
+    /// el número de registro MTC del emisor).
     pub tipo_doc: Option<String>,
     /// Serie.
     pub serie: Option<String>,
@@ -36,6 +41,11 @@ pub struct Despatch {
     pub tercero: Option<Client>,
     /// Comprador.
     pub comprador: Option<Client>,
+    /// Remitente de los bienes; obligatorio en la guía transportista (`31`).
+    pub remitente: Option<Client>,
+    /// Quien paga el servicio de transporte cuando es un tercero (guía
+    /// transportista, `OriginatorCustomerParty`).
+    pub pagador_flete: Option<Client>,
     /// Datos del envío.
     pub envio: Option<Shipment>,
     /// Documento dado de baja.
@@ -191,6 +201,9 @@ pub struct Shipment {
     pub aeropuerto: Option<Puerto>,
     /// Transportista.
     pub transportista: Option<Transportist>,
+    /// Empresa que subcontrata el transporte (guía transportista, tipo de
+    /// documento `6`).
+    pub subcontratador: Option<Client>,
     /// Vehículo principal.
     pub vehiculo: Option<Vehicle>,
     /// Conductores.

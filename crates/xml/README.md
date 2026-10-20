@@ -35,6 +35,14 @@ fechas nulas.
   (`despatch`) existen por compatibilidad. SUNAT exige UBL 2.1 para
   comprobantes de pago y la guía 2022 (`DespatchBuilder` con
   `version = "2022"`) para la guía electrónica.
+- La guía 2022 genera la GRE remitente (`tipo_doc = "09"`) y la GRE
+  transportista (`"31"`, anexo N.° 14 de la R. S. 123-2022/SUNAT con las rutas
+  de la R. S. 108-2026/SUNAT). En la transportista, `company` es el
+  transportista emisor; `remitente` (obligatorio) va en
+  `Shipment/Delivery/Despatch/DespatchParty`, `pagador_flete` en
+  `OriginatorCustomerParty`, `envio.subcontratador` en
+  `Consignment/LogisticsOperatorParty` y `envio.transportista.nro_mtc` es su
+  registro MTC; no lleva motivo ni modalidad de traslado.
 - Todo XML generado valida contra el XSD (`tests/schema.rs`, con `xmllint`)
   salvo los documentos vacíos o incompletos y los textos sin escapar con
   `Autoescape::Disabled`. Para lograrlo:

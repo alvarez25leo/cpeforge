@@ -1,6 +1,6 @@
 # Ejemplo de emisión con CPEForge
 
-`rust/` construye, firma y (opcionalmente) envía 44 comprobantes de ejemplo
+`rust/` construye, firma y (opcionalmente) envía 45 comprobantes de ejemplo
 con los crates de CPEForge, contra los entornos de prueba de SUNAT.
 
 ```bash
@@ -25,7 +25,8 @@ certificado que lleva incluido.
 | Resúmenes diarios (RC) | `resumen`, `resumen-contingencia`, `resumen-usd` |
 | Baja (RA) y reversión (RR) | `comunicacion-baja`, `reversion` |
 | Percepción y retención | `percepcion`, `retencion` |
-| Guías de remisión 2022 (GRE) | `guia-remision`, `guia-extra-atributos`, `guia-misma-empresa`, `guia-transporteM1L`, `guia-transportePrivado` |
+| Guías de remisión remitente 2022 (GRE, tipo 09) | `guia-remision`, `guia-extra-atributos`, `guia-misma-empresa`, `guia-transporteM1L`, `guia-transportePrivado` |
+| Guía de remisión transportista (GRE, tipo 31) | `guia-transportista` (solo en Rust) |
 
 Casos de rechazo (`--errores`), con el código que devuelve el entorno de
 prueba:
@@ -103,4 +104,6 @@ suya en `example/benchmark.md`.
 
 `php/` contiene los mismos casos en la implementación de referencia y se
 conserva tal cual. Los scripts que generan ambos y comparan el XML están en
-`oracle/ejemplos/` (fuera de los ejemplos).
+`oracle/ejemplos/` (fuera de los ejemplos). `guia-transportista` no tiene
+equivalente en PHP: está listado en `oracle/ejemplos/solo-rust.txt`, y el
+script lo valida contra el XSD sin compararlo.

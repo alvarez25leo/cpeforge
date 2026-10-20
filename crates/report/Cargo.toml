@@ -1,6 +1,6 @@
 [package]
 name = "cpeforge-report"
-version = "0.1.1"
+version = "0.2.0"
 description = "Representación impresa HTML (siete plantillas, CSS y QR SVG) de comprobantes electrónicos peruanos."
 readme = "README.md"
 keywords = ["sunat", "peru", "report", "html", "cpe"]

@@ -11,7 +11,7 @@ repository = "https://github.com/alvarez25leo/cpeforge"
 
 [workspace.dependencies]
 cpeforge-core = { path = "crates/core", version = "0.1.0" }
-cpeforge-xml-limits = { path = "crates/xml-limits", version = "0.1.1" }
+cpeforge-xml-limits = { path = "crates/xml-limits", version = "0.1.2" }
 roxmltree = "0.21.1"
 openssl = "0.10.81"
 quick-xml = "0.41.0"

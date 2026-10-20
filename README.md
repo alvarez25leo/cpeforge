@@ -22,7 +22,7 @@ Biblioteca principal:
 
 ```toml
 [dependencies]
-cpeforge = "0.1"
+cpeforge = "0.2"
 ```
 
 Componentes independientes:
@@ -30,15 +30,16 @@ Componentes independientes:
 ```toml
 [dependencies]
 cpeforge-core = "0.1"
-cpeforge-xml = "0.1"
-cpeforge-xmldsig = "0.1"
-cpeforge-ubl-validator = "0.1"
-cpeforge-report = "0.1"
+cpeforge-xml = "0.2"
+cpeforge-xmldsig = "0.2"
+cpeforge-ubl-validator = "0.2"
+cpeforge-report = "0.2"
 ```
 
 Los 13 paquetes `cpeforge` y `cpeforge-*` están publicados en
-[crates.io](https://crates.io/crates/cpeforge) en la serie 0.1. Siguen en
-desarrollo; lo que falta para una versión estable está en
+[crates.io](https://crates.io/crates/cpeforge): la serie 0.2 (0.3 para
+`cpeforge-xcodes`; `cpeforge-core` 0.1 y `cpeforge-xml-limits` 0.1 siguen
+siendo compatibles). Siguen en desarrollo; lo que falta para una versión estable está en
 [docs/pendientes.md](docs/pendientes.md).
 
 ## Paquetes

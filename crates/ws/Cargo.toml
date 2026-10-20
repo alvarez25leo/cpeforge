@@ -1,6 +1,6 @@
 [package]
 name = "cpeforge-ws"
-version = "0.1.1"
+version = "0.2.0"
 description = "SOAP, ZIP, CDR y adaptador GRE para los servicios electrónicos de SUNAT."
 readme = "README.md"
 keywords = ["sunat", "soap", "cdr", "cpe", "peru"]
@@ -14,7 +14,7 @@ repository.workspace = true
 
 [dependencies]
 cpeforge-core.workspace = true
-cpeforge-gre-api = { path = "../gre-api", version = "0.1.0" }
+cpeforge-gre-api = { path = "../gre-api", version = "0.2.0" }
 cpeforge-xml-limits.workspace = true
 roxmltree.workspace = true
 base64.workspace = true

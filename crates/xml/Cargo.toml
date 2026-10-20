@@ -1,6 +1,6 @@
 [package]
 name = "cpeforge-xml"
-version = "0.1.1"
+version = "0.2.0"
 description = "XML UBL sin firma de comprobantes electrónicos peruanos."
 readme = "README.md"
 keywords = ["sunat", "peru", "ubl", "xml", "cpe"]

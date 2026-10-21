@@ -62,20 +62,26 @@ firmados y enviados con una implementación en PHP y con CPEForge:
 
 | Suma de los 44 comprobantes | PHP 8.4 | Rust | Rust es |
 | --- | ---: | ---: | ---: |
-| Generar el XML UBL | 2,9 ms | 113 µs | **26× más rápido** |
-| Firmar (XMLDSig) | 25,7 ms | 15,9 ms | **1,6× más rápido** |
-| XML firmado de principio a fin | 31,8 ms | 16,2 ms | **2× más rápido** |
-| Primera llamada, en frío | 80,1 ms | 21,2 ms | **3,8× más rápido** |
-| Envío a SUNAT beta (red) | 8,03 s | 5,58 s | **1,4× más rápido** |
+| Generar el XML UBL | 3,0 ms | 47 µs | **64× más rápido** |
+| Firmar (XMLDSig) | 26,8 ms | 15,7 ms | **1,7× más rápido** |
+| XML firmado de principio a fin | 33,1 ms | 16,0 ms | **2,1× más rápido** |
+| Primera llamada, en frío | 103,4 ms | 28,9 ms | **3,6× más rápido** |
+| Envíos a SUNAT beta más rápidos (red) | 6/43 | 37/43 | **Rust en 37 de 43** |
 | Aceptados por SUNAT | 43/43 | 43/43 | mismo resultado |
 | Rechazos esperados (3617, 3315, 2992) | 3/3 | 3/3 | mismo código |
 
 Mediana de 30 llamadas por caso en un Apple M5, PHP 8.4.17 CLI y Rust 1.99
-en release. Con OPcache y JIT activados en PHP la ventaja se mantiene
-(19× al generar el XML y 1,9× en el XML firmado). El envío es una sola
-medición y depende de la latencia de SUNAT. Las cifras completas, caso por
-caso, están en [docs/benchmark.md](docs/benchmark.md) y se reproducen
-con `bash oracle/ejemplos/comparar.sh` y `bash oracle/ejemplos/enviar.sh`.
+en release, con cpeforge-xml 0.3.2 y cpeforge-xmldsig 0.2.2: generar el XML
+es 2,4 veces más rápido que en las versiones anteriores (113 → 47 µs). Con
+OPcache y JIT activados en PHP la ventaja se mantiene (48× al generar el
+XML y 2× en el XML firmado). El envío es una sola medición por caso y
+depende de la latencia de SUNAT: en la última corrida un único envío tardó
+9 s en responder, así que se compara caso a caso. Los 44 XML son
+equivalentes y validan contra su XSD, igual que los 4 casos propios de Rust
+(guía transportista y liquidaciones de compra, también aceptados). Las
+cifras completas, caso por caso, están en
+[docs/benchmark.md](docs/benchmark.md) y se reproducen con
+`bash oracle/ejemplos/comparar.sh` y `bash oracle/ejemplos/enviar.sh`.
 
 **El mismo comprobante, la misma respuesta de SUNAT, en la mitad del
 tiempo.** Con CPEForge tu servidor emite más comprobantes con menos

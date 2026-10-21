@@ -60,7 +60,7 @@ pub fn check_tree_markup(
     let mut open: Vec<usize> = Vec::new();
     let mut cost = 0usize;
     let mut pos = 0usize;
-    while let Some(offset) = bytes.get(pos..).and_then(|rest| memchr(b'<', rest)) {
+    while let Some(offset) = xml.get(pos..).and_then(|rest| rest.find('<')) {
         let start = pos + offset;
         let rest = &bytes[start..];
         let end = if rest.starts_with(b"<!--") {
@@ -73,7 +73,9 @@ pub fn check_tree_markup(
             None
         } else if rest.starts_with(b"</") {
             open.pop();
-            skip_past(bytes, start + 2, b">")
+            xml.get(start + 2..)
+                .and_then(|rest| rest.find('>'))
+                .map(|offset| start + 2 + offset + 1)
         } else {
             match start_tag(bytes, start + 1) {
                 Some(tag) => {
@@ -166,10 +168,6 @@ fn start_tag(bytes: &[u8], from: usize) -> Option<StartTag> {
         previous = byte;
     }
     None
-}
-
-fn memchr(needle: u8, haystack: &[u8]) -> Option<usize> {
-    haystack.iter().position(|&b| b == needle)
 }
 
 /// Posición tras la primera aparición de `marker` desde `from`.

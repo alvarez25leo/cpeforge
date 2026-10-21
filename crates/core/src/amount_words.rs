@@ -89,12 +89,15 @@ pub fn to_invoice(amount: Decimal, currency: &str) -> Result<String, AmountWords
 /// `EUR`), tal como se escribe en la leyenda. `None` si no se conoce.
 #[must_use]
 pub fn currency_name(code: &str) -> Option<&'static str> {
-    match code.trim().to_ascii_uppercase().as_str() {
-        "PEN" => Some("SOLES"),
-        "USD" => Some("DÓLARES AMERICANOS"),
-        "EUR" => Some("EUROS"),
-        _ => None,
-    }
+    let code = code.trim();
+    [
+        ("PEN", "SOLES"),
+        ("USD", "DÓLARES AMERICANOS"),
+        ("EUR", "EUROS"),
+    ]
+    .into_iter()
+    .find(|(iso, _)| iso.eq_ignore_ascii_case(code))
+    .map(|(_, name)| name)
 }
 
 impl Legend {

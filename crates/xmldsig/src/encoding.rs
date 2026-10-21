@@ -9,6 +9,9 @@
 //! representar se escribe como referencia decimal `&#N;`, igual que el
 //! respaldo de `xmlCharEncOutput`.
 
+use std::borrow::Cow;
+use std::fmt::Write as _;
+
 use crate::error::XmlError;
 
 /// Codificación de entrada y salida de un documento.
@@ -110,8 +113,9 @@ const LATIN9_CHANGES: [(u8, char); 8] = [
 impl Charset {
     /// Codificación por nombre declarado; `None` si no está admitida.
     pub(crate) fn from_name(name: &str) -> Option<Self> {
-        let upper = name.to_ascii_uppercase();
-        let is = |list: &[&str]| list.contains(&upper.as_str());
+        // Los alias son ASCII en mayúsculas: comparar sin distinguir
+        // mayúsculas equivale a pasar el nombre a mayúsculas, sin copiarlo.
+        let is = |list: &[&str]| list.iter().any(|alias| alias.eq_ignore_ascii_case(name));
         if is(UTF8) {
             Some(Self::Utf8)
         } else if is(LATIN1) {
@@ -161,47 +165,53 @@ impl Charset {
         }
     }
 
-    /// Bytes de entrada → texto.
-    pub(crate) fn decode(self, bytes: &[u8]) -> Result<String, XmlError> {
+    /// Bytes de entrada → texto. En UTF-8 se valida y se presta, sin copiar.
+    pub(crate) fn decode(self, bytes: &[u8]) -> Result<Cow<'_, str>, XmlError> {
+        let invalid = || XmlError::Malformed("bytes inválidos para la codificación".into());
         if self == Self::Utf8 {
             return std::str::from_utf8(bytes)
-                .map(str::to_owned)
-                .map_err(|_| XmlError::Malformed("bytes inválidos para la codificación".into()));
+                .map(Cow::Borrowed)
+                .map_err(|_| invalid());
         }
         bytes
             .iter()
             .map(|b| self.decode_byte(*b))
             .collect::<Option<String>>()
-            .ok_or_else(|| XmlError::Malformed("bytes inválidos para la codificación".into()))
+            .map(Cow::Owned)
+            .ok_or_else(invalid)
     }
 
-    /// Sustituye por `&#N;` los caracteres que la codificación no admite.
-    pub(crate) fn escape_unencodable(self, text: &str) -> String {
+    /// Sustituye por `&#N;` los caracteres que la codificación no admite. En
+    /// UTF-8 devuelve el mismo texto, sin copiarlo.
+    pub(crate) fn escape_unencodable(self, text: String) -> String {
         if self == Self::Utf8 {
-            return text.to_owned();
+            return text;
         }
         let mut out = String::with_capacity(text.len());
         for c in text.chars() {
             if self.encode_char(c).is_some() {
                 out.push(c);
             } else {
-                out.push_str(&format!("&#{};", u32::from(c)));
+                let _ = write!(out, "&#{};", u32::from(c));
             }
         }
         out
     }
 
-    /// Texto (ya escapado con [`Self::escape_unencodable`]) → bytes.
-    pub(crate) fn encode(self, text: &str) -> Vec<u8> {
+    /// Texto (ya escapado con [`Self::escape_unencodable`]) → bytes. En UTF-8
+    /// reutiliza el búfer del texto.
+    pub(crate) fn encode(self, text: String) -> Vec<u8> {
         if self == Self::Utf8 {
-            return text.as_bytes().to_vec();
+            return text.into_bytes();
         }
-        text.chars()
-            .flat_map(|c| match self.encode_char(c) {
-                Some(b) => vec![b],
-                None => format!("&#{};", u32::from(c)).into_bytes(),
-            })
-            .collect()
+        let mut out = Vec::with_capacity(text.len());
+        for c in text.chars() {
+            match self.encode_char(c) {
+                Some(b) => out.push(b),
+                None => out.extend_from_slice(format!("&#{};", u32::from(c)).as_bytes()),
+            }
+        }
+        out
     }
 }
 
@@ -242,17 +252,17 @@ mod tests {
         assert_eq!(Charset::from_name("cp1252"), Some(Charset::Windows1252));
         assert_eq!(Charset::from_name("Latin-9"), Some(Charset::Latin9));
         assert_eq!(Charset::from_name("ISO LATIN 1"), None);
-        assert_eq!(Charset::Latin1.decode(b"\xE9"), Ok("é".to_owned()));
+        assert_eq!(Charset::Latin1.decode(b"\xE9").as_deref(), Ok("é"));
         assert!(Charset::Ascii.decode(b"\xE9").is_err());
         assert!(Charset::Windows1252.decode(b"\x81").is_err());
-        assert_eq!(Charset::Windows1252.encode("\u{81}"), b"&#129;");
-        assert_eq!(Charset::Windows1252.decode(b"\x80"), Ok("€".to_owned()));
-        assert_eq!(Charset::Latin9.decode(b"\xA4"), Ok("€".to_owned()));
+        assert_eq!(Charset::Windows1252.encode("\u{81}".into()), b"&#129;");
+        assert_eq!(Charset::Windows1252.decode(b"\x80").as_deref(), Ok("€"));
+        assert_eq!(Charset::Latin9.decode(b"\xA4").as_deref(), Ok("€"));
         assert_eq!(Charset::from_name("LATIN9"), Some(Charset::Latin9));
-        let text = Charset::Latin1.escape_unencodable("é€\u{10000}");
+        let text = Charset::Latin1.escape_unencodable("é€\u{10000}".into());
         assert_eq!(text, "é&#8364;&#65536;");
-        assert_eq!(Charset::Latin1.encode(&text), b"\xE9&#8364;&#65536;");
-        assert_eq!(Charset::Latin9.escape_unencodable("¤€"), "&#164;€");
+        assert_eq!(Charset::Latin1.encode(text), b"\xE9&#8364;&#65536;");
+        assert_eq!(Charset::Latin9.escape_unencodable("¤€".into()), "&#164;€");
     }
 
     #[test]

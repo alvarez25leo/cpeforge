@@ -59,27 +59,47 @@ pub(crate) fn build_query(fields: &[(&str, &str)]) -> String {
         .join("&")
 }
 
+/// Cadena JSON en ASCII. Los tramos sin nada que escapar (por ejemplo, el
+/// ZIP en Base64 de un envío) se copian en bloque.
 fn escape_json_string(out: &mut String, s: &str) {
     out.push('"');
-    for c in s.chars() {
-        match c {
-            '"' => out.push_str("\\\""),
-            '\\' => out.push_str("\\\\"),
-            '/' => out.push_str("\\/"),
-            '\u{8}' => out.push_str("\\b"),
-            '\u{c}' => out.push_str("\\f"),
-            '\n' => out.push_str("\\n"),
-            '\r' => out.push_str("\\r"),
-            '\t' => out.push_str("\\t"),
-            c if (c as u32) < 0x20 || !c.is_ascii() => {
-                let mut buf = [0u16; 2];
-                for unit in c.encode_utf16(&mut buf) {
-                    let _ = write!(out, "\\u{unit:04x}");
-                }
+    let bytes = s.as_bytes();
+    let (mut start, mut index) = (0, 0);
+    while let Some(&byte) = bytes.get(index) {
+        let simple = match byte {
+            b'"' => "\\\"",
+            b'\\' => "\\\\",
+            b'/' => "\\/",
+            0x08 => "\\b",
+            0x0C => "\\f",
+            b'\n' => "\\n",
+            b'\r' => "\\r",
+            b'\t' => "\\t",
+            0x20..0x80 => {
+                index += 1;
+                continue;
             }
-            c => out.push(c),
+            _ => "",
+        };
+        out.push_str(&s[start..index]);
+        if simple.is_empty() {
+            // Control sin escape corto o carácter no ASCII: `\uXXXX` por
+            // cada unidad UTF-16.
+            let Some(c) = s[index..].chars().next() else {
+                break;
+            };
+            let mut buf = [0u16; 2];
+            for unit in c.encode_utf16(&mut buf) {
+                let _ = write!(out, "\\u{unit:04x}");
+            }
+            index += c.len_utf8();
+        } else {
+            out.push_str(simple);
+            index += 1;
         }
+        start = index;
     }
+    out.push_str(&s[start..]);
     out.push('"');
 }
 
@@ -99,9 +119,28 @@ pub enum Json {
 
 /// JSON compacto, sin espacios.
 pub(crate) fn encode_compact_json(value: &Json) -> String {
-    let mut out = String::new();
+    // Reserva lo que ocupan los textos sin escapes: el ZIP en Base64 de un
+    // envío GRE se copia una vez, sin crecer el búfer por duplicación.
+    let mut out = String::with_capacity(compact_len_hint(value));
     write_json(&mut out, value, None, 0);
     out
+}
+
+/// Longitud de [`encode_compact_json`] sin contar los escapes (cota inferior).
+fn compact_len_hint(value: &Json) -> usize {
+    match value {
+        Json::Null => 4,
+        Json::Str(s) => s.len() + 2,
+        Json::Int(_) => 20,
+        Json::Array(items) => items.iter().map(|v| compact_len_hint(v) + 1).sum::<usize>() + 2,
+        Json::Object(fields) => {
+            fields
+                .iter()
+                .map(|(k, v)| k.len() + 4 + compact_len_hint(v))
+                .sum::<usize>()
+                + 2
+        }
+    }
 }
 
 /// JSON con un elemento por línea, sangría de 4 espacios y `": "` entre
@@ -126,14 +165,12 @@ fn write_json(out: &mut String, value: &Json, indent: Option<usize>, level: usiz
                     out.push(',');
                 }
                 if let Some(n) = indent {
-                    out.push('\n');
-                    out.push_str(&" ".repeat(n * (level + 1)));
+                    newline_indent(out, n * (level + 1));
                 }
                 write_json(out, v, indent, level + 1);
             }
             if let Some(n) = indent {
-                out.push('\n');
-                out.push_str(&" ".repeat(n * level));
+                newline_indent(out, n * level);
             }
             out.push(']');
         }
@@ -152,8 +189,7 @@ fn write_json(out: &mut String, value: &Json, indent: Option<usize>, level: usiz
                     out.push(',');
                 }
                 if let Some(n) = indent {
-                    out.push('\n');
-                    out.push_str(&" ".repeat(n * (level + 1)));
+                    newline_indent(out, n * (level + 1));
                 }
                 escape_json_string(out, k);
                 out.push(':');
@@ -163,12 +199,17 @@ fn write_json(out: &mut String, value: &Json, indent: Option<usize>, level: usiz
                 write_json(out, v, indent, level + 1);
             }
             if let Some(n) = indent {
-                out.push('\n');
-                out.push_str(&" ".repeat(n * level));
+                newline_indent(out, n * level);
             }
             out.push('}');
         }
     }
+}
+
+/// Salto de línea y `spaces` espacios de sangría, sin cadenas intermedias.
+fn newline_indent(out: &mut String, spaces: usize) {
+    out.push('\n');
+    out.extend(std::iter::repeat_n(' ', spaces));
 }
 
 /// Decodifica un cuerpo JSON; inválido, vacío o no UTF-8 es `null`.

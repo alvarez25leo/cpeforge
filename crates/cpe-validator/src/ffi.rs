@@ -15,6 +15,7 @@
 #![allow(unsafe_code)]
 
 use std::cell::RefCell;
+use std::collections::HashMap;
 use std::ffi::{CStr, CString, c_char, c_double, c_int, c_ulong, c_void};
 use std::path::{Path, PathBuf};
 use std::ptr::{self, NonNull};
@@ -225,6 +226,8 @@ pub(crate) struct Session {
     pub(crate) extension: Option<ExtensionCall>,
     pub(crate) regex_errors: Vec<xslt_ext::RegexFailure>,
     pub(crate) regex_limits: u32,
+    /// Expresiones ya compiladas en esta operación.
+    pub(crate) regex_cache: RegexCache,
     pub(crate) op_limit_code: c_int,
     pub(crate) match_limit: u32,
     pub(crate) depth_limit: u32,
@@ -676,21 +679,69 @@ pub(crate) enum PcreResult {
     MatchError(i32),
 }
 
-/// Compila `pattern` con las opciones de la referencia por defecto y busca en
-/// `subject` con los límites `pcre.backtrack_limit`/`pcre.recursion_limit`.
-pub(crate) fn pcre_match(
-    pattern: &[u8],
-    subject: &[u8],
-    match_limit: u32,
-    depth_limit: u32,
-) -> PcreResult {
+/// Máximo de expresiones guardadas por operación (`PCRE_CACHE_SIZE` de la
+/// referencia). Las siguientes se compilan en cada llamada, como antes.
+const MAX_CACHED_REGEX: usize = 4096;
+
+/// Expresión PCRE2 compilada y su bloque de resultados.
+struct CompiledRegex {
+    code: NonNull<pcre2_sys::pcre2_code_8>,
+    data: NonNull<pcre2_sys::pcre2_match_data_8>,
+}
+
+// SAFETY: el código compilado es inmutable y el bloque de resultados solo se
+// usa desde la sesión que lo posee (una llamada a la vez); moverlos de hilo
+// no comparte nada. No se implementa Sync.
+unsafe impl Send for CompiledRegex {}
+
+impl Drop for CompiledRegex {
+    fn drop(&mut self) {
+        // SAFETY: ambos punteros provienen de `compile_regex` y se liberan
+        // una sola vez.
+        unsafe {
+            pcre2_sys::pcre2_match_data_free_8(self.data.as_ptr());
+            pcre2_sys::pcre2_code_free_8(self.code.as_ptr());
+        }
+    }
+}
+
+/// Contexto de búsqueda reutilizado (los límites se fijan en cada llamada).
+struct MatchContext(NonNull<pcre2_sys::pcre2_match_context_8>);
+
+// SAFETY: como `CompiledRegex`: lo usa solo la sesión que lo posee.
+unsafe impl Send for MatchContext {}
+
+impl Drop for MatchContext {
+    fn drop(&mut self) {
+        // SAFETY: puntero de pcre2_match_context_create_8, liberado una vez.
+        unsafe { pcre2_sys::pcre2_match_context_free_8(self.0.as_ptr()) };
+    }
+}
+
+/// Error de compilación guardado: mensaje y posición.
+type CompileFailure = (String, usize);
+
+/// Expresiones compiladas durante una operación, como la caché de
+/// `preg_match` de la referencia: el XSL evalúa los mismos patrones en cada
+/// línea y compilarlos en cada llamada dominaba la validación. Un patrón que
+/// no compila se guarda con su error, que es siempre el mismo.
+#[derive(Default)]
+pub(crate) struct RegexCache {
+    entries: HashMap<Vec<u8>, Result<CompiledRegex, CompileFailure>>,
+    context: Option<MatchContext>,
+}
+
+/// Compila `pattern` con las opciones de la referencia por defecto. `None` si
+/// falta memoria para el contexto o el bloque de resultados.
+fn compile_regex(pattern: &[u8]) -> Option<Result<CompiledRegex, CompileFailure>> {
     use pcre2_sys as p;
-    // SAFETY: todos los punteros PCRE2 se crean y liberan aquí; los búferes
-    // de patrón y sujeto viven durante las llamadas.
+    // SAFETY: el contexto de compilación se crea y libera aquí; el patrón
+    // vive durante la llamada. El código y el bloque de resultados pasan a
+    // `CompiledRegex`, que los libera en `Drop`.
     unsafe {
         let cctx = p::pcre2_compile_context_create_8(ptr::null_mut());
         if cctx.is_null() {
-            return PcreResult::MatchError(p::PCRE2_ERROR_NOMEMORY);
+            return None;
         }
         p::pcre2_set_compile_extra_options_8(cctx, p::PCRE2_EXTRA_ALLOW_LOOKAROUND_BSK);
         let mut errcode: c_int = 0;
@@ -704,49 +755,113 @@ pub(crate) fn pcre_match(
             cctx,
         );
         p::pcre2_compile_context_free_8(cctx);
-        if code.is_null() {
+        let Some(code) = NonNull::new(code) else {
             let mut buf = [0u8; 256];
             let n = p::pcre2_get_error_message_8(errcode, buf.as_mut_ptr(), buf.len());
             let len = usize::try_from(n).unwrap_or(0).min(buf.len());
+            return Some(Err((
+                String::from_utf8_lossy(&buf[..len]).into_owned(),
+                erroffset,
+            )));
+        };
+        let Some(data) = NonNull::new(p::pcre2_match_data_create_from_pattern_8(
+            code.as_ptr(),
+            ptr::null_mut(),
+        )) else {
+            p::pcre2_code_free_8(code.as_ptr());
+            return None;
+        };
+        Some(Ok(CompiledRegex { code, data }))
+    }
+}
+
+/// Busca `pattern` en `subject` con los límites `pcre.backtrack_limit`/
+/// `pcre.recursion_limit`, reutilizando la compilación guardada en `cache`.
+pub(crate) fn pcre_match(
+    cache: &mut RegexCache,
+    pattern: &[u8],
+    subject: &[u8],
+    match_limit: u32,
+    depth_limit: u32,
+) -> PcreResult {
+    use pcre2_sys as p;
+    if !cache.entries.contains_key(pattern) {
+        let Some(compiled) = compile_regex(pattern) else {
+            return PcreResult::MatchError(p::PCRE2_ERROR_NOMEMORY);
+        };
+        if cache.entries.len() >= MAX_CACHED_REGEX {
+            // Caché llena: se usa esta compilación una vez y se libera.
+            return run_regex(
+                &mut cache.context,
+                &compiled,
+                subject,
+                match_limit,
+                depth_limit,
+            );
+        }
+        cache.entries.insert(pattern.to_vec(), compiled);
+    }
+    match cache.entries.get(pattern) {
+        Some(compiled) => run_regex(
+            &mut cache.context,
+            compiled,
+            subject,
+            match_limit,
+            depth_limit,
+        ),
+        None => PcreResult::MatchError(p::PCRE2_ERROR_NOMEMORY),
+    }
+}
+
+/// `pcre2_match` con una expresión ya compilada (o su error de compilación).
+fn run_regex(
+    context: &mut Option<MatchContext>,
+    compiled: &Result<CompiledRegex, CompileFailure>,
+    subject: &[u8],
+    match_limit: u32,
+    depth_limit: u32,
+) -> PcreResult {
+    use pcre2_sys as p;
+    let regex = match compiled {
+        Ok(regex) => regex,
+        Err((message, offset)) => {
             return PcreResult::CompileError {
-                message: String::from_utf8_lossy(&buf[..len]).into_owned(),
-                offset: erroffset,
+                message: message.clone(),
+                offset: *offset,
             };
         }
-        let mctx = p::pcre2_match_context_create_8(ptr::null_mut());
-        let md = p::pcre2_match_data_create_from_pattern_8(code, ptr::null_mut());
-        if mctx.is_null() || md.is_null() {
-            if !mctx.is_null() {
-                p::pcre2_match_context_free_8(mctx);
-            }
-            if !md.is_null() {
-                p::pcre2_match_data_free_8(md);
-            }
-            p::pcre2_code_free_8(code);
-            return PcreResult::MatchError(p::PCRE2_ERROR_NOMEMORY);
-        }
-        p::pcre2_set_match_limit_8(mctx, match_limit);
-        p::pcre2_set_depth_limit_8(mctx, depth_limit);
-        let rc = p::pcre2_match_8(
-            code,
+    };
+    if context.is_none() {
+        // SAFETY: crea un contexto propio, que `MatchContext` libera en `Drop`.
+        let created = unsafe { p::pcre2_match_context_create_8(ptr::null_mut()) };
+        *context = NonNull::new(created).map(MatchContext);
+    }
+    let Some(mctx) = context.as_ref() else {
+        return PcreResult::MatchError(p::PCRE2_ERROR_NOMEMORY);
+    };
+    // SAFETY: código, bloque de resultados y contexto viven en la caché
+    // durante la llamada y no se usan a la vez desde otro sitio; el sujeto
+    // es un préstamo válido.
+    let rc = unsafe {
+        p::pcre2_set_match_limit_8(mctx.0.as_ptr(), match_limit);
+        p::pcre2_set_depth_limit_8(mctx.0.as_ptr(), depth_limit);
+        p::pcre2_match_8(
+            regex.code.as_ptr(),
             subject.as_ptr(),
             subject.len(),
             0,
             p::PCRE2_NO_UTF_CHECK,
-            md,
-            mctx,
-        );
-        p::pcre2_match_data_free_8(md);
-        p::pcre2_match_context_free_8(mctx);
-        p::pcre2_code_free_8(code);
-        match rc {
-            n if n >= 0 => PcreResult::Matched(true),
-            p::PCRE2_ERROR_NOMATCH => PcreResult::Matched(false),
-            p::PCRE2_ERROR_MATCHLIMIT
-            | p::PCRE2_ERROR_DEPTHLIMIT
-            | p::PCRE2_ERROR_HEAPLIMIT
-            | p::PCRE2_ERROR_JIT_STACKLIMIT => PcreResult::Limit,
-            other => PcreResult::MatchError(other),
-        }
+            regex.data.as_ptr(),
+            mctx.0.as_ptr(),
+        )
+    };
+    match rc {
+        n if n >= 0 => PcreResult::Matched(true),
+        p::PCRE2_ERROR_NOMATCH => PcreResult::Matched(false),
+        p::PCRE2_ERROR_MATCHLIMIT
+        | p::PCRE2_ERROR_DEPTHLIMIT
+        | p::PCRE2_ERROR_HEAPLIMIT
+        | p::PCRE2_ERROR_JIT_STACKLIMIT => PcreResult::Limit,
+        other => PcreResult::MatchError(other),
     }
 }

@@ -17,7 +17,8 @@ pub trait Document {
 /// Une las partes con `-` tratando `None` como cadena vacía, igual que
 /// `join('-', [...])` con valores `null`.
 pub(crate) fn join_parts(parts: &[Option<&str>]) -> String {
-    let mut out = String::new();
+    let len: usize = parts.iter().map(|p| p.map_or(0, str::len) + 1).sum();
+    let mut out = String::with_capacity(len);
     for (index, part) in parts.iter().enumerate() {
         if index > 0 {
             out.push('-');

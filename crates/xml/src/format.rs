@@ -37,6 +37,20 @@ pub fn float_string(value: Decimal) -> String {
 /// Dígitos decimales de `value` en `buf`, sin ceros a la izquierda.
 fn mantissa_digits(value: u128, buf: &mut [u8; 40]) -> &[u8] {
     let mut start = buf.len();
+    // Los importes caben casi siempre en 64 bits, cuya división es mucho más
+    // barata que la de 128.
+    if let Ok(mut rest) = u64::try_from(value) {
+        loop {
+            start -= 1;
+            // `rest % 10` siempre cabe en un dígito.
+            buf[start] = b'0' + u8::try_from(rest % 10).unwrap_or(0);
+            rest /= 10;
+            if rest == 0 {
+                break;
+            }
+        }
+        return &buf[start..];
+    }
     let mut rest = value;
     loop {
         start -= 1;
@@ -48,6 +62,40 @@ fn mantissa_digits(value: u128, buf: &mut [u8; 40]) -> &[u8] {
         }
     }
     &buf[start..]
+}
+
+/// `{value}` de `Decimal` (mantisa con el punto a `scale` cifras del final,
+/// `0.` delante si no hay parte entera y `-` si es negativo) escrito
+/// directamente, sin pasar por `fmt`.
+fn push_decimal(out: &mut String, value: Decimal) {
+    let mut buf = [0u8; 40];
+    let digits = mantissa_digits(value.mantissa().unsigned_abs(), &mut buf);
+    let scale = usize::try_from(value.scale()).unwrap_or(usize::MAX);
+    if value.is_sign_negative() {
+        out.push('-');
+    }
+    let push_digits = |out: &mut String, digits: &[u8]| {
+        out.extend(digits.iter().map(|d| char::from(*d)));
+    };
+    match digits.len().checked_sub(scale) {
+        Some(0) | None => {
+            out.push('0');
+            if scale > 0 {
+                out.push('.');
+                for _ in digits.len()..scale {
+                    out.push('0');
+                }
+                push_digits(out, digits);
+            }
+        }
+        Some(whole) => {
+            push_digits(out, &digits[..whole]);
+            if scale > 0 {
+                out.push('.');
+                push_digits(out, &digits[whole..]);
+            }
+        }
+    }
 }
 
 /// [`float_string`] escrito al final de `out`.
@@ -180,8 +228,7 @@ pub fn n_format(value: Option<Decimal>, decimals: u32) -> String {
 /// [`n_format`] escrito al final de `out`.
 pub(crate) fn write_n_format(out: &mut String, value: Option<Decimal>, decimals: u32) {
     let value = value.unwrap_or(Decimal::ZERO);
-    let threshold = Decimal::from_i128_with_scale(1_000_000_000_000_000, decimals.min(28));
-    let strategy = if value.abs() >= threshold {
+    let strategy = if reaches_round_threshold(value, decimals) {
         RoundingStrategy::MidpointNearestEven
     } else {
         RoundingStrategy::MidpointAwayFromZero
@@ -193,7 +240,7 @@ pub(crate) fn write_n_format(out: &mut String, value: Option<Decimal>, decimals:
     // Sin `{:.width$}`: `rust_decimal` entra en pánico si el texto con
     // relleno supera su búfer interno (p. ej. 1e23 con 10 decimales). Se
     // escribe el valor redondeado y se completan los ceros a mano.
-    let _ = write!(out, "{rounded}");
+    push_decimal(out, rounded);
     let scale = rounded.scale();
     if decimals > 0 {
         if scale == 0 {
@@ -203,6 +250,19 @@ pub(crate) fn write_n_format(out: &mut String, value: Option<Decimal>, decimals:
             out.push('0');
         }
     }
+}
+
+/// `|value| >= 1e15 / 10^decimals` (escala acotada a 28), el umbral desde el
+/// que la referencia no redondea. Con `value = m / 10^s`, si `|m|` tiene
+/// menos de `15 - decimals` cifras el valor está por debajo sin comparar
+/// `Decimal`s.
+fn reaches_round_threshold(value: Decimal, decimals: u32) -> bool {
+    let digits = 15u32.saturating_sub(decimals.min(28));
+    if value.mantissa().unsigned_abs() < 10u128.pow(digits) {
+        return false;
+    }
+    let threshold = Decimal::from_i128_with_scale(1_000_000_000_000_000, decimals.min(28));
+    value.abs() >= threshold
 }
 
 /// `FormatFilter::numberLimit` (`|n_format_limit`).
@@ -449,6 +509,65 @@ mod tests {
         assert_eq!(n_format_limit(Some(d("0.123456")), 5), "0.12346");
         assert_eq!(n_format_limit(Some(d("59.0")), 10), "59");
         assert_eq!(n_format_limit(None, 10), "");
+    }
+
+    #[test]
+    fn decimal_text_equals_display() {
+        let mut state = 0x2545_F491_4F6C_DD1D_u64;
+        let mut next = move || {
+            state ^= state << 13;
+            state ^= state >> 7;
+            state ^= state << 17;
+            state
+        };
+        let check = |value: Decimal| {
+            let mut out = String::new();
+            push_decimal(&mut out, value);
+            assert_eq!(out, value.to_string(), "{value:?}");
+        };
+        for scale in 0..=28u32 {
+            for _ in 0..2_000 {
+                let bits = next() % 96 + 1;
+                let raw = ((u128::from(next()) << 64) | u128::from(next())) >> (128 - bits);
+                let lo = u32::try_from(raw & 0xFFFF_FFFF).unwrap();
+                let mid = u32::try_from((raw >> 32) & 0xFFFF_FFFF).unwrap();
+                let hi = u32::try_from((raw >> 64) & 0xFFFF_FFFF).unwrap();
+                check(Decimal::from_parts(lo, mid, hi, next() % 2 == 0, scale));
+            }
+            check(Decimal::from_parts(0, 0, 0, false, scale));
+            check(Decimal::from_parts(0, 0, 0, true, scale));
+        }
+    }
+
+    #[test]
+    fn round_threshold_equals_decimal_comparison() {
+        for text in [
+            "0",
+            "999999999999999",
+            "1000000000000000",
+            "-1000000000000000",
+            "99999999999999.99",
+            "100000000000000.00",
+            "1e14",
+            "0.000001",
+            "12345678901234567890",
+            "-0.00",
+            "9999999999999.999",
+            "10000000000000",
+        ] {
+            let value = Decimal::from_scientific(text)
+                .or_else(|_| Decimal::from_str(text))
+                .unwrap();
+            for decimals in [0, 1, 2, 3, 10, 15, 16, 28, 30] {
+                let threshold =
+                    Decimal::from_i128_with_scale(1_000_000_000_000_000, decimals.min(28));
+                assert_eq!(
+                    reaches_round_threshold(value, decimals),
+                    value.abs() >= threshold,
+                    "{text} con {decimals}"
+                );
+            }
+        }
     }
 
     #[test]

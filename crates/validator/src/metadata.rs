@@ -50,16 +50,21 @@ fn table() -> Result<&'static RuleTable, ValidatorError> {
 }
 
 pub(crate) fn metadata(profile: &str, model: &str) -> Result<Metadata, ValidatorError> {
-    let table = table()?;
-    Ok(table
-        .get(profile)
-        .and_then(|classes| classes.get(model))
+    Ok(metadata_ref(profile, model)?
         .cloned()
         .unwrap_or_else(|| Metadata {
             loader: String::new(),
             has_metadata: false,
             fields: Vec::new(),
         }))
+}
+
+/// Metadata de la tabla sin copiarla; `None` si el tipo no tiene loader.
+pub(crate) fn metadata_ref(
+    profile: &str,
+    model: &str,
+) -> Result<Option<&'static Metadata>, ValidatorError> {
+    Ok(table()?.get(profile).and_then(|classes| classes.get(model)))
 }
 
 /// Los 33 loaders base y los siete loaders adicionales/sustituidos de UBL 2.1.

@@ -554,8 +554,16 @@ pub fn svg_from_symbol(symbol: &QrSymbol) -> String {
 
 /// `value` redondeado a tres decimales (mitad hacia arriba) y escrito en
 /// `out` con [`crate::format::float_to_string`].
+///
+/// Las coordenadas de los módulos son enteras: un entero de menos de 2^43
+/// (`value · 1000` exacto) ya está redondeado, así que se escribe sin pasar
+/// por [`format::round_half_up`], que lo devolvería igual.
 fn write_coord(out: &mut String, value: f64) {
-    format::write_float(out, format::round_half_up(value, 3));
+    if value.fract() == 0.0 && value.abs() < 8_796_093_022_208.0 {
+        format::write_float(out, value);
+    } else {
+        format::write_float(out, format::round_half_up(value, 3));
+    }
 }
 
 #[derive(Debug, Clone, Copy)]

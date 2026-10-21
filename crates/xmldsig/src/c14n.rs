@@ -14,7 +14,9 @@
 
 use std::collections::{HashMap, HashSet};
 
-use crate::dom::{Attribute, Document, NodeId, NodeKind, XML_NS};
+use crate::dom::{
+    Attribute, Document, Element, NodeId, NodeKind, NsDecl, XML_NS, retain_last_per_prefix,
+};
 use crate::error::Error;
 use crate::xpath_eval::{Evaluator, XNode};
 
@@ -280,6 +282,12 @@ struct Engine<'a, 's> {
     /// profundidad.
     subtree: Option<HashSet<NodeId>>,
     stack: NsStack<'a>,
+    /// Namespaces en ámbito de los elementos abiertos (solo C14N inclusiva):
+    /// el primer elemento visitado y cada uno que declara alguno apilan su
+    /// lista; los demás usan la del ancestro más cercano. Equivale a
+    /// [`Document::in_scope_namespace_refs`] sin recorrer los ancestros en
+    /// cada elemento.
+    in_scope: Vec<Vec<&'a NsDecl>>,
     pos: Pos,
     parent_is_doc: bool,
     out: String,
@@ -313,6 +321,7 @@ impl<'a, 's> Engine<'a, 's> {
                 prev_start: 0,
                 prev_end: 0,
             },
+            in_scope: Vec::new(),
             pos: Pos::Before,
             parent_is_doc: true,
             out: String::with_capacity(4096),
@@ -463,6 +472,7 @@ impl<'a, 's> Engine<'a, 's> {
         };
         let visible = self.visible(&Key::Node(node));
         let state = self.stack.save();
+        let scoped = !self.method.exclusive && self.enter_scope(node, element);
         let mut was_doc_element = false;
         if visible {
             if self.parent_is_doc {
@@ -497,8 +507,27 @@ impl<'a, 's> Engine<'a, 's> {
                 self.pos = Pos::After;
             }
         }
+        if scoped {
+            self.in_scope.pop();
+        }
         self.stack.restore(state);
         self.flush(false);
+    }
+
+    /// Apila los namespaces en ámbito de `node` si no son los del ancestro
+    /// más cercano ya apilado; devuelve si apiló. El orden es el de
+    /// [`Document::in_scope_namespace_refs`]: la última declaración de cada
+    /// prefijo, de la más externa a la más interna.
+    fn enter_scope(&mut self, node: NodeId, element: &'a Element) -> bool {
+        let list = match self.in_scope.last() {
+            None => self.doc.in_scope_namespace_refs(node),
+            Some(_) if element.ns_decls.is_empty() => return false,
+            Some(inherited) => {
+                retain_last_per_prefix(inherited.iter().copied().chain(&element.ns_decls).collect())
+            }
+        };
+        self.in_scope.push(list);
+        true
     }
 
     fn print_namespaces(&mut self, mut list: Vec<(Option<&str>, &str)>) {
@@ -524,7 +553,10 @@ impl<'a, 's> Engine<'a, 's> {
     fn inclusive_namespaces(&mut self, node: NodeId, visible: bool) {
         let mut list = Vec::new();
         let mut has_empty_ns = false;
-        for decl in self.doc.in_scope_namespace_refs(node) {
+        // La lista se aparta mientras se recorre (la pila de ámbitos no cambia
+        // hasta los hijos) y se devuelve al final.
+        let scope = self.in_scope.pop().unwrap_or_default();
+        for &decl in &scope {
             let prefix = decl.prefix.as_deref();
             if prefix == Some("xml") || !self.ns_visible(node, prefix) {
                 continue;
@@ -540,6 +572,7 @@ impl<'a, 's> Engine<'a, 's> {
                 has_empty_ns = true;
             }
         }
+        self.in_scope.push(scope);
         if visible && !has_empty_ns && !self.stack.find(None, "") {
             self.print_ns(None, "");
         }
@@ -633,6 +666,21 @@ impl<'a, 's> Engine<'a, 's> {
         let Some(element) = doc.element(node) else {
             return;
         };
+        // C14N 1.0: un elemento visible cuyo padre no lo es hereda los
+        // atributos xml:* de sus ancestros.
+        let inherited_from = (!self.method.exclusive && visible)
+            .then(|| doc.parent(node))
+            .flatten()
+            .filter(|parent| !self.visible(&Key::Node(*parent)));
+        if inherited_from.is_none() && element.attributes.len() <= 1 {
+            // Como mucho un atributo y nada heredado: no hay que ordenar.
+            if let Some(a) = element.attributes.first() {
+                if self.visible_attr(node, 0) {
+                    self.write_attribute(a);
+                }
+            }
+            return;
+        }
         let mut list: Vec<&Attribute> = element
             .attributes
             .iter()
@@ -640,33 +688,27 @@ impl<'a, 's> Engine<'a, 's> {
             .filter(|(i, _)| self.visible_attr(node, *i))
             .map(|(_, a)| a)
             .collect();
-        // C14N 1.0: un elemento visible cuyo padre no lo es hereda los
-        // atributos xml:* de sus ancestros.
-        if !self.method.exclusive && visible {
-            if let Some(parent) = doc.parent(node) {
-                if !self.visible(&Key::Node(parent)) {
-                    // Nombres xml:* ya presentes (el más cercano gana): con un
-                    // conjunto, la herencia es lineal en los atributos de los
-                    // ancestros (antes, cuadrática: 2,9 MB → 35 s).
-                    let mut taken: HashSet<&str> = list
-                        .iter()
-                        .filter(|x| x.namespace.as_deref() == Some(XML_NS))
-                        .map(|x| x.local.as_str())
-                        .collect();
-                    let mut ancestor = Some(parent);
-                    while let Some(a) = ancestor {
-                        if let Some(e) = doc.element(a) {
-                            for attr in &e.attributes {
-                                if attr.namespace.as_deref() == Some(XML_NS)
-                                    && taken.insert(attr.local.as_str())
-                                {
-                                    list.push(attr);
-                                }
-                            }
+        if let Some(parent) = inherited_from {
+            // Nombres xml:* ya presentes (el más cercano gana): con un
+            // conjunto, la herencia es lineal en los atributos de los
+            // ancestros (antes, cuadrática: 2,9 MB → 35 s).
+            let mut taken: HashSet<&str> = list
+                .iter()
+                .filter(|x| x.namespace.as_deref() == Some(XML_NS))
+                .map(|x| x.local.as_str())
+                .collect();
+            let mut ancestor = Some(parent);
+            while let Some(a) = ancestor {
+                if let Some(e) = doc.element(a) {
+                    for attr in &e.attributes {
+                        if attr.namespace.as_deref() == Some(XML_NS)
+                            && taken.insert(attr.local.as_str())
+                        {
+                            list.push(attr);
                         }
-                        ancestor = doc.parent(a);
                     }
                 }
+                ancestor = doc.parent(a);
             }
         }
         if list.len() > 1 {
@@ -684,12 +726,16 @@ impl<'a, 's> Engine<'a, 's> {
             });
         }
         for a in list {
-            self.out.push(' ');
-            a.push_qname(&mut self.out);
-            self.out.push_str("=\"");
-            escape_attribute(&mut self.out, &a.value);
-            self.out.push('"');
+            self.write_attribute(a);
         }
+    }
+
+    fn write_attribute(&mut self, a: &Attribute) {
+        self.out.push(' ');
+        a.push_qname(&mut self.out);
+        self.out.push_str("=\"");
+        escape_attribute(&mut self.out, &a.value);
+        self.out.push('"');
     }
 }
 

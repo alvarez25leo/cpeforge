@@ -105,9 +105,14 @@ pub fn exceeds_depth(xml: &str, max: usize) -> bool {
 
 /// Posición siguiente a la primera aparición de `needle` desde `from`.
 fn skip_past(xml: &str, from: usize, needle: &str) -> Option<usize> {
-    xml.get(from..)?
-        .find(needle)
-        .map(|offset| from + offset + needle.len())
+    let rest = xml.get(from..)?;
+    // Un solo byte (el `>` de las etiquetas de cierre) se busca como
+    // carácter, con la búsqueda por bloques de `str`.
+    let offset = match needle.as_bytes() {
+        [byte] => rest.find(char::from(*byte)),
+        _ => rest.find(needle),
+    };
+    offset.map(|offset| from + offset + needle.len())
 }
 
 /// Fin de una etiqueta de apertura: posición tras `>` y si termina en `/>`.

@@ -97,17 +97,26 @@ pub(crate) fn to_float(text: &str) -> Result<Decimal, XmlParserError> {
     let out_of_range = || XmlParserError::Number {
         text: text.to_owned(),
     };
-    let digits = format!("{}{}", n.integer, n.fraction);
-    let significant = digits.trim_start_matches('0');
-    let mut value = if significant.is_empty() {
+    // Cifras de la mantisa sin los ceros iniciales: la parte entera seguida
+    // de la fraccionaria, sin concatenarlas.
+    let int_zeros = n.integer.bytes().take_while(|b| *b == b'0').count();
+    let (significant_int, significant_fraction) = if int_zeros < n.integer.len() {
+        (&n.integer[int_zeros..], n.fraction)
+    } else {
+        let zeros = n.fraction.bytes().take_while(|b| *b == b'0').count();
+        ("", &n.fraction[zeros..])
+    };
+    let significant_len = significant_int.len() + significant_fraction.len();
+    let mut value = if significant_len == 0 {
         Decimal::ZERO
     } else {
         // Posición del punto decimal respecto del inicio de `significant`.
+        let digits_len = n.integer.len() + n.fraction.len();
         let leading_zeros =
-            i64::try_from(digits.len() - significant.len()).map_err(|_| out_of_range())?;
+            i64::try_from(digits_len - significant_len).map_err(|_| out_of_range())?;
         let int_len = i64::try_from(n.integer.len()).map_err(|_| out_of_range())?;
         let point = int_len - leading_zeros + n.exponent;
-        let sig_len = i64::try_from(significant.len()).map_err(|_| out_of_range())?;
+        let sig_len = i64::try_from(significant_len).map_err(|_| out_of_range())?;
         if point > 29 {
             return Err(out_of_range());
         }
@@ -116,6 +125,14 @@ pub(crate) fn to_float(text: &str) -> Result<Decimal, XmlParserError> {
         if point < -i64::try_from(MAX_DIGITS).map_err(|_| out_of_range())? {
             return Err(out_of_range());
         }
+        if let Some(mut value) =
+            exact_decimal(significant_int, significant_fraction, point, sig_len)
+        {
+            value.set_sign_negative(n.negative);
+            return Ok(value);
+        }
+        let significant = format!("{significant_int}{significant_fraction}");
+        let significant = significant.as_str();
         let mut text_value = String::new();
         if point <= 0 {
             text_value.push_str("0.");
@@ -142,6 +159,29 @@ pub(crate) fn to_float(text: &str) -> Result<Decimal, XmlParserError> {
     };
     value.set_sign_negative(n.negative);
     Ok(value)
+}
+
+/// El valor `0.significant × 10^point` sin pasar por texto, cuando cabe
+/// exacto en `Decimal` (hasta [`MAX_DIGITS`] cifras y escala 28): es el que
+/// produce `Decimal::from_str` con el mismo número escrito sin exponente,
+/// que solo redondea por encima de esos límites. `None` en otro caso.
+fn exact_decimal(int: &str, fraction: &str, point: i64, sig_len: i64) -> Option<Decimal> {
+    if usize::try_from(sig_len).ok()? > MAX_DIGITS {
+        return None;
+    }
+    let mut mantissa = int
+        .bytes()
+        .chain(fraction.bytes())
+        .fold(0_i128, |acc, digit| acc * 10 + i128::from(digit - b'0'));
+    let scale = if point >= sig_len {
+        for _ in 0..point - sig_len {
+            mantissa = mantissa.checked_mul(10)?;
+        }
+        0
+    } else {
+        u32::try_from(sig_len - point).ok()?
+    };
+    Decimal::try_from_i128_with_scale(mantissa, scale).ok()
 }
 
 /// Entero a partir del prefijo numérico: con saturación en los extremos si

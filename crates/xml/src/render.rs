@@ -110,7 +110,7 @@ impl<'o> Out<'o> {
     pub(crate) fn cdata(&mut self, value: Option<&str>) -> &mut Self {
         if let Some(value) = value {
             let mut rest = value;
-            while let Some(pos) = rest.find("]]>") {
+            while let Some(pos) = find_cdata_end(rest) {
                 self.buf.push_str(&rest[..pos]);
                 self.buf.push_str("]]]]><![CDATA[>");
                 rest = &rest[pos + 3..];
@@ -206,6 +206,21 @@ impl<'o> Out<'o> {
     }
 }
 
+/// Primera aparición de `]]>` (como `text.find("]]>")`), buscando el `]`
+/// con la búsqueda de un carácter: casi ningún texto lo contiene.
+fn find_cdata_end(text: &str) -> Option<usize> {
+    let bytes = text.as_bytes();
+    let mut from = 0;
+    while let Some(offset) = text.get(from..)?.find(']') {
+        let at = from + offset;
+        if bytes.get(at..at + 3) == Some(b"]]>".as_slice()) {
+            return Some(at);
+        }
+        from = at + 1;
+    }
+    None
+}
+
 /// `htmlspecialchars($s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')`. Copia por
 /// tramos entre los caracteres escapados (todos ASCII, así que los cortes
 /// caen en límites de carácter).
@@ -235,15 +250,61 @@ const fn is_trim_char(byte: u8) -> bool {
     matches!(byte, b' ' | b'\t' | b'\n' | b'\r' | 0 | 0x0B)
 }
 
+/// Posición del primer `>` seguido de un espacio PCRE, el único sitio donde
+/// [`spaceless`] puede quitar algo entre etiquetas.
+///
+/// Recorre ocho bytes por paso con un filtro que no pierde candidatos (`>`
+/// en un byte y un byte `<= 0x20` en el siguiente) y confirma cada uno con
+/// la condición exacta.
+fn first_space_after_gt(bytes: &[u8]) -> Option<usize> {
+    const ONES: u64 = 0x0101_0101_0101_0101;
+    const HIGH: u64 = 0x8080_8080_8080_8080;
+    let exact = |i: usize| bytes[i] == b'>' && bytes.get(i + 1).is_some_and(|b| is_pcre_space(*b));
+    let word = |at: usize| {
+        bytes
+            .get(at..at + 8)
+            .and_then(|chunk| <[u8; 8]>::try_from(chunk).ok())
+            .map(u64::from_le_bytes)
+    };
+    let mut at = 0;
+    while let (Some(current), Some(next)) = (word(at), word(at + 1)) {
+        // Bit alto en los bytes iguales a `>` (puede marcar de más tras uno
+        // de ellos, nunca de menos).
+        let x = current ^ (ONES * u64::from(b'>'));
+        let gt = x.wrapping_sub(ONES) & !x & HIGH;
+        // Bit alto, exacto, en los bytes `<= 0x20` del byte siguiente.
+        let low = !((next & !HIGH).wrapping_add(ONES * 0x5F)) & !next & HIGH;
+        if gt & low != 0 {
+            if let Some(found) = (at..at + 8).find(|&i| exact(i)) {
+                return Some(found);
+            }
+        }
+        at += 8;
+    }
+    (at..bytes.len()).find(|&i| exact(i))
+}
+
 /// [`spaceless`] sobre el propio buffer, sin una segunda copia del XML: solo
 /// se eliminan bytes ASCII de espacio situados entre `>` y `<`, así que el
 /// resultado sigue siendo UTF-8 válido.
 fn spaceless_in_place(text: String) -> String {
+    let first = first_space_after_gt(text.as_bytes());
+    let trimmed = |b: Option<&u8>| b.is_some_and(|b| is_trim_char(*b));
+    if first.is_none() && !trimmed(text.as_bytes().first()) && !trimmed(text.as_bytes().last()) {
+        // Nada que quitar (lo habitual: las plantillas no dejan espacio entre
+        // etiquetas): el texto ya es el resultado.
+        let mut text = text;
+        if text.capacity() > text.len() + text.len() / 2 {
+            text.shrink_to_fit();
+        }
+        return text;
+    }
     let mut bytes = text.into_bytes();
     let len = bytes.len();
-    // Mismo recorrido que [`spaceless`]; los tramos conservados se mueven por
+    // Mismo recorrido que [`spaceless`] desde el primer `>` con espacio (los
+    // anteriores no quitan nada); los tramos conservados se mueven por
     // bloques hacia delante dentro del buffer.
-    let (mut write, mut copied, mut index) = (0, 0, 0);
+    let (mut write, mut copied, mut index) = (0, 0, first.unwrap_or(len));
     while let Some(offset) = bytes[index..].iter().position(|b| *b == b'>') {
         index += offset;
         let mut end = index + 1;
@@ -380,6 +441,35 @@ mod tests {
     }
 
     #[test]
+    fn in_place_spaceless_matches_reference_on_random_text() {
+        // Textos con los bytes que importan, de longitudes que cruzan los
+        // bloques de ocho bytes del filtro.
+        let alphabet = [
+            '>', '<', ' ', '\t', '\n', '\r', '\u{b}', '\u{c}', '\0', 'a', 'é', '?', '\u{1f}',
+        ];
+        let mut state = 0x9E37_79B9_7F4A_7C15_u64;
+        let mut next = move || {
+            state ^= state << 13;
+            state ^= state >> 7;
+            state ^= state << 17;
+            state
+        };
+        for _ in 0..20_000 {
+            let len = usize::try_from(next() % 40).unwrap_or(0);
+            let input: String = (0..len)
+                .map(|_| alphabet[usize::try_from(next() % 13).unwrap_or(0)])
+                .collect();
+            assert_eq!(
+                spaceless_in_place(input.clone()),
+                spaceless(&input),
+                "{input:?}"
+            );
+        }
+        let long = format!("{}>  <{}", "<a>x</a>".repeat(9), "<b/>".repeat(5));
+        assert_eq!(spaceless_in_place(long.clone()), spaceless(&long));
+    }
+
+    #[test]
     fn cdata_splits_section_terminator() {
         let options = RenderOptions::default();
         let mut out = Out::new(&options, "t");
@@ -390,6 +480,15 @@ mod tests {
             out.finish(),
             "<a><![CDATA[x]]]]><![CDATA[><b>y</b>]]]]><![CDATA[>]]></a>"
         );
+    }
+
+    #[test]
+    fn cdata_end_search_equals_find() {
+        for text in [
+            "", "]", "]]", "]]>", "a]]>b]]>", "]]]>", "]>]]", "x]]x>]]>", "é]]>", "]]]]>",
+        ] {
+            assert_eq!(find_cdata_end(text), text.find("]]>"), "{text:?}");
+        }
     }
 
     #[test]

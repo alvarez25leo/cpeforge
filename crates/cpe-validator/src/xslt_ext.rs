@@ -132,7 +132,14 @@ pub(crate) fn dispatch(session: &mut Session, _string_mode: bool, args: &[XPathA
         };
     }
     let [pattern, input] = coerced;
-    match matches(&pattern, &input, session.match_limit, session.depth_limit) {
+    let (match_limit, depth_limit) = (session.match_limit, session.depth_limit);
+    match matches(
+        &mut session.regex_cache,
+        &pattern,
+        &input,
+        match_limit,
+        depth_limit,
+    ) {
         Ok(found) => Push::Matched(found),
         Err(MatchFailure::Limit) => {
             session.regex_limits = session.regex_limits.saturating_add(1);
@@ -156,6 +163,7 @@ pub(crate) enum MatchFailure {
 
 /// `XsltFunctions::matches`: `preg_match('/'.str_replace('/', '\/', $p).'/', $input)`.
 pub(crate) fn matches(
+    cache: &mut ffi::RegexCache,
     pattern: &str,
     input: &str,
     match_limit: u32,
@@ -207,7 +215,13 @@ pub(crate) fn matches(
             }));
         }
     }
-    match ffi::pcre_match(&bytes[1..pos], input.as_bytes(), match_limit, depth_limit) {
+    match ffi::pcre_match(
+        cache,
+        &bytes[1..pos],
+        input.as_bytes(),
+        match_limit,
+        depth_limit,
+    ) {
         PcreResult::Matched(found) => Ok(found),
         PcreResult::CompileError { message, offset } => Err(MatchFailure::Invalid(format!(
             "Compilation failed: {message} at offset {offset}"
@@ -324,7 +338,8 @@ mod tests {
 
     #[test]
     fn delimiter_and_modifier_errors_are_reported() {
-        let m = |p: &str, s: &str| matches(p, s, 1_000_000, 100_000);
+        let mut cache = ffi::RegexCache::default();
+        let mut m = |p: &str, s: &str| matches(&mut cache, p, s, 1_000_000, 100_000);
         assert_eq!(m("a/b", "a/b"), Ok(true));
         assert_eq!(
             m("a\\/i", "A"),

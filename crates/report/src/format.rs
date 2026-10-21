@@ -131,10 +131,32 @@ pub(crate) fn write_float(out: &mut String, value: f64) {
         // Entero exacto de 1 a 14 cifras: se imprimen sus dígitos.
         #[allow(clippy::cast_possible_truncation, reason = "|v| < 1e14, entero")]
         let int = value as i64;
-        let _ = write!(out, "{int}");
+        push_int(out, int);
         return;
     }
     write_float_digits(out, value);
+}
+
+/// Dígitos decimales de `value` (con `-` si es negativo), como `{value}`
+/// pero sin pasar por la maquinaria de `fmt`: las coordenadas del QR y los
+/// importes enteros se escriben por miles en cada render.
+pub(crate) fn push_int(out: &mut String, value: i64) {
+    let mut buf = [0u8; 20];
+    let mut start = buf.len();
+    let mut rest = value.unsigned_abs();
+    loop {
+        start -= 1;
+        // `rest % 10` cabe en un dígito.
+        buf[start] = b'0' + u8::try_from(rest % 10).unwrap_or(0);
+        rest /= 10;
+        if rest == 0 {
+            break;
+        }
+    }
+    if value < 0 {
+        out.push('-');
+    }
+    out.extend(buf[start..].iter().map(|d| char::from(*d)));
 }
 
 /// Algoritmo general de [`write_float`] para valores finitos.
@@ -376,8 +398,47 @@ fn number_format_double(value: f64, decimals: i64) -> String {
     if negative {
         out.push('-');
     }
-    let _ = write!(out, "{rounded:.dec$}");
+    if !push_fixed_exact(&mut out, rounded, dec) {
+        let _ = write!(out, "{rounded:.dec$}");
+    }
     out
+}
+
+/// `{value:.dec$}` con aritmética entera, para un `value ≥ 0` que ya está
+/// redondeado a `dec` decimales; `false` sin escribir nada si no es seguro.
+///
+/// Requiere `dec ≤ 15` y `s = value · 10^dec` (en `f64`) por debajo de 2^50 y
+/// a menos de 0,01 de un entero `k`. El producto en `f64` se aparta del
+/// exacto como mucho `s · 2^-53 < 0,125`, así que el valor exacto de `value`
+/// queda a menos de 0,135 / 10^dec de `k / 10^dec`: el redondeo correcto
+/// con que `std` escribe `dec` decimales da también `k`, y el texto es el
+/// mismo sin pasar por el algoritmo general de coma flotante.
+fn push_fixed_exact(out: &mut String, value: f64, dec: usize) -> bool {
+    let Some(&power) = EXACT_POW10.get(dec).filter(|_| dec <= 15) else {
+        return false;
+    };
+    let scaled = value * power;
+    if !(0.0..1_125_899_906_842_624.0).contains(&scaled) {
+        return false;
+    }
+    let nearest = scaled.round();
+    if (scaled - nearest).abs() >= 0.01 {
+        return false;
+    }
+    #[allow(
+        clippy::cast_possible_truncation,
+        clippy::cast_sign_loss,
+        reason = "entero no negativo menor que 2^50, comprobado arriba"
+    )]
+    let k = nearest as u64;
+    let Some(divisor) = u32::try_from(dec).ok().and_then(|d| 10u64.checked_pow(d)) else {
+        return false;
+    };
+    let _ = write!(out, "{}", k / divisor);
+    if dec > 0 {
+        let _ = write!(out, ".{:0dec$}", k % divisor);
+    }
+    true
 }
 
 const DAYS: [&str; 7] = [
@@ -696,6 +757,60 @@ mod tests {
         // Fuera de la vía rápida.
         assert_eq!(float_to_string(1e14), "1.0E+14");
         assert_eq!(float_to_string(2.927), "2.927");
+    }
+
+    #[test]
+    fn push_int_equals_display() {
+        for value in [
+            0,
+            1,
+            -1,
+            9,
+            10,
+            -10,
+            177,
+            99_999_999_999_999,
+            i64::MAX,
+            i64::MIN,
+        ] {
+            let mut out = String::new();
+            push_int(&mut out, value);
+            assert_eq!(out, value.to_string());
+        }
+    }
+
+    #[test]
+    fn fixed_fast_path_equals_std_formatting() {
+        let std_fixed = |v: f64, dec: usize| format!("{v:.dec$}");
+        let mut next = rng(0x2545_F491_4F6C_DD1D);
+        for dec in 0..=16usize {
+            let places = i32::try_from(dec).unwrap();
+            for _ in 0..20_000 {
+                // Importes de hasta 18 cifras y valores arbitrarios de bits.
+                #[allow(clippy::cast_precision_loss, reason = "valores de prueba")]
+                let candidates = [
+                    (next() % 1_000_000_000_000_000_000) as f64
+                        / 10f64.powi(i32::try_from(next() % 12).unwrap()),
+                    f64::from_bits(next() >> 2),
+                ];
+                for value in candidates {
+                    let rounded = round_half_up(value.abs(), places);
+                    if !rounded.is_finite() {
+                        continue;
+                    }
+                    let mut fast = String::new();
+                    if push_fixed_exact(&mut fast, rounded, dec) {
+                        assert_eq!(fast, std_fixed(rounded, dec), "{rounded} con {dec}");
+                    }
+                }
+            }
+        }
+        for (value, dec) in [(0.0, 2), (0.125, 2), (1.005, 2), (0.5, 0), (2.5, 0)] {
+            let mut fast = String::new();
+            if push_fixed_exact(&mut fast, value, dec) {
+                assert_eq!(fast, std_fixed(value, dec), "{value} con {dec}");
+            }
+        }
     }
 
     #[test]

@@ -181,7 +181,7 @@ impl XmlDocument {
             names: Vec::new(),
             children: Vec::new(),
         };
-        let mut interner: HashMap<&'t str, Name> = HashMap::new();
+        let mut interner = Interner::new();
         // Índice propio y profundidad de cada nodo roxmltree ya copiado.
         let mut map: Vec<Option<(usize, usize)>> = vec![None; total];
         let root = tree.root_element();
@@ -195,7 +195,7 @@ impl XmlDocument {
                     return Err(XmlParserError::TooDeep { limit: max_depth });
                 }
                 let scope = doc.scope_for(node, parent.map(|(i, _)| i), &mut interner);
-                let mut intern = |name: &'t str| doc_intern(&mut doc.names, &mut interner, name);
+                let mut intern = |name: &'t str| interner.intern(&mut doc.names, name);
                 let attrs = node
                     .attributes()
                     .map(|a| Attr {
@@ -304,7 +304,7 @@ impl XmlDocument {
         &mut self,
         node: roxmltree::Node<'t, 't>,
         parent: Option<usize>,
-        interner: &mut HashMap<&'t str, Name>,
+        interner: &mut Interner<'t>,
     ) -> usize {
         let named = || {
             node.namespaces()
@@ -329,8 +329,8 @@ impl XmlDocument {
         let scope = named()
             .map(|(prefix, uri)| {
                 (
-                    doc_intern(&mut self.names, interner, prefix),
-                    doc_intern(&mut self.names, interner, uri),
+                    interner.intern(&mut self.names, prefix),
+                    interner.intern(&mut self.names, uri),
                 )
             })
             .collect();
@@ -391,16 +391,65 @@ fn check_tree(text: &str) -> Result<(), XmlParserError> {
     }
 }
 
-/// Identificador interno de `name`, que se añade a la tabla la primera vez.
-fn doc_intern<'t>(
-    names: &mut Vec<Box<str>>,
-    interner: &mut HashMap<&'t str, Name>,
-    name: &'t str,
-) -> Name {
-    *interner.entry(name).or_insert_with(|| {
-        names.push(name.into());
-        Name::try_from(names.len() - 1).unwrap_or(Name::MAX)
-    })
+/// Entradas de la caché de nombres recientes de [`Interner`].
+const RECENT_NAMES: usize = 64;
+
+/// Tabla de nombres internados mientras se copia el árbol.
+///
+/// Un comprobante repite unas decenas de nombres miles de veces: una caché
+/// directa (por longitud y bytes finales) resuelve casi todos sin calcular
+/// el hash del mapa. El mapa conserva el hash con semilla aleatoria, así que
+/// nombres elegidos para colisionar solo fallan la caché.
+struct Interner<'t> {
+    map: HashMap<&'t str, Name>,
+    recent: [Option<(&'t str, Name)>; RECENT_NAMES],
+}
+
+impl<'t> Interner<'t> {
+    fn new() -> Self {
+        Self {
+            map: HashMap::new(),
+            recent: [None; RECENT_NAMES],
+        }
+    }
+
+    /// Identificador interno de `name`, que se añade a `names` la primera vez.
+    fn intern(&mut self, names: &mut Vec<Box<str>>, name: &'t str) -> Name {
+        let slot = recent_slot(name);
+        if let Some(Some((cached, id))) = self.recent.get(slot) {
+            if same_str(cached, name) {
+                return *id;
+            }
+        }
+        let id = *self.map.entry(name).or_insert_with(|| {
+            names.push(name.into());
+            Name::try_from(names.len() - 1).unwrap_or(Name::MAX)
+        });
+        if let Some(entry) = self.recent.get_mut(slot) {
+            *entry = Some((name, id));
+        }
+        id
+    }
+}
+
+/// `a == b`, comprobando antes si son la misma porción de memoria.
+fn same_str(a: &str, b: &str) -> bool {
+    a.len() == b.len() && (std::ptr::eq(a.as_ptr(), b.as_ptr()) || a == b)
+}
+
+/// Posición de `name` en la caché de [`Interner`]: los nombres UBL se
+/// distinguen sobre todo por la longitud y el final (`cbc:ID`,
+/// `cbc:PayableAmount`, `…CommonBasicComponents-2`).
+fn recent_slot(name: &str) -> usize {
+    let bytes = name.as_bytes();
+    let last = bytes.last().copied().map_or(0, usize::from);
+    let before = bytes
+        .len()
+        .checked_sub(2)
+        .and_then(|i| bytes.get(i))
+        .copied()
+        .map_or(0, usize::from);
+    (bytes.len().wrapping_mul(31) ^ last.wrapping_mul(7) ^ before) % RECENT_NAMES
 }
 
 /// Posición de un nodo roxmltree (su identificador es un índice).

@@ -27,6 +27,7 @@ use cpeforge_core::Document;
 use cpeforge_core::ports::ErrorCodeProvider;
 use serde::Serialize;
 use serde_json::Value;
+use std::borrow::Cow;
 use std::collections::BTreeMap;
 use std::fmt;
 
@@ -237,6 +238,28 @@ impl Validator {
         Ok(metadata)
     }
 
+    /// Como [`Self::metadata_for`] durante la validación: sin extensión que
+    /// modifique las reglas se presta la tabla, sin copiarla en cada nodo.
+    /// `None` si el tipo no tiene loader.
+    fn effective_metadata(
+        &self,
+        model_type: &str,
+    ) -> Result<Option<Cow<'static, Metadata>>, ValidatorError> {
+        let Some(metadata) = metadata::metadata_ref(self.profile(), model_type)?
+            .filter(|metadata| metadata.has_metadata)
+        else {
+            return Ok(None);
+        };
+        Ok(Some(match &self.extension {
+            Some(extension) => {
+                let mut metadata = metadata.clone();
+                extension.extend_metadata(model_type, &mut metadata);
+                Cow::Owned(metadata)
+            }
+            None => Cow::Borrowed(metadata),
+        }))
+    }
+
     /// Valida un documento de `core` por su tipo Rust.
     pub fn validate_document<T: Document + Serialize>(
         &self,
@@ -321,10 +344,12 @@ impl Validator {
         if state.nodes > MAX_NODES {
             return Err(ValidatorError::Limit("nodos"));
         }
-        let metadata = self.metadata_for(model_type)?;
-        if !metadata.has_metadata {
+        let Some(metadata) = self
+            .effective_metadata(model_type)?
+            .filter(|metadata| metadata.has_metadata)
+        else {
             return Ok(());
-        }
+        };
         if let Some(extension) = &self.extension {
             for mut violation in extension.validate(model_type, value) {
                 violation.path = join_path(prefix, &violation.path);
@@ -333,12 +358,15 @@ impl Validator {
         }
         for field in &metadata.fields {
             let field_value = value.get(&field.field).unwrap_or(&Value::Null);
-            let path = join_path(prefix, &field.field);
+            // La ruta solo se construye si hace falta: para una violación o
+            // un modelo anidado.
+            let path = || join_path(prefix, &field.field);
             for rule in &field.rules {
                 if rule.name == "Valid" {
                     if !field_value.is_null() {
                         let child_type = nested::nested_type(model_type, &field.field, field_value);
                         if let Some(child_type) = child_type {
+                            let path = path();
                             if let Some(items) = field_value.as_array() {
                                 for (index, item) in items.iter().enumerate() {
                                     self.validate_value(
@@ -374,7 +402,7 @@ impl Validator {
         &self,
         rule: &Rule,
         value: &Value,
-        path: &str,
+        path: &dyn Fn() -> String,
         typed: bool,
     ) -> Result<Option<Violation>, ValidatorError> {
         let option = |key: &str| rule.options.get(key);
@@ -408,7 +436,8 @@ impl Validator {
                 }
                 let Some(content) = scalar_string(value) else {
                     return Err(ValidatorError::Model(format!(
-                        "Length requiere string en {path}"
+                        "Length requiere string en {}",
+                        path()
                     )));
                 };
                 let count = content.chars().count();
@@ -440,7 +469,7 @@ impl Validator {
                     };
                 parameters.insert(
                     "{{ value }}".to_owned(),
-                    format_value(&Value::String(content)),
+                    format_value(&Value::String(content.into_owned())),
                 );
                 parameters.insert("{{ limit }}".to_owned(), limit.to_string());
                 parameters.insert("{{ value_length }}".to_owned(), count.to_string());
@@ -452,7 +481,8 @@ impl Validator {
                 }
                 let Some(content) = scalar_string(value) else {
                     return Err(ValidatorError::Model(format!(
-                        "Regex requiere string en {path}"
+                        "Regex requiere string en {}",
+                        path()
                     )));
                 };
                 let pattern = option_text(rule, "pattern", "");
@@ -536,7 +566,7 @@ impl Validator {
             self.translate(template, &parameters, Some("validators"), None)?
         };
         Ok(Some(Violation {
-            path: path.to_owned(),
+            path: path(),
             message,
             template: template.to_owned(),
             code: Some(code.to_owned()),
@@ -621,12 +651,14 @@ fn is_blank(value: &Value) -> bool {
         || value.as_array().is_some_and(Vec::is_empty)
 }
 
-fn scalar_string(value: &Value) -> Option<String> {
+/// Texto escalar como el cast `(string)` de la referencia; las cadenas se
+/// prestan.
+fn scalar_string(value: &Value) -> Option<Cow<'_, str>> {
     match value {
-        Value::String(text) => Some(text.clone()),
-        Value::Number(number) => Some(number.to_string()),
-        Value::Bool(true) => Some("1".to_owned()),
-        Value::Bool(false) => Some(String::new()),
+        Value::String(text) => Some(Cow::Borrowed(text)),
+        Value::Number(number) => Some(Cow::Owned(number.to_string())),
+        Value::Bool(true) => Some(Cow::Borrowed("1")),
+        Value::Bool(false) => Some(Cow::Borrowed("")),
         _ => None,
     }
 }

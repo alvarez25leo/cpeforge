@@ -26,10 +26,13 @@ fn preview(text: &str) -> String {
 
 /// `Option<Vec<u8>>` como texto Base64 estándar (contenido binario como el ZIP del CDR).
 pub(crate) mod base64_option {
+    use std::fmt;
+
     use base64::Engine as _;
     use base64::display::Base64Display;
     use base64::engine::general_purpose::STANDARD;
-    use serde::{Deserialize, Deserializer, Serializer};
+    use serde::de::{self, Visitor};
+    use serde::{Deserializer, Serializer};
 
     use super::AsText;
 
@@ -46,12 +49,60 @@ pub(crate) mod base64_option {
         }
     }
 
+    /// Decodifica el texto prestado por el formato, sin copiarlo antes en un
+    /// `String` (un CDR de 1 MiB son 1,3 MB de Base64). Acepta y rechaza lo
+    /// mismo que `Option<String>`, con los mismos mensajes.
     pub(crate) fn deserialize<'de, D: Deserializer<'de>>(
         deserializer: D,
     ) -> Result<Option<Vec<u8>>, D::Error> {
-        Option::<String>::deserialize(deserializer)?
-            .map(|text| STANDARD.decode(text).map_err(serde::de::Error::custom))
-            .transpose()
+        deserializer.deserialize_option(OptionVisitor)
+    }
+
+    struct OptionVisitor;
+
+    impl<'de> Visitor<'de> for OptionVisitor {
+        type Value = Option<Vec<u8>>;
+
+        fn expecting(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+            f.write_str("option")
+        }
+
+        fn visit_none<E: de::Error>(self) -> Result<Self::Value, E> {
+            Ok(None)
+        }
+
+        fn visit_unit<E: de::Error>(self) -> Result<Self::Value, E> {
+            Ok(None)
+        }
+
+        fn visit_some<D: Deserializer<'de>>(
+            self,
+            deserializer: D,
+        ) -> Result<Self::Value, D::Error> {
+            deserializer.deserialize_string(TextVisitor).map(Some)
+        }
+    }
+
+    /// Texto Base64, con el `expecting` de `String`.
+    struct TextVisitor;
+
+    impl Visitor<'_> for TextVisitor {
+        type Value = Vec<u8>;
+
+        fn expecting(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+            f.write_str("a string")
+        }
+
+        fn visit_str<E: de::Error>(self, text: &str) -> Result<Vec<u8>, E> {
+            STANDARD.decode(text).map_err(E::custom)
+        }
+
+        fn visit_bytes<E: de::Error>(self, bytes: &[u8]) -> Result<Vec<u8>, E> {
+            match std::str::from_utf8(bytes) {
+                Ok(text) => self.visit_str(text),
+                Err(_) => Err(E::invalid_value(de::Unexpected::Bytes(bytes), &self)),
+            }
+        }
     }
 }
 

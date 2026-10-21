@@ -131,71 +131,80 @@ impl<'q> Path<'q> {
         // Todos los prefijos se resuelven antes de evaluar, aunque el conjunto
         // de contexto quede vacío en un paso anterior: un prefijo indefinido
         // en cualquier paso deja la consulta sin resultado.
-        for step in &self.steps {
-            if let Err(prefix) = resolve(step.test, context, registered) {
-                return Eval::Undefined(prefix.to_owned());
+        let mut first_name = None;
+        for (index, step) in self.steps.iter().enumerate() {
+            match resolve(step.test, context, registered) {
+                Err(prefix) => return Eval::Undefined(prefix.to_owned()),
+                Ok(name) if index == 0 => first_name = name,
+                Ok(_) => {}
             }
         }
-        // `None` representa el nodo documento.
-        let mut current: Vec<Option<Node<'a>>> =
-            vec![if self.absolute { None } else { Some(context) }];
-        let mut next: Vec<Option<Node<'a>>> = Vec::new();
-        for step in &self.steps {
+        let mut steps = self.steps.iter();
+        let mut current: Vec<Node<'a>> = Vec::new();
+        // Primer paso desde el origen único (`None` es el nodo documento): el
+        // resultado ya sale en orden de documento y sin repetidos.
+        if let Some(step) = steps.next() {
+            let origin = if self.absolute { None } else { Some(context) };
+            extend_step(&mut current, document, origin, step, first_name);
+        }
+        let mut next: Vec<Node<'a>> = Vec::new();
+        for step in steps {
             let name = resolve(step.test, context, registered).unwrap_or(None);
-            let keep = |n: &Node<'a>| matches(n, name);
             next.clear();
-            for origin in &current {
-                match (*origin, step.descendant, step.attribute) {
-                    (None, false, false) => {
-                        next.extend(Some(document.root()).filter(keep).map(Some));
-                    }
-                    (None, false, true) => {}
-                    (Some(node), false, false) => {
-                        next.extend(node.child_elements().filter(keep).map(Some));
-                    }
-                    (Some(node), false, true) => {
-                        next.extend(node.attributes().filter(keep).map(Some));
-                    }
-                    // `//x` desde el documento: el raíz y todos sus
-                    // descendientes elemento.
-                    (None, true, false) => {
-                        let root = document.root();
-                        next.extend(
-                            std::iter::once(root)
-                                .chain(root.descendant_elements())
-                                .filter(keep)
-                                .map(Some),
-                        );
-                    }
-                    // `n//x`: los hijos de `n` y de cada descendiente son
-                    // exactamente los descendientes de `n`.
-                    (Some(node), true, false) => {
-                        next.extend(node.descendant_elements().filter(keep).map(Some));
-                    }
-                    // `//@a` y `n//@a`: atributos del nodo base (el raíz si se
-                    // parte del documento, que no tiene atributos) y de sus
-                    // descendientes.
-                    (origin, true, true) => {
-                        let base = origin.unwrap_or_else(|| document.root());
-                        next.extend(
-                            std::iter::once(base)
-                                .chain(base.descendant_elements())
-                                .flat_map(|e| e.attributes())
-                                .filter(keep)
-                                .map(Some),
-                        );
-                    }
-                }
+            for &origin in &current {
+                extend_step(&mut next, document, Some(origin), step, name);
             }
             // Desde un único origen el resultado ya está en orden de documento
             // y sin repetidos; con varios, los subárboles pueden solaparse.
             if current.len() > 1 {
-                next.sort_by_key(|n| n.as_ref().map_or((0, 0), order_key));
+                next.sort_by_key(order_key);
                 next.dedup();
             }
             std::mem::swap(&mut current, &mut next);
         }
-        Eval::Nodes(current.into_iter().flatten().collect())
+        Eval::Nodes(current)
+    }
+}
+
+/// Agrega a `out` los nodos que el paso `step` selecciona desde `origin`
+/// (`None` es el nodo documento), en orden de documento.
+fn extend_step<'a>(
+    out: &mut Vec<Node<'a>>,
+    document: &'a XmlDocument,
+    origin: Option<Node<'a>>,
+    step: &Step<'_>,
+    name: Resolved<'_>,
+) {
+    let keep = |n: &Node<'a>| matches(n, name);
+    match (origin, step.descendant, step.attribute) {
+        (None, false, false) => out.extend(Some(document.root()).filter(keep)),
+        (None, false, true) => {}
+        (Some(node), false, false) => out.extend(node.child_elements().filter(keep)),
+        (Some(node), false, true) => out.extend(node.attributes().filter(keep)),
+        // `//x` desde el documento: el raíz y todos sus descendientes
+        // elemento.
+        (None, true, false) => {
+            let root = document.root();
+            out.extend(
+                std::iter::once(root)
+                    .chain(root.descendant_elements())
+                    .filter(keep),
+            );
+        }
+        // `n//x`: los hijos de `n` y de cada descendiente son exactamente los
+        // descendientes de `n`.
+        (Some(node), true, false) => out.extend(node.descendant_elements().filter(keep)),
+        // `//@a` y `n//@a`: atributos del nodo base (el raíz si se parte del
+        // documento, que no tiene atributos) y de sus descendientes.
+        (origin, true, true) => {
+            let base = origin.unwrap_or_else(|| document.root());
+            out.extend(
+                std::iter::once(base)
+                    .chain(base.descendant_elements())
+                    .flat_map(|e| e.attributes())
+                    .filter(keep),
+            );
+        }
     }
 }
 

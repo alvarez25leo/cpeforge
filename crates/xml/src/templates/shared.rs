@@ -52,44 +52,39 @@ pub(crate) fn document_references(
 
 /// Bloque `cac:Contact` de emisor, cliente o vendedor.
 pub(crate) fn contact_company(out: &mut Out<'_>, emp: Option<&Company>) -> Result<()> {
-    let c = out.ctx();
-    let email = c.get(emp, "email", |e| e.email.as_deref())?;
-    let has_contact =
-        truthy_str(email) || truthy_str(c.get(emp, "telephone", |e| e.telephone.as_deref())?);
-    if has_contact {
-        out.raw("<cac:Contact>");
-        let telephone = c.get(emp, "telephone", |e| e.telephone.as_deref())?;
-        if truthy_str(telephone) {
-            out.raw("<cbc:Telephone>")
-                .text(telephone)
-                .raw("</cbc:Telephone>");
-        }
-        let email = c.get(emp, "email", |e| e.email.as_deref())?;
-        if truthy_str(email) {
-            out.raw("<cbc:ElectronicMail>")
-                .text(email)
-                .raw("</cbc:ElectronicMail>");
-        }
-        out.raw("</cac:Contact>");
-    }
-    Ok(())
+    contact(out, emp, |e| e.email.as_deref(), |e| e.telephone.as_deref())
 }
 
 /// Bloque `cac:Contact` de un cliente.
 pub(crate) fn contact_client(out: &mut Out<'_>, client: Option<&Client>) -> Result<()> {
+    contact(
+        out,
+        client,
+        |c| c.email.as_deref(),
+        |c| c.telephone.as_deref(),
+    )
+}
+
+/// `cac:Contact` con teléfono y correo de `party`, leídos en el orden de la
+/// plantilla (correo, teléfono, teléfono, correo).
+fn contact<P>(
+    out: &mut Out<'_>,
+    party: Option<&P>,
+    email: impl Fn(&P) -> Option<&str> + Copy,
+    telephone: impl Fn(&P) -> Option<&str> + Copy,
+) -> Result<()> {
     let c = out.ctx();
-    let email = c.get(client, "email", |e| e.email.as_deref())?;
-    let has_contact =
-        truthy_str(email) || truthy_str(c.get(client, "telephone", |e| e.telephone.as_deref())?);
+    let has_contact = truthy_str(c.get(party, "email", email)?)
+        || truthy_str(c.get(party, "telephone", telephone)?);
     if has_contact {
         out.raw("<cac:Contact>");
-        let telephone = c.get(client, "telephone", |e| e.telephone.as_deref())?;
+        let telephone = c.get(party, "telephone", telephone)?;
         if truthy_str(telephone) {
             out.raw("<cbc:Telephone>")
                 .text(telephone)
                 .raw("</cbc:Telephone>");
         }
-        let email = c.get(client, "email", |e| e.email.as_deref())?;
+        let email = c.get(party, "email", email)?;
         if truthy_str(email) {
             out.raw("<cbc:ElectronicMail>")
                 .text(email)

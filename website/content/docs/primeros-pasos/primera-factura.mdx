@@ -1,0 +1,230 @@
+---
+title: Tu primera factura
+description: Emite una factura gravada con IGV, fírmala y envíala al entorno beta de SUNAT en cinco minutos.
+---
+
+En esta guía emites la factura `F001-1`, de S/ 118.00 (S/ 100.00 más 18 % de
+IGV), y la envías al entorno **beta** de SUNAT con las credenciales públicas de
+prueba. No necesitas un RUC propio ni un certificado real.
+
+<Steps>
+<Step>
+
+### Crea el proyecto
+
+```bash
+cargo new mi-facturador
+cd mi-facturador
+```
+
+</Step>
+<Step>
+
+### Añade las dependencias
+
+<CargoDeps
+  crates={['cpeforge', 'cpeforge-core', 'cpeforge-gre-api', 'cpeforge-ws']}
+  extra={['tokio = { version = "1", features = ["macros", "rt-multi-thread"] }']}
+/>
+
+¿Te falta OpenSSL o un compilador de C? Revisa los
+[Requisitos](/docs/primeros-pasos/requisitos).
+
+</Step>
+<Step>
+
+### Descarga el certificado de prueba
+
+El entorno beta acepta el certificado autofirmado de muestra del repositorio.
+Guárdalo como `certificado.pem` en la raíz del proyecto:
+
+```bash
+curl -L -o certificado.pem https://raw.githubusercontent.com/alvarez25leo/cpeforge/main/example/credenciales/certificado-prueba.pem
+```
+
+<Callout type="warn">
+  Este certificado es público, está vencido y solo sirve para pruebas. Nunca lo
+  uses en producción ni subas tu certificado real a un repositorio.
+</Callout>
+
+</Step>
+<Step>
+
+### Escribe la factura
+
+Reemplaza el contenido de `src/main.rs`:
+
+```rust title="src/main.rs"
+use cpeforge::{DocumentRef, See, SendResult};
+use cpeforge_core::model::client::Client;
+use cpeforge_core::model::company::{Address, Company};
+use cpeforge_core::model::sale::{BaseSale, Invoice, Legend, SaleDetail};
+use cpeforge_core::{Decimal, Zoned};
+use cpeforge_gre_api::ReqwestTransport;
+use cpeforge_ws::outcome::TaxStatus;
+use cpeforge_ws::soap::SunatEndpoints;
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let total = Decimal::new(118, 0);
+    let invoice = Invoice {
+        base: BaseSale {
+            ubl_version: Some("2.1".into()),
+            tipo_doc: Some("01".into()), // factura
+            serie: Some("F001".into()),
+            correlativo: Some("1".into()),
+            fecha_emision: Some(Zoned::now()),
+            tipo_moneda: Some("PEN".into()),
+            company: Some(Company {
+                ruc: Some("20000000001".into()),
+                razon_social: Some("MI EMPRESA S.A.C.".into()),
+                address: Some(Address {
+                    ubigueo: Some("150101".into()),
+                    direccion: Some("Av. Siempre Viva 123".into()),
+                    cod_local: Some("0000".into()),
+                    ..Address::default()
+                }),
+                ..Company::default()
+            }),
+            client: Some(Client {
+                tipo_doc: Some("6".into()), // RUC
+                num_doc: Some("20123456789".into()),
+                rzn_social: Some("CLIENTE S.A.C.".into()),
+                ..Client::default()
+            }),
+            mto_oper_gravadas: Some(Decimal::new(100, 0)),
+            mto_igv: Some(Decimal::new(18, 0)),
+            total_impuestos: Some(Decimal::new(18, 0)),
+            mto_imp_venta: Some(total),
+            details: Some(vec![SaleDetail {
+                cod_producto: Some("P001".into()),
+                unidad: Some("NIU".into()),
+                cantidad: Some(Decimal::new(2, 0)),
+                descripcion: Some("PRODUCTO".into()),
+                mto_valor_unitario: Some(Decimal::new(50, 0)),
+                mto_precio_unitario: Some(Decimal::new(59, 0)),
+                mto_valor_venta: Some(Decimal::new(100, 0)),
+                mto_base_igv: Some(Decimal::new(100, 0)),
+                porcentaje_igv: Some(Decimal::new(18, 0)),
+                igv: Some(Decimal::new(18, 0)),
+                total_impuestos: Some(Decimal::new(18, 0)),
+                tip_afe_igv: Some("10".into()), // gravado
+                ..SaleDetail::default()
+            }]),
+            // «SON CIENTO DIECIOCHO CON 00/100 SOLES», sin escribirla a mano.
+            legends: Some(vec![Legend::amount_in_words(total, "PEN")?]),
+            ..BaseSale::default()
+        },
+        tipo_operacion: Some("0101".into()), // venta interna
+        valor_venta: Some(Decimal::new(100, 0)),
+        sub_total: Some(total),
+        ..Invoice::default()
+    };
+
+    let mut see = See::new(ReqwestTransport::new()?);
+    see.set_certificate(&std::fs::read_to_string("certificado.pem")?)?;
+    see.set_service(SunatEndpoints::FE_BETA);
+    see.set_clave_sol("20000000001", "MODDATOS", "moddatos");
+
+    match see.send(DocumentRef::Invoice(&invoice)).await? {
+        SendResult::Bill(bill) => println!("SUNAT: {:?}", TaxStatus::of_bill(&bill)),
+        other => println!("respuesta: {other:?}"),
+    }
+    Ok(())
+}
+```
+
+</Step>
+<Step>
+
+### Ejecútalo
+
+```bash
+cargo run
+```
+
+Si todo va bien, verás:
+
+```text
+SUNAT: Accepted
+```
+
+</Step>
+</Steps>
+
+## Qué acaba de pasar
+
+<Mermaid
+  chart={`sequenceDiagram
+  participant App as Tu programa
+  participant See as See
+  participant SUNAT as SUNAT beta
+  App->>See: send(DocumentRef::Invoice)
+  See->>See: XML UBL 2.1
+  See->>See: Firma con certificado.pem
+  See->>See: ZIP 20000000001-01-F001-1.zip
+  See->>SUNAT: sendBill (SOAP + Clave SOL)
+  SUNAT-->>See: CDR en ZIP
+  See-->>App: SendResult::Bill
+  App->>App: TaxStatus::of_bill`}
+/>
+
+1. **El modelo.** `Invoice` contiene una `BaseSale` con los datos comunes a
+   toda venta: emisor (`Company`), cliente (`Client`), totales, líneas
+   (`SaleDetail`) y leyendas. Todos los campos son `Option`; los que no
+   necesitas quedan en `..Default::default()`.
+2. **Los importes** son `Decimal` exactos. `Decimal::new(118, 0)` es 118 y
+   `Decimal::new(11800, 2)` también.
+3. **La leyenda 1000** (importe en letras) la genera
+   `Legend::amount_in_words` a partir del total y la moneda.
+4. **La fachada `See`** genera el XML UBL, lo firma con tu certificado, lo
+   comprime y lo envía al servicio indicado con tu Clave SOL.
+5. **La respuesta** de una factura es un `SendResult::Bill` con el CDR, y
+   `TaxStatus::of_bill` la clasifica.
+
+## Los códigos de esta factura
+
+| Campo | Valor | Significado |
+| --- | --- | --- |
+| `tipo_doc` | `01` | Factura (catálogo 01) |
+| `tipo_operacion` | `0101` | Venta interna (catálogo 51) |
+| `client.tipo_doc` | `6` | El cliente se identifica con RUC (catálogo 06) |
+| `unidad` | `NIU` | Unidad (bienes) |
+| `tip_afe_igv` | `10` | Gravado, operación onerosa (catálogo 07) |
+| `address.ubigueo` | `150101` | Lima, Lima, Lima |
+| `address.cod_local` | `0000` | Domicilio fiscal |
+
+## Si algo falla
+
+- **`TaxStatus::Rejected`**: SUNAT rechazó el comprobante. El código del CDR
+  dice por qué; con la feature `xcodes` de `cpeforge` obtienes el mensaje.
+- **`TaxStatus::Exception`**: SUNAT no procesó el envío. Algunos códigos (como
+  `1033`) indican que ese comprobante ya estaba registrado: si ejecutas el
+  programa dos veces, cambia el `correlativo`.
+- **Error HTTP 401 en beta**: SUNAT beta limita los envíos muy seguidos. Espera
+  unos segundos entre uno y otro.
+- **Error al leer el certificado**: comprueba que `certificado.pem` contiene el
+  certificado y la clave privada.
+
+<Callout title="La fecha de emisión">
+  `Zoned::now()` usa la zona horaria del sistema. En un servidor configurado en
+  UTC, convierte la fecha a la hora de Lima para que el comprobante no salga
+  con el día siguiente:
+
+  ```rust
+  use cpeforge_core::time::to_peru_time;
+
+  let ahora = to_peru_time(&Zoned::now())?; // America/Lima
+  ```
+</Callout>
+
+## Siguientes pasos
+
+<Cards>
+  <Card title="Entornos y credenciales" href="/docs/primeros-pasos/entornos-y-credenciales">
+    Pasar de beta a producción con tu Clave SOL.
+  </Card>
+  <Card title="Ejecutar los ejemplos" href="/docs/primeros-pasos/ejecutar-los-ejemplos">
+    48 comprobantes más: boletas, notas, guías, resúmenes…
+  </Card>
+</Cards>

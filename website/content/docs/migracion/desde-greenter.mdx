@@ -1,0 +1,125 @@
+---
+title: Viniendo de Greenter
+description: Equivalencias entre los paquetes PHP de Greenter y los crates de CPEForge, y los identificadores que cambiaron.
+---
+
+CPEForge es un proyecto independiente que tomó como referencia funcional el SDK
+PHP [Greenter](https://github.com/thegreenter/greenter) v5.3.0 (MIT). Si ya lo
+conoces, te resultará familiar: los mismos modelos, los mismos nombres de
+campos (en `snake_case`) y el mismo flujo de emisión.
+
+<Callout>
+  CPEForge no está afiliado a Greenter ni a SUNAT. Esta página sirve solo para
+  orientarse si vienes de ese proyecto.
+</Callout>
+
+## Paquetes
+
+| Paquete Greenter (PHP) | Crate CPEForge (Rust) |
+| --- | --- |
+| `greenter/lite` | `cpeforge` (paquete principal) |
+| `greenter/core` | `cpeforge-core` |
+| `greenter/xml` | `cpeforge-xml` |
+| `thegreenter/xmldsig` | `cpeforge-xmldsig` |
+| `greenter/gre-api` | `cpeforge-gre-api` |
+| `greenter/ws` | `cpeforge-ws` |
+| `greenter/validator` | `cpeforge-validator` |
+| `greenter/xcodes` | `cpeforge-xcodes` |
+| `greenter/xml-parser` | `cpeforge-xml-parser` |
+| `greenter/cpe-validator` | `cpeforge-cpe-validator` |
+| `greenter/ubl-validator` | `cpeforge-ubl-validator` |
+| `greenter/report` | `cpeforge-report` |
+| — | `cpeforge-xml-limits` (apoyo, sin equivalente) |
+| `greenter/htmltopdf` | Sin implementar: usa un navegador sin cabeza |
+| `greenter/data` | Sin equivalente (datos de ejemplo) |
+
+Los crates `greenter-rs-*` publicados antes del cambio de nombre ya no existen
+en crates.io: sus sucesores son los `cpeforge-*` de la tabla.
+
+## El mismo flujo, en Rust
+
+<Tabs items={['PHP (Greenter)', 'Rust (CPEForge)']}>
+  <Tab value="PHP (Greenter)">
+    ```php
+    $see = new See();
+    $see->setCertificate(file_get_contents('certificado.pem'));
+    $see->setService(SunatEndpoints::FE_BETA);
+    $see->setClaveSOL('20000000001', 'MODDATOS', 'moddatos');
+
+    $result = $see->send($invoice);
+    if ($result->isSuccess()) {
+        $cdr = $result->getCdrResponse();
+    }
+    ```
+  </Tab>
+  <Tab value="Rust (CPEForge)">
+    ```rust
+    let mut see = See::new(ReqwestTransport::new()?);
+    see.set_certificate(&std::fs::read_to_string("certificado.pem")?)?;
+    see.set_service(SunatEndpoints::FE_BETA);
+    see.set_clave_sol("20000000001", "MODDATOS", "moddatos");
+
+    if let SendResult::Bill(bill) = see.send(DocumentRef::Invoice(&invoice)).await? {
+        let estado = TaxStatus::of_bill(&bill);
+    }
+    ```
+  </Tab>
+</Tabs>
+
+Las diferencias principales:
+
+| Greenter | CPEForge |
+| --- | --- |
+| Setters (`setSerie('F001')`) | Campos `Option` con `..Default::default()` |
+| Importes `float` | `Decimal` exacto |
+| `DateTime` | `Zoned` con zona horaria |
+| `send($doc)` acepta cualquier documento | `send(DocumentRef::Invoice(&doc))`: el tipo se indica explícitamente |
+| `isSuccess()` + código del CDR | `TaxStatus`, que separa aceptado, observado, rechazado, excepción y pendiente |
+| Excepciones | `Result` con errores tipados |
+| Llamadas bloqueantes | `async` sobre Tokio |
+
+## Identificadores que cambiaron
+
+| Antes | CPEForge |
+| --- | --- |
+| Id de la firma `GreenterSign` | `CPEForgeSign` |
+| Referencia UBL `#GREENTER-SIGN` | `#CPEFORGE-SIGN` |
+| User-Agent `Greenter-Client/1.0.0/PHP` (API de guías) | `CPEForge/0.1.0` |
+| Nombres de clase `Greenter\Model\…`, `Greenter\Sunat\GRE\…` en errores y en `DocumentKind::from_class_name` | `CPEForge\Model\…`, `CPEForge\Sunat\GRE\…` |
+| Función XSLT `Greenter\Validator\Xml\XsltFunctions::matches` | `CPEForge\Validator\Xml\XsltFunctions::matches` |
+| `php_class()` (`cpe-validator`, `gre-api`, `xml-parser`) | `error_class()` |
+| `XmlParserError::php_message()` | `error_message()` |
+| `ApiError::Php` (`gre-api`) / `XmlParserError::Php` | `ApiError::Decode` / `XmlParserError::Runtime` |
+| `PhpTypeError` (`validator`) | `SetterTypeError` |
+| `response_code::php_int_cast` (`core`) | `response_code::int_cast` |
+| `format::php_float_string` (`xml`) | `format::float_string` |
+| `X509ContentType::from_php` (`xmldsig`) | `X509ContentType::from_code` |
+| `key::php_base64_decode` (`xmldsig`) | `key::lenient_base64_decode` |
+| módulo `report::php` | `report::format` |
+
+<Callout type="warn" title="Reglas XSL">
+  Las reglas XSL que llamen a la función `matches` con el nombre anterior deben
+  actualizarse al nuevo nombre para funcionar con `cpeforge-cpe-validator`.
+</Callout>
+
+## Compatibilidad verificada
+
+El repositorio incluye una herramienta de contraste que ejecuta la
+implementación PHP sobre los mismos casos que Rust y compara el resultado:
+
+- Los 44 comprobantes comparables generan **XML equivalente** en ambos.
+- Las firmas, los digest y los ZIP se comparan **byte a byte**.
+- Ambos obtienen la **misma respuesta de SUNAT** (43 de 43 aceptados y los
+  mismos códigos en los rechazos esperados).
+
+Ver [Rendimiento](/docs/introduccion/rendimiento) para la comparación de
+tiempos.
+
+## Lo que CPEForge añade
+
+- Guía de remisión transportista (tipo 31).
+- Liquidación de compra (tipo 04), incluida la compra de oro, y su reversión.
+- `TaxStatus` para clasificar las respuestas.
+- `TrustPolicy` para validar la confianza en el certificado firmante.
+- Caché de tokens de la API de guías aislada por empresa y ambiente.
+- Límites de XML ante entradas hostiles (`cpeforge-xml-limits`).

@@ -1,0 +1,40 @@
+{
+  "name": "cpeforge-docs",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.23.0",
+  "description": "Sitio de documentación de CPEForge (Fumadocs + Next.js, export estático).",
+  "scripts": {
+    "generate": "node scripts/generate.mjs",
+    "predev": "node scripts/generate.mjs",
+    "dev": "next dev",
+    "prebuild": "node scripts/generate.mjs",
+    "build": "next build",
+    "postbuild": "node scripts/flatten-rsc.mjs",
+    "start": "serve out",
+    "types:check": "node scripts/generate.mjs && next typegen && tsc --noEmit"
+  },
+  "dependencies": {
+    "cn": "^0.5.0",
+    "fumadocs-core": "16.17.7",
+    "fumadocs-mdx": "15.4.9",
+    "fumadocs-ui": "npm:@fumadocs/base-ui@16.17.7",
+    "lucide-react": "^1.61.0",
+    "mermaid": "^12.2.0",
+    "next": "16.4.2",
+    "next-themes": "^0.4.6",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/mdx": "^2.0.14",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "postcss": "^8.5.31",
+    "serve": "^14.2.6",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2"
+  }
+}

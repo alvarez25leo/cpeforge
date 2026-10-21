@@ -1,0 +1,40 @@
+---
+title: Bienvenido a CPEForge
+description: SDK de código abierto en Rust para emitir comprobantes de pago electrónicos de Perú ante SUNAT.
+---
+
+CPEForge construye el XML UBL de tus comprobantes, lo firma, lo envía a SUNAT,
+lee el CDR y genera la representación impresa. Está dividido en 13 crates
+independientes: puedes usar la fachada completa o solo la pieza que necesites.
+
+<Cards>
+  <Card title="¿Qué es CPEForge?" href="/docs/introduccion/que-es-cpeforge">
+    Qué problema resuelve, para quién es y qué incluye.
+  </Card>
+  <Card title="¿Por qué Rust?" href="/docs/introduccion/por-que-rust">
+    Dinero exacto, errores tipados, rendimiento y seguridad.
+  </Card>
+  <Card title="Tu primera factura" href="/docs/primeros-pasos/primera-factura">
+    Emite una factura en el entorno beta de SUNAT en cinco minutos.
+  </Card>
+  <Card title="Ejecutar los ejemplos" href="/docs/primeros-pasos/ejecutar-los-ejemplos">
+    Los 48 comprobantes de ejemplo, listos para generar y enviar.
+  </Card>
+</Cards>
+
+## Cómo está organizada esta documentación
+
+- **Introducción**: qué es CPEForge, por qué está escrito en Rust, cómo se
+  reparten las responsabilidades entre los crates y cuánto rinde.
+- **Primeros pasos**: requisitos, instalación, tu primera factura, entornos de
+  SUNAT, certificado digital y el proyecto de ejemplo.
+- **Migración**: equivalencias para quien viene de Greenter (PHP).
+
+La referencia completa de la API, tipo por tipo, está en
+[docs.rs/cpeforge](https://docs.rs/cpeforge) y en la página de docs.rs de cada
+crate.
+
+<Callout title="CPEForge no está afiliado a SUNAT">
+  Es software libre con licencia MIT. Los ejemplos usan solo entornos de prueba
+  y credenciales públicas; nunca envían datos a producción.
+</Callout>

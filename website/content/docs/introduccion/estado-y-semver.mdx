@@ -1,0 +1,60 @@
+---
+title: Estado y SemVer
+description: CPEForge es una versión estable. Así evoluciona su API pública sin romper tu código.
+---
+
+**Todos los crates son versiones estables** y su API pública sigue
+[SemVer](https://semver.org/lang/es/). Como están en `0.x`, un cambio
+incompatible sube la versión menor (`0.3` → `0.4`) y una corrección o mejora
+compatible sube el parche (`0.3.1` → `0.3.2`).
+
+## Lo que puede crecer sin romper tu código
+
+Los errores, los resultados y las opciones están marcados con
+`#[non_exhaustive]`. Pueden ganar variantes o campos en una versión de parche,
+así que:
+
+- un `match` sobre un error o un `TaxStatus` **lleva siempre una rama `_`**;
+- las opciones **se crean desde `Default`** y se modifican campo a campo.
+
+```rust
+match TaxStatus::of_bill(&bill) {
+    TaxStatus::Accepted => guardar(&bill),
+    TaxStatus::Rejected => marcar_rechazado(&bill),
+    _ => consultar_mas_tarde(&bill), // obligatoria: pueden llegar variantes nuevas
+}
+```
+
+## Los modelos se construyen con `..Default::default()`
+
+Los modelos de comprobantes tienen casi todos sus campos como `Option<T>`.
+Construye solo lo que necesitas y deja el resto en su valor por defecto. Así,
+un campo nuevo en una versión futura no rompe tu código:
+
+```rust
+let client = Client {
+    tipo_doc: Some("6".into()),
+    num_doc: Some("20123456789".into()),
+    rzn_social: Some("CLIENTE S.A.C.".into()),
+    ..Client::default()
+};
+```
+
+## Qué tipos externos forman parte de la API
+
+Ningún tipo de una dependencia interna (`openssl`, `roxmltree`, `reqwest`,
+`zip`…) aparece en la API pública. Las únicas excepciones son `jiff` y
+`rust_decimal`, porque son las fechas (`Zoned`) y los importes (`Decimal`) de
+los modelos. `cpeforge-core` los reexporta para que uses siempre la misma
+versión:
+
+```rust
+use cpeforge_core::{Decimal, Zoned};
+```
+
+## Versión mínima de Rust (MSRV)
+
+- Rust **1.85** para la mayoría de los crates.
+- Rust **1.88** para `cpeforge` y `cpeforge-ws`.
+
+La CI compila y prueba con 1.85, 1.88 y la versión estable.

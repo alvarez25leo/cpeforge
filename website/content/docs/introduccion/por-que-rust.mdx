@@ -1,0 +1,89 @@
+---
+title: ¿Por qué Rust?
+description: Facturar no es un CRUD más. Rust convierte buena parte de sus riesgos en errores que ves antes de llegar a producción.
+---
+
+Cada comprobante tiene importes que deben cuadrar al céntimo, fechas que
+dependen de la zona horaria de Lima, una firma que no admite ni un byte de
+diferencia y un servidor de SUNAT que responde cuando puede. Rust convierte
+buena parte de esos riesgos en errores de compilación o en tipos que el
+compilador te obliga a tratar.
+
+## El dinero nunca es `float`
+
+Todos los importes son `Decimal` exacto (`rust_decimal`) y todas las fechas son
+`Zoned` (`jiff`), con zona horaria. No hay redondeos binarios silenciosos ni
+comprobantes emitidos con la fecha de otro día porque el servidor estaba en UTC.
+
+```rust
+use cpeforge_core::Decimal;
+
+let base = Decimal::new(10000, 2); // 100.00 exactos
+let igv = Decimal::new(1800, 2);   // 18.00 exactos
+assert_eq!(base + igv, Decimal::new(11800, 2));
+```
+
+## Errores que se ven en el tipo
+
+Cada operación devuelve un `Result` con un error que dice qué falló: el XML,
+la firma, el transporte o la respuesta de SUNAT. El compilador te obliga a
+tratarlo. Y el estado tributario no se adivina a partir de un código suelto:
+`TaxStatus` lo clasifica.
+
+```rust
+use cpeforge_ws::outcome::TaxStatus;
+
+match TaxStatus::of_bill(&bill) {
+    TaxStatus::Accepted => { /* guardar el CDR */ }
+    TaxStatus::AcceptedWithObservations => { /* guardar y revisar las notas */ }
+    TaxStatus::Rejected => { /* el número ya no se puede reutilizar */ }
+    TaxStatus::Exception => { /* consultar el estado antes de reenviar */ }
+    _ => { /* pendiente o indeterminado: consultar más tarde */ }
+}
+```
+
+## Rendimiento predecible
+
+Código nativo, sin intérprete ni recolector de basura. Construir, firmar y
+enviar una factura de 1000 líneas (2,6 MB firmada) toma unos 36 ms con un
+transporte en memoria. Con los mismos 44 comprobantes, generar el XML es 64
+veces más rápido que en PHP. Ver [Rendimiento](/docs/introduccion/rendimiento).
+
+## Seguro por defecto
+
+- El XML se lee **sin DTD ni entidades externas** y con límites de tamaño,
+  profundidad, atributos y espacios de nombres.
+- **TLS siempre verificado**, tiempos límite y tamaño máximo de respuesta.
+- Los **ZIP se validan antes de abrirlos**: número de entradas, ZIP64 y
+  nombres.
+- Las contraseñas, claves privadas y PKCS#12 **no aparecen en `Debug`** y se
+  **borran de memoria** al soltarse (`zeroize`).
+- **Sin `unsafe`**, salvo el puente con libxml2 y libxslt de los validadores,
+  revisado bloque a bloque.
+
+## Concurrencia sin miedo
+
+Los tipos principales son `Send + Sync` y la red es `async` sobre Tokio. La
+caché de tokens de la API de guías separa empresas y ambientes: un servicio
+multiempresa no mezcla credenciales.
+
+## Un binario y listo
+
+No hay runtime que instalar en el servidor: compilas y despliegas un ejecutable
+o un contenedor pequeño. Solo necesitas OpenSSL del sistema (y libxml2/libxslt
+si usas los validadores XSD y XSL).
+
+## Solo lo que necesitas
+
+13 crates con responsabilidades claras. Usa la fachada `cpeforge` o solo el
+firmador, el lector de XML o el generador de la representación impresa. Ver
+[Arquitectura](/docs/introduccion/arquitectura).
+
+## Verificado de verdad
+
+- Más de **370 pruebas**. La CI compila y prueba en Linux con Rust 1.85, 1.88 y
+  estable.
+- Las firmas se verifican **fuera del crate** con `xmllint` y `openssl`.
+- La transformación XPath se contrasta **byte a byte con libxml2**.
+- Los XML generados **validan contra los esquemas UBL**.
+- Los 48 comprobantes de ejemplo son **aceptados por SUNAT beta**.

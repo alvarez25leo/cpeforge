@@ -1,0 +1,11 @@
+{
+  "title": "Primeros pasos",
+  "pages": [
+    "requisitos",
+    "instalacion",
+    "primera-factura",
+    "entornos-y-credenciales",
+    "certificado-digital",
+    "ejecutar-los-ejemplos"
+  ]
+}

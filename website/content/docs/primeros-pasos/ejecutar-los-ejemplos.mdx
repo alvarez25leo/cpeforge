@@ -1,0 +1,180 @@
+---
+title: Ejecutar los ejemplos
+description: El proyecto example/rust genera, firma y envía 48 comprobantes de ejemplo a los entornos de prueba de SUNAT.
+---
+
+El repositorio incluye un proyecto completo,
+[`example/rust`](https://github.com/alvarez25leo/cpeforge/tree/main/example/rust),
+que construye, firma y (opcionalmente) envía **48 comprobantes**, más 4 casos
+de rechazo deliberado. Todos usan entornos de prueba y credenciales públicas.
+
+## Clonar y ejecutar
+
+```bash
+git clone https://github.com/alvarez25leo/cpeforge.git
+cd cpeforge
+```
+
+<Tabs items={['Solo generar', 'Generar y enviar', 'Casos de rechazo']}>
+  <Tab value="Solo generar">
+    Genera el XML firmado de todos los casos en `example/rust/out/`, sin red:
+
+    ```bash
+    cargo run --release --manifest-path example/rust/Cargo.toml
+    ```
+
+    O solo algunos casos:
+
+    ```bash
+    cargo run --release --manifest-path example/rust/Cargo.toml -- factura boleta
+    ```
+  </Tab>
+  <Tab value="Generar y enviar">
+    Además los envía a SUNAT beta (o a la API de guías de prueba) y muestra la
+    respuesta:
+
+    ```bash
+    cargo run --release --manifest-path example/rust/Cargo.toml -- --enviar factura
+    ```
+  </Tab>
+  <Tab value="Casos de rechazo">
+    Genera los casos que SUNAT debe rechazar, en `out/errores/`:
+
+    ```bash
+    cargo run --release --manifest-path example/rust/Cargo.toml -- --errores
+    ```
+  </Tab>
+</Tabs>
+
+Cada XML se verifica con el certificado que lleva incluido antes de enviarlo.
+
+## Cómo está organizado
+
+<Files>
+  <Folder name="example" defaultOpen>
+    <Folder name="credenciales" defaultOpen>
+      <File name="credenciales-prueba.json" />
+      <File name="certificado-prueba.pem" />
+    </Folder>
+    <Folder name="rust" defaultOpen>
+      <File name="Cargo.toml" />
+      <Folder name="src" defaultOpen>
+        <File name="main.rs" />
+        <File name="config.rs" />
+        <File name="datos.rs" />
+        <File name="errores.rs" />
+        <Folder name="casos">
+          <File name="factura.rs" />
+          <File name="boleta.rs" />
+          <File name="nota_credito.rs" />
+          <File name="guia_remision.rs" />
+          <File name="… (48 casos)" />
+        </Folder>
+      </Folder>
+    </Folder>
+  </Folder>
+</Files>
+
+- `src/casos/<caso>.rs`: un archivo por comprobante.
+- `src/datos.rs`: los datos compartidos (empresa, cliente y fecha base).
+- `src/config.rs`: lee las credenciales y crea las fachadas `See` y `Api`.
+- `src/errores.rs`: los casos de rechazo.
+
+## Un caso por dentro
+
+Así es el caso `inicio-factura-gravada`. El código se muestra directamente desde
+el repositorio, así que siempre es la versión actual:
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/inicio_factura_gravada.rs"'>../example/rust/src/casos/inicio_factura_gravada.rs</include>
+
+Y así crea el proyecto la fachada para cada servicio:
+
+<include cwd lang="rust" meta='title="example/rust/src/config.rs"'>../example/rust/src/config.rs</include>
+
+## Los casos
+
+| Tipo | Casos |
+| --- | --- |
+| Facturas (25) | `factura`, `factura-anticipo`, `factura-beatose`, `factura-cargos`, `factura-compleja`, `factura-contingencia`, `factura-credito`, `factura-descuento-global`, `factura-descuento-linea`, `factura-descuento-nobase`, `factura-detraccion`, `factura-exonerado`, `factura-exportacion`, `factura-gratuita`, `factura-icbper`, `factura-icbper-gratuita`, `factura-inafecta`, `factura-isc`, `factura-ivap`, `factura-percepcion`, `factura-rel-guia-remision`, `factura-retencion`, `inicio-factura-gravada`, `inicio-factura-exonerada`, `inicio-factura-credito` |
+| Boletas | `boleta`, `boleta-icbper`, `inicio-boleta` |
+| Notas | `nota-credito`, `nota-credito-boleta`, `nota-credito-forma-pago`, `nota-debito` |
+| Resúmenes diarios (RC) | `resumen`, `resumen-contingencia`, `resumen-usd` |
+| Baja (RA) y reversión (RR) | `comunicacion-baja`, `reversion` |
+| Percepción y retención | `percepcion`, `retencion` |
+| Guía de remisión remitente (09) | `guia-remision`, `guia-extra-atributos`, `guia-misma-empresa`, `guia-transporteM1L`, `guia-transportePrivado` |
+| Guía de remisión transportista (31) | `guia-transportista` |
+| Liquidación de compra (04) | `liquidacion-compra`, `liquidacion-compra-oro`, `reversion-liquidacion` |
+
+`factura-beatose` solo genera XML: su demo original apunta a un servidor de
+terceros.
+
+## Casos de rechazo
+
+Cada uno tiene un cambio deliberado y el código que devuelve el entorno de
+prueba:
+
+| Caso | Cambio deliberado | Código |
+| --- | --- | --- |
+| `guia-sin-fecha-entrega` | Guía de transporte público sin fecha de entrega de bienes | `3617` |
+| `nota-motivo13-con-total` | Nota de crédito con motivo 13 e importe total distinto de cero | `3315` |
+| `resumen-sin-tasa` | Resumen diario sin `porcentajeIgv` en sus líneas | `2992` |
+| `liquidacion-vendedor-ruc` | Liquidación de compra a un vendedor con RUC | `2800` |
+
+## Variables de entorno
+
+| Variable | Para qué sirve | Por defecto |
+| --- | --- | --- |
+| `EJEMPLO_CREDENCIALES` | JSON con tus propias credenciales de prueba | `example/credenciales/credenciales-prueba.json` |
+| `EJEMPLO_CERT` | Otro certificado PEM | El que indica el JSON |
+| `EJEMPLO_FECHA` | Fecha base fija (`AAAA-MM-DD HH:MM:SS`, hora de Lima) | La hora actual |
+| `EJEMPLO_PAUSA` | Segundos entre envíos (SUNAT beta responde 401 si son muy seguidos) | `5` |
+| `EJEMPLO_REPETICIONES` | Llamadas por fase al medir el rendimiento | `10` |
+
+Con la misma `EJEMPLO_FECHA`, el XML firmado es reproducible byte a byte.
+
+El JSON de credenciales tiene esta forma (la sección `gre` es opcional; sin
+ella, las guías solo generan XML):
+
+```json title="credenciales.json"
+{
+  "certificado": "mi-certificado.pem",
+  "sunat_beta": { "ruc": "…", "usuario": "…", "clave": "…" },
+  "gre": {
+    "api_url": "…", "client_id": "…", "client_secret": "…",
+    "ruc": "…", "usuario": "…", "clave": "…"
+  }
+}
+```
+
+<Callout type="warn" title="Solo entornos de prueba">
+  El proyecto rechaza una URL de producción de SUNAT. Para usar tus propias
+  credenciales de prueba, apunta `EJEMPLO_CREDENCIALES` a un archivo fuera del
+  repositorio.
+</Callout>
+
+## Rendimiento
+
+Cada ejecución mide cada caso por fases (construir, XML, firma, XML firmado,
+primera llamada y, con `--enviar`, envío y estado) y deja los resultados en
+`example/rust/out/benchmark.json`. Compila en `--release` para medir. Ver
+[Rendimiento](/docs/introduccion/rendimiento).
+
+## Los ejemplos de cada crate
+
+Cada crate trae sus propios ejemplos, que se ejecutan sin red:
+
+```bash
+cargo run -p cpeforge --example importe_en_letras
+cargo run -p cpeforge --example fachadas_sin_red
+cargo run -p cpeforge --example see_with_xcodes --features xcodes
+cargo run -p cpeforge-core --example invoice_model
+cargo run -p cpeforge-xml --example invoice_xml
+cargo run -p cpeforge-xmldsig --example sign_verify_invoice
+cargo run -p cpeforge-ws --example local_cdr
+cargo run -p cpeforge-report --example invoice_html
+cargo run -p cpeforge-xml-parser --example parse_invoice
+```
+
+Por ejemplo, el importe en letras:
+
+<include cwd lang="rust" meta='title="crates/cpeforge/examples/importe_en_letras.rs"'>../crates/cpeforge/examples/importe_en_letras.rs</include>

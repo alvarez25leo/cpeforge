@@ -1,0 +1,104 @@
+---
+title: Arquitectura
+description: Cómo se reparten las responsabilidades entre los 13 crates de CPEForge y cómo dependen unos de otros.
+---
+
+CPEForge está dividido en 13 crates publicados en crates.io. Cada uno tiene una
+responsabilidad clara y puede usarse por separado.
+
+## Mapa de dependencias
+
+<Mermaid
+  chart={`flowchart TD
+  cpeforge[cpeforge<br/>fachadas See y Api]
+  core[cpeforge-core<br/>modelos y contratos]
+  xml[cpeforge-xml<br/>XML UBL]
+  dsig[cpeforge-xmldsig<br/>firma]
+  ws[cpeforge-ws<br/>SOAP, ZIP y CDR]
+  gre[cpeforge-gre-api<br/>API de guías]
+  xcodes[cpeforge-xcodes<br/>códigos de error]
+  report[cpeforge-report<br/>HTML y QR]
+  parser[cpeforge-xml-parser<br/>lectura de XML]
+  validator[cpeforge-validator<br/>reglas de modelos]
+  ubl[cpeforge-ubl-validator<br/>XSD]
+  cpe[cpeforge-cpe-validator<br/>reglas XSL]
+  limits[cpeforge-xml-limits<br/>límites de XML]
+
+  cpeforge --> core
+  cpeforge --> xml
+  cpeforge --> dsig
+  cpeforge --> ws
+  cpeforge --> gre
+  cpeforge -.feature xcodes.-> xcodes
+  xml --> core
+  ws --> core
+  ws --> gre
+  ws --> limits
+  xcodes --> core
+  report --> core
+  report --> limits
+  parser --> core
+  parser --> limits
+  validator --> core
+  ubl --> limits
+  cpe --> limits`}
+/>
+
+La línea punteada es una dependencia opcional: la feature `xcodes` de
+`cpeforge`.
+
+## Las capas
+
+### Modelos y contratos
+
+`cpeforge-core` define los modelos de todos los comprobantes, el importe en
+letras y los contratos (`ports`) que implementan los demás crates. No sabe nada
+de XML, firma ni red: es la base que todos comparten.
+
+### Emisión
+
+| Crate | Responsabilidad |
+| --- | --- |
+| `cpeforge-xml` | Convierte un modelo en XML UBL 2.0/2.1 sin firmar |
+| `cpeforge-xmldsig` | Firma y verifica (XMLDSig, C14N, X.509) con el perfil de SUNAT |
+| `cpeforge-ws` | Empaqueta en ZIP, llama a los servicios SOAP, lee el CDR y clasifica con `TaxStatus` |
+| `cpeforge-gre-api` | Cliente HTTP de bajo nivel de la API REST de guías de remisión |
+| `cpeforge` | Fachadas `See` y `Api` que encadenan todo lo anterior |
+
+### Después de emitir
+
+| Crate | Responsabilidad |
+| --- | --- |
+| `cpeforge-report` | Representación impresa en HTML, con QR |
+| `cpeforge-xml-parser` | Lee un XML de comprobante y lo convierte en modelos |
+| `cpeforge-xcodes` | Catálogo de los 2 077 códigos de retorno de SUNAT |
+
+### Validación
+
+| Crate | Responsabilidad |
+| --- | --- |
+| `cpeforge-validator` | Reglas sobre los modelos, antes de generar el XML |
+| `cpeforge-ubl-validator` | Validación contra los esquemas XSD de UBL (libxml2) |
+| `cpeforge-cpe-validator` | Reglas XSL de SUNAT (libxslt) |
+
+### Apoyo
+
+`cpeforge-xml-limits` comprueba límites sobre el texto del XML (anidamiento,
+atributos, DTD) **antes** de construir el árbol. Lo usan los crates que leen XML
+externo para no caer ante entradas hostiles.
+
+## Principios de diseño
+
+- **Lógica pura separada de la E/S.** El transporte HTTP y el reloj se inyectan:
+  las pruebas usan dobles sin red y fechas fijas.
+- **Sin `panic!` ante entradas externas.** Ningún `unwrap()` ni `expect()`; los
+  errores son tipos con contexto.
+- **Sin criptografía propia.** La firma usa OpenSSL a través del crate
+  `openssl`.
+- **Dependencias internas fuera de la API pública.** Ningún tipo de `openssl`,
+  `roxmltree`, `reqwest` o `zip` aparece en la API; solo `jiff` y
+  `rust_decimal`, que son las fechas y los importes de los modelos.
+
+## Versiones actuales
+
+<CrateTable />

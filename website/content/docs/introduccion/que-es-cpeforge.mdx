@@ -1,0 +1,86 @@
+---
+title: ¿Qué es CPEForge?
+description: Un SDK en Rust que resuelve el ciclo completo de la facturación electrónica peruana, del modelo al CDR.
+---
+
+**CPEForge es un SDK de código abierto para emitir comprobantes de pago
+electrónicos (CPE) de Perú.** Lo integras en tu sistema de ventas, ERP o
+servicio de facturación, y se encarga de todo lo que exige SUNAT entre «tengo
+una venta» y «SUNAT la aceptó».
+
+## El problema
+
+Emitir un comprobante electrónico parece sencillo, pero cada paso tiene reglas
+estrictas:
+
+1. **Generar el XML** en el estándar UBL 2.1, con los catálogos de SUNAT y los
+   importes cuadrados al céntimo.
+2. **Firmarlo** con tu certificado digital (XMLDSig), sin un solo byte de
+   diferencia en la canonicalización.
+3. **Comprimirlo** en un ZIP con el nombre exacto que espera SUNAT.
+4. **Enviarlo** por el servicio SOAP correcto (facturas, resúmenes,
+   retenciones) o por la API REST de guías de remisión con OAuth2.
+5. **Leer la respuesta**: un CDR (constancia de recepción) o un ticket que hay
+   que consultar después.
+6. **Decidir** si el comprobante quedó aceptado, observado o rechazado, y qué
+   hacer en cada caso.
+7. **Entregar** al cliente la representación impresa con su código QR.
+
+Un error en cualquiera de esos pasos es un comprobante rechazado, una venta sin
+sustento tributario o un reenvío duplicado.
+
+## Lo que hace CPEForge
+
+<Mermaid
+  chart={`flowchart LR
+  subgraph Tu sistema
+    A[Venta]
+  end
+  subgraph CPEForge
+    B[Modelo tipado] --> C[XML UBL]
+    C --> D[Firma]
+    D --> E[ZIP]
+    E --> F[Envío]
+    F --> G[CDR / ticket]
+    G --> H[TaxStatus]
+    B --> I[HTML + QR]
+  end
+  A --> B
+  F <--> S{{SUNAT}}`}
+/>
+
+- **Modelos tipados** para cada comprobante: `Invoice`, `Note`, `Despatch`,
+  `Summary`, `Voided`, `Retention`, `Perception`, `PurchaseSettlement`…
+- **Fachadas** que hacen todo el flujo en una llamada: `See` para los servicios
+  SOAP y `Api` para la API de guías de remisión.
+- **Clasificación de la respuesta** con `TaxStatus`: aceptado, aceptado con
+  observaciones, rechazado, excepción, pendiente o indeterminado.
+- **Piezas sueltas** para quien solo necesita una parte: el firmador, el
+  generador de XML, el lector de XML, los validadores o la representación
+  impresa.
+
+## Para quién es
+
+- Equipos que construyen **sistemas de facturación** y quieren un núcleo
+  confiable, rápido y fácil de desplegar.
+- **Proveedores de servicios** que emiten para muchas empresas y necesitan
+  concurrencia y aislamiento de credenciales.
+- Desarrolladores que vienen de **Greenter (PHP)** y buscan el mismo
+  comportamiento con más rendimiento. Ver
+  [Viniendo de Greenter](/docs/migracion/desde-greenter).
+
+## Lo que no hace
+
+- **No es un OSE ni un PSE.** Te conectas a SUNAT (o a tu OSE) con tus propias
+  credenciales.
+- **No genera PDF directamente.** Genera HTML; para PDF se recomienda un
+  navegador sin cabeza, como Gotenberg, sin JavaScript ni salida a red.
+- **No guarda tus comprobantes.** La persistencia, la numeración y los
+  reintentos son responsabilidad de tu sistema.
+
+## Siguiente paso
+
+<Cards>
+  <Card title="¿Por qué Rust?" href="/docs/introduccion/por-que-rust" />
+  <Card title="Tu primera factura" href="/docs/primeros-pasos/primera-factura" />
+</Cards>

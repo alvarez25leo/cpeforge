@@ -1,0 +1,73 @@
+---
+title: Qué cubre
+description: Comprobantes, servicios de envío, firma, validación, lectura y representación impresa que incluye CPEForge.
+---
+
+## Comprobantes
+
+| Comprobante | Tipo | Modelo | Vía de envío |
+| --- | --- | --- | --- |
+| Factura | `01` | `Invoice` | `sendBill` → CDR |
+| Boleta de venta | `03` | `Invoice` | `sendBill` → CDR, o resumen diario |
+| Nota de crédito | `07` | `Note` | `sendBill` → CDR |
+| Nota de débito | `08` | `Note` | `sendBill` → CDR |
+| Liquidación de compra | `04` | `PurchaseSettlement` | `sendBill` → CDR |
+| Comprobante de retención | `20` | `Retention` | `sendBill` al servicio de retenciones |
+| Comprobante de percepción | `40` | `Perception` | `sendBill` al servicio de retenciones |
+| Resumen diario | `RC` | `Summary` | `sendSummary` → ticket → `getStatus` |
+| Comunicación de baja | `RA` | `Voided` | `sendSummary` → ticket → `getStatus` |
+| Reversión | `RR` | `Reversion` | `sendSummary` al servicio de retenciones |
+| Guía de remisión remitente | `09` | `Despatch` | API REST de guías → ticket → estado |
+| Guía de remisión transportista | `31` | `Despatch` | API REST de guías → ticket → estado |
+
+Las facturas cubren, entre otros: gravadas, exoneradas, inafectas, de
+exportación, gratuitas, con detracción, percepción o retención, con anticipos,
+descuentos y cargos, ICBPER, ISC, IVAP, a crédito y de contingencia. La
+liquidación de compra incluye la compra de oro (`0503`).
+
+<Callout title="UBL 2.0 y 2.1">
+  SUNAT exige UBL 2.1 para los comprobantes de pago y la guía 2022 para la guía
+  electrónica. Las versiones UBL 2.0 y la guía anterior existen solo por
+  compatibilidad.
+</Callout>
+
+## Envío
+
+- Servicios SOAP de SUNAT: `sendBill`, `sendSummary`, `getStatus` (tickets) y
+  consulta de CDR.
+- API REST de guías de remisión, con token OAuth2 cacheado por empresa y
+  ambiente.
+- Endpoints de beta, homologación y producción en `SunatEndpoints`.
+
+## Firma
+
+- XMLDSig con el perfil de SUNAT (`Id="CPEForgeSign"`).
+- C14N 1.0 inclusiva y exclusiva.
+- Certificados PEM y PKCS#12; verificación de firma y política de confianza
+  (`TrustPolicy`).
+- Cifrado XML (XMLEnc) con AES-GCM y RSA-OAEP.
+
+## Validación
+
+- Reglas sobre los modelos, antes de generar el XML (`cpeforge-validator`).
+- Esquemas XSD de UBL 2.0 y 2.1 (`cpeforge-ubl-validator`).
+- Reglas XSL publicadas por SUNAT (`cpeforge-cpe-validator`).
+- Catálogo de los **2 077 códigos de error** de SUNAT (`cpeforge-xcodes`).
+
+## Lectura
+
+De un XML de comprobante (propio o recibido de un proveedor) a los modelos
+tipados, con un perfil XML seguro (`cpeforge-xml-parser`).
+
+## Representación impresa
+
+HTML con ocho plantillas (factura, boleta, guía, percepción, retención,
+resumen, baja y liquidación), código QR en SVG, importe en letras y plantillas
+propias en MiniJinja (`cpeforge-report`).
+
+## Lo que no incluye
+
+- Conversión directa a PDF: se hace con un navegador sin cabeza a partir del
+  HTML.
+- Persistencia, numeración correlativa ni reintentos automáticos: eso es
+  responsabilidad de tu sistema.

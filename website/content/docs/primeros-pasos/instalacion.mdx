@@ -1,0 +1,71 @@
+---
+title: Instalación
+description: Qué crates añadir a tu Cargo.toml según lo que quieras hacer.
+---
+
+Las versiones de esta página se leen de los `Cargo.toml` del repositorio cada
+vez que se publica la documentación, así que siempre son las actuales.
+
+## Para emitir y enviar comprobantes
+
+Es el caso más común: construir, firmar y enviar a SUNAT con la fachada `See`
+(o `Api` para guías de remisión).
+
+<CargoDeps
+  crates={['cpeforge', 'cpeforge-core', 'cpeforge-gre-api', 'cpeforge-ws']}
+  extra={['tokio = { version = "1", features = ["macros", "rt-multi-thread"] }']}
+/>
+
+O desde la terminal:
+
+<CargoAdd crates={['cpeforge', 'cpeforge-core', 'cpeforge-gre-api', 'cpeforge-ws']} />
+
+- `cpeforge`: las fachadas `See` y `Api`.
+- `cpeforge-core`: los modelos (`Invoice`, `Client`, `Company`…) y los tipos
+  `Decimal` y `Zoned`.
+- `cpeforge-gre-api`: el transporte HTTP `ReqwestTransport`.
+- `cpeforge-ws`: `TaxStatus` y `SunatEndpoints`.
+
+## ¿Qué crate necesito?
+
+| Quiero… | Crates |
+| --- | --- |
+| Emitir y enviar comprobantes | `cpeforge`, `cpeforge-core`, `cpeforge-gre-api`, `cpeforge-ws` |
+| Mostrar el mensaje de cada código de error de SUNAT | Añade la feature `xcodes` a `cpeforge` |
+| Solo generar el XML, sin firmar ni enviar | `cpeforge-core`, `cpeforge-xml` |
+| Solo firmar o verificar un XML | `cpeforge-xmldsig` |
+| Leer un XML de comprobante (propio o de un proveedor) | `cpeforge-core`, `cpeforge-xml-parser` |
+| Generar la representación impresa (HTML con QR) | `cpeforge-core`, `cpeforge-report` |
+| Validar el modelo antes de generar el XML | `cpeforge-core`, `cpeforge-validator` |
+| Validar contra los esquemas XSD de UBL | `cpeforge-ubl-validator` |
+| Validar con las reglas XSL de SUNAT | `cpeforge-cpe-validator` |
+| Llamar a la API de guías a bajo nivel | `cpeforge-gre-api` |
+| Serializar los modelos a JSON | Feature `serde` de `cpeforge-core` |
+
+## Features
+
+| Crate | Feature | Qué activa |
+| --- | --- | --- |
+| `cpeforge` | `xcodes` | Conecta el catálogo de códigos de error de `cpeforge-xcodes` a `See` |
+| `cpeforge-core` | `serde` | Serialización con nombres en camelCase; los importes viajan como texto |
+| `cpeforge-gre-api` | `reqwest` (por defecto) | El transporte `ReqwestTransport` con TLS nativo verificado |
+
+Por ejemplo, para los modelos en JSON y los mensajes de error:
+
+<CargoDeps
+  crates={['cpeforge', 'cpeforge-core', 'cpeforge-gre-api', 'cpeforge-ws']}
+  features={{ cpeforge: ['xcodes'], 'cpeforge-core': ['serde'] }}
+/>
+
+## Comprobar la instalación
+
+```bash
+cargo build
+```
+
+Si falla al compilar `openssl-sys`, revisa la sección de OpenSSL en
+[Requisitos](/docs/primeros-pasos/requisitos).
+
+## Todos los crates
+
+<CrateGrid />

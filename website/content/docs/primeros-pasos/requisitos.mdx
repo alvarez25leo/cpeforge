@@ -1,0 +1,99 @@
+---
+title: Requisitos
+description: Rust, OpenSSL y, solo para los validadores, libxml2 y libxslt. Instrucciones para Linux, macOS y Windows.
+---
+
+## Rust
+
+- **Rust 1.88 o posterior** si usas el crate `cpeforge` o `cpeforge-ws`.
+- **Rust 1.85 o posterior** para el resto de los crates.
+
+Instala Rust con [rustup](https://rustup.rs) y comprueba la versión:
+
+```bash
+rustc --version
+```
+
+Para actualizar una instalación existente:
+
+```bash
+rustup update stable
+```
+
+## Bibliotecas del sistema
+
+| Biblioteca | Versión | La necesitan |
+| --- | --- | --- |
+| OpenSSL | 3.x | Todos los crates que firman o se conectan a SUNAT (`cpeforge`, `cpeforge-xmldsig`, `cpeforge-ws`, `cpeforge-gre-api`) |
+| libxml2 | ≥ 2.9.11 | Solo `cpeforge-ubl-validator` y `cpeforge-cpe-validator` |
+| libxslt | ≥ 1.1.34 | Solo `cpeforge-cpe-validator` |
+
+Además hace falta un compilador de C: zlib se compila de forma estática para
+que el ZIP produzca los mismos bytes en cualquier sistema operativo.
+
+<Tabs items={['Debian / Ubuntu', 'Fedora / RHEL', 'macOS', 'Windows']}>
+  <Tab value="Debian / Ubuntu">
+    ```bash
+    sudo apt install build-essential pkg-config libssl-dev
+    # Solo si usas los validadores XSD y XSL:
+    sudo apt install libxml2-dev libxslt1-dev
+    ```
+  </Tab>
+  <Tab value="Fedora / RHEL">
+    ```bash
+    sudo dnf install gcc pkgconf-pkg-config openssl-devel
+    # Solo si usas los validadores XSD y XSL:
+    sudo dnf install libxml2-devel libxslt-devel
+    ```
+  </Tab>
+  <Tab value="macOS">
+    ```bash
+    xcode-select --install
+    brew install openssl@3 pkg-config
+    # libxml2 y libxslt vienen con el SDK de macOS.
+    ```
+
+    Si Cargo no encuentra OpenSSL, indica dónde está:
+
+    ```bash
+    export OPENSSL_DIR="$(brew --prefix openssl@3)"
+    ```
+  </Tab>
+  <Tab value="Windows">
+    Instala las **Build Tools de Visual Studio** (carga «Desarrollo para el
+    escritorio con C++») y OpenSSL con [vcpkg](https://vcpkg.io):
+
+    ```bash
+    vcpkg install openssl:x64-windows-static-md
+    ```
+
+    Después define `VCPKG_ROOT` (o `OPENSSL_DIR` con la carpeta de OpenSSL)
+    antes de compilar.
+
+    <Callout type="warn" title="Soporte limitado en Windows">
+      La CI de CPEForge compila y prueba solo en Linux. `cpeforge-ubl-validator`
+      no es compatible con Windows todavía. Para desarrollo y producción se
+      recomienda Linux, macOS o WSL2.
+    </Callout>
+  </Tab>
+</Tabs>
+
+## Tokio
+
+El envío a SUNAT es asíncrono. Tu aplicación necesita un runtime de
+[Tokio](https://tokio.rs):
+
+```toml
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+```
+
+## Para enviar a SUNAT
+
+- Un **certificado digital** en PEM con su clave privada. Para el entorno beta
+  sirve el certificado de prueba del repositorio. Ver
+  [Certificado digital](/docs/primeros-pasos/certificado-digital).
+- **Clave SOL**: RUC, usuario y clave. En beta se usan las credenciales
+  públicas de SUNAT. Ver
+  [Entornos y credenciales](/docs/primeros-pasos/entornos-y-credenciales).
+- Para guías de remisión, además, el **client_id** y el **client_secret** de
+  la API de guías.

@@ -1,0 +1,75 @@
+---
+title: Certificado digital
+description: Qué certificado necesitas, cómo convertir un .pfx a PEM y cómo cuidarlo.
+---
+
+Cada comprobante se firma con el certificado digital de la empresa emisora. Las
+fachadas `See` y `Api` reciben el certificado en **PEM**, con el certificado y
+su clave privada en el mismo texto:
+
+```rust
+let pem = std::fs::read_to_string("certificado.pem")?;
+see.set_certificate(&pem)?;
+```
+
+## Convertir un .pfx o .p12 a PEM
+
+Los certificados suelen entregarse en PKCS#12 (`.pfx` o `.p12`) protegidos con
+contraseña. Conviértelo con OpenSSL:
+
+```bash
+openssl pkcs12 -in certificado.pfx -out certificado.pem -nodes
+```
+
+OpenSSL pedirá la contraseña del `.pfx`. El archivo resultante contiene la
+clave privada **sin cifrar**: guárdalo con permisos restringidos.
+
+<Callout title="Certificados antiguos y OpenSSL 3">
+  Si OpenSSL 3 responde `unsupported algorithm` (habitual en certificados
+  generados con RC2 o 3DES), añade `-legacy`:
+
+  ```bash
+  openssl pkcs12 -legacy -in certificado.pfx -out certificado.pem -nodes
+  ```
+</Callout>
+
+## Revisar un PKCS#12 desde Rust
+
+`cpeforge-xmldsig` lee un `.pfx` directamente para consultar sus datos, por
+ejemplo para avisar antes de que venza:
+
+```rust
+use cpeforge_xmldsig::x509::X509Certificate;
+
+let cert = X509Certificate::from_file(std::path::Path::new("certificado.pfx"), "contraseña")?;
+println!("Titular: {:?}", cert.name());
+println!("Vence (Unix): {:?}", cert.expiration());
+```
+
+La clave privada y el PKCS#12 original se borran de memoria al soltar el valor.
+
+## Firma válida no es lo mismo que firmante confiable
+
+`SignedXml::verify_xml` comprueba que la firma y el digest son correctos con el
+certificado incluido en el documento, y **acepta certificados vencidos o
+autofirmados**. Si verificas XML de terceros y necesitas saber si el firmante es
+confiable, usa `cpeforge_xmldsig::trust::TrustPolicy` con raíces explícitas:
+valida la cadena, la vigencia y el uso de la clave.
+
+## Algoritmos
+
+El perfil por defecto es **RSA-SHA1 / SHA-1**, el que históricamente acepta
+SUNAT. Si el receptor lo admite, se puede usar RSA-SHA256 y SHA-256. Ver la
+documentación de [`cpeforge-xmldsig`](https://docs.rs/cpeforge-xmldsig).
+
+## Cuidar el certificado
+
+- **Nunca lo subas a un repositorio.** Añade `*.pem`, `*.pfx` y `*.p12` a tu
+  `.gitignore`.
+- Léelo de un gestor de secretos o de un volumen montado, no de una imagen de
+  contenedor.
+- `Debug` de los tipos de firma no muestra el PEM ni las contraseñas, así que
+  no se filtran en los logs.
+- El certificado de prueba del repositorio
+  (`example/credenciales/certificado-prueba.pem`) es público, está vencido y
+  solo sirve para el entorno beta.

@@ -1,0 +1,87 @@
+---
+title: Rendimiento
+description: Los mismos 44 comprobantes generados, firmados y enviados con PHP y con CPEForge.
+---
+
+Los 44 comprobantes de ejemplo (facturas, boletas, notas, resúmenes, bajas,
+retenciones, percepciones y guías) se generaron, firmaron y enviaron con la
+implementación PHP de referencia y con CPEForge, con los mismos datos y la
+misma fecha base.
+
+## Resultado funcional
+
+Antes que la velocidad, el resultado debe ser el mismo:
+
+| Comprobación | PHP | Rust |
+| --- | --- | --- |
+| XML equivalente entre ambos (sin firma ni identidad) | 44/44 | 44/44 |
+| XML válido contra su XSD (UBL 2.0/2.1) | — | 48/48 |
+| Aceptados por SUNAT beta / API de guías de prueba | 43/43 | 47/47 |
+| Rechazos esperados con el mismo código (3617, 3315, 2992; 2800 solo Rust) | 3/3 | 4/4 |
+
+`factura-beatose` no se envía porque su demo apunta a un servidor de terceros.
+Rust tiene además 4 casos propios: la guía transportista, las dos
+liquidaciones de compra y la reversión de una liquidación.
+
+## CPU, sin red
+
+Suma de las medianas de 30 llamadas por caso. PHP con la configuración por
+defecto de la CLI:
+
+<BenchmarkTable />
+
+Con **OPcache y JIT** activados en PHP la ventaja se mantiene: 48× al generar
+el XML, 2× en el XML firmado y 4,9× en la primera llamada (PHP paga además la
+compilación).
+
+| Fase | PHP (OPcache + JIT) | Rust | Factor |
+| --- | ---: | ---: | ---: |
+| Construir | 69 µs | 27 µs | ×2,6 |
+| XML | 2,2 ms | 47 µs | ×47,7 |
+| Firma | 26,6 ms | 15,5 ms | ×1,7 |
+| XML firmado | 32,9 ms | 16,5 ms | ×2,0 |
+| Primera llamada | 150,4 ms | 30,4 ms | ×4,9 |
+
+<Callout title="¿Por qué la firma solo es 1,7× más rápida?">
+  En ambos lados la criptografía la hace OpenSSL. La diferencia viene de la
+  canonicalización y del manejo del XML, no del cálculo RSA.
+</Callout>
+
+## Red: envío a SUNAT beta
+
+Una sola medición por caso, sin contar las pausas entre envíos. Depende de la
+latencia del servicio de prueba en ese momento, así que es orientativa:
+
+- Rust fue más rápido en **37 de 43** envíos.
+- En la última corrida, un único envío (`factura-descuento-global`) tardó 9,2 s
+  en responder en Rust y 86 ms en PHP un instante antes. Sin ese caso, el envío
+  total suma 10,40 s en Rust frente a 10,58 s en PHP.
+
+Por eso los envíos se comparan caso a caso y no por el total.
+
+## Rendimiento de cada crate
+
+| Operación | Tiempo |
+| --- | --- |
+| Construir, firmar y enviar una factura de 1000 líneas (transporte en memoria) | ~36 ms |
+| Generar el XML de una factura UBL 2.1 de 1000 líneas (2,7 MB) | 1,69 ms |
+| Firmar una factura de 5 líneas | 359 µs |
+| Verificar una factura de 5 líneas | 64 µs |
+| Representación impresa con QR | 124 µs |
+| Serializar una factura de 1000 líneas a JSON | 449 µs |
+
+Medido en Apple Silicon con los benchmarks de cada crate.
+
+## Entorno y reproducción
+
+Apple M5 (10 núcleos), macOS 27.2, PHP 8.4.17 CLI y Rust 1.99.1 en modo release.
+Corrida del 2026-10-20 con cpeforge-core 0.2.2, cpeforge-xml 0.3.2,
+cpeforge-xmldsig 0.2.2, cpeforge-gre-api 0.2.1 y cpeforge-ws 0.3.1.
+
+```bash
+bash oracle/ejemplos/comparar.sh   # CPU: genera y firma con ambos
+bash oracle/ejemplos/enviar.sh     # red: envía a los entornos de prueba
+```
+
+Las cifras completas, caso por caso, están en
+[docs/benchmark.md](https://github.com/alvarez25leo/cpeforge/blob/main/docs/benchmark.md).

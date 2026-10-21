@@ -1,0 +1,38 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
+/* Color de marca: el naranja de la forja (y de Rust). */
+@theme {
+  --color-fd-primary: hsl(18, 88%, 46%);
+  --color-fd-primary-foreground: hsl(0, 0%, 100%);
+  --color-fd-ring: hsl(18, 88%, 46%);
+}
+
+.dark {
+  --color-fd-primary: hsl(22, 95%, 58%);
+  --color-fd-primary-foreground: hsl(20, 30%, 8%);
+  --color-fd-ring: hsl(22, 95%, 58%);
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+html > body[data-scroll-locked] {
+  margin-right: 0px !important;
+  --removed-body-scroll-bar-size: 0px !important;
+}
+
+/* Diagramas Mermaid: centrados y sin desbordar en móvil. */
+.mermaid-diagram {
+  min-width: 0;
+  overflow-x: auto;
+}
+
+/* Mermaid fija `max-width` en línea con el ancho natural del diagrama. */
+.mermaid-diagram svg {
+  max-width: 100% !important;
+  height: auto;
+  margin-inline: auto;
+}

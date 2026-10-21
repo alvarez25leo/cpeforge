@@ -1,0 +1,112 @@
+---
+title: Entornos y credenciales
+description: Beta, homologación y producción de SUNAT, la Clave SOL y las credenciales de la API de guías de remisión.
+---
+
+## Los servicios de SUNAT
+
+Cada tipo de comprobante va a un servicio distinto. `SunatEndpoints` (en
+`cpeforge_ws::soap`) tiene las URL:
+
+| Constante | Entorno | Comprobantes |
+| --- | --- | --- |
+| `FE_BETA` | Beta (pruebas) | Facturas, boletas, notas, liquidaciones, resúmenes y bajas |
+| `FE_HOMOLOGACION` | Homologación | Igual que `FE_BETA` |
+| `FE_PRODUCCION` | **Producción** | Igual que `FE_BETA` |
+| `RETENCION_BETA` | Beta (pruebas) | Retenciones, percepciones y sus reversiones |
+| `RETENCION_PRODUCCION` | **Producción** | Retenciones, percepciones y sus reversiones |
+| `FE_CONSULTA_CDR` | Producción | Consulta del CDR de un comprobante ya enviado |
+
+```rust
+use cpeforge_ws::soap::SunatEndpoints;
+
+see.set_service(SunatEndpoints::FE_BETA);
+```
+
+<Callout title="Guías de remisión">
+  Las guías de remisión ya no se envían por SOAP: van por la **API REST de
+  guías** con la fachada `Api`. Las constantes `GUIA_BETA` y `GUIA_PRODUCCION`
+  están obsoletas.
+</Callout>
+
+## Clave SOL
+
+La Clave SOL identifica al emisor ante los servicios SOAP. Se configura con el
+RUC, el usuario y la clave:
+
+```rust
+see.set_clave_sol("20000000001", "MODDATOS", "moddatos");
+```
+
+- **En beta**, SUNAT acepta las credenciales públicas de la tabla, con el RUC
+  `20000000001` como emisor.
+- **En producción**, usa el RUC de la empresa y un **usuario secundario** de
+  Clave SOL creado para facturación electrónica, nunca el usuario principal.
+
+| Entorno | RUC | Usuario | Clave |
+| --- | --- | --- | --- |
+| Beta | `20000000001` | `MODDATOS` | `moddatos` |
+| Producción | El de tu empresa | Tu usuario secundario | Tu clave |
+
+## Credenciales de la API de guías
+
+La fachada `Api` necesita, además de la Clave SOL, el `client_id` y el
+`client_secret` que SUNAT entrega al registrar la aplicación en el menú SOL:
+
+```rust
+api.set_api_credentials(&client_id, &client_secret)
+    .set_clave_sol(&ruc, &usuario, &clave)
+    .set_certificate(&pem);
+```
+
+El token OAuth2 se cachea y se renueva solo. La caché separa empresas y
+ambientes, así que un mismo servicio puede emitir guías para varias empresas
+sin mezclar tokens.
+
+## Pasar de beta a producción
+
+<Steps>
+<Step>
+
+### Cambia el servicio
+
+`FE_BETA` → `FE_PRODUCCION` (y `RETENCION_BETA` → `RETENCION_PRODUCCION`).
+
+</Step>
+<Step>
+
+### Usa tus credenciales
+
+Tu RUC, tu usuario secundario de Clave SOL y tu clave.
+
+</Step>
+<Step>
+
+### Usa tu certificado
+
+El certificado digital vigente de tu empresa, en PEM. Ver
+[Certificado digital](/docs/primeros-pasos/certificado-digital).
+
+</Step>
+<Step>
+
+### Saca los secretos del código
+
+Lee credenciales y certificado de variables de entorno o de un gestor de
+secretos. Nunca los subas al repositorio.
+
+</Step>
+</Steps>
+
+<Callout type="warn" title="Ningún método reintenta un envío">
+  Un error de transporte puede haber llegado a SUNAT. Antes de reenviar,
+  consulta el estado del comprobante (ticket o CDR). Reenviar a ciegas puede
+  terminar en un rechazo por duplicado.
+</Callout>
+
+## Buenas prácticas en beta
+
+- SUNAT beta responde **401** a los envíos muy seguidos. Deja unos segundos
+  entre uno y otro (el proyecto de ejemplo espera 5 por defecto).
+- Las pruebas automáticas de CPEForge nunca llaman a SUNAT ni a un OSE de
+  producción. Haz lo mismo en las tuyas: usa un transporte simulado.

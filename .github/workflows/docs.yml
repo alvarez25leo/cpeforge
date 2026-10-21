@@ -1,0 +1,74 @@
+name: Documentación
+
+# Construye el sitio de documentación (website/) en cada cambio que lo afecte
+# y lo publica en GitHub Pages desde main.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "website/**"
+      - "example/**"
+      - "crates/*/Cargo.toml"
+      - "crates/*/examples/**"
+      - "Cargo.toml"
+      - ".github/workflows/docs.yml"
+  pull_request:
+    paths:
+      - "website/**"
+      - "example/**"
+      - "crates/*/Cargo.toml"
+      - "crates/*/examples/**"
+      - "Cargo.toml"
+      - ".github/workflows/docs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: website
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          package_json_file: website/package.json
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: website/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm types:check
+      # El sitio vive en https://alvarez25leo.github.io/cpeforge/.
+      - run: pnpm build
+        env:
+          DOCS_BASE_PATH: /cpeforge
+          DOCS_SITE_URL: https://alvarez25leo.github.io
+      # Sin .nojekyll, GitHub Pages ignora las carpetas que empiezan por `_` (como `_next`).
+      - run: touch out/.nojekyll
+      - uses: actions/upload-pages-artifact@v5
+        if: github.event_name != 'pull_request'
+        with:
+          path: website/out
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

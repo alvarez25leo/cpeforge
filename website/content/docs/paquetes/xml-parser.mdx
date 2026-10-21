@@ -1,0 +1,91 @@
+---
+title: cpeforge-xml-parser
+description: Lee un XML de comprobante SUNAT y lo convierte en los modelos tipados de cpeforge-core, con un perfil XML seguro.
+---
+
+<CrateBadges crate="cpeforge-xml-parser" />
+
+<CargoDeps crates={['cpeforge-core', 'cpeforge-xml-parser']} />
+
+## Para qué sirve
+
+El camino inverso de `cpeforge-xml`: de un XML (propio o recibido) a un modelo.
+Útil para:
+
+- registrar las **facturas de tus proveedores** a partir de su XML;
+- **reimprimir** un comprobante desde el XML archivado;
+- migrar comprobantes de otro sistema.
+
+## Un parser por familia
+
+| Parser | Devuelve |
+| --- | --- |
+| `InvoiceParser` | `Invoice` (factura y boleta) |
+| `NoteParser` | `Note` (notas de crédito y débito) |
+| `DespatchParser` | `Despatch` (guías) |
+| `ReceiptParser` | Recibo por honorarios |
+| `SummaryParser` | `Summary` |
+| `VoidedParser` | `Voided` o `Reversion`, según el prefijo `RA` |
+| `RetentionParser` | `Retention` |
+| `PerceptionParser` | `Perception` |
+
+Todos implementan el contrato `cpeforge_core::ports::DocumentParser` con
+entrada `[u8]`, y aceptan también un `XmlDocument` ya analizado.
+
+```rust
+use cpeforge_core::ports::DocumentParser;
+use cpeforge_xml_parser::{InvoiceParser, ParseOptions};
+
+let parser = InvoiceParser::with_options(ParseOptions::new());
+if let Some(factura) = parser.parse(&xml)? {
+    println!("{:?} {:?}", factura.base.serie, factura.base.mto_imp_venta);
+}
+```
+
+## Conversiones
+
+- Importes como `Decimal` exacto.
+- Enteros con saturación (sin desbordar).
+- Fechas en `America/Lima` o la zona de `ParseOptions::with_time_zone`.
+- Reloj inyectable para las fechas «ahora» con `ParseOptions::with_fixed_now`.
+- Los errores exponen `error_class()` y `error_message()`.
+
+## `XmlReader`
+
+`XmlReader` ofrece el subconjunto de XPath que usan los parsers: rutas
+absolutas (`/a:b/c:d`) y relativas (`a:b/c:d`), descendientes (`//a:b`),
+comodín `*` y un `@atributo` final. Las funciones (`count()`), los predicados
+(`[1]`), los ejes explícitos y las uniones se rechazan con
+`XmlParserError::Query`.
+
+<include cwd lang="rust" meta='title="crates/xml-parser/examples/reader.rs"'>../crates/xml-parser/examples/reader.rs</include>
+
+## Perfil seguro
+
+Se rechaza:
+
+- el XML mal formado;
+- cualquier DTD con declaraciones (sin expansión de entidades ni acceso
+  externo);
+- las codificaciones distintas de UTF-8, UTF-16, ISO-8859-1, US-ASCII,
+  windows-1252 e ISO-8859-15;
+- las entradas que superan los `Limits` (10 MiB, 64 niveles y 1 000 000 de
+  nodos por defecto);
+- antes de construir el árbol, los elementos con más de 256 atributos y los
+  espacios de nombres desmedidos.
+
+## Ejemplo
+
+<include cwd lang="rust" meta='title="crates/xml-parser/examples/parse_invoice.rs"'>../crates/xml-parser/examples/parse_invoice.rs</include>
+
+```bash
+cargo run -p cpeforge-xml-parser --example parse_invoice
+cargo run -p cpeforge-xml-parser --example reader
+cargo bench -p cpeforge-xml-parser --bench parse
+```
+
+## Relacionado
+
+- Depende de: [`cpeforge-core`](/docs/paquetes/core) y
+  [`cpeforge-xml-limits`](/docs/paquetes/xml-limits).
+- Referencia completa: [docs.rs/cpeforge-xml-parser](https://docs.rs/cpeforge-xml-parser).

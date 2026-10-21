@@ -1,0 +1,73 @@
+---
+title: cpeforge-xcodes
+description: Catálogo de los 2 077 códigos y mensajes de retorno de SUNAT, tomado de las reglas de validación vigentes.
+---
+
+<CrateBadges crate="cpeforge-xcodes" />
+
+<CargoDeps crates={['cpeforge-xcodes']} />
+
+## Para qué sirve
+
+Traduce un código de retorno de SUNAT (`2017`, `0100`, `4252`…) a su mensaje
+oficial. Contiene los **2 077 códigos** de la hoja «CódigosRetorno» de las
+reglas de validación de SUNAT, en la versión indicada por `CATALOG_VERSION`
+(hoy `2026-08-26`).
+
+Implementa el contrato `cpeforge_core::ports::ErrorCodeProvider`, así que se
+conecta a `See` (feature `xcodes` de `cpeforge`) y a `cpeforge-validator`.
+
+## Uso
+
+```rust
+use cpeforge_core::ports::ErrorCodeProvider;
+use cpeforge_xcodes::XmlErrorCodeProvider;
+
+let catalogo = XmlErrorCodeProvider::new()?;
+assert_eq!(catalogo.iter().len(), cpeforge_xcodes::ENTRY_COUNT);
+println!("{}", catalogo.get("0100"));
+```
+
+- `0100` y `100` son **códigos distintos**: la consulta es literal.
+- Un código desconocido o `None` devuelve `Some("")`.
+- El catálogo incrustado se comprueba (tamaño, BOM y SHA-256) y se analiza una
+  sola vez.
+
+## Con la fachada `See`
+
+<CargoDeps
+  crates={['cpeforge', 'cpeforge-xcodes']}
+  features={{ cpeforge: ['xcodes'] }}
+/>
+
+<include cwd lang="rust" meta='title="crates/cpeforge/examples/see_with_xcodes.rs"'>../crates/cpeforge/examples/see_with_xcodes.rs</include>
+
+## Ejemplos
+
+<include cwd lang="rust" meta='title="crates/xcodes/examples/lookup.rs"'>../crates/xcodes/examples/lookup.rs</include>
+
+```bash
+cargo run -p cpeforge-xcodes --example lookup
+cargo run -p cpeforge-xcodes --example with_validator
+```
+
+## Actualizar el catálogo
+
+SUNAT publica las reglas de validación en
+[cpe.sunat.gob.pe/guias-y-manuales](https://cpe.sunat.gob.pe/guias-y-manuales)
+(«Reglas de validación», `.xlsx`). Los mantenedores actualizan el catálogo con:
+
+```bash
+python3 -I scripts/update_xcodes.py "<Reglas de validación>.xlsx" AAAA-MM-DD
+```
+
+El script conserva byte a byte los textos que no cambiaron, toma de SUNAT los
+cambiados y los nuevos, y falla si desaparece un código. Cada actualización se
+publica como una versión nueva del crate.
+
+## Relacionado
+
+- Depende de: [`cpeforge-core`](/docs/paquetes/core).
+- Lo usa (opcional): [`cpeforge`](/docs/paquetes/cpeforge) con la feature
+  `xcodes`.
+- Referencia completa: [docs.rs/cpeforge-xcodes](https://docs.rs/cpeforge-xcodes).

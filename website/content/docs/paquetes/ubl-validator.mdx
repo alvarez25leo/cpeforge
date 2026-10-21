@@ -1,0 +1,80 @@
+---
+title: cpeforge-ubl-validator
+description: Valida documentos UBL 2.0 y 2.1 contra los esquemas XSD oficiales con libxml2, usando esquemas locales verificados por SHA-256.
+---
+
+<CrateBadges crate="cpeforge-ubl-validator" />
+
+<CargoDeps crates={['cpeforge-ubl-validator']} />
+
+## Para qué sirve
+
+Comprueba que un XML cumple el **esquema XSD de UBL** (estructura, tipos,
+orden de los elementos). Detecta un XML mal formado o incompleto antes de
+enviarlo a SUNAT.
+
+## Los esquemas no vienen en el crate
+
+Los 45 archivos XSD tienen avisos de licencia distintos según el titular (OASIS,
+W3C, ETSI, UN/CEFACT), así que **no se empaquetan**. El crate solo incluye un
+manifiesto (`schema-manifest.json`) con la ruta, el SHA-256, el titular y el
+aviso de cada archivo, y los usa desde un directorio local.
+
+Para obtenerlos, el repositorio incluye:
+
+```bash
+scripts/prepare_ubl_validator_reference.sh
+```
+
+que clona el conjunto de esquemas en el commit fijado. Los esquemas quedan en
+`target/reference/ubl-validator-v2.3.0/src/xsd`. Cualquier otra copia sirve si
+coincide con los SHA-256 del manifiesto.
+
+El crate comprueba el SHA-256 de cada esquema que alcanza y valida sobre una
+**copia privada** de esos bytes, para evitar cambios entre la comprobación y la
+carga. Un esquema modificado o una referencia fuera del conjunto se rechazan.
+
+## Uso
+
+```rust
+use cpeforge_ubl_validator::UblValidator;
+
+let mut validador = UblValidator::new("/ruta/a/xsd")?;
+let resultado = validador.validate(&xml)?;
+if !resultado.valid {
+    eprintln!("{}", resultado.error);
+}
+```
+
+El resultado indica si es válido (`valid`), la versión UBL detectada
+(`version`), el esquema usado (`schema`) y los errores (`error`).
+
+Una entrada vacía devuelve `InfrastructureError::EmptyInput`, no una validación
+fallida.
+
+## Límites
+
+- Codificaciones que reconozca libxml2, salvo UTF-32 y EBCDIC.
+- Sin DTD ni entidades declaradas.
+- 10 MiB, 100 000 nodos, 128 niveles y 256 atributos por elemento.
+
+## Ejemplo
+
+<include cwd lang="rust" meta='title="crates/ubl-validator/examples/validate_ubl.rs"'>../crates/ubl-validator/examples/validate_ubl.rs</include>
+
+```bash
+cargo run -p cpeforge-ubl-validator --example validate_ubl -- <directorio-xsd> <archivo-xml>
+```
+
+## Requisitos
+
+- libxml2 **2.9.11 o posterior**, comprobada al compilar y al iniciar.
+- En Linux: `libxml2-dev` y `pkg-config`. En macOS se usa la del SDK.
+- **Sin soporte en Windows** todavía.
+
+## Relacionado
+
+- Depende de: [`cpeforge-xml-limits`](/docs/paquetes/xml-limits).
+- Ver también: [`cpeforge-cpe-validator`](/docs/paquetes/cpe-validator) para
+  las reglas de negocio de SUNAT.
+- Referencia completa: [docs.rs/cpeforge-ubl-validator](https://docs.rs/cpeforge-ubl-validator).

@@ -1,0 +1,77 @@
+---
+title: Errores
+description: Cómo se separan los errores de tu programa de las respuestas negativas de SUNAT, y cómo tratarlos.
+---
+
+En CPEForge hay dos tipos de «algo salió mal», y conviene no confundirlos:
+
+1. **Un error de tu lado o de la red**: el modelo no se pudo convertir en XML,
+   el certificado no es válido o la conexión falló. Llega como `Err(...)`.
+2. **Una respuesta negativa de SUNAT**: rechazo, excepción o fault SOAP. Llega
+   como `Ok(resultado)` con el error dentro, y se clasifica con
+   [`TaxStatus`](/docs/conceptos/estado-tributario).
+
+```rust
+match see.send(DocumentRef::Invoice(&factura)).await {
+    // SUNAT respondió: aceptado, rechazado, excepción…
+    Ok(SendResult::Bill(bill)) => match TaxStatus::of_bill(&bill) { /* … */ _ => {} },
+    Ok(other) => println!("respuesta inesperada: {other:?}"),
+    // No se pudo construir, firmar o enviar.
+    Err(error) => eprintln!("no enviado: {error}"),
+}
+```
+
+## `CpeForgeError`
+
+Los errores de las fachadas `See` y `Api` son `cpeforge::CpeForgeError`. Cada
+variante dice en qué paso falló:
+
+| Variante | Paso | Ejemplos |
+| --- | --- | --- |
+| `Document` | Datos del documento | Falta la serie o el RUC para calcular el nombre del archivo |
+| `Xml` | Generar el XML | Falta el emisor en una liquidación de compra |
+| `Signature` | Firmar | Certificado sin clave privada, PEM inválido |
+| `Service` | Empaquetar, enviar o leer la respuesta | Fallo de red, ZIP o CDR inválido, respuesta incompleta |
+| `Missing` | Configuración | Falta una pieza (builder, firmador o sender) en la fábrica |
+| `UnsupportedDocument` | Tipo de documento | El tipo de documento no tiene builder asociado |
+
+Cada variante envuelve el error del crate correspondiente (`CoreError`,
+`XmlError`, `cpeforge_xmldsig::Error`, `WsError`), así que puedes inspeccionar
+el detalle con `match` o recorrer la cadena con `std::error::Error::source`.
+
+## Las enumeraciones pueden crecer
+
+Los errores son `#[non_exhaustive]`: una versión de parche puede añadir
+variantes. Un `match` sobre ellos necesita siempre una rama `_`:
+
+```rust
+use cpeforge::CpeForgeError;
+
+match error {
+    CpeForgeError::Signature(e) => eprintln!("revisa el certificado: {e}"),
+    CpeForgeError::Service(e) => eprintln!("problema con SUNAT o la red: {e}"),
+    other => eprintln!("error: {other}"),
+}
+```
+
+## Sin `panic!`
+
+Ninguna entrada externa (un XML, una respuesta de SUNAT, un JSON) provoca un
+`panic!`. El código de los crates no usa `unwrap()` ni `expect()`: todo fallo
+es un error tipado con contexto.
+
+## Los mensajes no filtran secretos
+
+`Debug` y `Display` de los errores, solicitudes y respuestas ocultan el
+contenido potencialmente sensible (contraseñas, tokens, claves privadas). Puedes
+registrar los errores en tus logs sin exponer credenciales.
+
+## Errores de transporte y reintentos
+
+Un error de transporte (`Service`) **no significa que SUNAT no recibió el
+comprobante**: la conexión pudo cortarse después de enviarlo. Ningún método
+reintenta por su cuenta. Antes de reenviar:
+
+1. Conserva el XML firmado (`see.factory_ref().last_xml()`).
+2. Consulta el estado del comprobante o del ticket.
+3. Reenvía solo si SUNAT no lo tiene.

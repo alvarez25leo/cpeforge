@@ -1,0 +1,98 @@
+---
+title: cpeforge-xml-limits
+description: Límites de XML comprobados sobre el texto, antes de construir el árbol. Crate de apoyo sin dependencias.
+---
+
+<CrateBadges crate="cpeforge-xml-limits" />
+
+<CargoDeps crates={['cpeforge-xml-limits']} />
+
+## Para qué sirve
+
+Algunos parsers XML tienen puntos débiles ante entradas hostiles: recursión sin
+límite, comparaciones cuadráticas de atributos o un `DOCTYPE` que se analiza
+entero antes de poder rechazarlo. Este crate recorre el **texto** una sola vez,
+sin recursión, y rechaza esas entradas **antes** de entregarlas al parser.
+
+Lo usan `cpeforge-ws` (SOAP y CDR), `cpeforge-xml-parser`, `cpeforge-report` y
+los dos validadores. No tiene dependencias y sirve para cualquier proyecto que
+analice XML de terceros.
+
+## Las comprobaciones
+
+| Función | Protege a | Rechaza |
+| --- | --- | --- |
+| `exceeds_depth(xml, max)` | Parsers recursivos (`roxmltree`) | Anidamiento mayor que `max` |
+| `check_markup(bytes, max_atributos)` | libxml2 | Cualquier `<!…>` que no sea comentario o CDATA, demasiados atributos, codificaciones no compatibles con ASCII |
+| `check_tree_markup(xml, max_atributos, max_ambito)` | `roxmltree` | Demasiados atributos y un coste desmedido de espacios de nombres |
+| `with_libxml_init_lock(f)` | libxml2 &lt; 2.11 | Inicializaciones concurrentes de libxml2 |
+
+## Anidamiento
+
+`roxmltree` analiza los elementos de forma recursiva y no limita la
+profundidad. En un hilo de 2 MiB (la pila de los workers de Tokio), el proceso
+aborta a partir de 125 niveles en debug y 3 136 en release. Un desbordamiento
+de pila **no es un pánico y no se puede capturar**.
+
+```rust
+use cpeforge_xml_limits::exceeds_depth;
+
+let profundo = format!("{}{}", "<a>".repeat(5_000), "</a>".repeat(5_000));
+assert!(exceeds_depth(&profundo, 256));
+assert!(!exceeds_depth("<r><a/></r>", 2));
+```
+
+Omite comentarios, CDATA, instrucciones de procesamiento y declaraciones, y
+respeta las comillas de los atributos. Solo es una cota válida si el parser no
+expande entidades declaradas.
+
+## Marcado antes de libxml2
+
+libxml2 anterior a 2.12 compara cada atributo con los anteriores del mismo
+elemento (tiempo cuadrático) y analiza un `DOCTYPE` entero antes de poder
+rechazarlo:
+
+```rust
+use cpeforge_xml_limits::{DEFAULT_MAX_ATTRIBUTES, MarkupRejection, check_markup};
+
+assert_eq!(check_markup(b"<a x='1'/>", DEFAULT_MAX_ATTRIBUTES), Ok(()));
+assert_eq!(
+    check_markup(b"<!DOCTYPE a><a/>", DEFAULT_MAX_ATTRIBUTES),
+    Err(MarkupRejection::Declaration)
+);
+```
+
+## Marcado antes de `roxmltree`
+
+En `roxmltree`, 40 000 atributos en un elemento tardan casi un segundo, y miles
+de elementos que redeclaran un espacio de nombres multiplican la memoria.
+`check_tree_markup` rechaza ambos casos:
+
+```rust
+use cpeforge_xml_limits::{
+    DEFAULT_MAX_ATTRIBUTES, DEFAULT_MAX_NAMESPACE_SCOPE, MarkupRejection, check_tree_markup,
+};
+
+let declaraciones: String = (0..250).map(|i| format!(" xmlns:p{i}='urn:{i}'")).collect();
+let ataque = format!("<r{declaraciones}>{}</r>", "<x xmlns:z='u'/>".repeat(20_000));
+assert_eq!(
+    check_tree_markup(&ataque, DEFAULT_MAX_ATTRIBUTES, DEFAULT_MAX_NAMESPACE_SCOPE),
+    Err(MarkupRejection::TooManyNamespaces)
+);
+```
+
+| Constante | Valor |
+| --- | --- |
+| `DEFAULT_MAX_ATTRIBUTES` | 256 |
+| `DEFAULT_MAX_NAMESPACE_SCOPE` | 4 000 000 |
+
+## Relacionado
+
+- Sin dependencias.
+- Lo usan: [`cpeforge-ws`](/docs/paquetes/ws),
+  [`cpeforge-xml-parser`](/docs/paquetes/xml-parser),
+  [`cpeforge-report`](/docs/paquetes/report),
+  [`cpeforge-ubl-validator`](/docs/paquetes/ubl-validator) y
+  [`cpeforge-cpe-validator`](/docs/paquetes/cpe-validator).
+- Ver también: [Seguridad](/docs/conceptos/seguridad).
+- Referencia completa: [docs.rs/cpeforge-xml-limits](https://docs.rs/cpeforge-xml-limits).

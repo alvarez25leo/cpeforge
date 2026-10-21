@@ -30,9 +30,9 @@ html > body[data-scroll-locked] {
   overflow-x: auto;
 }
 
-/* Mermaid fija `max-width` en línea con el ancho natural del diagrama. */
+/* Mermaid fija `width="100%"` y un `max-width` en línea con el ancho natural:
+   el diagrama encoge en pantallas estrechas sin crecer más de su tamaño. */
 .mermaid-diagram svg {
-  max-width: 100% !important;
   height: auto;
   margin-inline: auto;
 }

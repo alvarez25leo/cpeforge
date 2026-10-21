@@ -1,0 +1,88 @@
+---
+title: cpeforge-core
+description: Modelos y contratos de los comprobantes electrónicos, sin XML, firma ni red. La base que comparten todos los crates.
+---
+
+<CrateBadges crate="cpeforge-core" />
+
+<CargoDeps crates={['cpeforge-core']} />
+
+## Para qué sirve
+
+`cpeforge-core` define:
+
+- **Los modelos** de todos los comprobantes: factura, boleta, notas, guía de
+  remisión, resumen diario, baja, reversión, retención, percepción,
+  liquidación de compra, recibo por honorarios, emisor, cliente y respuestas de
+  SUNAT (CDR, tickets, errores).
+- **El nombre de archivo** de cada documento (`Document::name`) y el
+  identificador de resúmenes y bajas con la fecha de Perú.
+- **Los contratos** (`ports`, `service`) que implementan los demás crates:
+  builders, envío, lectura, reportes, validación, tokens y catálogos de
+  errores.
+- **El importe en letras** para la leyenda `1000` (`amount_words`,
+  `Legend::amount_in_words`).
+
+**No incluye** XML, firma, compresión ni llamadas a SUNAT.
+
+**Úsalo** siempre: cualquier otro crate de CPEForge lo necesita para construir
+los modelos.
+
+## Tipos principales
+
+| Ruta | Contenido |
+| --- | --- |
+| `cpeforge_core::model::*` | Los modelos. Ver [Modelos](/docs/conceptos/modelos) |
+| `cpeforge_core::Decimal` | Reexportación de `rust_decimal::Decimal` |
+| `cpeforge_core::Zoned` | Reexportación de `jiff::Zoned` |
+| `cpeforge_core::Document` | Contrato con `name()`, el nombre de archivo SUNAT |
+| `cpeforge_core::time` | `PERU_TIME_ZONE`, `peru_time_zone()`, `to_peru_time()` |
+| `cpeforge_core::amount_words` | Importe en letras |
+| `cpeforge_core::ports` | Contratos: `DocumentParser`, `Report`, `ErrorCodeProvider`… |
+| `cpeforge_core::CoreError` | Error del crate |
+
+## Features
+
+| Feature | Qué activa |
+| --- | --- |
+| `serde` | `Serialize` y `Deserialize` en todos los modelos, con nombres en camelCase e importes como texto. Ver [Serde y JSON](/docs/conceptos/serde-y-json) |
+
+## Decisiones de diseño
+
+- **Importes como `Decimal`**: valores exactos, sin redondeo binario. Límite:
+  28 dígitos.
+- **Fechas como `Zoned`**: entre los años −9999 y 9999.
+- **`None` es «no establecido»**; `""`, `0` y `[]` se conservan.
+- **Los importes no se calculan aquí**: el modelo transporta los valores que
+  calcula tu sistema.
+
+## Aceptación de un CDR
+
+`CdrResponse::is_accepted` aplica una regla permisiva: acepta el código `0` o
+mayor o igual a `4000`, y un código ausente o no numérico **cuenta como
+aceptado**. Para decidir de verdad, usa `TaxStatus` de `cpeforge-ws`. Ver
+[Estado tributario](/docs/conceptos/estado-tributario).
+
+## Ejemplo
+
+<include cwd lang="rust" meta='title="crates/core/examples/invoice_model.rs"'>../crates/core/examples/invoice_model.rs</include>
+
+```bash
+cargo run -p cpeforge-core --example invoice_model
+```
+
+## Rendimiento
+
+| Operación | Tiempo |
+| --- | --- |
+| Serializar una factura de 1000 líneas | 449 µs |
+| Deserializar la misma factura | 750 µs |
+| Serializar un CDR de 1 MiB (Base64) | 704 µs |
+| `Summary::name` (`RC` + fecha de Perú) | 145 ns |
+
+## Relacionado
+
+- No depende de ningún otro crate de CPEForge.
+- Lo usan `cpeforge`, `cpeforge-xml`, `cpeforge-ws`, `cpeforge-report`,
+  `cpeforge-xml-parser`, `cpeforge-validator` y `cpeforge-xcodes`.
+- Referencia completa: [docs.rs/cpeforge-core](https://docs.rs/cpeforge-core).

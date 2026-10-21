@@ -1,0 +1,102 @@
+---
+title: Concurrencia y volumen
+description: Cómo emitir muchos comprobantes en paralelo y para muchas empresas.
+---
+
+Los tipos principales de CPEForge son `Send + Sync` y la red es `async` sobre
+Tokio. Estas son las reglas para aprovecharlo.
+
+## Una fachada por tarea
+
+`See::send`, `send_xml` y `get_xml_signed` toman `&mut self`: el XML firmado
+queda guardado en la fachada (`last_xml`). Una fachada procesa **un
+comprobante a la vez**.
+
+Para procesar en paralelo, crea **una fachada por tarea o hilo**. Cada una
+carga la clave privada una sola vez y la reutiliza en todos sus envíos.
+
+```rust
+use cpeforge::{DocumentRef, See};
+use cpeforge_gre_api::ReqwestTransport;
+use cpeforge_ws::soap::SunatEndpoints;
+
+let transporte = ReqwestTransport::new()?;
+let mut tareas = tokio::task::JoinSet::new();
+
+for lote in facturas.chunks(100) {
+    let lote = lote.to_vec();
+    let transporte = transporte.clone();
+    let pem = pem.clone();
+    tareas.spawn(async move {
+        let mut see = See::new(transporte);
+        see.set_certificate(&pem)?;
+        see.set_service(SunatEndpoints::FE_PRODUCCION);
+        see.set_clave_sol(&ruc, &usuario, &clave);
+        for factura in &lote {
+            let resultado = see.send(DocumentRef::Invoice(factura)).await?;
+            // guardar resultado…
+        }
+        Ok::<_, cpeforge::CpeForgeError>(())
+    });
+}
+```
+
+`ReqwestTransport` se puede clonar y compartir entre fachadas.
+
+## El trabajo de CPU, fuera del runtime
+
+Construir y firmar es trabajo de CPU que se ejecuta dentro del `async fn`,
+antes de la primera espera de red. Una factura normal tarda menos de un
+milisegundo, pero con muchos envíos simultáneos o comprobantes de miles de
+líneas conviene ejecutar esa parte en un hilo de trabajo:
+
+```rust
+// Construir y firmar en un hilo de trabajo; la fachada vuelve con el resultado.
+let (mut see, xml_firmado) = tokio::task::spawn_blocking(move || {
+    let xml = see.get_xml_signed(DocumentRef::Invoice(&factura))?.to_owned();
+    Ok::<_, cpeforge::CpeForgeError>((see, xml))
+})
+.await??;
+
+// El envío del XML ya firmado es solo E/S.
+let resultado = see.send_xml_file(&xml_firmado).await?;
+```
+
+## Muchas empresas en un solo servicio
+
+- **SOAP:** cada fachada `See` lleva su propio certificado y Clave SOL. Crea
+  una por empresa (o una por tarea y empresa).
+- **API de guías:** la caché de tokens de `Api` usa por defecto
+  `CacheKey::Scoped`, que separa el token por ambiente y usuario. Una misma
+  tienda de tokens sirve a todas las empresas sin mezclar credenciales.
+- `ApiFactory` pide **un solo token por clave** aunque haya llamadas
+  concurrentes.
+
+<Callout title="CacheKey::ClientId">
+  `CacheKey::ClientId` usa solo el `client_id` como clave, el formato que
+  comparten otras implementaciones. Si lo eliges, necesitas una tienda por
+  ambiente y usuario.
+</Callout>
+
+## Sin reintentos automáticos
+
+Ningún método reintenta un envío. Un error de transporte puede haber llegado a
+SUNAT, así que el reintento es una decisión de tu sistema:
+
+1. Conserva el XML firmado.
+2. Consulta el estado (ticket o CDR) y clasifícalo con
+   [`TaxStatus`](/docs/conceptos/estado-tributario).
+3. Reenvía solo si SUNAT no tiene el comprobante.
+
+## SUNAT también tiene límites
+
+El entorno beta responde **401** a los envíos muy seguidos. En producción,
+respeta los límites de SUNAT y espacia los envíos masivos (por ejemplo, con un
+semáforo de Tokio que limite las conexiones simultáneas).
+
+## Rendimiento de referencia
+
+Construir, firmar y enviar una factura de 1000 líneas (2,6 MB firmada) cuesta
+unos 36 ms con un transporte en memoria, dominados por la firma. Una factura
+típica se firma en menos de 0,4 ms. Ver
+[Rendimiento](/docs/introduccion/rendimiento).

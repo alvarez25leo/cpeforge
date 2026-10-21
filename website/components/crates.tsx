@@ -19,7 +19,7 @@ export function CrateBadges({ crate }: { crate: string }) {
   const badge =
     'inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-medium no-underline';
   return (
-    <span className="not-prose flex flex-wrap gap-2">
+    <div className="not-prose mb-4 flex flex-wrap gap-2">
       <a className={`${badge} text-fd-primary`} href={cratesIo(info.name)}>
         crates.io v{info.version}
       </a>
@@ -28,7 +28,7 @@ export function CrateBadges({ crate }: { crate: string }) {
       </a>
       <span className={badge}>Rust {info.msrv}+</span>
       <span className={badge}>MIT</span>
-    </span>
+    </div>
   );
 }
 

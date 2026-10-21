@@ -1,0 +1,106 @@
+---
+title: cpeforge-ws
+description: Transporte SOAP, ZIP, lectura del CDR, clasificación con TaxStatus y adaptador de la API de guías con caché de tokens.
+---
+
+<CrateBadges crate="cpeforge-ws" />
+
+<CargoDeps crates={['cpeforge-ws']} />
+
+## Para qué sirve
+
+`cpeforge-ws` habla con SUNAT:
+
+- **ZIP** del XML con el nombre correcto, y lectura segura del ZIP del CDR.
+- **SOAP**: `sendBill`, `sendSummary`, `getStatus` y la consulta de CDR, con
+  autenticación WS-Security (Clave SOL).
+- **CDR**: lectura del `ApplicationResponse` a un `CdrResponse`.
+- **`TaxStatus`**: clasificación de cualquier respuesta. Ver
+  [Estado tributario](/docs/conceptos/estado-tributario).
+- **API de guías**: `GreSender` y `ApiFactory`, con caché de tokens OAuth2.
+- **Endpoints** de beta, homologación y producción en `SunatEndpoints`.
+
+**Úsalo directamente** si construyes tu propio flujo (por ejemplo, firmas con
+otra herramienta y solo necesitas enviar), o para `TaxStatus` y
+`SunatEndpoints`, que también usas con `cpeforge`.
+
+## Módulos
+
+| Módulo | Contenido |
+| --- | --- |
+| `soap` | `SoapClient`, `SunatEndpoints`, límites de tamaño y profundidad |
+| `services` | `BillSender`, `SummarySender`, `ExtService` (tickets), `ConsultCdrService` |
+| `zip` | `compress` y lectura con validaciones |
+| `cdr` | `read_cdr_zip`, `read_cdr_checked` (estricta) y `read_cdr` (tolerante) |
+| `outcome` | `TaxStatus` |
+| `api` | `ApiFactory`, `GreSender`, `InMemoryStore`, `CacheKey`, `SystemClock` |
+| `error` | `WsError` |
+
+## Enviar sin la fachada
+
+```rust
+use cpeforge_gre_api::ReqwestTransport;
+use cpeforge_ws::outcome::TaxStatus;
+use cpeforge_ws::services::BillSender;
+use cpeforge_ws::soap::{SoapClient, SunatEndpoints};
+
+let client = SoapClient::new(
+    ReqwestTransport::new()?,
+    SunatEndpoints::FE_BETA,
+    "20000000001MODDATOS",
+    "moddatos",
+);
+let resultado = BillSender::new(client)
+    .send("20000000001-01-F001-1", xml_firmado.as_bytes())
+    .await?;
+println!("{:?}", TaxStatus::of_bill(&resultado));
+```
+
+`BillSender::send` comprime `<nombre>.xml`, envía `<nombre>.zip` y lee el CDR.
+Un fault SOAP de SUNAT llega **dentro del resultado** (`base.error`); solo los
+fallos de transporte, ZIP o CDR son `Err(WsError)`.
+
+## Caché de tokens de la API de guías
+
+- `ApiFactory` emite **una sola solicitud de token por clave** aunque haya
+  llamadas concurrentes.
+- La clave por defecto, `CacheKey::Scoped`, aísla ambientes y usuarios en una
+  misma tienda: sirve para un servicio multiempresa.
+- `CacheKey::ClientId` usa solo el `client_id` (el formato de otras
+  implementaciones) y exige una tienda por ambiente y usuario.
+
+## Seguridad
+
+- Las respuestas SOAP y los CDR se rechazan **antes de construir el árbol** si
+  superan 64 niveles, 256 atributos por elemento o el coste de espacios de
+  nombres. Tamaño máximo de una respuesta SOAP: 16 MiB.
+- Un ZIP recibido se rechaza antes de abrirlo si declara más de 64 entradas o
+  usa ZIP64.
+- `GreSender` y `ApiFactory` rechazan `.` y `..` como nombre, ticket o
+  `client_id`.
+- El ZIP usa zlib compilado de forma estática: produce **los mismos bytes en
+  cualquier sistema operativo**, algo necesario para el `hashZip` de las guías.
+
+## Ejemplo sin red
+
+Comprime un CDR sintético, lo lee y prepara una solicitud SOAP sin enviarla:
+
+<include cwd lang="rust" meta='title="crates/ws/examples/local_cdr.rs"'>../crates/ws/examples/local_cdr.rs</include>
+
+```bash
+cargo run -p cpeforge-ws --example local_cdr
+cargo bench -p cpeforge-ws --bench pipeline   # cada etapa local con transportes simulados
+```
+
+## Requisitos
+
+- Rust **1.88** o posterior.
+- Un compilador de C (zlib) y el TLS del sistema (OpenSSL en Linux).
+
+## Relacionado
+
+- Depende de: [`cpeforge-core`](/docs/paquetes/core),
+  [`cpeforge-gre-api`](/docs/paquetes/gre-api) y
+  [`cpeforge-xml-limits`](/docs/paquetes/xml-limits).
+- Lo usa: [`cpeforge`](/docs/paquetes/cpeforge).
+- Referencia completa: [docs.rs/cpeforge-ws](https://docs.rs/cpeforge-ws).

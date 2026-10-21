@@ -1,0 +1,93 @@
+---
+title: Dinero y fechas
+description: Importes con Decimal exacto y fechas con zona horaria. Por qué y cómo usarlos.
+---
+
+Un comprobante con un céntimo de diferencia o con la fecha de otro día es un
+comprobante rechazado. CPEForge elimina las dos causas más comunes desde los
+tipos.
+
+## Importes: `Decimal`, nunca `float`
+
+Todos los importes, cantidades y porcentajes son `rust_decimal::Decimal`, que
+`cpeforge-core` reexporta:
+
+```rust
+use cpeforge_core::Decimal;
+use std::str::FromStr;
+
+let precio = Decimal::new(5900, 2);            // 59.00
+let cantidad = Decimal::from_str("1.5")?;      // 1.5
+let total = precio * cantidad;                 // 88.50, exacto
+assert_eq!(total, Decimal::new(8850, 2));
+```
+
+Con `f64`, `0.1 + 0.2` no es `0.3`. Con `Decimal`, sí. Un `Decimal` admite
+hasta 28 dígitos significativos.
+
+### Formas de crear un importe
+
+| Forma | Resultado |
+| --- | --- |
+| `Decimal::new(11800, 2)` | `118.00` (mantisa y número de decimales) |
+| `Decimal::from(118)` | `118` |
+| `Decimal::from_str("118.00")?` | `118.00`, desde texto |
+
+### Redondeo
+
+Redondea explícitamente donde SUNAT lo exige, por ejemplo el IGV de una línea:
+
+```rust
+let igv = (base * Decimal::new(18, 2)).round_dp(2);
+```
+
+`round_dp` usa el redondeo bancario (la mitad va al par). Para el redondeo
+«mitad lejos de cero», añade `rust_decimal` a tus dependencias y usa
+`round_dp_with_strategy(2, RoundingStrategy::MidpointAwayFromZero)`.
+
+<Callout title="En el XML">
+  `cpeforge-xml` escribe los importes en notación posicional (nunca con
+  exponente) y con los decimales que admite el esquema, para que el XML valide
+  contra el XSD.
+</Callout>
+
+## Fechas: `Zoned`, con zona horaria
+
+Las fechas son `jiff::Zoned`, también reexportado por `cpeforge-core`. Una
+`Zoned` sabe en qué zona horaria está, así que la fecha de emisión no depende
+de la configuración del servidor.
+
+```rust
+use cpeforge_core::Zoned;
+use std::str::FromStr;
+
+let emision = Zoned::from_str("2024-01-31T23:30:00-05:00[America/Lima]")?;
+```
+
+### La hora de Lima
+
+SUNAT trabaja con la hora de Perú (`America/Lima`, UTC−5). Si tu servidor está
+en UTC, una venta a las 20:00 de Lima ya es «mañana» en UTC. Convierte la fecha
+con el helper de `cpeforge-core`:
+
+```rust
+use cpeforge_core::time::to_peru_time;
+use cpeforge_core::Zoned;
+
+let emision = to_peru_time(&Zoned::now())?;
+```
+
+| Función | Para qué |
+| --- | --- |
+| `time::PERU_TIME_ZONE` | La constante `"America/Lima"` |
+| `time::peru_time_zone()` | La zona horaria de Perú |
+| `time::to_peru_time(&fecha)` | La misma fecha, expresada en hora de Lima |
+
+Los identificadores de resúmenes y bajas (`RC-20240201-001`) ya usan la fecha
+de Perú aunque la fecha del modelo esté en otra zona.
+
+## En la representación impresa
+
+`cpeforge-report` convierte cada `Decimal` en el `double` más cercano solo para
+mostrarlo con formato. No hace cálculos con esos valores: los importes que ves
+son los del documento. Ver [cpeforge-report](/docs/paquetes/report).

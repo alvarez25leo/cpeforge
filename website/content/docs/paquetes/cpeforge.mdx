@@ -1,0 +1,144 @@
+---
+title: cpeforge
+description: El paquete principal. Las fachadas See (servicios SOAP) y Api (guías de remisión) construyen, firman y envían en una sola llamada.
+---
+
+<CrateBadges crate="cpeforge" />
+
+<CargoDeps
+  crates={['cpeforge', 'cpeforge-core', 'cpeforge-gre-api', 'cpeforge-ws']}
+  extra={['tokio = { version = "1", features = ["macros", "rt-multi-thread"] }']}
+/>
+
+## Para qué sirve
+
+`cpeforge` une `cpeforge-core`, `cpeforge-xml`, `cpeforge-xmldsig` y
+`cpeforge-ws` en dos fachadas tipadas:
+
+- **`See`**: servicios SOAP de SUNAT. Facturas, boletas, notas, liquidaciones,
+  retenciones, percepciones, resúmenes, bajas y reversiones.
+- **`Api`**: API REST de guías de remisión (remitente y transportista), con
+  token OAuth2 cacheado.
+
+Cada una construye el XML, lo firma, lo comprime, lo envía y lee la respuesta.
+
+**Úsalo** si emites comprobantes: es el punto de entrada recomendado.
+**No lo necesitas** si solo generas XML, firmas o lees comprobantes: usa el
+crate de esa pieza.
+
+## `See`: servicios SOAP
+
+```rust
+use cpeforge::{DocumentRef, See, SendResult};
+use cpeforge_gre_api::ReqwestTransport;
+use cpeforge_ws::soap::SunatEndpoints;
+
+let mut see = See::new(ReqwestTransport::new()?);
+see.set_certificate(&pem)?;
+see.set_service(SunatEndpoints::FE_BETA);
+see.set_clave_sol("20000000001", "MODDATOS", "moddatos");
+
+let resultado = see.send(DocumentRef::Invoice(&factura)).await?;
+```
+
+| Método | Qué hace |
+| --- | --- |
+| `See::new(transporte)` | Crea la fachada con un transporte HTTP (`ReqwestTransport` o uno propio) |
+| `set_certificate(&pem)` | Certificado y clave privada en PEM |
+| `set_service(url)` | Servicio de destino (`SunatEndpoints::FE_BETA`, `FE_PRODUCCION`, `RETENCION_BETA`…) |
+| `set_clave_sol(ruc, usuario, clave)` | Credenciales SOL |
+| `send(DocumentRef)` | Construye, firma y envía. Devuelve `SendResult::Bill` (CDR) o `SendResult::Summary` (ticket) |
+| `get_xml_signed(DocumentRef)` | Construye y firma sin enviar |
+| `send_xml_file(&xml)` | Envía un XML ya firmado; deduce el tipo y el nombre del propio XML |
+| `send_xml(tipo, nombre, bytes)` | Envía bytes XML indicando tipo y nombre |
+| `get_status(ticket)` | Consulta un ticket (`getStatus`) |
+| `set_code_provider(...)` | Conecta un catálogo de mensajes de error (feature `xcodes`) |
+| `set_builder_options(...)` | Ajusta las opciones del generador de XML |
+| `set_zip_time(...)` | Fija la fecha de los ZIP (ZIP reproducibles) |
+
+`DocumentRef` indica qué se envía: `Invoice`, `Note`, `Despatch`, `Summary`,
+`Voided`, `Reversion`, `Perception`, `Retention` o `Settlement`.
+
+## `Api`: guías de remisión
+
+```rust
+use cpeforge::{Api, DocumentRef};
+use cpeforge_gre_api::{Configuration, ReqwestTransport};
+use cpeforge_ws::api::{ApiFactory, InMemoryStore, SystemClock};
+
+let mut api = Api::new(ApiFactory::new(
+    ReqwestTransport::new()?,
+    Configuration::auth().with_host(url_auth),
+    url_cpe,
+    InMemoryStore::default(),
+    SystemClock,
+));
+api.set_api_credentials(&client_id, &client_secret)
+    .set_clave_sol(&ruc, &usuario, &clave)
+    .set_certificate(&pem);
+
+let envio = api.send(DocumentRef::Despatch(&guia)).await?;
+if let Some(ticket) = envio.ticket.as_deref() {
+    let estado = api.get_status(ticket).await?;
+}
+```
+
+`Api::with_defaults(transporte, tienda, reloj)` usa los hosts predeterminados
+de SUNAT. La tienda de tokens (`InMemoryStore` u otra que implemente el
+contrato) separa empresas y ambientes.
+
+## Features
+
+| Feature | Qué activa |
+| --- | --- |
+| `xcodes` | Añade `cpeforge-xcodes` para conectar el catálogo de 2 077 códigos a `See` |
+
+```rust
+use std::sync::Arc;
+use cpeforge_xcodes::XmlErrorCodeProvider;
+
+see.set_code_provider(Some(Arc::new(XmlErrorCodeProvider::new()?)));
+```
+
+## Importe en letras
+
+`cpeforge::amount_words` reexporta el conversor de `cpeforge-core` para la
+leyenda `1000`. Ver [Importe en letras](/docs/conceptos/importe-en-letras).
+
+## Ejemplo sin red
+
+Ambas fachadas con un transporte simulado, sin conectarse a ningún servidor:
+
+<include cwd lang="rust" meta='title="crates/cpeforge/examples/fachadas_sin_red.rs"'>../crates/cpeforge/examples/fachadas_sin_red.rs</include>
+
+```bash
+cargo run -p cpeforge --example fachadas_sin_red
+cargo run -p cpeforge --example importe_en_letras
+cargo run -p cpeforge --example see_with_xcodes --features xcodes
+```
+
+## Concurrencia
+
+`send`, `send_xml` y `get_xml_signed` toman `&mut self`: una fachada procesa un
+comprobante a la vez. Para paralelizar, usa una fachada por tarea. Ver
+[Concurrencia y volumen](/docs/conceptos/concurrencia-y-volumen).
+
+## Rendimiento
+
+Construir, firmar y enviar una factura de 1000 líneas (2,6 MB firmada) con un
+transporte en memoria cuesta unos 36 ms, dominados por la firma XML.
+
+## Requisitos
+
+- Rust **1.88** o posterior.
+- OpenSSL 3 y un compilador de C. Ver [Requisitos](/docs/primeros-pasos/requisitos).
+
+## Relacionado
+
+- Depende de: [`cpeforge-core`](/docs/paquetes/core),
+  [`cpeforge-xml`](/docs/paquetes/xml),
+  [`cpeforge-xmldsig`](/docs/paquetes/xmldsig),
+  [`cpeforge-ws`](/docs/paquetes/ws),
+  [`cpeforge-gre-api`](/docs/paquetes/gre-api) y, con la feature `xcodes`,
+  [`cpeforge-xcodes`](/docs/paquetes/xcodes).
+- Referencia completa: [docs.rs/cpeforge](https://docs.rs/cpeforge).

@@ -1,0 +1,92 @@
+---
+title: cpeforge-gre-api
+description: Cliente HTTP de bajo nivel de la API REST de guías de remisión de SUNAT, con el transporte TLS que usan los demás crates.
+---
+
+<CrateBadges crate="cpeforge-gre-api" />
+
+<CargoDeps crates={['cpeforge-gre-api']} />
+
+## Para qué sirve
+
+- Las tres operaciones de la API de guías: **pedir un token** OAuth2, **enviar
+  un comprobante** y **consultar un envío**.
+- **`ReqwestTransport`**, el transporte HTTP con TLS verificado que usan
+  `cpeforge` y `cpeforge-ws`.
+- El contrato **`HttpTransport`**, para inyectar un transporte propio o uno
+  simulado en las pruebas.
+
+**Úsalo directamente** solo si necesitas la API a bajo nivel. Para emitir
+guías, la fachada `Api` de `cpeforge` ya hace el ZIP, el hash, el token y la
+caché. Lo necesitarás igualmente como dependencia para crear
+`ReqwestTransport`.
+
+**No incluye** ZIP, hashes ni caché de tokens: eso lo hace `cpeforge-ws`.
+
+## Uso
+
+```rust
+use cpeforge_gre_api::{AuthApi, Configuration, CpeApi, ReqwestTransport, TokenRequest};
+
+let transport = ReqwestTransport::new()?;
+let auth = AuthApi::new(transport.clone(), Configuration::auth());
+let credenciales = TokenRequest::password_grant("cliente", "secreto", "rucusuario", "clave");
+let token = auth.get_token(&credenciales).await?;
+
+let cpe = CpeApi::new(transport, Configuration::cpe(token.access_token.unwrap_or_default()));
+let estado = cpe.consultar_envio("ticket").await?;
+```
+
+| Método | Qué hace |
+| --- | --- |
+| `AuthApi::get_token` | Token OAuth2 (`password_grant`) |
+| `CpeApi::enviar_cpe` | Envía el ZIP de una guía y devuelve el ticket |
+| `CpeApi::consultar_envio` | Estado de un ticket |
+| `..._with_http_info` | Igual, devolviendo además el estado HTTP y las cabeceras |
+| `..._request` | Construye la solicitud sin enviarla |
+
+`Configuration::default()` apunta al host de autenticación. Para enviar o
+consultar, usa `Configuration::cpe(token)`.
+
+## Features
+
+| Feature | Por defecto | Qué activa |
+| --- | :---: | --- |
+| `reqwest` | Sí | `ReqwestTransport` y `ReqwestTransportBuilder`, con el TLS nativo del sistema |
+
+Sin la feature, el crate solo define el contrato `HttpTransport` y los modelos.
+
+## Seguridad del transporte
+
+`ReqwestTransport`:
+
+- **verifica TLS** y fija tiempos límite;
+- **limita el tamaño** del cuerpo de la respuesta;
+- **no usa proxy** y **no reintenta**;
+- solo sigue redirecciones **dentro del mismo origen**;
+- solo acepta HTTP sin TLS para `localhost`, salvo habilitación explícita.
+
+Además, un `client_id`, `filename` o `numTicket` igual a `.` o `..` se rechaza
+antes de enviar (`ApiError::InvalidRequest`): la URL se normalizaría y el token
+iría a otra ruta del servidor.
+
+`Debug` y `Display` de solicitudes, respuestas y errores ocultan el contenido
+sensible; `ApiError::message()` expone el mensaje completo de forma explícita.
+El User-Agent por defecto es `CPEForge/0.1.0`.
+
+## Ejemplo sin red
+
+El flujo completo (token, envío y consulta) contra un transporte simulado en
+memoria:
+
+<include cwd lang="rust" meta='title="crates/gre-api/examples/flujo_gre.rs"'>../crates/gre-api/examples/flujo_gre.rs</include>
+
+```bash
+cargo run -p cpeforge-gre-api --example flujo_gre
+```
+
+## Relacionado
+
+- No depende de otros crates de CPEForge.
+- Lo usan: [`cpeforge-ws`](/docs/paquetes/ws) y [`cpeforge`](/docs/paquetes/cpeforge).
+- Referencia completa: [docs.rs/cpeforge-gre-api](https://docs.rs/cpeforge-gre-api).

@@ -1,0 +1,87 @@
+---
+title: cpeforge-cpe-validator
+description: Valida comprobantes con las hojas XSL de reglas de SUNAT (XSLT 1.0 con libxslt), con un perfil seguro.
+---
+
+<CrateBadges crate="cpeforge-cpe-validator" />
+
+<CargoDeps crates={['cpeforge-cpe-validator']} />
+
+## Para qué sirve
+
+SUNAT publica sus reglas de validación como hojas XSL. Este crate las ejecuta
+sobre tu XML **antes de enviarlo**, y devuelve los mismos códigos de error que
+devolvería SUNAT. Así detectas un rechazo sin gastar un envío.
+
+## Cómo funciona
+
+1. `XmlTypeResolver` detecta el tipo de comprobante por la raíz del XML.
+2. `XslPathResolver` ubica la hoja de reglas en un **directorio local**
+   (`2.X/ValidaExprRegFactura-2.0.1.xsl`, …).
+3. `XslValidator` la ejecuta con libxslt (XSLT 1.0 + EXSLT).
+4. `ErrorResultParser` convierte cada `xsl:message`
+   (`nivel|código|mensaje[|ruta|valor]`) en un `CpeError`.
+
+```rust
+use cpeforge_cpe_validator::CpeValidator;
+
+let validador = CpeValidator::new("/ruta/a/reglas");
+let xml = std::fs::read("20000000001-01-F001-1.xml")?;
+for error in validador.validate_xml("20000000001-01-F001-1.xml", &xml)? {
+    println!("{:?} {:?} {:?}", error.level, error.code, error.message);
+}
+```
+
+## Las reglas de SUNAT no vienen en el crate
+
+El resultado depende de la versión de las hojas que proveas. Las hojas tal como
+las publica SUNAT («Archivo XSL – 2.1») **no se ejecutan directamente**:
+
+- incluyen `local:///commons/…` de IBM DataPower, que SUNAT no publica;
+- usan la función EXSLT `regexp:match`.
+
+Hay que convertirlas: `regexp:match` pasa a la función registrada como
+`MATCHES_HANDLER` (`CPEForge\Validator\Xml\XsltFunctions::matches`, con
+semántica PCRE) y los `commons` se incluyen en el directorio de reglas. Si los
+nombres de archivo de SUNAT no coinciden con los que busca `XslPathResolver`,
+renómbralos o usa un `RuleResolver` propio con `CpeValidator::with_parts`.
+
+## Perfil seguro
+
+- Se rechaza todo `DOCTYPE`. No hay red ni escritura.
+- `xsl:include`, `xsl:import` y `document()` solo leen dentro del directorio de
+  reglas (con los enlaces simbólicos resueltos).
+- Límites de tamaño, de operaciones XPath y de retroceso y recursión de PCRE.
+- Los fallos de infraestructura son `CpeValidatorError`, **nunca una lista
+  vacía**: una lista vacía significa «sin errores».
+
+<Callout type="warn" title="macOS anterior a 13">
+  La libxml2 de Apple en macOS 12 o anterior no ofrece el límite de operaciones
+  XPath (`engine_info().xpath_operation_limit` es `false`). Con reglas que no
+  sean de confianza, usa macOS 13 o posterior, o Linux.
+</Callout>
+
+## Ejemplo
+
+Crea una regla XSL propia (no es una regla de SUNAT) que exige UBL 2.1 y valida
+dos facturas sintéticas:
+
+<include cwd lang="rust" meta='title="crates/cpe-validator/examples/validate_rules.rs"'>../crates/cpe-validator/examples/validate_rules.rs</include>
+
+```bash
+cargo run -p cpeforge-cpe-validator --example validate_rules
+```
+
+## Requisitos
+
+- libxml2 **≥ 2.9.11**, libxslt **≥ 1.1.34** y libexslt
+  (`libxml2-dev` y `libxslt1-dev` en Debian/Ubuntu; el SDK en macOS).
+- Un compilador de C (PCRE2 y el puente con libxslt).
+- **Sin soporte en Windows.**
+
+## Relacionado
+
+- Depende de: [`cpeforge-xml-limits`](/docs/paquetes/xml-limits).
+- Ver también: [`cpeforge-ubl-validator`](/docs/paquetes/ubl-validator) y
+  [`cpeforge-xcodes`](/docs/paquetes/xcodes).
+- Referencia completa: [docs.rs/cpeforge-cpe-validator](https://docs.rs/cpeforge-cpe-validator).

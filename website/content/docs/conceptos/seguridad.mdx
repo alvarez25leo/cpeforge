@@ -1,0 +1,94 @@
+---
+title: Seguridad
+description: Cómo protege CPEForge el XML, la red, los ZIP y los secretos, y qué te toca a ti.
+---
+
+Un sistema de facturación recibe XML de terceros, guarda certificados y se
+conecta a servicios externos. CPEForge aplica un perfil seguro por defecto en
+cada uno de esos puntos.
+
+## XML
+
+Todo XML que llega de fuera (respuestas SOAP, CDR, XML de proveedores, firmas a
+verificar) se trata como hostil:
+
+- **Sin DTD ni entidades externas.** Se rechaza el `DOCTYPE` con
+  declaraciones: no hay XXE ni expansión de entidades («billion laughs»).
+- **Límites antes de construir el árbol.** `cpeforge-xml-limits` comprueba
+  sobre el texto la profundidad, el número de atributos por elemento (256) y el
+  coste de los espacios de nombres. Así un parser recursivo no desborda la pila
+  ni se vuelve cuadrático.
+- **Límites de tamaño y de nodos.** Por ejemplo, el lector de comprobantes
+  admite por defecto 10 MiB, 64 niveles y 1 000 000 de nodos.
+- **Nunca se descarga nada.** Ni esquemas, ni WSDL, ni certificados por URL.
+
+| Crate | Límites por defecto |
+| --- | --- |
+| `cpeforge-xml-parser` | 10 MiB, 64 niveles, 1 000 000 de nodos |
+| `cpeforge-xmldsig` | 10 MiB, 256 niveles, 1 000 000 de nodos; solo UTF-8 |
+| `cpeforge-ws` (SOAP y CDR) | 16 MiB de SOAP, 64 niveles, 256 atributos por elemento |
+| `cpeforge-ubl-validator` | 10 MiB, 100 000 nodos, 128 niveles |
+
+## Generación del XML
+
+Los textos que van dentro de `<![CDATA[…]]>` (descripciones, razones sociales,
+direcciones) no se escapan, pero un `]]>` en el valor se divide para que el XML
+siga bien formado: un cliente con un nombre malicioso **no puede inyectar
+elementos UBL**. Las pruebas lo comprueban en todos los comprobantes.
+
+## Firma
+
+- La criptografía es la de **OpenSSL**, a través del crate `openssl`. No hay
+  criptografía propia.
+- **Firma válida no es lo mismo que firmante confiable.** Para verificar XML de
+  terceros, usa `TrustPolicy` con raíces explícitas. Ver
+  [cpeforge-xmldsig](/docs/paquetes/xmldsig).
+- **Protección contra «signature wrapping»:** se puede exigir que los `Id`
+  firmados no estén duplicados y comprobar qué nodo se firmó.
+
+## Red
+
+- **TLS siempre verificado**, sin opción de desactivarlo.
+- **Tiempos límite** y **tamaño máximo** de las respuestas.
+- **Sin proxy implícito, sin reintentos**, y redirecciones solo dentro del
+  mismo origen.
+- HTTP sin TLS solo para `localhost`, salvo que se habilite explícitamente.
+- Se rechazan `.` y `..` como nombre de archivo, ticket o `client_id`, para que
+  un token no termine en otra ruta del servidor.
+
+## ZIP
+
+Un ZIP recibido se rechaza **antes de abrirlo** si declara más de 64 entradas o
+usa ZIP64. Los nombres de las entradas se validan.
+
+## Secretos
+
+- Contraseñas, claves privadas, PKCS#12 y tokens **no aparecen en `Debug`** ni
+  en los mensajes de error.
+- Se **borran de memoria** al soltarse (`zeroize`).
+- La caché de tokens de la API de guías **separa empresas y ambientes**.
+
+## `unsafe`
+
+Todos los crates prohíben `unsafe` (`unsafe_code = "forbid"`), salvo el puente
+con libxml2 y libxslt de `cpeforge-ubl-validator` y `cpeforge-cpe-validator`,
+revisado bloque a bloque.
+
+## Representación impresa
+
+- Los textos del documento se escapan en el HTML. Solo `header` y `footer`
+  (que provee tu sistema) se insertan sin escapar, como `TrustedHtml`.
+- Las plantillas propias no pueden salir de su carpeta ni acceder a archivos,
+  red o entorno.
+- Para generar PDF, ejecuta el navegador **sin JavaScript y sin salida a red**
+  (por ejemplo, Gotenberg con `--chromium-disable-javascript`).
+
+## Lo que te toca a ti
+
+- **Guarda certificados y credenciales en un gestor de secretos**, nunca en el
+  repositorio ni en la imagen del contenedor.
+- **Usa un usuario secundario de Clave SOL** solo para facturación.
+- **Valida los importes** antes de emitir: CPEForge no recalcula impuestos.
+- **No reenvíes a ciegas** tras un error de red: consulta antes el estado.
+- **Mantén las dependencias al día** con `cargo update` y revisa los avisos con
+  `cargo audit`.

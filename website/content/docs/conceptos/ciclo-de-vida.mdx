@@ -1,0 +1,118 @@
+---
+title: Ciclo de vida de un comprobante
+description: Qué ocurre entre construir el modelo y conocer la decisión de SUNAT, y qué crate se encarga de cada paso.
+---
+
+Todo comprobante pasa por los mismos pasos. La fachada `See` (o `Api` para las
+guías) los encadena en una sola llamada, pero conviene saber qué pasa en cada
+uno para entender los errores y para usar las piezas por separado.
+
+<Mermaid
+  chart={`flowchart TD
+  A[1. Modelo<br/>cpeforge-core] --> B[2. XML UBL<br/>cpeforge-xml]
+  B --> C[3. Firma XMLDSig<br/>cpeforge-xmldsig]
+  C --> D[4. ZIP<br/>cpeforge-ws]
+  D --> E{5. Envío}
+  E -->|sendBill| F[CDR inmediato]
+  E -->|sendSummary| G[Ticket]
+  E -->|API de guías| G
+  G --> H[getStatus / consulta]
+  H --> F
+  H -->|código 98| G
+  F --> I[6. TaxStatus<br/>cpeforge-ws]`}
+/>
+
+## 1. El modelo
+
+Describes el comprobante con los tipos de `cpeforge-core`: `Invoice`, `Note`,
+`Despatch`, `Summary`, etc. CPEForge **no calcula impuestos**: los importes los
+calcula tu sistema y el modelo solo los transporta. Ver
+[Modelos](/docs/conceptos/modelos).
+
+## 2. El XML UBL
+
+`cpeforge-xml` convierte el modelo en el XML UBL 2.1 (o 2.0) que exige SUNAT.
+Cada familia tiene su builder: `InvoiceBuilder`, `NoteBuilder`,
+`DespatchBuilder`, `SummaryBuilder`, `VoidedBuilder`, `RetentionBuilder`,
+`PerceptionBuilder` y `SettlementBuilder`. Todo XML generado valida contra su
+esquema XSD.
+
+## 3. La firma
+
+`cpeforge-xmldsig` firma el XML con tu certificado y deja la firma dentro de
+`ext:UBLExtensions` con `Id="CPEForgeSign"`. A partir de aquí, **cualquier
+cambio de un byte invalida la firma**.
+
+## 4. El ZIP
+
+SUNAT recibe el XML comprimido en un ZIP cuyo nombre sigue el patrón
+`RUC-TIPO-SERIE-NUMERO`, por ejemplo `20000000001-01-F001-1.zip`. El nombre lo
+calcula `Document::name()` a partir del modelo.
+
+## 5. El envío
+
+Hay tres vías, según el tipo de comprobante:
+
+| Vía | Comprobantes | Respuesta |
+| --- | --- | --- |
+| `sendBill` (SOAP) | Factura, boleta, notas, liquidación, retención, percepción | CDR inmediato |
+| `sendSummary` (SOAP) | Resumen diario, comunicación de baja, reversión | Ticket |
+| API REST de guías | Guía remitente y transportista | Ticket |
+
+La fachada elige la vía por el tipo de documento: `see.send(...)` devuelve
+`SendResult::Bill` (con CDR) o `SendResult::Summary` (con ticket).
+
+### Envíos con ticket
+
+Un ticket significa «recibido, todavía no procesado». Hay que consultarlo
+después:
+
+```rust
+use cpeforge::{DocumentRef, SendResult};
+use cpeforge_ws::outcome::TaxStatus;
+
+if let SendResult::Summary(summary) = see.send(DocumentRef::Summary(&resumen)).await? {
+    if let Some(ticket) = summary.ticket.as_deref() {
+        let status = see.get_status(ticket).await?;
+        match TaxStatus::of_status(&status) {
+            TaxStatus::Pending => { /* código 98: volver a consultar más tarde */ }
+            estado => println!("decisión: {estado:?}"),
+        }
+    }
+}
+```
+
+Para las guías, `Api::send` devuelve un `SummaryResult` con el ticket y
+`Api::get_status` lo consulta.
+
+## 6. La decisión
+
+La respuesta de SUNAT se clasifica con `TaxStatus`: aceptado, aceptado con
+observaciones, rechazado, excepción, pendiente o indeterminado. Ver
+[Estado tributario](/docs/conceptos/estado-tributario).
+
+## Paso a paso, sin la fachada
+
+Si necesitas intervenir entre pasos (guardar el XML firmado antes de enviarlo,
+usar tu propio transporte, validar el XML), cada paso está disponible por
+separado:
+
+```rust
+use cpeforge::DocumentRef;
+
+// Construir y firmar, sin enviar.
+let xml_firmado = see.get_xml_signed(DocumentRef::Invoice(&factura))?.to_owned();
+guardar_en_disco(&xml_firmado)?;
+
+// Enviar más tarde el XML ya firmado.
+let resultado = see.send_xml_file(&xml_firmado).await?;
+```
+
+`see.factory_ref().last_xml()` devuelve además el último XML firmado por
+`send`, incluso si el envío falló.
+
+<Callout type="warn" title="Guarda el XML firmado antes de enviar">
+  Ningún método reintenta un envío. Si la red falla después de enviar, el
+  comprobante pudo llegar a SUNAT. Conserva el XML firmado y consulta su estado
+  antes de reenviarlo.
+</Callout>

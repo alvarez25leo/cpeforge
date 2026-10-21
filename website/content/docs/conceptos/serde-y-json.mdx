@@ -1,0 +1,88 @@
+---
+title: Serde y JSON
+description: Recibir y guardar comprobantes en JSON con la feature serde de cpeforge-core.
+---
+
+Con la feature `serde` de `cpeforge-core`, todos los modelos implementan
+`Serialize` y `Deserialize`. Es la forma más directa de recibir comprobantes
+desde una API, una cola de mensajes o tu base de datos.
+
+<CargoDeps
+  crates={['cpeforge-core']}
+  features={{ 'cpeforge-core': ['serde'] }}
+  extra={['serde_json = "1"']}
+/>
+
+## El formato
+
+```json title="factura.json"
+{
+  "ublVersion": "2.1",
+  "tipoDoc": "01",
+  "serie": "F001",
+  "correlativo": "123",
+  "fechaEmision": "2024-01-31T23:30:00-05:00[America/Lima]",
+  "tipoMoneda": "PEN",
+  "company": { "ruc": "20000000001", "razonSocial": "EMPRESA" },
+  "mtoOperGravadas": "100.00",
+  "mtoIGV": "18.00",
+  "mtoImpVenta": "118.00",
+  "details": [
+    {
+      "codProducto": "P001", "unidad": "NIU", "cantidad": "2", "descripcion": "PRODUCTO",
+      "mtoValorUnitario": "50.00", "mtoBaseIgv": "100.00", "porcentajeIgv": "18",
+      "igv": "18.00", "tipAfeIgv": "10", "totalImpuestos": "18.00",
+      "mtoValorVenta": "100.00", "mtoPrecioUnitario": "59.00"
+    }
+  ]
+}
+```
+
+```rust
+use cpeforge_core::model::sale::Invoice;
+
+let factura: Invoice = serde_json::from_str(&texto)?;
+let json = serde_json::to_string(&factura)?;
+```
+
+## Reglas
+
+- **Nombres en camelCase**, los de las propiedades del modelo de referencia.
+  Ojo con las excepciones heredadas, como `mtoIGV` (no `mtoIgv`). Ante la duda,
+  serializa un modelo y mira el resultado.
+- **Los campos de `BaseSale` van en el nivel superior** de una factura o nota,
+  no dentro de un objeto `base`.
+- **Los importes viajan como texto** (`"118.00"`), para no perder precisión.
+  Un número JSON con decimales (`118.00` sin comillas) se rechaza, igual que
+  un `_` dentro del importe (`"1_00"`).
+- **Las fechas** son texto con zona horaria, en el formato de `jiff`:
+  `"2024-01-31T23:30:00-05:00[America/Lima]"`.
+- **Los datos binarios** (como el ZIP del CDR en `cdrZip`) van en Base64.
+- `null` y un campo ausente equivalen a `None`. `""`, `0` y `[]` se conservan.
+- **Muchos modelos rechazan campos desconocidos** (`Client`, `Company`,
+  `SaleDetail`…): un nombre mal escrito es un error, no un campo ignorado.
+
+## Errores al leer JSON
+
+Si el JSON no es válido, el error dice qué campo falló. Los mensajes recortan
+la entrada a 64 caracteres, así que un JSON de varios megabytes no termina
+copiado en tus logs.
+
+Para saber la ruta exacta del campo que falló, combínalo con
+[`serde_path_to_error`](https://docs.rs/serde_path_to_error):
+
+```rust
+let deserializer = &mut serde_json::Deserializer::from_str(&texto);
+let factura: Invoice = serde_path_to_error::deserialize(deserializer)
+    .map_err(|e| format!("{}: {}", e.path(), e.inner()))?;
+```
+
+## Rendimiento
+
+| Operación | Tiempo |
+| --- | --- |
+| Serializar una factura de 1000 líneas | 449 µs |
+| Deserializar la misma factura | 750 µs |
+| Serializar un CDR de 1 MiB (Base64) | 704 µs |
+
+Medido en Apple Silicon, mediana de 5 ejecuciones.

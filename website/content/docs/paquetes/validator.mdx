@@ -1,0 +1,69 @@
+---
+title: cpeforge-validator
+description: Reglas de validación sobre los modelos de cpeforge-core, para detectar errores antes de generar el XML.
+---
+
+<CrateBadges crate="cpeforge-validator" />
+
+<CargoDeps crates={['cpeforge-core', 'cpeforge-validator']} />
+
+## Para qué sirve
+
+Revisa un modelo **antes** de generar el XML: campos obligatorios, formatos y
+valores permitidos. Así detectas un comprobante incompleto en tu sistema, sin
+gastar un envío ni un número correlativo.
+
+Incluye 33 conjuntos de reglas base y siete variantes para UBL 2.1, valida los
+objetos anidados (cliente, emisor, líneas…), selecciona las reglas por versión
+y permite añadir reglas propias.
+
+## Uso
+
+```rust
+use cpeforge_core::model::client::Client;
+use cpeforge_validator::Validator;
+
+let errores = Validator::new().validate_model(&Client::default())?;
+assert_eq!(errores[0].path, "tipoDoc");
+```
+
+| Método | Qué hace |
+| --- | --- |
+| `Validator::new()` | Crea el validador con las reglas integradas |
+| `set_version(Some("2.1"))` | Usa las reglas de esa versión UBL |
+| `validate_document(&doc)` | Valida un comprobante completo |
+| `validate_model(&modelo)` | Valida cualquier modelo (cliente, emisor, línea…) |
+| `set_provider(catálogo)` | Traduce los códigos con un catálogo (por ejemplo, `cpeforge-xcodes`) |
+| `set_extension(...)` | Añade reglas propias |
+| `metadata_for(tipo)` | Las reglas de un tipo, en orden |
+
+Cada error indica la ruta del campo (`path`, en camelCase) y el mensaje
+(`message`).
+
+## Ejemplo
+
+<include cwd lang="rust" meta='title="crates/validator/examples/invoice_validation.rs"'>../crates/validator/examples/invoice_validation.rs</include>
+
+```bash
+cargo run -p cpeforge-validator --example invoice_validation
+```
+
+## Con el catálogo de códigos
+
+Con `cpeforge-xcodes`, los errores se traducen a los mensajes oficiales de
+SUNAT:
+
+<include cwd lang="rust" meta='title="crates/xcodes/examples/with_validator.rs"'>../crates/xcodes/examples/with_validator.rs</include>
+
+## La validación por capas
+
+| Capa | Crate | Cuándo |
+| --- | --- | --- |
+| Modelo | `cpeforge-validator` | Antes de generar el XML |
+| Esquema XSD | [`cpeforge-ubl-validator`](/docs/paquetes/ubl-validator) | Después de generar el XML |
+| Reglas de SUNAT | [`cpeforge-cpe-validator`](/docs/paquetes/cpe-validator) | Antes de enviar, con las hojas XSL oficiales |
+
+## Relacionado
+
+- Depende de: [`cpeforge-core`](/docs/paquetes/core).
+- Referencia completa: [docs.rs/cpeforge-validator](https://docs.rs/cpeforge-validator).

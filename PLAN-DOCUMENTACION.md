@@ -2,12 +2,14 @@
 
 > Fecha del análisis: 2026-10-21.
 >
-> **Estado (2026-10-21): MVP (F0–F3) hecho** en `website/`, más el workflow de
-> GitHub Pages (`.github/workflows/docs.yml`) adelantado de F7. Decisiones
-> tomadas: `website/` en el repo, GitHub Pages en `/cpeforge`, solo español,
-> con la página de Greenter. Pendiente: F4 (conceptos y paquetes), F5 (guías y
-> ejemplos), F6 (referencia y comunidad) y el resto de F7 (comprobación de
-> enlaces). Cambios respecto al plan:
+> **Estado (2026-10-21): F0–F4 hechas** en `website/`, más el workflow de
+> GitHub Pages (`.github/workflows/docs.yml`) adelantado de F7. F4 añadió las 9
+> páginas de conceptos y el índice más las 13 páginas de paquetes, cada una con
+> su ejemplo real incluido. Decisiones tomadas: `website/` en el repo, GitHub
+> Pages en `/cpeforge`, solo español, con la página de Greenter. Pendiente: F5
+> (guías por comprobante y explorador de ejemplos), F6 (referencia y
+> comunidad) y el resto de F7 (comprobación de enlaces en CI). Cambios
+> respecto al plan:
 >
 > - Fumadocs MDX 15 ya no usa `source.config.ts`: las colecciones se definen en
 >   `lib/source.ts` con `fumadocs-mdx/macro`.

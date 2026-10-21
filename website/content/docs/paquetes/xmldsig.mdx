@@ -1,0 +1,123 @@
+---
+title: cpeforge-xmldsig
+description: Firma y verificación XMLDSig con el perfil de SUNAT, canonicalización C14N, certificados X.509, política de confianza y cifrado XML.
+---
+
+<CrateBadges crate="cpeforge-xmldsig" />
+
+<CargoDeps crates={['cpeforge-xmldsig']} />
+
+## Para qué sirve
+
+- **Firmar** un XML de comprobante con el perfil de SUNAT
+  (`Id="CPEForgeSign"`, dentro de `ext:ExtensionContent`).
+- **Verificar** firmas XMLDSig, propias o de terceros.
+- **Decidir si el firmante es confiable** con `TrustPolicy`.
+- Canonicalización **C14N 1.0** inclusiva y exclusiva, certificados **X.509**
+  y **PKCS#12**, y **cifrado XML** (XMLEnc).
+
+**Úsalo** si solo necesitas firmar o verificar, o para validar las firmas de
+los XML que recibes de proveedores. Si emites con `cpeforge`, ya lo usa por
+dentro.
+
+## Módulos
+
+| Módulo | Contenido |
+| --- | --- |
+| `sunat` | `SignedXml`: firma y verificación con el perfil SUNAT |
+| `dsig` | Firma y verificación XMLDSig genérica |
+| `key` | Claves RSA, HMAC y AES, y utilidades Base64 |
+| `x509` | Lectura de certificados, `X509Certificate` (PKCS#12) |
+| `trust` | `TrustPolicy`: cadena, vigencia y uso de la clave |
+| `enc` | Cifrado y descifrado XMLEnc |
+| `c14n`, `dom` | Canonicalización y DOM propio |
+| `xpath` | Consultas XPath 1.0 acotadas |
+
+## Firmar y verificar
+
+```rust
+use cpeforge_xmldsig::sunat::SignedXml;
+
+let mut signer = SignedXml::new();
+signer.set_certificate(&pem); // clave privada + certificado
+let firmado = signer.sign_xml(&xml)?;
+
+let valido = SignedXml::new().verify_xml(&firmado)?;
+```
+
+## Validez matemática no es confianza
+
+`verify_xml` comprueba la firma y el digest con el certificado **incluido en el
+documento**, y acepta certificados vencidos o autofirmados. Para saber si el
+firmante es de confianza, usa `TrustPolicy` con raíces explícitas: valida la
+cadena, la vigencia, el `keyUsage` de firma y, si se indican, los
+`extendedKeyUsage` aceptados. No consulta CRL ni OCSP.
+
+```rust
+use cpeforge_xmldsig::trust::TrustPolicy;
+
+let mut politica = TrustPolicy::new();
+politica.add_root_pem(raiz_pem)?;
+let veredicto = politica.evaluate_pem(certificado_pem)?;
+```
+
+## Algoritmos
+
+- **Por defecto: RSA-SHA1 / SHA-1**, el perfil que históricamente acepta SUNAT.
+  SHA-1 ya no se considera resistente a colisiones: si el receptor lo admite,
+  usa `set_signature_algorithm(RSA_SHA256)` y `set_digest_algorithm(SHA256)`.
+- Fuera del perfil SUNAT, `XmlSecurityDsig::reject_sha1` rechaza al verificar
+  los digest SHA-1 y las firmas RSA-SHA1 o HMAC-SHA1.
+- **Cifrado XML:** solo AES-GCM y RSA-OAEP por defecto. AES-CBC, 3DES y RSA
+  PKCS#1 v1.5 requieren `allow_legacy_algorithms`. Todo fallo de descifrado es
+  `Error::DecryptionFailed`, sin detalles que sirvan de oráculo.
+
+## Seguridad
+
+- **Entradas hostiles:** sin DTD ni entidades no predefinidas, solo UTF-8, y
+  límites de 10 MiB, 256 niveles y 1 000 000 de nodos.
+- **XPath acotado:** corta tras 10 millones de nodos y rechaza expresiones de
+  más de 16 384 caracteres, 32 niveles de anidamiento o 128 operadores.
+- **Signature wrapping:** `set_reject_duplicate_ids(true)` rechaza una
+  referencia si su `Id` está repetido; `validated_nodes()` dice qué nodo se
+  firmó.
+- **Secretos:** `Debug` no muestra PEM ni contraseñas, y se borran de memoria
+  al soltarse.
+- **Sin red:** las referencias externas nunca se descargan.
+- **Contraste externo:** las firmas se verifican fuera del crate con `xmllint`
+  y `openssl`, y la transformación XPath coincide byte a byte con libxml2 en
+  unas 6 000 combinaciones.
+
+## Ejemplo
+
+Firma con RSA-SHA256, verifica, detecta un documento alterado y evalúa la
+confianza del certificado:
+
+<include cwd lang="rust" meta='title="crates/xmldsig/examples/sign_verify_invoice.rs"'>../crates/xmldsig/examples/sign_verify_invoice.rs</include>
+
+```bash
+cargo run -p cpeforge-xmldsig --example sign_verify_invoice
+```
+
+## Rendimiento
+
+RSA-2048, un hilo:
+
+| Operación | Tiempo |
+| --- | --- |
+| `verify_xml`, factura de 5 líneas (2 KiB) | 64 µs |
+| `sign_xml`, factura de 5 líneas | 359 µs |
+| `verify_xml`, 2000 líneas (691 KiB) | 6,5 ms |
+| `sign_xml`, 2000 líneas | 8,3 ms |
+| C14N inclusiva, 2000 líneas | 2,3 ms |
+
+## Requisitos
+
+OpenSSL 3 (`OPENSSL_DIR` si `pkg-config` no lo encuentra).
+
+## Relacionado
+
+- No depende de otros crates de CPEForge.
+- Lo usa: [`cpeforge`](/docs/paquetes/cpeforge).
+- Ver también: [Certificado digital](/docs/primeros-pasos/certificado-digital).
+- Referencia completa: [docs.rs/cpeforge-xmldsig](https://docs.rs/cpeforge-xmldsig).

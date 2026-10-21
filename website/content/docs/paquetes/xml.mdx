@@ -1,0 +1,116 @@
+---
+title: cpeforge-xml
+description: Genera el XML UBL 2.0 y 2.1 sin firmar a partir de los modelos de cpeforge-core.
+---
+
+<CrateBadges crate="cpeforge-xml" />
+
+<CargoDeps crates={['cpeforge-core', 'cpeforge-xml']} />
+
+## Para qué sirve
+
+Convierte un modelo en el XML UBL que exige SUNAT, **sin firmar**. Tiene ocho
+builders y trece plantillas.
+
+**Úsalo** si quieres el XML sin firma (para firmarlo con otra herramienta,
+inspeccionarlo o validarlo). Si vas a enviar a SUNAT, `cpeforge` ya lo usa por
+dentro.
+
+**No incluye** firma, compresión, envío ni PDF.
+
+## Builders
+
+| Builder | Comprobante |
+| --- | --- |
+| `InvoiceBuilder` | Factura y boleta (UBL 2.0 y 2.1), también con guía embebida |
+| `NoteBuilder` | Notas de crédito y débito (UBL 2.0 y 2.1) |
+| `DespatchBuilder` | Guía de remisión anterior y 2022 (remitente `09` y transportista `31`) |
+| `SummaryBuilder` | Resumen diario |
+| `VoidedBuilder` | Comunicación de baja y reversión |
+| `RetentionBuilder` | Comprobante de retención |
+| `PerceptionBuilder` | Comprobante de percepción |
+| `SettlementBuilder` | Liquidación de compra (tipo `04`, `SelfBilledInvoice`) |
+
+```rust
+use cpeforge_xml::{InvoiceBuilder, RenderOptions};
+
+let xml = InvoiceBuilder::new(RenderOptions::default()).render(&factura)?;
+```
+
+## Opciones
+
+| Opción | Por defecto | Qué hace |
+| --- | --- | --- |
+| `autoescape` | `Autoescape::Html` | Escapa los textos como `htmlspecialchars`. `Autoescape::Disabled` los inserta tal cual |
+| `strict_variables` | `false` | Falla si la plantilla usa un dato que no existe |
+| `now` | `None` | Reloj inyectable para las fechas nulas (pruebas reproducibles) |
+
+`RenderOptions::cpeforge()` es la configuración que usa la fachada
+(`Autoescape::Disabled`) y `RenderOptions::strict()` activa
+`strict_variables`.
+
+<Callout type="warn" title="Autoescape::Disabled">
+  Con el escape desactivado, un `&` o `<` en un texto produce XML mal formado:
+  esos textos deben llegar ya escapados.
+</Callout>
+
+## Conformidad con SUNAT
+
+- SUNAT exige **UBL 2.1** para los comprobantes de pago y la **guía 2022**
+  (`DespatchBuilder` con `version = "2022"`) para la guía electrónica. UBL 2.0
+  y la guía anterior existen solo por compatibilidad.
+- **Todo XML generado valida contra el XSD**, salvo documentos vacíos o
+  incompletos y textos sin escapar con `Autoescape::Disabled`.
+- Cantidades e importes se escriben en **notación posicional**, nunca con
+  exponente.
+- Una retención o percepción con más de un pago por comprobante relacionado
+  devuelve `XmlError::MultiplePayments`: el esquema admite un `cac:Payment` por
+  comprobante.
+- La firma se referencia como `#CPEFORGE-SIGN` en `cac:Signature`.
+
+### Guía transportista y liquidación de compra
+
+- En la **guía transportista** (`31`), `company` es el transportista emisor;
+  `remitente` es obligatorio y `envio.transportista.nro_mtc` es su registro
+  MTC. No lleva motivo ni modalidad de traslado.
+- En la **liquidación de compra**, el comprador que la emite va en
+  `AccountingCustomerParty` y el vendedor sin RUC en
+  `AccountingSupplierParty`. Cada línea lleva el IGV y la retención del
+  impuesto a la renta. Faltan el emisor, el vendedor o el lugar →
+  `XmlError::Document`.
+
+## Seguridad
+
+Los textos dentro de `<![CDATA[…]]>` no se escapan, pero un `]]>` en el valor
+se divide en `]]]]><![CDATA[>`: el XML sigue bien formado y no se pueden
+inyectar elementos UBL. Los importes son `Decimal`, nunca `float`.
+
+## Ejemplo
+
+<include cwd lang="rust" meta='title="crates/xml/examples/invoice_xml.rs"'>../crates/xml/examples/invoice_xml.rs</include>
+
+```bash
+cargo run -p cpeforge-xml --example invoice_xml
+cargo run -p cpeforge-xml --example despatch_2022_xml
+```
+
+## Rendimiento
+
+Solo la generación, facturas de 1000 líneas:
+
+| Comprobante | Tiempo |
+| --- | --- |
+| Factura UBL 2.1 (2,7 MB) | 1,69 ms |
+| Factura UBL 2.0 (1,4 MB) | 0,76 ms |
+| Nota de crédito 2.1 (2,0 MB) | 1,19 ms |
+| Guía 2022 (0,5 MB) | 0,31 ms |
+| Resumen diario (1,5 MB) | 0,82 ms |
+
+Pico de memoria al generar una factura de 5000 líneas (13,3 MB de XML):
+20,7 MB.
+
+## Relacionado
+
+- Depende de: [`cpeforge-core`](/docs/paquetes/core).
+- Lo usa: [`cpeforge`](/docs/paquetes/cpeforge).
+- Referencia completa: [docs.rs/cpeforge-xml](https://docs.rs/cpeforge-xml).

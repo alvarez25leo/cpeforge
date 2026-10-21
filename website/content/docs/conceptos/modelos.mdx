@@ -1,0 +1,108 @@
+---
+title: Modelos
+description: Los tipos de cpeforge-core que describen cada comprobante, y cómo construirlos.
+---
+
+Los modelos viven en `cpeforge_core::model` y describen los comprobantes sin
+saber nada de XML, firma ni red. Todos los crates los comparten.
+
+## Cómo se construyen
+
+Casi todos los campos son `Option<T>`. Construye solo lo que el comprobante
+necesita y deja el resto en su valor por defecto:
+
+```rust
+use cpeforge_core::model::client::Client;
+
+let cliente = Client {
+    tipo_doc: Some("6".into()),         // RUC (catálogo 06)
+    num_doc: Some("20123456789".into()),
+    rzn_social: Some("CLIENTE S.A.C.".into()),
+    ..Client::default()
+};
+```
+
+- `None` significa «no establecido». `""`, `0` y `[]` se conservan tal cual.
+- Los nombres de los campos siguen los de SUNAT en `snake_case`
+  (`mto_oper_gravadas`, `tip_afe_igv`, `fec_emision`…).
+- Construir siempre con `..Default::default()` garantiza que un campo nuevo en
+  una versión futura no rompa tu código.
+
+<Callout title="CPEForge no calcula impuestos">
+  Los importes (`mto_igv`, `total_impuestos`, `mto_imp_venta`…) los calcula tu
+  sistema. El modelo solo los transporta al XML. Si no cuadran, SUNAT rechaza
+  el comprobante.
+</Callout>
+
+## Comprobantes de venta
+
+Factura, boleta y notas comparten `BaseSale` (en `model::sale`), con el emisor,
+el cliente, los totales, las líneas y las leyendas.
+
+| Tipo | Uso |
+| --- | --- |
+| `Invoice` | Factura (`01`) y boleta (`03`). Añade `tipo_operacion`, `valor_venta`, `sub_total`, detracción, percepción, anticipos, descuentos y cargos |
+| `Note` | Nota de crédito (`07`) y de débito (`08`), con el documento afectado y el motivo |
+| `SaleDetail` | Una línea: producto, cantidad, valor unitario, afectación del IGV e impuestos |
+| `Legend` | Leyendas, como la `1000` del importe en letras |
+| `PaymentTerms`, `Cuota` | Forma de pago: `PaymentTerms::contado()` o a crédito con cuotas |
+| `Detraction`, `SalePerception`, `Prepayment`, `Charge` | Detracción, percepción, anticipos y cargos o descuentos |
+| `RelatedDocument`, `EmbededDespatch` | Guías y documentos relacionados |
+
+Los campos principales de `BaseSale`:
+
+| Campo | Tipo | Ejemplo |
+| --- | --- | --- |
+| `ubl_version` | `String` | `"2.1"` |
+| `tipo_doc`, `serie`, `correlativo` | `String` | `"01"`, `"F001"`, `"1"` |
+| `fecha_emision` | `Zoned` | Fecha y hora con zona |
+| `tipo_moneda` | `String` | `"PEN"`, `"USD"` |
+| `company`, `client` | `Company`, `Client` | Emisor y cliente |
+| `mto_oper_gravadas`, `mto_oper_exoneradas`, `mto_oper_inafectas`… | `Decimal` | Bases por tipo de operación |
+| `mto_igv`, `mto_isc`, `icbper`, `total_impuestos` | `Decimal` | Impuestos |
+| `mto_imp_venta` | `Decimal` | Total a pagar |
+| `details` | `Vec<SaleDetail>` | Líneas |
+| `legends` | `Vec<Legend>` | Leyendas |
+| `forma_pago`, `cuotas` | `PaymentTerms`, `Vec<Cuota>` | Contado o crédito |
+
+## Otros comprobantes
+
+| Módulo | Tipos | Comprobante |
+| --- | --- | --- |
+| `model::despatch` | `Despatch`, `Shipment`, `DespatchDetail`, `Direction`, `Driver`, `Vehicle`, `Transportist` | Guía de remisión remitente (`09`) y transportista (`31`) |
+| `model::summary` | `Summary`, `SummaryDetail` | Resumen diario de boletas (`RC`) |
+| `model::voided` | `Voided`, `VoidedDetail`, `Reversion` | Comunicación de baja (`RA`) y reversión (`RR`) |
+| `model::retention` | `Retention`, `RetentionDetail`, `Payment`, `Exchange` | Comprobante de retención (`20`) |
+| `model::perception` | `Perception`, `PerceptionDetail` | Comprobante de percepción (`40`) |
+| `model::settlement` | `PurchaseSettlement`, `SettlementSeller`, `SettlementPlace`, `SettlementDetail` | Liquidación de compra (`04`) |
+| `model::company` | `Company`, `Address` | Emisor y su domicilio |
+| `model::client` | `Client` | Cliente o destinatario |
+| `model::response` | `BillResult`, `SummaryResult`, `StatusResult`, `CdrResponse`, `ResponseError` | Respuestas de SUNAT |
+
+## El nombre del archivo
+
+Todo comprobante implementa el contrato `Document`, que calcula el nombre que
+exige SUNAT para el XML y el ZIP:
+
+```rust
+use cpeforge_core::Document;
+
+assert_eq!(factura.name()?, "20000000001-01-F001-123");
+```
+
+En los resúmenes y bajas, el identificador (`RC-20240201-001`) usa la **fecha
+de Perú**, aunque la fecha del modelo esté en otra zona horaria.
+
+## Un ejemplo completo
+
+Este ejemplo, del propio crate, calcula los importes de dos líneas, construye
+la factura y un resumen, y muestra sus nombres de archivo:
+
+<include cwd lang="rust" meta='title="crates/core/examples/invoice_model.rs"'>../crates/core/examples/invoice_model.rs</include>
+
+```bash
+cargo run -p cpeforge-core --example invoice_model
+```
+
+La referencia completa de cada tipo está en
+[docs.rs/cpeforge-core](https://docs.rs/cpeforge-core).

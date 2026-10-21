@@ -1,0 +1,14 @@
+{
+  "title": "Conceptos",
+  "pages": [
+    "ciclo-de-vida",
+    "modelos",
+    "dinero-y-fechas",
+    "estado-tributario",
+    "errores",
+    "importe-en-letras",
+    "seguridad",
+    "concurrencia-y-volumen",
+    "serde-y-json"
+  ]
+}

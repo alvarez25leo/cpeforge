@@ -1,0 +1,76 @@
+---
+title: Estado tributario
+description: TaxStatus clasifica cualquier respuesta de SUNAT en aceptado, observado, rechazado, excepción, pendiente o indeterminado.
+---
+
+Una respuesta de SUNAT puede ser un CDR, un ticket, un fault SOAP o un error de
+red. Decidir a mano qué significa cada código es fácil de hacer mal. Por eso
+`cpeforge_ws::outcome::TaxStatus` lo hace por ti.
+
+## Los seis estados
+
+| Estado | Significa | Qué hacer |
+| --- | --- | --- |
+| `Accepted` | Aceptado sin observaciones | Guardar el CDR y entregar el comprobante |
+| `AcceptedWithObservations` | Aceptado, con notas o código `4000` o mayor | Guardar el CDR y revisar las observaciones |
+| `Rejected` | Rechazado (códigos `2000`–`3999`) | Corregir y emitir **con otro número**: este ya no se puede reutilizar |
+| `Exception` | SUNAT no procesó el envío (códigos `0100`–`1999`) | Revisar el error. Algunos códigos (como `1032` o `1033`) indican que el comprobante ya estaba registrado: consultar su estado antes de reenviar |
+| `Pending` | Recibido, aún sin procesar (ticket o código `98`) | Consultar el ticket más tarde |
+| `Indeterminate` | La respuesta no permite concluir: falta el CDR o el ticket, el código es desconocido o falló el transporte | Consultar el estado antes de hacer nada más |
+
+## Según el tipo de respuesta
+
+| Función | Recibe | Devuelve |
+| --- | --- | --- |
+| `TaxStatus::of_bill(&BillResult)` | Respuesta de `sendBill` | Decide por el CDR; sin CDR, por el código del error |
+| `TaxStatus::of_summary(&SummaryResult)` | Respuesta de `sendSummary` o de la API de guías | `Pending` si hay ticket |
+| `TaxStatus::of_status(&StatusResult)` | Consulta de un ticket | Decide por el CDR; sin él, `98` es `Pending` |
+| `TaxStatus::of_consult(&StatusCdrResult)` | Consulta del CDR de un comprobante | Decide por el CDR |
+| `TaxStatus::from_cdr(&CdrResponse)` | Un CDR suelto | Por su `ResponseCode` y sus notas |
+
+Y dos atajos:
+
+- `estado.is_accepted()`: aceptado, con o sin observaciones.
+- `estado.is_final()`: SUNAT ya decidió (aceptado o rechazado).
+
+## Ejemplo
+
+```rust
+use cpeforge::{DocumentRef, SendResult};
+use cpeforge_ws::outcome::TaxStatus;
+
+let resultado = see.send(DocumentRef::Invoice(&factura)).await?;
+let SendResult::Bill(bill) = resultado else {
+    return Ok(()); // las facturas siempre van por sendBill
+};
+
+match TaxStatus::of_bill(&bill) {
+    TaxStatus::Accepted => guardar_cdr(&bill)?,
+    TaxStatus::AcceptedWithObservations => {
+        let notas = bill.cdr_response.as_ref().and_then(|c| c.notes.clone());
+        guardar_cdr(&bill)?;
+        avisar_observaciones(notas);
+    }
+    TaxStatus::Rejected => marcar_rechazado(&bill),
+    TaxStatus::Exception | TaxStatus::Indeterminate => programar_consulta(&factura),
+    TaxStatus::Pending => programar_consulta(&factura),
+    _ => programar_consulta(&factura), // TaxStatus puede crecer
+}
+```
+
+`bill.cdr_zip` contiene el ZIP original del CDR, tal como lo devolvió SUNAT:
+guárdalo como constancia.
+
+## ¿Por qué no basta con `CdrResponse::is_accepted`?
+
+`CdrResponse::is_accepted` (de `cpeforge-core`) aplica una regla permisiva:
+acepta el código `0` o mayor o igual a `4000`, y **un código ausente o no
+numérico cuenta como aceptado**. Es útil por compatibilidad, pero para decidir
+si un comprobante quedó aceptado usa `TaxStatus`, que trata esos casos como
+`Indeterminate` y separa las excepciones de los rechazos.
+
+## Mensajes de los códigos
+
+`TaxStatus` dice qué pasó; el mensaje de cada código está en el catálogo de
+`cpeforge-xcodes` (2 077 códigos). Con la feature `xcodes` de `cpeforge`, `See`
+lo usa directamente. Ver [cpeforge-xcodes](/docs/paquetes/xcodes).

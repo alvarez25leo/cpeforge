@@ -1,0 +1,60 @@
+---
+title: Importe en letras
+description: La leyenda 1000 («SON … CON 00/100 SOLES») generada a partir del total y la moneda.
+---
+
+Los comprobantes de venta llevan la leyenda `1000` (catálogo 52) con el total
+en letras. CPEForge la genera a partir del importe y la moneda, así que no hace
+falta escribirla a mano ni mantener tu propio conversor.
+
+## La leyenda lista para el comprobante
+
+```rust
+use cpeforge_core::model::sale::Legend;
+use cpeforge_core::Decimal;
+
+let legend = Legend::amount_in_words(Decimal::new(11800, 2), "PEN")?;
+assert_eq!(legend.code.as_deref(), Some("1000"));
+assert_eq!(legend.value.as_deref(), Some("SON CIENTO DIECIOCHO CON 00/100 SOLES"));
+```
+
+`Legend::amount_in_words` reconoce tres monedas:
+
+| Código | Texto |
+| --- | --- |
+| `PEN` | SOLES |
+| `USD` | DÓLARES AMERICANOS |
+| `EUR` | EUROS |
+
+## Solo el texto, con otra moneda
+
+Para otra moneda, o para imprimir el nombre que prefieras, usa
+`amount_words::to_invoice` con el nombre de la moneda:
+
+```rust
+use cpeforge::amount_words;
+use cpeforge_core::Decimal;
+
+let texto = amount_words::to_invoice(Decimal::new(21_000, 0), "dólares americanos")?;
+assert_eq!(texto, "VEINTIÚN MIL CON 00/100 DÓLARES AMERICANOS");
+```
+
+El módulo es `cpeforge_core::amount_words`; `cpeforge` lo reexporta como
+`cpeforge::amount_words`.
+
+## Reglas
+
+- El importe se redondea a **dos decimales**, con la mitad lejos de cero.
+- Admite hasta **15 dígitos enteros**. Un importe negativo o mayor devuelve
+  `AmountWordsError`.
+- `UNO` se apocopa delante de `MIL`, `MILLONES` y `BILLONES`
+  (`VEINTIÚN MIL`, `UN MILLÓN`) y se conserva al final
+  (`MIL UNO CON 00/100 SOLES`).
+
+## Ejemplo completo
+
+<include cwd lang="rust" meta='title="crates/cpeforge/examples/importe_en_letras.rs"'>../crates/cpeforge/examples/importe_en_letras.rs</include>
+
+```bash
+cargo run -p cpeforge --example importe_en_letras
+```

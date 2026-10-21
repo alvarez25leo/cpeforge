@@ -1,0 +1,55 @@
+---
+title: Los 13 paquetes
+description: Qué hace cada crate de CPEForge, cuál necesitas y cómo dependen entre sí.
+---
+
+CPEForge está dividido en 13 crates publicados en crates.io. Puedes usar la
+fachada completa (`cpeforge`) o solo la pieza que necesites. Las versiones de
+esta página se leen de los `Cargo.toml` del repositorio en cada publicación.
+
+<CrateGrid />
+
+## ¿Cuál necesito?
+
+| Quiero… | Crates |
+| --- | --- |
+| Emitir y enviar comprobantes | [`cpeforge`](/docs/paquetes/cpeforge) + [`cpeforge-core`](/docs/paquetes/core) |
+| Solo generar el XML UBL | [`cpeforge-xml`](/docs/paquetes/xml) |
+| Solo firmar o verificar | [`cpeforge-xmldsig`](/docs/paquetes/xmldsig) |
+| Hablar con SUNAT con mi propio flujo | [`cpeforge-ws`](/docs/paquetes/ws) |
+| Llamar a la API de guías a bajo nivel | [`cpeforge-gre-api`](/docs/paquetes/gre-api) |
+| Generar la representación impresa | [`cpeforge-report`](/docs/paquetes/report) |
+| Leer XML de comprobantes (por ejemplo, de proveedores) | [`cpeforge-xml-parser`](/docs/paquetes/xml-parser) |
+| Validar el modelo antes de generar el XML | [`cpeforge-validator`](/docs/paquetes/validator) |
+| Mostrar el mensaje de un código de SUNAT | [`cpeforge-xcodes`](/docs/paquetes/xcodes) |
+| Validar contra los XSD de UBL | [`cpeforge-ubl-validator`](/docs/paquetes/ubl-validator) |
+| Validar con las reglas XSL de SUNAT | [`cpeforge-cpe-validator`](/docs/paquetes/cpe-validator) |
+| Limitar XML hostil antes de analizarlo | [`cpeforge-xml-limits`](/docs/paquetes/xml-limits) |
+
+## Requisitos del sistema por crate
+
+| Crate | OpenSSL 3 | Compilador de C | libxml2 / libxslt | Windows |
+| --- | :---: | :---: | :---: | :---: |
+| `cpeforge` | Sí | Sí (zlib) | — | Sin CI |
+| `cpeforge-xmldsig` | Sí | — | — | Sin CI |
+| `cpeforge-ws` | TLS nativo¹ | Sí (zlib) | — | Sin CI |
+| `cpeforge-gre-api` | TLS nativo¹ | — | — | Sin CI |
+| `cpeforge-core`, `cpeforge-xml`, `cpeforge-report`, `cpeforge-xml-parser`, `cpeforge-validator`, `cpeforge-xcodes`, `cpeforge-xml-limits` | — | — | — | Sin CI |
+| `cpeforge-ubl-validator` | — | Sí | libxml2 ≥ 2.9.11 | No |
+| `cpeforge-cpe-validator` | — | Sí (PCRE2) | libxml2 ≥ 2.9.11, libxslt ≥ 1.1.34 | No |
+
+¹ El transporte HTTP usa el TLS del sistema: OpenSSL en Linux,
+Security.framework en macOS y SChannel en Windows.
+
+«Sin CI» significa que el crate no usa nada específico de un sistema
+operativo, pero la integración continua solo prueba en Linux.
+
+## Cómo se relacionan
+
+Ver el mapa de dependencias en [Arquitectura](/docs/introduccion/arquitectura).
+
+## Versiones y compatibilidad
+
+<CrateTable />
+
+Todos siguen SemVer. Ver [Estado y SemVer](/docs/introduccion/estado-y-semver).

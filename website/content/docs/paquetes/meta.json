@@ -1,0 +1,19 @@
+{
+  "title": "Paquetes",
+  "pages": [
+    "index",
+    "cpeforge",
+    "core",
+    "xml",
+    "xmldsig",
+    "ws",
+    "gre-api",
+    "report",
+    "xml-parser",
+    "validator",
+    "xcodes",
+    "ubl-validator",
+    "cpe-validator",
+    "xml-limits"
+  ]
+}

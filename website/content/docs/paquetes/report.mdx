@@ -1,0 +1,125 @@
+---
+title: cpeforge-report
+description: Representación impresa en HTML de los comprobantes, con ocho plantillas, código QR en SVG y plantillas propias.
+---
+
+<CrateBadges crate="cpeforge-report" />
+
+<CargoDeps crates={['cpeforge-core', 'cpeforge-report']} />
+
+## Para qué sirve
+
+Genera el HTML de la representación impresa (lo que recibe tu cliente) a partir
+de los modelos de `cpeforge-core`:
+
+- **Ocho plantillas** con su CSS: `invoice`, `invoice2`, `despatch`,
+  `perception`, `retention`, `summary`, `voided` y `settlement`.
+- **Código QR** en SVG para ventas, guías y URL.
+- **Plantillas propias** en una carpeta, que sustituyen a las integradas.
+
+**No incluye** PDF, firma ni envío. Para PDF, pasa el HTML a un navegador sin
+cabeza (ver [Seguridad](#seguridad)).
+
+## Uso
+
+```rust
+use cpeforge_core::ports::Report;
+use cpeforge_report::{DefaultTemplateResolver, HtmlReport, ReportParameters, TemplateResolver, XmlUtils};
+
+let mut params = ReportParameters::default();
+params.system.logo = Some(std::fs::read("logo.png")?);
+params.system.hash = Some(XmlUtils::default().hash_sign(xml_firmado.as_bytes())?);
+
+let mut report = HtmlReport::default();
+report.set_template(DefaultTemplateResolver.template(&factura)?);
+let html = Report::render(&report, &factura, &params)?;
+```
+
+| Tipo | Para qué |
+| --- | --- |
+| `HtmlReport` | El generador. Es `Send + Sync`: créalo una vez y compártelo |
+| `DefaultTemplateResolver` | Elige la plantilla según el tipo de documento |
+| `ReportParameters` | Logo, resumen de la firma (`hash`), encabezado, pie y datos extra |
+| `ReportOptions` | Carpeta de plantillas propias, `strict_variables`, límites |
+| `XmlUtils` | Extrae el `DigestValue` de un XML firmado (no verifica la firma) |
+| `qr` | SVG del QR de ventas, guías y URL |
+| `format` | Formato de números y fechas |
+
+## Plantillas propias
+
+`ReportOptions::template_dir` se consulta antes que las plantillas integradas:
+un `invoice.html.twig` o `assets/style.css` propio las sustituye.
+
+Las plantillas usan el dialecto **MiniJinja**. Funciona la sintaxis común
+(`{{ }}`, `{% if %}`, `{% for %}`, `{% set %}`, `{% include %}`, filtros,
+`is defined`, `loop.index`), pero no los operadores `?:`, `??` ni `..`, ni las
+etiquetas `apply`, `with`, `embed` o `sandbox`.
+
+| En lugar de… | Usa |
+| --- | --- |
+| `cond ? a : b` | `a if cond else b` |
+| `x ?? 'valor'` | `x\|default('valor')` |
+| `1..3` | `range(1, 4)` |
+
+<Callout type="warn" title="El rango 1..3 no falla">
+  Se evalúa como indefinido y se imprime vacío, incluso con
+  `strict_variables`. Usa siempre `range()`.
+</Callout>
+
+Cada plantilla se valida al cargarla: un filtro, test o función inexistente es
+`ReportError::Syntax` aunque esté en una rama que nunca se ejecuta.
+
+### Filtros y funciones
+
+| Nombre | Tipo | Qué hace |
+| --- | --- | --- |
+| `catalog(código)` | filtro | Texto del catálogo SUNAT |
+| `image_b64(mime)` | filtro | `data:image/...;base64,…` (PNG, GIF o JPEG) |
+| `n_format(decimales)` | filtro | Número con decimales fijos |
+| `date(formato)` | filtro | Fecha en hora de Lima |
+| `legend(leyendas, código)` | función | Valor de la leyenda con ese código |
+| `qrCode(venta)`, `qrCodeDespatch(guía)`, `qrUrl(url)` | función | SVG del QR |
+
+Las variables son `doc` (el modelo), `params` y los globales añadidos con
+`HtmlReport::add_global`.
+
+## Importes
+
+Cada `Decimal` se convierte en el `double` más cercano **solo para mostrarlo**,
+con redondeo half-up. No se calculan impuestos: se muestran los del documento.
+El resultado coincide con el redondeo decimal exacto para importes de hasta 15
+cifras significativas (con dos decimales, hasta unos 11 billones).
+
+## Seguridad
+
+- Los textos del documento se escapan. Solo `user.header` y `user.footer` se
+  imprimen sin escapar: son `TrustedHtml`, que provee tu sistema.
+- Las plantillas propias no pueden salir de su carpeta (`..`, rutas absolutas,
+  enlaces simbólicos), tienen un tamaño máximo de 1 MiB y el motor no da acceso
+  a archivos, red ni entorno. Aun así, **una plantilla propia es código de
+  confianza**: la carpeta no debe ser escribible por terceros.
+- Límites: 32 MiB de HTML, logo de hasta 10 MiB y QR hasta la versión 40.
+- **Para PDF**, ejecuta el navegador sin JavaScript y sin salida a red (por
+  ejemplo, Gotenberg con `--chromium-disable-javascript` y egress bloqueado).
+
+## Ejemplo
+
+<include cwd lang="rust" meta='title="crates/report/examples/invoice_html.rs"'>../crates/report/examples/invoice_html.rs</include>
+
+```bash
+cargo run -p cpeforge-report --example invoice_html > factura.html
+```
+
+## Rendimiento
+
+| Operación | Tiempo (p50) |
+| --- | --- |
+| Factura completa con QR | 124 µs |
+| Factura de 10 000 líneas | 11,9 ms |
+| QR de venta | 92 µs |
+
+## Relacionado
+
+- Depende de: [`cpeforge-core`](/docs/paquetes/core) y
+  [`cpeforge-xml-limits`](/docs/paquetes/xml-limits).
+- Referencia completa: [docs.rs/cpeforge-report](https://docs.rs/cpeforge-report).

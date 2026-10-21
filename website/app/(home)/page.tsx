@@ -5,11 +5,14 @@ import {
   BadgeCheck,
   Banknote,
   Boxes,
+  Cog,
   Cpu,
   FileCode2,
   Gauge,
   Package,
+  Scale,
   ShieldCheck,
+  Tag,
   Workflow,
 } from 'lucide-react';
 import { BenchmarkTable } from '@/components/benchmark';
@@ -118,13 +121,6 @@ export default function HomePage() {
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,color-mix(in_oklab,var(--color-fd-primary)_18%,transparent),transparent)]"
         />
         <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center px-4 py-20 text-center md:px-6 md:py-28">
-          <a
-            href={`https://crates.io/crates/cpeforge`}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border bg-fd-card px-3 py-1 text-xs text-fd-muted-foreground"
-          >
-            <span className="size-1.5 rounded-full bg-fd-primary" />
-            cpeforge {cpeforge.version} · API estable · MIT
-          </a>
           <h1 className="max-w-3xl text-4xl font-bold tracking-tight md:text-6xl">
             Facturación electrónica SUNAT en <span className="text-fd-primary">Rust</span>
           </h1>
@@ -156,6 +152,24 @@ export default function HomePage() {
           <div className="mt-10 w-full max-w-2xl text-left">
             <DynamicCodeBlock lang="bash" code={install} />
           </div>
+          <ul className="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-fd-muted-foreground">
+            {[
+              { icon: <Tag />, text: `v${cpeforge.version}`, href: 'https://crates.io/crates/cpeforge' },
+              { icon: <BadgeCheck />, text: 'API estable (SemVer)', href: '/docs/introduccion/estado-y-semver' },
+              { icon: <Cog />, text: `Rust ${cpeforge.msrv}+`, href: '/docs/primeros-pasos/requisitos' },
+              { icon: <Scale />, text: 'Licencia MIT', href: '/docs/comunidad/licencia' },
+            ].map((item) => (
+              <li key={item.text}>
+                <Link
+                  href={item.href}
+                  className="inline-flex items-center gap-1.5 transition-colors hover:text-fd-foreground [&_svg]:size-4 [&_svg]:text-fd-primary"
+                >
+                  {item.icon}
+                  {item.text}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

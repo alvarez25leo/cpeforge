@@ -21,8 +21,8 @@ html {
 
 /* Resplandor que sigue al cursor en la portada (components/cursor-glow.tsx). */
 .cursor-glow {
-  --glow-strong: 30%;
-  --glow-soft: 12%;
+  --glow-strong: 20%;
+  --glow-soft: 8%;
   position: absolute;
   top: 0;
   left: 0;
@@ -47,8 +47,8 @@ html {
 }
 
 .dark .cursor-glow {
-  --glow-strong: 26%;
-  --glow-soft: 10%;
+  --glow-strong: 17%;
+  --glow-soft: 7%;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { BenchmarkTable } from '@/components/benchmark';
 import { CrateGrid } from '@/components/crates';
+import { CursorGlow } from '@/components/cursor-glow';
 import { Mermaid } from '@/components/mermaid';
 import { cargoRequirement, crates, exampleCases, getCrate } from '@/lib/crates';
 import { repoUrl } from '@/lib/shared';
@@ -114,185 +115,187 @@ export default function HomePage() {
 
   return (
     <main className="flex flex-1 flex-col">
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,color-mix(in_oklab,var(--color-fd-primary)_18%,transparent),transparent)]"
-        />
-        <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center px-4 py-20 text-center md:px-6 md:py-28">
-          <h1 className="max-w-3xl text-4xl font-bold tracking-tight md:text-6xl">
-            Facturación electrónica SUNAT en <span className="text-fd-primary">Rust</span>
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-fd-muted-foreground">
-            CPEForge construye el XML UBL, lo firma, lo envía a SUNAT, lee el CDR y genera la
-            representación impresa. Rápido, seguro y sin sorpresas, para que tu sistema de facturación
-            sea tan confiable como el dinero que mueve.
+      <CursorGlow className="flex flex-1 flex-col">
+        {/* Hero */}
+        <section className="relative overflow-hidden border-b">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,color-mix(in_oklab,var(--color-fd-primary)_18%,transparent),transparent)]"
+          />
+          <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center px-4 py-20 text-center md:px-6 md:py-28">
+            <h1 className="max-w-3xl text-4xl font-bold tracking-tight md:text-6xl">
+              Facturación electrónica SUNAT en <span className="text-fd-primary">Rust</span>
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg text-fd-muted-foreground">
+              CPEForge construye el XML UBL, lo firma, lo envía a SUNAT, lee el CDR y genera la
+              representación impresa. Rápido, seguro y sin sorpresas, para que tu sistema de facturación
+              sea tan confiable como el dinero que mueve.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Link
+                href="/docs/primeros-pasos/primera-factura"
+                className="rounded-lg bg-fd-primary px-5 py-2.5 text-sm font-medium text-fd-primary-foreground transition-opacity hover:opacity-90"
+              >
+                Emite tu primera factura
+              </Link>
+              <Link
+                href="/docs"
+                className="rounded-lg border bg-fd-card px-5 py-2.5 text-sm font-medium transition-colors hover:bg-fd-accent"
+              >
+                Leer la documentación
+              </Link>
+              <a
+                href={repoUrl}
+                className="rounded-lg border bg-fd-card px-5 py-2.5 text-sm font-medium transition-colors hover:bg-fd-accent"
+              >
+                GitHub
+              </a>
+            </div>
+            <div className="mt-10 w-full max-w-2xl text-left">
+              <DynamicCodeBlock lang="bash" code={install} />
+            </div>
+            <ul className="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-fd-muted-foreground">
+              {[
+                { icon: <Tag />, text: `v${cpeforge.version}`, href: 'https://crates.io/crates/cpeforge' },
+                { icon: <BadgeCheck />, text: 'API estable (SemVer)', href: '/docs/introduccion/estado-y-semver' },
+                { icon: <Cog />, text: `Rust ${cpeforge.msrv}+`, href: '/docs/primeros-pasos/requisitos' },
+                { icon: <Scale />, text: 'Licencia MIT', href: '/docs/comunidad/licencia' },
+              ].map((item) => (
+                <li key={item.text}>
+                  <Link
+                    href={item.href}
+                    className="inline-flex items-center gap-1.5 transition-colors hover:text-fd-foreground [&_svg]:size-4 [&_svg]:text-fd-primary"
+                  >
+                    {item.icon}
+                    {item.text}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* Cifras */}
+        <section className="border-b bg-fd-card/50">
+          <dl className="mx-auto grid w-full max-w-6xl grid-cols-2 gap-6 px-4 py-10 md:grid-cols-4 md:px-6">
+            {stats.map((stat) => (
+              <div key={stat.label} className="text-center">
+                <dt className="sr-only">{stat.label}</dt>
+                <dd className="text-3xl font-bold tabular-nums text-fd-primary">{stat.value}</dd>
+                <dd className="mt-1 text-sm text-fd-muted-foreground">{stat.label}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
+        <Section kicker="Por qué Rust" title="Facturar no es un CRUD más">
+          <p className="-mt-4 mb-8 max-w-3xl text-fd-muted-foreground">
+            Cada comprobante tiene importes que deben cuadrar al céntimo, fechas que dependen de la zona
+            horaria de Lima, una firma que no admite ni un byte de diferencia y un servidor de SUNAT que
+            responde cuando puede. Rust convierte esos riesgos en errores que ves antes de que lleguen a tu
+            cliente.
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {reasons.map((reason) => (
+              <div key={reason.title} className="rounded-xl border bg-fd-card p-5">
+                <div className="mb-3 inline-flex size-9 items-center justify-center rounded-lg bg-fd-primary/10 text-fd-primary [&_svg]:size-5">
+                  {reason.icon}
+                </div>
+                <h3 className="mb-1 font-semibold">{reason.title}</h3>
+                <p className="text-sm text-fd-muted-foreground">{reason.body}</p>
+              </div>
+            ))}
+          </div>
+          <Link href="/docs/introduccion/por-que-rust" className="mt-6 inline-block text-sm font-medium text-fd-primary">
+            Más sobre por qué Rust →
+          </Link>
+        </Section>
+
+        <Section kicker="Cómo funciona" title="Del modelo al CDR, en un solo SDK">
+          <div className="grid items-center gap-8 lg:grid-cols-2">
+            <div className="min-w-0 rounded-xl border bg-fd-card p-4">
+              <Mermaid chart={flow} />
+            </div>
+            <div className="min-w-0">
+              <p className="mb-4 text-fd-muted-foreground">
+                Describes el comprobante con modelos tipados. La fachada <code>See</code> genera el XML UBL,
+                lo firma con tu certificado, lo comprime y lo envía a SUNAT. La respuesta llega clasificada
+                en un <code>TaxStatus</code>: aceptado, con observaciones, rechazado o pendiente.
+              </p>
+              <DynamicCodeBlock lang="rust" code={quickstart} codeblock={{ title: 'src/main.rs' }} />
+            </div>
+          </div>
+        </Section>
+
+        <Section kicker="Rendimiento" title="Rust frente a PHP, con los mismos 44 comprobantes">
+          <p className="-mt-4 mb-6 max-w-3xl text-fd-muted-foreground">
+            El mismo comprobante y la misma respuesta de SUNAT (43 de 43 aceptados en ambos), en la mitad
+            del tiempo. Generar el XML es 64 veces más rápido y la primera llamada en frío, 3,6 veces.
+          </p>
+          <BenchmarkTable />
+          <Link href="/docs/introduccion/rendimiento" className="mt-6 inline-block text-sm font-medium text-fd-primary">
+            Ver el benchmark completo →
+          </Link>
+        </Section>
+
+        <Section kicker="Qué cubre" title="Todos los comprobantes electrónicos de SUNAT">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+            {coverage.map(([name, code]) => (
+              <div key={name} className="flex items-center justify-between gap-2 rounded-lg border bg-fd-card px-4 py-3">
+                <span className="text-sm font-medium">{name}</span>
+                <span className="rounded bg-fd-muted px-1.5 py-0.5 font-mono text-xs text-fd-muted-foreground">
+                  {code}
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 grid gap-4 text-sm text-fd-muted-foreground md:grid-cols-3">
+            <p className="flex gap-2">
+              <FileCode2 className="mt-0.5 size-4 shrink-0 text-fd-primary" />
+              UBL 2.0 y 2.1, firma XMLDSig, envío SOAP y API REST de guías con OAuth2.
+            </p>
+            <p className="flex gap-2">
+              <Cpu className="mt-0.5 size-4 shrink-0 text-fd-primary" />
+              Validación de modelos, esquemas XSD y reglas XSL de SUNAT.
+            </p>
+            <p className="flex gap-2">
+              <Boxes className="mt-0.5 size-4 shrink-0 text-fd-primary" />
+              Lectura de XML a modelos y representación impresa HTML con QR.
+            </p>
+          </div>
+        </Section>
+
+        <Section kicker="Paquetes" title="Usa la fachada completa o solo la pieza que necesitas">
+          <CrateGrid />
+          <p className="mt-6 text-sm text-fd-muted-foreground">
+            ¿Empiezas? Con <code>cpeforge = &quot;{cargoRequirement(cpeforge.version)}&quot;</code> tienes las
+            fachadas <code>See</code> y <code>Api</code>.{' '}
+            <Link href="/docs/primeros-pasos/instalacion" className="font-medium text-fd-primary">
+              ¿Qué crate necesito? →
+            </Link>
+          </p>
+        </Section>
+
+        <section className="border-t">
+          <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 px-4 py-16 text-center md:px-6">
+            <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Empieza en cinco minutos</h2>
+            <p className="max-w-xl text-fd-muted-foreground">
+              Emite una factura gravada con IGV en el entorno beta de SUNAT, con credenciales públicas de
+              prueba.
+            </p>
             <Link
               href="/docs/primeros-pasos/primera-factura"
               className="rounded-lg bg-fd-primary px-5 py-2.5 text-sm font-medium text-fd-primary-foreground transition-opacity hover:opacity-90"
             >
               Emite tu primera factura
             </Link>
-            <Link
-              href="/docs"
-              className="rounded-lg border bg-fd-card px-5 py-2.5 text-sm font-medium transition-colors hover:bg-fd-accent"
-            >
-              Leer la documentación
-            </Link>
-            <a
-              href={repoUrl}
-              className="rounded-lg border bg-fd-card px-5 py-2.5 text-sm font-medium transition-colors hover:bg-fd-accent"
-            >
-              GitHub
-            </a>
           </div>
-          <div className="mt-10 w-full max-w-2xl text-left">
-            <DynamicCodeBlock lang="bash" code={install} />
-          </div>
-          <ul className="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-fd-muted-foreground">
-            {[
-              { icon: <Tag />, text: `v${cpeforge.version}`, href: 'https://crates.io/crates/cpeforge' },
-              { icon: <BadgeCheck />, text: 'API estable (SemVer)', href: '/docs/introduccion/estado-y-semver' },
-              { icon: <Cog />, text: `Rust ${cpeforge.msrv}+`, href: '/docs/primeros-pasos/requisitos' },
-              { icon: <Scale />, text: 'Licencia MIT', href: '/docs/comunidad/licencia' },
-            ].map((item) => (
-              <li key={item.text}>
-                <Link
-                  href={item.href}
-                  className="inline-flex items-center gap-1.5 transition-colors hover:text-fd-foreground [&_svg]:size-4 [&_svg]:text-fd-primary"
-                >
-                  {item.icon}
-                  {item.text}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+        </section>
 
-      {/* Cifras */}
-      <section className="border-b bg-fd-card/50">
-        <dl className="mx-auto grid w-full max-w-6xl grid-cols-2 gap-6 px-4 py-10 md:grid-cols-4 md:px-6">
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <dt className="sr-only">{stat.label}</dt>
-              <dd className="text-3xl font-bold tabular-nums text-fd-primary">{stat.value}</dd>
-              <dd className="mt-1 text-sm text-fd-muted-foreground">{stat.label}</dd>
-            </div>
-          ))}
-        </dl>
-      </section>
-
-      <Section kicker="Por qué Rust" title="Facturar no es un CRUD más">
-        <p className="-mt-4 mb-8 max-w-3xl text-fd-muted-foreground">
-          Cada comprobante tiene importes que deben cuadrar al céntimo, fechas que dependen de la zona
-          horaria de Lima, una firma que no admite ni un byte de diferencia y un servidor de SUNAT que
-          responde cuando puede. Rust convierte esos riesgos en errores que ves antes de que lleguen a tu
-          cliente.
-        </p>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {reasons.map((reason) => (
-            <div key={reason.title} className="rounded-xl border bg-fd-card p-5">
-              <div className="mb-3 inline-flex size-9 items-center justify-center rounded-lg bg-fd-primary/10 text-fd-primary [&_svg]:size-5">
-                {reason.icon}
-              </div>
-              <h3 className="mb-1 font-semibold">{reason.title}</h3>
-              <p className="text-sm text-fd-muted-foreground">{reason.body}</p>
-            </div>
-          ))}
-        </div>
-        <Link href="/docs/introduccion/por-que-rust" className="mt-6 inline-block text-sm font-medium text-fd-primary">
-          Más sobre por qué Rust →
-        </Link>
-      </Section>
-
-      <Section kicker="Cómo funciona" title="Del modelo al CDR, en un solo SDK">
-        <div className="grid items-center gap-8 lg:grid-cols-2">
-          <div className="min-w-0 rounded-xl border bg-fd-card p-4">
-            <Mermaid chart={flow} />
-          </div>
-          <div className="min-w-0">
-            <p className="mb-4 text-fd-muted-foreground">
-              Describes el comprobante con modelos tipados. La fachada <code>See</code> genera el XML UBL,
-              lo firma con tu certificado, lo comprime y lo envía a SUNAT. La respuesta llega clasificada
-              en un <code>TaxStatus</code>: aceptado, con observaciones, rechazado o pendiente.
-            </p>
-            <DynamicCodeBlock lang="rust" code={quickstart} codeblock={{ title: 'src/main.rs' }} />
-          </div>
-        </div>
-      </Section>
-
-      <Section kicker="Rendimiento" title="Rust frente a PHP, con los mismos 44 comprobantes">
-        <p className="-mt-4 mb-6 max-w-3xl text-fd-muted-foreground">
-          El mismo comprobante y la misma respuesta de SUNAT (43 de 43 aceptados en ambos), en la mitad
-          del tiempo. Generar el XML es 64 veces más rápido y la primera llamada en frío, 3,6 veces.
-        </p>
-        <BenchmarkTable />
-        <Link href="/docs/introduccion/rendimiento" className="mt-6 inline-block text-sm font-medium text-fd-primary">
-          Ver el benchmark completo →
-        </Link>
-      </Section>
-
-      <Section kicker="Qué cubre" title="Todos los comprobantes electrónicos de SUNAT">
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-          {coverage.map(([name, code]) => (
-            <div key={name} className="flex items-center justify-between gap-2 rounded-lg border bg-fd-card px-4 py-3">
-              <span className="text-sm font-medium">{name}</span>
-              <span className="rounded bg-fd-muted px-1.5 py-0.5 font-mono text-xs text-fd-muted-foreground">
-                {code}
-              </span>
-            </div>
-          ))}
-        </div>
-        <div className="mt-6 grid gap-4 text-sm text-fd-muted-foreground md:grid-cols-3">
-          <p className="flex gap-2">
-            <FileCode2 className="mt-0.5 size-4 shrink-0 text-fd-primary" />
-            UBL 2.0 y 2.1, firma XMLDSig, envío SOAP y API REST de guías con OAuth2.
-          </p>
-          <p className="flex gap-2">
-            <Cpu className="mt-0.5 size-4 shrink-0 text-fd-primary" />
-            Validación de modelos, esquemas XSD y reglas XSL de SUNAT.
-          </p>
-          <p className="flex gap-2">
-            <Boxes className="mt-0.5 size-4 shrink-0 text-fd-primary" />
-            Lectura de XML a modelos y representación impresa HTML con QR.
-          </p>
-        </div>
-      </Section>
-
-      <Section kicker="Paquetes" title="Usa la fachada completa o solo la pieza que necesitas">
-        <CrateGrid />
-        <p className="mt-6 text-sm text-fd-muted-foreground">
-          ¿Empiezas? Con <code>cpeforge = &quot;{cargoRequirement(cpeforge.version)}&quot;</code> tienes las
-          fachadas <code>See</code> y <code>Api</code>.{' '}
-          <Link href="/docs/primeros-pasos/instalacion" className="font-medium text-fd-primary">
-            ¿Qué crate necesito? →
-          </Link>
-        </p>
-      </Section>
-
-      <section className="border-t">
-        <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 px-4 py-16 text-center md:px-6">
-          <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Empieza en cinco minutos</h2>
-          <p className="max-w-xl text-fd-muted-foreground">
-            Emite una factura gravada con IGV en el entorno beta de SUNAT, con credenciales públicas de
-            prueba.
-          </p>
-          <Link
-            href="/docs/primeros-pasos/primera-factura"
-            className="rounded-lg bg-fd-primary px-5 py-2.5 text-sm font-medium text-fd-primary-foreground transition-opacity hover:opacity-90"
-          >
-            Emite tu primera factura
-          </Link>
-        </div>
-      </section>
-
-      <footer className="border-t py-8 text-center text-xs text-fd-muted-foreground">
-        CPEForge es software libre con licencia MIT. No está afiliado a SUNAT.
-      </footer>
+        <footer className="border-t py-8 text-center text-xs text-fd-muted-foreground">
+          CPEForge es software libre con licencia MIT. No está afiliado a SUNAT.
+        </footer>
+      </CursorGlow>
     </main>
   );
 }

@@ -19,6 +19,44 @@ html {
   scrollbar-gutter: stable;
 }
 
+/* Resplandor que sigue al cursor en la portada (components/cursor-glow.tsx). */
+.cursor-glow {
+  --glow-strong: 30%;
+  --glow-soft: 12%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: min(100vw, 72rem);
+  height: min(100vw, 72rem);
+  border-radius: 9999px;
+  background: radial-gradient(
+    ellipse 70% 70% at 50% 50%,
+    color-mix(in oklab, var(--color-fd-primary) var(--glow-strong), transparent) 0%,
+    color-mix(in oklab, var(--color-fd-primary) var(--glow-soft), transparent) 30%,
+    transparent 70%
+  );
+  filter: blur(90px);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.cursor-glow[data-visible='true'] {
+  opacity: 1;
+}
+
+.dark .cursor-glow {
+  --glow-strong: 26%;
+  --glow-soft: 10%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-glow {
+    display: none;
+  }
+}
+
 html > body[data-scroll-locked] {
   margin-right: 0px !important;
   --removed-body-scroll-bar-size: 0px !important;

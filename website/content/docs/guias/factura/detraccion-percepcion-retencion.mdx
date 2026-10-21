@@ -1,0 +1,78 @@
+---
+title: Detracción, percepción y retención
+description: Facturas sujetas a los sistemas de pago del IGV de SUNAT.
+---
+
+SUNAT tiene tres sistemas para asegurar el cobro del IGV. Los tres se informan
+en la factura de venta, pero cada uno de forma distinta:
+
+| Sistema | Quién retiene o deposita | En la factura |
+| --- | --- | --- |
+| **Detracción** | El cliente deposita un porcentaje en la cuenta del Banco de la Nación del proveedor | `tipo_operacion = "1001"` y el bloque `detraccion` |
+| **Percepción** | El vendedor (agente de percepción) cobra un importe adicional al cliente | `tipo_operacion = "2001"` y el bloque `perception` |
+| **Retención** | El cliente (agente de retención) retiene una parte del pago | Un descuento con código `62` en `descuentos` |
+
+El comprobante de retención o percepción que emite el agente es otro documento.
+Ver [Retención y percepción](/docs/guias/retencion-percepcion).
+
+## Casos de esta guía
+
+<CasosDeGuia guia="factura/detraccion-percepcion-retencion" />
+
+### Operación sujeta a detracción [#factura-detraccion]
+
+<Caso id="factura-detraccion" />
+
+Una venta de S/ 944.00 sujeta a detracción del 4 %:
+
+| Campo | Valor | Significado |
+| --- | --- | --- |
+| `tipo_operacion` | `"1001"` | Operación sujeta a detracción (catálogo 51) |
+| `detraccion.cod_bien_detraccion` | `"014"` | Carnes y despojos comestibles (catálogo 54) |
+| `detraccion.cod_medio_pago` | `"001"` | Depósito en cuenta (catálogo 59) |
+| `detraccion.cta_banco` | `"0004-3342343243"` | Cuenta de detracciones del proveedor |
+| `detraccion.percent` | `4.00` | Porcentaje de detracción |
+| `detraccion.mount` | `37.76` | 944.00 × 4 % |
+| Leyenda | `2006` | «Operación sujeta a detracción» |
+
+El importe de la detracción va siempre **en soles**, aunque la factura esté en
+otra moneda.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_detraccion.rs"'>../example/rust/src/casos/factura_detraccion.rs</include>
+
+### Venta sujeta a percepción [#factura-percepcion]
+
+<Caso id="factura-percepcion" />
+
+Una venta de S/ 236.00 sujeta a percepción del 2 % sobre la base de S/ 200.00:
+
+| Campo | Valor | Significado |
+| --- | --- | --- |
+| `tipo_operacion` | `"2001"` | Operación sujeta a percepción (catálogo 51) |
+| `perception.cod_reg` | `"51"` | Percepción, venta interna |
+| `perception.porcentaje` | `0.02` | 2 % |
+| `perception.mto_base` | `200.00` | Base de la percepción |
+| `perception.mto` | `4.00` | Importe percibido |
+| `perception.mto_total` | `204.00` | Base más percepción |
+| Leyenda | `2000` | «COMPROBANTE DE PERCEPCIÓN» |
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_percepcion.rs"'>../example/rust/src/casos/factura_percepcion.rs</include>
+
+### Factura con retención del 3 % [#factura-retencion]
+
+<Caso id="factura-retencion" />
+
+La retención se informa como un **descuento con código `62`** (catálogo 53):
+3 % de S/ 236.00 son S/ 7.08. El total de la factura no cambia
+(`mto_imp_venta` sigue en 236.00): la retención la aplica el cliente al pagar.
+
+```rust
+descuentos: Some(vec![Charge {
+    cod_tipo: s("62"),     // retención del IGV
+    monto_base: d(236, 0),
+    factor: d(3, 2),       // 0.03
+    monto: d(708, 2),      // 7.08
+}]),
+```
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_retencion.rs"'>../example/rust/src/casos/factura_retencion.rs</include>

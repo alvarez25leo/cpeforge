@@ -1,0 +1,41 @@
+---
+title: Comunicación de baja
+description: Dar de baja facturas y sus notas aceptadas por SUNAT (RA).
+---
+
+La comunicación de baja (`RA`) anula comprobantes ya aceptados: facturas, notas
+de crédito y de débito asociadas a facturas. Las **boletas no se dan de baja así**:
+se anulan en un [resumen diario](/docs/guias/resumen-diario) con `estado = "3"`.
+
+Va por `sendSummary` al servicio de facturas y se consulta con un ticket, igual
+que el resumen diario:
+
+```rust
+if let SendResult::Summary(envio) = see.send(DocumentRef::Voided(&baja)).await? {
+    let estado = see.get_status(envio.ticket.as_deref().ok_or("sin ticket")?).await?;
+}
+```
+
+## Campos
+
+| Campo | Ejemplo | Significado |
+| --- | --- | --- |
+| `fec_generacion` | Hace 3 días | Fecha de emisión de los comprobantes que se dan de baja |
+| `fec_comunicacion` | Hace 1 día | Fecha de la comunicación |
+| `correlativo` | `"00111"` | Número de la comunicación |
+| `details` | | Un `VoidedDetail` por comprobante: `tipo_doc`, `serie`, `correlativo` y `des_motivo_baja` |
+
+El identificador es `RA-AAAAMMDD-correlativo`, con la fecha de Perú.
+
+## Casos de esta guía
+
+<CasosDeGuia guia="comunicacion-baja" />
+
+### Comunicación de baja [#comunicacion-baja]
+
+<Caso id="comunicacion-baja" />
+
+Da de baja la factura `F001-02132132` («ERROR EN CÁLCULOS») y la nota de crédito
+`FC01-222` («ERROR DE RUC»).
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/comunicacion_baja.rs"'>../example/rust/src/casos/comunicacion_baja.rs</include>

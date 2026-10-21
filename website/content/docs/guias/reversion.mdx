@@ -1,0 +1,43 @@
+---
+title: Reversión
+description: Revertir comprobantes de retención, de percepción y liquidaciones de compra (RR).
+---
+
+La reversión (`RR`) es la «comunicación de baja» de los comprobantes que van al
+**servicio de retenciones**: retenciones (`20`), percepciones (`40`) y, en
+CPEForge, liquidaciones de compra (`04`).
+
+El modelo `Reversion` envuelve un `Voided` con los mismos campos que la
+[comunicación de baja](/docs/guias/comunicacion-baja). Va por `sendSummary` al
+servicio de retenciones y se consulta con un ticket:
+
+```rust
+see.set_service(SunatEndpoints::RETENCION_BETA);
+if let SendResult::Summary(envio) = see.send(DocumentRef::Reversion(&reversion)).await? {
+    let estado = see.get_status(envio.ticket.as_deref().ok_or("sin ticket")?).await?;
+}
+```
+
+El identificador es `RR-AAAAMMDD-correlativo`.
+
+## Casos de esta guía
+
+<CasosDeGuia guia="reversion" />
+
+### Reversión de retención y percepción [#reversion]
+
+<Caso id="reversion" />
+
+Revierte la retención `R001-122` y la percepción `P001-111`.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/reversion.rs"'>../example/rust/src/casos/reversion.rs</include>
+
+### Reversión de una liquidación de compra [#reversion-liquidacion]
+
+<Caso id="reversion-liquidacion" />
+
+Revierte la [liquidación de compra](/docs/guias/liquidacion-compra) `L001-1`
+(`tipo_doc = "04"`) el mismo día de su emisión. Aunque la liquidación se envía
+al servicio de facturas, **su reversión va al servicio de retenciones**.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/reversion_liquidacion.rs"'>../example/rust/src/casos/reversion_liquidacion.rs</include>

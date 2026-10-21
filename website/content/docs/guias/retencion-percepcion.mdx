@@ -1,0 +1,69 @@
+---
+title: Retención y percepción
+description: Comprobantes de retención (20) y de percepción (40) que emiten los agentes designados por SUNAT.
+---
+
+Los agentes de retención y de percepción designados por SUNAT emiten su propio
+comprobante por cada operación:
+
+| Comprobante | Tipo | Lo emite | Modelo |
+| --- | --- | --- | --- |
+| **Retención** | `20` | El cliente que retiene parte del pago a su proveedor | `Retention` |
+| **Percepción** | `40` | El vendedor que cobra un importe adicional a su cliente | `Perception` |
+
+Ambos van por `sendBill`, pero al **servicio de retenciones**
+(`SunatEndpoints::RETENCION_BETA` o `RETENCION_PRODUCCION`), no al de
+facturas:
+
+```rust
+see.set_service(SunatEndpoints::RETENCION_BETA);
+let resultado = see.send(DocumentRef::Retention(&retencion)).await?;
+```
+
+No confundir con la factura sujeta a percepción o con retención, que es la
+[factura de venta](/docs/guias/factura/detraccion-percepcion-retencion).
+
+## Campos
+
+| Retención | Percepción | Significado |
+| --- | --- | --- |
+| `serie`, `correlativo` | `serie`, `correlativo` | `R001-123`, `P001-123` |
+| `proveedor` | `proveedor` | La otra parte de la operación |
+| `regimen`, `tasa` | `regimen`, `tasa` | Régimen (`01`: tasa 3 % en retención, 2 % en percepción) |
+| `imp_retenido`, `imp_pagado` | `imp_percibido`, `imp_cobrado` | Totales del comprobante |
+| `details` | `details` | Un detalle por comprobante relacionado |
+
+Cada detalle relaciona un comprobante (`tipo_doc`, `num_doc`, fechas, moneda e
+importes) con su pago o cobro (`pagos` / `cobros`) y el tipo de cambio
+(`tipo_cambio`).
+
+<Callout type="warn" title="Un pago por comprobante relacionado">
+  El esquema UBL admite un solo `cac:Payment` por comprobante relacionado.
+  Si un detalle tiene más de un pago o cobro, `cpeforge-xml` devuelve
+  `XmlError::MultiplePayments`: informa cada pago como un detalle propio.
+</Callout>
+
+## Casos de esta guía
+
+<CasosDeGuia guia="retencion-percepcion" />
+
+### Comprobante de retención [#retencion]
+
+<Caso id="retencion" />
+
+Retiene S/ 10.00 al pagar la factura `F001-1`: importe total 210.00, pagado
+200.00, régimen `01` con tasa del 3 %.
+
+La observación lleva a propósito el texto `NOTA /><!-- HI -->`: demuestra que un
+texto con marcado no rompe el XML ni inyecta elementos.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/retencion.rs"'>../example/rust/src/casos/retencion.rs</include>
+
+### Comprobante de percepción [#percepcion]
+
+<Caso id="percepcion" />
+
+Percibe S/ 10.00 sobre la factura `F001-1`: importe 200.00, cobrado 210.00,
+régimen `01` con tasa del 2 %.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/percepcion.rs"'>../example/rust/src/casos/percepcion.rs</include>

@@ -1,0 +1,13 @@
+{
+  "title": "Factura",
+  "pages": [
+    "index",
+    "afectacion-igv",
+    "credito",
+    "detraccion-percepcion-retencion",
+    "anticipos",
+    "descuentos-y-cargos",
+    "impuestos-especiales",
+    "contingencia"
+  ]
+}

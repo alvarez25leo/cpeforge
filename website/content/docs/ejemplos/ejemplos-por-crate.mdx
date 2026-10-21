@@ -1,0 +1,46 @@
+---
+title: Ejemplos de cada crate
+description: Ejemplos pequeños y sin red que muestran cómo usar cada crate por separado.
+---
+
+Además del proyecto `example/rust`, cada crate trae ejemplos propios en su
+carpeta `examples/`. Ninguno se conecta a SUNAT: usan transportes simulados o
+datos sintéticos, así que se pueden ejecutar en cualquier momento desde la raíz
+del repositorio.
+
+| Crate | Ejemplo | Qué muestra | Página |
+| --- | --- | --- | --- |
+| `cpeforge` | `fachadas_sin_red` | `See` y `Api` con un transporte simulado | [cpeforge](/docs/paquetes/cpeforge#ejemplo-sin-red) |
+| `cpeforge` | `importe_en_letras` | La leyenda 1000 | [Importe en letras](/docs/conceptos/importe-en-letras) |
+| `cpeforge` | `see_with_xcodes` | El catálogo de códigos conectado a `See` (feature `xcodes`) | [cpeforge-xcodes](/docs/paquetes/xcodes) |
+| `cpeforge-core` | `invoice_model` | Construir una factura y calcular su nombre de archivo | [cpeforge-core](/docs/paquetes/core#ejemplo) |
+| `cpeforge-xml` | `invoice_xml` | El XML UBL 2.1 de una factura, sin firma | [cpeforge-xml](/docs/paquetes/xml#ejemplo) |
+| `cpeforge-xml` | `despatch_2022_xml` | El XML de una guía 2022 | [cpeforge-xml](/docs/paquetes/xml) |
+| `cpeforge-xmldsig` | `sign_verify_invoice` | Firmar, verificar y evaluar la confianza | [cpeforge-xmldsig](/docs/paquetes/xmldsig#ejemplo) |
+| `cpeforge-ws` | `local_cdr` | ZIP, lectura de CDR y una solicitud SOAP sin enviarla | [cpeforge-ws](/docs/paquetes/ws#ejemplo-sin-red) |
+| `cpeforge-gre-api` | `flujo_gre` | Token, envío y consulta de la API de guías, simulados | [cpeforge-gre-api](/docs/paquetes/gre-api#ejemplo-sin-red) |
+| `cpeforge-report` | `invoice_html` | Representación impresa de una factura | [cpeforge-report](/docs/paquetes/report#ejemplo) |
+| `cpeforge-xml-parser` | `parse_invoice` | Leer una factura UBL a los modelos | [cpeforge-xml-parser](/docs/paquetes/xml-parser#ejemplo) |
+| `cpeforge-xml-parser` | `reader` | Consultas con `XmlReader` y rechazo de XML hostil | [cpeforge-xml-parser](/docs/paquetes/xml-parser#xmlreader) |
+| `cpeforge-validator` | `invoice_validation` | Validar una factura vacía | [cpeforge-validator](/docs/paquetes/validator#ejemplo) |
+| `cpeforge-xcodes` | `lookup` | Consultar el catálogo de códigos | [cpeforge-xcodes](/docs/paquetes/xcodes#ejemplos) |
+| `cpeforge-xcodes` | `with_validator` | Traducir errores del validador con el catálogo | [cpeforge-validator](/docs/paquetes/validator#con-el-catálogo-de-códigos) |
+| `cpeforge-ubl-validator` | `validate_ubl` | Validar un XML contra los XSD (necesita los esquemas) | [cpeforge-ubl-validator](/docs/paquetes/ubl-validator#ejemplo) |
+| `cpeforge-cpe-validator` | `validate_rules` | Una regla XSL propia sobre dos facturas | [cpeforge-cpe-validator](/docs/paquetes/cpe-validator#ejemplo) |
+
+## Ejecutarlos
+
+```bash
+cargo run -p <crate> --example <ejemplo>
+```
+
+Por ejemplo:
+
+```bash
+cargo run -p cpeforge-xml --example invoice_xml
+cargo run -p cpeforge-report --example invoice_html > factura.html
+cargo run -p cpeforge --example see_with_xcodes --features xcodes
+```
+
+`cpeforge-ubl-validator` y `cpeforge-cpe-validator` necesitan libxml2 y libxslt.
+Ver [Requisitos](/docs/primeros-pasos/requisitos).

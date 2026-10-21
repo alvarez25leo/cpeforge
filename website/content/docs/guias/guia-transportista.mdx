@@ -1,0 +1,43 @@
+---
+title: Guía de remisión transportista
+description: La GRE transportista (tipo 31) que emite la empresa de transportes por el traslado que realiza.
+---
+
+La guía de remisión transportista (tipo `31`) la emite **la empresa de
+transportes** por cada traslado que realiza para un remitente. Se envía por la
+API REST de guías, igual que la [guía remitente](/docs/guias/guia-remitente).
+
+<Callout title="Solo en CPEForge">
+  La guía transportista no existe en la implementación de referencia. Sigue el
+  anexo N.º 14 de la R. S. 123-2022/SUNAT con las rutas de la R. S.
+  108-2026/SUNAT, y SUNAT beta la aceptó.
+</Callout>
+
+## En qué se diferencia de la guía remitente
+
+| | Guía remitente (`09`) | Guía transportista (`31`) |
+| --- | --- | --- |
+| La emite | Quien envía los bienes | La empresa de transportes |
+| `company` | El remitente | El transportista |
+| `remitente` | — | **Obligatorio**: quien envía los bienes |
+| Motivo y modalidad de traslado | Sí | No lleva |
+| `envio.transportista.nro_mtc` | Del transportista contratado | Registro MTC del propio emisor |
+| Vehículo | Placa | Placa y Tarjeta Única de Circulación (`nro_circulacion`) |
+| `add_docs` | Opcional | La guía remitente que sustenta el traslado (código `09`) |
+
+También admite el pagador del flete (`pagador_flete`) y el subcontratista
+(`envio.subcontratador`).
+
+## Casos de esta guía
+
+<CasosDeGuia guia="guia-transportista" />
+
+### Guía de remisión transportista [#guia-transportista]
+
+<Caso id="guia-transportista" />
+
+El transportista emite la guía `V001-1` por los bienes de un remitente,
+sustentados por la guía remitente `T001-121`. Informa su registro MTC, el
+vehículo con su TUC y el conductor.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/guia_transportista.rs"'>../example/rust/src/casos/guia_transportista.rs</include>

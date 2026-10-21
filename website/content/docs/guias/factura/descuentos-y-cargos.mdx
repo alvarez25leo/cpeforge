@@ -1,0 +1,96 @@
+---
+title: Descuentos y cargos
+description: Descuentos por línea y globales, que afectan o no la base imponible, y cargos como el recargo al consumo.
+---
+
+Los descuentos y cargos son `Charge` con un código del catálogo 53. Lo que
+importa es si **afectan la base imponible** (reducen el valor sobre el que se
+calcula el IGV) o no.
+
+| Código | Tipo | Dónde | Afecta la base |
+| --- | --- | --- | :---: |
+| `00` | Descuento por línea | `SaleDetail::descuentos` | Sí |
+| `01` | Descuento por línea | `SaleDetail::descuentos` | No |
+| `02` | Descuento global | `Invoice::descuentos` | Sí |
+| `03` | Descuento global | `Invoice::descuentos` | No |
+| `04` | Descuento global por anticipo | `Invoice::descuentos` | Sí. Ver [Anticipos](/docs/guias/factura/anticipos) |
+| `46` | Recargo al consumo o propinas | `Invoice::cargos` | No |
+| `62` | Retención del IGV | `Invoice::descuentos` | No. Ver [Retención](/docs/guias/factura/detraccion-percepcion-retencion#factura-retencion) |
+
+Cada `Charge` lleva `cod_tipo`, `monto_base`, `factor` (por ejemplo `0.20` para
+el 20 %) y `monto`.
+
+## Casos de esta guía
+
+<CasosDeGuia guia="factura/descuentos-y-cargos" />
+
+### Descuento por línea que afecta la base [#factura-descuento-linea]
+
+<Caso id="factura-descuento-linea" />
+
+Diez cuadernos a S/ 2.00 con un 20 % de descuento (código `00`):
+
+| Campo de la línea | Cálculo | Importe |
+| --- | --- | ---: |
+| `descuentos[0].monto_base` | 10 × 2.00 | 20.00 |
+| `descuentos[0].monto` | 20.00 × 0.20 | 4.00 |
+| `mto_valor_venta`, `mto_base_igv` | 20.00 − 4.00 | 16.00 |
+| `igv` | 16.00 × 18 % | 2.88 |
+| `mto_precio_unitario` | (16.00 + 2.88) / 10 | 1.89 |
+
+Con la segunda línea (una radio de S/ 50.00), la factura suma
+`mto_oper_gravadas` 66.00, IGV 11.88 y total **77.88**.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_descuento_linea.rs"'>../example/rust/src/casos/factura_descuento_linea.rs</include>
+
+### Descuento global que afecta la base [#factura-descuento-global]
+
+<Caso id="factura-descuento-global" />
+
+Las líneas suman S/ 70.00 y un descuento global de S/ 3.00 (código `02`) reduce
+la base:
+
+| Campo | Cálculo | Importe |
+| --- | --- | ---: |
+| Suma de las líneas | 20.00 + 50.00 | 70.00 |
+| `descuentos[0].monto` | Código `02` | 3.00 |
+| `mto_oper_gravadas`, `valor_venta` | 70.00 − 3.00 | 67.00 |
+| `mto_igv` | 67.00 × 18 % | 12.06 |
+| **`mto_imp_venta`** | 67.00 + 12.06 | **79.06** |
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_descuento_global.rs"'>../example/rust/src/casos/factura_descuento_global.rs</include>
+
+### Descuentos que no afectan la base [#factura-descuento-nobase]
+
+<Caso id="factura-descuento-nobase" />
+
+Un descuento por línea (código `01`, S/ 4.00) y uno global (código `03`,
+S/ 3.00) que **no reducen la base del IGV**: el IGV se calcula sobre el valor
+completo y los descuentos se restan del total a pagar.
+
+| Campo | Cálculo | Importe |
+| --- | --- | ---: |
+| `mto_oper_gravadas` | 10 × 2.00 | 20.00 |
+| `mto_igv` | 20.00 × 18 % | 3.60 |
+| `sub_total` | 20.00 + 3.60 | 23.60 |
+| `sum_otros_descuentos` | 4.00 + 3.00 | 7.00 |
+| **`mto_imp_venta`** | 23.60 − 7.00 | **16.60** |
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_descuento_nobase.rs"'>../example/rust/src/casos/factura_descuento_nobase.rs</include>
+
+### Recargo al consumo del 10 % [#factura-cargos]
+
+<Caso id="factura-cargos" />
+
+Un restaurante cobra un recargo al consumo del 10 % (código `46`) que no lleva
+IGV. El recargo va en `cargos` y en `sum_otros_cargos`, y se suma al total:
+
+| Campo | Cálculo | Importe |
+| --- | --- | ---: |
+| `mto_oper_gravadas` | 2 × 50.00 | 100.00 |
+| `mto_igv` | 100.00 × 18 % | 18.00 |
+| `sub_total` | | 118.00 |
+| `cargos[0].monto`, `sum_otros_cargos` | 100.00 × 10 % | 10.00 |
+| **`mto_imp_venta`** | 118.00 + 10.00 | **128.00** |
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_cargos.rs"'>../example/rust/src/casos/factura_cargos.rs</include>

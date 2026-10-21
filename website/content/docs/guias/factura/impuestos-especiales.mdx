@@ -1,0 +1,88 @@
+---
+title: ICBPER, ISC e IVAP
+description: Impuesto a las bolsas plásticas, impuesto selectivo al consumo e impuesto a la venta del arroz pilado.
+---
+
+| Impuesto | Qué grava | En la línea | En la cabecera |
+| --- | --- | --- | --- |
+| **ICBPER** | Bolsas de plástico, un monto fijo por bolsa | `factor_icbper`, `icbper` | `icbper` |
+| **ISC** | Ciertos bienes (combustibles, licores, cigarrillos…) | `tip_sis_isc`, `porcentaje_isc`, `mto_base_isc`, `isc` | `mto_base_isc`, `mto_isc` |
+| **IVAP** | Venta de arroz pilado, en lugar del IGV | `tip_afe_igv = "17"`, tasa 4 % | `mto_base_ivap`, `mto_ivap` |
+
+Todos suman en `total_impuestos`, en la línea y en la cabecera.
+
+## Casos de esta guía
+
+<CasosDeGuia guia="factura/impuestos-especiales" />
+
+### Bolsas plásticas (ICBPER) y redondeo [#factura-icbper]
+
+<Caso id="factura-icbper" />
+
+Además del IGV, cada bolsa paga el ICBPER: `icbper = cantidad × factor_icbper`.
+
+<Callout type="warn" title="El factor ICBPER cambia con los años">
+  Este caso es del demo original y usa S/ 0.20 por bolsa (4 bolsas × 0.20 =
+  0.80). **Desde 2023 el factor es S/ 0.50**, como en los casos
+  [`inicio-boleta`](/docs/guias/boleta#inicio-boleta) e
+  [`inicio-factura-credito`](/docs/guias/factura/credito#inicio-factura-credito).
+  Usa siempre el factor vigente en la fecha de emisión.
+</Callout>
+
+| Campo | Importe |
+| --- | ---: |
+| `mto_oper_gravadas` (200.00 + 0.20) | 200.20 |
+| `mto_igv` (36.00 + 0.04) | 36.04 |
+| `icbper` (4 × 0.20) | 0.80 |
+| `total_impuestos` | 36.84 |
+| `sub_total` | 237.04 |
+| `redondeo` | 0.04 |
+| **`mto_imp_venta`** | **237.00** |
+
+El campo `redondeo` informa el ajuste por redondeo del total.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_icbper.rs"'>../example/rust/src/casos/factura_icbper.rs</include>
+
+### Bolsa plástica gratuita (ICBPER) [#factura-icbper-gratuita]
+
+<Caso id="factura-icbper-gratuita" />
+
+Si la bolsa se entrega gratis (`tip_afe_igv = "13"`), su valor va en
+`mto_oper_gratuitas` y su IGV en `mto_igv_gratuitas`, pero **el ICBPER sí se
+cobra**: suma en `icbper` y en el total.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_icbper_gratuita.rs"'>../example/rust/src/casos/factura_icbper_gratuita.rs</include>
+
+### ISC, sistema al valor [#factura-isc]
+
+<Caso id="factura-isc" />
+
+Con el ISC, el **IGV se calcula sobre el valor de venta más el ISC**:
+
+| Campo de la línea | Cálculo | Importe |
+| --- | --- | ---: |
+| `mto_base_isc` | 2 × 100.00 | 200.00 |
+| `tip_sis_isc` | Sistema al valor (catálogo 08) | `01` |
+| `isc` | 200.00 × 17 % | 34.00 |
+| `mto_base_igv` | 200.00 + 34.00 | 234.00 |
+| `igv` | 234.00 × 18 % | 42.12 |
+| `total_impuestos` | 34.00 + 42.12 | 76.12 |
+| **Total** | 200.00 + 76.12 | **276.12** |
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_isc.rs"'>../example/rust/src/casos/factura_isc.rs</include>
+
+### Venta sujeta al IVAP [#factura-ivap]
+
+<Caso id="factura-ivap" />
+
+La venta de arroz pilado paga IVAP (4 %) en lugar de IGV:
+
+- En la línea, `tip_afe_igv = "17"` y `porcentaje_igv = 4`.
+- En la cabecera, la base va en `mto_base_ivap` y el impuesto en `mto_ivap`
+  (no en `mto_oper_gravadas` ni `mto_igv`).
+- Lleva la leyenda `2007` («Operación sujeta al IVAP»).
+
+900 sacos a S/ 100.00 son S/ 90 000.00 de base, S/ 3 600.00 de IVAP y un total
+de **S/ 93 600.00**.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_ivap.rs"'>../example/rust/src/casos/factura_ivap.rs</include>

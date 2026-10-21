@@ -1,0 +1,37 @@
+---
+title: Explorador de ejemplos
+description: Los 48 comprobantes del proyecto de ejemplo, con buscador, filtros y enlace a la guía que explica cada uno.
+---
+
+El proyecto [`example/rust`](/docs/primeros-pasos/ejecutar-los-ejemplos)
+construye, firma y envía 48 comprobantes a los entornos de prueba de SUNAT.
+Todos fueron aceptados por SUNAT beta, salvo `factura-beatose`, que solo genera
+el XML.
+
+Busca por nombre o por tema (por ejemplo, «detracción», «crédito» o «dólares»)
+y abre la **guía** para ver el caso explicado con su código, o el **código** para
+verlo en GitHub.
+
+<EjemplosExplorer />
+
+## Ejecutar un caso
+
+```bash
+cargo run --release --manifest-path example/rust/Cargo.toml -- factura-credito            # genera el XML firmado
+cargo run --release --manifest-path example/rust/Cargo.toml -- --enviar factura-credito   # y lo envía a SUNAT beta
+```
+
+El XML firmado queda en `example/rust/out/`. Ver
+[Ejecutar los ejemplos](/docs/primeros-pasos/ejecutar-los-ejemplos) para las
+credenciales y las variables de entorno.
+
+## Más ejemplos
+
+<Cards>
+  <Card title="Casos de rechazo" href="/docs/ejemplos/casos-de-rechazo">
+    Cuatro comprobantes que SUNAT debe rechazar, y por qué.
+  </Card>
+  <Card title="Ejemplos de cada crate" href="/docs/ejemplos/ejemplos-por-crate">
+    Ejemplos pequeños, sin red, para usar cada pieza por separado.
+  </Card>
+</Cards>

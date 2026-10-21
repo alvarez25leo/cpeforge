@@ -1,0 +1,33 @@
+---
+title: Anticipos
+description: Factura final que descuenta un anticipo facturado antes.
+---
+
+Cuando el cliente pagó una parte por adelantado, se emitió una factura por ese
+anticipo. La factura final de la venta **descuenta** ese anticipo: lo informa en
+`anticipos` y como un descuento global con código `04`.
+
+## Casos de esta guía
+
+<CasosDeGuia guia="factura/anticipos" />
+
+### Factura con deducción de anticipo [#factura-anticipo]
+
+<Caso id="factura-anticipo" />
+
+Una venta de S/ 236.00 de la que ya se facturó un anticipo de S/ 100.00 en la
+factura `F001-111`.
+
+| Campo | Valor | Cálculo |
+| --- | ---: | --- |
+| `valor_venta` | 200.00 | Suma de los valores de venta de las líneas |
+| `sub_total` | 236.00 | 200.00 + 18 % |
+| `descuentos[0].cod_tipo` | `04` | Descuento global por anticipo (catálogo 53) |
+| `descuentos[0].monto` | 100.00 | El anticipo |
+| `mto_oper_gravadas` | 100.00 | 200.00 − 100.00 de anticipo |
+| `mto_igv` | 18.00 | IGV de la base que queda |
+| `anticipos[0]` | `02`, `F001-111`, 100.00 | Tipo del documento del anticipo (catálogo 12), número e importe |
+| `total_anticipos` | 100.00 | Suma de los anticipos |
+| **`mto_imp_venta`** | **136.00** | 236.00 − 100.00 |
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_anticipo.rs"'>../example/rust/src/casos/factura_anticipo.rs</include>

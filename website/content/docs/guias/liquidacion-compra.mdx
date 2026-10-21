@@ -1,0 +1,94 @@
+---
+title: Liquidación de compra
+description: La liquidación de compra (tipo 04) que emite el comprador cuando el vendedor no tiene RUC, incluida la compra de oro.
+---
+
+La liquidación de compra (tipo `04`) la emite **el comprador** cuando adquiere
+bienes a una persona **sin RUC** (por ejemplo, un productor agrícola o un
+minero artesanal). El comprador retiene el IGV y el impuesto a la renta del
+vendedor.
+
+<Callout title="Solo en CPEForge">
+  La liquidación de compra no existe en la implementación de referencia. Se
+  generó a partir del anexo N.º 9-A de la R. S. 123-2022/SUNAT, valida contra el
+  XSD y SUNAT beta aceptó los dos casos de esta guía.
+</Callout>
+
+Usa el modelo `PurchaseSettlement` y va por `sendBill` al servicio de facturas.
+Se revierte con una [reversión](/docs/guias/reversion#reversion-liquidacion) en
+el servicio de retenciones.
+
+```rust
+let resultado = see.send(DocumentRef::Settlement(&liquidacion)).await?;
+```
+
+## Quién es quién
+
+| Rol | Campo | En el XML UBL (`SelfBilledInvoice`) |
+| --- | --- | --- |
+| Comprador, que emite la liquidación | `company` | `AccountingCustomerParty` |
+| Vendedor sin RUC | `vendedor` (`SettlementSeller`) | `AccountingSupplierParty` |
+| Lugar de la operación | `lugar_operacion` (`SettlementPlace`) | `DeliveryTerms` |
+
+El vendedor y el lugar llevan una **condición** (catálogo 60): `01` punto de
+venta, `02` producción, `03` extracción. Si falta el emisor, el vendedor o el
+lugar, la generación del XML falla con `XmlError::Document`.
+
+## Los importes
+
+Cada línea lleva el IGV **y** la retención de la renta (`mto_base_ir`,
+`porcentaje_ir`, `ir`). El total a pagar al vendedor descuenta lo retenido:
+
+```text
+mto_imp_venta = sub_total − mto_igv − mto_ir
+```
+
+## Casos de esta guía
+
+<CasosDeGuia guia="liquidacion-compra" />
+
+### Compra interna [#liquidacion-compra]
+
+<Caso id="liquidacion-compra" />
+
+Un comprador adquiere café pergamino y sacos a un productor con DNI
+(operación `0501`, compra interna):
+
+| Línea | Afectación | Valor | IGV | Renta 1.5 % |
+| --- | --- | ---: | ---: | ---: |
+| Café pergamino (200 kg × 3.50) | Gravado (`10`) | 700.00 | 126.00 | 10.50 |
+| Sacos de yute (10 × 20.00) | Exonerado (`20`) | 200.00 | 0.00 | 3.00 |
+| **Totales** | | **900.00** | **126.00** | **13.50** |
+
+| Campo | Importe |
+| --- | ---: |
+| `sub_total` (900.00 + 126.00) | 1 026.00 |
+| **`mto_imp_venta`** (1 026.00 − 126.00 − 13.50) | **886.50** |
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/liquidacion_compra.rs"'>../example/rust/src/casos/liquidacion_compra.rs</include>
+
+### Compra de oro [#liquidacion-compra-oro]
+
+<Caso id="liquidacion-compra-oro" />
+
+Compra de 60 g de oro de minería artesanal (operación `0503`) con la retención
+de renta del **4 %** y las cuatro propiedades del derecho minero en los
+atributos de la línea (catálogo 55):
+
+| Código | Propiedad | Valor |
+| --- | --- | --- |
+| `6000` | Código único de concesión minera | `010012718` |
+| `6004` | Ley mineral | `85.50` |
+| `6005` | Naturaleza del mineral | `1` |
+| `6006` | Nombre del derecho minero | `MINA DEMO` |
+
+Valor 17 100.00, IGV 3 078.00 y renta 684.00: el vendedor recibe
+**S/ 16 416.00**.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/liquidacion_compra_oro.rs"'>../example/rust/src/casos/liquidacion_compra_oro.rs</include>
+
+<Callout type="warn" title="Error 2800: vendedor con RUC">
+  Si el vendedor tiene RUC, no corresponde una liquidación de compra y SUNAT la
+  rechaza. Ver el caso
+  [`liquidacion-vendedor-ruc`](/docs/ejemplos/casos-de-rechazo#liquidacion-vendedor-ruc).
+</Callout>

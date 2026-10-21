@@ -1,0 +1,123 @@
+---
+title: Factura
+description: La factura electrónica (tipo 01) gravada con IGV, sus campos y cómo cuadran los importes.
+---
+
+La factura (tipo `01`) sustenta una venta a otra empresa o a quien necesite
+usar el crédito fiscal. El cliente se identifica normalmente con RUC
+(catálogo 06, código `6`). Va por `sendBill` al servicio de facturas y SUNAT
+responde con el CDR en el momento.
+
+```rust
+let resultado = see.send(DocumentRef::Invoice(&factura)).await?;
+```
+
+## Campos de la cabecera
+
+| Campo | Valor habitual | Significado |
+| --- | --- | --- |
+| `ubl_version` | `"2.1"` | Versión UBL exigida por SUNAT |
+| `tipo_doc` | `"01"` | Factura (catálogo 01) |
+| `serie` | `"F001"` | Empieza con `F` (o es numérica en [contingencia](/docs/guias/factura/contingencia)) |
+| `correlativo` | `"1"` | Número de la factura dentro de la serie |
+| `tipo_operacion` | `"0101"` | Venta interna (catálogo 51) |
+| `tipo_moneda` | `"PEN"` | Moneda (ISO 4217) |
+| `forma_pago` | `PaymentTerms::contado()` | Contado o [crédito](/docs/guias/factura/credito) |
+| `fec_vencimiento` | Opcional | Fecha de vencimiento |
+| `legends` | Leyenda `1000` | Importe en letras (catálogo 52) |
+
+## Campos de cada línea
+
+| Campo | Ejemplo | Significado |
+| --- | --- | --- |
+| `cod_producto` | `"P001"` | Código interno del producto |
+| `unidad` | `"NIU"` | Unidad de medida (`NIU` bienes, `ZZ` servicios, `KGM` kilos…) |
+| `cantidad` | `2` | Cantidad |
+| `mto_valor_unitario` | `50.00` | Precio unitario **sin** impuestos |
+| `mto_precio_unitario` | `59.00` | Precio unitario **con** impuestos |
+| `tip_afe_igv` | `"10"` | Afectación del IGV (catálogo 07): ver [Afectación del IGV](/docs/guias/factura/afectacion-igv) |
+| `porcentaje_igv`, `igv` | `18`, `18.00` | Tasa e importe del IGV |
+| `mto_base_igv`, `mto_valor_venta`, `total_impuestos` | | Base, valor de venta e impuestos de la línea |
+
+## Casos de esta guía
+
+<CasosDeGuia guia="factura" />
+
+### Factura gravada al contado [#inicio-factura-gravada]
+
+<Caso id="inicio-factura-gravada" />
+
+El caso más simple: una línea gravada de dos unidades a S/ 50.00.
+
+| Concepto | Cálculo | Importe |
+| --- | --- | ---: |
+| Valor de venta | 2 × 50.00 | 100.00 |
+| IGV 18 % | 100.00 × 0.18 | 18.00 |
+| **Total** (`mto_imp_venta`) | 100.00 + 18.00 | **118.00** |
+
+Usa los atajos de `datos.rs` (`inicio_base`, `inicio_linea_gravada`) para no
+repetir la cabecera ni la línea:
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/inicio_factura_gravada.rs"'>../example/rust/src/casos/inicio_factura_gravada.rs</include>
+
+### Factura gravada y exonerada [#factura]
+
+<Caso id="factura" />
+
+Una línea gravada (`tip_afe_igv = "10"`) y otra exonerada (`"20"`). Cada tipo
+suma en su propio total de cabecera:
+
+| Concepto | Importe |
+| --- | ---: |
+| `mto_oper_gravadas` (2 × 100.00) | 200.00 |
+| `mto_oper_exoneradas` (2 × 50.00) | 100.00 |
+| `mto_igv` (solo de la gravada) | 36.00 |
+| `valor_venta` | 300.00 |
+| **`mto_imp_venta`** | **336.00** |
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura.rs"'>../example/rust/src/casos/factura.rs</include>
+
+### Factura con guía de remisión relacionada [#factura-rel-guia-remision]
+
+<Caso id="factura-rel-guia-remision" />
+
+Cuando la venta se despachó con una guía de remisión, se relaciona en `guias`
+con su tipo (`"09"`, guía remitente) y su número:
+
+```rust
+guias: Some(vec![RelatedDocument {
+    tipo_doc: s("09"),
+    nro_doc: s("T001-2"),
+}]),
+```
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_rel_guia_remision.rs"'>../example/rust/src/casos/factura_rel_guia_remision.rs</include>
+
+### Factura con errores intencionales [#factura-beatose]
+
+<Caso id="factura-beatose" />
+
+Este caso **no se envía nunca**: tiene dos errores a propósito
+(`mto_precio_unitario` de 100 en lugar de 118 y `valor_venta` de 300 en lugar de
+200) para probar validadores externos. Sirve para ver que CPEForge genera y
+firma lo que le das: **no corrige ni recalcula importes**. Para detectar estos
+errores antes de enviar, usa los
+[validadores](/docs/paquetes/cpe-validator).
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_beatose.rs"'>../example/rust/src/casos/factura_beatose.rs</include>
+
+## Otras variantes
+
+<Cards>
+  <Card title="Afectación del IGV" href="/docs/guias/factura/afectacion-igv">
+    Exonerada, inafecta, exportación y gratuita.
+  </Card>
+  <Card title="A crédito" href="/docs/guias/factura/credito">
+    Forma de pago a crédito con cuotas.
+  </Card>
+  <Card title="Detracción, percepción y retención" href="/docs/guias/factura/detraccion-percepcion-retencion" />
+  <Card title="Anticipos" href="/docs/guias/factura/anticipos" />
+  <Card title="Descuentos y cargos" href="/docs/guias/factura/descuentos-y-cargos" />
+  <Card title="ICBPER, ISC e IVAP" href="/docs/guias/factura/impuestos-especiales" />
+  <Card title="Contingencia" href="/docs/guias/factura/contingencia" />
+</Cards>

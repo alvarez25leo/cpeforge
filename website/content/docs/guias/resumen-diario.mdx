@@ -1,0 +1,92 @@
+---
+title: Resumen diario
+description: El resumen diario de boletas y sus notas (RC), enviado por sendSummary y consultado con un ticket.
+---
+
+El resumen diario (`RC`) informa en un solo envío las boletas y sus notas de un
+día: las nuevas, las modificadas y las anuladas. Es la forma habitual de
+**anular una boleta**.
+
+Va por `sendSummary` al servicio de facturas. SUNAT responde con un **ticket**,
+que se consulta después con `getStatus`:
+
+```rust
+use cpeforge::{DocumentRef, SendResult};
+use cpeforge_ws::outcome::TaxStatus;
+
+if let SendResult::Summary(envio) = see.send(DocumentRef::Summary(&resumen)).await? {
+    let ticket = envio.ticket.as_deref().ok_or("sin ticket")?;
+    let estado = see.get_status(ticket).await?;
+    println!("{:?}", TaxStatus::of_status(&estado)); // Pending mientras SUNAT procesa
+}
+```
+
+Mientras SUNAT procesa, la consulta devuelve el código `98` (`TaxStatus::Pending`):
+vuelve a consultar más tarde.
+
+## Campos
+
+| Campo | Ejemplo | Significado |
+| --- | --- | --- |
+| `fec_generacion` | Hace 3 días | Fecha de emisión de los comprobantes informados |
+| `fec_resumen` | Hace 1 día | Fecha del resumen; no puede ser anterior a `fec_generacion` |
+| `correlativo` | `"001"` | Número del resumen en el día |
+| `moneda` | `"USD"` | Opcional; por defecto, soles |
+| `details` | | Un `SummaryDetail` por comprobante |
+
+El identificador del resumen es `RC-AAAAMMDD-correlativo`, con la fecha de Perú.
+
+### Cada comprobante (`SummaryDetail`)
+
+| Campo | Ejemplo | Significado |
+| --- | --- | --- |
+| `tipo_doc` | `"03"` / `"07"` | Boleta o nota |
+| `serie_nro` | `"B001-1"` | Serie y número |
+| `estado` | `"1"` / `"3"` | `1` adicionar, `2` modificar, `3` anular (catálogo 19) |
+| `cliente_tipo`, `cliente_nro` | `"1"`, `"00000000"` | Documento del cliente |
+| `total` | `129.555` | Importe total del comprobante |
+| `mto_oper_gravadas`, `…exoneradas`, `…inafectas`, `…exportacion` | | Bases por tipo |
+| `porcentaje_igv`, `mto_igv` | `18`, `3.60` | Tasa e importe del IGV |
+| `doc_referencia` | | En una nota, el comprobante que modifica |
+| `percepcion` | | Si la boleta tiene percepción |
+
+<Callout type="warn" title="Error 2992: porcentaje_igv">
+  SUNAT exige hoy la tasa del IGV (`porcentaje_igv`) en cada línea del resumen.
+  Sin ella, rechaza el resumen con el error 2992. Los tres casos ya la
+  informan; el caso de rechazo
+  [`resumen-sin-tasa`](/docs/ejemplos/casos-de-rechazo#resumen-sin-tasa) la
+  quita.
+</Callout>
+
+## Casos de esta guía
+
+<CasosDeGuia guia="resumen-diario" />
+
+### Resumen de boletas y nota [#resumen]
+
+<Caso id="resumen" />
+
+Informa tres comprobantes:
+
+- la boleta `B001-1`, **anulada** (`estado = "3"`);
+- la nota de crédito `B001-4`, que modifica la boleta `0001-122`;
+- la boleta `B001-2`, con **percepción** del 2 %.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/resumen.rs"'>../example/rust/src/casos/resumen.rs</include>
+
+### Resumen con boleta de contingencia [#resumen-contingencia]
+
+<Caso id="resumen-contingencia" />
+
+Informa la boleta de contingencia `0001-1` (serie numérica). Usa el correlativo
+`002` para no coincidir con el caso `resumen` del mismo día.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/resumen_contingencia.rs"'>../example/rust/src/casos/resumen_contingencia.rs</include>
+
+### Resumen diario en dólares [#resumen-usd]
+
+<Caso id="resumen-usd" />
+
+Un resumen con `moneda = "USD"`.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/resumen_usd.rs"'>../example/rust/src/casos/resumen_usd.rs</include>

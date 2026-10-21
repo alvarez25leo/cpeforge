@@ -1,0 +1,68 @@
+---
+title: Guías por comprobante
+description: Cómo emitir cada tipo de comprobante, con los casos reales del proyecto de ejemplo aceptados por SUNAT beta.
+---
+
+Cada guía explica un tipo de comprobante: cuándo se emite, por qué vía se envía,
+qué campos importan y cómo cuadran los importes. Los ejemplos son los casos del
+proyecto [`example/rust`](/docs/primeros-pasos/ejecutar-los-ejemplos), que se
+generan, firman y envían a SUNAT beta: el código que ves es el del repositorio.
+
+<Callout title="Los datos de los ejemplos">
+  Los casos comparten la empresa, el cliente y la fecha base de
+  `example/rust/src/datos.rs`. Las funciones `s("…")` y `d(mantisa, escala)`
+  son atajos para `Some(String)` y `Some(Decimal)`: `d(17236, 2)` es
+  `172.36`.
+</Callout>
+
+## Comprobantes
+
+| Comprobante | Tipo | Guía | Vía | Servicio |
+| --- | --- | --- | --- | --- |
+| Factura | `01` | [Factura](/docs/guias/factura) | `sendBill` | Facturas |
+| Boleta de venta | `03` | [Boleta](/docs/guias/boleta) | `sendBill` o resumen diario | Facturas |
+| Nota de crédito y de débito | `07`, `08` | [Notas](/docs/guias/notas) | `sendBill` | Facturas |
+| Resumen diario | `RC` | [Resumen diario](/docs/guias/resumen-diario) | `sendSummary` + ticket | Facturas |
+| Comunicación de baja | `RA` | [Comunicación de baja](/docs/guias/comunicacion-baja) | `sendSummary` + ticket | Facturas |
+| Reversión | `RR` | [Reversión](/docs/guias/reversion) | `sendSummary` + ticket | Retenciones |
+| Retención y percepción | `20`, `40` | [Retención y percepción](/docs/guias/retencion-percepcion) | `sendBill` | Retenciones |
+| Liquidación de compra | `04` | [Liquidación de compra](/docs/guias/liquidacion-compra) | `sendBill` | Facturas |
+| Guía de remisión remitente | `09` | [Guía remitente](/docs/guias/guia-remitente) | API de guías + ticket | API REST |
+| Guía de remisión transportista | `31` | [Guía transportista](/docs/guias/guia-transportista) | API de guías + ticket | API REST |
+
+El servicio de **facturas** es `SunatEndpoints::FE_BETA` (o `FE_PRODUCCION`) y
+el de **retenciones**, `RETENCION_BETA` (o `RETENCION_PRODUCCION`). Ver
+[Entornos y credenciales](/docs/primeros-pasos/entornos-y-credenciales).
+
+## Cómo cuadran los importes de una venta
+
+Las facturas, boletas y notas comparten estas relaciones. CPEForge no las
+calcula: las calcula tu sistema, y SUNAT rechaza el comprobante si no cuadran.
+
+**Por línea (`SaleDetail`):**
+
+| Campo | Cálculo |
+| --- | --- |
+| `mto_valor_venta` | `cantidad × mto_valor_unitario` (menos los descuentos que afectan la base) |
+| `mto_base_igv` | Normalmente igual a `mto_valor_venta` (con ISC: `mto_valor_venta + isc`) |
+| `igv` | `mto_base_igv × porcentaje_igv / 100` |
+| `total_impuestos` | `igv + isc + icbper` |
+| `mto_precio_unitario` | `(mto_valor_venta + total_impuestos) / cantidad`: el precio con impuestos |
+
+**Del comprobante (`BaseSale` e `Invoice`):**
+
+| Campo | Cálculo |
+| --- | --- |
+| `mto_oper_gravadas`, `…exoneradas`, `…inafectas`, `…exportacion` | Suma de `mto_valor_venta` de las líneas de cada tipo |
+| `mto_igv` | Suma del IGV de las líneas que se cobran |
+| `total_impuestos` | `mto_igv + mto_isc + icbper` |
+| `valor_venta` | Suma de los valores de venta |
+| `sub_total` | `valor_venta + total_impuestos` |
+| `mto_imp_venta` | Lo que paga el cliente: `sub_total` más los cargos que no afectan la base (`sum_otros_cargos`), menos los descuentos que no afectan la base (`sum_otros_descuentos`) y los anticipos, ajustado por `redondeo` |
+
+Cada guía muestra estas cuentas con los números de sus casos.
+
+## Todos los casos
+
+Los 48 casos, con buscador y filtros, están en el
+[explorador de ejemplos](/docs/ejemplos).

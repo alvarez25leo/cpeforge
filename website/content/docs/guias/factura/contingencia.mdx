@@ -1,0 +1,31 @@
+---
+title: Factura de contingencia
+description: Comprobantes emitidos en papel o con un sistema de contingencia y su informe a SUNAT.
+---
+
+Cuando no se pudo emitir electrónicamente (por ejemplo, por una caída del
+sistema), se emiten comprobantes de **contingencia**, con una **serie
+numérica** (`0001`) en lugar de una alfanumérica (`F001`). Después se informan
+a SUNAT.
+
+Con CPEForge, la factura de contingencia se construye igual que una normal: solo
+cambia la serie.
+
+```rust
+serie: s("0001"), // serie numérica de contingencia
+```
+
+Las boletas de contingencia se informan en un
+[resumen diario](/docs/guias/resumen-diario#resumen-contingencia).
+
+## Casos de esta guía
+
+<CasosDeGuia guia="factura/contingencia" />
+
+### Factura de contingencia [#factura-contingencia]
+
+<Caso id="factura-contingencia" />
+
+Una factura gravada de S/ 236.00 con la serie `0001`.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_contingencia.rs"'>../example/rust/src/casos/factura_contingencia.rs</include>

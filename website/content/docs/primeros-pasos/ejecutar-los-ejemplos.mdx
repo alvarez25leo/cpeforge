@@ -93,32 +93,16 @@ Y así crea el proyecto la fachada para cada servicio:
 
 ## Los casos
 
-| Tipo | Casos |
-| --- | --- |
-| Facturas (25) | `factura`, `factura-anticipo`, `factura-beatose`, `factura-cargos`, `factura-compleja`, `factura-contingencia`, `factura-credito`, `factura-descuento-global`, `factura-descuento-linea`, `factura-descuento-nobase`, `factura-detraccion`, `factura-exonerado`, `factura-exportacion`, `factura-gratuita`, `factura-icbper`, `factura-icbper-gratuita`, `factura-inafecta`, `factura-isc`, `factura-ivap`, `factura-percepcion`, `factura-rel-guia-remision`, `factura-retencion`, `inicio-factura-gravada`, `inicio-factura-exonerada`, `inicio-factura-credito` |
-| Boletas | `boleta`, `boleta-icbper`, `inicio-boleta` |
-| Notas | `nota-credito`, `nota-credito-boleta`, `nota-credito-forma-pago`, `nota-debito` |
-| Resúmenes diarios (RC) | `resumen`, `resumen-contingencia`, `resumen-usd` |
-| Baja (RA) y reversión (RR) | `comunicacion-baja`, `reversion` |
-| Percepción y retención | `percepcion`, `retencion` |
-| Guía de remisión remitente (09) | `guia-remision`, `guia-extra-atributos`, `guia-misma-empresa`, `guia-transporteM1L`, `guia-transportePrivado` |
-| Guía de remisión transportista (31) | `guia-transportista` |
-| Liquidación de compra (04) | `liquidacion-compra`, `liquidacion-compra-oro`, `reversion-liquidacion` |
+Los 48 casos (25 facturas, 3 boletas, 4 notas, resúmenes, bajas, reversiones,
+retención, percepción, liquidaciones de compra y guías de remisión) están en el
+[explorador de ejemplos](/docs/ejemplos), con buscador y enlace a la guía que
+explica cada uno.
 
 `factura-beatose` solo genera XML: su demo original apunta a un servidor de
 terceros.
 
-## Casos de rechazo
-
-Cada uno tiene un cambio deliberado y el código que devuelve el entorno de
-prueba:
-
-| Caso | Cambio deliberado | Código |
-| --- | --- | --- |
-| `guia-sin-fecha-entrega` | Guía de transporte público sin fecha de entrega de bienes | `3617` |
-| `nota-motivo13-con-total` | Nota de crédito con motivo 13 e importe total distinto de cero | `3315` |
-| `resumen-sin-tasa` | Resumen diario sin `porcentajeIgv` en sus líneas | `2992` |
-| `liquidacion-vendedor-ruc` | Liquidación de compra a un vendedor con RUC | `2800` |
+Con `--errores` se generan además cuatro
+[casos de rechazo](/docs/ejemplos/casos-de-rechazo) con un error deliberado.
 
 ## Variables de entorno
 

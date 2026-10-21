@@ -65,14 +65,54 @@ for (const dir of (await readdir(cratesDir)).sort()) {
   });
 }
 
-// Casos del proyecto de ejemplo (`example/rust/src/casos/*.rs`).
-const casosDir = path.join(repo, 'example', 'rust', 'src', 'casos');
-const casos = (await readdir(casosDir)).filter((f) => f.endsWith('.rs') && f !== 'mod.rs').length;
+// Casos del proyecto de ejemplo: la tabla `CASOS` de `casos/mod.rs` da el
+// nombre de cada caso y su módulo; el primer párrafo `//!` del módulo, su
+// descripción.
+const ejemploSrc = path.join(repo, 'example', 'rust', 'src');
+const casosDir = path.join(ejemploSrc, 'casos');
+const modRs = await readFile(path.join(casosDir, 'mod.rs'), 'utf8');
+
+/** Pares `("nombre", modulo::documento)` de una tabla de casos. */
+function caseTable(source) {
+  return [...source.matchAll(/\(\s*"([^"]+)",\s*([a-z0-9_]+)(?:::documento)?,?\s*\)/g)].map(
+    ([, id, fn]) => ({ id, fn }),
+  );
+}
+
+/** Primer párrafo de los comentarios `//!` de un archivo, en una línea. */
+function docSummary(source) {
+  const lines = [];
+  for (const line of source.split(/\r?\n/)) {
+    if (!line.startsWith('//!')) break;
+    const text = line.replace(/^\/\/!\s?/, '');
+    if (text.trim() === '') break;
+    lines.push(text.trim());
+  }
+  return lines.join(' ');
+}
+
+const ejemplos = [];
+for (const { id, fn: module } of caseTable(modRs)) {
+  const file = `example/rust/src/casos/${module}.rs`;
+  const source = await readFile(path.join(repo, file), 'utf8');
+  ejemplos.push({ id, module, file, description: docSummary(source) });
+}
+if (ejemplos.length === 0) throw new Error('No se encontró la tabla CASOS en casos/mod.rs');
+
+// Casos de rechazo (`CASOS_ERROR` de errores.rs).
+const erroresRs = await readFile(path.join(ejemploSrc, 'errores.rs'), 'utf8');
+const rechazos = caseTable(erroresRs.slice(erroresRs.indexOf('CASOS_ERROR'))).map((c) => c.id);
 
 const out = path.join(website, 'generated');
 await mkdir(out, { recursive: true });
 await writeFile(
   path.join(out, 'crates.json'),
-  `${JSON.stringify({ msrv: defaultMsrv, casos, crates }, null, 2)}\n`,
+  `${JSON.stringify({ msrv: defaultMsrv, casos: ejemplos.length, crates }, null, 2)}\n`,
 );
-console.log(`generated/crates.json: ${crates.length} crates, ${casos} casos de ejemplo`);
+await writeFile(
+  path.join(out, 'ejemplos.json'),
+  `${JSON.stringify({ ejemplos, rechazos }, null, 2)}\n`,
+);
+console.log(
+  `generated/: ${crates.length} crates, ${ejemplos.length} casos de ejemplo, ${rechazos.length} de rechazo`,
+);

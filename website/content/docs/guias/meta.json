@@ -1,0 +1,16 @@
+{
+  "title": "Guías",
+  "pages": [
+    "index",
+    "factura",
+    "boleta",
+    "notas",
+    "resumen-diario",
+    "comunicacion-baja",
+    "reversion",
+    "retencion-percepcion",
+    "liquidacion-compra",
+    "guia-remitente",
+    "guia-transportista"
+  ]
+}

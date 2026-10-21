@@ -1,0 +1,68 @@
+---
+title: Boleta de venta
+description: La boleta (tipo 03) para ventas a consumidores finales, enviada sola o en un resumen diario.
+---
+
+La boleta de venta (tipo `03`) sustenta ventas a consumidores finales. Usa el
+mismo modelo que la factura (`Invoice`) y los mismos cálculos; cambian el tipo,
+la serie y el cliente.
+
+| Campo | Factura | Boleta |
+| --- | --- | --- |
+| `tipo_doc` | `"01"` | `"03"` |
+| `serie` | `F001` | `B001` |
+| Cliente | Normalmente con RUC (`"6"`) | Con DNI (`"1"`) u otro documento |
+| `forma_pago` | Obligatoria | No se informa en los casos de ejemplo |
+
+## Dos formas de enviarla
+
+1. **Una por una, con `sendBill`**, como una factura. Es lo que hacen los
+   casos de esta guía: SUNAT responde con el CDR al momento.
+2. **Agrupadas en un [resumen diario](/docs/guias/resumen-diario)** (`RC`),
+   que va por `sendSummary` y se consulta con un ticket.
+
+```rust
+let resultado = see.send(DocumentRef::Invoice(&boleta)).await?;
+```
+
+## Casos de esta guía
+
+<CasosDeGuia guia="boleta" />
+
+### Boleta a persona con DNI [#boleta]
+
+<Caso id="boleta" />
+
+Una boleta gravada de S/ 118.00 a un cliente identificado con DNI
+(`tipo_doc = "1"`).
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/boleta.rs"'>../example/rust/src/casos/boleta.rs</include>
+
+### Boleta con varias líneas y bolsa plástica [#inicio-boleta]
+
+<Caso id="inicio-boleta" />
+
+Una venta de bodega: cuadernos, lapiceros y dos bolsas con el ICBPER vigente
+desde 2023 (S/ 0.50 por bolsa).
+
+| Línea | Valor de venta | IGV | ICBPER |
+| --- | ---: | ---: | ---: |
+| CUADERNO A4 (3 × 10.00) | 30.00 | 5.40 | |
+| LAPICERO AZUL X 10 (2 × 25.00) | 50.00 | 9.00 | |
+| BOLSA (2 bolsas) | 1.00 | 0.18 | 1.00 |
+| **Totales** | **81.00** | **14.58** | **1.00** |
+
+Total: 81.00 + 14.58 + 1.00 = **S/ 96.58**.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/inicio_boleta.rs"'>../example/rust/src/casos/inicio_boleta.rs</include>
+
+### Boleta con ICBPER y redondeo [#boleta-icbper]
+
+<Caso id="boleta-icbper" />
+
+La versión boleta de
+[`factura-icbper`](/docs/guias/factura/impuestos-especiales#factura-icbper),
+con los mismos importes y el mismo redondeo. Usa el factor ICBPER antiguo
+(S/ 0.20) del demo original.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/boleta_icbper.rs"'>../example/rust/src/casos/boleta_icbper.rs</include>

@@ -1,0 +1,89 @@
+---
+title: Notas de crédito y de débito
+description: Corregir, anular o ajustar una factura o boleta ya emitida.
+---
+
+Un comprobante aceptado por SUNAT no se modifica: se corrige con una nota.
+
+- La **nota de crédito** (tipo `07`) reduce o anula: devoluciones, descuentos
+  posteriores, anulación de la operación, correcciones.
+- La **nota de débito** (tipo `08`) aumenta: intereses, penalidades, aumento
+  en el valor.
+
+Ambas usan el modelo `Note`, que contiene una `BaseSale` como la factura, más
+los datos del comprobante afectado y el motivo. Van por `sendBill`.
+
+```rust
+let resultado = see.send(DocumentRef::Note(&nota)).await?;
+```
+
+## Campos propios de la nota
+
+| Campo | Ejemplo | Significado |
+| --- | --- | --- |
+| `tip_doc_afectado` | `"01"` | Tipo del comprobante que se corrige (factura `01`, boleta `03`) |
+| `num_doc_afectado` | `"F001-111"` | Serie y número del comprobante afectado |
+| `cod_motivo` | `"07"` | Motivo: catálogo 09 (crédito) o 10 (débito) |
+| `des_motivo` | `"DEVOLUCION POR ITEM"` | Descripción del motivo |
+
+La serie de la nota empieza como la del comprobante que corrige: `F…` para
+facturas (los casos usan `FF01`) y `B…` para boletas (`BB01`).
+
+### Motivos más usados
+
+| Nota | Código | Motivo |
+| --- | --- | --- |
+| Crédito | `01` | Anulación de la operación |
+| Crédito | `07` | Devolución por ítem |
+| Crédito | `13` | Ajustes de montos y/o fechas de pago |
+| Débito | `02` | Aumento en el valor |
+
+## Casos de esta guía
+
+<CasosDeGuia guia="notas" />
+
+### Nota de crédito por devolución [#nota-credito]
+
+<Caso id="nota-credito" />
+
+Devuelve dos productos de la factura `F001-111` (motivo `07`, devolución por
+ítem) por S/ 236.00. Relaciona además una guía de remisión en `guias`.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/nota_credito.rs"'>../example/rust/src/casos/nota_credito.rs</include>
+
+### Nota de crédito que anula una boleta [#nota-credito-boleta]
+
+<Caso id="nota-credito-boleta" />
+
+Anula la boleta `B001-12` completa (motivo `01`, anulación de la operación),
+con la serie `BB01` y `tip_doc_afectado = "03"`.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/nota_credito_boleta.rs"'>../example/rust/src/casos/nota_credito_boleta.rs</include>
+
+### Ajuste de montos y fechas de pago [#nota-credito-forma-pago]
+
+<Caso id="nota-credito-forma-pago" />
+
+El motivo `13` corrige el **cronograma de pago** de una factura a crédito, no
+sus importes. Por eso:
+
+- **todos los importes van en cero** (líneas y cabecera) y la leyenda dice
+  «SON CERO CON 00/100 SOLES»;
+- la forma de pago y la cuota llevan el **nuevo cronograma**: S/ 236.00 a 5
+  días.
+
+<Callout type="warn" title="Error 3315">
+  SUNAT rechaza una nota con motivo 13 si su importe total no es cero. El demo
+  original usaba 236.00; este caso ya está corregido. Puedes ver el rechazo con
+  el caso [`nota-motivo13-con-total`](/docs/ejemplos/casos-de-rechazo#nota-motivo13-con-total).
+</Callout>
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/nota_credito_forma_pago.rs"'>../example/rust/src/casos/nota_credito_forma_pago.rs</include>
+
+### Nota de débito por aumento en el valor [#nota-debito]
+
+<Caso id="nota-debito" />
+
+Aumenta en S/ 236.00 el valor de la factura `F001-111` (tipo `08`, motivo `02`).
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/nota_debito.rs"'>../example/rust/src/casos/nota_debito.rs</include>

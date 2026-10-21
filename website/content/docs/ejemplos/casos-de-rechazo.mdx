@@ -1,0 +1,53 @@
+---
+title: Casos de rechazo
+description: Cuatro comprobantes con un error deliberado que SUNAT rechaza, para ver cómo se reciben y clasifican los rechazos.
+---
+
+Estos casos parten de un ejemplo aceptado y cambian **un solo dato** para que
+SUNAT lo rechace. Sirven para comprobar que tu sistema recibe y trata bien los
+rechazos: el envío responde `Ok` y `TaxStatus` devuelve `Rejected` con el código
+de la regla. Ver [Estado tributario](/docs/conceptos/estado-tributario).
+
+```bash
+cargo run --release --manifest-path example/rust/Cargo.toml -- --errores             # genera el XML en out/errores/
+cargo run --release --manifest-path example/rust/Cargo.toml -- --errores --enviar    # y los envía
+```
+
+| Caso | Parte de | Cambio deliberado | Código |
+| --- | --- | --- | --- |
+| [`guia-sin-fecha-entrega`](#guia-sin-fecha-entrega) | [`guia-remision`](/docs/guias/guia-remitente#guia-remision) | Quita la fecha de entrega de los bienes en transporte público | `3617` |
+| [`liquidacion-vendedor-ruc`](#liquidacion-vendedor-ruc) | [`liquidacion-compra`](/docs/guias/liquidacion-compra#liquidacion-compra) | El vendedor tiene RUC | `2800` |
+| [`nota-motivo13-con-total`](#nota-motivo13-con-total) | [`nota-credito`](/docs/guias/notas#nota-credito) | Motivo 13 con importe total distinto de cero | `3315` |
+| [`resumen-sin-tasa`](#resumen-sin-tasa) | [`resumen`](/docs/guias/resumen-diario#resumen) | Quita `porcentaje_igv` de las líneas del resumen | `2992` |
+
+Todos usan el correlativo `901`, para no chocar con los casos aceptados.
+
+## Guía sin fecha de entrega [#guia-sin-fecha-entrega]
+
+En transporte público, la API de guías exige la fecha de entrega de los bienes
+al transportista (`fec_entrega_bienes`). Sin ella responde **3617**.
+
+## Liquidación a un vendedor con RUC [#liquidacion-vendedor-ruc]
+
+La liquidación de compra solo se emite a vendedores **sin RUC**. Con un vendedor
+identificado por RUC (`tipo_doc = "6"`), SUNAT responde **2800**. Caso propio de
+CPEForge.
+
+## Nota con motivo 13 e importe [#nota-motivo13-con-total]
+
+Una nota de crédito con motivo `13` (ajuste de montos y fechas de pago) debe
+tener todos sus importes en cero. Con los importes de la nota original, SUNAT
+responde **3315**. Compárala con el caso correcto,
+[`nota-credito-forma-pago`](/docs/guias/notas#nota-credito-forma-pago).
+
+## Resumen sin tasa del IGV [#resumen-sin-tasa]
+
+SUNAT exige la tasa del IGV (`porcentaje_igv`) en cada línea del resumen diario.
+Sin ella responde **2992**.
+
+## El código
+
+Los cuatro casos están en un solo archivo. Cada uno construye el caso positivo
+con `positivo(...)` y cambia el dato:
+
+<include cwd lang="rust" meta='title="example/rust/src/errores.rs"'>../example/rust/src/errores.rs</include>

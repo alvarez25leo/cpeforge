@@ -12,6 +12,7 @@
     "build": "next build",
     "postbuild": "node scripts/flatten-rsc.mjs",
     "start": "serve out",
+    "check:links": "node scripts/check-links.mjs",
     "types:check": "node scripts/generate.mjs && next typegen && tsc --noEmit"
   },
   "dependencies": {

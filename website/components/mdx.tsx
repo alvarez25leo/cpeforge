@@ -6,6 +6,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import type { MDXComponents } from 'mdx/types';
 import { BenchmarkTable } from '@/components/benchmark';
 import { CargoAdd, CargoDeps, CrateBadges, CrateGrid, CrateTable, Version } from '@/components/crates';
+import { Caso, CasosDeGuia, EjemplosExplorer } from '@/components/ejemplos';
 import { Mermaid } from '@/components/mermaid';
 
 export function getMDXComponents(components?: MDXComponents) {
@@ -23,6 +24,9 @@ export function getMDXComponents(components?: MDXComponents) {
     BenchmarkTable,
     CargoAdd,
     CargoDeps,
+    Caso,
+    CasosDeGuia,
+    EjemplosExplorer,
     CrateBadges,
     CrateGrid,
     CrateTable,

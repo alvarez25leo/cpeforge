@@ -1,0 +1,113 @@
+---
+title: Afectación del IGV
+description: Facturas exoneradas, inafectas, de exportación y gratuitas, y cómo combinarlas en un mismo comprobante.
+---
+
+Cada línea indica cómo le afecta el IGV con `tip_afe_igv` (catálogo 07). Ese
+código decide en qué total de cabecera suma la línea y si su IGV se cobra.
+
+| `tip_afe_igv` | Afectación | Suma en | ¿Se cobra el IGV? |
+| --- | --- | --- | --- |
+| `10` | Gravado, operación onerosa | `mto_oper_gravadas` | Sí |
+| `11` a `16` | Gravado, retiro o entrega gratuita (premio, donación, retiro, publicidad…) | `mto_oper_gratuitas` | No: va en `mto_igv_gratuitas` |
+| `17` | Gravado, IVAP | `mto_base_ivap` | IVAP en lugar de IGV. Ver [IVAP](/docs/guias/factura/impuestos-especiales#factura-ivap) |
+| `20` | Exonerado, operación onerosa | `mto_oper_exoneradas` | No hay IGV |
+| `21` | Exonerado, transferencia gratuita | `mto_oper_gratuitas` | No hay IGV |
+| `30` | Inafecto, operación onerosa | `mto_oper_inafectas` | No hay IGV |
+| `31` a `37` | Inafecto, retiro o entrega gratuita | `mto_oper_gratuitas` | No hay IGV |
+| `40` | Exportación | `mto_oper_exportacion` | No hay IGV |
+
+En una línea exonerada, inafecta o de exportación, `igv` y `total_impuestos` son
+`0` y `mto_precio_unitario` es igual a `mto_valor_unitario`.
+
+## Casos de esta guía
+
+<CasosDeGuia guia="factura/afectacion-igv" />
+
+### Factura exonerada [#inicio-factura-exonerada]
+
+<Caso id="inicio-factura-exonerada" />
+
+Una línea exonerada (`tip_afe_igv = "20"`): el total es el valor de venta.
+
+| Campo | Importe |
+| --- | ---: |
+| `mto_oper_exoneradas` | 200.00 |
+| `mto_igv`, `total_impuestos` | 0.00 |
+| **`mto_imp_venta`** | **200.00** |
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/inicio_factura_exonerada.rs"'>../example/rust/src/casos/inicio_factura_exonerada.rs</include>
+
+### Factura exonerada (demo) [#factura-exonerado]
+
+<Caso id="factura-exonerado" />
+
+La misma idea con los datos compartidos del demo: dos kilos a S/ 50.00,
+exonerados.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_exonerado.rs"'>../example/rust/src/casos/factura_exonerado.rs</include>
+
+### Factura inafecta [#factura-inafecta]
+
+<Caso id="factura-inafecta" />
+
+Igual que la exonerada, pero con `tip_afe_igv = "30"`: el importe suma en
+`mto_oper_inafectas`.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_inafecta.rs"'>../example/rust/src/casos/factura_inafecta.rs</include>
+
+### Factura de exportación [#factura-exportacion]
+
+<Caso id="factura-exportacion" />
+
+Una exportación de bienes en dólares a un cliente del extranjero:
+
+| Campo | Valor | Por qué |
+| --- | --- | --- |
+| `tipo_operacion` | `"0200"` | Exportación de bienes (catálogo 51) |
+| `tipo_moneda` | `"USD"` | Moneda de la operación |
+| `client.tipo_doc` / `num_doc` | `"0"` / `"-"` | Cliente sin documento peruano (catálogo 06) |
+| `tip_afe_igv` | `"40"` | Exportación |
+| `cod_prod_sunat` | `"44121618"` | Código de producto SUNAT, obligatorio en exportación |
+| `mto_oper_exportacion` | `100.00` | Total exportado |
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_exportacion.rs"'>../example/rust/src/casos/factura_exportacion.rs</include>
+
+### Transferencia gratuita [#factura-gratuita]
+
+<Caso id="factura-gratuita" />
+
+Una entrega gratuita de un bien gravado (`tip_afe_igv = "11"`, retiro por
+premio). Lo importante:
+
+- En la línea, `mto_valor_unitario` y `mto_precio_unitario` son `0`, y el
+  valor de referencia va en **`mto_valor_gratuito`**.
+- En la cabecera, el valor va en **`mto_oper_gratuitas`** y su IGV en
+  **`mto_igv_gratuitas`**, que **no se cobra**: `mto_imp_venta` es `0`.
+- Lleva la leyenda **`1002`** («TRANSFERENCIA GRATUITA DE UN BIEN Y/O
+  SERVICIO PRESTADO GRATUITAMENTE»).
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_gratuita.rs"'>../example/rust/src/casos/factura_gratuita.rs</include>
+
+### Todas las afectaciones en una factura [#factura-compleja]
+
+<Caso id="factura-compleja" />
+
+Cinco líneas: gravada (`10`), exonerada (`20`), inafecta (`30`), gravada
+gratuita (`13`) e inafecta gratuita (`32`).
+
+| Total de cabecera | Líneas | Importe |
+| --- | --- | ---: |
+| `mto_oper_gravadas` | P001 | 200.00 |
+| `mto_oper_exoneradas` | P002 | 100.00 |
+| `mto_oper_inafectas` | P003 | 200.00 |
+| `mto_oper_gratuitas` | P004 + P005 | 300.00 |
+| `mto_igv` | Solo P001 | 36.00 |
+| `mto_igv_gratuitas` | Solo P004 (no se cobra) | 18.00 |
+| `valor_venta` | Gravadas + exoneradas + inafectas | 500.00 |
+| **`mto_imp_venta`** | 500.00 + 36.00 | **536.00** |
+
+Lleva las leyendas `1000` (importe en letras) y `1002` (transferencia
+gratuita).
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_compleja.rs"'>../example/rust/src/casos/factura_compleja.rs</include>

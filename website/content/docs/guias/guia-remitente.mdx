@@ -1,0 +1,119 @@
+---
+title: Guía de remisión remitente
+description: La GRE remitente (tipo 09) que sustenta el traslado de bienes, enviada por la API REST de guías de SUNAT.
+---
+
+La guía de remisión remitente (tipo `09`) la emite **quien envía los bienes**
+(el vendedor o el propietario) para sustentar su traslado. Se emite con el
+formato **2022** (`version = "2022"`) y **se envía por la API REST de guías**,
+no por SOAP.
+
+Usa el modelo `Despatch` y la fachada `Api`, que obtiene el token OAuth2, arma
+el ZIP con su hash y lo envía. La respuesta es un ticket:
+
+```rust
+let envio = api.send(DocumentRef::Despatch(&guia)).await?;
+if let Some(ticket) = envio.ticket.as_deref() {
+    let estado = api.get_status(ticket).await?;
+}
+```
+
+Ver cómo crear `Api` en [cpeforge](/docs/paquetes/cpeforge#api-guías-de-remisión)
+y las credenciales en
+[Entornos y credenciales](/docs/primeros-pasos/entornos-y-credenciales#credenciales-de-la-api-de-guías).
+
+## Campos
+
+| Campo | Ejemplo | Significado |
+| --- | --- | --- |
+| `version` | `"2022"` | Formato de la guía electrónica vigente |
+| `tipo_doc` | `"09"` | Guía de remisión remitente |
+| `serie`, `correlativo` | `"T001"`, `"121"` | La serie empieza con `T` |
+| `company` | | El remitente que emite la guía |
+| `destinatario` | | Quien recibe los bienes |
+| `envio` | `Shipment` | Datos del traslado |
+| `details` | `DespatchDetail` | Bienes trasladados: `cantidad`, `unidad`, `descripcion`, `codigo` |
+| `add_docs` | `AdditionalDoc` | Documentos relacionados (catálogo 61) |
+
+### El traslado (`Shipment`)
+
+| Campo | Ejemplo | Significado |
+| --- | --- | --- |
+| `cod_traslado` | `"01"` | Motivo (catálogo 20): `01` venta, `04` entre establecimientos de la misma empresa… |
+| `mod_traslado` | `"01"` / `"02"` | Modalidad (catálogo 18): `01` transporte público, `02` privado |
+| `fec_traslado` | | Fecha de inicio del traslado |
+| `fec_entrega_bienes` | | Fecha de entrega al transportista. **Obligatoria en transporte público** |
+| `peso_total`, `und_peso_total` | `12.5`, `"KGM"` | Peso bruto total |
+| `partida`, `llegada` | `Direction::new(ubigeo, dirección)` | Puntos de partida y llegada |
+| `transportista` | `Transportist` | En transporte público: RUC, razón social y registro MTC |
+| `vehiculo`, `choferes` | `Vehicle`, `Driver` | En transporte privado |
+| `indicadores` | `SUNAT_Envio_IndicadorTrasladoVehiculoM1L` | Traslado en vehículo de categoría M1 o L |
+
+<Callout type="warn" title="Error 3617: fecha de entrega">
+  La API de guías exige `fec_entrega_bienes` en transporte público. Sin ella,
+  rechaza la guía con el error 3617. Ver el caso
+  [`guia-sin-fecha-entrega`](/docs/ejemplos/casos-de-rechazo#guia-sin-fecha-entrega).
+</Callout>
+
+## Casos de esta guía
+
+<CasosDeGuia guia="guia-remitente" />
+
+### Transporte público [#guia-remision]
+
+<Caso id="guia-remision" />
+
+Una venta (`cod_traslado = "01"`) trasladada por una empresa de transportes
+(`mod_traslado = "01"`): la guía identifica al transportista con su RUC y su
+registro MTC, e incluye la fecha de entrega de los bienes.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/guia_remision.rs"'>../example/rust/src/casos/guia_remision.rs</include>
+
+### Transporte privado [#guia-transporteprivado]
+
+<Caso id="guia-transportePrivado" />
+
+El remitente traslada con sus propios vehículos (`mod_traslado = "02"`): la guía
+informa el vehículo principal (placa `ABC123`), uno secundario y el conductor
+con su licencia.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/guia_transporteprivado.rs"'>../example/rust/src/casos/guia_transporteprivado.rs</include>
+
+### Vehículo de categoría M1 o L [#guia-transportem1l]
+
+<Caso id="guia-transporteM1L" />
+
+En un traslado privado con un vehículo de categoría M1 o L (autos y motos), basta
+el indicador `SUNAT_Envio_IndicadorTrasladoVehiculoM1L`: no se informan placa ni
+conductor.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/guia_transportem1l.rs"'>../example/rust/src/casos/guia_transportem1l.rs</include>
+
+### Traslado entre establecimientos propios [#guia-misma-empresa]
+
+<Caso id="guia-misma-empresa" />
+
+Traslado entre dos establecimientos de la misma empresa
+(`cod_traslado = "04"`). El **destinatario es el propio emisor**, y la partida y
+la llegada indican su RUC y el código de cada establecimiento anexo
+(`cod_local`).
+
+<Callout title="Errores 2554 y 3414">
+  Si el destinatario o los anexos de partida y llegada no tienen el RUC del
+  emisor, SUNAT rechaza la guía.
+</Callout>
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/guia_misma_empresa.rs"'>../example/rust/src/casos/guia_misma_empresa.rs</include>
+
+### Documento adicional y atributos del bien [#guia-extra-atributos]
+
+<Caso id="guia-extra-atributos" />
+
+Añade dos cosas a la guía de transporte público:
+
+- un **documento relacionado** en `add_docs`: una constancia de depósito del
+  IVAP (código `49`);
+- **atributos del bien** en la línea: la partida arancelaria (`7020`) y el
+  indicador de bien normalizado (`7022`), además del código de producto SUNAT.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/guia_extra_atributos.rs"'>../example/rust/src/casos/guia_extra_atributos.rs</include>

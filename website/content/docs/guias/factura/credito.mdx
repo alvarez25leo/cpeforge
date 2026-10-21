@@ -1,0 +1,71 @@
+---
+title: Factura a crédito
+description: Forma de pago a crédito con cuotas y fechas de pago.
+---
+
+Desde 2021, SUNAT exige indicar la forma de pago de cada factura: **contado** o
+**crédito**. A crédito, hay que informar el monto pendiente y cada cuota con su
+fecha de pago.
+
+```rust
+use cpeforge_core::model::sale::{Cuota, PaymentTerms};
+
+forma_pago: Some(PaymentTerms::credito(d(236, 0), None)), // monto pendiente
+cuotas: Some(vec![
+    Cuota { monto: d(100, 0), fecha_pago: fecha_cuota_1, ..Cuota::default() },
+    Cuota { monto: d(136, 0), fecha_pago: fecha_cuota_2, ..Cuota::default() },
+]),
+```
+
+| Campo | Qué es |
+| --- | --- |
+| `PaymentTerms::contado()` | Pago al contado |
+| `PaymentTerms::credito(monto, moneda)` | Pago a crédito: el monto neto pendiente de pago. Con `None`, la moneda es la del comprobante |
+| `cuotas` | Lista de `Cuota` con `monto` y `fecha_pago` |
+
+<Callout title="Las cuotas deben sumar el monto pendiente">
+  En los dos casos, la suma de las cuotas es igual al monto de
+  `PaymentTerms::credito`: 100.00 + 136.00 = 236.00, y 86.18 + 86.18 = 172.36.
+</Callout>
+
+## Casos de esta guía
+
+<CasosDeGuia guia="factura/credito" />
+
+### Factura a crédito en dos cuotas [#factura-credito]
+
+<Caso id="factura-credito" />
+
+Una factura de S/ 236.00 a pagar en dos cuotas, a 7 y 14 días de la fecha
+base: S/ 100.00 y S/ 136.00.
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/factura_credito.rs"'>../example/rust/src/casos/factura_credito.rs</include>
+
+### Crédito con líneas mixtas y bolsa plástica [#inicio-factura-credito]
+
+<Caso id="inicio-factura-credito" />
+
+Un caso completo, cercano a una venta real: cuatro líneas de distinto tipo, dos
+cuotas de S/ 86.18 a 30 y 60 días, orden de compra (`compra`) y guía
+relacionada.
+
+| Línea | Afectación | Valor de venta | IGV | ICBPER |
+| --- | --- | ---: | ---: | ---: |
+| PRODUCTO 1 (2 × 50.00) | Gravado (`10`) | 100.00 | 18.00 | |
+| LIBRO IMPRESO (2 × 25.00) | Inafecto (`30`) | 50.00 | | |
+| MUESTRA GRATIS | Gravado gratuito (`11`) | 20.00 | 3.60 (no se cobra) | |
+| BOLSA (4 bolsas) | Gravado (`10`) | 2.00 | 0.36 | 2.00 |
+
+| Total de cabecera | Importe |
+| --- | ---: |
+| `mto_oper_gravadas` (100.00 + 2.00) | 102.00 |
+| `mto_oper_inafectas` | 50.00 |
+| `mto_oper_gratuitas` | 20.00 |
+| `mto_igv` (18.00 + 0.36) | 18.36 |
+| `icbper` | 2.00 |
+| **`mto_imp_venta`** (102.00 + 50.00 + 18.36 + 2.00) | **172.36** |
+
+La bolsa usa el ICBPER vigente desde 2023: S/ 0.50 por bolsa. Ver
+[ICBPER](/docs/guias/factura/impuestos-especiales#factura-icbper).
+
+<include cwd lang="rust" meta='title="example/rust/src/casos/inicio_factura_credito.rs"'>../example/rust/src/casos/inicio_factura_credito.rs</include>

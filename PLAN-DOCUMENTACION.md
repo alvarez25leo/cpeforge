@@ -8,11 +8,18 @@
 > 18 guías por comprobante (8 de factura) con los 48 casos explicados e
 > incluidos desde el repo, el explorador de ejemplos (`generated/ejemplos.json`
 > + `lib/ejemplos.ts`), los casos de rechazo y los ejemplos por crate, y el
-> script `pnpm check:links`. Decisiones tomadas: `website/` en el repo, GitHub
-> Pages en `/cpeforge`, solo español, con la página de Greenter. Pendiente:
-> las guías transversales del plan (representación impresa, leer XML,
-> validación, códigos de error, producción), F6 (referencia y comunidad) y el
-> resto de F7 (ejecutar `check:links` en CI). Cambios respecto al plan:
+> script `pnpm check:links`. Después se añadieron las 5 guías transversales
+> (representación impresa, leer XML, validación, códigos de error y
+> producción) y F6: referencia (buscador de los 2 077 códigos SUNAT generado
+> desde `CodeErrors.xml`, catálogos, servicios, glosario y docs.rs) y
+> comunidad (contribuir, FAQ, versiones y licencia). El sitio tiene 75
+> páginas. F7 completó la CI: `docs.yml` ejecuta `types:check`, `build` y
+> `check:links` en cada PR y despliega en Pages desde `main`; el sitio tiene
+> `sitemap.xml` y `robots.txt`. Decisiones tomadas: `website/` en el repo,
+> GitHub Pages en `/cpeforge`, solo español, con la página de Greenter.
+> Pendiente, del lado del repositorio: activar Pages (Source: GitHub Actions)
+> y, opcionalmente, el campo `homepage` de los crates. Cambios respecto al
+> plan:
 >
 > - Fumadocs MDX 15 ya no usa `source.config.ts`: las colecciones se definen en
 >   `lib/source.ts` con `fumadocs-mdx/macro`.

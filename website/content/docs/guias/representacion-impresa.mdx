@@ -1,0 +1,159 @@
+---
+title: Representación impresa
+description: Generar el HTML del comprobante con su QR, personalizar las plantillas y convertirlo a PDF de forma segura.
+---
+
+La representación impresa es lo que recibe tu cliente: el comprobante legible,
+con el código QR y el resumen de la firma. `cpeforge-report` la genera en
+**HTML**; para PDF se usa un navegador sin cabeza.
+
+<CargoDeps crates={['cpeforge-core', 'cpeforge-report']} />
+
+<Mermaid
+  chart={`flowchart LR
+  A[Modelo] --> B[HtmlReport]
+  X[XML firmado] -->|hash_sign| P[ReportParameters]
+  L[Logo] --> P
+  P --> B
+  B --> H[HTML + QR SVG]
+  H -->|Gotenberg / Chromium| PDF[PDF]`}
+/>
+
+## Paso a paso
+
+<Steps>
+<Step>
+
+### Prepara los parámetros
+
+```rust
+use cpeforge_report::{Extra, ReportParameters, TrustedHtml, XmlUtils};
+
+let mut params = ReportParameters::default();
+// Obligatorio: sin logo, el render falla.
+params.system.logo = Some(std::fs::read("logo.png")?);
+// El resumen (DigestValue) del XML firmado que enviaste a SUNAT.
+params.system.hash = Some(XmlUtils::default().hash_sign(xml_firmado.as_bytes())?);
+// Opcionales.
+params.user.header = Some(TrustedHtml::new("Telf: <b>(01) 000-0000</b>"));
+params.user.extras = Some(vec![Extra::new("Condición de pago", "Contado")]);
+```
+
+</Step>
+<Step>
+
+### Elige la plantilla y genera el HTML
+
+```rust
+use cpeforge_core::ports::Report;
+use cpeforge_report::{DefaultTemplateResolver, HtmlReport, TemplateResolver};
+
+let mut report = HtmlReport::default();
+report.set_template(DefaultTemplateResolver.template(&factura)?);
+let html: Option<String> = Report::render(&report, &factura, &params)?;
+```
+
+`HtmlReport` es `Send + Sync`: créalo una vez al iniciar tu servicio y
+compártelo; las plantillas compiladas se reutilizan.
+
+</Step>
+<Step>
+
+### Conviértelo a PDF (opcional)
+
+Ver [Convertir a PDF](#convertir-a-pdf).
+
+</Step>
+</Steps>
+
+## Las plantillas
+
+`DefaultTemplateResolver` elige la plantilla según el documento:
+
+| Documento | Plantilla |
+| --- | --- |
+| `Invoice`, `Note` | `invoice` (A4). `invoice2` es un diseño alternativo que eliges con `set_template` |
+| `Despatch` | `despatch` (guía remitente y transportista) |
+| `Retention` | `retention` |
+| `Perception` | `perception` |
+| `Summary` | `summary` |
+| `Voided`, `Reversion` | `voided` |
+| `PurchaseSettlement` | `settlement` |
+
+## Los parámetros
+
+| Campo | Para qué | Notas |
+| --- | --- | --- |
+| `system.logo` | Logo del emisor | **Obligatorio**. PNG, GIF o JPEG, hasta 10 MiB por defecto |
+| `system.hash` | Resumen de la firma | Se obtiene del XML firmado con `XmlUtils::hash_sign` (no verifica la firma) |
+| `system.qr` | URL del QR | Para la guía de remisión |
+| `user.header`, `user.footer` | HTML propio arriba y abajo | `TrustedHtml`: **no se escapa** |
+| `user.extras` | Filas de información adicional | Lista de `Extra::new(nombre, valor)` |
+| `user.num_igv` | Porcentaje de IGV impreso | Opcional |
+
+## El código QR
+
+El QR de una venta sigue el formato de SUNAT:
+
+```text
+RUC|tipo|serie|correlativo|IGV|total|fecha|tipoDocCliente|numDocCliente|
+```
+
+Los importes van con dos decimales y la fecha como `AAAA-MM-DD`. El módulo
+`cpeforge_report::qr` también genera el SVG de cualquier contenido (`qr::svg`).
+
+## Plantillas propias
+
+Con una carpeta de plantillas, cualquier archivo con el mismo nombre sustituye
+al integrado:
+
+```rust
+use cpeforge_report::{HtmlReport, ReportOptions};
+
+let report = HtmlReport::new(ReportOptions::with_template_dir("plantillas/"));
+```
+
+```text
+plantillas/
+├── invoice.html.twig     # sustituye la factura
+└── assets/style.css      # sustituye los estilos
+```
+
+Las plantillas usan el dialecto **MiniJinja**. Los filtros propios (`catalog`,
+`n_format`, `image_b64`, `date`), las funciones (`legend`, `qrCode`) y las
+diferencias con Twig están en la página de
+[cpeforge-report](/docs/paquetes/report#plantillas-propias).
+
+<Callout type="warn" title="Una plantilla propia es código de confianza">
+  Puede desactivar el escape (`|raw`) y consumir CPU. La carpeta de
+  plantillas no debe poder escribirla nadie más que tu equipo.
+</Callout>
+
+## Convertir a PDF
+
+El HTML se convierte a PDF con un navegador sin cabeza. Por ejemplo, con
+[Gotenberg](https://gotenberg.dev):
+
+```bash
+docker run --rm -p 3000:3000 gotenberg/gotenberg:8 \
+  gotenberg --chromium-disable-javascript=true
+```
+
+```bash
+curl -X POST http://localhost:3000/forms/chromium/convert/html \
+  -F "files=@factura.html;filename=index.html" -o factura.pdf
+```
+
+Por seguridad, ejecuta el navegador **sin JavaScript y sin salida a red**: el
+HTML incluye textos de tus clientes, y aunque se escapan, es una defensa en
+profundidad. Bloquea la salida a internet en la red del contenedor (por
+ejemplo, una red interna de Docker o una regla de cortafuegos). El logo va
+incrustado en el HTML, así que no necesita red.
+
+## Ejemplo completo
+
+<include cwd lang="rust" meta='title="crates/report/examples/invoice_html.rs"'>../crates/report/examples/invoice_html.rs</include>
+
+```bash
+cargo run -p cpeforge-report --example invoice_html > factura.html
+```

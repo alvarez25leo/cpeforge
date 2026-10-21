@@ -1,0 +1,62 @@
+---
+title: Versiones
+description: Las versiones actuales de cada crate, cómo se versionan y dónde ver su historial.
+---
+
+Cada crate se versiona y se publica por separado. Las versiones de esta página
+se leen de los `Cargo.toml` del repositorio en cada publicación de la
+documentación.
+
+<CrateTable />
+
+## Cómo se versiona
+
+- **SemVer.** En `0.x`, un cambio incompatible sube la versión menor
+  (`0.3.1` → `0.4.0`) y un cambio compatible, el parche (`0.3.1` → `0.3.2`).
+- **Los crates evolucionan a ritmos distintos.** Por eso `cpeforge` puede estar
+  en `0.3` y `cpeforge-core` en `0.2`. Usa siempre las versiones que indica
+  [Instalación](/docs/primeros-pasos/instalacion).
+- **`cpeforge-xcodes` sube de versión con cada actualización** de las reglas de
+  validación de SUNAT.
+- **Las enumeraciones y opciones pueden crecer en un parche**, porque son
+  `#[non_exhaustive]`. Ver [Estado y SemVer](/docs/introduccion/estado-y-semver).
+
+## Historial
+
+El historial de versiones de cada crate, con sus fechas de publicación, está en
+crates.io:
+
+| Crate | Historial |
+| --- | --- |
+| `cpeforge` | [crates.io/crates/cpeforge/versions](https://crates.io/crates/cpeforge/versions) |
+| `cpeforge-core` | [crates.io/crates/cpeforge-core/versions](https://crates.io/crates/cpeforge-core/versions) |
+| `cpeforge-xml` | [crates.io/crates/cpeforge-xml/versions](https://crates.io/crates/cpeforge-xml/versions) |
+| `cpeforge-xmldsig` | [crates.io/crates/cpeforge-xmldsig/versions](https://crates.io/crates/cpeforge-xmldsig/versions) |
+| `cpeforge-ws` | [crates.io/crates/cpeforge-ws/versions](https://crates.io/crates/cpeforge-ws/versions) |
+| `cpeforge-gre-api` | [crates.io/crates/cpeforge-gre-api/versions](https://crates.io/crates/cpeforge-gre-api/versions) |
+| `cpeforge-report` | [crates.io/crates/cpeforge-report/versions](https://crates.io/crates/cpeforge-report/versions) |
+| `cpeforge-xml-parser` | [crates.io/crates/cpeforge-xml-parser/versions](https://crates.io/crates/cpeforge-xml-parser/versions) |
+| `cpeforge-validator` | [crates.io/crates/cpeforge-validator/versions](https://crates.io/crates/cpeforge-validator/versions) |
+| `cpeforge-xcodes` | [crates.io/crates/cpeforge-xcodes/versions](https://crates.io/crates/cpeforge-xcodes/versions) |
+| `cpeforge-ubl-validator` | [crates.io/crates/cpeforge-ubl-validator/versions](https://crates.io/crates/cpeforge-ubl-validator/versions) |
+| `cpeforge-cpe-validator` | [crates.io/crates/cpeforge-cpe-validator/versions](https://crates.io/crates/cpeforge-cpe-validator/versions) |
+| `cpeforge-xml-limits` | [crates.io/crates/cpeforge-xml-limits/versions](https://crates.io/crates/cpeforge-xml-limits/versions) |
+
+Los cambios de código están en el
+[historial de commits](https://github.com/alvarez25leo/cpeforge/commits/main).
+
+## Actualizar
+
+```bash
+cargo update -p cpeforge -p cpeforge-core -p cpeforge-ws -p cpeforge-gre-api
+```
+
+`cargo update` actualiza dentro de la versión compatible (por ejemplo, de
+`0.3.0` a `0.3.1`). Para pasar a una versión menor nueva (`0.4`), cambia el
+requisito en tu `Cargo.toml` y revisa las notas del cambio.
+
+## Los crates `greenter-rs-*`
+
+Los crates publicados con el nombre `greenter-rs-*` antes del cambio de nombre
+ya no existen en crates.io. Sus sucesores son los `cpeforge-*`. Ver
+[Viniendo de Greenter](/docs/migracion/desde-greenter).

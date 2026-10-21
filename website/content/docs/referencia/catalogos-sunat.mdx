@@ -1,0 +1,193 @@
+---
+title: Catálogos de SUNAT
+description: Los catálogos de códigos de SUNAT que usan los comprobantes, con los valores más comunes y el campo del modelo donde van.
+---
+
+Muchos campos de los modelos guardan un código de un catálogo de SUNAT (por
+ejemplo, `tip_afe_igv = "10"` del catálogo 07). Esta página resume los catálogos
+que aparecen en la documentación y en los ejemplos.
+
+<Callout title="La fuente oficial">
+  Los catálogos completos y vigentes están en el «Anexo N.° 8: Catálogo de
+  códigos» que SUNAT publica en
+  [cpe.sunat.gob.pe](https://cpe.sunat.gob.pe/guias-y-manuales). Esta página
+  solo recoge los valores más usados.
+</Callout>
+
+## Dónde se usa cada catálogo
+
+| Catálogo | Contenido | Campo del modelo |
+| --- | --- | --- |
+| 01 | Tipo de documento | `tipo_doc`, `tip_doc_afectado`, `RelatedDocument::tipo_doc` |
+| 06 | Tipo de documento de identidad | `Client::tipo_doc`, `SettlementSeller::tipo_doc` |
+| 07 | Afectación del IGV | `SaleDetail::tip_afe_igv` |
+| 08 | Sistema de cálculo del ISC | `SaleDetail::tip_sis_isc` |
+| 09 | Motivo de la nota de crédito | `Note::cod_motivo` (tipo `07`) |
+| 10 | Motivo de la nota de débito | `Note::cod_motivo` (tipo `08`) |
+| 12 | Documentos relacionados | `Prepayment::tipo_doc_rel` |
+| 18 | Modalidad de traslado | `Shipment::mod_traslado` |
+| 19 | Estado del ítem del resumen diario | `SummaryDetail::estado` |
+| 20 | Motivo de traslado | `Shipment::cod_traslado` |
+| 25 | Código de producto SUNAT (UNSPSC) | `SaleDetail::cod_prod_sunat` |
+| 51 | Tipo de operación | `Invoice::tipo_operacion`, `PurchaseSettlement::tipo_operacion` |
+| 52 | Leyendas | `Legend::code` |
+| 53 | Cargos, descuentos y otras deducciones | `Charge::cod_tipo`, `SalePerception::cod_reg` |
+| 54 | Bienes y servicios sujetos a detracción | `Detraction::cod_bien_detraccion` |
+| 55 | Propiedades del ítem | `DetailAttribute::code` |
+| 59 | Medios de pago | `Detraction::cod_medio_pago` |
+| 60 | Condición del domicilio (liquidación de compra) | `SettlementSeller::condicion`, `SettlementPlace::condicion` |
+| 61 | Documentos relacionados con el traslado | `AdditionalDoc::tipo` |
+
+## 01: Tipo de documento
+
+| Código | Documento |
+| --- | --- |
+| `01` | Factura |
+| `03` | Boleta de venta |
+| `04` | Liquidación de compra |
+| `07` | Nota de crédito |
+| `08` | Nota de débito |
+| `09` | Guía de remisión remitente |
+| `20` | Comprobante de retención |
+| `31` | Guía de remisión transportista |
+| `40` | Comprobante de percepción |
+
+## 06: Documento de identidad
+
+| Código | Documento |
+| --- | --- |
+| `0` | Sin documento (no domiciliado) |
+| `1` | DNI |
+| `4` | Carné de extranjería |
+| `6` | RUC |
+| `7` | Pasaporte |
+
+## 07: Afectación del IGV
+
+| Código | Afectación |
+| --- | --- |
+| `10` | Gravado, operación onerosa |
+| `11`–`16` | Gravado, retiros y entregas gratuitas |
+| `17` | Gravado, IVAP |
+| `20` | Exonerado, operación onerosa |
+| `21` | Exonerado, transferencia gratuita |
+| `30` | Inafecto, operación onerosa |
+| `31`–`37` | Inafecto, retiros y entregas gratuitas |
+| `40` | Exportación |
+
+Ver [Afectación del IGV](/docs/guias/factura/afectacion-igv).
+
+## 09 y 10: Motivos de las notas
+
+| Nota | Código | Motivo |
+| --- | --- | --- |
+| Crédito | `01` | Anulación de la operación |
+| Crédito | `06` | Devolución total |
+| Crédito | `07` | Devolución por ítem |
+| Crédito | `13` | Ajustes de montos y/o fechas de pago |
+| Débito | `01` | Intereses por mora |
+| Débito | `02` | Aumento en el valor |
+| Débito | `03` | Penalidades u otros conceptos |
+
+## 18 y 20: Traslado
+
+| Catálogo | Código | Significado |
+| --- | --- | --- |
+| 18 | `01` | Transporte público |
+| 18 | `02` | Transporte privado |
+| 20 | `01` | Venta |
+| 20 | `02` | Compra |
+| 20 | `04` | Traslado entre establecimientos de la misma empresa |
+| 20 | `08` | Importación |
+| 20 | `09` | Exportación |
+| 20 | `13` | Otros |
+| 20 | `14` | Venta sujeta a confirmación del comprador |
+| 20 | `18` | Traslado emisor itinerante CP |
+| 20 | `19` | Traslado a zona primaria |
+
+## 19: Estado del ítem del resumen
+
+| Código | Estado |
+| --- | --- |
+| `1` | Adicionar |
+| `2` | Modificar |
+| `3` | Anulado |
+
+## 51: Tipo de operación
+
+| Código | Operación |
+| --- | --- |
+| `0101` | Venta interna |
+| `0200` | Exportación de bienes |
+| `0501` | Compra interna (liquidación de compra) |
+| `0503` | Compra de oro (liquidación de compra) |
+| `1001` | Operación sujeta a detracción |
+| `2001` | Operación sujeta a percepción |
+
+## 52: Leyendas
+
+| Código | Leyenda |
+| --- | --- |
+| `1000` | Monto en letras |
+| `1002` | Transferencia gratuita de un bien y/o servicio prestado gratuitamente |
+| `2000` | Comprobante de percepción |
+| `2006` | Operación sujeta a detracción |
+| `2007` | Operación sujeta al IVAP |
+
+## 53: Cargos y descuentos
+
+| Código | Concepto |
+| --- | --- |
+| `00` | Descuento por ítem que afecta la base imponible |
+| `01` | Descuento por ítem que no afecta la base imponible |
+| `02` | Descuento global que afecta la base imponible |
+| `03` | Descuento global que no afecta la base imponible |
+| `04` | Descuento global por anticipos gravados |
+| `46` | Recargo al consumo y/o propinas |
+| `51` | Percepción, venta interna |
+| `62` | Retención del IGV |
+
+Ver [Descuentos y cargos](/docs/guias/factura/descuentos-y-cargos).
+
+## 54: Bienes y servicios sujetos a detracción
+
+| Código | Bien o servicio |
+| --- | --- |
+| `001` | Azúcar y melaza de caña |
+| `002` | Arroz |
+| `004` | Recursos hidrobiológicos |
+| `012` | Intermediación laboral y tercerización |
+| `014` | Carnes y despojos comestibles |
+| `019` | Arrendamiento de bienes |
+| `020` | Mantenimiento y reparación de bienes muebles |
+| `022` | Otros servicios empresariales |
+| `027` | Servicio de transporte de carga |
+| `030` | Contratos de construcción |
+| `037` | Demás servicios gravados con el IGV |
+
+## 59: Medios de pago
+
+| Código | Medio de pago |
+| --- | --- |
+| `001` | Depósito en cuenta |
+| `002` | Giro |
+| `003` | Transferencia de fondos |
+| `004` | Orden de pago |
+| `005` | Tarjeta de débito |
+| `008` | Efectivo, sin obligación de usar medio de pago |
+| `009` | Efectivo, en los demás casos |
+| `999` | Otros medios de pago |
+
+## 60: Condición del domicilio (liquidación de compra)
+
+| Código | Condición |
+| --- | --- |
+| `01` | Punto de venta |
+| `02` | Producción |
+| `03` | Extracción |
+
+## En la representación impresa
+
+`cpeforge-report` incluye tablas propias de algunos catálogos (01, 06, 18, 19,
+20, 54 y 59) para el filtro `catalog` de sus plantillas, con los textos que se
+imprimen en el comprobante.

@@ -1,0 +1,97 @@
+---
+title: Contribuir
+description: Cómo reportar errores, proponer cambios y la puerta de calidad que debe pasar todo cambio.
+---
+
+CPEForge es software libre y las contribuciones son bienvenidas: reportes de
+errores, casos de SUNAT que no funcionan, mejoras de la documentación y código.
+
+## Reportar un error
+
+Abre un issue en
+[GitHub](https://github.com/alvarez25leo/cpeforge/issues) con:
+
+- la versión de los crates (`cargo tree -i cpeforge`) y de Rust (`rustc --version`);
+- qué esperabas y qué ocurrió, con el error completo;
+- si es un rechazo de SUNAT, el **código** y el **mensaje**;
+- si puedes, el XML generado **con datos ficticios**.
+
+<Callout type="warn" title="Nunca publiques datos reales">
+  No adjuntes certificados, claves, credenciales SOL ni XML con datos reales de
+  contribuyentes. Sustituye RUC, nombres e importes por valores de prueba.
+</Callout>
+
+## Preparar el entorno
+
+```bash
+git clone https://github.com/alvarez25leo/cpeforge.git
+cd cpeforge
+cargo build --workspace
+```
+
+Necesitas Rust 1.88 o posterior, OpenSSL 3, libxml2 y libxslt (para los
+validadores). Ver [Requisitos](/docs/primeros-pasos/requisitos).
+
+Para las pruebas de `cpeforge-ubl-validator`, descarga antes los esquemas:
+
+```bash
+bash scripts/prepare_ubl_validator_reference.sh
+```
+
+## La puerta de calidad
+
+Todo cambio debe pasar estas comprobaciones, las mismas que ejecuta la CI:
+
+```bash
+cargo fmt --all -- --check
+cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
+cargo test --workspace --all-features --locked
+RUSTDOCFLAGS="-D warnings" cargo doc --workspace --no-deps --all-features --locked
+cargo deny check
+cargo audit
+```
+
+La CI compila y prueba con Rust 1.85, 1.88 y estable, y ejecuta todos los
+ejemplos de los crates.
+
+## Reglas del código
+
+- **Rust idiomático, pequeño y documentado.** Todo elemento público lleva su
+  documentación.
+- **Tipos explícitos** para dinero (`Decimal`), fechas (`jiff`, zona
+  `America/Lima`), códigos y errores. Nada de `f32` ni `f64` para importes.
+- **Una entrada externa nunca causa `panic!`.** Sin `unwrap()` ni `expect()`:
+  errores tipados con contexto.
+- **Lógica pura separada de la E/S.** Reloj y transporte inyectables, para
+  pruebas deterministas.
+- **XML seguro:** sin DTD ni entidades externas, con límites de tamaño,
+  profundidad y nodos.
+- **Criptografía solo con OpenSSL**, a través del crate `openssl`.
+- **`unsafe` solo** en el puente FFI ya revisado de los validadores.
+- **Dependencias:** versiones vigentes compatibles con el MSRV, revisando
+  mantenimiento, licencia y avisos de seguridad, compartidas en
+  `[workspace.dependencies]`.
+- **Pruebas sin red:** ninguna prueba llama a SUNAT ni a un OSE de producción, ni
+  usa datos reales.
+
+## Cambios que alteran la salida
+
+Si un cambio modifica el XML, la firma o cualquier salida observable, actualiza
+sus fixtures en `tests/reference/`. Si además se aparta del comportamiento de
+referencia, regístralo en `tests/reference/<crate>/differences.json` con el
+motivo.
+
+## Documentación
+
+Este sitio está en la carpeta `website/` del repositorio. Las páginas son
+archivos MDX en `website/content/docs/`, y cada página tiene un enlace para
+editarla en GitHub.
+
+```bash
+cd website
+pnpm install
+pnpm dev
+```
+
+Las versiones de los crates, los ejemplos y el catálogo de códigos se generan a
+partir del código: no se escriben a mano. Ver el `README.md` de `website/`.

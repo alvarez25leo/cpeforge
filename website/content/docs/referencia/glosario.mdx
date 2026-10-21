@@ -1,0 +1,45 @@
+---
+title: Glosario
+description: Términos de la facturación electrónica peruana y de CPEForge.
+---
+
+## Facturación electrónica
+
+- **Anticipo**: Pago adelantado por una venta futura. Se factura al recibirlo y se descuenta en la factura final. Ver [Anticipos](/docs/guias/factura/anticipos).
+- **Boleta de venta**: Comprobante (tipo `03`) para ventas a consumidores finales.
+- **CDR (Constancia de Recepción)**: Respuesta de SUNAT a un comprobante: un XML firmado (dentro de un ZIP) con el código de aceptación, rechazo u observación. Es el sustento de que SUNAT recibió el comprobante.
+- **Clave SOL**: Credenciales del sistema SUNAT Operaciones en Línea: RUC, usuario y clave. Para facturar se usa un usuario secundario.
+- **Comunicación de baja (RA)**: Documento que anula facturas y notas ya aceptadas.
+- **Contingencia**: Emisión fuera del sistema electrónico habitual (por ejemplo, ante una caída), con series numéricas como `0001`.
+- **CPE (Comprobante de Pago Electrónico)**: Cualquier comprobante emitido electrónicamente: factura, boleta, notas, retención, percepción, liquidación de compra.
+- **Detracción**: Sistema por el que el cliente deposita un porcentaje del pago en una cuenta del proveedor en el Banco de la Nación.
+- **GRE (Guía de Remisión Electrónica)**: Documento que sustenta el traslado de bienes. Puede ser remitente (`09`) o transportista (`31`) y se envía por la API REST de guías.
+- **ICBPER**: Impuesto al consumo de las bolsas de plástico: un monto fijo por bolsa.
+- **IGV**: Impuesto General a las Ventas (18 % en general).
+- **ISC**: Impuesto Selectivo al Consumo, sobre ciertos bienes.
+- **IVAP**: Impuesto a la Venta del Arroz Pilado (4 %), en lugar del IGV.
+- **Leyenda**: Texto codificado del comprobante (catálogo 52), como el importe en letras (`1000`).
+- **Liquidación de compra**: Comprobante (tipo `04`) que emite el comprador cuando el vendedor no tiene RUC.
+- **Nota de crédito / débito**: Comprobantes (tipos `07` y `08`) que reducen o aumentan un comprobante ya emitido.
+- **OSE (Operador de Servicios Electrónicos)**: Empresa autorizada por SUNAT para validar comprobantes en su nombre. CPEForge se conecta a SUNAT; para un OSE, se configura su servicio.
+- **Percepción**: Sistema por el que el vendedor cobra al cliente un importe adicional a cuenta del IGV.
+- **Representación impresa**: Versión legible del comprobante que recibe el cliente (HTML o PDF), con el QR y el resumen de la firma.
+- **Resumen diario (RC)**: Documento que informa en un envío las boletas y sus notas de un día, incluidas las anulaciones.
+- **Retención**: Sistema por el que el cliente retiene una parte del pago al proveedor.
+- **Reversión (RR)**: Anulación de retenciones, percepciones y liquidaciones de compra.
+- **RUC**: Registro Único de Contribuyentes: el número de 11 dígitos de una empresa o persona con negocio.
+- **Ticket**: Número que devuelve SUNAT en los envíos asíncronos (resúmenes, bajas, guías). Se consulta después para obtener el resultado.
+- **Ubigeo**: Código de 6 dígitos de departamento, provincia y distrito (`150101` es Lima, Lima, Lima).
+- **UBL (Universal Business Language)**: Estándar XML de OASIS en el que SUNAT basa sus comprobantes (versiones 2.0 y 2.1).
+
+## Técnicos
+
+- **C14N**: Canonicalización XML: la forma normalizada del XML que se firma.
+- **`Decimal`**: Tipo de número decimal exacto (`rust_decimal`) que usa CPEForge para los importes.
+- **Fachada**: Tipo que encadena todos los pasos en una sola llamada: `See` (SOAP) y `Api` (guías).
+- **Feature**: Parte opcional de un crate que se activa en `Cargo.toml` (por ejemplo, `xcodes` o `serde`).
+- **MSRV**: Versión mínima de Rust con la que compila un crate.
+- **`TaxStatus`**: Clasificación de una respuesta de SUNAT en aceptado, observado, rechazado, excepción, pendiente o indeterminado. Ver [Estado tributario](/docs/conceptos/estado-tributario).
+- **XMLDSig**: Estándar de firma digital de XML que exige SUNAT.
+- **XXE**: Ataque que usa entidades externas de XML para leer archivos o hacer peticiones. CPEForge rechaza los DTD y las entidades externas.
+- **`Zoned`**: Tipo de fecha con zona horaria (`jiff`) que usa CPEForge.

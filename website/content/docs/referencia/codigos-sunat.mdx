@@ -1,0 +1,23 @@
+---
+title: Códigos de retorno de SUNAT
+description: Buscador de los códigos de error y observación de SUNAT, con su mensaje oficial y cómo los clasifica TaxStatus.
+---
+
+El catálogo completo de [`cpeforge-xcodes`](/docs/paquetes/xcodes), tomado de la
+hoja «CódigosRetorno» de las reglas de validación de SUNAT. Busca por número
+(`2017`, `0100`) o por palabras del mensaje (`RUC`, `fecha`, `IGV`).
+
+<XcodesResumen />
+
+<XcodesSearch />
+
+La etiqueta de cada código es la variante de
+[`TaxStatus`](/docs/conceptos/estado-tributario) que corresponde a su rango. Qué
+hacer con cada tipo de código está en
+[Códigos de error](/docs/guias/codigos-de-error).
+
+<Callout title="Códigos que no están aquí">
+  Algunos servicios devuelven códigos propios que no forman parte de las reglas
+  de validación (por ejemplo, el `3617` de la API de guías o el `98` de un
+  ticket en proceso).
+</Callout>

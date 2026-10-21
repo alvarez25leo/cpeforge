@@ -11,6 +11,12 @@
     "retencion-percepcion",
     "liquidacion-compra",
     "guia-remitente",
-    "guia-transportista"
+    "guia-transportista",
+    "---Temas transversales---",
+    "representacion-impresa",
+    "leer-xml",
+    "validacion",
+    "codigos-de-error",
+    "produccion"
   ]
 }

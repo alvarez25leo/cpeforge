@@ -1,0 +1,56 @@
+---
+title: Servicios de SUNAT
+description: Las URL de los servicios SOAP y de la API de guías que usa CPEForge, por entorno.
+---
+
+## Servicios SOAP (`SunatEndpoints`)
+
+Constantes de `cpeforge_ws::soap::SunatEndpoints`:
+
+| Constante | Entorno | Comprobantes | URL |
+| --- | --- | --- | --- |
+| `FE_BETA` | Beta | Facturas, boletas, notas, liquidaciones, resúmenes y bajas | `https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService` |
+| `FE_HOMOLOGACION` | Homologación | Igual que `FE_BETA` | `https://www.sunat.gob.pe/ol-ti-itcpgem-sqa/billService` |
+| `FE_PRODUCCION` | Producción | Igual que `FE_BETA` | `https://e-factura.sunat.gob.pe/ol-ti-itcpfegem/billService` |
+| `RETENCION_BETA` | Beta | Retenciones, percepciones y reversiones | `https://e-beta.sunat.gob.pe/ol-ti-itemision-otroscpe-gem-beta/billService` |
+| `RETENCION_PRODUCCION` | Producción | Retenciones, percepciones y reversiones | `https://e-factura.sunat.gob.pe/ol-ti-itemision-otroscpe-gem/billService` |
+| `FE_CONSULTA_CDR` | Producción | Consulta del estado y del CDR de un comprobante | `https://e-factura.sunat.gob.pe/ol-it-wsconscpegem/billConsultService` |
+| `GUIA_BETA` | Beta | **Obsoleto**: las guías van por la API REST | `https://e-beta.sunat.gob.pe/ol-ti-itemision-guia-gem-beta/billService` |
+| `GUIA_PRODUCCION` | Producción | **Obsoleto**: las guías van por la API REST | `https://e-guiaremision.sunat.gob.pe/ol-ti-itemision-guia-gem/billService` |
+
+`SunatEndpoints::WSDL_ENDPOINT` es la URL del WSDL publicado. CPEForge **nunca
+lo descarga**: valida el contrato contra una copia local fijada.
+
+## Operaciones SOAP
+
+| Operación | Comprobantes | Respuesta | En CPEForge |
+| --- | --- | --- | --- |
+| `sendBill` | Factura, boleta, notas, liquidación, retención, percepción | CDR en un ZIP | `See::send`, `BillSender` |
+| `sendSummary` | Resumen diario, baja, reversión | Ticket | `See::send`, `SummarySender` |
+| `getStatus` | Consulta de un ticket | Código y CDR | `See::get_status`, `ExtService` |
+| `getStatus` / `getStatusCdr` (consulta) | Consulta por RUC, tipo, serie y número | Estado y CDR | `ConsultCdrService` |
+
+Todas se autentican con WS-Security: usuario `RUC + usuario SOL` y la clave SOL.
+
+## API REST de guías de remisión
+
+| Uso | Host | En CPEForge |
+| --- | --- | --- |
+| Token OAuth2 | `https://api-seguridad.sunat.gob.pe/v1` | `cpeforge::api::DEFAULT_AUTH_HOST`, `Configuration::auth()` |
+| Envío y consulta de guías | `https://api-cpe.sunat.gob.pe/v1` | `cpeforge::api::DEFAULT_CPE_HOST`, `Configuration::cpe(token)` |
+
+`Api::with_defaults` usa estos hosts. Para un entorno de pruebas, crea la fábrica
+con `ApiFactory::new` y los hosts de ese entorno (el proyecto de ejemplo usa la
+URL del JSON de credenciales).
+
+| Operación | Método | En CPEForge |
+| --- | --- | --- |
+| Pedir token | `POST …/clientessol/{client_id}/oauth2/token/` | `AuthApi::get_token` |
+| Enviar una guía | `POST …/contribuyente/gem/comprobantes/{nombre}` | `CpeApi::enviar_cpe`, `Api::send` |
+| Consultar un envío | `GET …/contribuyente/gem/comprobantes/envios/{ticket}` | `CpeApi::consultar_envio`, `Api::get_status` |
+
+## Seguridad de la conexión
+
+En todas las llamadas: TLS verificado, tiempos límite, tamaño máximo de
+respuesta, sin proxy implícito, sin reintentos y redirecciones solo dentro del
+mismo origen. Ver [Seguridad](/docs/conceptos/seguridad#red).

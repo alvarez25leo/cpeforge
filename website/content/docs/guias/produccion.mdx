@@ -1,0 +1,170 @@
+---
+title: Producción
+description: Lista de comprobación, despliegue en contenedor, conservación de comprobantes, reintentos y monitoreo para emitir en producción.
+---
+
+Pasar de beta a producción es cambiar tres cosas (servicio, credenciales y
+certificado), pero operar un sistema de facturación pide algo más. Esta guía
+reúne lo que conviene tener resuelto antes del primer comprobante real.
+
+## Lista de comprobación
+
+<Steps>
+<Step>
+
+### Servicios y credenciales de producción
+
+- `SunatEndpoints::FE_PRODUCCION` y `RETENCION_PRODUCCION`.
+- Un **usuario secundario** de Clave SOL solo para facturación.
+- Para guías: el `client_id` y el `client_secret` de producción de la API de
+  guías.
+- Ver [Entornos y credenciales](/docs/primeros-pasos/entornos-y-credenciales).
+
+</Step>
+<Step>
+
+### Certificado vigente, fuera del código
+
+- El certificado digital de la empresa, convertido a PEM. Ver
+  [Certificado digital](/docs/primeros-pasos/certificado-digital).
+- Guardado en un gestor de secretos o en un volumen montado, nunca en el
+  repositorio ni en la imagen.
+- Un aviso antes de que venza (`X509Certificate::expiration`).
+
+</Step>
+<Step>
+
+### Numeración y fecha
+
+- Los correlativos los asigna **tu sistema**, sin huecos ni repeticiones por
+  serie. Un comprobante rechazado consume su número.
+- La fecha de emisión en hora de Lima (`to_peru_time`), aunque el servidor
+  esté en UTC.
+
+</Step>
+<Step>
+
+### Importes cuadrados y validación
+
+- CPEForge no recalcula impuestos: valida tus cálculos antes de emitir. Ver
+  [Validación](/docs/guias/validacion).
+
+</Step>
+<Step>
+
+### Conservación
+
+- Guarda el **XML firmado** y el **ZIP del CDR** (`bill.cdr_zip`) de cada
+  comprobante: son tu sustento tributario.
+- Guarda también la representación impresa que entregaste.
+
+</Step>
+<Step>
+
+### Reintentos y consulta de estado
+
+- Ningún método reintenta. Diseña tu propio flujo (ver abajo).
+
+</Step>
+</Steps>
+
+## Un flujo de envío robusto
+
+<Mermaid
+  chart={`flowchart TD
+  A[Asignar número y guardar el modelo] --> B[get_xml_signed]
+  B --> C[Guardar el XML firmado<br/>estado: firmado]
+  C --> D[send_xml_file]
+  D -->|Ok| E{TaxStatus}
+  D -->|Err de transporte| F[estado: desconocido]
+  F --> G[Consultar el estado del comprobante]
+  G --> E
+  E -->|Accepted / con observaciones| H[Guardar CDR<br/>estado: aceptado]
+  E -->|Rejected| I[estado: rechazado<br/>emitir con otro número]
+  E -->|Exception| J[Corregir y reintentar<br/>con el mismo número]
+  E -->|Pending / Indeterminate| K[Reintentar la consulta más tarde]`}
+/>
+
+1. **Guarda el XML firmado antes de enviarlo.** Si el proceso cae a mitad del
+   envío, sabes qué se envió.
+2. **Trata los errores de transporte como «estado desconocido»**, no como «no
+   enviado»: el comprobante pudo llegar a SUNAT.
+3. **Consulta antes de reenviar.** Para facturas, boletas y notas, el servicio
+   de consulta de CDR responde con el estado y el CDR de un comprobante:
+
+   ```rust
+   use cpeforge_ws::outcome::TaxStatus;
+   use cpeforge_ws::services::ConsultCdrService;
+   use cpeforge_ws::soap::{SoapClient, SunatEndpoints};
+
+   let cliente = SoapClient::new(transporte, SunatEndpoints::FE_CONSULTA_CDR, usuario_sol, clave);
+   let consulta = ConsultCdrService::new(cliente)
+       .get_status_cdr("20123456789", "01", "F001", 123)
+       .await?;
+   let estado = TaxStatus::of_consult(&consulta);
+   ```
+
+   Para resúmenes, bajas y guías, guarda el **ticket** y consúltalo hasta que
+   deje de estar pendiente.
+4. **Usa una cola** (o una tabla de pendientes) para los envíos y las consultas,
+   con reintentos espaciados. SUNAT limita los envíos muy seguidos.
+
+## Despliegue en contenedor
+
+CPEForge compila a un solo binario. En la imagen final solo hacen falta OpenSSL
+y los certificados raíz para TLS. La base de datos de zonas horarias va dentro
+del binario (`jiff` con `tzdb-bundle-always`), así que no necesitas `tzdata`.
+
+```dockerfile title="Dockerfile"
+FROM rust:1.88-bookworm AS build
+WORKDIR /app
+COPY . .
+RUN cargo build --release --locked
+
+FROM debian:bookworm-slim
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends libssl3 ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+COPY --from=build /app/target/release/mi-facturador /usr/local/bin/mi-facturador
+USER nobody
+CMD ["mi-facturador"]
+```
+
+Si usas los validadores XSD o XSL, añade `libxml2-dev` y `libxslt1-dev` a la
+etapa de compilación, y `libxml2` y `libxslt1.1` a la imagen final.
+
+## Secretos
+
+- Pasa el certificado, la Clave SOL y las credenciales de la API de guías por
+  variables de entorno o archivos montados desde tu gestor de secretos.
+- Los tipos de CPEForge **no muestran secretos** en `Debug` ni en los errores:
+  puedes registrar errores sin filtrar credenciales.
+- Rota la Clave SOL del usuario secundario y renueva el certificado antes de
+  su vencimiento.
+
+## Muchas empresas
+
+Si emites para varias empresas, crea una fachada por empresa (o por tarea) con
+su propio certificado y Clave SOL, y comparte la tienda de tokens de la API de
+guías: separa empresas y ambientes por sí sola. Ver
+[Concurrencia y volumen](/docs/conceptos/concurrencia-y-volumen).
+
+## Monitoreo
+
+Mide al menos:
+
+| Métrica | Por qué |
+| --- | --- |
+| Comprobantes por `TaxStatus` | Un aumento de `Rejected` indica un error en tus datos; de `Exception`, un problema de credenciales o del servicio |
+| Pendientes de consulta | Tickets o envíos en estado desconocido que no se resuelven |
+| Latencia de SUNAT | Los tiempos de respuesta varían mucho; ajusta los reintentos |
+| Días para el vencimiento del certificado | Un certificado vencido detiene la emisión |
+| Errores de transporte | Fallos de red o de TLS hacia SUNAT |
+
+## Mantenerse al día
+
+- **Reglas de SUNAT:** cambian varias veces al año. Sigue las versiones nuevas
+  de `cpeforge-xcodes` y, si validas con XSL, actualiza las hojas.
+- **Dependencias:** `cargo update` y `cargo audit` con regularidad.
+- **CPEForge:** la API sigue SemVer; actualizar dentro de la misma versión menor
+  no rompe tu código. Ver [Estado y SemVer](/docs/introduccion/estado-y-semver).

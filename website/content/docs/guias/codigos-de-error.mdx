@@ -1,0 +1,95 @@
+---
+title: Códigos de error de SUNAT
+description: Cómo leer un código de retorno de SUNAT, qué significa cada rango y qué hacer con los más frecuentes.
+---
+
+Cada respuesta de SUNAT trae un código. El rango del código dice qué pasó, y
+`TaxStatus` hace esa clasificación por ti:
+
+| Rango | `TaxStatus` | Significa | Qué hacer |
+| --- | --- | --- | --- |
+| `0` | `Accepted` | Aceptado | Guardar el CDR |
+| `0100`–`1999` | `Exception` | SUNAT no procesó el envío (credenciales, formato, servicio) | Corregir y **reenviar con el mismo número**, tras consultar su estado |
+| `2000`–`3999` | `Rejected` | Rechazado por una regla de negocio | Corregir y emitir **con otro número**: este ya no se puede usar |
+| `4000` o más | `AcceptedWithObservations` | Aceptado, con observaciones | Guardar el CDR y corregir el dato en los siguientes comprobantes |
+| `98` (ticket) | `Pending` | Aún en proceso | Volver a consultar el ticket |
+
+<XcodesResumen />
+
+Busca cualquier código en el
+[buscador de códigos SUNAT](/docs/referencia/codigos-sunat).
+
+## El mensaje de un código
+
+El catálogo de [`cpeforge-xcodes`](/docs/paquetes/xcodes) traduce el código a su
+mensaje oficial. Con la feature `xcodes`, `See` lo usa directamente:
+
+```rust
+use cpeforge_core::ports::ErrorCodeProvider;
+use cpeforge_xcodes::XmlErrorCodeProvider;
+
+let catalogo = XmlErrorCodeProvider::new()?;
+println!("{}", catalogo.get("2800"));
+```
+
+## Leer el error de una respuesta
+
+```rust
+use cpeforge_ws::outcome::TaxStatus;
+
+if let SendResult::Bill(bill) = see.send(DocumentRef::Invoice(&factura)).await? {
+    match TaxStatus::of_bill(&bill) {
+        TaxStatus::Rejected | TaxStatus::Exception => {
+            // Sin CDR, el código viene en el error de la respuesta…
+            let error = bill.base.error.as_ref();
+            // …y con CDR, en el propio CDR.
+            let cdr = bill.cdr_response.as_ref();
+            let codigo = cdr.and_then(|c| c.code.as_deref())
+                .or_else(|| error.and_then(|e| e.code.as_deref()));
+            eprintln!("SUNAT {codigo:?}: {}", catalogo.get(codigo.unwrap_or_default()));
+        }
+        TaxStatus::AcceptedWithObservations => {
+            let notas = bill.cdr_response.as_ref().and_then(|c| c.notes.as_ref());
+            eprintln!("Observaciones: {notas:?}");
+        }
+        _ => {}
+    }
+}
+```
+
+## Códigos frecuentes
+
+### Excepciones (reintentar tras corregir)
+
+- <CodigoSunat codigo="0102" />. Revisa el RUC, el usuario secundario y la
+  clave de `set_clave_sol`.
+- <CodigoSunat codigo="0111" />. El usuario secundario no tiene permiso para
+  enviar comprobantes.
+- <CodigoSunat codigo="0112" />. Usa un usuario secundario, no el principal.
+- <CodigoSunat codigo="0127" />. Revisa que consultas el ticket en el mismo
+  servicio y con la misma Clave SOL con los que enviaste.
+- <CodigoSunat codigo="1033" />. **No reenvíes**: consulta su estado.
+
+### Rechazos que muestran los casos de ejemplo
+
+- <CodigoSunat codigo="2992" />. Ver
+  [Resumen diario](/docs/guias/resumen-diario).
+- <CodigoSunat codigo="3315" />. Ver [Notas](/docs/guias/notas#nota-credito-forma-pago).
+- `3617`: la guía de transporte público no tiene fecha de entrega de los
+  bienes. Este código lo devuelve la API de guías y no figura en el catálogo de
+  reglas de validación. Ver [Guía remitente](/docs/guias/guia-remitente).
+- <CodigoSunat codigo="2800" />. Ver
+  [Liquidación de compra](/docs/guias/liquidacion-compra).
+
+### Observaciones
+
+- <CodigoSunat codigo="4000" />.
+
+## Si el código no está en el catálogo
+
+El catálogo corresponde a las reglas de validación de la fecha indicada arriba.
+Algunos servicios, como la API de guías, devuelven además códigos propios que
+no están en él. Si SUNAT devuelve un código que no figura, el catálogo devuelve
+un texto vacío y
+`TaxStatus` lo clasifica igualmente por su rango. Actualiza `cpeforge-xcodes`
+cuando se publique una versión con las reglas nuevas.

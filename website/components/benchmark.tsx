@@ -1,3 +1,5 @@
+import { formatoNumero } from '@/lib/numeros';
+
 /**
  * Datos de docs/benchmark.md (corrida del 2026-10-20, Apple M5, mediana de 30
  * llamadas por caso, suma de los 44 casos comparables). Al publicar una corrida
@@ -47,7 +49,7 @@ export function BenchmarkTable() {
                     />
                   </div>
                   <span className="w-14 text-right font-mono font-semibold tabular-nums">
-                    {row.factor.toLocaleString('es-PE')}×
+                    {formatoNumero(row.factor)}×
                   </span>
                 </div>
               </td>

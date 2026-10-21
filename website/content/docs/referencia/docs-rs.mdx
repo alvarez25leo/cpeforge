@@ -1,0 +1,34 @@
+---
+title: Referencia de la API
+description: La documentación generada de cada crate en docs.rs, tipo por tipo.
+---
+
+Esta documentación explica conceptos, guías y ejemplos. La referencia completa
+de cada tipo, función y módulo se genera a partir del código y se publica en
+**docs.rs** con cada versión.
+
+<CrateTable />
+
+## Qué buscar en cada crate
+
+| Necesitas | Empieza en |
+| --- | --- |
+| Las fachadas `See` y `Api` | [docs.rs/cpeforge](https://docs.rs/cpeforge) |
+| Los modelos (`Invoice`, `Despatch`…) | [docs.rs/cpeforge-core](https://docs.rs/cpeforge-core), módulo `model` |
+| `TaxStatus` y `SunatEndpoints` | [docs.rs/cpeforge-ws](https://docs.rs/cpeforge-ws), módulos `outcome` y `soap` |
+| `SignedXml` y `TrustPolicy` | [docs.rs/cpeforge-xmldsig](https://docs.rs/cpeforge-xmldsig), módulos `sunat` y `trust` |
+| Los builders de XML | [docs.rs/cpeforge-xml](https://docs.rs/cpeforge-xml) |
+| `HtmlReport` y sus parámetros | [docs.rs/cpeforge-report](https://docs.rs/cpeforge-report) |
+
+## Generar la referencia en local
+
+Desde la raíz del repositorio:
+
+```bash
+cargo doc --workspace --no-deps --all-features --open
+```
+
+La CI genera la documentación con `RUSTDOCFLAGS="-D warnings"`, así que un
+enlace roto en la documentación hace fallar la compilación. Además, el lint
+`missing_docs` y `clippy -D warnings` obligan a documentar todo elemento
+público.

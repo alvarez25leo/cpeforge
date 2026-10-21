@@ -1,0 +1,49 @@
+---
+title: Licencia
+description: CPEForge se distribuye con licencia MIT. Atribuciones del material de terceros y relación con SUNAT.
+---
+
+CPEForge es software libre con **licencia MIT**: puedes usarlo, copiarlo,
+modificarlo, fusionarlo, publicarlo, distribuirlo, sublicenciarlo y venderlo,
+también en productos comerciales, siempre que conserves el aviso de copyright y
+de permiso.
+
+El texto completo está en el archivo
+[LICENSE](https://github.com/alvarez25leo/cpeforge/blob/main/LICENSE) del
+repositorio, y cada crate lo incluye en su paquete.
+
+## Material de terceros
+
+CPEForge es un proyecto independiente que tomó como referencia funcional el SDK
+PHP [Greenter](https://github.com/thegreenter/greenter) v5.3.0, también con
+licencia MIT. Algunos crates incluyen material derivado de ese proyecto y
+reproducen su aviso de copyright en el archivo `LICENSE-THIRD-PARTY` de su
+paquete:
+
+| Crate | Material incluido |
+| --- | --- |
+| `cpeforge-xml` | Marcado UBL de las plantillas de documentos |
+| `cpeforge-xcodes` | El catálogo `CodeErrors.xml` |
+| `cpeforge-report` | Plantillas HTML, CSS y tablas de catálogos, adaptadas a MiniJinja |
+| `cpeforge-core`, `cpeforge-validator`, `cpeforge-xml-parser`, `cpeforge-ws`, `cpeforge-gre-api`, `cpeforge`, `cpeforge-xmldsig`, `cpeforge-cpe-validator`, `cpeforge-ubl-validator` | Partes del modelo de datos, de las reglas y de la API pública |
+
+El detalle está en el archivo
+[NOTICE](https://github.com/alvarez25leo/cpeforge/blob/main/NOTICE).
+
+## Lo que no se distribuye
+
+Los recursos WSDL y XSD de SUNAT, las reglas XSL de SUNAT y los archivos de
+prueba **no forman parte de los paquetes publicados**. Los esquemas XSD de UBL
+tampoco se empaquetan, por sus licencias: se descargan aparte. Ver
+[Validación](/docs/guias/validacion).
+
+## Sin afiliación
+
+CPEForge **no está afiliado a SUNAT** ni a Greenter. Los nombres de SUNAT y de
+sus servicios se usan solo para describir con qué interopera.
+
+## Sin garantía
+
+Como indica la licencia MIT, el software se ofrece «tal cual», sin garantías de
+ningún tipo. Tú eres responsable de verificar que los comprobantes que emites
+cumplen la normativa tributaria vigente.

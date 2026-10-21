@@ -8,6 +8,8 @@ import { BenchmarkTable } from '@/components/benchmark';
 import { CargoAdd, CargoDeps, CrateBadges, CrateGrid, CrateTable, Version } from '@/components/crates';
 import { Caso, CasosDeGuia, EjemplosExplorer } from '@/components/ejemplos';
 import { Mermaid } from '@/components/mermaid';
+import { CodigoSunat, XcodesResumen } from '@/components/xcodes';
+import { XcodesSearch } from '@/components/xcodes-search';
 
 export function getMDXComponents(components?: MDXComponents) {
   return {
@@ -31,6 +33,9 @@ export function getMDXComponents(components?: MDXComponents) {
     CrateGrid,
     CrateTable,
     Mermaid,
+    CodigoSunat,
+    XcodesResumen,
+    XcodesSearch,
     Version,
     ...components,
   } satisfies MDXComponents;

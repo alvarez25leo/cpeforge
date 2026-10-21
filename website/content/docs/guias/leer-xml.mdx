@@ -1,0 +1,123 @@
+---
+title: Leer XML de comprobantes
+description: Convertir el XML de un comprobante (propio o de un proveedor) en los modelos tipados, verificando antes su firma.
+---
+
+Muchos sistemas no solo emiten: también **reciben** comprobantes. Las facturas
+de tus proveedores llegan como XML firmado, y para registrarlas necesitas sus
+datos. `cpeforge-xml-parser` convierte ese XML en los mismos modelos que usas
+para emitir.
+
+<CargoDeps crates={['cpeforge-core', 'cpeforge-xml-parser', 'cpeforge-xmldsig']} />
+
+## El flujo recomendado
+
+<Mermaid
+  chart={`flowchart LR
+  A[XML recibido] --> B{¿Firma válida?<br/>SignedXml::verify_xml}
+  B -->|No| R[Rechazar]
+  B -->|Sí| C{¿Firmante confiable?<br/>TrustPolicy}
+  C -->|No| R
+  C -->|Sí| D[InvoiceParser::parse]
+  D --> E[Invoice tipado]
+  E --> F[Registrar la compra]`}
+/>
+
+<Steps>
+<Step>
+
+### Verifica la firma
+
+```rust
+use cpeforge_xmldsig::sunat::SignedXml;
+
+let xml = std::fs::read_to_string("20123456789-01-F001-45.xml")?;
+let mut verificador = SignedXml::new();
+verificador.set_reject_duplicate_ids(true); // protección contra «signature wrapping»
+if !verificador.verify_xml(&xml)? {
+    return Err("la firma no es válida: el XML fue modificado".into());
+}
+```
+
+</Step>
+<Step>
+
+### Decide si confías en el firmante (opcional)
+
+Una firma válida solo dice que el XML no cambió desde que se firmó. Para saber
+**quién** lo firmó y si confías en él, evalúa el certificado con
+`TrustPolicy` y tus raíces de confianza. Ver
+[cpeforge-xmldsig](/docs/paquetes/xmldsig#validez-matemática-no-es-confianza).
+
+</Step>
+<Step>
+
+### Léelo como modelo
+
+```rust
+use cpeforge_core::ports::DocumentParser;
+use cpeforge_xml_parser::{InvoiceParser, ParseOptions};
+
+let parser = InvoiceParser::with_options(ParseOptions::new());
+let Some(factura) = parser.parse(xml.as_bytes())? else {
+    return Err("el XML no es una factura".into());
+};
+
+let base = &factura.base;
+println!("{:?}-{:?}", base.serie, base.correlativo);
+println!("Proveedor: {:?}", base.company.as_ref().and_then(|c| c.ruc.as_deref()));
+println!("Total: {:?}", base.mto_imp_venta);
+```
+
+</Step>
+</Steps>
+
+<Callout title="El CDR también cuenta">
+  Antes de registrar una compra, comprueba que SUNAT la aceptó: pide al
+  proveedor el CDR o consulta el comprobante con el servicio de consulta de
+  CDR (`ConsultCdrService` de `cpeforge-ws`).
+</Callout>
+
+## Qué parser usar
+
+El elemento raíz del XML indica el tipo:
+
+| Raíz del XML | Parser | Modelo |
+| --- | --- | --- |
+| `Invoice` | `InvoiceParser` | `Invoice` (factura y boleta) |
+| `CreditNote`, `DebitNote` | `NoteParser` | `Note` |
+| `DespatchAdvice` | `DespatchParser` | `Despatch` |
+| `SummaryDocuments` | `SummaryParser` | `Summary` |
+| `VoidedDocuments` | `VoidedParser` | `Voided` o `Reversion` (según el prefijo `RA` o `RR`) |
+| `Retention` | `RetentionParser` | `Retention` |
+| `Perception` | `PerceptionParser` | `Perception` |
+
+## Lo que debes saber
+
+- **Las fechas** se interpretan en `America/Lima`, o en la zona que indiques
+  con `ParseOptions::with_time_zone`.
+- **Los importes** son `Decimal` exactos.
+- **Los campos ausentes** quedan en `None`: el parser no inventa datos.
+- **El XML hostil se rechaza**: DTD, entidades externas, más de 10 MiB, más de
+  64 niveles o 1 000 000 de nodos, y codificaciones no admitidas. Ajusta los
+  límites con `ParseOptions::with_limits`.
+
+## Consultas puntuales con `XmlReader`
+
+Si solo necesitas un par de datos, `XmlReader` consulta el XML con un
+subconjunto de XPath, sin construir el modelo completo:
+
+```rust
+use cpeforge_xml_parser::XmlReader;
+
+let reader = XmlReader::load_xml(xml.as_bytes())?;
+let numero = reader.value("cbc:ID", None)?;
+// RUC del emisor en UBL 2.1.
+let ruc_emisor = reader.value(
+    "cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID",
+    None,
+)?;
+```
+
+Ver [cpeforge-xml-parser](/docs/paquetes/xml-parser) para el detalle de las
+consultas admitidas.

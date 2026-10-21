@@ -1,0 +1,113 @@
+---
+title: Validación antes de enviar
+description: Las tres capas de validación de CPEForge (modelo, esquema XSD y reglas de SUNAT) para detectar rechazos sin gastar envíos.
+---
+
+Un rechazo de SUNAT cuesta un número correlativo: el comprobante rechazado no se
+puede volver a enviar con el mismo número. Validar antes de enviar evita la
+mayoría de los rechazos. CPEForge ofrece tres capas, de la más rápida a la más
+completa:
+
+| Capa | Crate | Qué revisa | Necesita |
+| --- | --- | --- | --- |
+| 1. Modelo | [`cpeforge-validator`](/docs/paquetes/validator) | Campos obligatorios, formatos y valores permitidos | Nada más |
+| 2. Esquema | [`cpeforge-ubl-validator`](/docs/paquetes/ubl-validator) | Estructura del XML contra los XSD de UBL | libxml2 y los archivos XSD |
+| 3. Reglas de SUNAT | [`cpeforge-cpe-validator`](/docs/paquetes/cpe-validator) | Las reglas de negocio de SUNAT, con sus códigos de error | libxml2, libxslt y las hojas XSL |
+
+<Mermaid
+  chart={`flowchart LR
+  M[Modelo] -->|1. validator| X[XML firmado]
+  X -->|2. ubl-validator| X2[XML válido]
+  X2 -->|3. cpe-validator| E[Enviar a SUNAT]`}
+/>
+
+Ninguna capa es obligatoria y ninguna sustituye a SUNAT, que es la que decide.
+Elige según tu volumen y tu tolerancia a los rechazos.
+
+## 1. Validar el modelo
+
+La capa más barata: no genera XML ni necesita bibliotecas del sistema.
+
+```rust
+use cpeforge_validator::Validator;
+
+let mut validador = Validator::new();
+validador.set_version(Some("2.1"));
+let errores = validador.validate_document(&factura)?;
+for error in &errores {
+    eprintln!("{}: {}", error.path, error.message);
+}
+if !errores.is_empty() {
+    return Err("la factura tiene datos inválidos".into());
+}
+```
+
+Cada error indica la ruta del campo (`path`, por ejemplo `client.numDoc`) y el
+mensaje. Con [`cpeforge-xcodes`](/docs/paquetes/xcodes) los mensajes se
+traducen a los textos oficiales de SUNAT (`set_provider`).
+
+## 2. Validar contra el esquema XSD
+
+Comprueba que el XML generado cumple la estructura UBL. Útil si generas XML con
+plantillas propias o si recibes XML de otros sistemas.
+
+```rust
+use cpeforge_ubl_validator::UblValidator;
+
+let mut validador = UblValidator::new("/ruta/a/xsd")?;
+let resultado = validador.validate(xml_firmado.as_bytes())?;
+if !resultado.valid {
+    eprintln!("{}", resultado.error);
+}
+```
+
+Los 45 archivos XSD **no vienen en el crate** por sus licencias. El repositorio
+incluye un script que los descarga en la versión fijada:
+
+```bash
+bash scripts/prepare_ubl_validator_reference.sh
+```
+
+Los esquemas quedan en `target/reference/ubl-validator-v2.3.0/src/xsd`. El
+validador comprueba el SHA-256 de cada uno antes de usarlo.
+
+<Callout title="El XML de CPEForge ya valida">
+  Todo XML que genera `cpeforge-xml` valida contra su XSD (lo comprueban las
+  pruebas del crate). Esta capa sirve sobre todo para XML de otras fuentes.
+</Callout>
+
+## 3. Validar con las reglas de SUNAT
+
+La capa más completa: ejecuta las mismas hojas XSL con las que SUNAT valida, y
+devuelve los mismos códigos de error.
+
+```rust
+use cpeforge_cpe_validator::CpeValidator;
+
+let validador = CpeValidator::new("/ruta/a/reglas");
+let errores = validador.validate_xml("20000000001-01-F001-1.xml", xml_firmado.as_bytes())?;
+for error in &errores {
+    eprintln!("{:?} {:?} {:?}", error.level, error.code, error.message);
+}
+```
+
+Las hojas **no vienen en el crate**: SUNAT las publica en
+[cpe.sunat.gob.pe](https://cpe.sunat.gob.pe/guias-y-manuales) («Archivo XSL»),
+pero no se ejecutan tal cual. Hay que convertirlas: sustituir la función
+`regexp:match` por la extensión `MATCHES_HANDLER` e incluir los `commons` en el
+directorio de reglas. El detalle está en
+[cpeforge-cpe-validator](/docs/paquetes/cpe-validator#las-reglas-de-sunat-no-vienen-en-el-crate).
+
+<Callout type="warn" title="Las reglas cambian">
+  SUNAT actualiza las reglas varias veces al año. El resultado de esta capa es
+  tan actual como las hojas que uses.
+</Callout>
+
+## ¿Qué capas usar?
+
+| Situación | Recomendación |
+| --- | --- |
+| Empiezas o tienes poco volumen | Capa 1 y revisa los rechazos con [`TaxStatus`](/docs/conceptos/estado-tributario) |
+| Generas XML con plantillas propias o lo recibes de otros sistemas | Capas 1 y 2 |
+| Alto volumen o un rechazo es caro | Las tres, con las reglas de SUNAT al día |
+| Windows | Solo la capa 1: los validadores XSD y XSL no son compatibles con Windows |

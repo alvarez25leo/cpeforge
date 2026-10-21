@@ -103,8 +103,31 @@ if (ejemplos.length === 0) throw new Error('No se encontró la tabla CASOS en ca
 const erroresRs = await readFile(path.join(ejemploSrc, 'errores.rs'), 'utf8');
 const rechazos = caseTable(erroresRs.slice(erroresRs.indexOf('CASOS_ERROR'))).map((c) => c.id);
 
+// Catálogo de códigos de retorno de SUNAT (`cpeforge-xcodes`).
+const xcodesDir = path.join(cratesDir, 'xcodes', 'src');
+const xcodesLib = await readFile(path.join(xcodesDir, 'lib.rs'), 'utf8');
+const xmlEntities = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'" };
+const codigos = [
+  ...(await readFile(path.join(xcodesDir, 'data', 'CodeErrors.xml'), 'utf8')).matchAll(
+    /<error code="([^"]+)">([\s\S]*?)<\/error>/g,
+  ),
+].map(([, code, text]) => [code, text.replace(/&(\w+);/g, (m, e) => xmlEntities[e] ?? m).trim()]);
+const expectedCount = Number(xcodesLib.match(/ENTRY_COUNT: usize = ([\d_]+)/)?.[1].replace(/_/g, ''));
+if (codigos.length !== expectedCount) {
+  throw new Error(`CodeErrors.xml tiene ${codigos.length} códigos; ENTRY_COUNT dice ${expectedCount}`);
+}
+const xcodes = {
+  version: xcodesLib.match(/CATALOG_VERSION: &str = "([^"]+)"/)?.[1] ?? '',
+  codigos,
+};
+
 const out = path.join(website, 'generated');
 await mkdir(out, { recursive: true });
+await writeFile(path.join(out, 'xcodes.json'), `${JSON.stringify(xcodes)}\n`);
+// El buscador de códigos lo descarga en el navegador, fuera del HTML de la página.
+const publicData = path.join(website, 'public', 'data');
+await mkdir(publicData, { recursive: true });
+await writeFile(path.join(publicData, 'xcodes.json'), JSON.stringify(xcodes));
 await writeFile(
   path.join(out, 'crates.json'),
   `${JSON.stringify({ msrv: defaultMsrv, casos: ejemplos.length, crates }, null, 2)}\n`,
@@ -114,5 +137,5 @@ await writeFile(
   `${JSON.stringify({ ejemplos, rechazos }, null, 2)}\n`,
 );
 console.log(
-  `generated/: ${crates.length} crates, ${ejemplos.length} casos de ejemplo, ${rechazos.length} de rechazo`,
+  `generated/: ${crates.length} crates, ${ejemplos.length} casos de ejemplo, ${rechazos.length} de rechazo, ${codigos.length} códigos SUNAT`,
 );

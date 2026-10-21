@@ -1,0 +1,91 @@
+---
+title: Preguntas frecuentes
+description: Respuestas cortas a las dudas más comunes sobre CPEForge.
+---
+
+<Accordions>
+<Accordion title="¿Puedo usar CPEForge en un producto comercial?">
+
+Sí. La licencia es MIT: puedes usarlo, modificarlo y distribuirlo en productos
+comerciales, conservando el aviso de copyright. Ver [Licencia](/docs/comunidad/licencia).
+
+</Accordion>
+<Accordion title="¿CPEForge es un OSE o un PSE?">
+
+No. Es una biblioteca para que **tu** sistema emita comprobantes. Te conectas a
+SUNAT (o a tu OSE) con tus propias credenciales y certificado.
+
+</Accordion>
+<Accordion title="¿Funciona con un OSE en lugar de SUNAT?">
+
+Los servicios SOAP de los OSE siguen el mismo contrato que los de SUNAT. Con
+`see.set_service(url)` puedes apuntar a la URL de tu OSE. Comprueba con tu OSE
+sus particularidades, porque CPEForge se prueba contra SUNAT beta.
+
+</Accordion>
+<Accordion title="¿Calcula el IGV y los totales por mí?">
+
+No. CPEForge transporta los importes que calcula tu sistema; no recalcula
+impuestos. Las [guías por comprobante](/docs/guias) muestran cómo cuadran los
+importes, y los [validadores](/docs/guias/validacion) ayudan a detectar errores
+antes de enviar.
+
+</Accordion>
+<Accordion title="¿Genera el PDF?">
+
+Genera la representación impresa en **HTML** con su QR. Para PDF, conviértela
+con un navegador sin cabeza como Gotenberg. Ver
+[Representación impresa](/docs/guias/representacion-impresa).
+
+</Accordion>
+<Accordion title="¿Funciona en Windows?">
+
+Los crates principales no usan nada específico de un sistema operativo, pero la
+CI solo prueba en Linux, y los validadores XSD y XSL no son compatibles con
+Windows. Para producción se recomienda Linux (o WSL2 para desarrollar). Ver
+[Requisitos](/docs/primeros-pasos/requisitos).
+
+</Accordion>
+<Accordion title="¿Puedo usarlo desde otro lenguaje (Node, Python, PHP)?">
+
+CPEForge es una biblioteca de Rust. Desde otro lenguaje, lo habitual es
+envolverlo en un pequeño servicio HTTP en Rust que reciba los comprobantes en
+JSON (con la feature `serde` de `cpeforge-core`) y devuelva el resultado.
+
+</Accordion>
+<Accordion title="¿Por qué SUNAT beta responde 401?">
+
+El entorno beta limita los envíos muy seguidos. Espera unos segundos entre uno y
+otro; el proyecto de ejemplo espera 5 por defecto (`EJEMPLO_PAUSA`).
+
+</Accordion>
+<Accordion title="Envié un comprobante y falló la red. ¿Lo reenvío?">
+
+No a ciegas: el comprobante pudo llegar a SUNAT. Consulta primero su estado (el
+CDR o el ticket) y reenvía solo si SUNAT no lo tiene. Ver
+[Producción](/docs/guias/produccion#un-flujo-de-envío-robusto).
+
+</Accordion>
+<Accordion title="¿Qué diferencia hay con Greenter?">
+
+CPEForge tomó como referencia funcional el SDK PHP Greenter y genera XML
+equivalente, pero está escrito en Rust, con tipos exactos para el dinero y las
+fechas, errores tipados y mejor rendimiento. Añade la guía transportista y la
+liquidación de compra. Ver [Viniendo de Greenter](/docs/migracion/desde-greenter).
+
+</Accordion>
+<Accordion title="¿Por qué el perfil de firma usa SHA-1?">
+
+Es el que históricamente acepta SUNAT. Si el receptor admite SHA-256, puedes
+cambiarlo con `set_signature_algorithm` y `set_digest_algorithm`. Ver
+[cpeforge-xmldsig](/docs/paquetes/xmldsig#algoritmos).
+
+</Accordion>
+<Accordion title="¿Cómo sé si una versión nueva rompe mi código?">
+
+La API sigue SemVer. En `0.x`, un cambio incompatible sube la versión menor
+(`0.3` → `0.4`). Actualizar dentro de la misma versión menor es seguro. Ver
+[Estado y SemVer](/docs/introduccion/estado-y-semver).
+
+</Accordion>
+</Accordions>

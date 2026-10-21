@@ -1,6 +1,6 @@
 [package]
 name = "cpeforge-gre-api"
-version = "0.2.0"
+version = "0.2.1"
 description = "Cliente HTTP de la API GRE de SUNAT (token, envío y consulta de guías de remisión)."
 readme = "README.md"
 keywords = ["sunat", "gre", "guia-remision", "api", "cpe"]

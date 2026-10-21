@@ -1,6 +1,6 @@
 [package]
 name = "cpeforge-xml-parser"
-version = "0.3.0"
+version = "0.3.1"
 description = "Lectura de comprobantes electrónicos SUNAT (UBL) a modelos de cpeforge-core, con perfil XML seguro."
 readme = "README.md"
 keywords = ["sunat", "peru", "ubl", "cpe", "xml"]

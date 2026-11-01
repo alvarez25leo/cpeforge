@@ -9,7 +9,7 @@ enviar comprobantes, y leer el CDR.
 
 ```toml
 [dependencies]
-cpeforge = "0.3"
+cpeforge = "0.4"
 ```
 
 La feature `xcodes` conecta el catálogo de códigos de error de

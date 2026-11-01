@@ -7,7 +7,10 @@
 use cpeforge_core::Decimal;
 use cpeforge_core::model::client::Client;
 use cpeforge_core::model::company::{Address, Company};
-use cpeforge_core::model::sale::{Charge, DetailAttribute, RelatedDocument, SaleDetail};
+use cpeforge_core::model::despatch::Direction;
+use cpeforge_core::model::sale::{
+    CargoTransport, Charge, DetailAttribute, RelatedDocument, SaleDetail,
+};
 
 use crate::format::tributo_by_afectacion;
 use crate::render::{Out, Result, truthy_list, truthy_num, truthy_str};
@@ -314,6 +317,8 @@ pub(crate) struct Line21 {
     pub(crate) icbper_fixed_unit: bool,
     /// La factura emite `cbc:Value` si no es nulo; las notas si es verdadero.
     pub(crate) attribute_value_not_null: bool,
+    /// Solo la factura emite el transporte de carga sujeto a detracción.
+    pub(crate) cargo_transport: bool,
 }
 
 /// Líneas de factura y notas UBL 2.1.
@@ -355,6 +360,11 @@ pub(crate) fn lines_21(
                 .raw("</cbc:PriceAmount><cbc:PriceTypeCode>01</cbc:PriceTypeCode></cac:AlternativeConditionPrice>");
         }
         out.raw("</cac:PricingReference>");
+        if kind.cargo_transport {
+            if let Some(cargo) = detail.transporte_carga.as_ref() {
+                cargo_transport(out, cargo);
+            }
+        }
         if kind.charges {
             line_charges(out, detail.cargos.as_ref(), "true", currency);
             line_charges(out, detail.descuentos.as_ref(), "false", currency);
@@ -509,6 +519,61 @@ fn line_charges(
                 .raw("</cbc:BaseAmount></cac:AllowanceCharge>");
         }
     }
+}
+
+/// Transporte de carga sujeto a detracción (anexo N.º 9-A de la
+/// R. S. 114-2019/SUNAT, datos 113 a 118), en el orden del XSD de
+/// `cac:Delivery`: destino, despacho (detalle del viaje y origen) y los
+/// valores referenciales. Cada parte se emite solo si tiene datos.
+fn cargo_transport(out: &mut Out<'_>, cargo: &CargoTransport) {
+    out.raw("<cac:Delivery>");
+    if let Some(destino) = cargo.destino.as_ref() {
+        out.raw("<cac:DeliveryLocation>");
+        cargo_point(out, "Address", destino);
+        out.raw("</cac:DeliveryLocation>");
+    }
+    if truthy_str(cargo.detalle_viaje.as_deref()) || cargo.origen.is_some() {
+        out.raw("<cac:Despatch>");
+        if truthy_str(cargo.detalle_viaje.as_deref()) {
+            out.raw("<cbc:Instructions><![CDATA[")
+                .cdata(cargo.detalle_viaje.as_deref())
+                .raw("]]></cbc:Instructions>");
+        }
+        if let Some(origen) = cargo.origen.as_ref() {
+            cargo_point(out, "DespatchAddress", origen);
+        }
+        out.raw("</cac:Despatch>");
+    }
+    for (code, value) in [
+        ("01", cargo.valor_ref_servicio),
+        ("02", cargo.valor_ref_carga_efectiva),
+        ("03", cargo.valor_ref_carga_util),
+    ] {
+        if value.is_some() {
+            out.raw("<cac:DeliveryTerms><cbc:ID>")
+                .raw(code)
+                .raw("</cbc:ID><cbc:Amount currencyID=\"PEN\">")
+                .amount(value)
+                .raw("</cbc:Amount></cac:DeliveryTerms>");
+        }
+    }
+    out.raw("</cac:Delivery>");
+}
+
+/// Punto del viaje: ubigeo (catálogo 13) y dirección detallada.
+fn cargo_point(out: &mut Out<'_>, tag: &str, point: &Direction) {
+    out.raw("<cac:").raw(tag).raw(">");
+    if truthy_str(point.ubigueo.as_deref()) {
+        out.raw(r#"<cbc:ID schemeAgencyName="PE:INEI" schemeName="Ubigeos">"#)
+            .text(point.ubigueo.as_deref())
+            .raw("</cbc:ID>");
+    }
+    if truthy_str(point.direccion.as_deref()) {
+        out.raw("<cac:AddressLine><cbc:Line><![CDATA[")
+            .cdata(point.direccion.as_deref())
+            .raw("]]></cbc:Line></cac:AddressLine>");
+    }
+    out.raw("</cac:").raw(tag).raw(">");
 }
 
 /// `cac:AdditionalItemProperty` de UBL 2.1 (con periodo de uso).

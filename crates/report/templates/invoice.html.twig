@@ -199,6 +199,33 @@
                                     {{ doc.detraccion.ctaBanco }}
                                 </td>
                             </tr>
+{% for det in doc.details %}{% if det.transporteCarga %}{% set tc = det.transporteCarga %}
+                            <tr>
+                                <td width="30%" style="font-size: 10px;">
+                                    TRANSPORTE DE CARGA:
+                                </td>
+                                <td width="70%" style="font-size: 10px;">
+{% if tc.origen %}
+                                    Origen: {{ tc.origen.ubigueo }} - {{ tc.origen.direccion }}<br>
+{% endif %}
+{% if tc.destino %}
+                                    Destino: {{ tc.destino.ubigueo }} - {{ tc.destino.direccion }}<br>
+{% endif %}
+{% if tc.detalleViaje %}
+                                    Detalle del viaje: {{ tc.detalleViaje }}<br>
+{% endif %}
+{% if tc.valorRefServicio %}
+                                    Valor referencial del servicio: {{ tc.valorRefServicio|n_format }}<br>
+{% endif %}
+{% if tc.valorRefCargaEfectiva %}
+                                    Valor referencial sobre la carga efectiva: {{ tc.valorRefCargaEfectiva|n_format }}<br>
+{% endif %}
+{% if tc.valorRefCargaUtil %}
+                                    Valor referencial sobre la carga útil nominal: {{ tc.valorRefCargaUtil|n_format }}
+{% endif %}
+                                </td>
+                            </tr>
+{% endif %}{% endfor %}
                             {% endif %}
                             {% if isNota %}
                             <tr class="border_top">

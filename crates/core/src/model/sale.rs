@@ -309,6 +309,9 @@ pub struct SaleDetail {
     pub mto_valor_gratuito: Option<Decimal>,
     /// Atributos adicionales.
     pub atributos: Option<Vec<DetailAttribute>>,
+    /// Servicio de transporte de carga sujeto a detracción (operación `1004`).
+    /// Extensión de CPEForge: solo lo emite la factura UBL 2.1.
+    pub transporte_carga: Option<CargoTransport>,
 }
 
 impl Default for SaleDetail {
@@ -342,6 +345,7 @@ impl Default for SaleDetail {
             mto_valor_venta: None,
             mto_valor_gratuito: None,
             atributos: None,
+            transporte_carga: None,
         }
     }
 }
@@ -432,6 +436,39 @@ pub struct Detraction {
     /// Valor referencial.
     #[cfg_attr(feature = "serde", serde(with = "crate::serde_util::decimal_option"))]
     pub value_ref: Option<Decimal>,
+}
+
+/// Servicio de transporte de carga sujeto a detracción (operación `1004`):
+/// información de la línea del anexo N.º 9-A de la R. S. 114-2019/SUNAT
+/// (datos 113 a 118), que va en `cac:InvoiceLine/cac:Delivery`.
+///
+/// Con esa operación SUNAT exige el origen y el destino (ubigeo y dirección),
+/// el detalle del viaje y un valor de cada tipo referencial (reglas 3116 a
+/// 3126). Los tramos y los vehículos (datos 119 a 128) no están soportados.
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "serde",
+    serde(default, rename_all = "camelCase", deny_unknown_fields)
+)]
+pub struct CargoTransport {
+    /// Punto de origen del viaje: ubigeo (catálogo 13) y dirección detallada.
+    /// `cod_local` y `ruc` no se emiten.
+    pub origen: Option<Direction>,
+    /// Punto de destino del viaje: ubigeo (catálogo 13) y dirección detallada.
+    /// `cod_local` y `ruc` no se emiten.
+    pub destino: Option<Direction>,
+    /// Detalle del viaje.
+    pub detalle_viaje: Option<String>,
+    /// Valor referencial del servicio de transporte (tipo `01`), en soles.
+    #[cfg_attr(feature = "serde", serde(with = "crate::serde_util::decimal_option"))]
+    pub valor_ref_servicio: Option<Decimal>,
+    /// Valor referencial sobre la carga efectiva (tipo `02`), en soles.
+    #[cfg_attr(feature = "serde", serde(with = "crate::serde_util::decimal_option"))]
+    pub valor_ref_carga_efectiva: Option<Decimal>,
+    /// Valor referencial sobre la carga útil nominal (tipo `03`), en soles.
+    #[cfg_attr(feature = "serde", serde(with = "crate::serde_util::decimal_option"))]
+    pub valor_ref_carga_util: Option<Decimal>,
 }
 
 /// Referencia a otro documento (guía, documento relacionado o de referencia).

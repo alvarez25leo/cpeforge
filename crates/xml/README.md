@@ -54,6 +54,17 @@ fechas nulas.
   emisor, el vendedor o el lugar → `XmlError::Document`. Validado con
   `xmllint` en `tests/settlement.rs` y aceptado por SUNAT beta (compra
   interna `0501` y compra de oro `0503`).
+- Factura con detracción por servicio de transporte de carga (operación
+  `1004`, bien o servicio `027`): `SaleDetail::transporte_carga` emite, en
+  `InvoiceLine/cac:Delivery`, los datos 113 a 118 del anexo N.º 9-A de la
+  R. S. 114-2019/SUNAT: destino en `DeliveryLocation/Address`, detalle del
+  viaje en `Despatch/Instructions`, origen en `Despatch/DespatchAddress`
+  (ubigeos con `PE:INEI`) y un `DeliveryTerms` por valor referencial
+  (`01` servicio, `02` carga efectiva, `03` carga útil nominal), en soles.
+  Cada parte sale solo si tiene datos; las notas no la emiten. Los tramos y
+  los vehículos (datos 119 a 128) no están soportados. Validado con
+  `xmllint` en `tests/cargo_transport.rs` y aceptado por SUNAT beta, que
+  rechaza la misma factura sin esos datos (3116).
 - Todo XML generado valida contra el XSD (`tests/schema.rs`, con `xmllint`)
   salvo los documentos vacíos o incompletos y los textos sin escapar con
   `Autoescape::Disabled`. Para lograrlo:

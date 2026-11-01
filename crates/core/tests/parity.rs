@@ -470,11 +470,13 @@ impl Comparator<'_> {
 }
 
 /// Campos de los modelos que no existen en la referencia (extensiones de
-/// CPEForge), por clase: la guía de remisión transportista (`31`).
+/// CPEForge), por clase: la guía de remisión transportista (`31`) y el
+/// transporte de carga sujeto a detracción (operación `1004`).
 const CPEFORGE_EXTENSIONS: &[(&str, &str)] = &[
     ("Despatch", "remitente"),
     ("Despatch", "pagadorFlete"),
     ("Shipment", "subcontratador"),
+    ("SaleDetail", "transporteCarga"),
 ];
 
 const NRO_TYPE_ERROR: &str =

@@ -82,8 +82,28 @@ fn liquidacion_vendedor_ruc(contexto: &Contexto) -> Resultado {
     Ok(Documento::Settlement(liquidacion))
 }
 
+/// Factura con detracción por transporte de carga (`1004`) sin el origen, el
+/// destino, el detalle del viaje ni los valores referenciales de la línea
+/// (SUNAT exige esos datos, reglas 3116 a 3126). Caso propio de CPEForge.
+fn detraccion_transporte_sin_datos(contexto: &Contexto) -> Resultado {
+    let Documento::Invoice(mut factura): Documento =
+        positivo("factura-detraccion-transporte-carga", contexto)?
+    else {
+        return Err("factura-detraccion-transporte-carga no construyó una factura".into());
+    };
+    factura.base.correlativo = s("81005");
+    for detalle in factura.base.details.iter_mut().flatten() {
+        detalle.transporte_carga = None;
+    }
+    Ok(Documento::Invoice(factura))
+}
+
 /// Casos de rechazo, en el mismo orden que `ksort` de la referencia.
 pub const CASOS_ERROR: &[(&str, Constructor)] = &[
+    (
+        "detraccion-transporte-sin-datos",
+        detraccion_transporte_sin_datos,
+    ),
     ("guia-sin-fecha-entrega", guia_sin_fecha_entrega),
     ("liquidacion-vendedor-ruc", liquidacion_vendedor_ruc),
     ("nota-motivo13-con-total", nota_motivo13_con_total),

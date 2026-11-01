@@ -28,6 +28,7 @@ mod factura_descuento_global;
 mod factura_descuento_linea;
 mod factura_descuento_nobase;
 mod factura_detraccion;
+mod factura_detraccion_transporte_carga;
 mod factura_exonerado;
 mod factura_exportacion;
 mod factura_gratuita;
@@ -136,6 +137,10 @@ pub const CASOS: &[(&str, Constructor)] = &[
         factura_descuento_nobase::documento,
     ),
     ("factura-detraccion", factura_detraccion::documento),
+    (
+        "factura-detraccion-transporte-carga",
+        factura_detraccion_transporte_carga::documento,
+    ),
     ("factura-exonerado", factura_exonerado::documento),
     ("factura-exportacion", factura_exportacion::documento),
     ("factura-gratuita", factura_gratuita::documento),

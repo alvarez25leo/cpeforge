@@ -31,11 +31,13 @@ use serde_json::{Map, Value, json};
 type TestResult<T = ()> = Result<T, Box<dyn std::error::Error>>;
 
 /// Campos de los modelos que no existen en la referencia (extensiones de
-/// CPEForge), por clase: la guía de remisión transportista (`31`).
+/// CPEForge), por clase: la guía de remisión transportista (`31`) y el
+/// transporte de carga sujeto a detracción (operación `1004`).
 const CPEFORGE_EXTENSIONS: &[(&str, &str)] = &[
     ("Despatch", "remitente"),
     ("Despatch", "pagadorFlete"),
     ("Shipment", "subcontratador"),
+    ("SaleDetail", "transporteCarga"),
 ];
 
 fn workspace() -> PathBuf {

@@ -11,7 +11,10 @@ plantillas, CSS y QR SVG). Recibe los modelos de `cpeforge-core`.
   (tipo 04): vendedor, lugar de la operación, IGV y renta retenidos e
   importe neto. `despatch` muestra también la guía de remisión
   transportista (tipo 31): remitente, registro MTC, pagador del flete, TUC y
-  subcontratista. La plantilla inicial es `invoice.html.twig`; se cambia
+  subcontratista. `invoice` muestra, debajo de la cuenta de detracciones,
+  el transporte de carga sujeto a detracción (operación 1004) de las líneas
+  que lo traen: origen, destino, detalle del viaje y valores referenciales.
+  La plantilla inicial es `invoice.html.twig`; se cambia
   con `set_template`. Opciones: carpeta de plantillas propias,
   `strict_variables`, escape automático, globales (`max_items`) y reloj
   inyectable para `date(null)`.

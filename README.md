@@ -183,8 +183,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-El proyecto [`example/rust`](example/rust) emite 48 casos: facturas
-(gravadas, exoneradas, de exportación, con detracción, percepción,
+El proyecto [`example/rust`](example/rust) emite 49 casos: facturas
+(gravadas, exoneradas, de exportación, con detracción —también la de
+transporte de carga—, percepción,
 anticipo o cargos…), boletas, notas de crédito y débito, resúmenes diarios,
 bajas, retenciones, percepciones, liquidaciones de compra (con su reversión)
 y guías de remisión remitente y transportista por la API de SUNAT.

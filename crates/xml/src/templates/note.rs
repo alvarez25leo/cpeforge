@@ -237,6 +237,7 @@ pub(crate) fn render_21(
         charges: false,
         icbper_fixed_unit: false,
         attribute_value_not_null: false,
+        cargo_transport: false,
     };
     shared::lines_21(&mut out, base.details.as_ref(), currency, &lines)?;
     out.raw("</").raw(kind.root()).raw(">");

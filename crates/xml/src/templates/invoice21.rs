@@ -265,6 +265,7 @@ pub(crate) fn render(doc: &Invoice, options: &RenderOptions) -> Result<String> {
         charges: true,
         icbper_fixed_unit: true,
         attribute_value_not_null: true,
+        cargo_transport: true,
     };
     shared::lines_21(&mut out, base.details.as_ref(), currency, &kind)?;
     out.raw("</Invoice>");

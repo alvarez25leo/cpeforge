@@ -22,8 +22,8 @@ use cpeforge_core::model::despatch::{
 use cpeforge_core::model::perception::{Perception, PerceptionDetail};
 use cpeforge_core::model::retention::{Exchange, Payment, Retention, RetentionDetail};
 use cpeforge_core::model::sale::{
-    BaseSale, Charge, Cuota, DetailAttribute, Detraction, EmbededDespatch, Invoice, Legend, Note,
-    PaymentTerms, Prepayment, Receipt, RelatedDocument, SaleDetail, SalePerception,
+    BaseSale, CargoTransport, Charge, Cuota, DetailAttribute, Detraction, EmbededDespatch, Invoice,
+    Legend, Note, PaymentTerms, Prepayment, Receipt, RelatedDocument, SaleDetail, SalePerception,
 };
 use cpeforge_core::model::settlement::{
     PurchaseSettlement, SettlementDetail, SettlementPlace, SettlementSeller,
@@ -465,6 +465,9 @@ static SALE_DETAIL: &[Getter<SaleDetail>] = &[
     ("getMtoValorVenta", |d| amount(d.mto_valor_venta)),
     ("getMtoValorGratuito", |d| amount(d.mto_valor_gratuito)),
     ("getAtributos", |d| list(d.atributos.as_ref(), attribute)),
+    ("getTransporteCarga", |d| {
+        object(d.transporte_carga.as_ref(), cargo_transport)
+    }),
 ];
 
 fn cuota(c: &Cuota) -> Value {
@@ -509,6 +512,21 @@ fn detraction(d: &Detraction) -> Value {
         .getter("getCodMedioPago", text(d.cod_medio_pago.as_ref()))
         .getter("getCodBienDetraccion", text(d.cod_bien_detraccion.as_ref()))
         .getter("getValueRef", amount(d.value_ref))
+        .build()
+}
+
+/// Transporte de carga sujeto a detracción (extensión de CPEForge).
+fn cargo_transport(c: &CargoTransport) -> Value {
+    Builder::new("CargoTransport")
+        .getter("getOrigen", object(c.origen.as_ref(), direction))
+        .getter("getDestino", object(c.destino.as_ref(), direction))
+        .getter("getDetalleViaje", text(c.detalle_viaje.as_ref()))
+        .getter("getValorRefServicio", amount(c.valor_ref_servicio))
+        .getter(
+            "getValorRefCargaEfectiva",
+            amount(c.valor_ref_carga_efectiva),
+        )
+        .getter("getValorRefCargaUtil", amount(c.valor_ref_carga_util))
         .build()
 }
 

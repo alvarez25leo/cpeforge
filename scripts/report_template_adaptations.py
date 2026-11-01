@@ -15,6 +15,8 @@ en la referencia y quedan fuera de la comparación.
 Además, `despatch.html.twig` agrega los datos de la guía de remisión
 transportista (tipo 31, extensión de CPEForge) en bloques que solo se
 evalúan con ese tipo: la salida de la guía remitente (09) no cambia.
+`invoice.html.twig` agrega el transporte de carga sujeto a detracción
+(operación 1004, extensión de CPEForge) solo para las líneas que lo traen.
 
 Uso:
   report_template_adaptations.py check <plantillas PHP> <plantillas Rust>
@@ -98,6 +100,44 @@ CARRIER = [
         "                    {% endif %}\n", "                    {% endif %}\n" + _SUB, 1), 1),
 ]
 
+# Detracción por transporte de carga (operación 1004, extensión de CPEForge):
+# datos de la línea debajo de la cuenta de detracciones. Las etiquetas nuevas
+# van en la columna 0 para que, con `trim_blocks`, una factura sin esos datos
+# produzca el mismo HTML que PHP.
+_CTA_BANCO = """                                    {{ doc.detraccion.ctaBanco }}
+                                </td>
+                            </tr>
+"""
+_CARGO = """{% for det in doc.details %}{% if det.transporteCarga %}{% set tc = det.transporteCarga %}
+                            <tr>
+                                <td width="30%" style="font-size: 10px;">
+                                    TRANSPORTE DE CARGA:
+                                </td>
+                                <td width="70%" style="font-size: 10px;">
+{% if tc.origen %}
+                                    Origen: {{ tc.origen.ubigueo }} - {{ tc.origen.direccion }}<br>
+{% endif %}
+{% if tc.destino %}
+                                    Destino: {{ tc.destino.ubigueo }} - {{ tc.destino.direccion }}<br>
+{% endif %}
+{% if tc.detalleViaje %}
+                                    Detalle del viaje: {{ tc.detalleViaje }}<br>
+{% endif %}
+{% if tc.valorRefServicio %}
+                                    Valor referencial del servicio: {{ tc.valorRefServicio|n_format }}<br>
+{% endif %}
+{% if tc.valorRefCargaEfectiva %}
+                                    Valor referencial sobre la carga efectiva: {{ tc.valorRefCargaEfectiva|n_format }}<br>
+{% endif %}
+{% if tc.valorRefCargaUtil %}
+                                    Valor referencial sobre la carga útil nominal: {{ tc.valorRefCargaUtil|n_format }}
+{% endif %}
+                                </td>
+                            </tr>
+{% endif %}{% endfor %}
+"""
+CARGO_TRANSPORT = [(_CTA_BANCO, _CTA_BANCO + _CARGO, 1)]
+
 # Plantillas propias de CPEForge, sin equivalente en la referencia.
 CPEFORGE_TEMPLATES = {"settlement.html.twig"}
 
@@ -111,6 +151,7 @@ ADAPTATIONS: dict[str, list[tuple[str, str, int]]] = {
          "{% if doc.compra is defined and doc.compra is twig_true %}", 1),
         ("{% if leg.code != '1000' %}", "{% if leg.code is not twig_eq('1000') %}", 1),
         (*HASH, 1),
+        *CARGO_TRANSPORT,
     ],
     "invoice2.html.twig": [
         ("{% set serieNro = doc.serie ~ '-' ~ doc.correlativo %}",

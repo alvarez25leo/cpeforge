@@ -8,6 +8,7 @@ use crate::datos::{Contexto, cliente, d, empresa, s};
 
 pub fn documento(c: &Contexto) -> Resultado {
     let pay = Payment {
+        numero: None,
         moneda: s("PEN"),
         fecha: c.fecha(),
         importe: d(100, 0),
@@ -41,6 +42,7 @@ pub fn documento(c: &Contexto) -> Resultado {
         imp_cobrado: d(210, 0),
         regimen: s("01"),
         tasa: d(2, 0),
+        ind_excepcional: None,
         details: Some(vec![detail]),
     }))
 }

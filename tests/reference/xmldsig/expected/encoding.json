@@ -5,11 +5,11 @@
   "libxml_cdata": "separados",
   "libxml_cr": "decimal",
   "openssl": "OpenSSL 3.6.0 1 Oct 2025",
-  "reference_version": "8.4.17",
   "reference": {
     "commit": "3b70c1b1cd1b2be3693666b91be3e5adff620b76",
     "tag": "v5.1.0"
   },
+  "reference_version": "8.4.17",
   "results": {
     "encoding-alias-CP819": {
       "result": "<latin1><?xml version=\"1.0\" encoding=\"CP819\"?>\n<r>é &#8364;</r>\n",

@@ -1,5 +1,5 @@
 {
-  "description": "Diferencias frente a XmlErrorCodeProvider.php v5.3.0: consulta literal frente a inyección XPath y textos que SUNAT cambió en las reglas de validación vigentes (tests/reference/xcodes/sunat-catalog.json).",
+  "description": "Diferencias frente a XmlErrorCodeProvider.php v5.4.0: consulta literal frente a inyección XPath y textos que SUNAT cambió en las reglas de validación vigentes (tests/reference/xcodes/sunat-catalog.json).",
   "differences": [
     {
       "id": "xpath-injection-0100",

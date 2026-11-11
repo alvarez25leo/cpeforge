@@ -1,7 +1,7 @@
 {
     "reference": {
-        "baseline_tag": "v5.3.0",
-        "baseline_commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+        "baseline_tag": "v5.4.0",
+        "baseline_commit": "866ba448a6436143eff59d77c790bd0decc0d5f4"
     },
     "reference_version": "8.4.17",
     "classes": {
@@ -3531,6 +3531,14 @@
                     "default": null
                 },
                 {
+                    "name": "indExcepcional",
+                    "visibility": "private",
+                    "type": null,
+                    "doc_var": "string|null",
+                    "has_default": true,
+                    "default": null
+                },
+                {
                     "name": "details",
                     "visibility": "private",
                     "type": null,
@@ -3809,6 +3817,33 @@
                     "doc_return": "Perception",
                     "kind": "setter",
                     "property": "observacion"
+                },
+                {
+                    "name": "getIndExcepcional",
+                    "visibility": "public",
+                    "static": false,
+                    "params": [],
+                    "return_type": "?string",
+                    "doc_return": "string|null",
+                    "kind": "getter",
+                    "property": "indExcepcional"
+                },
+                {
+                    "name": "setIndExcepcional",
+                    "visibility": "public",
+                    "static": false,
+                    "params": [
+                        {
+                            "name": "indExcepcional",
+                            "type": "?string",
+                            "optional": false,
+                            "default": null
+                        }
+                    ],
+                    "return_type": "CPEForge\\Model\\Perception\\Perception",
+                    "doc_return": "Perception",
+                    "kind": "setter",
+                    "property": "indExcepcional"
                 },
                 {
                     "name": "getDetails",
@@ -5024,6 +5059,14 @@
             "constants": [],
             "properties": [
                 {
+                    "name": "numero",
+                    "visibility": "private",
+                    "type": null,
+                    "doc_var": "int|null",
+                    "has_default": true,
+                    "default": null
+                },
+                {
                     "name": "moneda",
                     "visibility": "private",
                     "type": null,
@@ -5049,6 +5092,33 @@
                 }
             ],
             "methods": [
+                {
+                    "name": "getNumero",
+                    "visibility": "public",
+                    "static": false,
+                    "params": [],
+                    "return_type": "?int",
+                    "doc_return": "int|null",
+                    "kind": "getter",
+                    "property": "numero"
+                },
+                {
+                    "name": "setNumero",
+                    "visibility": "public",
+                    "static": false,
+                    "params": [
+                        {
+                            "name": "numero",
+                            "type": "?int",
+                            "optional": false,
+                            "default": null
+                        }
+                    ],
+                    "return_type": "CPEForge\\Model\\Retention\\Payment",
+                    "doc_return": "Payment",
+                    "kind": "setter",
+                    "property": "numero"
+                },
                 {
                     "name": "getMoneda",
                     "visibility": "public",

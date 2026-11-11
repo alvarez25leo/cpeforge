@@ -176,6 +176,7 @@ fn voided() -> Voided {
 
 fn payment() -> Payment {
     Payment {
+        numero: None,
         moneda: Some("PEN".into()),
         importe: Some(dec("100")),
         fecha: Some(lima("2024-07-01")),

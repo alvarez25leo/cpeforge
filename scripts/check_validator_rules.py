@@ -27,7 +27,7 @@ assert all(name.endswith(".php") and len(digest) == 64 for name, digest in inven
 assert sum(name.startswith("Loader/") and "/v21/" not in name for name in inventory["files"]) == 33
 assert sum(name.startswith("Loader/v21/") for name in inventory["files"]) == 7
 
-for profile, expected_rules, expected_valid in (("default", 293, 50), ("2.1", 307, 59)):
+for profile, expected_rules, expected_valid in (("default", 297, 50), ("2.1", 311, 59)):
     php = inventory["profiles"][profile]
     rust = rules[profile]
     assert len(php) == len(rust) == 35
@@ -75,7 +75,20 @@ assert paths("default/DespatchDetail/_/default") == ["cantidad"]
 assert "address.ubigueo" in paths("default/Client/address/valid-nested")
 assert "mto" in paths("default/SalePerception/mto/raw-type-numeric-string")
 assert "pesoBruto" not in paths("default/EmbededDespatch/pesoBruto/raw-type-numeric-string")
+# Reglas de Greenter v5.4.0: número de pago > 0, indicador excepcional de dos
+# caracteres y un solo pago/cobro por comprobante relacionado.
+for profile in ("default", "2.1"):
+    assert "numero" in paths(f"{profile}/Payment/numero/gt-below")
+    assert "numero" in paths(f"{profile}/Payment/numero/gt-equal")
+    assert "numero" not in paths(f"{profile}/Payment/numero/gt-above")
+    assert "indExcepcional" not in paths(f"{profile}/Perception/indExcepcional/max-2")
+    assert "indExcepcional" in paths(f"{profile}/Perception/indExcepcional/max-3")
+    assert "indExcepcional" in paths(f"{profile}/Perception/indExcepcional/min-1")
+    assert "cobros" not in paths(f"{profile}/PerceptionDetail/cobros/count-max-1")
+    assert "cobros" in paths(f"{profile}/PerceptionDetail/cobros/count-max-2")
+    assert "pagos" not in paths(f"{profile}/RetentionDetail/pagos/count-max-1")
+    assert "pagos" in paths(f"{profile}/RetentionDetail/pagos/count-max-2")
 
 covered = Counter(rule["name"] for profile in ("default", "2.1") for meta in inventory["profiles"][profile].values() for items in meta["fields"].values() for rule in items)
-assert set(covered) == {"NotBlank", "NotNull", "Length", "Valid", "Type", "Regex", "Required", "Choice"}
+assert set(covered) == {"NotBlank", "NotNull", "Length", "Valid", "Type", "Regex", "Required", "Choice", "GreaterThan", "Count"}
 print(f"Tabla independiente: 45 fuentes, 33+7 loaders, {len(cases)} casos, {sum(covered.values())} reglas en 2 perfiles: OK")

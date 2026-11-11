@@ -155,6 +155,7 @@ fn run_case(case: Case) -> ResultRow {
             };
         }
     }
+    let typed_input = fields.clone();
     let fields = normalize_input(fields);
     let fields = if matches!(kind.as_str(), "FormaPagoContado" | "FormaPagoCredito") {
         let mut object = match fields {
@@ -221,12 +222,19 @@ fn run_case(case: Case) -> ResultRow {
         }
     };
     match result {
-        Ok(violations) => ResultRow {
-            id: case.id,
-            kind,
-            violations: Some(violations_value(&violations)),
-            error: None,
-        },
+        Ok(mut violations) => {
+            for violation in &mut violations {
+                if let Some(invalid) = reference_object_list(&typed_input, &violation.path) {
+                    violation.invalid = invalid;
+                }
+            }
+            ResultRow {
+                id: case.id,
+                kind,
+                violations: Some(violations_value(&violations)),
+                error: None,
+            }
+        }
         Err(failure) => {
             let (error_kind, message) = match failure {
                 Failure::Type(message) => ("TypeError", message),
@@ -246,6 +254,33 @@ fn run_case(case: Case) -> ResultRow {
             }
         }
     }
+}
+
+/// El oráculo de referencia serializa cada objeto de una colección inválida
+/// (por ejemplo, la de `Count`) como `{"type": clase}`. Busca en la entrada
+/// tipada el valor de `path` (`details[0].cobros`) y, si es una lista de
+/// objetos, devuelve esa forma; si no, `None`.
+fn reference_object_list(input: &Value, path: &str) -> Option<Value> {
+    let mut current = input;
+    for segment in path.split('.') {
+        let (name, index) = match segment.split_once('[') {
+            Some((name, rest)) => (name, rest.strip_suffix(']')?.parse::<usize>().ok()),
+            None => (segment, None),
+        };
+        current = current.get("fields").unwrap_or(current).get(name)?;
+        if let Some(index) = index {
+            current = current.get(index)?;
+        }
+    }
+    let items = current.as_array()?;
+    let types = items
+        .iter()
+        .map(|item| {
+            let kind = item.get("type")?.as_str()?;
+            Some(serde_json::json!({ "type": kind }))
+        })
+        .collect::<Option<Vec<_>>>()?;
+    (!types.is_empty()).then_some(Value::Array(types))
 }
 
 /// Igual que el oráculo de referencia: más de 1000 violaciones se resumen con su

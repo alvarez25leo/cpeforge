@@ -196,6 +196,19 @@ impl<'a> Lookup<'a> {
         })
     }
 
+    /// Valor del primer nodo o `None` si la consulta no encuentra ninguno
+    /// (`getValue($query, $context, null)`).
+    pub(crate) fn optional_value(
+        &self,
+        query: &str,
+        context: Option<Node<'a>>,
+    ) -> Result<Option<String>, XmlParserError> {
+        Ok(match self.query(query, context)? {
+            Some(nodes) => nodes.first().map(Node::value),
+            None => None,
+        })
+    }
+
     /// Primer nodo si es un elemento.
     pub(crate) fn node(
         &self,

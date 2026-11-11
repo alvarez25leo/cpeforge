@@ -4,7 +4,7 @@ Licencia: MIT (ver LICENSE).
 
 CPEForge es un proyecto independiente que toma como referencia funcional
 determinadas capacidades de Greenter (https://github.com/thegreenter/greenter,
-v5.3.0, licencia MIT). No está afiliado a Greenter ni a SUNAT.
+v5.4.0, licencia MIT). No está afiliado a Greenter ni a SUNAT.
 
 Material de terceros incluido en los crates, distribuido bajo licencia MIT
 (Copyright (c) 2017-2021 Giancarlos Salas). Cada crate que lo incluye

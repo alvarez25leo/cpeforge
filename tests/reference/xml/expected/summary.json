@@ -1,8 +1,8 @@
 {
     "generator": "oracle/php/xml/run_cases.php",
     "reference": {
-        "tag": "v5.3.0",
-        "commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+        "tag": "v5.4.0",
+        "commit": "866ba448a6436143eff59d77c790bd0decc0d5f4"
     },
     "reference_version": "8.4.17",
     "twig_version": "v3.30.0",
@@ -10,7 +10,7 @@
     "cases_file": "summary.json",
     "results": {
         "summary-full-default": {
-            "now": 1792253932,
+            "now": 1794356323,
             "sha256": "ef03f7e6591f1f0675c7dcc98d1eb3ed864473f8b8ab62af47f531427ad0868a",
             "bytes": 5957,
             "deprecations": [
@@ -18,7 +18,7 @@
             ]
         },
         "summary-full-cpeforge": {
-            "now": 1792253932,
+            "now": 1794356323,
             "sha256": "ef03f7e6591f1f0675c7dcc98d1eb3ed864473f8b8ab62af47f531427ad0868a",
             "bytes": 5957,
             "deprecations": [
@@ -26,7 +26,7 @@
             ]
         },
         "summary-full-tests": {
-            "now": 1792253932,
+            "now": 1794356323,
             "sha256": "ef03f7e6591f1f0675c7dcc98d1eb3ed864473f8b8ab62af47f531427ad0868a",
             "bytes": 5957,
             "deprecations": [
@@ -34,7 +34,7 @@
             ]
         },
         "summary-usd-default": {
-            "now": 1792253932,
+            "now": 1794356323,
             "sha256": "bc028bc679347092bc54584bf699c6494eb8af142563a0ed6f20e3fc38578f21",
             "bytes": 5957,
             "deprecations": [
@@ -42,15 +42,15 @@
             ]
         },
         "summary-null-generation-default": {
-            "now": 1792253932,
-            "sha256": "96861a9b7055e555ca69ff3721e3d938e55ba1dbe99927b5275d067173187110",
+            "now": 1794356323,
+            "sha256": "1e63269b54ffdc580e23712b1827f45f1e90acb5d7bb33a350b5ae6cd79cd0e1",
             "bytes": 5957,
             "deprecations": [
                 "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/summary.xml.twig at line 1."
             ]
         },
         "summary-null-resumen-default": {
-            "now": 1792253932,
+            "now": 1794356323,
             "error": {
                 "class": "Twig\\Error\\RuntimeError",
                 "message": "An exception has been thrown during the rendering of a template (\"CPEForge\\Model\\Summary\\Summary::getDateWithTimezone(): Argument #1 ($date) must be of type DateTimeInterface, null given\") in \"summary.xml.twig\" at line 11.",
@@ -64,7 +64,7 @@
             ]
         },
         "summary-null-resumen-tests": {
-            "now": 1792253932,
+            "now": 1794356323,
             "error": {
                 "class": "Twig\\Error\\RuntimeError",
                 "message": "An exception has been thrown during the rendering of a template (\"CPEForge\\Model\\Summary\\Summary::getDateWithTimezone(): Argument #1 ($date) must be of type DateTimeInterface, null given\") in \"summary.xml.twig\" at line 11.",
@@ -78,7 +78,7 @@
             ]
         },
         "summary-empty-details-default": {
-            "now": 1792253932,
+            "now": 1794356323,
             "sha256": "8c0388d1bc7daa2ff7a66c226e725fb0cb1bdcfa33d98b97d4866dda41499e96",
             "bytes": 1595,
             "deprecations": [
@@ -86,7 +86,7 @@
             ]
         },
         "summary-no-company-default": {
-            "now": 1792253932,
+            "now": 1794356323,
             "sha256": "455d7c016477868f67fd885baaf06f0d38a99013230b7cec8f02e723aa33f59f",
             "bytes": 5876,
             "deprecations": [
@@ -94,7 +94,7 @@
             ]
         },
         "summary-no-company-cpeforge": {
-            "now": 1792253932,
+            "now": 1794356323,
             "sha256": "455d7c016477868f67fd885baaf06f0d38a99013230b7cec8f02e723aa33f59f",
             "bytes": 5876,
             "deprecations": [
@@ -102,7 +102,7 @@
             ]
         },
         "summary-no-company-tests": {
-            "now": 1792253932,
+            "now": 1794356323,
             "error": {
                 "class": "Twig\\Error\\RuntimeError",
                 "message": "Impossible to access an attribute (\"ruc\") on a null variable in \"summary.xml.twig\" at line 16."
@@ -112,7 +112,7 @@
             ]
         },
         "summary-empty-line-default": {
-            "now": 1792253932,
+            "now": 1794356323,
             "sha256": "9c474e2074125d9b2b48bcf24b98c3095a3b54dc0afddbfc6c4954c8ccd99c1d",
             "bytes": 2346,
             "deprecations": [
@@ -121,7 +121,7 @@
             ]
         },
         "summary-empty-line-cpeforge": {
-            "now": 1792253932,
+            "now": 1794356323,
             "sha256": "9c474e2074125d9b2b48bcf24b98c3095a3b54dc0afddbfc6c4954c8ccd99c1d",
             "bytes": 2346,
             "deprecations": [
@@ -130,7 +130,7 @@
             ]
         },
         "summary-empty-line-tests": {
-            "now": 1792253932,
+            "now": 1794356323,
             "sha256": "9c474e2074125d9b2b48bcf24b98c3095a3b54dc0afddbfc6c4954c8ccd99c1d",
             "bytes": 2346,
             "deprecations": [

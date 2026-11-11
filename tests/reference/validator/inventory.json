@@ -1,5 +1,5 @@
 {
-    "reference": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f",
+    "reference": "866ba448a6436143eff59d77c790bd0decc0d5f4",
     "symfony": "6.4.48",
     "files": {
         "Loader/AddressLoader.php": "5d0d60a67325ea35bebaeb6eee00ce5872340181b2492b041bee42d0497d3eab",
@@ -18,12 +18,12 @@
         "Loader/InvoiceLoader.php": "9885e3dda8e4fc16d1a3f29f690264afd256e3514dff1229237d926661eea083",
         "Loader/LegendLoader.php": "e65832f85d928ca20f5069382acdde3bf606ed782992f6c6d520a6735e89d809",
         "Loader/NoteLoader.php": "cf165e88f1fca8964b7840987169765e0797f01f7560ea75a549f21ab1dbc730",
-        "Loader/PaymentLoader.php": "e4b4917e7ff9a576bc1b57015644ee6f8e6d9a69da29232e2e9a7ce0ed8f7b4d",
+        "Loader/PaymentLoader.php": "0ce9303560d525b80f38bedb6ac36604c4a183477657feb9f246ba712f212b94",
         "Loader/PaymentTermsLoader.php": "8ad8ff6e86a147abc51b41917b1191cf934f48d0af26f8eef24948eca6397e54",
-        "Loader/PerceptionDetailLoader.php": "7c60f71eaacc42721b1c20f88ec63291e93db4a9e9df7e58dbba6ccd8ad20b3e",
-        "Loader/PerceptionLoader.php": "7d1c61c4aff8d8560c5c734b6589da6c22500d064c52360eba6e6d70fbd35aec",
+        "Loader/PerceptionDetailLoader.php": "53e4c2b0296c701a5f683f2ba1f8aa8b07d91875621b0854747d8dc812b1f7ba",
+        "Loader/PerceptionLoader.php": "4fc6ba8c745b39e21169e78a4ce4e16c05d3324ec7e1a2af8e383fd6c7a1ecef",
         "Loader/PrepaymentLoader.php": "ae715ca6d633a162d6a0b3d97c226441d3be41810c3ffe0c5132bbc3ca27a42a",
-        "Loader/RetentionDetailLoader.php": "457ab0b948e9a0325a9a9ed22127bedc11334fa1d66d3fa802a087b45cd525f8",
+        "Loader/RetentionDetailLoader.php": "7aa77e4899c27a36d28f9941ece8b75443af9cdc00e9fa9960684ad60fba42b5",
         "Loader/RetentionLoader.php": "0c3f3f5f3cded13443ade535a9b0f9cc08b5515ded1fcd8b689569bcab9e5b84",
         "Loader/ReversionLoader.php": "7fe303b5c5a31d4094164a7d1ba9d8d95c97e649d149b41ef94c814bacb99b53",
         "Loader/SaleDetailLoader.php": "a01fc3ca536fddf3355f29f04321c7e2717b797198bbaabc0f4a5a95aea6bd1d",
@@ -42,7 +42,7 @@
         "Loader/v21/NoteLoader.php": "f682080163a232de98b2d601ec851ed9daae982ae3d30e61cbab4fb32176f752",
         "Loader/v21/SaleDetailLoader.php": "592b40469609f4b9d4033060d196520091b1bc2d79ffdb046e18f25bae4eee88",
         "Loader/v21/SalePerceptionLoader.php": "59d710aab598b0be59563472dbd98136224a8e29aa09412eb5aae1bad6f9e154",
-        "MessageTranslator.php": "96cf41e06f44b9b3c9b6cf8a3c5587ae9a4206141559d656b1ab6ab3f36f16b0",
+        "MessageTranslator.php": "e14d95e66e01a1628972ae66ae97cfbbfedc8769068f5720e253b8f6ff7d0430",
         "Metadata/CustomMetadataFactory.php": "c6ec8b1e31aa1217424baa7fb1ea8d3b813a2543bbed675d4452902316042a7a",
         "Metadata/LoaderListenerInterface.php": "048d10358cfa812f2c5f4d89b86cfb48c7ad5d41c036e4612ef806e2026338c2",
         "Metadata/LoaderMetadataInterface.php": "cc7e5d1cd524170948f27ad512f14d73bda84deeef8c59f48449d6e24522512e",
@@ -1376,6 +1376,15 @@
             "Payment": {
                 "loader": "base",
                 "fields": {
+                    "numero": [
+                        {
+                            "name": "GreaterThan",
+                            "options": {
+                                "message": "This value should be greater than {{ compared_value }}.",
+                                "value": 0
+                            }
+                        }
+                    ],
                     "moneda": [
                         {
                             "name": "NotBlank",
@@ -1585,6 +1594,21 @@
                             }
                         }
                     ],
+                    "indExcepcional": [
+                        {
+                            "name": "Length",
+                            "options": {
+                                "maxMessage": "This value is too long. It should have {{ limit }} character or less.|This value is too long. It should have {{ limit }} characters or less.",
+                                "minMessage": "This value is too short. It should have {{ limit }} character or more.|This value is too short. It should have {{ limit }} characters or more.",
+                                "exactMessage": "This value should have exactly {{ limit }} character.|This value should have exactly {{ limit }} characters.",
+                                "charsetMessage": "This value does not match the expected {{ charset }} charset.",
+                                "max": 2,
+                                "min": 2,
+                                "charset": "UTF-8",
+                                "countUnit": "codepoints"
+                            }
+                        }
+                    ],
                     "details": [
                         {
                             "name": "NotBlank",
@@ -1677,6 +1701,16 @@
                             "options": {
                                 "message": "This value should not be blank.",
                                 "allowNull": false
+                            }
+                        },
+                        {
+                            "name": "Count",
+                            "options": {
+                                "minMessage": "This collection should contain {{ limit }} element or more.|This collection should contain {{ limit }} elements or more.",
+                                "maxMessage": "This collection should contain {{ limit }} element or less.|This collection should contain {{ limit }} elements or less.",
+                                "exactMessage": "This collection should contain exactly {{ limit }} element.|This collection should contain exactly {{ limit }} elements.",
+                                "divisibleByMessage": "The number of elements in this collection should be a multiple of {{ compared_value }}.",
+                                "max": 1
                             }
                         },
                         {
@@ -2003,6 +2037,16 @@
                             "options": {
                                 "message": "This value should not be blank.",
                                 "allowNull": false
+                            }
+                        },
+                        {
+                            "name": "Count",
+                            "options": {
+                                "minMessage": "This collection should contain {{ limit }} element or more.|This collection should contain {{ limit }} elements or more.",
+                                "maxMessage": "This collection should contain {{ limit }} element or less.|This collection should contain {{ limit }} elements or less.",
+                                "exactMessage": "This collection should contain exactly {{ limit }} element.|This collection should contain exactly {{ limit }} elements.",
+                                "divisibleByMessage": "The number of elements in this collection should be a multiple of {{ compared_value }}.",
+                                "max": 1
                             }
                         },
                         {
@@ -4325,6 +4369,15 @@
             "Payment": {
                 "loader": "base",
                 "fields": {
+                    "numero": [
+                        {
+                            "name": "GreaterThan",
+                            "options": {
+                                "message": "This value should be greater than {{ compared_value }}.",
+                                "value": 0
+                            }
+                        }
+                    ],
                     "moneda": [
                         {
                             "name": "NotBlank",
@@ -4534,6 +4587,21 @@
                             }
                         }
                     ],
+                    "indExcepcional": [
+                        {
+                            "name": "Length",
+                            "options": {
+                                "maxMessage": "This value is too long. It should have {{ limit }} character or less.|This value is too long. It should have {{ limit }} characters or less.",
+                                "minMessage": "This value is too short. It should have {{ limit }} character or more.|This value is too short. It should have {{ limit }} characters or more.",
+                                "exactMessage": "This value should have exactly {{ limit }} character.|This value should have exactly {{ limit }} characters.",
+                                "charsetMessage": "This value does not match the expected {{ charset }} charset.",
+                                "max": 2,
+                                "min": 2,
+                                "charset": "UTF-8",
+                                "countUnit": "codepoints"
+                            }
+                        }
+                    ],
                     "details": [
                         {
                             "name": "NotBlank",
@@ -4626,6 +4694,16 @@
                             "options": {
                                 "message": "This value should not be blank.",
                                 "allowNull": false
+                            }
+                        },
+                        {
+                            "name": "Count",
+                            "options": {
+                                "minMessage": "This collection should contain {{ limit }} element or more.|This collection should contain {{ limit }} elements or more.",
+                                "maxMessage": "This collection should contain {{ limit }} element or less.|This collection should contain {{ limit }} elements or less.",
+                                "exactMessage": "This collection should contain exactly {{ limit }} element.|This collection should contain exactly {{ limit }} elements.",
+                                "divisibleByMessage": "The number of elements in this collection should be a multiple of {{ compared_value }}.",
+                                "max": 1
                             }
                         },
                         {
@@ -4952,6 +5030,16 @@
                             "options": {
                                 "message": "This value should not be blank.",
                                 "allowNull": false
+                            }
+                        },
+                        {
+                            "name": "Count",
+                            "options": {
+                                "minMessage": "This collection should contain {{ limit }} element or more.|This collection should contain {{ limit }} elements or more.",
+                                "maxMessage": "This collection should contain {{ limit }} element or less.|This collection should contain {{ limit }} elements or less.",
+                                "exactMessage": "This collection should contain exactly {{ limit }} element.|This collection should contain exactly {{ limit }} elements.",
+                                "divisibleByMessage": "The number of elements in this collection should be a multiple of {{ compared_value }}.",
+                                "max": 1
                             }
                         },
                         {
@@ -7255,6 +7343,15 @@
             "Payment": {
                 "loader": "base",
                 "fields": {
+                    "numero": [
+                        {
+                            "name": "GreaterThan",
+                            "options": {
+                                "message": "This value should be greater than {{ compared_value }}.",
+                                "value": 0
+                            }
+                        }
+                    ],
                     "moneda": [
                         {
                             "name": "NotBlank",
@@ -7464,6 +7561,21 @@
                             }
                         }
                     ],
+                    "indExcepcional": [
+                        {
+                            "name": "Length",
+                            "options": {
+                                "maxMessage": "This value is too long. It should have {{ limit }} character or less.|This value is too long. It should have {{ limit }} characters or less.",
+                                "minMessage": "This value is too short. It should have {{ limit }} character or more.|This value is too short. It should have {{ limit }} characters or more.",
+                                "exactMessage": "This value should have exactly {{ limit }} character.|This value should have exactly {{ limit }} characters.",
+                                "charsetMessage": "This value does not match the expected {{ charset }} charset.",
+                                "max": 2,
+                                "min": 2,
+                                "charset": "UTF-8",
+                                "countUnit": "codepoints"
+                            }
+                        }
+                    ],
                     "details": [
                         {
                             "name": "NotBlank",
@@ -7556,6 +7668,16 @@
                             "options": {
                                 "message": "This value should not be blank.",
                                 "allowNull": false
+                            }
+                        },
+                        {
+                            "name": "Count",
+                            "options": {
+                                "minMessage": "This collection should contain {{ limit }} element or more.|This collection should contain {{ limit }} elements or more.",
+                                "maxMessage": "This collection should contain {{ limit }} element or less.|This collection should contain {{ limit }} elements or less.",
+                                "exactMessage": "This collection should contain exactly {{ limit }} element.|This collection should contain exactly {{ limit }} elements.",
+                                "divisibleByMessage": "The number of elements in this collection should be a multiple of {{ compared_value }}.",
+                                "max": 1
                             }
                         },
                         {
@@ -7882,6 +8004,16 @@
                             "options": {
                                 "message": "This value should not be blank.",
                                 "allowNull": false
+                            }
+                        },
+                        {
+                            "name": "Count",
+                            "options": {
+                                "minMessage": "This collection should contain {{ limit }} element or more.|This collection should contain {{ limit }} elements or more.",
+                                "maxMessage": "This collection should contain {{ limit }} element or less.|This collection should contain {{ limit }} elements or less.",
+                                "exactMessage": "This collection should contain exactly {{ limit }} element.|This collection should contain exactly {{ limit }} elements.",
+                                "divisibleByMessage": "The number of elements in this collection should be a multiple of {{ compared_value }}.",
+                                "max": 1
                             }
                         },
                         {

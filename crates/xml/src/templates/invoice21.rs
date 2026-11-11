@@ -4,7 +4,7 @@ use cpeforge_core::model::sale::{Charge, Invoice};
 
 use super::shared::{
     self, EMPTY_EXTENSIONS, EXO, EXP, GRA, ICBPER, IGV, INA, ISC, IVAP, Line21, OTROS, TaxAmount,
-    XML_DECLARATION,
+    XML_DECLARATION, ZERO_TAX,
 };
 use crate::options::RenderOptions;
 use crate::render::{Out, Result, default_str, truthy_list, truthy_num, truthy_str};
@@ -85,23 +85,34 @@ pub(crate) fn render(doc: &Invoice, options: &RenderOptions) -> Result<String> {
         shared::party_21(&mut out, "SellerSupplierParty", doc.seller.as_ref())?;
     }
     if let Some(addr) = doc.direccion_entrega.as_ref() {
-        out.raw("<cac:Delivery><cac:DeliveryLocation><cac:Address><cbc:ID>")
-            .text(addr.ubigueo.as_deref())
-            .raw("</cbc:ID>");
-        if truthy_str(addr.urbanizacion.as_deref()) {
-            out.raw("<cbc:CitySubdivisionName>")
-                .text(addr.urbanizacion.as_deref())
-                .raw("</cbc:CitySubdivisionName>");
+        // Cada parte de la dirección es opcional: la exportación de servicios
+        // declara solo el país del uso del servicio (campo 15), sin la línea
+        // de dirección del campo 14 (venta itinerante).
+        out.raw("<cac:Delivery><cac:DeliveryLocation><cac:Address>");
+        let parts = [
+            ("cbc:ID", addr.ubigueo.as_deref()),
+            ("cbc:CitySubdivisionName", addr.urbanizacion.as_deref()),
+            ("cbc:CityName", addr.provincia.as_deref()),
+            ("cbc:CountrySubentity", addr.departamento.as_deref()),
+            ("cbc:District", addr.distrito.as_deref()),
+        ];
+        for (tag, value) in parts {
+            if truthy_str(value) {
+                out.raw("<")
+                    .raw(tag)
+                    .raw(">")
+                    .text(value)
+                    .raw("</")
+                    .raw(tag)
+                    .raw(">");
+            }
         }
-        out.raw("<cbc:CityName>")
-            .text(addr.provincia.as_deref())
-            .raw("</cbc:CityName><cbc:CountrySubentity>")
-            .text(addr.departamento.as_deref())
-            .raw("</cbc:CountrySubentity><cbc:District>")
-            .text(addr.distrito.as_deref())
-            .raw("</cbc:District><cac:AddressLine><cbc:Line><![CDATA[")
-            .cdata(addr.direccion.as_deref())
-            .raw(r#"]]></cbc:Line></cac:AddressLine><cac:Country><cbc:IdentificationCode listID="ISO 3166-1" listAgencyName="United Nations Economic Commission for Europe" listName="Country">"#)
+        if truthy_str(addr.direccion.as_deref()) {
+            out.raw("<cac:AddressLine><cbc:Line><![CDATA[")
+                .cdata(addr.direccion.as_deref())
+                .raw("]]></cbc:Line></cac:AddressLine>");
+        }
+        out.raw(r#"<cac:Country><cbc:IdentificationCode listID="ISO 3166-1" listAgencyName="United Nations Economic Commission for Europe" listName="Country">"#)
             .text(addr.codigo_pais.as_deref())
             .raw("</cbc:IdentificationCode></cac:Country></cac:Address></cac:DeliveryLocation></cac:Delivery>");
     }
@@ -176,7 +187,7 @@ pub(crate) fn render(doc: &Invoice, options: &RenderOptions) -> Result<String> {
             &mut out,
             currency,
             base.mto_oper_inafectas,
-            &TaxAmount::Literal("0"),
+            &TaxAmount::Literal(ZERO_TAX),
             &INA,
         );
     }
@@ -185,7 +196,7 @@ pub(crate) fn render(doc: &Invoice, options: &RenderOptions) -> Result<String> {
             &mut out,
             currency,
             base.mto_oper_exoneradas,
-            &TaxAmount::Literal("0"),
+            &TaxAmount::Literal(ZERO_TAX),
             &EXO,
         );
     }
@@ -203,7 +214,7 @@ pub(crate) fn render(doc: &Invoice, options: &RenderOptions) -> Result<String> {
             &mut out,
             currency,
             base.mto_oper_exportacion,
-            &TaxAmount::Literal("0"),
+            &TaxAmount::Literal(ZERO_TAX),
             &EXP,
         );
     }

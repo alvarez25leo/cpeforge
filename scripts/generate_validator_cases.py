@@ -76,6 +76,20 @@ for profile in ("default", "2.1"):
                 elif rule["name"] == "Required":
                     for label, value in (("null", None), ("empty", ""), ("false", False)):
                         add(profile, model, field, f"raw-required-{label}", value, True)
+                elif rule["name"] == "GreaterThan":
+                    # Fronteras de la comparación estricta `>` con el valor fijado.
+                    n = opts["value"]
+                    for label, value in (("gt-below", n - 1), ("gt-equal", n), ("gt-above", n + 1)):
+                        add(profile, model, field, label, value)
+                elif rule["name"] == "Count":
+                    # Colecciones justo en el límite y una más allá, con elementos
+                    # del tipo real de la propiedad.
+                    item = {"type": NESTED[model][field], "fields": {}}
+                    for bound in ("min", "max"):
+                        if bound in opts:
+                            n = opts[bound]
+                            for size in (max(0, n - 1), n, n + 1):
+                                add(profile, model, field, f"count-{bound}-{size}", [item] * size)
             if "Valid" in names:
                 child = NESTED[model][field]
                 item = {"type": child, "fields": {}}

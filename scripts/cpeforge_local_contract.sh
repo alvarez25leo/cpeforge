@@ -28,7 +28,7 @@ PY
 trap cleanup EXIT
 chmod 700 "$cpeforge_work"
 python3 oracle/cpeforge/mock_http_server.py "$cpeforge_work/port" "$cpeforge_work/requests.jsonl" \
-  target/reference/v5.3.0/packages/ws/src/Resources/wsdl/billService.wsdl &
+  target/reference/v5.4.0/packages/ws/src/Resources/wsdl/billService.wsdl &
 cpeforge_server_pid="$!"
 for _ in {1..100}; do
   [[ -s "$cpeforge_work/port" ]] && break

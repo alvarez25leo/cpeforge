@@ -42,7 +42,7 @@ fn inventory_is_from_pinned_reference() -> TestResult {
     assert_eq!(
         object(&inventory["classes"])?.len(),
         61,
-        "v5.3.0 tiene 61 archivos de la referencia en packages/core/src/Core"
+        "la referencia fijada tiene 61 archivos en packages/core/src/Core"
     );
     Ok(())
 }

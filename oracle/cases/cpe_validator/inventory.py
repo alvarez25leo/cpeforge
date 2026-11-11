@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Inventario de greenter/cpe-validator v5.3.0 (14 archivos fuente).
+"""Inventario de greenter/cpe-validator v5.4.0 (14 archivos fuente).
 
 Extrae, por archivo: SHA-256, líneas, tipo (clase/interfaz), métodos
 públicos, constantes y literales relevantes (códigos de error, mensajes de
@@ -34,7 +34,7 @@ def main() -> int:
     src = package / "src"
     files = sorted(src.rglob("*.php"))
     out: dict = {
-        "source": "thegreenter/greenter f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f packages/cpe-validator",
+        "source": "thegreenter/greenter 866ba448a6436143eff59d77c790bd0decc0d5f4 packages/cpe-validator",
         "files": [],
     }
     constants: dict[str, str] = {}

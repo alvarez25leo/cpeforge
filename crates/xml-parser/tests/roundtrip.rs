@@ -382,6 +382,7 @@ fn voided_and_reversion_roundtrip() -> TestResult {
 #[test]
 fn retention_and_perception_roundtrip() -> TestResult {
     let payment = Payment {
+        numero: Some(3),
         moneda: Some("PEN".into()),
         importe: Some(dec("100")),
         fecha: Some(lima("2024-07-01")),
@@ -441,9 +442,8 @@ fn retention_and_perception_roundtrip() -> TestResult {
         d[0].tipo_cambio.as_ref().and_then(|e| e.factor),
         Some(dec("3.785"))
     );
-    // La referencia lee `cbc:PaidDate` sin contexto (desde el raíz): el pago queda con
-    // la fecha actual aunque el XML la tenga.
-    assert_eq!(d[0].pagos.as_ref().map(Vec::len), Some(1));
+    // Número y fecha del pago se leen del propio `cac:Payment`.
+    assert_eq!(d[0].pagos.as_deref(), Some(&[payment.clone()][..]));
 
     let perception = Perception {
         serie: Some("P001".into()),
@@ -456,13 +456,14 @@ fn retention_and_perception_roundtrip() -> TestResult {
         imp_percibido: Some(dec("2")),
         imp_cobrado: Some(dec("102")),
         observacion: Some("NOTA".into()),
+        ind_excepcional: Some("01".into()),
         details: Some(vec![PerceptionDetail {
             tipo_doc: Some("01".into()),
             num_doc: Some("F001-1".into()),
             fecha_emision: Some(lima("2024-06-20")),
             imp_total: Some(dec("100")),
             moneda: Some("PEN".into()),
-            cobros: Some(vec![payment]),
+            cobros: Some(vec![payment.clone()]),
             fecha_percepcion: Some(lima("2024-07-02")),
             imp_percibido: Some(dec("2")),
             imp_cobrar: Some(dec("102")),
@@ -475,11 +476,59 @@ fn retention_and_perception_roundtrip() -> TestResult {
         .parse(xml.as_bytes())?
         .ok_or("sin percepción")?;
     assert_eq!(parsed.serie, perception.serie);
+    assert_eq!(parsed.ind_excepcional.as_deref(), Some("01"));
     assert_eq!(parsed.imp_percibido, Some(dec("2")));
     assert_eq!(parsed.imp_cobrado, Some(dec("102")));
     let d = parsed.details.unwrap_or_default();
     assert_eq!(d[0].imp_cobrar, Some(dec("102")));
     assert_eq!(d[0].fecha_percepcion, Some(lima("2024-07-02")));
+    assert_eq!(d[0].cobros.as_deref(), Some(&[payment][..]));
+    Ok(())
+}
+
+#[test]
+fn perception_without_exceptional_indicator_parses_as_none() -> TestResult {
+    let perception = Perception {
+        serie: Some("P001".into()),
+        correlativo: Some("2".into()),
+        fecha_emision: Some(lima("2024-07-03")),
+        company: Some(company()),
+        proveedor: Some(client()),
+        regimen: Some("01".into()),
+        tasa: Some(dec("2")),
+        imp_percibido: Some(dec("2")),
+        imp_cobrado: Some(dec("102")),
+        details: Some(vec![PerceptionDetail {
+            tipo_doc: Some("01".into()),
+            num_doc: Some("F001-1".into()),
+            fecha_emision: Some(lima("2024-06-20")),
+            imp_total: Some(dec("100")),
+            moneda: Some("PEN".into()),
+            cobros: Some(vec![Payment {
+                numero: None,
+                moneda: Some("PEN".into()),
+                importe: Some(dec("100")),
+                fecha: Some(lima("2024-07-01")),
+            }]),
+            ..PerceptionDetail::default()
+        }]),
+        ..Perception::default()
+    };
+    let xml = PerceptionBuilder::new(RenderOptions::default()).render(&perception)?;
+    assert!(!xml.contains("ExceptionalIndicator"));
+    let parsed = PerceptionParser::new()
+        .parse(xml.as_bytes())?
+        .ok_or("sin percepción")?;
+    assert_eq!(parsed.ind_excepcional, None);
+    // Sin número, el XML lleva la posición (1) y el parser la lee como número.
+    let cobros = parsed
+        .details
+        .unwrap_or_default()
+        .remove(0)
+        .cobros
+        .unwrap_or_default();
+    assert_eq!(cobros[0].numero, Some(1));
+    assert_eq!(cobros[0].fecha, Some(lima("2024-07-01")));
     Ok(())
 }
 

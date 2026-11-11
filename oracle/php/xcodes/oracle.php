@@ -6,7 +6,7 @@ declare(strict_types=1);
 // reimplementa aquí. DOM solo conserva la forma textual de las claves que PHP
 // convierte en enteros al construir getAll().
 $root = dirname(__DIR__, 3);
-$reference = getenv('PHP_REFERENCE_DIR') ?: $root.'/target/reference/v5.3.0';
+$reference = getenv('PHP_REFERENCE_DIR') ?: $root.'/target/reference/v5.4.0';
 require $reference.'/packages/core/src/Core/Validator/ErrorCodeProviderInterface.php';
 require $reference.'/packages/xcodes/src/Validator/XmlErrorCodeProvider.php';
 
@@ -57,7 +57,7 @@ foreach ($extra as $id => $code) {
 }
 
 echo json_encode(
-    ['source' => 'thegreenter/greenter v5.3.0 f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f',
+    ['source' => 'thegreenter/greenter v5.4.0 866ba448a6436143eff59d77c790bd0decc0d5f4',
      'all' => $rows, 'values' => $queries],
     JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR
 ), "\n";

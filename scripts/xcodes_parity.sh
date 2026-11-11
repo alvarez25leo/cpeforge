@@ -2,11 +2,11 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-reference=target/reference/v5.3.0
-suite=target/reference/v5.3.0-suite
-test "$(git -C "$reference" rev-parse HEAD)" = f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f
+reference=target/reference/v5.4.0
+suite=target/reference/v5.4.0-suite
+test "$(git -C "$reference" rev-parse HEAD)" = 866ba448a6436143eff59d77c790bd0decc0d5f4
 test -z "$(git -C greenter-php status --porcelain)"
-test "$(git -C "$suite" rev-parse HEAD)" = f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f
+test "$(git -C "$suite" rev-parse HEAD)" = 866ba448a6436143eff59d77c790bd0decc0d5f4
 test -f "$suite/vendor/bin/phpunit"
 mkdir -p target/evidence
 profile='(version 1)(allow default)(deny network*)'

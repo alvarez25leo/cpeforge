@@ -674,8 +674,8 @@ def voided_cases() -> list[dict]:
 # Retenciones y percepciones
 # --------------------------------------------------------------------------
 
-def payment(moneda: str, importe: str) -> dict:
-    return obj("Payment", moneda=moneda, importe=dec(importe), fecha=dt("2024-04-10T09:00:00-05:00"))
+def payment(moneda: str, importe: str, **over) -> dict:
+    return obj("Payment", moneda=moneda, importe=dec(importe), fecha=dt("2024-04-10T09:00:00-05:00"), **over)
 
 
 def exchange() -> dict:
@@ -755,9 +755,19 @@ def retention_perception_cases() -> list[dict]:
         case("retention-name-null-parts", "Partes nulas del nombre", obj("Retention", company=obj("Company")), name),
         case("retention-detail-empty", "RetentionDetail vacío", obj("RetentionDetail")),
         case("payment-empty", "Payment vacío", obj("Payment")),
+        case("payment-numero", "Payment con número de cuota", payment("PEN", "100.00", numero=2)),
         case("exchange-empty", "Exchange vacío", obj("Exchange")),
         case("perception-empty", "Perception vacía", obj("Perception")),
         case("perception-full", "Percepción completa: nombre con tipo 40", perception_full(), name),
+        case(
+            "perception-exceptional",
+            "Percepción de emisión excepcional con cobro numerado",
+            perception_full(
+                indExcepcional="01",
+                details=[obj("PerceptionDetail", tipoDoc="01", numDoc="F001-3", cobros=[payment("PEN", "1000.00", numero=3)])],
+            ),
+            name,
+        ),
         case("perception-name-no-company", "getName sin company falla", obj("Perception", serie="P001"), name),
         case("perception-name-null-parts", "Partes nulas del nombre", obj("Perception", company=obj("Company")), name),
         case("perception-detail-empty", "PerceptionDetail vacío", obj("PerceptionDetail")),

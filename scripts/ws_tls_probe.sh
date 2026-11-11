@@ -3,8 +3,8 @@
 set -euo pipefail
 root="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$root"
-test "$(git -C target/reference/v5.3.0 rev-parse HEAD)" = f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f
-test -f target/reference/v5.3.0-suite/vendor/autoload.php
+test "$(git -C target/reference/v5.4.0 rev-parse HEAD)" = 866ba448a6436143eff59d77c790bd0decc0d5f4
+test -f target/reference/v5.4.0-suite/vendor/autoload.php
 source scripts/evidence.sh
 scratch="$(mktemp -d)"
 server_pid=""

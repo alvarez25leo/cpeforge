@@ -33401,6 +33401,138 @@
         ]
     },
     {
+        "id": "2.1/Payment/numero/gt-above",
+        "type": "Payment",
+        "violations": [
+            {
+                "path": "moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "importe",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fecha",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "2.1/Payment/numero/gt-below",
+        "type": "Payment",
+        "violations": [
+            {
+                "path": "numero",
+                "message": "This value should be greater than 0.",
+                "template": "This value should be greater than {{ compared_value }}.",
+                "code": "778b7ae0-84d3-481a-9dec-35fdb64b1d78",
+                "parameters": {
+                    "{{ value }}": "-1",
+                    "{{ compared_value }}": "0",
+                    "{{ compared_value_type }}": "int"
+                },
+                "invalid": -1
+            },
+            {
+                "path": "moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "importe",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fecha",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "2.1/Payment/numero/gt-equal",
+        "type": "Payment",
+        "violations": [
+            {
+                "path": "numero",
+                "message": "This value should be greater than 0.",
+                "template": "This value should be greater than {{ compared_value }}.",
+                "code": "778b7ae0-84d3-481a-9dec-35fdb64b1d78",
+                "parameters": {
+                    "{{ value }}": "0",
+                    "{{ compared_value }}": "0",
+                    "{{ compared_value_type }}": "int"
+                },
+                "invalid": 0
+            },
+            {
+                "path": "moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "importe",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fecha",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
         "id": "2.1/PaymentTerms/_/default",
         "type": "PaymentTerms",
         "violations": [
@@ -35900,6 +36032,926 @@
                     "{{ value }}": "null"
                 },
                 "invalid": null
+            },
+            {
+                "path": "details",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "2.1/Perception/indExcepcional/max-1",
+        "type": "Perception",
+        "violations": [
+            {
+                "path": "serie",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "correlativo",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "company",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "proveedor",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "regimen",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "tasa",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrado",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "indExcepcional",
+                "message": "This value should have exactly 2 characters.",
+                "template": "This value should have exactly {{ limit }} character.|This value should have exactly {{ limit }} characters.",
+                "code": "4b6f5c76-22b4-409d-af16-fbe823ba9332",
+                "parameters": {
+                    "{{ value }}": "\"A\"",
+                    "{{ limit }}": "2",
+                    "{{ value_length }}": "1"
+                },
+                "invalid": "A"
+            },
+            {
+                "path": "details",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "2.1/Perception/indExcepcional/max-2",
+        "type": "Perception",
+        "violations": [
+            {
+                "path": "serie",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "correlativo",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "company",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "proveedor",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "regimen",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "tasa",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrado",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "details",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "2.1/Perception/indExcepcional/max-3",
+        "type": "Perception",
+        "violations": [
+            {
+                "path": "serie",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "correlativo",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "company",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "proveedor",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "regimen",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "tasa",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrado",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "indExcepcional",
+                "message": "This value should have exactly 2 characters.",
+                "template": "This value should have exactly {{ limit }} character.|This value should have exactly {{ limit }} characters.",
+                "code": "4b6f5c76-22b4-409d-af16-fbe823ba9332",
+                "parameters": {
+                    "{{ value }}": "\"AAA\"",
+                    "{{ limit }}": "2",
+                    "{{ value_length }}": "3"
+                },
+                "invalid": "AAA"
+            },
+            {
+                "path": "details",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "2.1/Perception/indExcepcional/max-unicode-3",
+        "type": "Perception",
+        "violations": [
+            {
+                "path": "serie",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "correlativo",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "company",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "proveedor",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "regimen",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "tasa",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrado",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "indExcepcional",
+                "message": "This value should have exactly 2 characters.",
+                "template": "This value should have exactly {{ limit }} character.|This value should have exactly {{ limit }} characters.",
+                "code": "4b6f5c76-22b4-409d-af16-fbe823ba9332",
+                "parameters": {
+                    "{{ value }}": "\"ñññ\"",
+                    "{{ limit }}": "2",
+                    "{{ value_length }}": "3"
+                },
+                "invalid": "ñññ"
+            },
+            {
+                "path": "details",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "2.1/Perception/indExcepcional/min-1",
+        "type": "Perception",
+        "violations": [
+            {
+                "path": "serie",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "correlativo",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "company",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "proveedor",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "regimen",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "tasa",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrado",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "indExcepcional",
+                "message": "This value should have exactly 2 characters.",
+                "template": "This value should have exactly {{ limit }} character.|This value should have exactly {{ limit }} characters.",
+                "code": "4b6f5c76-22b4-409d-af16-fbe823ba9332",
+                "parameters": {
+                    "{{ value }}": "\"A\"",
+                    "{{ limit }}": "2",
+                    "{{ value_length }}": "1"
+                },
+                "invalid": "A"
+            },
+            {
+                "path": "details",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "2.1/Perception/indExcepcional/min-2",
+        "type": "Perception",
+        "violations": [
+            {
+                "path": "serie",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "correlativo",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "company",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "proveedor",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "regimen",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "tasa",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrado",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "details",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "2.1/Perception/indExcepcional/min-3",
+        "type": "Perception",
+        "violations": [
+            {
+                "path": "serie",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "correlativo",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "company",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "proveedor",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "regimen",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "tasa",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrado",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "indExcepcional",
+                "message": "This value should have exactly 2 characters.",
+                "template": "This value should have exactly {{ limit }} character.|This value should have exactly {{ limit }} characters.",
+                "code": "4b6f5c76-22b4-409d-af16-fbe823ba9332",
+                "parameters": {
+                    "{{ value }}": "\"AAA\"",
+                    "{{ limit }}": "2",
+                    "{{ value_length }}": "3"
+                },
+                "invalid": "AAA"
+            },
+            {
+                "path": "details",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "2.1/Perception/indExcepcional/min-unicode-3",
+        "type": "Perception",
+        "violations": [
+            {
+                "path": "serie",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "correlativo",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "company",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "proveedor",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "regimen",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "tasa",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrado",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "indExcepcional",
+                "message": "This value should have exactly 2 characters.",
+                "template": "This value should have exactly {{ limit }} character.|This value should have exactly {{ limit }} characters.",
+                "code": "4b6f5c76-22b4-409d-af16-fbe823ba9332",
+                "parameters": {
+                    "{{ value }}": "\"ñññ\"",
+                    "{{ limit }}": "2",
+                    "{{ value_length }}": "3"
+                },
+                "invalid": "ñññ"
             },
             {
                 "path": "details",
@@ -39494,6 +40546,382 @@
                 "message": "This value should not be blank.",
                 "template": "This value should not be blank.",
                 "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrar",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaPercepcion",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "2.1/PerceptionDetail/cobros/count-max-0",
+        "type": "PerceptionDetail",
+        "violations": [
+            {
+                "path": "tipoDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "numDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impTotal",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "array"
+                },
+                "invalid": []
+            },
+            {
+                "path": "impCobrar",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaPercepcion",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "2.1/PerceptionDetail/cobros/count-max-1",
+        "type": "PerceptionDetail",
+        "violations": [
+            {
+                "path": "tipoDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "numDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impTotal",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros[0].moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros[0].importe",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros[0].fecha",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrar",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaPercepcion",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "2.1/PerceptionDetail/cobros/count-max-2",
+        "type": "PerceptionDetail",
+        "violations": [
+            {
+                "path": "tipoDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "numDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impTotal",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros",
+                "message": "This collection should contain 1 element or less.",
+                "template": "This collection should contain {{ limit }} element or less.|This collection should contain {{ limit }} elements or less.",
+                "code": "756b1212-697c-468d-a9ad-50dd783bb169",
+                "parameters": {
+                    "{{ count }}": "2",
+                    "{{ limit }}": "1"
+                },
+                "invalid": [
+                    {
+                        "type": "Payment"
+                    },
+                    {
+                        "type": "Payment"
+                    }
+                ]
+            },
+            {
+                "path": "cobros[0].moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros[0].importe",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros[0].fecha",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros[1].moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros[1].importe",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros[1].fecha",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
                 "parameters": {
                     "{{ value }}": "null"
                 },
@@ -52240,6 +53668,412 @@
                 "message": "This value should not be blank.",
                 "template": "This value should not be blank.",
                 "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPagar",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPagar",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaRetencion",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impRetenido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "2.1/RetentionDetail/pagos/count-max-0",
+        "type": "RetentionDetail",
+        "violations": [
+            {
+                "path": "tipoDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "numDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impTotal",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "array"
+                },
+                "invalid": []
+            },
+            {
+                "path": "impPagar",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPagar",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaRetencion",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impRetenido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "2.1/RetentionDetail/pagos/count-max-1",
+        "type": "RetentionDetail",
+        "violations": [
+            {
+                "path": "tipoDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "numDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impTotal",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos[0].moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos[0].importe",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos[0].fecha",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPagar",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPagar",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaRetencion",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impRetenido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "2.1/RetentionDetail/pagos/count-max-2",
+        "type": "RetentionDetail",
+        "violations": [
+            {
+                "path": "tipoDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "numDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impTotal",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos",
+                "message": "This collection should contain 1 element or less.",
+                "template": "This collection should contain {{ limit }} element or less.|This collection should contain {{ limit }} elements or less.",
+                "code": "756b1212-697c-468d-a9ad-50dd783bb169",
+                "parameters": {
+                    "{{ count }}": "2",
+                    "{{ limit }}": "1"
+                },
+                "invalid": [
+                    {
+                        "type": "Payment"
+                    },
+                    {
+                        "type": "Payment"
+                    }
+                ]
+            },
+            {
+                "path": "pagos[0].moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos[0].importe",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos[0].fecha",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos[1].moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos[1].importe",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos[1].fecha",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
                 "parameters": {
                     "{{ value }}": "null"
                 },
@@ -112244,6 +114078,138 @@
         ]
     },
     {
+        "id": "default/Payment/numero/gt-above",
+        "type": "Payment",
+        "violations": [
+            {
+                "path": "moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "importe",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fecha",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "default/Payment/numero/gt-below",
+        "type": "Payment",
+        "violations": [
+            {
+                "path": "numero",
+                "message": "This value should be greater than 0.",
+                "template": "This value should be greater than {{ compared_value }}.",
+                "code": "778b7ae0-84d3-481a-9dec-35fdb64b1d78",
+                "parameters": {
+                    "{{ value }}": "-1",
+                    "{{ compared_value }}": "0",
+                    "{{ compared_value_type }}": "int"
+                },
+                "invalid": -1
+            },
+            {
+                "path": "moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "importe",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fecha",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "default/Payment/numero/gt-equal",
+        "type": "Payment",
+        "violations": [
+            {
+                "path": "numero",
+                "message": "This value should be greater than 0.",
+                "template": "This value should be greater than {{ compared_value }}.",
+                "code": "778b7ae0-84d3-481a-9dec-35fdb64b1d78",
+                "parameters": {
+                    "{{ value }}": "0",
+                    "{{ compared_value }}": "0",
+                    "{{ compared_value_type }}": "int"
+                },
+                "invalid": 0
+            },
+            {
+                "path": "moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "importe",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fecha",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
         "id": "default/PaymentTerms/_/default",
         "type": "PaymentTerms",
         "violations": [
@@ -114743,6 +116709,926 @@
                     "{{ value }}": "null"
                 },
                 "invalid": null
+            },
+            {
+                "path": "details",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "default/Perception/indExcepcional/max-1",
+        "type": "Perception",
+        "violations": [
+            {
+                "path": "serie",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "correlativo",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "company",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "proveedor",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "regimen",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "tasa",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrado",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "indExcepcional",
+                "message": "This value should have exactly 2 characters.",
+                "template": "This value should have exactly {{ limit }} character.|This value should have exactly {{ limit }} characters.",
+                "code": "4b6f5c76-22b4-409d-af16-fbe823ba9332",
+                "parameters": {
+                    "{{ value }}": "\"A\"",
+                    "{{ limit }}": "2",
+                    "{{ value_length }}": "1"
+                },
+                "invalid": "A"
+            },
+            {
+                "path": "details",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "default/Perception/indExcepcional/max-2",
+        "type": "Perception",
+        "violations": [
+            {
+                "path": "serie",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "correlativo",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "company",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "proveedor",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "regimen",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "tasa",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrado",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "details",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "default/Perception/indExcepcional/max-3",
+        "type": "Perception",
+        "violations": [
+            {
+                "path": "serie",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "correlativo",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "company",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "proveedor",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "regimen",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "tasa",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrado",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "indExcepcional",
+                "message": "This value should have exactly 2 characters.",
+                "template": "This value should have exactly {{ limit }} character.|This value should have exactly {{ limit }} characters.",
+                "code": "4b6f5c76-22b4-409d-af16-fbe823ba9332",
+                "parameters": {
+                    "{{ value }}": "\"AAA\"",
+                    "{{ limit }}": "2",
+                    "{{ value_length }}": "3"
+                },
+                "invalid": "AAA"
+            },
+            {
+                "path": "details",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "default/Perception/indExcepcional/max-unicode-3",
+        "type": "Perception",
+        "violations": [
+            {
+                "path": "serie",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "correlativo",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "company",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "proveedor",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "regimen",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "tasa",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrado",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "indExcepcional",
+                "message": "This value should have exactly 2 characters.",
+                "template": "This value should have exactly {{ limit }} character.|This value should have exactly {{ limit }} characters.",
+                "code": "4b6f5c76-22b4-409d-af16-fbe823ba9332",
+                "parameters": {
+                    "{{ value }}": "\"ñññ\"",
+                    "{{ limit }}": "2",
+                    "{{ value_length }}": "3"
+                },
+                "invalid": "ñññ"
+            },
+            {
+                "path": "details",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "default/Perception/indExcepcional/min-1",
+        "type": "Perception",
+        "violations": [
+            {
+                "path": "serie",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "correlativo",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "company",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "proveedor",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "regimen",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "tasa",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrado",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "indExcepcional",
+                "message": "This value should have exactly 2 characters.",
+                "template": "This value should have exactly {{ limit }} character.|This value should have exactly {{ limit }} characters.",
+                "code": "4b6f5c76-22b4-409d-af16-fbe823ba9332",
+                "parameters": {
+                    "{{ value }}": "\"A\"",
+                    "{{ limit }}": "2",
+                    "{{ value_length }}": "1"
+                },
+                "invalid": "A"
+            },
+            {
+                "path": "details",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "default/Perception/indExcepcional/min-2",
+        "type": "Perception",
+        "violations": [
+            {
+                "path": "serie",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "correlativo",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "company",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "proveedor",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "regimen",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "tasa",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrado",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "details",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "default/Perception/indExcepcional/min-3",
+        "type": "Perception",
+        "violations": [
+            {
+                "path": "serie",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "correlativo",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "company",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "proveedor",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "regimen",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "tasa",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrado",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "indExcepcional",
+                "message": "This value should have exactly 2 characters.",
+                "template": "This value should have exactly {{ limit }} character.|This value should have exactly {{ limit }} characters.",
+                "code": "4b6f5c76-22b4-409d-af16-fbe823ba9332",
+                "parameters": {
+                    "{{ value }}": "\"AAA\"",
+                    "{{ limit }}": "2",
+                    "{{ value_length }}": "3"
+                },
+                "invalid": "AAA"
+            },
+            {
+                "path": "details",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "default/Perception/indExcepcional/min-unicode-3",
+        "type": "Perception",
+        "violations": [
+            {
+                "path": "serie",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "correlativo",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "company",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "proveedor",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "regimen",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "tasa",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrado",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "indExcepcional",
+                "message": "This value should have exactly 2 characters.",
+                "template": "This value should have exactly {{ limit }} character.|This value should have exactly {{ limit }} characters.",
+                "code": "4b6f5c76-22b4-409d-af16-fbe823ba9332",
+                "parameters": {
+                    "{{ value }}": "\"ñññ\"",
+                    "{{ limit }}": "2",
+                    "{{ value_length }}": "3"
+                },
+                "invalid": "ñññ"
             },
             {
                 "path": "details",
@@ -118337,6 +121223,382 @@
                 "message": "This value should not be blank.",
                 "template": "This value should not be blank.",
                 "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrar",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaPercepcion",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "default/PerceptionDetail/cobros/count-max-0",
+        "type": "PerceptionDetail",
+        "violations": [
+            {
+                "path": "tipoDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "numDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impTotal",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "array"
+                },
+                "invalid": []
+            },
+            {
+                "path": "impCobrar",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaPercepcion",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "default/PerceptionDetail/cobros/count-max-1",
+        "type": "PerceptionDetail",
+        "violations": [
+            {
+                "path": "tipoDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "numDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impTotal",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros[0].moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros[0].importe",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros[0].fecha",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impCobrar",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaPercepcion",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPercibido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "default/PerceptionDetail/cobros/count-max-2",
+        "type": "PerceptionDetail",
+        "violations": [
+            {
+                "path": "tipoDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "numDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impTotal",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros",
+                "message": "This collection should contain 1 element or less.",
+                "template": "This collection should contain {{ limit }} element or less.|This collection should contain {{ limit }} elements or less.",
+                "code": "756b1212-697c-468d-a9ad-50dd783bb169",
+                "parameters": {
+                    "{{ count }}": "2",
+                    "{{ limit }}": "1"
+                },
+                "invalid": [
+                    {
+                        "type": "Payment"
+                    },
+                    {
+                        "type": "Payment"
+                    }
+                ]
+            },
+            {
+                "path": "cobros[0].moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros[0].importe",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros[0].fecha",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros[1].moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros[1].importe",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "cobros[1].fecha",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
                 "parameters": {
                     "{{ value }}": "null"
                 },
@@ -131083,6 +134345,412 @@
                 "message": "This value should not be blank.",
                 "template": "This value should not be blank.",
                 "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPagar",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPagar",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaRetencion",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impRetenido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "default/RetentionDetail/pagos/count-max-0",
+        "type": "RetentionDetail",
+        "violations": [
+            {
+                "path": "tipoDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "numDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impTotal",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "array"
+                },
+                "invalid": []
+            },
+            {
+                "path": "impPagar",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPagar",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaRetencion",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impRetenido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "default/RetentionDetail/pagos/count-max-1",
+        "type": "RetentionDetail",
+        "violations": [
+            {
+                "path": "tipoDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "numDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impTotal",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos[0].moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos[0].importe",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos[0].fecha",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPagar",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impPagar",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaRetencion",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impRetenido",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            }
+        ]
+    },
+    {
+        "id": "default/RetentionDetail/pagos/count-max-2",
+        "type": "RetentionDetail",
+        "violations": [
+            {
+                "path": "tipoDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "numDoc",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "fechaEmision",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "impTotal",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos",
+                "message": "This collection should contain 1 element or less.",
+                "template": "This collection should contain {{ limit }} element or less.|This collection should contain {{ limit }} elements or less.",
+                "code": "756b1212-697c-468d-a9ad-50dd783bb169",
+                "parameters": {
+                    "{{ count }}": "2",
+                    "{{ limit }}": "1"
+                },
+                "invalid": [
+                    {
+                        "type": "Payment"
+                    },
+                    {
+                        "type": "Payment"
+                    }
+                ]
+            },
+            {
+                "path": "pagos[0].moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos[0].importe",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos[0].fecha",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos[1].moneda",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos[1].importe",
+                "message": "This value should not be blank.",
+                "template": "This value should not be blank.",
+                "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3",
+                "parameters": {
+                    "{{ value }}": "null"
+                },
+                "invalid": null
+            },
+            {
+                "path": "pagos[1].fecha",
+                "message": "This value should not be null.",
+                "template": "This value should not be null.",
+                "code": "ad32d13f-c3d4-423b-909a-857b961eb720",
                 "parameters": {
                     "{{ value }}": "null"
                 },

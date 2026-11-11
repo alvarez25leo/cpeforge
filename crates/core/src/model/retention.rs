@@ -33,6 +33,10 @@ pub struct Exchange {
     serde(default, rename_all = "camelCase", deny_unknown_fields)
 )]
 pub struct Payment {
+    /// Número de pago o cobro (cuota) asignado a la factura relacionada; se
+    /// escribe en `cac:Payment/cbc:ID`. Sin valor se usa la posición del pago
+    /// dentro del detalle (1, 2, …). El validador exige un valor mayor que 0.
+    pub numero: Option<i64>,
     /// Moneda.
     pub moneda: Option<String>,
     /// Importe.

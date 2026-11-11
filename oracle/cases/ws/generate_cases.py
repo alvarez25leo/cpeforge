@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Casos sintéticos de ws v5.3.0; solo bytes locales, nunca credenciales reales."""
+"""Casos sintéticos de ws v5.4.0; solo bytes locales, nunca credenciales reales."""
 
 import json
 import sys
@@ -95,5 +95,5 @@ cases = [
 
 target = sys.argv[1] if len(sys.argv) > 1 else "tests/reference/ws/cases.json"
 with open(target, "w", encoding="utf-8") as file:
-    json.dump({"source": "thegreenter/greenter v5.3.0 f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f", "cases": cases}, file, ensure_ascii=False, indent=2)
+    json.dump({"source": "thegreenter/greenter v5.4.0 866ba448a6436143eff59d77c790bd0decc0d5f4", "cases": cases}, file, ensure_ascii=False, indent=2)
     file.write("\n")

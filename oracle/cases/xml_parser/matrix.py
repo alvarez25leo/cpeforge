@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Matriz campo a campo de greenter/xml-parser v5.3.0 para la evidencia.
+"""Matriz campo a campo de greenter/xml-parser v5.4.0 para la evidencia.
 
 Para cada llamada `->setX(expresión)` de los parsers PHP fijados extrae la
 expresión literal (ruta XPath, contexto, valor por defecto y conversión) y
@@ -78,7 +78,7 @@ def main() -> int:
         "# Matriz de campos — cpeforge-xml-parser 0.1.0",
         "",
         "Generada con `python3 -I oracle/cases/xml_parser/matrix.py` desde las fuentes PHP fijadas",
-        "(`f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f`) y `tests/reference/xml-parser/expected.json`.",
+        "(`866ba448a6436143eff59d77c790bd0decc0d5f4`) y `tests/reference/xml-parser/expected.json`.",
         "Cada fila es una llamada a un setter en el orden del código: la expresión PHP literal",
         "(ruta XPath, nodo de contexto, valor por defecto y conversión) y el número de",
         "objetos del oráculo en que una propiedad con ese nombre tiene valor PHP no nulo (todas las",

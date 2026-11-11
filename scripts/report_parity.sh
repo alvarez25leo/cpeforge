@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Gate de paridad de cpeforge-report contra greenter/report v5.3.0.
+# Gate de paridad de cpeforge-report contra greenter/report v5.4.0.
 #
 # 1. Prepara la referencia PHP aislada (commit fijado) y las dependencias del
 #    oráculo (oracle/php/report/composer.lock: Twig 3.30.0, Bacon QR 3.1.1).
@@ -26,13 +26,13 @@ GREENTER_PHP_REFERENCE="$("$root/scripts/prepare_php_reference.sh")"
 export GREENTER_PHP_REFERENCE
 (cd "$root/oracle/php/report" && composer install --no-interaction --no-progress --quiet)
 echo "referencia PHP: $(git -C "$GREENTER_PHP_REFERENCE" rev-parse HEAD)"
-php -n --version | head -1
+php -n --version | sed -n 1p
 echo "composer.lock del oráculo: $(shasum -a 256 "$root/oracle/php/report/composer.lock" | cut -d' ' -f1)"
 
 python3 "$root/scripts/report_template_adaptations.py" check \
     "$GREENTER_PHP_REFERENCE/packages/report/src/Report/Templates" "$root/crates/report/templates"
 
-suite="$root/target/reference/v5.3.0-suite"
+suite="$root/target/reference/v5.4.0-suite"
 if [[ -x "$suite/vendor/bin/phpunit" ]]; then
     echo "suite PHPUnit upstream de packages/report:"
     (cd "$suite" && php vendor/bin/phpunit packages/report/tests --no-coverage)

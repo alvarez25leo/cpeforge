@@ -15,7 +15,7 @@ use cpeforge_core::model::settlement::{
 use cpeforge_core::{CoreError, Zoned};
 
 use super::shared::{
-    self, EMPTY_EXTENSIONS, EXO, IGV, INA, Scheme, TaxAmount, XML_DECLARATION, tax_scheme,
+    self, EMPTY_EXTENSIONS, EXO, IGV, INA, Scheme, TaxAmount, XML_DECLARATION, ZERO_TAX, tax_scheme,
 };
 use crate::format::tributo_by_afectacion;
 use crate::options::RenderOptions;
@@ -217,7 +217,7 @@ fn tax_total(out: &mut Out<'_>, doc: &PurchaseSettlement, currency: Option<&str>
             out,
             currency,
             doc.mto_oper_exoneradas,
-            &TaxAmount::Literal("0"),
+            &TaxAmount::Literal(ZERO_TAX),
             &EXO,
         );
     }
@@ -226,7 +226,7 @@ fn tax_total(out: &mut Out<'_>, doc: &PurchaseSettlement, currency: Option<&str>
             out,
             currency,
             doc.mto_oper_inafectas,
-            &TaxAmount::Literal("0"),
+            &TaxAmount::Literal(ZERO_TAX),
             &INA,
         );
     }

@@ -7,8 +7,8 @@ require __DIR__ . '/bootstrap.php';
 use Greenter\Validator\Metadata\CustomMetadataFactory;
 
 $root = dirname(__DIR__, 3);
-$source = $root . '/target/reference/v5.3.0/packages/validator/src/Validator';
-$out = ['reference' => 'f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f', 'symfony' => '6.4.48', 'files' => [], 'profiles' => []];
+$source = $root . '/target/reference/v5.4.0/packages/validator/src/Validator';
+$out = ['reference' => '866ba448a6436143eff59d77c790bd0decc0d5f4', 'symfony' => '6.4.48', 'files' => [], 'profiles' => []];
 $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source, FilesystemIterator::SKIP_DOTS));
 foreach ($it as $file) {
     if ($file->getExtension() === 'php') {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * Oráculo de los filtros y funciones de greenter/xml v5.3.0:
+ * Oráculo de los filtros y funciones de greenter/xml v5.4.0:
  * FormatFilter::number (n_format), FormatFilter::numberLimit (n_format_limit),
  * TributoFunction::getByAfectacion y getByTributo, y la impresión `{{ x }}`
  * de un float en Twig (conversión float→string con precision=14).

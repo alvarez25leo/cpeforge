@@ -264,6 +264,22 @@ def invoice_cases():
         relDocs=[obj("Document", tipoDoc="99", nroDoc="R-1")],
     )
     cases += with_options("inv21-parties", "Nombre comercial \"0\", contactos parciales, vendedor y entrega", b, parties, ("default", "tests"))
+    # Greenter v5.4.0: cada parte de la dirección de entrega es opcional; la
+    # exportación de servicios declara solo el país del uso del servicio.
+    cases += with_options(
+        "inv21-delivery-country",
+        "Dirección de entrega solo con país (exportación de servicios)",
+        b,
+        minimal_invoice("2.1", direccionEntrega=obj("Address", codigoPais="US")),
+        ("default", "tests"),
+    )
+    cases += with_options(
+        "inv21-delivery-full",
+        "Dirección de entrega completa con urbanización",
+        b,
+        minimal_invoice("2.1", direccionEntrega=core.address(provincia="HUAURA", departamento="LIMA", distrito="HUACHO")),
+        ("default", "tests"),
+    )
     cases += with_options("inv20-parties", "Partes en UBL 2.0", b, set_fields(parties, ublVersion="2.0"), ("default", "tests"))
     cases += with_options(
         "inv21-no-contact",
@@ -546,6 +562,20 @@ def retention_cases():
         cases += with_options(f"{name}-partial", f"{name}: detalles sin pagos, información incompleta e importe 0", builder, partial, ("default", "tests"))
         cases += with_options(f"{name}-empty", f"{name} vacía", builder, obj("Retention" if name == "retention" else "Perception"))
         cases += with_options(f"{name}-no-provider", f"{name} sin proveedor", builder, maker(proveedor=None))
+        # Greenter v5.4.0: CityName = provincia y CountrySubentity = departamento
+        # en la dirección del agente, número de pago explícito y, en percepción,
+        # el indicador de emisión excepcional con un único documento (factura).
+        extra = {"indExcepcional": "01"} if name == "perception" else {}
+        numbered = maker(
+            company=core.company(address=core.address(provincia="HUAURA", departamento="LIMA", distrito="HUACHO")),
+            details=[
+                obj(detail_class, tipoDoc="01", numDoc="F001-9", fechaEmision=dt("2024-04-01T10:00:00-05:00"), impTotal=dec("1000.00"), moneda="PEN",
+                    **{pay_field: [core.payment("PEN", "400.00", numero=3)], amount_a: dec("20.00"), amount_b: dec("980.00"),
+                       date_field: dt("2024-04-15T10:00:00-05:00")}),
+            ],
+            **extra,
+        )
+        cases += with_options(f"{name}-v540", f"{name}: provincia/departamento, pago numerado e indicador excepcional", builder, numbered, ("default", "tests"))
     return cases
 
 

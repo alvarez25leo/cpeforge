@@ -8,12 +8,12 @@ date_default_timezone_set('UTC');
 ini_set('precision', '14');
 
 $root = dirname(__DIR__, 3);
-$ref = $root.'/target/reference/v5.3.0';
-if (trim((string) shell_exec('git -C '.escapeshellarg($ref).' rev-parse HEAD')) !== 'f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f') {
+$ref = $root.'/target/reference/v5.4.0';
+if (trim((string) shell_exec('git -C '.escapeshellarg($ref).' rev-parse HEAD')) !== '866ba448a6436143eff59d77c790bd0decc0d5f4') {
     throw new RuntimeException('Referencia PHP incorrecta');
 }
 require $root.'/oracle/php/core/lib.php';
-require $root.'/target/reference/v5.3.0-suite/vendor/autoload.php';
+require $root.'/target/reference/v5.4.0-suite/vendor/autoload.php';
 spl_autoload_register(static function (string $class) use ($ref): void {
     if (!str_starts_with($class, 'Greenter\\')) return;
     $relative = str_replace('\\', '/', substr($class, 9)).'.php';

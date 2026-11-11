@@ -8,7 +8,7 @@ declare(strict_types=1);
  * autoloader PSR-4 equivalente al de su composer.json.
  */
 
-$referenceDir = getenv('GREENTER_PHP_REFERENCE') ?: dirname(__DIR__, 3) . '/target/reference/v5.3.0';
+$referenceDir = getenv('GREENTER_PHP_REFERENCE') ?: dirname(__DIR__, 3) . '/target/reference/v5.4.0';
 $coreSrc = realpath($referenceDir . '/packages/core/src/Core');
 if ($coreSrc === false) {
     fwrite(STDERR, "No existe la referencia PHP en $referenceDir; ejecutar scripts/prepare_php_reference.sh\n");

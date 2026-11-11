@@ -88,7 +88,7 @@ def main() -> None:
     out.append("")
     out.append(
         "Generada con `python3 oracle/cases/core/build_matrix.py` a partir de `tests/reference/core/`. "
-        "Los resultados PHP provienen de Greenter v5.3.0 (`f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f`) "
+        "Los resultados PHP provienen de Greenter v5.4.0 (`866ba448a6436143eff59d77c790bd0decc0d5f4`) "
         "ejecutado con PHP 8.4.17. La prueba Rust de cada caso es `crates/core/tests/parity.rs`."
     )
     out.append("")

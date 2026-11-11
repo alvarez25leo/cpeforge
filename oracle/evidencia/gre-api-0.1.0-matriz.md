@@ -36,6 +36,9 @@ de `Configuration`; `GreSender.php` llama a las dos operaciones CPE.
 `greenter/lite` configura el host de autenticación. No se portaron su caché de
 token, ZIP, CDR ni flujos de facturación a este crate.
 
+La referencia actual del consumidor es Greenter v5.4.0; `ApiFactory.php` y
+`packages/lite` no cambiaron respecto de v5.3.0.
+
 Los fixtures por fila están en `tests/reference/gre-api/cases.json` (159 casos),
 el resultado ejecutado del PHP en `expected.json`, y las observaciones
 independientes de OpenAPI en `contract.json`. El comparador `parity.rs` exige

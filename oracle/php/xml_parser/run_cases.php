@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 /*
- * Oráculo PHP de greenter/xml-parser v5.3.0: ejecuta los parsers reales del
- * checkout fijado (target/reference/v5.3.0) sobre los XML sintéticos de
+ * Oráculo PHP de greenter/xml-parser v5.4.0: ejecuta los parsers reales del
+ * checkout fijado (target/reference/v5.4.0) sobre los XML sintéticos de
  * tests/reference/xml-parser/cases.json y exporta el documento completo con
  * los getters de greenter/core (export_object de oracle/php/core/lib.php).
  *
@@ -18,7 +18,7 @@ require dirname(__DIR__) . '/core/bootstrap.php';
 require dirname(__DIR__) . '/core/lib.php';
 
 $root = dirname(__DIR__, 3);
-$referenceDir = getenv('GREENTER_PHP_REFERENCE') ?: $root . '/target/reference/v5.3.0';
+$referenceDir = getenv('GREENTER_PHP_REFERENCE') ?: $root . '/target/reference/v5.4.0';
 $parserSrc = realpath($referenceDir . '/packages/xml-parser/src');
 spl_autoload_register(static function (string $class) use ($parserSrc): void {
     if (strncmp($class, 'Greenter\\Xml\\', 13) !== 0) {

@@ -27,7 +27,7 @@ trap cleanup EXIT
 chmod 700 "$cpeforge_work"
 
 cd "$cpeforge_root"
-test "$(git -C target/reference/v5.3.0 rev-parse HEAD)" = 'f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f'
+test "$(git -C target/reference/v5.4.0 rev-parse HEAD)" = '866ba448a6436143eff59d77c790bd0decc0d5f4'
 scripts/lite_upstream_safe.sh
 scripts/cpeforge_local_contract.sh
 if ! "${cpeforge_php[@]}" php -r 'exit(@fsockopen("192.0.2.1", 80, $n, $s, 1) ? 1 : 0);'; then

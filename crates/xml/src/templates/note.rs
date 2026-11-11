@@ -7,7 +7,7 @@ use super::invoice20::{self, Line20};
 use super::invoice21::{monetary, payment_terms_21};
 use super::shared::{
     self, EMPTY_EXTENSIONS, EXO, EXP, GRA, ICBPER, IGV, INA, ISC, IVAP, Line21, OTROS, TaxAmount,
-    XML_DECLARATION,
+    XML_DECLARATION, ZERO_TAX,
 };
 use crate::format::n_format;
 use crate::options::RenderOptions;
@@ -161,13 +161,13 @@ pub(crate) fn render_21(
         (
             base.mto_oper_inafectas,
             base.mto_oper_inafectas,
-            TaxAmount::Literal("0"),
+            TaxAmount::Literal(ZERO_TAX),
             &INA,
         ),
         (
             base.mto_oper_exoneradas,
             base.mto_oper_exoneradas,
-            TaxAmount::Literal("0"),
+            TaxAmount::Literal(ZERO_TAX),
             &EXO,
         ),
         (
@@ -179,7 +179,7 @@ pub(crate) fn render_21(
         (
             base.mto_oper_exportacion,
             base.mto_oper_exportacion,
-            TaxAmount::Literal("0"),
+            TaxAmount::Literal(ZERO_TAX),
             &EXP,
         ),
         (

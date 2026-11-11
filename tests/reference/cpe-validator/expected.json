@@ -1,10 +1,10 @@
 {
     "generator": "oracle/php/cpe_validator/run_cases.php",
     "reference": {
-        "tag": "v5.3.0",
-        "commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+        "tag": "v5.4.0",
+        "commit": "866ba448a6436143eff59d77c790bd0decc0d5f4"
     },
-    "cases_sha256": "ab1d59366d5f7dc74897ab15d05040e5d152494cc7d178dda0e9c123bdad461b",
+    "cases_sha256": "d0e0bbdef9496e5ea5da4c82323f54ebdea6b7db262838acd1e2a9205147d177",
     "classes": [
         "CPEForge\\Validator\\Entity\\CpeError",
         "CPEForge\\Validator\\Entity\\DocumentType",

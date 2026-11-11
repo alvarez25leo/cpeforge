@@ -1,21 +1,21 @@
 //! `retention.xml.twig` y `perception.xml.twig`.
 //!
-//! Las dos plantillas son iguales salvo nombres de nodos y un detalle de
-//! escape: en retención el nombre del receptor dentro de `CDATA` se imprime
-//! **con** escape (sin `|raw`); en percepción, sin escape.
+//! Las dos plantillas son iguales salvo nombres de nodos, el indicador de
+//! emisión excepcional (solo percepción) y un detalle de escape: en retención
+//! el nombre del receptor dentro de `CDATA` se imprime **con** escape (sin
+//! `|raw`); en percepción, sin escape.
 
 use cpeforge_core::Decimal;
 use cpeforge_core::Zoned;
 use cpeforge_core::model::client::Client;
-use cpeforge_core::model::company::Company;
+use cpeforge_core::model::company::{Address, Company};
 use cpeforge_core::model::perception::Perception;
 use cpeforge_core::model::retention::{Exchange, Payment, Retention};
 
-use super::invoice20::postal_address_20;
 use super::shared::{self, EMPTY_EXTENSIONS, XML_DECLARATION};
 use crate::XmlError;
 use crate::options::RenderOptions;
-use crate::render::{Out, Result, truthy_list, truthy_num, truthy_str};
+use crate::render::{Ctx, Out, Result, truthy_list, truthy_num, truthy_str};
 
 pub(crate) const RETENTION_TEMPLATE: &str = "retention.xml.twig";
 pub(crate) const PERCEPTION_TEMPLATE: &str = "perception.xml.twig";
@@ -85,6 +85,8 @@ struct Header<'a> {
     total: Option<Decimal>,
     paid: Option<Decimal>,
     observacion: Option<&'a str>,
+    /// `sac:ExceptionalIndicator`; solo existe en percepción.
+    ind_excepcional: Option<&'a str>,
 }
 
 pub(crate) fn render_retention(doc: &Retention, options: &RenderOptions) -> Result<String> {
@@ -99,6 +101,7 @@ pub(crate) fn render_retention(doc: &Retention, options: &RenderOptions) -> Resu
         total: doc.imp_retenido,
         paid: doc.imp_pagado,
         observacion: doc.observacion.as_deref(),
+        ind_excepcional: None,
     };
     let details: Vec<Detail<'_>> = doc
         .details
@@ -132,6 +135,7 @@ pub(crate) fn render_perception(doc: &Perception, options: &RenderOptions) -> Re
         total: doc.imp_percibido,
         paid: doc.imp_cobrado,
         observacion: doc.observacion.as_deref(),
+        ind_excepcional: doc.ind_excepcional.as_deref(),
     };
     let details: Vec<Detail<'_>> = doc
         .details
@@ -180,13 +184,19 @@ fn render(
         .date(doc.fecha_emision)?
         .raw("</cbc:IssueDate><cbc:IssueTime>")
         .time(doc.fecha_emision)?
-        .raw("</cbc:IssueTime><cac:AgentParty><cac:PartyIdentification><cbc:ID schemeID=\"6\">")
+        .raw("</cbc:IssueTime>");
+    if truthy_str(doc.ind_excepcional) {
+        out.raw("<sac:ExceptionalIndicator>")
+            .text(doc.ind_excepcional)
+            .raw("</sac:ExceptionalIndicator>");
+    }
+    out.raw("<cac:AgentParty><cac:PartyIdentification><cbc:ID schemeID=\"6\">")
         .text(c.get(emp, "ruc", |e| e.ruc.as_deref())?)
         .raw("</cbc:ID></cac:PartyIdentification><cac:PartyName><cbc:Name><![CDATA[")
         .cdata(c.get(emp, "nombreComercial", |e| e.nombre_comercial.as_deref())?)
         .raw("]]></cbc:Name></cac:PartyName>");
     let addr = c.obj(emp, "address", |e| e.address.as_ref())?;
-    postal_address_20(&mut out, c, addr)?;
+    agent_postal_address(&mut out, c, addr)?;
     out.raw("<cac:PartyLegalEntity><cbc:RegistrationName><![CDATA[")
         .cdata(c.get(emp, "razonSocial", |e| e.razon_social.as_deref())?)
         .raw("]]></cbc:RegistrationName></cac:PartyLegalEntity></cac:AgentParty><cac:ReceiverParty><cac:PartyIdentification><cbc:ID schemeID=\"")
@@ -251,9 +261,13 @@ fn render(
             .raw("</cbc:TotalInvoiceAmount>");
         if truthy_list(det.payments) {
             for (index, pay) in det.payments.into_iter().flatten().enumerate() {
-                out.raw("<cac:Payment><cbc:ID>")
-                    .index(index)
-                    .raw("</cbc:ID><cbc:PaidAmount currencyID=\"")
+                out.raw("<cac:Payment><cbc:ID>");
+                // `{{ pay.numero|default(loop.index) }}`.
+                match pay.numero {
+                    Some(numero) => out.int(Some(numero)),
+                    None => out.index(index),
+                };
+                out.raw("</cbc:ID><cbc:PaidAmount currencyID=\"")
                     .text(pay.moneda.as_deref())
                     .raw("\">")
                     .amount(pay.importe)
@@ -301,4 +315,24 @@ fn render(
     }
     out.raw("</").raw(names.root).raw(">");
     Ok(out.finish())
+}
+
+/// Dirección del agente (`cac:AgentParty/cac:PostalAddress`). Según las
+/// reglas de SUNAT, `cbc:CityName` es la provincia y `cbc:CountrySubentity`
+/// el departamento (a diferencia de la plantilla de factura UBL 2.0).
+fn agent_postal_address(out: &mut Out<'_>, c: Ctx, addr: Option<&Address>) -> Result<()> {
+    out.raw("<cac:PostalAddress><cbc:ID>")
+        .text(c.get(addr, "ubigueo", |a| a.ubigueo.as_deref())?)
+        .raw("</cbc:ID><cbc:StreetName><![CDATA[")
+        .cdata(c.get(addr, "direccion", |a| a.direccion.as_deref())?)
+        .raw("]]></cbc:StreetName><cbc:CityName>")
+        .text(c.get(addr, "provincia", |a| a.provincia.as_deref())?)
+        .raw("</cbc:CityName><cbc:CountrySubentity>")
+        .text(c.get(addr, "departamento", |a| a.departamento.as_deref())?)
+        .raw("</cbc:CountrySubentity><cbc:District>")
+        .text(c.get(addr, "distrito", |a| a.distrito.as_deref())?)
+        .raw("</cbc:District><cac:Country><cbc:IdentificationCode>")
+        .text(c.get(addr, "codigoPais", |a| a.codigo_pais.as_deref())?)
+        .raw("</cbc:IdentificationCode></cac:Country></cac:PostalAddress>");
+    Ok(())
 }

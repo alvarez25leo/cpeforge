@@ -105,7 +105,7 @@ def main() -> None:
     out = ["# Matriz de inventario y casos — cpeforge-xml 0.1.0", ""]
     out.append(
         "Generada con `python3 oracle/cases/xml/build_matrix.py` a partir de `tests/reference/xml/`. Resultados PHP de "
-        "Greenter v5.3.0 (`f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f`) con PHP 8.4.17 y Twig 3.30.0, un proceso por caso. "
+        "Greenter v5.4.0 (`866ba448a6436143eff59d77c790bd0decc0d5f4`) con PHP 8.4.17 y Twig 3.30.0, un proceso por caso. "
         "Pruebas Rust: `crates/xml/tests/parity.rs` (bytes y errores) y `crates/xml/tests/schema.rs` (XSD con xmllint, "
         "salida PHP y Rust)."
     )

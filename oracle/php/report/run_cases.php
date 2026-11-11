@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * Oráculo PHP de greenter/report v5.3.0.
+ * Oráculo PHP de greenter/report v5.4.0.
  *
  * Ejecuta los casos neutrales de oracle/cases/report con el código PHP real:
  * HtmlReport (Twig 3.30.0), QrRender/Bacon QR 3.1.1, XmlUtils,

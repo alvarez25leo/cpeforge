@@ -2,6 +2,11 @@
 
 Referencia inmutable: `target/php-reference/v5.3.0`, commit `f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f`. Cinco archivos fuente, seis clases `*Test.php`, dos clases base. Consumidores: la aplicación invoca `See` o `Api`; `FeFactory` satisface `core/FactoryInterface`; los resolvers consumen modelos `core`, builders `xml` y servicios `ws`. No se edita `greenter-php/`.
 
+> **Referencia actual: v5.4.0** (`866ba448a6436143eff59d77c790bd0decc0d5f4`). `packages/lite`
+> no cambió entre v5.3.0 y v5.4.0; el inventario se conserva como se hizo para el
+> port y `scripts/cpeforge_parity.sh` y `scripts/lite_upstream_safe.sh` pasan con la
+> referencia v5.4.0.
+
 | Archivo y operación pública | Entrada | Salida y efecto; error PHP | Composición Rust y verificación prevista |
 | --- | --- | --- | --- |
 | `FeFactory` getters/setters | `BuilderInterface?`, `SignedXml?`, `SenderInterface?` | Estado mutable; getters pueden devolver `null` | `FeFactory`, dobles de builder/firma/sender; comprobar sustitución y estado |

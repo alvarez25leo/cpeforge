@@ -115,7 +115,7 @@ def compat_markdown() -> str:
         "Archivo generado por `python3 scripts/release_readiness.py --write-compat` desde",
         "`tests/reference/*/differences.json`; no editar a mano.",
         "",
-        "Los crates reproducen el comportamiento de Greenter v5.3.0 salvo en las diferencias",
+        "Los crates reproducen el comportamiento de Greenter v5.4.0 salvo en las diferencias",
         "deliberadas de esta lista, admitidas por el",
         "perfil seguro. Las entradas `CORREGIR` son",
         "pendientes: el paquete correspondiente sigue **NO LISTO** mientras existan.",

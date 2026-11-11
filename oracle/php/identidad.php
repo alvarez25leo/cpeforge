@@ -68,7 +68,7 @@ function identidad_reemplazar(string $src, string $from, string $to): string
  */
 function identidad_buscar(string $class): string
 {
-    $ref = dirname(__DIR__, 2).'/target/reference/v5.3.0/packages';
+    $ref = (getenv('GREENTER_PHP_REFERENCE') ?: dirname(__DIR__, 2).'/target/reference/v5.4.0').'/packages';
     $relative = str_replace('\\', '/', substr($class, strlen('Greenter\\'))).'.php';
     foreach (['lite/src/Greenter', 'xml/src', 'ws/src', 'core/src/Core'] as $part) {
         if (is_file("$ref/$part/$relative")) {

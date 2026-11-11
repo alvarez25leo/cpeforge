@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Adaptaciones de las plantillas Twig de greenter/report v5.3.0 a MiniJinja.
+"""Adaptaciones de las plantillas Twig de greenter/report v5.4.0 a MiniJinja.
 
 Las plantillas de crates/report/templates son las de la referencia con estas
 sustituciones exactas y nada más. Cada una conserva la semántica de PHP donde

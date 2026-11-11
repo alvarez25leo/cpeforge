@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Casos sintéticos de paridad de greenter/cpe-validator v5.3.0.
+"""Casos sintéticos de paridad de greenter/cpe-validator v5.4.0.
 
 Todas las hojas XSL y los XML se construyen aquí con datos ficticios. No se
 copia la XSL de prueba upstream (tests/Resources/2.X/...) ni los XML de
@@ -541,7 +541,7 @@ def main() -> int:
     if len(ids) != len(set(ids)):
         raise SystemExit("ids duplicados")
     out = {
-        "source": "thegreenter/greenter f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f packages/cpe-validator",
+        "source": "thegreenter/greenter 866ba448a6436143eff59d77c790bd0decc0d5f4 packages/cpe-validator",
         "generator": "oracle/cases/cpe_validator/generate_cases.py",
         "matches": M,
         "paths": PATHS,

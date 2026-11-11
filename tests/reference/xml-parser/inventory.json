@@ -317,7 +317,7 @@
   },
   {
    "file": "Xml/Parser/InvoiceParser.php",
-   "sha256": "69e0dd0842ce3be47cd5ea0cac269dae74c330d04bbf0b31bcac850f9f01eca5",
+   "sha256": "241b46c0d3da3f40c8e120195d2fc0c5b3fb32ce143eb102aa169154585f1f5a",
    "lines": 352,
    "methods": [
     "parse",
@@ -838,7 +838,7 @@
   },
   {
    "file": "Xml/Parser/NoteParser.php",
-   "sha256": "324f0324990299312a8c9a66cf094e94d8f7727c6ba3d2fac45aa8f02d809e1d",
+   "sha256": "2a9faab0eb41a9309fa6685983a79aa1918baeb24d8650d24336fa4c78695f34",
    "lines": 312,
    "methods": [
     "parse",
@@ -1283,8 +1283,8 @@
   },
   {
    "file": "Xml/Parser/PerceptionParser.php",
-   "sha256": "148c43e9a4e19962d7a7bb4065ba965112e4430435d4396aaeee0b0ca443d32d",
-   "lines": 183,
+   "sha256": "86126d668b309fc81b2693175ad14a8b064a05f595ba02b78b0a60770bdd48c8",
+   "lines": 186,
    "methods": [
     "parse",
     "getCompany",
@@ -1304,6 +1304,12 @@
      "call": "getValue",
      "xpath": "cbc:IssueDate",
      "context": null,
+     "default": null
+    },
+    {
+     "call": "getValue",
+     "xpath": "sac:ExceptionalIndicator",
+     "context": "$root",
      "default": null
     },
     {
@@ -1506,8 +1512,14 @@
     },
     {
      "call": "getValue",
+     "xpath": "cbc:ID",
+     "context": "$pay",
+     "default": null
+    },
+    {
+     "call": "getValue",
      "xpath": "cbc:PaidDate",
-     "context": null,
+     "context": "$pay",
      "default": null
     }
    ],
@@ -1529,11 +1541,13 @@
     "impPercibido",
     "impTotal",
     "importe",
+    "indExcepcional",
     "moneda",
     "monedaObj",
     "monedaRef",
     "nombreComercial",
     "numDoc",
+    "numero",
     "observacion",
     "proveedor",
     "provincia",
@@ -1549,7 +1563,7 @@
    ],
    "switch_cases": [],
    "float_casts": 8,
-   "int_casts": 0,
+   "int_casts": 1,
    "datetime": 6,
    "trim": 0,
    "explode": 1
@@ -1704,8 +1718,8 @@
   },
   {
    "file": "Xml/Parser/RetentionParser.php",
-   "sha256": "5ca9a8a08a50a0ba1cf162f88c703d15fd4977c69024f1fa9770629703d58693",
-   "lines": 178,
+   "sha256": "d7840866b17b4941c3f4370413a8030cce63a2477e4e432c3b2509690674c6e1",
+   "lines": 180,
    "methods": [
     "parse",
     "getCompany",
@@ -1927,8 +1941,14 @@
     },
     {
      "call": "getValue",
+     "xpath": "cbc:ID",
+     "context": "$pay",
+     "default": null
+    },
+    {
+     "call": "getValue",
      "xpath": "cbc:PaidDate",
-     "context": null,
+     "context": "$pay",
      "default": null
     }
    ],
@@ -1954,6 +1974,7 @@
     "monedaRef",
     "nombreComercial",
     "numDoc",
+    "numero",
     "observacion",
     "pagos",
     "proveedor",
@@ -1970,7 +1991,7 @@
    ],
    "switch_cases": [],
    "float_casts": 8,
-   "int_casts": 0,
+   "int_casts": 1,
    "datetime": 6,
    "trim": 0,
    "explode": 1
@@ -2337,7 +2358,7 @@
   },
   {
    "file": "Xml/XmlReader.php",
-   "sha256": "0e7dd23d80672c920f89b5a240cd5625fa6e3b55774fc4ef3035d05303f2f289",
+   "sha256": "c34d3fc90f60dcefbdab23c9e6114d815157c04a130e657beb6a46121bc72c17",
    "lines": 98,
    "methods": [
     "loadXml",

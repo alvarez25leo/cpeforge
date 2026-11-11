@@ -6,7 +6,7 @@ use cpeforge_core::model::retention::{Exchange, Payment, Retention, RetentionDet
 use rust_decimal::Decimal;
 
 use super::full_address;
-use crate::convert::{DateContext, explode_part, to_float};
+use crate::convert::{DateContext, explode_part, to_float, to_int};
 use crate::dom::Node;
 use crate::error::XmlParserError;
 use crate::reader::{Lookup, node_attribute, node_value};
@@ -107,9 +107,17 @@ pub(super) fn detail_head<'a>(
         let amount = xml.node("cbc:PaidAmount", Some(pay))?;
         let moneda = node_attribute(amount, "currencyID")?;
         let importe = to_float(&node_value(amount).unwrap_or_default())?;
-        // `cbc:PaidDate` se consulta sin contexto, es decir, desde el raíz.
-        let fecha = dates.parse(&xml.value("cbc:PaidDate", None)?)?;
+        // Número y fecha se leen del propio `cac:Payment`; `cbc:ID` ausente o
+        // vacío deja el número sin valor y, si no, se convierte como `(int)`.
+        let numero = xml.value("cbc:ID", Some(pay))?;
+        let numero = if numero.is_empty() {
+            None
+        } else {
+            Some(to_int(&numero)?)
+        };
+        let fecha = dates.parse(&xml.value("cbc:PaidDate", Some(pay))?)?;
         payments.push(Payment {
+            numero,
             moneda: Some(moneda),
             importe: Some(importe),
             fecha: Some(fecha),

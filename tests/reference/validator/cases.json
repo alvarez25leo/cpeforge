@@ -6784,6 +6784,36 @@
     }
   },
   {
+    "id": "2.1/Payment/numero/gt-above",
+    "version": "2.1",
+    "model": {
+      "type": "Payment",
+      "fields": {
+        "numero": 1
+      }
+    }
+  },
+  {
+    "id": "2.1/Payment/numero/gt-below",
+    "version": "2.1",
+    "model": {
+      "type": "Payment",
+      "fields": {
+        "numero": -1
+      }
+    }
+  },
+  {
+    "id": "2.1/Payment/numero/gt-equal",
+    "version": "2.1",
+    "model": {
+      "type": "Payment",
+      "fields": {
+        "numero": 0
+      }
+    }
+  },
+  {
     "id": "2.1/PaymentTerms/_/default",
     "version": "2.1",
     "model": {
@@ -7562,6 +7592,86 @@
     }
   },
   {
+    "id": "2.1/Perception/indExcepcional/max-1",
+    "version": "2.1",
+    "model": {
+      "type": "Perception",
+      "fields": {
+        "indExcepcional": "A"
+      }
+    }
+  },
+  {
+    "id": "2.1/Perception/indExcepcional/max-2",
+    "version": "2.1",
+    "model": {
+      "type": "Perception",
+      "fields": {
+        "indExcepcional": "AA"
+      }
+    }
+  },
+  {
+    "id": "2.1/Perception/indExcepcional/max-3",
+    "version": "2.1",
+    "model": {
+      "type": "Perception",
+      "fields": {
+        "indExcepcional": "AAA"
+      }
+    }
+  },
+  {
+    "id": "2.1/Perception/indExcepcional/max-unicode-3",
+    "version": "2.1",
+    "model": {
+      "type": "Perception",
+      "fields": {
+        "indExcepcional": "ñññ"
+      }
+    }
+  },
+  {
+    "id": "2.1/Perception/indExcepcional/min-1",
+    "version": "2.1",
+    "model": {
+      "type": "Perception",
+      "fields": {
+        "indExcepcional": "A"
+      }
+    }
+  },
+  {
+    "id": "2.1/Perception/indExcepcional/min-2",
+    "version": "2.1",
+    "model": {
+      "type": "Perception",
+      "fields": {
+        "indExcepcional": "AA"
+      }
+    }
+  },
+  {
+    "id": "2.1/Perception/indExcepcional/min-3",
+    "version": "2.1",
+    "model": {
+      "type": "Perception",
+      "fields": {
+        "indExcepcional": "AAA"
+      }
+    }
+  },
+  {
+    "id": "2.1/Perception/indExcepcional/min-unicode-3",
+    "version": "2.1",
+    "model": {
+      "type": "Perception",
+      "fields": {
+        "indExcepcional": "ñññ"
+      }
+    }
+  },
+  {
     "id": "2.1/Perception/observacion/max-249",
     "version": "2.1",
     "model": {
@@ -7940,6 +8050,50 @@
     "model": {
       "type": "PerceptionDetail",
       "fields": {}
+    }
+  },
+  {
+    "id": "2.1/PerceptionDetail/cobros/count-max-0",
+    "version": "2.1",
+    "model": {
+      "type": "PerceptionDetail",
+      "fields": {
+        "cobros": []
+      }
+    }
+  },
+  {
+    "id": "2.1/PerceptionDetail/cobros/count-max-1",
+    "version": "2.1",
+    "model": {
+      "type": "PerceptionDetail",
+      "fields": {
+        "cobros": [
+          {
+            "type": "Payment",
+            "fields": {}
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "2.1/PerceptionDetail/cobros/count-max-2",
+    "version": "2.1",
+    "model": {
+      "type": "PerceptionDetail",
+      "fields": {
+        "cobros": [
+          {
+            "type": "Payment",
+            "fields": {}
+          },
+          {
+            "type": "Payment",
+            "fields": {}
+          }
+        ]
+      }
     }
   },
   {
@@ -10026,6 +10180,50 @@
       "type": "RetentionDetail",
       "fields": {
         "numDoc": "0"
+      }
+    }
+  },
+  {
+    "id": "2.1/RetentionDetail/pagos/count-max-0",
+    "version": "2.1",
+    "model": {
+      "type": "RetentionDetail",
+      "fields": {
+        "pagos": []
+      }
+    }
+  },
+  {
+    "id": "2.1/RetentionDetail/pagos/count-max-1",
+    "version": "2.1",
+    "model": {
+      "type": "RetentionDetail",
+      "fields": {
+        "pagos": [
+          {
+            "type": "Payment",
+            "fields": {}
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "2.1/RetentionDetail/pagos/count-max-2",
+    "version": "2.1",
+    "model": {
+      "type": "RetentionDetail",
+      "fields": {
+        "pagos": [
+          {
+            "type": "Payment",
+            "fields": {}
+          },
+          {
+            "type": "Payment",
+            "fields": {}
+          }
+        ]
       }
     }
   },
@@ -21645,6 +21843,36 @@
     }
   },
   {
+    "id": "default/Payment/numero/gt-above",
+    "version": null,
+    "model": {
+      "type": "Payment",
+      "fields": {
+        "numero": 1
+      }
+    }
+  },
+  {
+    "id": "default/Payment/numero/gt-below",
+    "version": null,
+    "model": {
+      "type": "Payment",
+      "fields": {
+        "numero": -1
+      }
+    }
+  },
+  {
+    "id": "default/Payment/numero/gt-equal",
+    "version": null,
+    "model": {
+      "type": "Payment",
+      "fields": {
+        "numero": 0
+      }
+    }
+  },
+  {
     "id": "default/PaymentTerms/_/default",
     "version": null,
     "model": {
@@ -22423,6 +22651,86 @@
     }
   },
   {
+    "id": "default/Perception/indExcepcional/max-1",
+    "version": null,
+    "model": {
+      "type": "Perception",
+      "fields": {
+        "indExcepcional": "A"
+      }
+    }
+  },
+  {
+    "id": "default/Perception/indExcepcional/max-2",
+    "version": null,
+    "model": {
+      "type": "Perception",
+      "fields": {
+        "indExcepcional": "AA"
+      }
+    }
+  },
+  {
+    "id": "default/Perception/indExcepcional/max-3",
+    "version": null,
+    "model": {
+      "type": "Perception",
+      "fields": {
+        "indExcepcional": "AAA"
+      }
+    }
+  },
+  {
+    "id": "default/Perception/indExcepcional/max-unicode-3",
+    "version": null,
+    "model": {
+      "type": "Perception",
+      "fields": {
+        "indExcepcional": "ñññ"
+      }
+    }
+  },
+  {
+    "id": "default/Perception/indExcepcional/min-1",
+    "version": null,
+    "model": {
+      "type": "Perception",
+      "fields": {
+        "indExcepcional": "A"
+      }
+    }
+  },
+  {
+    "id": "default/Perception/indExcepcional/min-2",
+    "version": null,
+    "model": {
+      "type": "Perception",
+      "fields": {
+        "indExcepcional": "AA"
+      }
+    }
+  },
+  {
+    "id": "default/Perception/indExcepcional/min-3",
+    "version": null,
+    "model": {
+      "type": "Perception",
+      "fields": {
+        "indExcepcional": "AAA"
+      }
+    }
+  },
+  {
+    "id": "default/Perception/indExcepcional/min-unicode-3",
+    "version": null,
+    "model": {
+      "type": "Perception",
+      "fields": {
+        "indExcepcional": "ñññ"
+      }
+    }
+  },
+  {
     "id": "default/Perception/observacion/max-249",
     "version": null,
     "model": {
@@ -22801,6 +23109,50 @@
     "model": {
       "type": "PerceptionDetail",
       "fields": {}
+    }
+  },
+  {
+    "id": "default/PerceptionDetail/cobros/count-max-0",
+    "version": null,
+    "model": {
+      "type": "PerceptionDetail",
+      "fields": {
+        "cobros": []
+      }
+    }
+  },
+  {
+    "id": "default/PerceptionDetail/cobros/count-max-1",
+    "version": null,
+    "model": {
+      "type": "PerceptionDetail",
+      "fields": {
+        "cobros": [
+          {
+            "type": "Payment",
+            "fields": {}
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "default/PerceptionDetail/cobros/count-max-2",
+    "version": null,
+    "model": {
+      "type": "PerceptionDetail",
+      "fields": {
+        "cobros": [
+          {
+            "type": "Payment",
+            "fields": {}
+          },
+          {
+            "type": "Payment",
+            "fields": {}
+          }
+        ]
+      }
     }
   },
   {
@@ -24887,6 +25239,50 @@
       "type": "RetentionDetail",
       "fields": {
         "numDoc": "0"
+      }
+    }
+  },
+  {
+    "id": "default/RetentionDetail/pagos/count-max-0",
+    "version": null,
+    "model": {
+      "type": "RetentionDetail",
+      "fields": {
+        "pagos": []
+      }
+    }
+  },
+  {
+    "id": "default/RetentionDetail/pagos/count-max-1",
+    "version": null,
+    "model": {
+      "type": "RetentionDetail",
+      "fields": {
+        "pagos": [
+          {
+            "type": "Payment",
+            "fields": {}
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "default/RetentionDetail/pagos/count-max-2",
+    "version": null,
+    "model": {
+      "type": "RetentionDetail",
+      "fields": {
+        "pagos": [
+          {
+            "type": "Payment",
+            "fields": {}
+          },
+          {
+            "type": "Payment",
+            "fields": {}
+          }
+        ]
       }
     }
   },

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * Oráculo PHP de greenter/xml v5.3.0.
+ * Oráculo PHP de greenter/xml v5.4.0.
  *
  * Para cada caso construye el modelo de greenter/core con los setters reales
  * (misma gramática que oracle/php/core/run_cases.php), instancia el builder

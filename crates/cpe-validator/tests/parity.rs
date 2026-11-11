@@ -306,7 +306,7 @@ fn rust_matches_reference_oracle() -> TestResult {
     let commit = expected["reference"]["commit"].as_str();
     assert_eq!(
         commit,
-        Some("f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"),
+        Some("866ba448a6436143eff59d77c790bd0decc0d5f4"),
         "oráculo de otra referencia"
     );
 

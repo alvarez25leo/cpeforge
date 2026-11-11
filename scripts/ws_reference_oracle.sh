@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# Referencia v5.3.0 y SOAP confinados a 127.0.0.1. No ejecuta PHPUnit.
+# Referencia v5.4.0 y SOAP confinados a 127.0.0.1. No ejecuta PHPUnit.
 set -euo pipefail
 root="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$root"
 reference="$(bash scripts/prepare_php_reference.sh)"
-suite="$root/target/reference/v5.3.0-suite"
+suite="$root/target/reference/v5.4.0-suite"
 PHP_REFERENCE_DIR="$suite" bash scripts/prepare_php_reference.sh >/dev/null
-test "$(git -C "$reference" rev-parse HEAD)" = f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f
-test "$(git -C "$reference" rev-parse v5.3.0)" = f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f
-test "$(git -C "$suite" rev-parse HEAD)" = f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f
+test "$(git -C "$reference" rev-parse HEAD)" = 866ba448a6436143eff59d77c790bd0decc0d5f4
+test "$(git -C "$reference" rev-parse v5.4.0)" = 866ba448a6436143eff59d77c790bd0decc0d5f4
+test "$(git -C "$suite" rev-parse HEAD)" = 866ba448a6436143eff59d77c790bd0decc0d5f4
 if ! test -f "$suite/vendor/autoload.php"; then
   cp oracle/php/ws/composer.lock "$suite/composer.lock"
   composer install --working-dir="$suite" --no-interaction --prefer-dist --no-progress --ignore-platform-req=php

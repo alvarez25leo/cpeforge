@@ -161,9 +161,9 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y libxml2-utils libssl-dev pkg-config iptables
       - run: |
           bash scripts/prepare_php_reference.sh
-          PHP_REFERENCE_DIR="$PWD/target/reference/v5.3.0-suite" bash scripts/prepare_php_reference.sh
-          cp oracle/php/ws/composer.lock target/reference/v5.3.0-suite/composer.lock
-          composer install --working-dir=target/reference/v5.3.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
+          PHP_REFERENCE_DIR="$PWD/target/reference/v5.4.0-suite" bash scripts/prepare_php_reference.sh
+          cp oracle/php/ws/composer.lock target/reference/v5.4.0-suite/composer.lock
+          composer install --working-dir=target/reference/v5.4.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
           cargo fetch --locked
       # Dependencias y fuente fijada están descargadas. Durante la ejecución
       # solo se permite loopback, que usa el servidor SOAP independiente.
@@ -202,9 +202,9 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y libxml2-utils libssl-dev pkg-config iptables openssl
       - run: |
           bash scripts/prepare_php_reference.sh
-          PHP_REFERENCE_DIR="$PWD/target/reference/v5.3.0-suite" bash scripts/prepare_php_reference.sh
-          cp oracle/php/ws/composer.lock target/reference/v5.3.0-suite/composer.lock
-          composer install --working-dir=target/reference/v5.3.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
+          PHP_REFERENCE_DIR="$PWD/target/reference/v5.4.0-suite" bash scripts/prepare_php_reference.sh
+          cp oracle/php/ws/composer.lock target/reference/v5.4.0-suite/composer.lock
+          composer install --working-dir=target/reference/v5.4.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
           composer install --working-dir=oracle/php --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
           cargo fetch --locked
       - run: |
@@ -235,15 +235,15 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y libssl-dev pkg-config iptables
       - run: |
           bash scripts/prepare_php_reference.sh
-          PHP_REFERENCE_DIR="$PWD/target/reference/v5.3.0-suite" bash scripts/prepare_php_reference.sh
-          cp oracle/php/ws/composer.lock target/reference/v5.3.0-suite/composer.lock
-          composer install --working-dir=target/reference/v5.3.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
+          PHP_REFERENCE_DIR="$PWD/target/reference/v5.4.0-suite" bash scripts/prepare_php_reference.sh
+          cp oracle/php/ws/composer.lock target/reference/v5.4.0-suite/composer.lock
+          composer install --working-dir=target/reference/v5.4.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
           cargo fetch --locked
       - run: |
           sudo iptables -I OUTPUT ! -o lo -j REJECT
           trap 'sudo iptables -D OUTPUT ! -o lo -j REJECT || true; sudo ip6tables -D OUTPUT ! -o lo -j REJECT || true' EXIT
           sudo ip6tables -I OUTPUT ! -o lo -j REJECT
-          (cd target/reference/v5.3.0-suite && php vendor/bin/phpunit packages/validator/tests --no-coverage)
+          (cd target/reference/v5.4.0-suite && php vendor/bin/phpunit packages/validator/tests --no-coverage)
           VALIDATOR_NETWORK_BLOCKED=1 bash scripts/validator_parity.sh
       - uses: actions/upload-artifact@v4
         if: always()
@@ -266,9 +266,9 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y libssl-dev pkg-config iptables
       - run: |
           bash scripts/prepare_php_reference.sh
-          PHP_REFERENCE_DIR="$PWD/target/reference/v5.3.0-suite" bash scripts/prepare_php_reference.sh
-          cp oracle/php/ws/composer.lock target/reference/v5.3.0-suite/composer.lock
-          composer install --working-dir=target/reference/v5.3.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
+          PHP_REFERENCE_DIR="$PWD/target/reference/v5.4.0-suite" bash scripts/prepare_php_reference.sh
+          cp oracle/php/ws/composer.lock target/reference/v5.4.0-suite/composer.lock
+          composer install --working-dir=target/reference/v5.4.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
           cargo fetch --locked
       - run: |
           sudo iptables -I OUTPUT ! -o lo -j REJECT
@@ -300,9 +300,9 @@ jobs:
       - run: |
           bash scripts/prepare_php_reference.sh
           bash scripts/prepare_ubl_validator_reference.sh
-          PHP_REFERENCE_DIR="$PWD/target/reference/v5.3.0-suite" bash scripts/prepare_php_reference.sh
-          cp oracle/php/ws/composer.lock target/reference/v5.3.0-suite/composer.lock
-          composer install --working-dir=target/reference/v5.3.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
+          PHP_REFERENCE_DIR="$PWD/target/reference/v5.4.0-suite" bash scripts/prepare_php_reference.sh
+          cp oracle/php/ws/composer.lock target/reference/v5.4.0-suite/composer.lock
+          composer install --working-dir=target/reference/v5.4.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
           cargo fetch --locked
       # Sin red: la suite upstream, el oráculo PHP y las pruebas Rust.
       - run: |
@@ -331,9 +331,9 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y libssl-dev pkg-config libxslt1-dev xsltproc iptables
       - run: |
           bash scripts/prepare_php_reference.sh
-          PHP_REFERENCE_DIR="$PWD/target/reference/v5.3.0-suite" bash scripts/prepare_php_reference.sh
-          cp oracle/php/ws/composer.lock target/reference/v5.3.0-suite/composer.lock
-          composer install --working-dir=target/reference/v5.3.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
+          PHP_REFERENCE_DIR="$PWD/target/reference/v5.4.0-suite" bash scripts/prepare_php_reference.sh
+          cp oracle/php/ws/composer.lock target/reference/v5.4.0-suite/composer.lock
+          composer install --working-dir=target/reference/v5.4.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
           cargo fetch --locked
       # Sin red: la suite upstream, el oráculo PHP, las pruebas Rust y el
       # verificador independiente (xsltproc).
@@ -401,9 +401,9 @@ jobs:
       # oráculo y del decodificador QR se descargan antes de cortar la red.
       - run: |
           bash scripts/prepare_php_reference.sh
-          PHP_REFERENCE_DIR="$PWD/target/reference/v5.3.0-suite" bash scripts/prepare_php_reference.sh
-          cp oracle/php/ws/composer.lock target/reference/v5.3.0-suite/composer.lock
-          composer install --working-dir=target/reference/v5.3.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
+          PHP_REFERENCE_DIR="$PWD/target/reference/v5.4.0-suite" bash scripts/prepare_php_reference.sh
+          cp oracle/php/ws/composer.lock target/reference/v5.4.0-suite/composer.lock
+          composer install --working-dir=target/reference/v5.4.0-suite --no-interaction --prefer-dist --no-progress --ignore-platform-req=php
           composer install --working-dir=oracle/php/report --no-interaction --prefer-dist --no-progress
           cargo fetch --locked
           cargo fetch --locked --manifest-path scripts/report_qr_verify/Cargo.toml

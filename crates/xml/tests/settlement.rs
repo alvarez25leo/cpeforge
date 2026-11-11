@@ -252,7 +252,8 @@ fn full_settlement_is_valid_and_places_each_party() {
         "150101"
     );
 
-    // Totales: el TaxAmount es el IGV; la renta va en su propio subtotal.
+    // Totales: el TaxAmount es el IGV; la renta va en su propio subtotal y el
+    // exonerado lleva `0.00` (formato n(12,2)).
     let tax_total = child(root, CAC, "TaxTotal");
     assert_eq!(text(child(tax_total, CBC, "TaxAmount")), "126.00");
     let schemes: Vec<(&str, &str)> = tax_total
@@ -268,7 +269,7 @@ fn full_settlement_is_valid_and_places_each_party() {
         .collect();
     assert_eq!(
         schemes,
-        [("1000", "126.00"), ("9997", "0"), ("3000", "13.50")]
+        [("1000", "126.00"), ("9997", "0.00"), ("3000", "13.50")]
     );
     let totals = child(root, CAC, "LegalMonetaryTotal");
     assert_eq!(text(child(totals, CBC, "TaxInclusiveAmount")), "1026.00");

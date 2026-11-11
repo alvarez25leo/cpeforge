@@ -39,6 +39,12 @@ pub struct Perception {
     pub imp_cobrado: Option<Decimal>,
     /// Observación.
     pub observacion: Option<String>,
+    /// Indicador de emisión excepcional (`sac:ExceptionalIndicator`, campo 7
+    /// de «Percepciones1_0» en las reglas de validación de SUNAT). Hoy el único
+    /// valor admitido es `01` (regla 3322); con indicador, el comprobante solo
+    /// puede llevar un documento relacionado (3323) y debe ser una factura
+    /// (3324). Sin valor, el nodo no se escribe.
+    pub ind_excepcional: Option<String>,
     /// Comprobantes relacionados, en orden.
     pub details: Option<Vec<PerceptionDetail>>,
 }

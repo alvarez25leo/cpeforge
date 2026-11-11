@@ -39,6 +39,10 @@ const CODE_EXACT_LENGTH: &str = "4b6f5c76-22b4-409d-af16-fbe823ba9332";
 const CODE_REGEX: &str = "de1e3db3-5ed4-4941-aae4-59f3667cc3a3";
 const CODE_CHOICE: &str = "8e179f1b-97aa-4560-a02f-2a8b42e49df7";
 const CODE_TYPE: &str = "ba785a8c-82cb-4283-967c-3cf342181b40";
+const CODE_GREATER_THAN: &str = "778b7ae0-84d3-481a-9dec-35fdb64b1d78";
+const CODE_COUNT_TOO_FEW: &str = "bef8e338-6ae5-4caf-b8e2-50e7b0579e69";
+const CODE_COUNT_TOO_MANY: &str = "756b1212-697c-468d-a9ad-50dd783bb169";
+const CODE_COUNT_EXACT: &str = "9fe5d43f-3784-4ece-a0e1-473fc02dadbc";
 const MAX_DEPTH: usize = 32;
 const MAX_NODES: usize = 100_000;
 const MAX_VIOLATIONS: usize = 10_000;
@@ -555,13 +559,106 @@ impl Validator {
                     CODE_TYPE,
                 )
             }
+            "GreaterThan" => {
+                if value.is_null() {
+                    return Ok(None);
+                }
+                let compared = option("value").ok_or_else(|| {
+                    ValidatorError::UnsupportedRule("GreaterThan sin value".to_owned())
+                })?;
+                if option("propertyPath").is_some() {
+                    return Err(ValidatorError::UnsupportedRule(
+                        "GreaterThan con propertyPath".to_owned(),
+                    ));
+                }
+                if greater_than(value, compared).ok_or_else(|| {
+                    ValidatorError::Model(format!("GreaterThan requiere número en {}", path()))
+                })? {
+                    return Ok(None);
+                }
+                parameters.insert("{{ value }}".to_owned(), format_value(value));
+                parameters.insert("{{ compared_value }}".to_owned(), format_value(compared));
+                parameters.insert(
+                    "{{ compared_value_type }}".to_owned(),
+                    debug_type(compared).to_owned(),
+                );
+                (
+                    option_text(
+                        rule,
+                        "message",
+                        "This value should be greater than {{ compared_value }}.",
+                    ),
+                    CODE_GREATER_THAN,
+                )
+            }
+            "Count" => {
+                if value.is_null() {
+                    return Ok(None);
+                }
+                if option("divisibleBy").is_some() {
+                    return Err(ValidatorError::UnsupportedRule(
+                        "Count con divisibleBy".to_owned(),
+                    ));
+                }
+                let Some(items) = value.as_array() else {
+                    return Err(ValidatorError::Model(format!(
+                        "Count requiere colección en {}",
+                        path()
+                    )));
+                };
+                let count = items.len() as u64;
+                let min = option("min").and_then(Value::as_u64);
+                let max = option("max").and_then(Value::as_u64);
+                let (template, code, limit) = if let Some(limit) = max.filter(|max| count > *max) {
+                    if min == max {
+                        (
+                            option_text(rule, "exactMessage", ""),
+                            CODE_COUNT_EXACT,
+                            limit,
+                        )
+                    } else {
+                        (
+                            option_text(rule, "maxMessage", ""),
+                            CODE_COUNT_TOO_MANY,
+                            limit,
+                        )
+                    }
+                } else if let Some(limit) = min.filter(|min| count < *min) {
+                    if min == max {
+                        (
+                            option_text(rule, "exactMessage", ""),
+                            CODE_COUNT_EXACT,
+                            limit,
+                        )
+                    } else {
+                        (
+                            option_text(rule, "minMessage", ""),
+                            CODE_COUNT_TOO_FEW,
+                            limit,
+                        )
+                    }
+                } else {
+                    return Ok(None);
+                };
+                parameters.insert("{{ count }}".to_owned(), count.to_string());
+                parameters.insert("{{ limit }}".to_owned(), limit.to_string());
+                (template, code)
+            }
             "Required" => return Ok(None), // Symfony 6.4: Existence sin constraints no añade violación en propiedad.
             unknown => return Err(ValidatorError::UnsupportedRule(unknown.to_owned())),
         };
-        let message = if rule.name == "Length" {
+        let message = if rule.name == "Length" || rule.name == "Count" {
             render_plural(template, &parameters)
         } else if rule.name == "Type" {
             template.replace("{{ type }}", option_text(rule, "type", ""))
+        } else if rule.name == "GreaterThan" && self.provider.is_none() {
+            // Sin proveedor la referencia usa el traductor por defecto, que
+            // sustituye los parámetros (`{{ compared_value }}`).
+            parameters
+                .iter()
+                .fold(template.to_owned(), |text, (key, value)| {
+                    text.replace(key, value)
+                })
         } else {
             self.translate(template, &parameters, Some("validators"), None)?
         };
@@ -761,6 +858,36 @@ fn is_numeric(value: &str) -> bool {
         }
     }
     index == bytes.len()
+}
+
+/// `$value > $compared` de la referencia para los escalares que puede recibir
+/// `GreaterThan`: números (enteros exactos, decimales como `f64`) y cadenas
+/// numéricas, que la referencia compara como números. `None` para el resto.
+fn greater_than(value: &Value, compared: &Value) -> Option<bool> {
+    let number = |value: &Value| match value {
+        Value::Number(number) => Some(number.clone()),
+        Value::String(text) if is_numeric(text) => {
+            serde_json::from_str::<serde_json::Number>(text.trim()).ok()
+        }
+        _ => None,
+    };
+    let (left, right) = (number(value)?, number(compared)?);
+    if let (Some(left), Some(right)) = (left.as_i64(), right.as_i64()) {
+        return Some(left > right);
+    }
+    Some(left.as_f64()? > right.as_f64()?)
+}
+
+/// `get_debug_type` de la referencia para el valor de comparación.
+fn debug_type(value: &Value) -> &'static str {
+    match value {
+        Value::Null => "null",
+        Value::Bool(_) => "bool",
+        Value::Number(number) if number.is_f64() => "float",
+        Value::Number(_) => "int",
+        Value::String(_) => "string",
+        Value::Array(_) | Value::Object(_) => "array",
+    }
 }
 
 fn render_plural(template: &str, parameters: &BTreeMap<String, String>) -> String {

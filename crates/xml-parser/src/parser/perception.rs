@@ -24,6 +24,8 @@ fn parse(xml: &Lookup<'_>, dates: &DateContext) -> Result<Perception, XmlParserE
     let root = Some(xml.root());
     let id = xml.value("cbc:ID", None)?;
     let fecha_emision = dates.parse(&xml.value("cbc:IssueDate", None)?)?;
+    // Condicional: sin nodo (comprobante no excepcional) queda sin valor.
+    let ind_excepcional = xml.optional_value("sac:ExceptionalIndicator", root)?;
     let company = company(xml)?;
     let proveedor = provider(xml)?;
     let regimen = xml.value("sac:SUNATPerceptionSystemCode", None)?;
@@ -46,6 +48,7 @@ fn parse(xml: &Lookup<'_>, dates: &DateContext) -> Result<Perception, XmlParserE
         imp_percibido: Some(imp_percibido),
         imp_cobrado: Some(imp_cobrado),
         observacion: Some(observacion),
+        ind_excepcional,
         details: Some(details),
     })
 }

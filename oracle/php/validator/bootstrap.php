@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 $root = dirname(__DIR__, 3);
-$reference = $root . '/target/reference/v5.3.0';
-$suite = $root . '/target/reference/v5.3.0-suite';
+$reference = $root . '/target/reference/v5.4.0';
+$suite = $root . '/target/reference/v5.4.0-suite';
 if (!is_dir($reference . '/packages/validator/src') || !is_file($suite . '/vendor/autoload.php')) {
     fwrite(STDERR, "Referencia PHP o dependencias faltantes\n");
     exit(2);
@@ -33,7 +33,7 @@ function validator_class(string $name): string
     if ($classes === null) {
         $classes = [];
         foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(
-            dirname(__DIR__, 3) . '/target/reference/v5.3.0/packages/core/src/Core/Model',
+            dirname(__DIR__, 3) . '/target/reference/v5.4.0/packages/core/src/Core/Model',
             FilesystemIterator::SKIP_DOTS
         )) as $file) {
             if ($file->getExtension() !== 'php') {

@@ -6,6 +6,13 @@ Fuente inmutable: `thegreenter/greenter` tag `v5.3.0`, commit
 más seis WSDL/XSD locales. `lite/See.php`, `lite/Api.php` y
 `lite/Factory/WsSenderResolver.php` son consumidores, no parte del port.
 
+> **Referencia actual: v5.4.0** (`866ba448a6436143eff59d77c790bd0decc0d5f4`). Entre v5.3.0 y
+> v5.4.0 solo cambiaron tres firmas en `packages/ws/src/Zip/` (`?callable $filter`,
+> parámetro implícitamente nullable deprecado en PHP 8.4), sin efecto en el
+> comportamiento; el inventario siguiente se conserva como se hizo para el port.
+> `scripts/ws_reference_oracle.sh`, `ws_tls_probe.sh` y `ws_http_probe.sh` reproducen
+> los fixtures con la referencia v5.4.0.
+
 Cada fila describe entrada, efecto/salida, error relevante, consumidor y
 comprobación planeada. «Pendiente» significa que todavía no hay fixture PHP y
 prueba Rust completos; no implica que la rama sea irrelevante.

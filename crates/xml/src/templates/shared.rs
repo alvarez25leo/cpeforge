@@ -254,7 +254,12 @@ pub(crate) fn tax_scheme(out: &mut Out<'_>, scheme: &Scheme) {
         .raw("</cbc:TaxTypeCode></cac:TaxScheme>");
 }
 
-/// Importe de impuesto en un subtotal: `n_format` o el literal `0`.
+/// `TaxAmount` de los tributos sin impuesto (exonerado, inafecto y
+/// exportación): formato n(12,2) de SUNAT.
+pub(crate) const ZERO_TAX: &str = "0.00";
+
+/// Importe de impuesto en un subtotal: `n_format` o un literal (ver
+/// [`ZERO_TAX`]).
 pub(crate) enum TaxAmount<'a> {
     Amount(Option<cpeforge_core::Decimal>),
     Literal(&'a str),

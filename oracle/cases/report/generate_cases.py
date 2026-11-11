@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Genera los casos sintéticos de paridad de greenter/report v5.3.0.
+"""Genera los casos sintéticos de paridad de greenter/report v5.4.0.
 
 Los casos son entradas neutrales (sin resultados esperados). El oráculo PHP
 (oracle/php/report/) y las pruebas Rust (crates/report/tests/) los ejecutan

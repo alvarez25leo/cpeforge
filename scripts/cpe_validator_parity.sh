@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 # Puertas de paridad de cpeforge-cpe-validator frente a greenter/cpe-validator
-# v5.3.0 (thegreenter/greenter f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f).
+# v5.4.0 (thegreenter/greenter 866ba448a6436143eff59d77c790bd0decc0d5f4).
 # Todo se ejecuta sin red (sandbox-exec en macOS o CPE_VALIDATOR_NETWORK_BLOCKED=1
 # con un cortafuegos externo). Las evidencias quedan en target/evidence/.
 # Requiere php (ext-dom, ext-xsl), xsltproc, python3 y libxslt de desarrollo.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-reference=target/reference/v5.3.0
-suite=target/reference/v5.3.0-suite
-commit=f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f
+reference=target/reference/v5.4.0
+suite=target/reference/v5.4.0-suite
+commit=866ba448a6436143eff59d77c790bd0decc0d5f4
 ref=tests/reference/cpe-validator
 test "$(git -C "$reference" rev-parse HEAD)" = "$commit"
 test -z "$(git -C "$reference" status --porcelain)"
@@ -35,7 +35,7 @@ run_offline() {
 # 1. Entorno del oráculo.
 php -r 'printf("PHP %s libxml %s libxslt %s libexslt %s PCRE %s pcre.jit=%s\n", PHP_VERSION, LIBXML_DOTTED_VERSION, LIBXSLT_DOTTED_VERSION, LIBEXSLT_DOTTED_VERSION, PCRE_VERSION, ini_get("pcre.jit"));' \
   | tee "$evidence/cpe-validator-env.txt"
-xsltproc --version | head -1 | tee -a "$evidence/cpe-validator-env.txt"
+xsltproc --version | sed -n 1p | tee -a "$evidence/cpe-validator-env.txt"
 
 # 2. Suite upstream de cpe-validator sin red, en el checkout aislado. Sus XML
 #    de prueba (packages/xml-parser/tests/Resources) no se copian.

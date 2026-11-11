@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Inventario de los 10 archivos fuente de greenter/xml-parser v5.3.0.
+"""Inventario de los 10 archivos fuente de greenter/xml-parser v5.4.0.
 
 Extrae, por archivo: SHA-256, líneas, métodos, rutas XPath consultadas (con
 su contexto y valor por defecto cuando es literal), setters llamados,
@@ -27,7 +27,7 @@ CASE = re.compile(r"case\s+'([^']*)'")
 def main() -> int:
     src = Path(sys.argv[1])
     files = sorted(src.rglob("*.php"))
-    out = {"source": "thegreenter/greenter f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f packages/xml-parser/src", "files": []}
+    out = {"source": "thegreenter/greenter 866ba448a6436143eff59d77c790bd0decc0d5f4 packages/xml-parser/src", "files": []}
     for path in files:
         code = path.read_text()
         rel = str(path.relative_to(src))

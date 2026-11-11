@@ -36,7 +36,7 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-REFERENCE = ROOT / "target/reference/v5.3.0/packages/xcodes/src/data/CodeErrors.xml"
+REFERENCE = ROOT / "target/reference/v5.4.0/packages/xcodes/src/data/CodeErrors.xml"
 OUTPUT = ROOT / "crates/xcodes/src/data/CodeErrors.xml"
 SUMMARY = ROOT / "tests/reference/xcodes/sunat-catalog.json"
 SOURCE = "https://cpe.sunat.gob.pe/guias-y-manuales"

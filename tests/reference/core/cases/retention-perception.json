@@ -179,6 +179,23 @@
       }
     },
     {
+      "id": "payment-numero",
+      "description": "Payment con número de cuota",
+      "input": {
+        "$class": "Payment",
+        "moneda": "PEN",
+        "importe": {
+          "$decimal": "100.00"
+        },
+        "fecha": {
+          "$datetime": "2024-04-10T09:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "numero": 2
+      }
+    },
+    {
       "id": "exchange-empty",
       "description": "Exchange vacío",
       "input": {
@@ -307,6 +324,95 @@
             }
           }
         ]
+      },
+      "calls": [
+        "getName"
+      ]
+    },
+    {
+      "id": "perception-exceptional",
+      "description": "Percepción de emisión excepcional con cobro numerado",
+      "input": {
+        "$class": "Perception",
+        "serie": "P001",
+        "correlativo": "11",
+        "fechaEmision": {
+          "$datetime": "2024-04-15T10:00:00-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "proveedor": {
+          "$class": "Client",
+          "tipoDoc": "6",
+          "numDoc": "20000000002",
+          "rznSocial": "CLIENTE SINTETICO S.A.",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150122",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "CALLE PRUEBA 456",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "cliente@example.test",
+          "telephone": "999000000"
+        },
+        "regimen": "01",
+        "tasa": {
+          "$decimal": "2.00"
+        },
+        "impPercibido": {
+          "$decimal": "20.00"
+        },
+        "impCobrado": {
+          "$decimal": "1020.00"
+        },
+        "observacion": "Percepción sintética",
+        "details": [
+          {
+            "$class": "PerceptionDetail",
+            "tipoDoc": "01",
+            "numDoc": "F001-3",
+            "cobros": [
+              {
+                "$class": "Payment",
+                "moneda": "PEN",
+                "importe": {
+                  "$decimal": "1000.00"
+                },
+                "fecha": {
+                  "$datetime": "2024-04-10T09:00:00-05:00",
+                  "tz": "America/Lima",
+                  "class": "DateTimeImmutable"
+                },
+                "numero": 3
+              }
+            ]
+          }
+        ],
+        "indExcepcional": "01"
       },
       "calls": [
         "getName"

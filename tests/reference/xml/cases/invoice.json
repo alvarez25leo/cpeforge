@@ -9132,6 +9132,428 @@
       }
     },
     {
+      "id": "inv21-delivery-country-default",
+      "description": "Dirección de entrega solo con país (exportación de servicios) [default]",
+      "builder": "InvoiceBuilder",
+      "options": {},
+      "input": {
+        "$class": "Invoice",
+        "ublVersion": "2.1",
+        "tipoOperacion": "0101",
+        "tipoDoc": "01",
+        "serie": "F001",
+        "correlativo": "1",
+        "fechaEmision": {
+          "$datetime": "2024-03-15T10:20:30-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "tipoMoneda": "PEN",
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "client": {
+          "$class": "Client",
+          "tipoDoc": "6",
+          "numDoc": "20000000002",
+          "rznSocial": "CLIENTE"
+        },
+        "mtoOperGravadas": {
+          "$decimal": "100"
+        },
+        "mtoIGV": {
+          "$decimal": "18"
+        },
+        "totalImpuestos": {
+          "$decimal": "18"
+        },
+        "valorVenta": {
+          "$decimal": "100"
+        },
+        "subTotal": {
+          "$decimal": "118"
+        },
+        "mtoImpVenta": {
+          "$decimal": "118"
+        },
+        "details": [
+          {
+            "$class": "SaleDetail",
+            "codProducto": "P1",
+            "unidad": "NIU",
+            "cantidad": {
+              "$decimal": "1"
+            },
+            "descripcion": "ITEM",
+            "mtoBaseIgv": {
+              "$decimal": "100"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18"
+            },
+            "igv": {
+              "$decimal": "18"
+            },
+            "tipAfeIgv": "10",
+            "totalImpuestos": {
+              "$decimal": "18"
+            },
+            "mtoValorVenta": {
+              "$decimal": "100"
+            },
+            "mtoValorUnitario": {
+              "$decimal": "100"
+            },
+            "mtoPrecioUnitario": {
+              "$decimal": "118"
+            }
+          }
+        ],
+        "direccionEntrega": {
+          "$class": "Address",
+          "codigoPais": "US"
+        }
+      }
+    },
+    {
+      "id": "inv21-delivery-country-tests",
+      "description": "Dirección de entrega solo con país (exportación de servicios) [tests]",
+      "builder": "InvoiceBuilder",
+      "options": {
+        "cache": false,
+        "strict_variables": true,
+        "autoescape": false
+      },
+      "input": {
+        "$class": "Invoice",
+        "ublVersion": "2.1",
+        "tipoOperacion": "0101",
+        "tipoDoc": "01",
+        "serie": "F001",
+        "correlativo": "1",
+        "fechaEmision": {
+          "$datetime": "2024-03-15T10:20:30-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "tipoMoneda": "PEN",
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "client": {
+          "$class": "Client",
+          "tipoDoc": "6",
+          "numDoc": "20000000002",
+          "rznSocial": "CLIENTE"
+        },
+        "mtoOperGravadas": {
+          "$decimal": "100"
+        },
+        "mtoIGV": {
+          "$decimal": "18"
+        },
+        "totalImpuestos": {
+          "$decimal": "18"
+        },
+        "valorVenta": {
+          "$decimal": "100"
+        },
+        "subTotal": {
+          "$decimal": "118"
+        },
+        "mtoImpVenta": {
+          "$decimal": "118"
+        },
+        "details": [
+          {
+            "$class": "SaleDetail",
+            "codProducto": "P1",
+            "unidad": "NIU",
+            "cantidad": {
+              "$decimal": "1"
+            },
+            "descripcion": "ITEM",
+            "mtoBaseIgv": {
+              "$decimal": "100"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18"
+            },
+            "igv": {
+              "$decimal": "18"
+            },
+            "tipAfeIgv": "10",
+            "totalImpuestos": {
+              "$decimal": "18"
+            },
+            "mtoValorVenta": {
+              "$decimal": "100"
+            },
+            "mtoValorUnitario": {
+              "$decimal": "100"
+            },
+            "mtoPrecioUnitario": {
+              "$decimal": "118"
+            }
+          }
+        ],
+        "direccionEntrega": {
+          "$class": "Address",
+          "codigoPais": "US"
+        }
+      }
+    },
+    {
+      "id": "inv21-delivery-full-default",
+      "description": "Dirección de entrega completa con urbanización [default]",
+      "builder": "InvoiceBuilder",
+      "options": {},
+      "input": {
+        "$class": "Invoice",
+        "ublVersion": "2.1",
+        "tipoOperacion": "0101",
+        "tipoDoc": "01",
+        "serie": "F001",
+        "correlativo": "1",
+        "fechaEmision": {
+          "$datetime": "2024-03-15T10:20:30-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "tipoMoneda": "PEN",
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "client": {
+          "$class": "Client",
+          "tipoDoc": "6",
+          "numDoc": "20000000002",
+          "rznSocial": "CLIENTE"
+        },
+        "mtoOperGravadas": {
+          "$decimal": "100"
+        },
+        "mtoIGV": {
+          "$decimal": "18"
+        },
+        "totalImpuestos": {
+          "$decimal": "18"
+        },
+        "valorVenta": {
+          "$decimal": "100"
+        },
+        "subTotal": {
+          "$decimal": "118"
+        },
+        "mtoImpVenta": {
+          "$decimal": "118"
+        },
+        "details": [
+          {
+            "$class": "SaleDetail",
+            "codProducto": "P1",
+            "unidad": "NIU",
+            "cantidad": {
+              "$decimal": "1"
+            },
+            "descripcion": "ITEM",
+            "mtoBaseIgv": {
+              "$decimal": "100"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18"
+            },
+            "igv": {
+              "$decimal": "18"
+            },
+            "tipAfeIgv": "10",
+            "totalImpuestos": {
+              "$decimal": "18"
+            },
+            "mtoValorVenta": {
+              "$decimal": "100"
+            },
+            "mtoValorUnitario": {
+              "$decimal": "100"
+            },
+            "mtoPrecioUnitario": {
+              "$decimal": "118"
+            }
+          }
+        ],
+        "direccionEntrega": {
+          "$class": "Address",
+          "ubigueo": "150101",
+          "departamento": "LIMA",
+          "provincia": "HUAURA",
+          "distrito": "HUACHO",
+          "urbanizacion": "CERCADO",
+          "direccion": "AV. FICTICIA 123",
+          "codigoPais": "PE",
+          "codLocal": "0001"
+        }
+      }
+    },
+    {
+      "id": "inv21-delivery-full-tests",
+      "description": "Dirección de entrega completa con urbanización [tests]",
+      "builder": "InvoiceBuilder",
+      "options": {
+        "cache": false,
+        "strict_variables": true,
+        "autoescape": false
+      },
+      "input": {
+        "$class": "Invoice",
+        "ublVersion": "2.1",
+        "tipoOperacion": "0101",
+        "tipoDoc": "01",
+        "serie": "F001",
+        "correlativo": "1",
+        "fechaEmision": {
+          "$datetime": "2024-03-15T10:20:30-05:00",
+          "tz": "America/Lima",
+          "class": "DateTimeImmutable"
+        },
+        "tipoMoneda": "PEN",
+        "company": {
+          "$class": "Company",
+          "ruc": "20000000001",
+          "razonSocial": "EMPRESA SINTETICA S.A.C.",
+          "nombreComercial": "SINTETICA",
+          "address": {
+            "$class": "Address",
+            "ubigueo": "150101",
+            "departamento": "LIMA",
+            "provincia": "LIMA",
+            "distrito": "LIMA",
+            "urbanizacion": "CERCADO",
+            "direccion": "AV. FICTICIA 123",
+            "codigoPais": "PE",
+            "codLocal": "0001"
+          },
+          "email": "facturacion@example.test",
+          "telephone": "01-0000000"
+        },
+        "client": {
+          "$class": "Client",
+          "tipoDoc": "6",
+          "numDoc": "20000000002",
+          "rznSocial": "CLIENTE"
+        },
+        "mtoOperGravadas": {
+          "$decimal": "100"
+        },
+        "mtoIGV": {
+          "$decimal": "18"
+        },
+        "totalImpuestos": {
+          "$decimal": "18"
+        },
+        "valorVenta": {
+          "$decimal": "100"
+        },
+        "subTotal": {
+          "$decimal": "118"
+        },
+        "mtoImpVenta": {
+          "$decimal": "118"
+        },
+        "details": [
+          {
+            "$class": "SaleDetail",
+            "codProducto": "P1",
+            "unidad": "NIU",
+            "cantidad": {
+              "$decimal": "1"
+            },
+            "descripcion": "ITEM",
+            "mtoBaseIgv": {
+              "$decimal": "100"
+            },
+            "porcentajeIgv": {
+              "$decimal": "18"
+            },
+            "igv": {
+              "$decimal": "18"
+            },
+            "tipAfeIgv": "10",
+            "totalImpuestos": {
+              "$decimal": "18"
+            },
+            "mtoValorVenta": {
+              "$decimal": "100"
+            },
+            "mtoValorUnitario": {
+              "$decimal": "100"
+            },
+            "mtoPrecioUnitario": {
+              "$decimal": "118"
+            }
+          }
+        ],
+        "direccionEntrega": {
+          "$class": "Address",
+          "ubigueo": "150101",
+          "departamento": "LIMA",
+          "provincia": "HUAURA",
+          "distrito": "HUACHO",
+          "urbanizacion": "CERCADO",
+          "direccion": "AV. FICTICIA 123",
+          "codigoPais": "PE",
+          "codLocal": "0001"
+        }
+      }
+    },
+    {
       "id": "inv20-parties-default",
       "description": "Partes en UBL 2.0 [default]",
       "builder": "InvoiceBuilder",

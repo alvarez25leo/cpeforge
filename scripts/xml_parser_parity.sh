@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # Puertas de paridad de cpeforge-xml-parser frente a greenter/xml-parser
-# v5.3.0 (thegreenter/greenter f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f).
+# v5.4.0 (thegreenter/greenter 866ba448a6436143eff59d77c790bd0decc0d5f4).
 # Todo se ejecuta sin red (sandbox-exec en macOS o XML_PARSER_NETWORK_BLOCKED=1
 # con un cortafuegos externo). Las evidencias quedan en target/evidence/.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-reference=target/reference/v5.3.0
-suite=target/reference/v5.3.0-suite
-commit=f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f
+reference=target/reference/v5.4.0
+suite=target/reference/v5.4.0-suite
+commit=866ba448a6436143eff59d77c790bd0decc0d5f4
 test "$(git -C "$reference" rev-parse HEAD)" = "$commit"
 test -z "$(git -C "$reference" status --porcelain)"
 test -z "$(git -C greenter-php status --porcelain)"
@@ -28,14 +28,14 @@ run_offline() {
   fi
 }
 
-# 1. Auditoría de los 70 XML upstream ANTES de su suite: sin contenido, solo
+# 1. Auditoría de los 71 XML upstream ANTES de su suite: sin contenido, solo
 #    agregados. Ninguno se copia a fixtures.
 python3 -I scripts/audit_xml_parser_resources.py \
   "$suite/packages/xml-parser/tests/Resources" "$evidence/xml-parser-audit.json"
 python3 -I - "$evidence/xml-parser-audit.json" <<'PY'
 import json, sys
 totals = json.load(open(sys.argv[1]))["totals"]
-assert totals["files"] == 70, totals
+assert totals["files"] == 71, totals
 assert totals.get("doctype", 0) == 0 and totals.get("entity_decl", 0) == 0, totals
 PY
 

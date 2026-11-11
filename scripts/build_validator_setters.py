@@ -2,7 +2,7 @@
 """Genera crates/validator/src/setters.json desde el inventario PHP de core.
 
 tests/reference/core/inventory.json se obtiene por reflexión de Greenter
-v5.3.0 (oracle/php/core). Para cada clase de `Greenter\\Model` se resuelven,
+v5.4.0 (oracle/php/core). Para cada clase de `Greenter\\Model` se resuelven,
 recorriendo `parent`, los setters heredados: el TypeError de PHP nombra la
 clase que DECLARA el método (`PaymentTerms::setTipo` aunque el objeto sea un
 `FormaPagoContado`). También se guardan los ancestros e interfaces, porque un

@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 /*
- * Oráculo PHP de greenter/cpe-validator v5.3.0: ejecuta las clases reales del
- * checkout fijado (target/reference/v5.3.0/packages/cpe-validator) sobre
+ * Oráculo PHP de greenter/cpe-validator v5.4.0: ejecuta las clases reales del
+ * checkout fijado (target/reference/v5.4.0/packages/cpe-validator) sobre
  * los casos sintéticos de tests/reference/cpe-validator/cases.json.
  *
  * Uso: php oracle/php/cpe_validator/run_cases.php <cases.json>
@@ -21,7 +21,7 @@ declare(strict_types=1);
 require dirname(__DIR__) . '/core/lib.php';
 
 $root = dirname(__DIR__, 3);
-$referenceDir = getenv('GREENTER_PHP_REFERENCE') ?: $root . '/target/reference/v5.3.0';
+$referenceDir = getenv('GREENTER_PHP_REFERENCE') ?: $root . '/target/reference/v5.4.0';
 $validatorSrc = realpath($referenceDir . '/packages/cpe-validator/src');
 if ($validatorSrc === false) {
     fail("No existe packages/cpe-validator en $referenceDir");

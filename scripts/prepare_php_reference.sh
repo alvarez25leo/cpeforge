@@ -18,8 +18,11 @@ if [[ -d "$dest/.git" ]] && [[ "$(git -C "$dest" rev-parse HEAD)" == "$commit" ]
 fi
 
 source_repo="$root/greenter-php"
-if [[ ! -d "$source_repo/.git" ]]; then
-    source_repo="https://github.com/thegreenter/greenter.git"
+# El clon de consulta no se actualiza desde aquí: si no existe o no contiene
+# el commit fijado (referencia más nueva que el clon), se usa el remoto oficial.
+if [[ ! -d "$source_repo/.git" ]] \
+    || ! git -C "$source_repo" cat-file -e "$commit^{commit}" 2>/dev/null; then
+    source_repo="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["repository"])' "$ref_json")"
 fi
 
 rm -rf "$dest"

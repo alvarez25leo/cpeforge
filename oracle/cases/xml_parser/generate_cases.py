@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Casos sintéticos de paridad de greenter/xml-parser v5.3.0.
+"""Casos sintéticos de paridad de greenter/xml-parser v5.4.0.
 
 Todos los XML se construyen aquí con datos ficticios (RUC 20000000001 y
 20000000002, DNI 00000001, nombres «SINTETICA»). Ningún XML upstream de
@@ -415,6 +415,14 @@ def cases() -> list[dict]:
         out.append(case(f"{parser}-without-exchange", parser, cp_xml(kind, serie, exchange=False, details=2)))
         out.append(case(f"{parser}-paid-date-at-root", parser, x.replace("<cbc:IssueDate>2024-07-03</cbc:IssueDate>", "<cbc:IssueDate>2024-07-03</cbc:IssueDate><cbc:PaidDate>2024-07-09</cbc:PaidDate>")))
         out.append(case(f"{parser}-missing-receiver-id", parser, x.replace('<cac:PartyIdentification><cbc:ID schemeID="6">20000000002</cbc:ID></cac:PartyIdentification>', "")))
+        # Número de pago (`cac:Payment/cbc:ID`) convertido como `(int)`.
+        for label, value in (("text", "A1"), ("padded", " 7 "), ("negative", "-3"), ("empty", "")):
+            out.append(case(f"{parser}-payment-id-{label}", parser, x.replace("<cac:Payment><cbc:ID>1</cbc:ID>", f"<cac:Payment><cbc:ID>{value}</cbc:ID>")))
+        if kind == "Perception":
+            # Campo 7 de «Percepciones1_0»: sac:ExceptionalIndicator.
+            for label, value in (("exceptional", "<sac:ExceptionalIndicator>01</sac:ExceptionalIndicator>"),
+                                 ("exceptional-empty", "<sac:ExceptionalIndicator/>")):
+                out.append(case(f"{parser}-{label}", parser, x.replace("<cbc:IssueDate>2024-07-03</cbc:IssueDate>", "<cbc:IssueDate>2024-07-03</cbc:IssueDate>" + value, 1)))
         out += mutations(parser, x, parser)
         name = "retention" if kind == "Retention" else "perception"
         out.append(file_case(f"{parser}-ubl-{name}-full-default", parser, f"retention-perception/{name}-full-default.xml"))

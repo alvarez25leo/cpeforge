@@ -1,8 +1,8 @@
 {
     "generator": "oracle/php/xml/run_cases.php",
     "reference": {
-        "tag": "v5.3.0",
-        "commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+        "tag": "v5.4.0",
+        "commit": "866ba448a6436143eff59d77c790bd0decc0d5f4"
     },
     "reference_version": "8.4.17",
     "twig_version": "v3.30.0",
@@ -10,7 +10,7 @@
     "cases_file": "note.json",
     "results": {
         "cr21-full-default": {
-            "now": 1792253929,
+            "now": 1794356320,
             "sha256": "fabea2edfe7de5014697ad28126219f1e177cefe9f44ac22cea5782ffb9e64f4",
             "bytes": 9134,
             "deprecations": [
@@ -18,7 +18,7 @@
             ]
         },
         "cr21-full-cpeforge": {
-            "now": 1792253929,
+            "now": 1794356320,
             "sha256": "fabea2edfe7de5014697ad28126219f1e177cefe9f44ac22cea5782ffb9e64f4",
             "bytes": 9134,
             "deprecations": [
@@ -26,7 +26,7 @@
             ]
         },
         "cr21-full-tests": {
-            "now": 1792253929,
+            "now": 1794356320,
             "sha256": "fabea2edfe7de5014697ad28126219f1e177cefe9f44ac22cea5782ffb9e64f4",
             "bytes": 9134,
             "deprecations": [
@@ -34,7 +34,7 @@
             ]
         },
         "db21-full-default": {
-            "now": 1792253929,
+            "now": 1794356320,
             "sha256": "3cef4605edbacfbc809720a760427488d5723a2fd49789efa35a3e1ee417cd24",
             "bytes": 8696,
             "deprecations": [
@@ -42,7 +42,7 @@
             ]
         },
         "db21-full-cpeforge": {
-            "now": 1792253929,
+            "now": 1794356321,
             "sha256": "3cef4605edbacfbc809720a760427488d5723a2fd49789efa35a3e1ee417cd24",
             "bytes": 8696,
             "deprecations": [
@@ -50,7 +50,7 @@
             ]
         },
         "db21-full-tests": {
-            "now": 1792253929,
+            "now": 1794356321,
             "sha256": "3cef4605edbacfbc809720a760427488d5723a2fd49789efa35a3e1ee417cd24",
             "bytes": 8696,
             "deprecations": [
@@ -58,8 +58,8 @@
             ]
         },
         "cr21-empty-default": {
-            "now": 1792253929,
-            "sha256": "6e93ea7193035f24ccde02823b70a9fa35b331641fa01eb84955d19b16ded80c",
+            "now": 1794356321,
+            "sha256": "cd4df3884e2b1fb5f1b424bdfc285d0f2ebec9fb99ec74d1630ef0e84e18a24a",
             "bytes": 2593,
             "deprecations": [
                 "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/notacr2.1.xml.twig at line 1.",
@@ -67,7 +67,7 @@
             ]
         },
         "cr21-empty-tests": {
-            "now": 1792253930,
+            "now": 1794356321,
             "error": {
                 "class": "Twig\\Error\\RuntimeError",
                 "message": "Impossible to access an attribute (\"ruc\") on a null variable in \"notacr2.1.xml.twig\" at line 52."
@@ -77,8 +77,8 @@
             ]
         },
         "db21-empty-default": {
-            "now": 1792253930,
-            "sha256": "b2f7b3be3a72bcf88ac3959537e3e41f17682f69ca4e2e173b047a3eb07d7cb6",
+            "now": 1794356321,
+            "sha256": "555245c8e7dc7b62c6bd1b47b3f114b06689a9fb73b1a56f1aa83581efc09b91",
             "bytes": 2598,
             "deprecations": [
                 "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/notadb2.1.xml.twig at line 1.",
@@ -86,7 +86,7 @@
             ]
         },
         "db21-empty-tests": {
-            "now": 1792253930,
+            "now": 1794356321,
             "error": {
                 "class": "Twig\\Error\\RuntimeError",
                 "message": "Impossible to access an attribute (\"ruc\") on a null variable in \"notadb2.1.xml.twig\" at line 52."
@@ -96,25 +96,25 @@
             ]
         },
         "cr21-taxes-default": {
-            "now": 1792253930,
-            "sha256": "10abeea4913a250c39d1678a53e861578e39f0ba290734a569991763f5cadaa2",
-            "bytes": 14822,
+            "now": 1794356321,
+            "sha256": "e4ef32905783b19c44c557e7d5735f960f46144b04b79698a70edc74503b110a",
+            "bytes": 14831,
             "deprecations": [
                 "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/notacr2.1.xml.twig at line 1.",
                 "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
             ]
         },
         "db21-taxes-default": {
-            "now": 1792253930,
-            "sha256": "27c597e5a7d689b5a74d6e86a00dbff5ee418d502444296e27974d3d5d519d5c",
-            "bytes": 14368,
+            "now": 1794356321,
+            "sha256": "e4a314b8b1c1443ae08531b2643e6f26d12ef42193f3dd571166316c38a92fd2",
+            "bytes": 14377,
             "deprecations": [
                 "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/notadb2.1.xml.twig at line 1.",
                 "number_format(): Passing null to parameter #1 ($num) of type float is deprecated"
             ]
         },
         "cr20-full-default": {
-            "now": 1792253930,
+            "now": 1794356321,
             "sha256": "22773d07eac281e07bf5becd541cd93755fcec30b4e25af7346a28dec1cea26c",
             "bytes": 7249,
             "deprecations": [
@@ -122,7 +122,7 @@
             ]
         },
         "cr20-full-cpeforge": {
-            "now": 1792253930,
+            "now": 1794356321,
             "sha256": "22773d07eac281e07bf5becd541cd93755fcec30b4e25af7346a28dec1cea26c",
             "bytes": 7249,
             "deprecations": [
@@ -130,7 +130,7 @@
             ]
         },
         "cr20-full-tests": {
-            "now": 1792253930,
+            "now": 1794356321,
             "sha256": "22773d07eac281e07bf5becd541cd93755fcec30b4e25af7346a28dec1cea26c",
             "bytes": 7249,
             "deprecations": [
@@ -138,7 +138,7 @@
             ]
         },
         "db20-full-default": {
-            "now": 1792253930,
+            "now": 1794356321,
             "sha256": "107841bb1934c8f665babcfd866c7aa0b8c273b6afb9c2fadf182a77b5ef64a8",
             "bytes": 7113,
             "deprecations": [
@@ -146,7 +146,7 @@
             ]
         },
         "db20-full-cpeforge": {
-            "now": 1792253930,
+            "now": 1794356321,
             "sha256": "107841bb1934c8f665babcfd866c7aa0b8c273b6afb9c2fadf182a77b5ef64a8",
             "bytes": 7113,
             "deprecations": [
@@ -154,7 +154,7 @@
             ]
         },
         "db20-full-tests": {
-            "now": 1792253930,
+            "now": 1794356321,
             "sha256": "107841bb1934c8f665babcfd866c7aa0b8c273b6afb9c2fadf182a77b5ef64a8",
             "bytes": 7113,
             "deprecations": [
@@ -162,8 +162,8 @@
             ]
         },
         "cr20-empty-default": {
-            "now": 1792253930,
-            "sha256": "b3d45156fcef90909aa152cc5daf25a88b00f3f7ad4c07ef9246b8c60835cf55",
+            "now": 1794356321,
+            "sha256": "663fdad8ce3d46b60b5abd7e5a56d4a2902f351a79e3300080ad67c8d565f453",
             "bytes": 2796,
             "deprecations": [
                 "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/notacr2.0.xml.twig at line 1.",
@@ -171,7 +171,7 @@
             ]
         },
         "cr20-empty-tests": {
-            "now": 1792253930,
+            "now": 1794356321,
             "error": {
                 "class": "Twig\\Error\\RuntimeError",
                 "message": "Impossible to access an attribute (\"ruc\") on a null variable in \"notacr2.0.xml.twig\" at line 93."
@@ -181,8 +181,8 @@
             ]
         },
         "db20-empty-default": {
-            "now": 1792253930,
-            "sha256": "b6c995921c4890b7c8ba0d4a5db96de9a4a9e200fd5a53f5ff77b6d7e6976068",
+            "now": 1794356321,
+            "sha256": "bd02e62a29e71f2826f964d17ce7e23c643f807418cdbb055bc6e87c849bfb83",
             "bytes": 2801,
             "deprecations": [
                 "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/notadb2.0.xml.twig at line 1.",
@@ -190,7 +190,7 @@
             ]
         },
         "db20-empty-tests": {
-            "now": 1792253930,
+            "now": 1794356321,
             "error": {
                 "class": "Twig\\Error\\RuntimeError",
                 "message": "Impossible to access an attribute (\"ruc\") on a null variable in \"notadb2.0.xml.twig\" at line 85."
@@ -200,7 +200,7 @@
             ]
         },
         "cr20-taxes-default": {
-            "now": 1792253930,
+            "now": 1794356321,
             "sha256": "b483821d9dd721bd83d2ac410f450fdca2d927470f584ceeba611bcc1cc7c670",
             "bytes": 11148,
             "deprecations": [
@@ -208,7 +208,7 @@
             ]
         },
         "db20-taxes-default": {
-            "now": 1792253930,
+            "now": 1794356321,
             "sha256": "329e20713ca52993bbc2b30cf058d65b0ecd2bfe37f27dc5d597f97618823092",
             "bytes": 10996,
             "deprecations": [
@@ -216,7 +216,7 @@
             ]
         },
         "db21-no-totals-default": {
-            "now": 1792253930,
+            "now": 1794356321,
             "sha256": "e3c0b78d8ec38b4030c293d2145eed47f1f24174fd0ea855617f1ea2fc5dbeac",
             "bytes": 8481,
             "deprecations": [
@@ -224,7 +224,7 @@
             ]
         },
         "cr21-special-default": {
-            "now": 1792253930,
+            "now": 1794356321,
             "sha256": "f9c8cfdd4b29b6d746bddbfe12b0e3d90ce457c9c33a431ced85a5901f58a361",
             "bytes": 9195,
             "deprecations": [
@@ -232,7 +232,7 @@
             ]
         },
         "cr21-special-cpeforge": {
-            "now": 1792253930,
+            "now": 1794356321,
             "sha256": "51e105816ea07bfd48597aea37edacd327bf7aa9ed9d6343011e3fd3189887a3",
             "bytes": 9153,
             "deprecations": [
@@ -240,7 +240,7 @@
             ]
         },
         "note-selector-tipo01": {
-            "now": 1792253930,
+            "now": 1794356322,
             "sha256": "12f38fdc24349c635999ecdac3e372d9459a4bf62a50cd962a65fe96c57db42b",
             "bytes": 8696,
             "deprecations": [
@@ -248,7 +248,7 @@
             ]
         },
         "note-selector-tipo7": {
-            "now": 1792253930,
+            "now": 1794356322,
             "sha256": "12f38fdc24349c635999ecdac3e372d9459a4bf62a50cd962a65fe96c57db42b",
             "bytes": 8696,
             "deprecations": [
@@ -256,7 +256,7 @@
             ]
         },
         "note-selector-tiponull": {
-            "now": 1792253930,
+            "now": 1794356322,
             "sha256": "12f38fdc24349c635999ecdac3e372d9459a4bf62a50cd962a65fe96c57db42b",
             "bytes": 8696,
             "deprecations": [
@@ -264,7 +264,7 @@
             ]
         },
         "note-selector-tipo07space": {
-            "now": 1792253931,
+            "now": 1794356322,
             "sha256": "12f38fdc24349c635999ecdac3e372d9459a4bf62a50cd962a65fe96c57db42b",
             "bytes": 8696,
             "deprecations": [
@@ -272,7 +272,7 @@
             ]
         },
         "note-version-v22": {
-            "now": 1792253931,
+            "now": 1794356322,
             "error": {
                 "class": "Twig\\Error\\LoaderError",
                 "message": "Unable to find template \"notacr2.2.xml.twig\" (looked into: <xml-src>/Xml/Builder/../Templates)."
@@ -280,7 +280,7 @@
             "deprecations": []
         },
         "note-version-vnull": {
-            "now": 1792253931,
+            "now": 1794356322,
             "error": {
                 "class": "Twig\\Error\\LoaderError",
                 "message": "Unable to find template \"notacr.xml.twig\" (looked into: <xml-src>/Xml/Builder/../Templates)."
@@ -288,8 +288,8 @@
             "deprecations": []
         },
         "note-default-version": {
-            "now": 1792253931,
-            "sha256": "4c78c32101f060c19119d0505dc75a9f41ecfe1afb3711babcd17e2a1fb68db8",
+            "now": 1794356322,
+            "sha256": "09bc5473d3838427c2b10d630d5796ef6a5debfc714bbcf12fc17587cd7831fb",
             "bytes": 2800,
             "deprecations": [
                 "Since twig/twig 3.12: Twig Filter \"spaceless\" is deprecated in <xml-src>/Xml/Templates/notacr2.0.xml.twig at line 1.",

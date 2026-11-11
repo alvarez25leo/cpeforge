@@ -1405,6 +1405,11 @@
      "CPEForge\\Model\\Retention\\Payment",
      "moneda",
      "?string"
+    ],
+    "setNumero": [
+     "CPEForge\\Model\\Retention\\Payment",
+     "numero",
+     "?int"
     ]
    }
   },
@@ -1467,6 +1472,11 @@
      "CPEForge\\Model\\Perception\\Perception",
      "impPercibido",
      "?float"
+    ],
+    "setIndExcepcional": [
+     "CPEForge\\Model\\Perception\\Perception",
+     "indExcepcional",
+     "?string"
     ],
     "setObservacion": [
      "CPEForge\\Model\\Perception\\Perception",

@@ -1,6 +1,6 @@
-# Matriz de validator 0.1.0 frente a Greenter PHP v5.3.0
+# Matriz de validator 0.1.0 frente a Greenter PHP v5.4.0
 
-Fuente fijada: `thegreenter/greenter` `f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f`; Symfony Validator 6.4.48. Generar con `python3 scripts/build_validator_matrix.py`. El inventario JSON guarda el SHA-256 de cada fuente, campos, orden, opciones y versiones; `cases.json` y `reference-results.json` conservan cada entrada, salida y error por ID.
+Fuente fijada: `thegreenter/greenter` `866ba448a6436143eff59d77c790bd0decc0d5f4`; Symfony Validator 6.4.48. Generar con `python3 scripts/build_validator_matrix.py`. El inventario JSON guarda el SHA-256 de cada fuente, campos, orden, opciones y versiones; `cases.json` y `reference-results.json` conservan cada entrada, salida y error por ID.
 
 ## API y metadatos públicos
 
@@ -34,12 +34,12 @@ Cada caso usa el modelo `cpeforge-core` correspondiente, salvo los casos `raw` q
 | `Loader/InvoiceLoader.php` | default | `Invoice` → raíz o `Validator::validate_model` | 19/23 | Choice, NotBlank, NotNull, Regex, Valid | default: 61/8 |
 | `Loader/LegendLoader.php` | default | `Legend` → Invoice, Note | 2/2 | Length | default: 13/0, 2.1: 13/0 |
 | `Loader/NoteLoader.php` | default | `Note` → raíz o `Validator::validate_model` | 20/29 | Length, NotBlank, NotNull, Valid | default: 128/16 |
-| `Loader/PaymentLoader.php` | default | `Payment` → RetentionDetail, PerceptionDetail | 3/4 | Length, NotBlank, NotNull | default: 28/9, 2.1: 28/9 |
+| `Loader/PaymentLoader.php` | default | `Payment` → RetentionDetail, PerceptionDetail | 4/5 | GreaterThan, Length, NotBlank, NotNull | default: 31/9, 2.1: 31/9 |
 | `Loader/PaymentTermsLoader.php` | default | `PaymentTerms` → raíz o `Validator::validate_model` | 2/2 | Length, NotBlank | default: 18/2, 2.1: 18/2 |
-| `Loader/PerceptionDetailLoader.php` | default | `PerceptionDetail` → Perception | 10/13 | Length, NotBlank, NotNull, Valid | default: 52/14, 2.1: 52/14 |
-| `Loader/PerceptionLoader.php` | default | `Perception` → raíz o `Validator::validate_model` | 11/17 | Length, NotBlank, NotNull, Valid | default: 69/14, 2.1: 69/14 |
+| `Loader/PerceptionDetailLoader.php` | default | `PerceptionDetail` → Perception | 10/14 | Count, Length, NotBlank, NotNull, Valid | default: 55/14, 2.1: 55/14 |
+| `Loader/PerceptionLoader.php` | default | `Perception` → raíz o `Validator::validate_model` | 12/18 | Length, NotBlank, NotNull, Valid | default: 77/14, 2.1: 77/14 |
 | `Loader/PrepaymentLoader.php` | default | `Prepayment` → Invoice | 3/5 | Length, NotBlank, NotNull | default: 32/4, 2.1: 32/4 |
-| `Loader/RetentionDetailLoader.php` | default | `RetentionDetail` → Retention | 10/14 | Length, NotBlank, NotNull, Valid | default: 52/14, 2.1: 52/14 |
+| `Loader/RetentionDetailLoader.php` | default | `RetentionDetail` → Retention | 10/15 | Count, Length, NotBlank, NotNull, Valid | default: 55/14, 2.1: 55/14 |
 | `Loader/RetentionLoader.php` | default | `Retention` → raíz o `Validator::validate_model` | 11/17 | Length, NotBlank, NotNull, Valid | default: 69/14, 2.1: 69/14 |
 | `Loader/ReversionLoader.php` | default | `Reversion` → raíz o `Validator::validate_model` | 5/8 | Length, NotBlank, NotNull, Valid | default: 31/10, 2.1: 31/10 |
 | `Loader/SaleDetailLoader.php` | default | `SaleDetail` → Invoice, Note | 10/11 | Length, NotBlank, NotNull | default: 37/4 |
@@ -82,4 +82,4 @@ Doce clases `*Test.php` y cuatro archivos de apoyo; ejecutadas con salida de red
 - `Validator/Validator21Trait.php` — apoyo.
 - `Validator/ValidatorTrait.php` — apoyo.
 
-Total de casos: 2761, con 476 `TypeError` PHP. El runner/comparador recorre todos los IDs en orden; `scripts/check_validator_rules.py` comprueba opciones completas, cobertura por campo y bordes independientes.
+Total de casos: 2795, con 476 `TypeError` PHP. El runner/comparador recorre todos los IDs en orden; `scripts/check_validator_rules.py` comprueba opciones completas, cobertura por campo y bordes independientes.

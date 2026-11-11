@@ -2,9 +2,9 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-reference=target/reference/v5.3.0
+reference=target/reference/v5.4.0
 commit=$(git -C "$reference" rev-parse HEAD)
-test "$commit" = f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f
+test "$commit" = 866ba448a6436143eff59d77c790bd0decc0d5f4
 test -z "$(git -C greenter-php status --porcelain)"
 mkdir -p target/evidence
 profile='(version 1)(allow default)(deny network*)'

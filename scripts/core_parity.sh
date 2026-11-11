@@ -19,7 +19,7 @@ update=false
 GREENTER_PHP_REFERENCE="$("$root/scripts/prepare_php_reference.sh")"
 export GREENTER_PHP_REFERENCE
 echo "referencia PHP: $GREENTER_PHP_REFERENCE ($(git -C "$GREENTER_PHP_REFERENCE" rev-parse HEAD))"
-php --version | head -1
+php --version | sed -n 1p
 
 work="$(mktemp -d)"
 source "$root/scripts/evidence.sh"

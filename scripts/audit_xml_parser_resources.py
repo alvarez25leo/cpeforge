@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Auditoría de los 70 XML de prueba de greenter/xml-parser v5.3.0.
+"""Auditoría de los 71 XML de prueba de greenter/xml-parser v5.4.0.
 
 Se ejecuta ANTES de la suite upstream. No imprime contenido de los archivos:
 solo agregados (raíz, namespace, UBLVersionID, DTD/entidades, firma y

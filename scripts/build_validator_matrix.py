@@ -36,10 +36,10 @@ consumer = {
 }
 
 lines = [
-    "# Matriz de validator 0.1.0 frente a Greenter PHP v5.3.0",
+    "# Matriz de validator 0.1.0 frente a Greenter PHP v5.4.0",
     "",
     "Fuente fijada: `thegreenter/greenter` "
-    "`f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f`; Symfony Validator 6.4.48. "
+    "`866ba448a6436143eff59d77c790bd0decc0d5f4`; Symfony Validator 6.4.48. "
     "Generar con `python3 scripts/build_validator_matrix.py`. "
     "El inventario JSON guarda el SHA-256 de cada fuente, campos, orden, opciones y versiones; "
     "`cases.json` y `reference-results.json` conservan cada entrada, salida y error por ID.",
@@ -93,11 +93,11 @@ lines += [
     "denegada por `sandbox-exec`. Los nombres se toman del checkout fijado:",
     "",
 ]
-test_files = sorted((ROOT / "target/reference/v5.3.0/packages/validator/tests").rglob("*.php"))
+test_files = sorted((ROOT / "target/reference/v5.4.0/packages/validator/tests").rglob("*.php"))
 assert len(test_files) == 16
 for file in test_files:
     kind = "clase de prueba" if file.name.endswith("Test.php") else "apoyo"
-    lines.append(f"- `{file.relative_to(ROOT / 'target/reference/v5.3.0/packages/validator/tests')}` — {kind}.")
+    lines.append(f"- `{file.relative_to(ROOT / 'target/reference/v5.4.0/packages/validator/tests')}` — {kind}.")
 lines += [
     "",
     f"Total de casos: {len(cases)}, con {sum(errors.values())} `TypeError` PHP. "

@@ -1,21 +1,21 @@
 <?php
 declare(strict_types=1);
 
-// BillSender con el SoapClient real de Greenter v5.3.0 (ext/soap) contra el
+// BillSender con el SoapClient real de Greenter v5.4.0 (ext/soap) contra el
 // servidor HTTP de oracle/ws/http_status_server.py. Solo destinos loopback.
 ini_set('display_errors', '0');
 error_reporting(E_ALL);
 
 $root = dirname(__DIR__, 3);
-$reference = $root.'/target/reference/v5.3.0';
+$reference = $root.'/target/reference/v5.4.0';
 $base = getenv('WS_HTTP_URL') ?: '';
 if (!preg_match('~^http://127\.0\.0\.1:[0-9]+$~', $base)) {
     throw new RuntimeException('Solo HTTP loopback');
 }
-if (trim((string) shell_exec('git -C '.escapeshellarg($reference).' rev-parse HEAD')) !== 'f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f') {
+if (trim((string) shell_exec('git -C '.escapeshellarg($reference).' rev-parse HEAD')) !== '866ba448a6436143eff59d77c790bd0decc0d5f4') {
     throw new RuntimeException('Referencia PHP incorrecta');
 }
-require $root.'/target/reference/v5.3.0-suite/vendor/autoload.php';
+require $root.'/target/reference/v5.4.0-suite/vendor/autoload.php';
 spl_autoload_register(static function (string $class) use ($reference): void {
     if (!str_starts_with($class, 'Greenter\\')) return;
     $relative = substr($class, strlen('Greenter\\'));

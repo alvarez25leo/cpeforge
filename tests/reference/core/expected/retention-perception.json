@@ -1,8 +1,8 @@
 {
     "generator": "oracle/php/core/run_cases.php",
     "reference": {
-        "tag": "v5.3.0",
-        "commit": "f24e546d3e62e0ce4c2ebfbe23c7e8c9d464d51f"
+        "tag": "v5.4.0",
+        "commit": "866ba448a6436143eff59d77c790bd0decc0d5f4"
     },
     "reference_version": "8.4.17",
     "timezone_db": "2025.2",
@@ -101,7 +101,8 @@
                                 "importe": {
                                     "$float": "500.0"
                                 },
-                                "moneda": "USD"
+                                "moneda": "USD",
+                                "numero": null
                             },
                             {
                                 "$class": "Payment",
@@ -118,7 +119,8 @@
                                 "importe": {
                                     "$float": "500.0"
                                 },
-                                "moneda": "USD"
+                                "moneda": "USD",
+                                "numero": null
                             }
                         ],
                         "tipoCambio": {
@@ -258,7 +260,29 @@
                 "$class": "Payment",
                 "fecha": null,
                 "importe": null,
-                "moneda": null
+                "moneda": null,
+                "numero": null
+            }
+        },
+        "payment-numero": {
+            "calls": {},
+            "snapshot": {
+                "$class": "Payment",
+                "fecha": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-04-10T09:00:00.000000",
+                        "offset": -18000,
+                        "unix": 1712757600,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "importe": {
+                    "$float": "100.0"
+                },
+                "moneda": "PEN",
+                "numero": 2
             }
         },
         "exchange-empty": {
@@ -281,6 +305,7 @@
                 "fechaEmision": null,
                 "impCobrado": null,
                 "impPercibido": null,
+                "indExcepcional": null,
                 "observacion": null,
                 "proveedor": null,
                 "regimen": null,
@@ -333,7 +358,8 @@
                                 "importe": {
                                     "$float": "1000.0"
                                 },
-                                "moneda": "PEN"
+                                "moneda": "PEN",
+                                "numero": null
                             }
                         ],
                         "fechaEmision": {
@@ -404,6 +430,111 @@
                 "impPercibido": {
                     "$float": "20.0"
                 },
+                "indExcepcional": null,
+                "observacion": "Percepción sintética",
+                "proveedor": {
+                    "$class": "Client",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "CALLE PRUEBA 456",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150122",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "cliente@example.test",
+                    "numDoc": "20000000002",
+                    "rznSocial": "CLIENTE SINTETICO S.A.",
+                    "telephone": "999000000",
+                    "tipoDoc": "6"
+                },
+                "regimen": "01",
+                "serie": "P001",
+                "tasa": {
+                    "$float": "2.0"
+                }
+            }
+        },
+        "perception-exceptional": {
+            "calls": {
+                "getName": "20000000001-40-P001-11"
+            },
+            "snapshot": {
+                "$class": "Perception",
+                "company": {
+                    "$class": "Company",
+                    "address": {
+                        "$class": "Address",
+                        "codLocal": "0001",
+                        "codigoPais": "PE",
+                        "departamento": "LIMA",
+                        "direccion": "AV. FICTICIA 123",
+                        "distrito": "LIMA",
+                        "provincia": "LIMA",
+                        "ubigueo": "150101",
+                        "urbanizacion": "CERCADO"
+                    },
+                    "email": "facturacion@example.test",
+                    "nombreComercial": "SINTETICA",
+                    "razonSocial": "EMPRESA SINTETICA S.A.C.",
+                    "ruc": "20000000001",
+                    "telephone": "01-0000000"
+                },
+                "correlativo": "11",
+                "details": [
+                    {
+                        "$class": "PerceptionDetail",
+                        "cobros": [
+                            {
+                                "$class": "Payment",
+                                "fecha": {
+                                    "$datetime": {
+                                        "class": "DateTimeImmutable",
+                                        "local": "2024-04-10T09:00:00.000000",
+                                        "offset": -18000,
+                                        "unix": 1712757600,
+                                        "micro": 0,
+                                        "tz": "America/Lima"
+                                    }
+                                },
+                                "importe": {
+                                    "$float": "1000.0"
+                                },
+                                "moneda": "PEN",
+                                "numero": 3
+                            }
+                        ],
+                        "fechaEmision": null,
+                        "fechaPercepcion": null,
+                        "impCobrar": null,
+                        "impPercibido": null,
+                        "impTotal": null,
+                        "moneda": null,
+                        "numDoc": "F001-3",
+                        "tipoCambio": null,
+                        "tipoDoc": "01"
+                    }
+                ],
+                "fechaEmision": {
+                    "$datetime": {
+                        "class": "DateTimeImmutable",
+                        "local": "2024-04-15T10:00:00.000000",
+                        "offset": -18000,
+                        "unix": 1713193200,
+                        "micro": 0,
+                        "tz": "America/Lima"
+                    }
+                },
+                "impCobrado": {
+                    "$float": "1020.0"
+                },
+                "impPercibido": {
+                    "$float": "20.0"
+                },
+                "indExcepcional": "01",
                 "observacion": "Percepción sintética",
                 "proveedor": {
                     "$class": "Client",
@@ -448,6 +579,7 @@
                 "fechaEmision": null,
                 "impCobrado": null,
                 "impPercibido": null,
+                "indExcepcional": null,
                 "observacion": null,
                 "proveedor": null,
                 "regimen": null,
@@ -475,6 +607,7 @@
                 "fechaEmision": null,
                 "impCobrado": null,
                 "impPercibido": null,
+                "indExcepcional": null,
                 "observacion": null,
                 "proveedor": null,
                 "regimen": null,

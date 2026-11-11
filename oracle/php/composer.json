@@ -1,6 +1,6 @@
 {
     "name": "cpeforge/php-oracle",
-    "description": "Dependencias fijadas del oráculo PHP: Twig para greenter/xml, los XSD de greenter/ubl-validator y Guzzle para greenter/gre-api (mismas versiones que resolvió Greenter v5.3.0). Greenter v5.3.0, xmldsig y gre-api se cargan desde target/reference.",
+    "description": "Dependencias fijadas del oráculo PHP: Twig para greenter/xml, los XSD de greenter/ubl-validator y Guzzle para greenter/gre-api (mismas versiones que resolvió Greenter v5.4.0). Greenter v5.4.0, xmldsig y gre-api se cargan desde target/reference.",
     "type": "project",
     "license": "proprietary",
     "require": {
